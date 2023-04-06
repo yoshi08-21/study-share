@@ -1,0 +1,26 @@
+[
+  {
+    "name": "myPage",
+    "path": "/myPage",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/myPage.vue",
+    "chunkName": "pages/myPage"
+  },
+  {
+    "name": "auth-login",
+    "path": "/auth/login",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/login.vue",
+    "chunkName": "pages/auth/login"
+  },
+  {
+    "name": "auth-signUp",
+    "path": "/auth/signUp",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/signUp.vue",
+    "chunkName": "pages/auth/signUp"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
