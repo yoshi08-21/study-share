@@ -3791,3 +3791,26 @@ Processing by QuestionsController#index as HTML
 Completed 200 OK in 44ms (Views: 25.6ms | ActiveRecord: 16.0ms | Allocations: 5343)
 
 
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('1817772182736899970', 0)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateSubjectQuestions (20230407004112)
+  [1m[35m (55.1ms)[0m  [1m[35mCREATE TABLE `subject_questions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `content` text, `subject` varchar(255), `user_id` int, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230407004112')[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.0ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('1817772182736899970')[0m
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` ORDER BY `books`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubjectQuestion Create (1.6ms)[0m  [1m[32mINSERT INTO `subject_questions` (`title`, `content`, `subject`, `user_id`, `created_at`, `updated_at`) VALUES ('テスト', 'テスト', '英語', 1, '2023-04-07 01:00:53.757409', '2023-04-07 01:00:53.757409')[0m
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/subject_questions" for ::1 at 2023-04-07 10:01:06 +0900
+  [1m[35m (6.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 24ms (Views: 11.6ms | ActiveRecord: 8.3ms | Allocations: 6007)
+
+
