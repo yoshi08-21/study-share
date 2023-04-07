@@ -3814,3 +3814,11 @@ Processing by SubjectQuestionsController#index as HTML
 Completed 200 OK in 24ms (Views: 11.6ms | ActiveRecord: 8.3ms | Allocations: 6007)
 
 
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` ORDER BY `questions`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` ORDER BY `questions`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 1 LIMIT 1[0m
+  [1m[36mReply Create (1.3ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('テスト回答', 1, 1, '2023-04-07 03:13:52.739989', '2023-04-07 03:13:52.739989')[0m
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
