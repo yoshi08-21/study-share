@@ -3769,3 +3769,25 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 48ms (Views: 1.2ms | ActiveRecord: 5.3ms | Allocations: 8209)
 
 
+  [1m[36mUser Load (7.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mBook Load (9.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` ORDER BY `books`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` ORDER BY `books`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mQuestion Create (4.8ms)[0m  [1m[32mINSERT INTO `questions` (`title`, `content`, `subject`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES ('テスト', 'テスト', '人生', 1, 1, '2023-04-07 00:35:26.713397', '2023-04-07 00:35:26.713397')[0m
+  [1m[36mTRANSACTION (3.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/reviews" for ::1 at 2023-04-07 09:35:39 +0900
+Processing by ReviewsController#index as HTML
+  [1m[36mReview Load (4.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:6:in `index'
+Completed 200 OK in 38ms (Views: 25.8ms | ActiveRecord: 4.5ms | Allocations: 6344)
+
+
+Started GET "/questions" for ::1 at 2023-04-07 09:35:43 +0900
+Processing by QuestionsController#index as HTML
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:6:in `index'
+Completed 200 OK in 44ms (Views: 25.6ms | ActiveRecord: 16.0ms | Allocations: 5343)
+
+

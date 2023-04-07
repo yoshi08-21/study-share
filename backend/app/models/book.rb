@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
 belongs_to :user
+has_many :questions
 
 validates :name,      presence: true, length: { maximum: 50 }, uniqueness: true
 validates :author,    presence: true, length: { maximum: 25 }
