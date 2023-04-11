@@ -44,5 +44,6 @@ yarn-debug.log*
 
 node_modules/.cache
 frontend/node_modules/
+backend/tmp/
 
 /coverage/
