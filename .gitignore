@@ -42,4 +42,6 @@ yarn-debug.log*
 
 "メモ".html.erb
 
+node_modules/.cache
+
 /coverage/
