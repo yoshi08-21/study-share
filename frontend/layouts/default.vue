@@ -26,7 +26,9 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title>
+        <nuxt-link to="/">{{ title.title }}</nuxt-link>
+      </v-toolbar-title>
       <v-spacer />
       <div v-if="!isLoggedIn">
         <v-btn to="/auth/login">ログイン</v-btn>
@@ -76,19 +78,22 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'トップページ',
           to: '/',
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          title: 'マイページ',
+          to: '/mypage',
         },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: {
+        title: "StudyFeedback",
+        to: "/"
+      },
       user: {}
     }
   },
@@ -116,3 +121,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.v-main {
+  background-color: #edebe8;
+}
+</style>

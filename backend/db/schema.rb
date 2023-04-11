@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_07_025807) do
+ActiveRecord::Schema.define(version: 2023_04_11_013457) do
 
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2023_04_07_025807) do
     t.text "content"
     t.integer "user_id"
     t.integer "book_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subject_question_replies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "subject_question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

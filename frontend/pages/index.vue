@@ -13,7 +13,19 @@
       <p>ログイン中です</p>
     </div>
     <v-btn @click="getUser">ユーザーを取得</v-btn>
+
     <br>
+    <h3>新着レビュー</h3>
+    <hr>
+    <h1>サンプル</h1>
+    <br>
+    <h3>みんなが使っている参考書</h3>
+    <hr>
+    <h1>サンプル</h1>
+    <br>
+    <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
+    <hr>
+    <h1>サンプル</h1>
   </div>
 </template>
 
@@ -27,7 +39,9 @@ export default {
   data() {
     return {
       user: "",
-      error: ""
+      error: "",
+      newReviews: [],
+
     }
   },
   computed: {
@@ -37,7 +51,7 @@ export default {
     },
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
-    }
+    },
   },
   methods: {
     async getUser() {
@@ -51,11 +65,10 @@ export default {
       }
     },
   },
-  // async created () {
-  //     const response = await axios.get("http://localhost:3001/v1/todos")
-  //     this.todos = response.data
-  //   },
-  // 関連する参考書を取得するのに使える
+  async created () {
+      const response = await axios.get("/reviews")
+      this.newReviews = response.data
+    },
 
 }
 

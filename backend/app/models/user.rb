@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :subject_questions
   has_many :replies
+  has_many :subject_question_replies
 
 
 
