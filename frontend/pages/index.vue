@@ -17,7 +17,16 @@
     <br>
     <h3>新着レビュー</h3>
     <hr>
-    <h1>サンプル</h1>
+    <v-sheet>
+      <v-slide-group multiple show-arrows>
+        <v-slide-group v-for="newReview in newReviews" :key="newReview.id">
+          <v-card style="margin: 0 20px 0 20; width: 320px; height: 240px;">
+            <v-card-title>{{ newReview.title }}</v-card-title>
+            <v-card-text class="text--primary">{{ newReview.content }}</v-card-text>
+          </v-card>
+        </v-slide-group>v-slide-item>
+      </v-slide-group>
+    </v-sheet>
     <br>
     <h3>みんなが使っている参考書</h3>
     <hr>
