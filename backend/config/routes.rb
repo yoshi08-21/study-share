@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
 
   resources :users
-  resources :books
-  resources :reviews
+  resources :books do
+    resources :favorite_books, only: [:create, :destroy]
+    resources :reviews
+  end
   resources :questions
   resources :subject_questions
   resources :replies

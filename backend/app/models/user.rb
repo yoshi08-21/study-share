@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :subject_questions
   has_many :replies
   has_many :subject_question_replies
+  has_many :favorite_books
+
 
 
 
