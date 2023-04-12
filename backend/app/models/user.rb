@@ -6,7 +6,8 @@ class User < ApplicationRecord
   has_many :subject_questions
   has_many :replies
   has_many :subject_question_replies
-  has_many :favorite_books
+  has_many :favorite_books, dependent: :destroy
+  has_many :favorite_questions, dependent: :destroy
 
 
 

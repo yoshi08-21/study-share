@@ -2,6 +2,8 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :book
+  has_many :favorite_questions, dependent: :destroy
+
 
   validates :title,    presence: true, length: { maximum: 60 }
   validates :content,  presence: true, length: { maximum: 1000 }
