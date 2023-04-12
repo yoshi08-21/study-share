@@ -1,0 +1,2 @@
+class FavoriteQuestionsController < ApplicationController
+end

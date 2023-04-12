@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :favorite_books, only: [:create, :destroy]
     resources :reviews
   end
-  resources :questions
+  resources :questions do
+    resources :favorite_questions, only: [:create, :destroy]
+  end
   resources :subject_questions
   resources :replies
   resources :subject_question_replies
