@@ -4013,3 +4013,48 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 677)
 
 
+Started GET "/reviews" for ::1 at 2023-04-11 12:43:26 +0900
+Processing by ReviewsController#index as HTML
+  [1m[36mReview Load (29.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:6:in `index'
+Completed 200 OK in 109ms (Views: 94.4ms | ActiveRecord: 34.6ms | Allocations: 1286)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-04-11 12:43:27 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 10ms (Views: 2.4ms | ActiveRecord: 3.0ms | Allocations: 641)
+
+
+Started GET "/reviews" for ::1 at 2023-04-11 12:43:54 +0900
+Processing by ReviewsController#index as HTML
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:6:in `index'
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.6ms | Allocations: 1178)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-04-11 12:43:54 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 12ms (Views: 0.8ms | ActiveRecord: 2.0ms | Allocations: 641)
+
+
+Started GET "/reviews" for ::1 at 2023-04-11 12:44:22 +0900
+Processing by ReviewsController#index as HTML
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:6:in `index'
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.7ms | Allocations: 1176)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-04-11 12:44:23 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 3.9ms | Allocations: 641)
+
+
