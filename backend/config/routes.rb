@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   resources :users
   resources :books do
     resources :favorite_books, only: [:create, :destroy]
+    collection do
+      get "is_favorite"
+    end
     resources :reviews
   end
+  resources :reviews
   resources :questions do
     resources :favorite_questions, only: [:create, :destroy]
   end
