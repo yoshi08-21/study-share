@@ -54,5 +54,9 @@ export const getters = {
   },
   getCurrentUser(state) {
     return state.currentUser
+  },
+  getCurrentUserId(state) {
+    return state.currentUser.id
   }
+
 }
