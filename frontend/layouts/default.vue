@@ -86,6 +86,10 @@ export default {
           title: 'マイページ',
           to: '/mypage',
         },
+        {
+          title: 'books/1',
+          to: '/books/1',
+        }
       ],
       miniVariant: false,
       right: true,
