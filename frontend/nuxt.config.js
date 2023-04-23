@@ -31,11 +31,21 @@ export default {
   plugins: [
     "@/plugins/authenticated.js",
     // "@/plugins/firebase.js",
-    // "@/plugins/getUser.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
+  components: {
+  },
+
+  vuetify: {
+    // ...
+    components: {
+      VSnackbar: true,
+    },
+    // ...
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

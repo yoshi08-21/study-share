@@ -14,6 +14,11 @@
       <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
     </div>
 
+    <nuxt-link to=/books/1/reviews/new>レビューを書く</nuxt-link>
+    <br>
+    <v-btn @click="showSnackbar">snackbar</v-btn>
+    <v-snackbar v-model="snackbar" :timeout="3000">{{ flashMessage }}</v-snackbar>
+
 
   </div>
 </template>
@@ -33,7 +38,8 @@ export default {
     return {
       book: null,
       isFavorite: false,
-      favoriteBookId: ""
+      snackbar: false,
+      flashMessage: "テストメッセージ"
     }
   },
   computed: {
@@ -51,7 +57,6 @@ export default {
       })
       console.log(response)
       this.isFavorite = response.data.is_favorite
-      this.favoriteBookId = response.data.favorite_book_id
     } catch(error) {
       console.log("エラー文です")
       console.log(error)
@@ -65,8 +70,9 @@ export default {
           book_id: this.params.id
         })
         console.log(response.data)
-        console.log("お気に入りに追加しました")
         this.isFavorite = !this.isFavorite
+        this.snackbar = true
+        this.flashMessage = "お気に入りに追加しました"
       } catch(error) {
         console.log(error)
         console.log("すでにお気に入りに登録されています")
@@ -81,12 +87,16 @@ export default {
           }
         })
         console.log(response)
-        console.log("お気に入りから削除しました")
         this.isFavorite = !this.isFavorite
+        this.snackbar = true
+        this.flashMessage = "お気に入りから削除しました"
       } catch(error) {
         console.log(error)
         console.log("お気に入りに登録されていません")
       }
+    },
+    showSnackbar() {
+      this.snackbar = !this.snackbar
     }
   }
 }
