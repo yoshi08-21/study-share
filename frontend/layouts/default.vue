@@ -89,7 +89,12 @@ export default {
         {
           title: 'books/1',
           to: '/books/1',
+        },
+        {
+          title: 'books/1/reviews/new',
+          to: 'books/1/reviews/new',
         }
+
       ],
       miniVariant: false,
       right: true,

@@ -25,6 +25,15 @@
     "path": "/books/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id.vue",
     "chunkName": "pages/books/_id",
+    "children": [
+      {
+        "name": "books-id-reviews-new",
+        "path": "reviews/new",
+        "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id/reviews/new.vue",
+        "chunkName": "pages/books/_id/reviews/new",
+        "_name": "_1e9a1ec0"
+      }
+    ],
     "_name": "_ea3048ba"
   },
   {
