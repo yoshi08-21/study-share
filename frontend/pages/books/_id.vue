@@ -16,8 +16,7 @@
 
     <nuxt-link to=/books/1/reviews/new>レビューを書く</nuxt-link>
     <br>
-    <v-btn @click="showSnackbar">snackbar</v-btn>
-    <v-snackbar v-model="snackbar" :timeout="3000">{{ flashMessage }}</v-snackbar>
+    <v-snackbar v-model="snackbar" :timeout="3000" color="primary">{{ flashMessage }}</v-snackbar>
 
 
   </div>
