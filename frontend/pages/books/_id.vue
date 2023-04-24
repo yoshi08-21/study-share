@@ -13,21 +13,37 @@
     <div v-else>
       <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
     </div>
-
-    <nuxt-link to=/books/1/reviews/new>レビューを書く</nuxt-link>
     <br>
-    <v-snackbar v-model="snackbar" :timeout="3000" color="primary">{{ flashMessage }}</v-snackbar>
+    <v-btn @click="dialog = true">新規レビューを投稿する</v-btn>
 
+    <v-dialog v-model="dialog">
+      <v-card>
+        <v-card-title>
+          Dialog Title
+        </v-card-title>
+        <v-card-text>
+          <review-form @submitReview="submitReview" @closeDialog="dialog = false"></review-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
   </div>
 </template>
 
 <script>
 
+import { VDialog } from 'vuetify/lib'
+import ReviewForm from '../../components/ReviewForm.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
+  components: {
+    ReviewForm,
+    VDialog
+  },
   async asyncData({ params }) {
     const response = await axios.get(`/books/${params.id}`)
     console.log(response.data)
@@ -37,8 +53,11 @@ export default {
     return {
       book: null,
       isFavorite: false,
+      favoriteBookId: "",
       snackbar: false,
-      flashMessage: "テストメッセージ"
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
+      dialog: false,
     }
   },
   computed: {
@@ -70,6 +89,7 @@ export default {
         })
         console.log(response.data)
         this.isFavorite = !this.isFavorite
+        this.favoriteBookId = response.data.favorite_book_id
         this.snackbar = true
         this.flashMessage = "お気に入りに追加しました"
       } catch(error) {
@@ -94,8 +114,27 @@ export default {
         console.log("お気に入りに登録されていません")
       }
     },
-    showSnackbar() {
-      this.snackbar = !this.snackbar
+    async submitReview(data) {
+      try {
+        const response = await axios.post(`/books/${this.params.id}/reviews`, {
+            user_id: this.currentUser.id,
+            book_id: this.params.id,
+            title: data.title,
+            content: data.content,
+            rating: data.rating
+          }
+        )
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "レビューの投稿が完了しました"
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "レビューを投稿できませんでした"
+      }
+      this.dialog = false
     }
   }
 }
