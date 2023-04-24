@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      rating: 0,
+      rating: 1,
       title: "",
       content: "",
       titleRules: [
@@ -43,13 +43,10 @@ export default {
   methods: {
     submitForm() {
       this.$emit('submitReview', { title: this.title, content: this.content, rating: this.rating })
-      this.ratig = 0
+      this.rating = 1
       this.title = ""
       this.content = ""
     },
-    getLabel(value) {
-      return `${value}/5`
-    }
   }
 }
 </script>
