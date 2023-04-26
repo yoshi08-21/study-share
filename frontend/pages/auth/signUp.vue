@@ -54,42 +54,9 @@ export default {
       } catch(error) {
         console.log(error)
       }
+      this.$router.push('/mypage')
     }
 
-    // async signUp() {
-    //     const auth = getAuth(this.$firebase);
-    //     const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password)
-    //       console.log(userCredential)
-    //       this.uid = userCredential.user.uid
-    //       .catch(error => {
-    //         console.log(error)
-    //       })
-
-    //     const user = {
-    //       name: this.name,
-    //       email: this.email,
-    //       uid: userCredential.user.uid
-    //     }
-    //     const response = await axios.post("/users", {
-    //       user
-    //     })
-    //       console.log(response.data)
-    //       .catch(error => {
-    //         console.log(error)
-    //       })
-    // }
-
-    // signUp() {
-    //   const auth = getAuth(this.$firebase)
-    //   createUserWithEmailAndPassword(auth, this.email, this.password)
-    //     .then((userCredential) => {
-    //       const user = userCredential.user
-    //       console.log(user)
-    //     })
-    //     .catch((error) => {
-    //       console.log(error)
-    //     })
-    // }
   }
 }
 </script>
