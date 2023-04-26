@@ -9442,3 +9442,60 @@ Processing by FavoriteBooksController#destroy as HTML
 Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 3.4ms | Allocations: 3150)
 
 
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-04-27 06:11:47 +0900
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 64ms (Views: 2.9ms | ActiveRecord: 18.8ms | Allocations: 16393)
+
+
+Started GET "/books/1" for ::1 at 2023-04-27 06:11:47 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (2.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:14:in `show'
+Completed 200 OK in 35ms (Views: 0.4ms | ActiveRecord: 15.1ms | Allocations: 6995)
+
+
+Started GET "/books/is_favorite?user_id=1&book_id=1" for ::1 at 2023-04-27 06:11:47 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:23:in `is_favorite'
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:24:in `is_favorite'
+  [1m[36mFavoriteBook Load (1.1ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:25:in `is_favorite'
+Completed 200 OK in 395ms (Views: 0.2ms | ActiveRecord: 5.5ms | Allocations: 3096)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-04-27 06:11:53 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 716)
+
+
+Started GET "/books/1" for ::1 at 2023-04-27 06:11:53 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (2.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:14:in `show'
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 2.5ms | Allocations: 635)
+
+
+Started GET "/books/is_favorite?user_id=1&book_id=1" for ::1 at 2023-04-27 06:11:53 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (7.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:23:in `is_favorite'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:24:in `is_favorite'
+  [1m[36mFavoriteBook Load (3.5ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:25:in `is_favorite'
+Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 11.8ms | Allocations: 1408)
+
+
