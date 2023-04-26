@@ -4,7 +4,7 @@
     <p v-if="currentUser">
       currentUser: {{ currentUser.name }}
     </p>
-    <p>
+    <p v-if="currentUser">
       email: {{ currentUser.email }}
     </p>
     <p v-if="isLoggedIn">ログイン中です</p>
