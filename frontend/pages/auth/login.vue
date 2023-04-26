@@ -2,10 +2,17 @@
   <div>
     ログイン
     <v-col>
-
-      <v-text-field v-model="email" label="メールアドレス"></v-text-field>
-      <v-text-field v-model="password" label="パスワード"></v-text-field>
-      <v-btn @click="login">ログイン</v-btn>
+      <v-form>
+        <v-text-field v-model="email" label="メールアドレス"></v-text-field>
+        <v-text-field v-model="password" label="パスワード"></v-text-field>
+        <v-btn @click="login">ログイン</v-btn>
+      </v-form>
+      <v-spacer :style="{ height: '20px' }"></v-spacer>
+      <v-btn @click="loginAsUser1">ゲストユーザーでログイン</v-btn>
+      <v-spacer :style="{ height: '20px' }"></v-spacer>
+      <v-btn @click="loginAsUser2">ゲストユーザー2でログイン</v-btn>
+      <v-spacer :style="{ height: '20px' }"></v-spacer>
+      <v-btn block @click="$router.push('/auth/signup')">新規登録はこちらから</v-btn>
     </v-col>
   </div>
 </template>
@@ -48,7 +55,18 @@ export default {
       }
 
       this.$router.push("/")
+    },
+    async loginAsUser1() {
+      this.email = "sample@sample.com"
+      this.password = "123456"
+      await this.login()
+    },
+    async loginAsUser2() {
+      this.email = "sample2@sample.com"
+      this.password = "234567"
+      await this.login()
     }
+
 
   }
 }
