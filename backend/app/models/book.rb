@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
 
 belongs_to :user
+has_many :reviews
 has_many :questions
 has_many :favorite_books, dependent: :destroy
 

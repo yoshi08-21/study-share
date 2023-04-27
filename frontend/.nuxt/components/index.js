@@ -1,3 +1,4 @@
+export { default as BookReviews } from '../../components/BookReviews.vue'
 export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
 export { default as ReviewForm } from '../../components/ReviewForm.vue'
 export { default as Tutorial } from '../../components/Tutorial.vue'

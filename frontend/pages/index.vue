@@ -75,7 +75,8 @@ export default {
     },
   },
   async created () {
-      const response = await axios.get("/reviews")
+      const response = await axios.get("/reviews/new_reviews")
+      // コントローラーを改良する必要あり
       this.newReviews = response.data
     },
 
