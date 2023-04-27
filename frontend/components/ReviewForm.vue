@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>新規レビュー</h1>
+    <v-form>
       <v-rating
         v-model="rating"
         background-color="orange lighten-3"
@@ -13,6 +14,7 @@
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
       <v-btn color="primary" @click="submitForm">投稿する</v-btn>
       <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+    </v-form>
   </div>
 </template>
 

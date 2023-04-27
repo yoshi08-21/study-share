@@ -31,7 +31,7 @@
 
     <br>
     <v-divider height="50"></v-divider>
-    <book-reviews></book-reviews>
+    <book-reviews :reviews="reviews"></book-reviews>
 
   </div>
 </template>
@@ -52,18 +52,18 @@ export default {
     BookReviews
   },
   async asyncData({ params }) {
-    const response = await axios.get(`/books/${params.id}`)
-    console.log(response.data)
-    return { book: response.data, params};
-    // const book = await axios.get(`/books/${params.id}`)
-    // const reviews = await axios.get(`/books/${params.id}/reviews`)
-    // console.log(book.data)
-    // console.log(reviews.data)
-    // return {
-    //   book: book.data,
-    //   reviews: reviews.data,
-    //   params
-    // };
+    // const response = await axios.get(`/books/${params.id}`)
+    // console.log(response.data)
+    // return { book: response.data, params};
+    const book = await axios.get(`/books/${params.id}`)
+    const reviews = await axios.get(`/books/${params.id}/reviews`)
+    console.log(book.data)
+    console.log(reviews.data)
+    return {
+      book: book.data,
+      reviews: reviews.data,
+      params
+    };
     // const [reviews, questions] = await Promise.all([
     //   axios.get(`/books/${params.id}/reviews`),
     //   axios.get(`/books/${params.id}/questions`)
@@ -78,6 +78,7 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       dialog: false,
+      reviews: []
     }
   },
   computed: {
