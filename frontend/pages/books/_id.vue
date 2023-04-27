@@ -1,7 +1,7 @@
 <template>
   <div>
     book_show
-    <p>id: {{ this.$route.params.id }}</p>
+    <p>book_id: {{ this.$route.params.id }}</p>
     <h4>タイトル: {{ book.name }}</h4>
     <h4>作者: {{ book.author }}</h4>
     <h4>出版社: {{ book.publisher }}</h4>
@@ -29,25 +29,45 @@
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
+    <br>
+    <v-divider height="50"></v-divider>
+    <book-reviews></book-reviews>
+
   </div>
 </template>
 
 <script>
 
-import { VDialog } from 'vuetify/lib'
+import { VDialog, VDivider } from 'vuetify/lib'
 import ReviewForm from '../../components/ReviewForm.vue'
+import BookReviews from '../../components/BookReviews.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
   components: {
     ReviewForm,
-    VDialog
+    VDialog,
+    VDivider,
+    BookReviews
   },
   async asyncData({ params }) {
     const response = await axios.get(`/books/${params.id}`)
     console.log(response.data)
     return { book: response.data, params};
+    // const book = await axios.get(`/books/${params.id}`)
+    // const reviews = await axios.get(`/books/${params.id}/reviews`)
+    // console.log(book.data)
+    // console.log(reviews.data)
+    // return {
+    //   book: book.data,
+    //   reviews: reviews.data,
+    //   params
+    // };
+    // const [reviews, questions] = await Promise.all([
+    //   axios.get(`/books/${params.id}/reviews`),
+    //   axios.get(`/books/${params.id}/questions`)
+    // ])
   },
   data() {
     return {
@@ -75,6 +95,7 @@ export default {
       })
       console.log(response)
       this.isFavorite = response.data.is_favorite
+      this.favoriteBookId = response.data.favorite_book_id
     } catch(error) {
       console.log("エラー文です")
       console.log(error)

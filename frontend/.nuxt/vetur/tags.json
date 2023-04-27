@@ -1,4 +1,7 @@
 {
+  "BookReviews": {
+    "description": "Auto imported from components/BookReviews.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },

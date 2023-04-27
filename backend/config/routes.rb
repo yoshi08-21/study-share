@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     end
     resources :reviews
   end
-  resources :reviews
+  resources :reviews do
+    collection do
+      get "new_reviews"
+    end
+  end
   resources :questions do
     resources :favorite_questions, only: [:create, :destroy]
   end

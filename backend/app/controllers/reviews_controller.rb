@@ -1,7 +1,8 @@
 class ReviewsController < ApplicationController
 
   def index
-    reviews = Review.all
+    book = Book.find_by(id: params[:book_id])
+    reviews = book.reviews
     if reviews
       render json: reviews
     else
@@ -19,6 +20,17 @@ class ReviewsController < ApplicationController
     else
       render json: { error: "エラーが発生しました" }, status: 400
     end
+  end
+
+  def new_reviews
+    reviews = Review.all
+    # 後でレビューの並び替え・件数の制限を実装する
+    if reviews
+      render json: reviews
+    else
+      render json: reviews.erorrs
+    end
+
   end
 
   private
