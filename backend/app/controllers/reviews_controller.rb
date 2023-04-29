@@ -2,9 +2,9 @@ class ReviewsController < ApplicationController
 
   def index
     book = Book.find_by(id: params[:book_id])
-    reviews = book.reviews
+    reviews = book.reviews.includes(:user)
     if reviews
-      render json: reviews
+      render json: reviews, include: "user"
     else
       render json: reviews.erorrs
     end
