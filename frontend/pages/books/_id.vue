@@ -39,8 +39,8 @@
 <script>
 
 import { VDialog, VDivider } from 'vuetify/lib'
-import ReviewForm from '../../components/ReviewForm.vue'
-import BookReviews from '../../components/BookReviews.vue'
+import ReviewForm from '../../components/reviews/ReviewForm.vue'
+import BookReviews from '../../components/reviews/BookReviews.vue'
 import axios from "@/plugins/axios"
 
 

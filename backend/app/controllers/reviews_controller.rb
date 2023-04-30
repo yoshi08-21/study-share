@@ -10,6 +10,19 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def show
+    book = Book.find_by(id: params[:book_id])
+    review = Review.includes(:user).find_by(id: params[:id])
+    if review
+      render json: {
+        book: book,
+        review: review.as_json(include: :user),
+      }
+    else
+      render json: review.erorrs
+    end
+  end
+
   def create
     current_user = User.find_by(id: params[:user_id])
     book = Book.find_by(id: params[:book_id])

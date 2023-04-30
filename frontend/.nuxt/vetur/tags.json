@@ -1,17 +1,17 @@
 {
-  "BookReviews": {
-    "description": "Auto imported from components/BookReviews.vue"
-  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
-  },
-  "ReviewForm": {
-    "description": "Auto imported from components/ReviewForm.vue"
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
   },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "ReviewsBookReviews": {
+    "description": "Auto imported from components/reviews/BookReviews.vue"
+  },
+  "ReviewsReviewForm": {
+    "description": "Auto imported from components/reviews/ReviewForm.vue"
   }
 }
