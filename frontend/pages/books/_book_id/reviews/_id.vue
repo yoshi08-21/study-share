@@ -15,6 +15,8 @@
     <br>
     <v-btn @click="dialog=true">編集する</v-btn>
     <v-btn>削除する</v-btn>
+    <br><br>
+    <v-btn @click="redirectToBook">参考書に戻る</v-btn>
 
     <v-dialog v-model="dialog">
       <v-card>
@@ -87,6 +89,9 @@ export default {
         this.flashMessage = "レビューを編集できませんでした"
       }
       this.dialog = false
+    },
+    redirectToBook() {
+      this.$router.push({ path: `/books/${this.book.id}` })
     }
   }
 }
