@@ -11737,3 +11737,429 @@ Processing by ReviewsController#show as HTML
 Completed 200 OK in 19ms (Views: 0.6ms | ActiveRecord: 1.1ms | Allocations: 2179)
 
 
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 11:41:12 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (9.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (23.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 98ms (Views: 14.9ms | ActiveRecord: 42.8ms | Allocations: 2289)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 11:46:08 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (4.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 15ms (Views: 0.5ms | ActiveRecord: 4.8ms | Allocations: 643)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 11:46:08 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 14ms (Views: 1.6ms | ActiveRecord: 1.5ms | Allocations: 2179)
+
+
+Started GET "/books/1" for ::1 at 2023-04-30 11:49:18 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mBook Load (2.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:14:in `show'
+Completed 200 OK in 26ms (Views: 4.7ms | ActiveRecord: 2.9ms | Allocations: 630)
+
+
+Started GET "/books/1/reviews" for ::1 at 2023-04-30 11:49:18 +0900
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mReview Load (1.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 6)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 86ms (Views: 47.4ms | ActiveRecord: 5.7ms | Allocations: 5954)
+
+
+Started GET "/books/is_favorite?user_id=6&book_id=1" for ::1 at 2023-04-30 11:49:18 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"6", "book_id"=>"1"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:23:in `is_favorite'
+  [1m[36mBook Load (1.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:24:in `is_favorite'
+  [1m[36mFavoriteBook Load (3.6ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 6 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:25:in `is_favorite'
+Completed 200 OK in 240ms (Views: 3.1ms | ActiveRecord: 48.4ms | Allocations: 6681)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 11:49:20 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (1.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (2.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 34ms (Views: 0.4ms | ActiveRecord: 5.4ms | Allocations: 2252)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 12:03:28 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (39.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 135ms (Views: 0.6ms | ActiveRecord: 59.6ms | Allocations: 785)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:03:28 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (19.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (20.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 124ms (Views: 2.1ms | ActiveRecord: 46.4ms | Allocations: 2182)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 12:09:46 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (14.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 53ms (Views: 2.2ms | ActiveRecord: 21.3ms | Allocations: 750)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:09:46 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (2.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (2.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 15ms (Views: 0.8ms | ActiveRecord: 4.7ms | Allocations: 2179)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 12:11:56 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 6.4ms | Allocations: 641)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:11:56 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (3.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 15ms (Views: 2.0ms | ActiveRecord: 4.4ms | Allocations: 2179)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:13:35 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 14ms (Views: 0.6ms | ActiveRecord: 1.8ms | Allocations: 2179)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:24:53 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (5.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.9ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 92ms (Views: 0.7ms | ActiveRecord: 9.2ms | Allocations: 24398)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:24:53 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (2.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (2.1ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 22ms (Views: 0.6ms | ActiveRecord: 6.3ms | Allocations: 2228)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:24:53 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (4.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (4.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (6.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 26ms (Views: 1.3ms | ActiveRecord: 15.2ms | Allocations: 2179)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:24:54 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 13ms (Views: 0.6ms | ActiveRecord: 5.1ms | Allocations: 2179)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:25:05 +0900
+  
+AbstractController::ActionNotFound (The action 'update' could not be found for ReviewsController
+Did you mean?  updata
+               create
+               index
+               new_reviews):
+  
+actionpack (6.1.7) lib/abstract_controller/base.rb:160:in `process'
+actionpack (6.1.7) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7) lib/action_dispatch/routing/route_set.rb:842:in `call'
+rack (2.2.5) lib/rack/etag.rb:27:in `call'
+rack (2.2.5) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.5) lib/rack/head.rb:12:in `call'
+activerecord (6.1.7) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.5) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.5) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.1.7) lib/rails/engine.rb:539:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 12:26:19 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 94ms (Views: 0.5ms | ActiveRecord: 58.7ms | Allocations: 11918)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:26:20 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 89ms (Views: 9.8ms | ActiveRecord: 37.3ms | Allocations: 13786)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:26:35 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト", "content"=>"テスト編集", "rating"=>5, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>5, "title"=>"テスト", "content"=>"テスト編集"}}
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.4ms | Allocations: 3392)
+
+
+  
+NoMethodError (undefined method `updata' for #<Review id: 1, rating: 5, title: "テスト", content: "テスト", user_id: 1, book_id: 1, created_at: "2023-04-05 01:41:48.463654000 +0000", updated_at: "2023-04-05 01:41:48.463654000 +0000">
+Did you mean?  update
+               update!):
+  
+app/controllers/reviews_controller.rb:28:in `update'
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:27:35 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト編集", "content"=>"編集後", "rating"=>1, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>1, "title"=>"テスト編集", "content"=>"編集後"}}
+  [1m[36mReview Load (1.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mReview Update (87.7ms)[0m  [1m[33mUPDATE `reviews` SET `reviews`.`rating` = 1, `reviews`.`title` = 'テスト編集', `reviews`.`content` = '編集後', `reviews`.`updated_at` = '2023-04-30 03:27:35.412073' WHERE `reviews`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (10.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+Completed 200 OK in 215ms (Views: 0.6ms | ActiveRecord: 156.5ms | Allocations: 26111)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-04-30 12:28:29 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 3.8ms | Allocations: 1095)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:28:29 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 18ms (Views: 0.8ms | ActiveRecord: 1.4ms | Allocations: 2443)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:28:58 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (3.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (1.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 16ms (Views: 0.6ms | ActiveRecord: 7.7ms | Allocations: 2179)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:29:45 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト編集２", "content"=>"編集後２", "rating"=>4, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>4, "title"=>"テスト編集２", "content"=>"編集後２"}}
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mReview Update (10.9ms)[0m  [1m[33mUPDATE `reviews` SET `reviews`.`rating` = 4, `reviews`.`title` = 'テスト編集２', `reviews`.`content` = '編集後２', `reviews`.`updated_at` = '2023-04-30 03:29:45.532458' WHERE `reviews`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+Completed 200 OK in 28ms (Views: 0.5ms | ActiveRecord: 15.8ms | Allocations: 4510)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:30:20 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (2.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (1.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (11.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 15.9ms | Allocations: 2179)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:30:25 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト編集３", "content"=>"編集後２", "rating"=>4, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>4, "title"=>"テスト編集３", "content"=>"編集後２"}}
+  [1m[36mReview Load (7.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mReview Update (0.5ms)[0m  [1m[33mUPDATE `reviews` SET `reviews`.`title` = 'テスト編集３', `reviews`.`updated_at` = '2023-04-30 03:30:25.550876' WHERE `reviews`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+Completed 200 OK in 24ms (Views: 0.3ms | ActiveRecord: 13.8ms | Allocations: 4422)
+
+
+Started GET "/books/1/reviews/1" for ::1 at 2023-04-30 12:32:22 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 1.4ms | Allocations: 2180)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:32:32 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト編集5", "content"=>"編集後7", "rating"=>5, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>5, "title"=>"テスト編集5", "content"=>"編集後7"}}
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mReview Update (22.8ms)[0m  [1m[33mUPDATE `reviews` SET `reviews`.`rating` = 5, `reviews`.`title` = 'テスト編集5', `reviews`.`content` = '編集後7', `reviews`.`updated_at` = '2023-04-30 03:32:32.619784' WHERE `reviews`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+Completed 200 OK in 49ms (Views: 0.4ms | ActiveRecord: 31.2ms | Allocations: 4426)
+
+
+Started PATCH "/books/1/reviews/1" for ::1 at 2023-04-30 12:33:14 +0900
+Processing by ReviewsController#update as HTML
+  Parameters: {"title"=>"テスト編集40", "content"=>"編集345", "rating"=>2, "book_id"=>"1", "id"=>"1", "review"=>{"rating"=>2, "title"=>"テスト編集40", "content"=>"編集345"}}
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:27:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mReview Update (19.1ms)[0m  [1m[33mUPDATE `reviews` SET `reviews`.`rating` = 2, `reviews`.`title` = 'テスト編集40', `reviews`.`content` = '編集345', `reviews`.`updated_at` = '2023-04-30 03:33:14.582609' WHERE `reviews`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (25.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/reviews_controller.rb:28:in `update'
+Completed 200 OK in 62ms (Views: 0.4ms | ActiveRecord: 45.9ms | Allocations: 4422)
+
+

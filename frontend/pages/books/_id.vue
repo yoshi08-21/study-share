@@ -26,6 +26,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
@@ -52,9 +53,6 @@ export default {
     BookReviews
   },
   async asyncData({ params }) {
-    // const response = await axios.get(`/books/${params.id}`)
-    // console.log(response.data)
-    // return { book: response.data, params};
     const book = await axios.get(`/books/${params.id}`)
     const reviews = await axios.get(`/books/${params.id}/reviews`)
     console.log(book.data)
