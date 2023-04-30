@@ -23,6 +23,15 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def update
+    review = Review.find_by(id: params[:id])
+    if review.update(review_params)
+      render json: review, status: 200
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
   def create
     current_user = User.find_by(id: params[:user_id])
     book = Book.find_by(id: params[:book_id])

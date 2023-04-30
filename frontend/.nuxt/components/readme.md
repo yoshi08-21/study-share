@@ -10,4 +10,5 @@ You can directly use them in pages and other components without the need to impo
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
 - `<ReviewsBookReviews>` | `<reviews-book-reviews>` (components/reviews/BookReviews.vue)
+- `<ReviewsEditReview>` | `<reviews-edit-review>` (components/reviews/EditReview.vue)
 - `<ReviewsReviewForm>` | `<reviews-review-form>` (components/reviews/ReviewForm.vue)

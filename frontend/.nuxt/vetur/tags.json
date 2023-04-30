@@ -11,6 +11,9 @@
   "ReviewsBookReviews": {
     "description": "Auto imported from components/reviews/BookReviews.vue"
   },
+  "ReviewsEditReview": {
+    "description": "Auto imported from components/reviews/EditReview.vue"
+  },
   "ReviewsReviewForm": {
     "description": "Auto imported from components/reviews/ReviewForm.vue"
   }
