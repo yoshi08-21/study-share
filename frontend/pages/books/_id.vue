@@ -32,7 +32,7 @@
 
     <br>
     <v-divider height="50"></v-divider>
-    <book-reviews :reviews="reviews"></book-reviews>
+    <book-reviews :reviews="reviews" :book_id="book.id" ></book-reviews>
 
   </div>
 </template>
