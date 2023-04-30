@@ -61,6 +61,14 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Uncomment if you wish to allow Action Cable access from any origin.
-  # config.action_cable.disable_request_forgery_protection = true
+
+  # Bulletの設定
+  config.after_initialize do
+    Bullet.enable = true # Bulletを有効にする
+    Bullet.alert = true # JavaScriptアラートを表示する
+    Bullet.bullet_logger = true # log/bullet.logにログを出力する
+    Bullet.console = true # ブラウザのコンソールにログを出力する
+  end
+
+
 end
