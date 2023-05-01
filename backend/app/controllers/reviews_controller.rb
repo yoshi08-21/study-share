@@ -44,6 +44,15 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    review = Review.find_by(id: params[:id])
+    if review.destroy
+      head :no_content
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
   def new_reviews
     reviews = Review.all
     # 後でレビューの並び替え・件数の制限を実装する
