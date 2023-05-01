@@ -14,7 +14,7 @@
 
     <br>
     <v-btn @click="dialog=true">編集する</v-btn>
-    <v-btn>削除する</v-btn>
+    <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
     <br><br>
     <v-btn @click="redirectToBook">参考書に戻る</v-btn>
 
@@ -34,6 +34,27 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <v-dialog v-model="showDeleteConfirmation">
+      <v-card>
+        <v-card-title>
+          削除したレビューは復元できません！
+        </v-card-title>
+        <v-card-text>
+          <strong>
+            レビューを削除しますか？
+          </strong>
+        </v-card-text>
+        <v-card-action class="justify-content-center">
+          <v-btn @click="deleteReview">削除する</v-btn>
+          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
+        </v-card-action>
+      </v-card>
+    </v-dialog>
+
+
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
 
   </div>
@@ -64,6 +85,10 @@ export default {
   data() {
     return {
       dialog: false,
+      showDeleteConfirmation: false,
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
 
     }
   },
@@ -89,6 +114,18 @@ export default {
         this.flashMessage = "レビューを編集できませんでした"
       }
       this.dialog = false
+    },
+    async deleteReview() {
+      try {
+        const response = await axios.delete(`/books/${this.params.book_id}/reviews/${this.params.id}`)
+        console.log(response)
+        this.$router.push({ path: `/books/${this.book.id}`, query: { message: 'レビューを削除しました' } })
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "レビューを削除できませんでした"
+      }
     },
     redirectToBook() {
       this.$router.push({ path: `/books/${this.book.id}` })
