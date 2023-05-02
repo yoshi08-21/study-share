@@ -156,6 +156,7 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "レビューの投稿が完了しました"
+        this.$router.push({ path: `/books/${this.book.id}/reviews/${response.data.id}`, query: { message: 'レビューの投稿が完了しました' } })
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
