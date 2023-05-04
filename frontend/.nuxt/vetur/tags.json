@@ -1,20 +1,5 @@
 {
-  "NuxtLogo": {
-    "description": "Auto imported from components/NuxtLogo.vue"
-  },
-  "Tutorial": {
-    "description": "Auto imported from components/Tutorial.vue"
-  },
-  "VuetifyLogo": {
-    "description": "Auto imported from components/VuetifyLogo.vue"
-  },
-  "ReviewsBookReviews": {
-    "description": "Auto imported from components/reviews/BookReviews.vue"
-  },
-  "ReviewsEditReview": {
-    "description": "Auto imported from components/reviews/EditReview.vue"
-  },
-  "ReviewsReviewForm": {
-    "description": "Auto imported from components/reviews/ReviewForm.vue"
+  "ShowSnackbar": {
+    "description": "Auto imported from components/global/ShowSnackbar.vue"
   }
 }
