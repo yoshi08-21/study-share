@@ -34,8 +34,10 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  components: {
-  },
+  // Global Components
+  components: [
+    { path: '~/components/global/ShowSnackbar.vue', global: true }
+  ],
 
   vuetify: {
     // ...

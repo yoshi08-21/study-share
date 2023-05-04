@@ -45,18 +45,17 @@
             レビューを削除しますか？
           </strong>
         </v-card-text>
-        <v-card-action class="justify-content-center">
+        <v-card-actions class="justify-content-center">
           <v-btn @click="deleteReview">削除する</v-btn>
           <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-action>
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
-
-
+    <!-- <show-snackbar ref="snackbar" /> -->
   </div>
 </template>
 
@@ -112,6 +111,8 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "レビューの編集が完了しました"
+        // this.$snackbar.showSnackbar("Hello, Snackbar!", "success");
+        // this.$refs.snackbar.showSnackbar('This is a message', 'success')
         this.review.title = response.data.title
         this.review.content = response.data.content
         this.review.rating = response.data.rating
