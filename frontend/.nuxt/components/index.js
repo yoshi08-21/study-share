@@ -1,4 +1,10 @@
-export { default as ShowSnackbar } from '../../components/global/ShowSnackbar.vue'
+export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
+export { default as Tutorial } from '../../components/Tutorial.vue'
+export { default as VuetifyLogo } from '../../components/VuetifyLogo.vue'
+export { default as GlobalShowSnackbar } from '../../components/global/ShowSnackbar.vue'
+export { default as ReviewsBookReviews } from '../../components/reviews/BookReviews.vue'
+export { default as ReviewsEditReview } from '../../components/reviews/EditReview.vue'
+export { default as ReviewsReviewForm } from '../../components/reviews/ReviewForm.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
