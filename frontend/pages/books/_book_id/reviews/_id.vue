@@ -18,6 +18,7 @@
     <br><br>
     <v-btn @click="redirectToBook">参考書に戻る</v-btn>
 
+    <!-- レビュー編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
         <v-card-title>
@@ -35,6 +36,7 @@
       </v-card>
     </v-dialog>
 
+    <!-- レビュー削除の確認ダイアログ -->
     <v-dialog v-model="showDeleteConfirmation">
       <v-card>
         <v-card-title>
