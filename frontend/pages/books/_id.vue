@@ -32,8 +32,10 @@
 
     <br>
     <v-divider height="50"></v-divider>
-    <book-reviews :reviews="reviews" :book_id="book.id" ></book-reviews>
 
+    <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
+    <book-reviews :reviews="reviewsChunk" :book_id="book.id" ></book-reviews>
+    <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
   </div>
 </template>
 
@@ -76,13 +78,23 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       dialog: false,
-      reviews: []
+      reviews: [],
+      perPage: 10,
+      page: 1,
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
-    }
+    },
+    reviewsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.reviews.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.reviews.length / this.perPage);
+    },
   },
   async created() {
     try {
@@ -164,7 +176,7 @@ export default {
         this.flashMessage = "レビューを投稿できませんでした"
       }
       this.dialog = false
-    }
+    },
   }
 }
 </script>
