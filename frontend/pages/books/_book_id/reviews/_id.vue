@@ -10,11 +10,15 @@
     <h4>評価:{{ review.rating }}</h4>
     <h4>タイトル:{{ review.title }}</h4>
     <p>本文:{{ review.content }}</p>
-    <p>reviewd by {{ user.name }}</p>
+    <p>reviewd by {{ this.user.name }}</p>
 
     <br>
-    <v-btn @click="dialog=true">編集する</v-btn>
-    <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+
+    <template v-if="this.user.id == this.currentUser.id">
+      <v-btn @click="dialog=true">編集する</v-btn>
+      <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+    </template>
+
     <br><br>
     <v-btn @click="redirectToBook">参考書に戻る</v-btn>
 
@@ -90,8 +94,14 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
+      user: {}
 
     }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters["auth/getCurrentUser"]
+    },
   },
   mounted() {
     if (this.$route.query.message) {
@@ -140,7 +150,7 @@ export default {
     },
     redirectToBook() {
       this.$router.push({ path: `/books/${this.book.id}` })
-    }
+    },
   }
 }
 </script>
