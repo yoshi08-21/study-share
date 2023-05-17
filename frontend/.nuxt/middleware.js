@@ -12,4 +12,7 @@ middleware['currentUser'] = middleware['currentUser'].default || middleware['cur
 middleware['getUser'] = require('../middleware/getUser.js')
 middleware['getUser'] = middleware['getUser'].default || middleware['getUser']
 
+middleware['isLoggedIn'] = require('../middleware/isLoggedIn.js')
+middleware['isLoggedIn'] = middleware['isLoggedIn'].default || middleware['isLoggedIn']
+
 export default middleware
