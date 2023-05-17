@@ -14,6 +14,9 @@
       <v-spacer :style="{ height: '20px' }"></v-spacer>
       <v-btn block @click="$router.push('/auth/signup')">新規登録はこちらから</v-btn>
     </v-col>
+
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
 </template>
 
@@ -27,7 +30,10 @@ export default {
     return {
       email: "",
       password: "",
-      user: {}
+      user: {},
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
     }
   },
   methods: {
@@ -68,7 +74,16 @@ export default {
     }
 
 
-  }
+  },
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
+    }
+  },
+
 }
 </script>
 

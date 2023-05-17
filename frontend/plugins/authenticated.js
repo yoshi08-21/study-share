@@ -2,6 +2,9 @@
 import firebase from "../plugins/firebase";
 import axios from "../plugins/axios";
 
+// ページのリロード時にfirebaseにアクセスしてログインの有無を確認する
+// ログインが確認できたら、storeにユーザー情報をセットする
+
 const auth = ({ $firebase, store }) => {
   if (!store.getters["auth/getLoggedIn"]) {
     return new Promise((resolve) => {
