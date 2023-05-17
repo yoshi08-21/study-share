@@ -14,7 +14,7 @@
 
     <br>
 
-    <template v-if="this.user.id == this.currentUser.id">
+    <template v-if="this.currentUser && this.user.id == this.currentUser.id">
       <v-btn @click="dialog=true">編集する</v-btn>
       <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
     </template>
@@ -117,7 +117,8 @@ export default {
         const response = await axios.patch(`/books/${this.params.book_id}/reviews/${this.params.id}`, {
           title: data.title,
           content: data.content,
-          rating: data.rating
+          rating: data.rating,
+          current_user_id: this.currentUser.id
         })
         console.log(response.data)
         this.snackbarColor = "primary"
@@ -138,7 +139,9 @@ export default {
     },
     async deleteReview() {
       try {
-        const response = await axios.delete(`/books/${this.params.book_id}/reviews/${this.params.id}`)
+        const response = await axios.delete(`/books/${this.params.book_id}/reviews/${this.params.id}`, {
+          params: { current_user_id: this.currentUser.id }
+        })
         console.log(response)
         this.$router.push({ path: `/books/${this.book.id}`, query: { message: 'レビューを削除しました' } })
       } catch(error) {
@@ -146,6 +149,7 @@ export default {
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "レビューを削除できませんでした"
+        this.dialog = false
       }
     },
     redirectToBook() {

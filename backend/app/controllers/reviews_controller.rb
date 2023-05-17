@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     if reviews
       render json: reviews, include: "user"
     else
-      render json: reviews.erorrs
+      render json: reviews.errors
     end
   end
 
@@ -19,16 +19,22 @@ class ReviewsController < ApplicationController
         review: review.as_json(include: :user),
       }
     else
-      render json: review.erorrs
+      render json: review.errors
     end
   end
 
   def update
     review = Review.find_by(id: params[:id])
-    if review.update(review_params)
-      render json: review, status: 200
+    current_user = User.find_by(id: params[:current_user_id])
+    author = review.user
+    if validate_authorship(current_user, author)
+      if review.update(review_params)
+        render json: review, status: 200
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { error: "権限がありません" }, status: 400
     end
   end
 
@@ -46,11 +52,19 @@ class ReviewsController < ApplicationController
 
   def destroy
     review = Review.find_by(id: params[:id])
-    if review.destroy
-      head :no_content
+    current_user = User.find_by(id: params[:current_user_id])
+    author = review.user
+    if validate_authorship(current_user, author)
+      if review.destroy
+        head :no_content
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { error: "権限がありません" }, status: 400
     end
+
+
   end
 
   def new_reviews
@@ -59,7 +73,7 @@ class ReviewsController < ApplicationController
     if reviews
       render json: reviews
     else
-      render json: reviews.erorrs
+      render json: reviews.errors
     end
 
   end
@@ -68,6 +82,10 @@ class ReviewsController < ApplicationController
 
     def review_params
       params.require(:review).permit(:title, :content, :rating, :user_id, :book_id)
+    end
+
+    def validate_authorship(current_user, author)
+      current_user == author
     end
 
 end
