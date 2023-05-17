@@ -1,5 +1,8 @@
 const middleware = {}
 
+middleware['authCheck'] = require('../middleware/authCheck.js')
+middleware['authCheck'] = middleware['authCheck'].default || middleware['authCheck']
+
 middleware['authenticated'] = require('../middleware/authenticated.js')
 middleware['authenticated'] = middleware['authenticated'].default || middleware['authenticated']
 
