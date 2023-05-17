@@ -91,8 +91,8 @@ export default {
           to: '/books/1',
         },
         {
-          title: 'books/1/reviews/1',
-          to: '/books/1/reviews/1'
+          title: '新規登録',
+          to: '/auth/signup'
         },
       ],
       miniVariant: false,

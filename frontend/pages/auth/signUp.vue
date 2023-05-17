@@ -15,8 +15,11 @@
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import axios from "../../plugins/axios";
+import isLoggedIn from "../../middleware/isLoggedIn"
+
 
 export default {
+  middleware: isLoggedIn,
   data() {
     return {
       name: "",
