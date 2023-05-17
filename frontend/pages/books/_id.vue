@@ -14,7 +14,7 @@
       <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
     </div>
     <br>
-    <v-btn @click="dialog = true">新規レビューを投稿する</v-btn>
+    <v-btn @click="openDialog">新規レビューを投稿する</v-btn>
 
     <v-dialog v-model="dialog">
       <v-card>
@@ -122,20 +122,25 @@ export default {
   },
   methods: {
     async addToFavorites() {
-      try {
-        const response = await axios.post(`/books/${this.params.id}/favorite_books`, {
-          user_id: this.currentUser.id,
-          book_id: this.params.id
-        })
-        console.log(response.data)
-        this.isFavorite = !this.isFavorite
-        this.favoriteBookId = response.data.favorite_book_id
-        this.snackbar = true
-        this.flashMessage = "お気に入りに追加しました"
-      } catch(error) {
-        console.log(error)
-        console.log("すでにお気に入りに登録されています")
+      if (this.currentUser) {
+        try {
+          const response = await axios.post(`/books/${this.params.id}/favorite_books`, {
+            user_id: this.currentUser.id,
+            book_id: this.params.id
+          })
+          console.log(response.data)
+          this.isFavorite = !this.isFavorite
+          this.favoriteBookId = response.data.favorite_book_id
+          this.snackbar = true
+          this.flashMessage = "お気に入りに追加しました"
+        } catch(error) {
+          console.log(error)
+          console.log("すでにお気に入りに登録されています")
+        }
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
+
     },
     async removeFromFavorite() {
       try {
@@ -177,6 +182,13 @@ export default {
       }
       this.dialog = false
     },
+    openDialog() {
+      if(this.currentUser) {
+        this.dialog = true
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
+      }
+    }
   }
 }
 </script>
