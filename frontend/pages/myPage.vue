@@ -4,6 +4,10 @@
     ID: {{ currentUser.id }}
     <br>
     name: {{ currentUser.name }}
+
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -13,18 +17,24 @@ import authCheck from '../middleware/authCheck'
 
 export default {
   middleware: authCheck,
+  data() {
+    return {
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
+    }
+  },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     }
   },
-  beforeRouteUpdate(to, from, next) {
-    const currentUser = this.$store.getters["auth/getCurrentUser"]
-    if(currentUser) {
-      next("/auth/login")
-      // this.$router.push({ path: "/login" })
-    } else {
-      next("/login")
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
     }
   },
 }
