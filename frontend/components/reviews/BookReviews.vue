@@ -7,7 +7,9 @@
       <v-card :to="`${book_id}/reviews/${review.id}`">
         <v-card-title>{{ review.title }} 評価：{{ review.rating }}</v-card-title>
         <v-card-text>{{ review.content }}</v-card-text>
-        <v-card-actions>by:{{ review.user.name }}</v-card-actions>
+        <template v-if="review.user">
+          <v-card-actions>by:{{ review.user.name }}</v-card-actions>
+        </template>
       </v-card>
     </a>
 

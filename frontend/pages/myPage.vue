@@ -31,6 +31,7 @@
             :second_choice_school="currentUser.second_choice_school"
             :third_choice_school="currentUser.third_choice_school"
             @editUser="editUser"
+            @deleteUser="deleteUser"
             @closeDialog="dialog = false"
           ></edit-user>
         </v-card-text>
@@ -112,6 +113,17 @@ export default {
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "ユーザーを編集できませんでした"
+      }
+    },
+    async deleteUser() {
+      // firebaseからデータを削除する処理を追加する
+      try {
+        const response = await axios.delete(`/users/${this.currentUser.id}`)
+        console.log(response.data)
+        this.$router.push({ path: "/", query: { message: "ユーザーを削除しました。またのご利用をお待ちしています。" } })
+      } catch(error) {
+        console.log(error)
+        console.log(error.response.data.error)
       }
     }
   }

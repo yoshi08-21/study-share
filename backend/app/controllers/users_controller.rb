@@ -46,10 +46,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find_by(id: params[:id])
+    if !check_admin?(user)
+      if user.destroy
+        head :no_content
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
+    else
+      render json: { error: "このユーザーは削除できません" }, status: 400
+    end
+  end
+
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :uid, :introduction, :first_choice_school, :second_choice_school, :third_choice_school)
     end
 
+    def check_admin?(user)
+      user.admin == true
+    end
 end

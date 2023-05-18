@@ -1,11 +1,11 @@
 class User < ApplicationRecord
 
   has_many :books
-  has_many :reviews
-  has_many :questions
-  has_many :subject_questions
-  has_many :replies
-  has_many :subject_question_replies
+  has_many :reviews, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :subject_questions, dependent: :destroy
+  has_many :replies, dependent: :destroy
+  has_many :subject_question_replies, dependent: :destroy
   has_many :favorite_books, dependent: :destroy
   has_many :fav_books,       through: :favorite_books, source: :book
   has_many :favorite_reviews, dependent: :destroy
