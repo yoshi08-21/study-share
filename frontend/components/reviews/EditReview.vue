@@ -12,8 +12,20 @@
       </v-rating>
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedTitle"></v-text-field>
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent"></v-textarea>
-      <v-btn color="primary" @click="submitForm">編集する</v-btn>
-      <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+
+
+      <v-row>
+        <v-col cols="2" class="align-start custom-button-margin">
+          <v-btn color="primary" @click="submitForm">編集する</v-btn>
+        </v-col>
+        <v-col cols="2" class="align-start">
+          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+        </v-col>
+      </v-row>
+
+
+
+
     </v-form>
   </div>
 </template>

@@ -7,14 +7,29 @@
       <v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool"></v-text-field>
       <v-text-field counter label="第二志望" :rules="schoolNameRules" v-model="editedSecondChoiceSchool"></v-text-field>
       <v-text-field counter label="第三志望" :rules="schoolNameRules" v-model="editedThirdChoiceSchool"></v-text-field>
-      <v-btn color="primary" @click="submitForm">編集する</v-btn>
+
+      <v-row>
+        <v-col cols="2" class="align-start custom-button-margin">
+          <v-btn color="primary" @click="submitForm">編集する</v-btn>
+        </v-col>
+        <v-col cols="2" class="align-start">
+          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+        </v-col>
+        <v-col cols="8" class="text-right">
+          <v-btn color="error" class="justify-end">ユーザーを削除する</v-btn>
+        </v-col>
+      </v-row>
+
+      <!-- <v-btn color="primary" @click="submitForm">編集する</v-btn>
       <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+      <v-btn class="justify-end">ユーザーを削除する</v-btn>
+      -->
     </v-form>
   </div>
 </template>
 
 <script>
-import { VTextField, VTextarea } from 'vuetify/lib'
+import { VTextField, VTextarea} from 'vuetify/lib'
 
 export default {
   props: {
@@ -63,5 +78,9 @@ export default {
 </script>
 
 <style>
+
+.custom-button-margin {
+  margin-right: -30px;
+}
 
 </style>
