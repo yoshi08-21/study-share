@@ -88,12 +88,12 @@ export default {
           third_choice_school: data.thirdChoiceSchool,
         })
         console.log(response.data)
+        // もう一度getリクエストを送って、storeのcurrentUserにセットし直す
+        this.updateUser()
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "ユーザーの編集が完了しました"
         this.dialog = false
-        // もう一度getリクエストを送って、storeのcurrentUserにセットし直す
-        this.updateUser()
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -109,6 +109,9 @@ export default {
         this.$store.dispatch("auth/setCurrentUser", this.updatedUser)
       } catch(error) {
         console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "ユーザーを編集できませんでした"
       }
     }
   }
