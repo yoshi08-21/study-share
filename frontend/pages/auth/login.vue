@@ -62,7 +62,7 @@ export default {
         console.log(error)
       }
 
-      this.$router.push("/")
+      this.$router.push({ path: "/mypage" , query: { message: "ログインしました"} })
     },
     async loginAsUser1() {
       this.email = "sample@sample.com"
