@@ -28,6 +28,13 @@
     "_name": "_ea3048ba"
   },
   {
+    "name": "users-id",
+    "path": "/users/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/users/_id.vue",
+    "chunkName": "pages/users/_id",
+    "_name": "_3a7b0901"
+  },
+  {
     "name": "books-book_id-reviews-id",
     "path": "/books/:book_id?/reviews/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/reviews/_id.vue",
