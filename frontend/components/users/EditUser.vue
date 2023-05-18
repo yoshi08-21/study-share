@@ -16,7 +16,8 @@
           <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
         </v-col>
         <v-col cols="8" class="text-right">
-          <v-btn color="error" class="justify-end">ユーザーを削除する</v-btn>
+          <!-- ダイアログの表示を挟む -->
+          <v-btn color="error" class="justify-end" @click="deleteUser">ユーザーを削除する</v-btn>
         </v-col>
       </v-row>
 
@@ -73,6 +74,9 @@ export default {
         thirdChoiceSchool: this.editedThirdChoiceSchool,
       })
     },
+    deleteUser() {
+      this.$emit("deleteUser")
+    }
   }
 }
 </script>

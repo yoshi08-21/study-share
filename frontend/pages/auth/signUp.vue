@@ -30,34 +30,33 @@ export default {
   },
   methods: {
     async signUp() {
+      // 新規登録時にデータベースにuidを登録することまでは完了した
+      // 登録したユーザーでログインすることも成功した
+      // 登録後に自動的にログインする昨日はまだ実装できていない
       try {
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
         console.log(response)
-        this.uid = response.user.uid
-
-      } catch(error) {
-        console.log(error)
-      }
-
-      setTimeout(() => {
-        console.log("wait")
-      }, 1000);
-
-      try {
-        const user = {
-          name: this.name,
-          email: this.email,
-          uid: this.uid
-        }
-        const response = await axios.post("/users", {
-          user
-        })
-        console.log(response.data)
+        // response.user.uid
+        console.log(response.user.uid)
+        this.userSetup(response.user.uid)
       } catch(error) {
         console.log(error)
       }
       this.$router.push('/mypage')
+    },
+    async userSetup(userUid) {
+      try {
+        const response = await axios.post("/users", {
+          name: this.name,
+          email: this.email,
+          uid: userUid
+        })
+        this.$store.dispatch("auth/setCurrentUser", response.data)
+        console.log(response.data)
+      } catch(error) {
+        console.log(error)
+      }
     }
 
   }
