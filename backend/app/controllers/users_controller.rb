@@ -37,10 +37,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find_by(id: params[:id])
+    if user.update(user_params)
+      render json: user
+    else
+      render json: user.errors
+    end
+  end
+
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :uid)
+      params.require(:user).permit(:name, :email, :uid, :introduction, :first_choice_school, :second_choice_school, :third_choice_school)
     end
 
 end

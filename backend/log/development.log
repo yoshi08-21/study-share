@@ -15326,3 +15326,9 @@ Processing by ReviewsController#show as HTML
 Completed 200 OK in 26ms (Views: 0.6ms | ActiveRecord: 11.1ms | Allocations: 2818)
 
 
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'sample@sample.com' AND `users`.`id` != 1 LIMIT 1[0m
+  [1m[36mUser Update (9.9ms)[0m  [1m[33mUPDATE `users` SET `users`.`first_choice_school` = 'A大学', `users`.`second_choice_school` = 'B大学', `users`.`third_choice_school` = 'C大学', `users`.`introduction` = 'よろしくお願いします', `users`.`admin` = TRUE, `users`.`updated_at` = '2023-05-18 03:44:14.087872' WHERE `users`.`id` = 1[0m
+  [1m[36mTRANSACTION (6.5ms)[0m  [1m[35mCOMMIT[0m
