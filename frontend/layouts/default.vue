@@ -53,6 +53,9 @@
           </v-list-item-action>
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
         </v-list-item>
+        <v-list-item>
+          「{{ this.currentUser.name }}」でログイン中
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
@@ -94,6 +97,11 @@ export default {
           title: '新規登録',
           to: '/auth/signup'
         },
+        {
+          title: 'sample6詳細ページ',
+          to: '/users/4'
+        },
+
       ],
       miniVariant: false,
       right: true,
@@ -109,7 +117,9 @@ export default {
     isLoggedIn() {
       return this.$store.getters["auth/getLoggedIn"]
     },
-
+    currentUser() {
+      return this.$store.getters["auth/getCurrentUser"]
+    }
 
   },
   methods: {
