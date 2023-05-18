@@ -10,7 +10,7 @@
     <h4>評価:{{ review.rating }}</h4>
     <h4>タイトル:{{ review.title }}</h4>
     <p>本文:{{ review.content }}</p>
-    <p>reviewd by {{ this.user.name }}</p>
+    <h3>reviewd by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
     <br>
 
@@ -155,10 +155,18 @@ export default {
     redirectToBook() {
       this.$router.push({ path: `/books/${this.book.id}` })
     },
+    redirectToUser() {
+      this.$router.push({ path: `/users/${this.user.id}` })
+    },
   }
 }
 </script>
 
 <style>
-
+  .link-text {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 </style>
+
