@@ -8,6 +8,7 @@ const _4859987d = () => interopDefault(import('../pages/myPage.vue' /* webpackCh
 const _ffdb8438 = () => interopDefault(import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _d0175066 = () => interopDefault(import('../pages/auth/signUp.vue' /* webpackChunkName: "pages/auth/signUp" */))
 const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpackChunkName: "pages/books/_id" */))
+const _3a7b0901 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
 const _db10b3e0 = () => interopDefault(import('../pages/books/_book_id/reviews/_id.vue' /* webpackChunkName: "pages/books/_book_id/reviews/_id" */))
 const _2a6ffc20 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -38,6 +39,10 @@ export const routerOptions = {
     path: "/books/:id?",
     component: _ea3048ba,
     name: "books-id"
+  }, {
+    path: "/users/:id?",
+    component: _3a7b0901,
+    name: "users-id"
   }, {
     path: "/books/:book_id?/reviews/:id?",
     component: _db10b3e0,
