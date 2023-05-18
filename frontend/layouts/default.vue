@@ -53,7 +53,7 @@
           </v-list-item-action>
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
         </v-list-item>
-        <v-list-item>
+        <v-list-item v-if="this.currentUser">
           「{{ this.currentUser.name }}」でログイン中
         </v-list-item>
       </v-list>
