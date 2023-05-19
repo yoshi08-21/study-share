@@ -30,9 +30,7 @@ export default {
   },
   methods: {
     async signUp() {
-      // 新規登録時にデータベースにuidを登録することまでは完了した
-      // 登録したユーザーでログインすることも成功した
-      // 登録後に自動的にログインする昨日はまだ実装できていない
+      // 登録後はトップページに遷移
       try {
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
@@ -43,7 +41,7 @@ export default {
       } catch(error) {
         console.log(error)
       }
-      this.$router.push('/mypage')
+      this.$router.push({ path: "/", query: { message: "会員登録が完了しました" } })
     },
     async userSetup(userUid) {
       try {
@@ -53,6 +51,7 @@ export default {
           uid: userUid
         })
         this.$store.dispatch("auth/setCurrentUser", response.data)
+        this.$store.dispatch("auth/setLoginState", true)
         console.log(response.data)
       } catch(error) {
         console.log(error)

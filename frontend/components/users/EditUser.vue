@@ -17,14 +17,29 @@
         </v-col>
         <v-col cols="8" class="text-right">
           <!-- ダイアログの表示を挟む -->
-          <v-btn color="error" class="justify-end" @click="deleteUser">ユーザーを削除する</v-btn>
+          <v-btn color="error" class="justify-end" @click="showDeleteConfirmation=true">ユーザーを削除する</v-btn>
         </v-col>
       </v-row>
 
-      <!-- <v-btn color="primary" @click="submitForm">編集する</v-btn>
-      <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-      <v-btn class="justify-end">ユーザーを削除する</v-btn>
-      -->
+      <!-- ユーザー削除確認ダイアログ -->
+      <v-dialog v-model="showDeleteConfirmation">
+      <v-card>
+        <v-card-title>
+          削除されたユーザーは復元することができません！
+        </v-card-title>
+        <v-card-text>
+          <strong>
+            ユーザーを削除しますか？
+          </strong>
+        </v-card-text>
+        <v-card-actions class="justify-content-center">
+          <v-btn @click="deleteLocalUser">削除する</v-btn>
+          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
     </v-form>
   </div>
 </template>
@@ -61,7 +76,9 @@ export default {
       ],
       schoolNameRules: [
       value => (value || '').length <= 30 || "最大入力文字数は30文字です",
-      ]
+      ],
+      showDeleteConfirmation: false,
+
     }
   },
   methods: {
@@ -74,7 +91,7 @@ export default {
         thirdChoiceSchool: this.editedThirdChoiceSchool,
       })
     },
-    deleteUser() {
+    deleteLocalUser() {
       this.$emit("deleteUser")
     }
   }

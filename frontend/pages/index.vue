@@ -35,6 +35,11 @@
     <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
     <hr>
     <h1>サンプル</h1>
+
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
+
   </div>
 </template>
 
@@ -50,7 +55,9 @@ export default {
       user: "",
       error: "",
       newReviews: [],
-
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
     }
   },
   computed: {
@@ -79,6 +86,15 @@ export default {
       // コントローラーを改良する必要あり
       this.newReviews = response.data
     },
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
+    }
+  },
+
 
 }
 

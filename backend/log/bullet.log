@@ -1,0 +1,8 @@
+2023-05-20 06:12:04[WARN] user: yoshito-t
+DELETE /users/11
+USE eager loading detected
+  Review => [:favorite_reviews]
+  Add to your query: .includes([:favorite_reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/users_controller.rb:52:in `destroy'
+
