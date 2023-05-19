@@ -132,7 +132,10 @@ export default {
         this.$router.push({ path: "/", query: { message: "ユーザーを削除しました。またのご利用をお待ちしています。" } })
       } catch(error) {
         console.log(error)
-        console.log(error.response.data.error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = error.response.data.error
+        this.dialog = false
       }
     }
   }
