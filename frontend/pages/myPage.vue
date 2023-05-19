@@ -31,7 +31,7 @@
             :second_choice_school="currentUser.second_choice_school"
             :third_choice_school="currentUser.third_choice_school"
             @editUser="editUser"
-            @deleteUser="deleteUser"
+            @deleteUser="deleteLocalUser"
             @closeDialog="dialog = false"
           ></edit-user>
         </v-card-text>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { getAuth, deleteUser } from "firebase/auth"
 import EditUser from '../components/users/EditUser.vue'
 import authCheck from '../middleware/authCheck'
 import axios from "@/plugins/axios"
@@ -115,11 +116,19 @@ export default {
         this.flashMessage = "ユーザーを編集できませんでした"
       }
     },
-    async deleteUser() {
-      // firebaseからデータを削除する処理を追加する
+    async deleteLocalUser() {
       try {
         const response = await axios.delete(`/users/${this.currentUser.id}`)
         console.log(response.data)
+        this.$store.dispatch("auth/setCurrentUser", null)
+        this.$store.dispatch("auth/setLoginState", false)
+        const auth = getAuth(this.$firebase)
+        const user = auth.currentUser;
+        deleteUser(user).then(() => {
+          console.log("ユーザーを削除しました")
+        }).catch((error) => {
+          console.log(error)
+        });
         this.$router.push({ path: "/", query: { message: "ユーザーを削除しました。またのご利用をお待ちしています。" } })
       } catch(error) {
         console.log(error)
