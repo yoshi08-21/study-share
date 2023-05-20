@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :favorite_books, dependent: :destroy
   has_many :fav_books,       through: :favorite_books, source: :book
   has_many :favorite_reviews, dependent: :destroy
+  has_many :fav_reviews,       through: :favorite_reviews, source: :review
   has_many :favorite_questions, dependent: :destroy
 
 

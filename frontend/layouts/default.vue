@@ -30,6 +30,9 @@
         <nuxt-link to="/">{{ title.title }}</nuxt-link>
       </v-toolbar-title>
       <v-spacer />
+      <div>
+        <v-btn>お気に入り</v-btn>
+      </div>
       <div v-if="!isLoggedIn">
         <v-btn to="/auth/login">ログイン</v-btn>
       </div>
@@ -129,8 +132,8 @@ export default {
         await signOut(auth)
         this.$store.dispatch("auth/setLoginState", false)
         this.$store.dispatch("auth/setUserUid", "")
-        this.$router.push("/")
         this.$store.dispatch("auth/setEmail", "")
+        this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
       } catch(error) {
         console.log(error)
       }

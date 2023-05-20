@@ -15332,3 +15332,11 @@ Completed 200 OK in 26ms (Views: 0.6ms | ActiveRecord: 11.1ms | Allocations: 281
   [1m[36mUser Exists? (3.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'sample@sample.com' AND `users`.`id` != 1 LIMIT 1[0m
   [1m[36mUser Update (9.9ms)[0m  [1m[33mUPDATE `users` SET `users`.`first_choice_school` = 'A大学', `users`.`second_choice_school` = 'B大学', `users`.`third_choice_school` = 'C大学', `users`.`introduction` = 'よろしくお願いします', `users`.`admin` = TRUE, `users`.`updated_at` = '2023-05-18 03:44:14.087872' WHERE `users`.`id` = 1[0m
   [1m[36mTRANSACTION (6.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` DESC LIMIT 1[0m
+  [1m[36mReview Load (1.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` ORDER BY `reviews`.`id` ASC LIMIT 1[0m
+  [1m[36mFavoriteReview Load (3.4ms)[0m  [1m[34mSELECT `favorite_reviews`.* FROM `favorite_reviews` WHERE `favorite_reviews`.`user_id` = 14[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
+  [1m[36mFavoriteReview Create (1.2ms)[0m  [1m[32mINSERT INTO `favorite_reviews` (`user_id`, `review_id`, `created_at`, `updated_at`) VALUES (14, 4, '2023-05-20 01:41:30.230124', '2023-05-20 01:41:30.230124')[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m

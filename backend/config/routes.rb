@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  get "/favorites", to: "favorites#index"
 
   resources :users do
     collection do
@@ -15,8 +16,10 @@ Rails.application.routes.draw do
     resources :reviews
   end
   resources :reviews do
+    resources :favorite_reviews, only: [:create, :destroy]
     collection do
       get "new_reviews"
+      get "is_favorite"
     end
   end
   resources :questions do

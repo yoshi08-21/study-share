@@ -156,7 +156,9 @@ export default {
         this.flashMessage = "お気に入りから削除しました"
       } catch(error) {
         console.log(error)
-        console.log("お気に入りに登録されていません")
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "気に入りに登録されていません"
       }
     },
     async submitReview(data) {
