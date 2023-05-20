@@ -75,8 +75,19 @@ class ReviewsController < ApplicationController
     else
       render json: reviews.errors
     end
-
   end
+
+  def is_favorite
+    current_user = User.find_by(id: params[:user_id])
+    review = Review.find_by(id: params[:review_id])
+    favorite_review = FavoriteReview.find_by(user_id: current_user.id, review_id: review.id)
+    if favorite_review
+      render json: { is_favorite: true, favorite_review_id: favorite_review.id }
+    else
+      render json: false
+    end
+  end
+
 
   private
 

@@ -14,6 +14,20 @@
 
     <br>
 
+    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
+    <template v-if="this.currentUser && this.user.id !== this.currentUser.id">
+      <template v-if="!isFavorite">
+        <v-btn @click="addToFavorite">いいね！する</v-btn>
+      </template>
+      <template v-else>
+        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
+      </template>
+    </template>
+    <template v-else>
+      「いいね？件」
+    </template>
+
+    <br>
     <template v-if="this.currentUser && this.user.id == this.currentUser.id">
       <v-btn @click="dialog=true">編集する</v-btn>
       <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
@@ -94,7 +108,9 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
-      user: {}
+      user: {},
+      isFavorite: false,
+      favoriteReviewId: "",
 
     }
   },
@@ -102,6 +118,22 @@ export default {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+  },
+  async created() {
+    try {
+      const response = await axios.get("reviews/is_favorite", {
+        params: {
+          user_id: this.$store.getters["auth/getCurrentUserId"],
+          review_id: this.$route.params.id
+        }
+      })
+      console.log(response)
+      this.isFavorite = response.data.is_favorite
+      this.favoriteReviewId = response.data.favorite_review_id
+    } catch(error) {
+      console.log("エラー文です")
+      console.log(error)
+    }
   },
   mounted() {
     if (this.$route.query.message) {
@@ -164,6 +196,44 @@ export default {
         this.$router.push({ path: "/mypage" })
       }
     },
+    async addToFavorite() {
+      try {
+        const response = await axios.post(`/reviews/${this.review.id}/favorite_reviews`, {
+          user_id: this.currentUser.id
+        })
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！しました"
+        this.isFavorite = true
+        this.favoriteReviewId = response.data.id
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "すでにいいね！されています"
+      }
+    },
+    async removeFromFavorite() {
+      try {
+        const response = await axios.delete(`/reviews/${this.review.id}/favorite_reviews/${this.favoriteReviewId}`, {
+          params: {
+            user_id: this.currentUser.id
+          }
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！を削除しました"
+        this.isFavorite = !this.isFavorite
+        this.favoriteReviewId = null
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "いいね！されていません"
+      }
+    }
   }
 }
 </script>
