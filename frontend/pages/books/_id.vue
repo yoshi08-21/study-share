@@ -35,6 +35,7 @@
 
     <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
     <book-reviews :reviews="reviewsChunk" :book_id="book.id" ></book-reviews>
+    <book-questions :questions="questionsChunk" :book_id="book.id"></book-questions>
     <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
   </div>
 </template>
@@ -44,6 +45,7 @@
 import { VDialog, VDivider } from 'vuetify/lib'
 import ReviewForm from '../../components/reviews/ReviewForm.vue'
 import BookReviews from '../../components/reviews/BookReviews.vue'
+import BookQuestions from '../../components/questions/BookQuestions.vue'
 import axios from "@/plugins/axios"
 
 
@@ -52,17 +54,21 @@ export default {
     ReviewForm,
     VDialog,
     VDivider,
-    BookReviews
+    BookReviews,
+    BookQuestions
   },
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params }) {
     const book = await axios.get(`/books/${params.id}`)
     const reviews = await axios.get(`/books/${params.id}/reviews`)
+    const questions = await axios.get(`/books/${params.id}/questions`)
     console.log(book.data)
     console.log(reviews.data)
+    console.log(questions.data)
     return {
       book: book.data,
       reviews: reviews.data,
+      questions: questions.data,
       params
     };
     // const [reviews, questions] = await Promise.all([
@@ -92,6 +98,11 @@ export default {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
       return this.reviews.slice(start, end)
+    },
+    questionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.questions.slice(start, end)
     },
     totalPages() {
       return Math.ceil(this.reviews.length / this.perPage);
