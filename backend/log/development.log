@@ -15345,3 +15345,22 @@ Completed 200 OK in 26ms (Views: 0.6ms | ActiveRecord: 11.1ms | Allocations: 281
   [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
   [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1[0m
   [1m[36mBook Load (3.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mBook Load (4.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` ORDER BY `books`.`id` ASC LIMIT 1[0m
+  [1m[36mReview Load (2.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`user_id` = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Load (2.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mQuestion Create (11.6ms)[0m  [1m[32mINSERT INTO `questions` (`title`, `content`, `subject`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES ('テスト質問1', 'テスト質問1', '英語', 1, 1, '2023-05-21 07:34:57.547296', '2023-05-21 07:34:57.547296')[0m
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mQuestion Create (2.1ms)[0m  [1m[32mINSERT INTO `questions` (`title`, `content`, `subject`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES ('テスト質問2', 'テスト質問2', '英語', 1, 1, '2023-05-21 07:35:05.263160', '2023-05-21 07:35:05.263160')[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mQuestion Create (1.7ms)[0m  [1m[32mINSERT INTO `questions` (`title`, `content`, `subject`, `user_id`, `book_id`, `created_at`, `updated_at`) VALUES ('テスト質問3', 'テスト質問3', '英語', 1, 1, '2023-05-21 07:35:11.376558', '2023-05-21 07:35:11.376558')[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
