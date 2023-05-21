@@ -1,5 +1,12 @@
 [
   {
+    "name": "favorites",
+    "path": "/favorites",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/favorites.vue",
+    "chunkName": "pages/favorites",
+    "_name": "_02462825"
+  },
+  {
     "name": "myPage",
     "path": "/myPage",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/myPage.vue",
