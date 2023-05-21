@@ -31,7 +31,8 @@
       </v-toolbar-title>
       <v-spacer />
       <div>
-        <v-btn>お気に入り</v-btn>
+        <!-- メソッドに切り替えて、未ログイン時のリダイレクトを追加する -->
+        <v-btn to="/favorites">お気に入り</v-btn>
       </div>
       <div v-if="!isLoggedIn">
         <v-btn to="/auth/login">ログイン</v-btn>
@@ -104,7 +105,6 @@ export default {
           title: 'sample6詳細ページ',
           to: '/users/4'
         },
-
       ],
       miniVariant: false,
       right: true,

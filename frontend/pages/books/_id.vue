@@ -54,6 +54,7 @@ export default {
     VDivider,
     BookReviews
   },
+  // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params }) {
     const book = await axios.get(`/books/${params.id}`)
     const reviews = await axios.get(`/books/${params.id}/reviews`)
