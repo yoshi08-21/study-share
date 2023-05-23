@@ -3,37 +3,43 @@
     "name": "favorites",
     "path": "/favorites",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/favorites.vue",
-    "chunkName": "pages/favorites"
+    "chunkName": "pages/favorites",
+    "_name": "_02462825"
   },
   {
     "name": "myPage",
     "path": "/myPage",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/myPage.vue",
-    "chunkName": "pages/myPage"
+    "chunkName": "pages/myPage",
+    "_name": "_4859987d"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/login.vue",
-    "chunkName": "pages/auth/login"
+    "chunkName": "pages/auth/login",
+    "_name": "_ffdb8438"
   },
   {
     "name": "auth-signUp",
     "path": "/auth/signUp",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/signUp.vue",
-    "chunkName": "pages/auth/signUp"
+    "chunkName": "pages/auth/signUp",
+    "_name": "_d0175066"
   },
   {
     "name": "books-id",
     "path": "/books/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id.vue",
-    "chunkName": "pages/books/_id"
+    "chunkName": "pages/books/_id",
+    "_name": "_ea3048ba"
   },
   {
     "name": "users-id",
     "path": "/users/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/users/_id.vue",
-    "chunkName": "pages/users/_id"
+    "chunkName": "pages/users/_id",
+    "_name": "_3a7b0901"
   },
   {
     "name": "books-book_id-questions-id",
@@ -46,12 +52,14 @@
     "name": "books-book_id-reviews-id",
     "path": "/books/:book_id?/reviews/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/reviews/_id.vue",
-    "chunkName": "pages/books/_book_id/reviews/_id"
+    "chunkName": "pages/books/_book_id/reviews/_id",
+    "_name": "_db10b3e0"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_2a6ffc20"
   }
 ]
