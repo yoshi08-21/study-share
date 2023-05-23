@@ -6,31 +6,27 @@
 
     <h3>お気に入りの参考書</h3>
     <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteBook, index) in favoriteBooks" :key="'book_' + index">
-      <a href="" style="text-decoration: none;">
-        <v-card :to="`/books/${favoriteBook.id}`">
-          <v-card-title>タイトル：{{ favoriteBook.name }}</v-card-title>
-          <v-card-title>著者：{{ favoriteBook.author }}</v-card-title>
-          <v-card-title>出版社：{{ favoriteBook.publisher }}</v-card-title>
-          <v-card-title>科目：{{ favoriteBook.subject }}</v-card-title>
-        </v-card>
-      </a>
+      <v-card :to="`/books/${favoriteBook.id}`">
+        <v-card-title>タイトル：{{ favoriteBook.name }}</v-card-title>
+        <v-card-title>著者：{{ favoriteBook.author }}</v-card-title>
+        <v-card-title>出版社：{{ favoriteBook.publisher }}</v-card-title>
+        <v-card-title>科目：{{ favoriteBook.subject }}</v-card-title>
+      </v-card>
     </v-flex>
 
 
     <h3>いいねしたレビュー</h3>
     <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteReview, index) in favoriteReviews" :key="'review_' + index">
-      <a href="" style="text-decoration: none;">
-        <v-card :to="`/books/${favoriteReview.book_id}/reviews/${favoriteReview.id}`">
-          <v-card-title>{{ favoriteReview.title }} 評価：{{ favoriteReview.rating }}</v-card-title>
-          <v-card-text>{{ favoriteReview.content }}</v-card-text>
-          <template v-if="favoriteReview.user">
-            <v-card-actions>by:{{ favoriteReview.user.name }}</v-card-actions>
-          </template>
-          <template v-if="favoriteReview.book">
-            <v-card-actions>to:{{ favoriteReview.book.name }}</v-card-actions>
-          </template>
-        </v-card>
-      </a>
+      <v-card :to="`/books/${favoriteReview.book_id}/reviews/${favoriteReview.id}`">
+        <v-card-title>{{ favoriteReview.title }} 評価：{{ favoriteReview.rating }}</v-card-title>
+        <v-card-text>{{ favoriteReview.content }}</v-card-text>
+        <template v-if="favoriteReview.user">
+          <v-card-actions>by:{{ favoriteReview.user.name }}</v-card-actions>
+        </template>
+        <template v-if="favoriteReview.book">
+          <v-card-actions>to:{{ favoriteReview.book.name }}</v-card-actions>
+        </template>
+      </v-card>
     </v-flex>
 
   </div>

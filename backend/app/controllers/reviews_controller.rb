@@ -23,6 +23,18 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def create
+    current_user = User.find_by(id: params[:user_id])
+    book = Book.find_by(id: params[:book_id])
+    review = current_user.reviews.build(review_params)
+    review.book_id = book.id
+    if review.save
+      render json: review, status: 200
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
   def update
     review = Review.find_by(id: params[:id])
     current_user = User.find_by(id: params[:current_user_id])
@@ -35,18 +47,6 @@ class ReviewsController < ApplicationController
       end
     else
       render json: { error: "権限がありません" }, status: 400
-    end
-  end
-
-  def create
-    current_user = User.find_by(id: params[:user_id])
-    book = Book.find_by(id: params[:book_id])
-    review = current_user.reviews.build(review_params)
-    review.book_id = book.id
-    if review.save
-      render json: review, status: 200
-    else
-      render json: { error: "エラーが発生しました" }, status: 400
     end
   end
 
@@ -63,8 +63,6 @@ class ReviewsController < ApplicationController
     else
       render json: { error: "権限がありません" }, status: 400
     end
-
-
   end
 
   def new_reviews
@@ -95,8 +93,5 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:title, :content, :rating, :user_id, :book_id)
     end
 
-    def validate_authorship(current_user, author)
-      current_user == author
-    end
 
 end

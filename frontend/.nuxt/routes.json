@@ -36,6 +36,13 @@
     "chunkName": "pages/users/_id"
   },
   {
+    "name": "books-book_id-questions-id",
+    "path": "/books/:book_id?/questions/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/questions/_id.vue",
+    "chunkName": "pages/books/_book_id/questions/_id",
+    "_name": "_368e3cc2"
+  },
+  {
     "name": "books-book_id-reviews-id",
     "path": "/books/:book_id?/reviews/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/reviews/_id.vue",
