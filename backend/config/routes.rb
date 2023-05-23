@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   end
   resources :questions, only: [:index] do
     resources :favorite_questions, only: [:create, :destroy]
+    collection do
+      get "is_favorite"
+    end
   end
   resources :subject_questions
   resources :replies
