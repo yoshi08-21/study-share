@@ -79,22 +79,29 @@ export default {
   },
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params }) {
-    const book = await axios.get(`/books/${params.id}`)
-    const reviews = await axios.get(`/books/${params.id}/reviews`)
-    const questions = await axios.get(`/books/${params.id}/questions`)
-    console.log(book.data)
-    console.log(reviews.data)
-    console.log(questions.data)
-    return {
-      book: book.data,
-      reviews: reviews.data,
-      questions: questions.data,
-      params
-    };
-    // const [reviews, questions] = await Promise.all([
-    //   axios.get(`/books/${params.id}/reviews`),
-    //   axios.get(`/books/${params.id}/questions`)
-    // ])
+    try {
+      const [bookResponse, reviewsResponse, questionsResponse] = await Promise.all([
+        axios.get(`/books/${params.id}`),
+        axios.get(`/books/${params.id}/reviews`),
+        axios.get(`/books/${params.id}/questions`)
+      ])
+      const book = bookResponse.data
+      const reviews = reviewsResponse.data
+      const questions = questionsResponse.data
+      console.log(book)
+      console.log(reviews)
+      console.log(questions)
+      return {
+        book,
+        reviews,
+        questions,
+        params
+      };
+    } catch(error) {
+      console.log(error)
+      throw error
+    }
+
   },
   data() {
     return {
