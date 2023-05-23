@@ -4,10 +4,12 @@ class FavoritesController < ApplicationController
     current_user = User.find_by(id: params[:user_id])
     favorite_books = current_user.fav_books
     favorite_reviews = current_user.fav_reviews.includes(:user, :book)
+    favorite_questions = current_user.fav_questions.includes(:user, :book)
     if current_user
       render json: {
         favorite_books: favorite_books,
-        favorite_reviews: favorite_reviews.as_json(include: [:user, :book])
+        favorite_reviews: favorite_reviews.as_json(include: [:user, :book]),
+        favorite_questions: favorite_questions.as_json(include: [:user, :book])
       },
       status: 200
     else

@@ -29,6 +29,22 @@
       </v-card>
     </v-flex>
 
+
+    <h3>いいねした質問</h3>
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoritequestion, index) in favoritequestions" :key="'question_' + index">
+      <v-card :to="`/books/${favoritequestion.book_id}/questions/${favoritequestion.id}`">
+        <v-card-title>{{ favoritequestion.title }} </v-card-title>
+        <v-card-text>{{ favoritequestion.content }}</v-card-text>
+        <template v-if="favoritequestion.user">
+          <v-card-actions>by:{{ favoritequestion.user.name }}</v-card-actions>
+        </template>
+        <template v-if="favoritequestion.book">
+          <v-card-actions>to:{{ favoritequestion.book.name }}</v-card-actions>
+        </template>
+      </v-card>
+    </v-flex>
+
+
   </div>
 </template>
 
@@ -47,7 +63,8 @@ export default {
       console.log(response.data)
       return {
         favoriteBooks: response.data.favorite_books,
-        favoriteReviews: response.data.favorite_reviews
+        favoriteReviews: response.data.favorite_reviews,
+        favoritequestions: response.data.favorite_questions
       }
     } catch(error) {
       console.log(error)
