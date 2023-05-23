@@ -96,16 +96,21 @@ export default {
     EditReview
   },
   async asyncData({ params }) {
-    const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`)
-    console.log(responce.data.review)
-    console.log(responce.data.book)
-    console.log(responce.data.review.user)
-    return {
-      book: responce.data.book,
-      review: responce.data.review,
-      user: responce.data.review.user,
-      params
-    };
+    try {
+      const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`)
+      console.log(responce.data.review)
+      console.log(responce.data.book)
+      console.log(responce.data.review.user)
+      return {
+        book: responce.data.book,
+        review: responce.data.review,
+        user: responce.data.review.user,
+        params
+      };
+    } catch(error) {
+      console.log(error)
+      throw error
+    }
   },
   data() {
     return {

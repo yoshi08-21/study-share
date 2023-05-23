@@ -85,15 +85,22 @@ import axios from "@/plugins/axios"
 export default {
   components: { EditQuestion },
   async asyncData({ params }) {
-    const responce = await axios.get(`/books/${params.book_id}/questions/${params.id}`)
-    console.log(responce.data)
-    return {
-      book: responce.data.book,
-      question: responce.data.question,
-      user: responce.data.question.user,
-      favoriteQuestionsCount: responce.data.favorite_questions_count,
-      params
-    };
+
+    try {
+      const responce = await axios.get(`/books/${params.book_id}/questions/${params.id}`)
+      console.log(responce.data)
+      return {
+        book: responce.data.book,
+        question: responce.data.question,
+        user: responce.data.question.user,
+        favoriteQuestionsCount: responce.data.favorite_questions_count,
+        params
+      };
+    } catch(error) {
+      console.log(error)
+      throw error
+    }
+
   },
   data() {
     return {
