@@ -11,6 +11,20 @@
     <p>本文:{{ this.question.content }}</p>
     <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
+    <br>
+    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
+    <template v-if="this.currentUser && this.user.id !== this.currentUser.id">
+      <template v-if="!isFavorite">
+        <v-btn @click="addToFavorite">いいね！する</v-btn>
+      </template>
+      <template v-else>
+        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
+      </template>
+    </template>
+    <template v-else>
+      「いいね？件」
+    </template>
+
     <!-- 自分の質問のみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.user.id == this.currentUser.id">
@@ -87,12 +101,31 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
+      isFavorite: false,
+      favoriteQuestionId: "",
+
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+  },
+  async created() {
+    try {
+      const response = await axios.get("questions/is_favorite", {
+        params: {
+          user_id: this.$store.getters["auth/getCurrentUserId"],
+          question_id: this.$route.params.id
+        }
+      })
+      console.log(response)
+      this.isFavorite = response.data.is_favorite
+      this.favoriteQuestionId = response.data.favorite_question_id
+    } catch(error) {
+      console.log("エラー文です")
+      console.log(error)
+    }
   },
   mounted() {
     if (this.$route.query.message) {
@@ -152,9 +185,45 @@ export default {
         this.dialog = false
       }
     },
+    async addToFavorite() {
+      try {
+        const response = await axios.post(`/questions/${this.question.id}/favorite_questions`, {
+          user_id: this.currentUser.id
+        })
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！しました"
+        this.isFavorite = true
+        this.favoriteQuestionId = response.data.id
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "すでにいいね！されています"
+      }
+    },
+    async removeFromFavorite() {
+      try {
+        const response = await axios.delete(`/questions/${this.question.id}/favorite_questions/${this.favoriteQuestionId}`, {
+          params: {
+            user_id: this.currentUser.id
+          }
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！を削除しました"
+        this.isFavorite = !this.isFavorite
+        this.favoriteQuestionId = null
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "いいね！されていません"
+      }
+    }
   }
-
-
 }
 </script>
 

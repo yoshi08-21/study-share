@@ -36,8 +36,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    question = Question.find_by(id: params[:id])
     current_user = User.find_by(id: params[:current_user_id])
+    question = Question.find_by(id: params[:id])
     author = question.user
     if validate_authorship(current_user, author)
       if question.update(question_params)
@@ -51,8 +51,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    question = Question.find_by(id: params[:id])
     current_user = User.find_by(id: params[:current_user_id])
+    question = Question.find_by(id: params[:id])
     author = question.user
     if validate_authorship(current_user, author)
       if question.destroy
@@ -65,6 +65,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def is_favorite
+    current_user = User.find_by(id: params[:user_id])
+    question = Question.find_by(id: params[:question_id])
+    favorite_question = FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id)
+    if favorite_question
+      render json: { is_favorite: true, favorite_question_id: favorite_question.id }
+    else
+      render json: false
+    end
+  end
 
 
 
