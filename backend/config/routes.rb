@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get "is_favorite"
     end
     resources :reviews
+    resources :questions, only: [:index, :show, :create, :update, :destroy]
+
   end
   resources :reviews do
     resources :favorite_reviews, only: [:create, :destroy]
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
       get "is_favorite"
     end
   end
-  resources :questions do
+  resources :questions, only: [:index] do
     resources :favorite_questions, only: [:create, :destroy]
   end
   resources :subject_questions
