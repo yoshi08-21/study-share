@@ -13,10 +13,13 @@ class QuestionsController < ApplicationController
   def show
     book = Book.find_by(id: params[:book_id])
     question = Question.includes(:user).find_by(id: params[:id])
+    favorite_questions = FavoriteQuestion.where(question_id: question.id)
+    favorite_questions_count = favorite_questions.count
     if question
       render json: {
         book: book,
-        question: question.as_json(include: :user)
+        question: question.as_json(include: :user),
+        favorite_questions_count: favorite_questions_count
       }
     else
       render json: question.errors

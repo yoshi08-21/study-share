@@ -16,13 +16,15 @@
     <template v-if="this.currentUser && this.user.id !== this.currentUser.id">
       <template v-if="!isFavorite">
         <v-btn @click="addToFavorite">いいね！する</v-btn>
+        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
       </template>
       <template v-else>
         <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
+        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
       </template>
     </template>
     <template v-else>
-      「いいね？件」
+      <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
     </template>
 
     <!-- 自分の質問のみ編集・削除ボタンを表示 -->
@@ -84,13 +86,12 @@ export default {
   components: { EditQuestion },
   async asyncData({ params }) {
     const responce = await axios.get(`/books/${params.book_id}/questions/${params.id}`)
-    console.log(responce.data.question)
-    console.log(responce.data.book)
-    console.log(responce.data.question.user)
+    console.log(responce.data)
     return {
       book: responce.data.book,
       question: responce.data.question,
       user: responce.data.question.user,
+      favoriteQuestionsCount: responce.data.favorite_questions_count,
       params
     };
   },
@@ -196,6 +197,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteQuestionId = response.data.id
+        this.favoriteQuestionsCount += 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -216,6 +218,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteQuestionId = null
+        this.favoriteQuestionsCount -= 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
