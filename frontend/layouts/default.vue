@@ -105,6 +105,14 @@ export default {
           title: 'sample6詳細ページ',
           to: '/users/4'
         },
+        {
+          title: 'reviews/4',
+          to: '/books/1/reviews/4'
+        },
+        {
+          title: 'questions/1',
+          to: '/books/1/questions/1'
+        },
       ],
       miniVariant: false,
       right: true,

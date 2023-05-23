@@ -63,8 +63,6 @@ class ReviewsController < ApplicationController
     else
       render json: { error: "権限がありません" }, status: 400
     end
-
-
   end
 
   def new_reviews
@@ -95,8 +93,5 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:title, :content, :rating, :user_id, :book_id)
     end
 
-    def validate_authorship(current_user, author)
-      current_user == author
-    end
 
 end
