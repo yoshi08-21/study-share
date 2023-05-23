@@ -4,12 +4,19 @@
     <h3>レビューid:{{ this.$route.params.id }}</h3>
 
     <h4>参考書情報</h4>
-    <p>タイトル:{{ book.name }}</p>
+    <p>タイトル:{{ this.book.name }}</p>
 
     <h3>レビュー</h3>
-    <h4>評価:{{ review.rating }}</h4>
-    <h4>タイトル:{{ review.title }}</h4>
-    <p>本文:{{ review.content }}</p>
+    <h4>評価:{{ this.review.rating }}</h4>
+    <v-rating
+      v-model="review.rating"
+      :readonly="true"
+      background-color="orange lighten-3"
+      color="orange"
+    >
+    </v-rating>
+    <h4>タイトル:{{ this.review.title }}</h4>
+    <p>本文:{{ this.review.content }}</p>
     <h3>reviewd by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
     <br>
@@ -27,6 +34,7 @@
       「いいね？件」
     </template>
 
+    <!-- 自分のレビューのみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.user.id == this.currentUser.id">
       <v-btn @click="dialog=true">編集する</v-btn>
@@ -75,7 +83,6 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
-    <!-- <show-snackbar ref="snackbar" /> -->
   </div>
 </template>
 
@@ -85,7 +92,6 @@ import EditReview from '../../../../components/reviews/EditReview.vue'
 import axios from "@/plugins/axios"
 
 export default {
-
   components: {
     EditReview
   },
@@ -239,10 +245,6 @@ export default {
 </script>
 
 <style>
-  .link-text {
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+
 </style>
 

@@ -13,9 +13,15 @@
     <div v-else>
       <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
     </div>
+
+    <!-- 以下のボタンをそれぞれのコンポーネントに設置することも検討 -->
     <br>
     <v-btn @click="openDialog">新規レビューを投稿する</v-btn>
+    <br><br>
+    <v-btn @click="openQuestionDialog">新規質問を投稿する</v-btn>
 
+
+    <!-- 新規レビュー投稿ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
         <v-card-title>
@@ -27,16 +33,28 @@
       </v-card>
     </v-dialog>
 
+        <!-- 新規質問投稿ダイアログ -->
+        <v-dialog v-model="questionDialog">
+      <v-card>
+        <v-card-title>
+          Dialog Title（質問）
+        </v-card-title>
+        <v-card-text>
+          <question-form @submitQuestion="submitQuestion" @closeDialog="questionDialog = false"></question-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
     <br>
     <v-divider height="50"></v-divider>
 
-    <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
     <book-reviews :reviews="reviewsChunk" :book_id="book.id" ></book-reviews>
     <book-questions :questions="questionsChunk" :book_id="book.id"></book-questions>
-    <v-pagination v-model="page" :length="totalPages" @input="updateReviews"></v-pagination>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
   </div>
 </template>
 
@@ -44,6 +62,7 @@
 
 import { VDialog, VDivider } from 'vuetify/lib'
 import ReviewForm from '../../components/reviews/ReviewForm.vue'
+import QuestionForm from '../../components/questions/QuestionForm.vue'
 import BookReviews from '../../components/reviews/BookReviews.vue'
 import BookQuestions from '../../components/questions/BookQuestions.vue'
 import axios from "@/plugins/axios"
@@ -52,6 +71,7 @@ import axios from "@/plugins/axios"
 export default {
   components: {
     ReviewForm,
+    QuestionForm,
     VDialog,
     VDivider,
     BookReviews,
@@ -88,6 +108,8 @@ export default {
       reviews: [],
       perPage: 10,
       page: 1,
+      questionDialog: false,
+
     }
   },
   computed: {
@@ -196,13 +218,45 @@ export default {
       }
       this.dialog = false
     },
+    async submitQuestion(data) {
+      try {
+        const response = await axios.post(`/books/${this.params.id}/questions`, {
+            user_id: this.currentUser.id,
+            book_id: this.params.id,
+            // 以下の２つが空になっている
+            title: data.title,
+            content: data.content,
+            subject: this.book.subject
+          }
+        )
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "質問の投稿が完了しました"
+        this.$router.push({ path: `/books/${this.book.id}/questions/${response.data.id}`, query: { message: '質問の投稿が完了しました' } })
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "質問を投稿できませんでした"
+      }
+      this.questionDialog = false
+    },
     openDialog() {
       if(this.currentUser) {
         this.dialog = true
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
+    },
+    openQuestionDialog() {
+      if(this.currentUser) {
+        this.questionDialog = true
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
+      }
     }
+
   }
 }
 </script>
