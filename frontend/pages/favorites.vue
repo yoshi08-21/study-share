@@ -31,15 +31,28 @@
 
 
     <h3>いいねした質問</h3>
-    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoritequestion, index) in favoritequestions" :key="'question_' + index">
-      <v-card :to="`/books/${favoritequestion.book_id}/questions/${favoritequestion.id}`">
-        <v-card-title>{{ favoritequestion.title }} </v-card-title>
-        <v-card-text>{{ favoritequestion.content }}</v-card-text>
-        <template v-if="favoritequestion.user">
-          <v-card-actions>by:{{ favoritequestion.user.name }}</v-card-actions>
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteQuestion, index) in favoriteQuestions" :key="'question_' + index">
+      <v-card :to="`/books/${favoriteQuestion.book_id}/questions/${favoriteQuestion.id}`">
+        <v-card-title>{{ favoriteQuestion.title }} </v-card-title>
+        <v-card-text>{{ favoriteQuestion.content }}</v-card-text>
+        <template v-if="favoriteQuestion.user">
+          <v-card-actions>by:{{ favoriteQuestion.user.name }}</v-card-actions>
         </template>
-        <template v-if="favoritequestion.book">
-          <v-card-actions>to:{{ favoritequestion.book.name }}</v-card-actions>
+        <template v-if="favoriteQuestion.book">
+          <v-card-actions>to:{{ favoriteQuestion.book.name }}</v-card-actions>
+        </template>
+      </v-card>
+    </v-flex>
+
+    <h3>いいねした返信</h3>
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteReply, index) in favoriteReplies" :key="'question_' + index">
+      <v-card :to="`/books/${favoriteReply.question.book_id}/questions/${favoriteReply.question_id}/replies/${favoriteReply.id}`">
+        <v-card-text>{{ favoriteReply.content }}</v-card-text>
+        <template v-if="favoriteReply.user">
+          <v-card-actions>by:{{ favoriteReply.user.name }}</v-card-actions>
+        </template>
+        <template v-if="favoriteReply.question">
+          <v-card-actions>to:{{ favoriteReply.question.title }}</v-card-actions>
         </template>
       </v-card>
     </v-flex>
@@ -64,7 +77,8 @@ export default {
       return {
         favoriteBooks: response.data.favorite_books,
         favoriteReviews: response.data.favorite_reviews,
-        favoritequestions: response.data.favorite_questions
+        favoriteQuestions: response.data.favorite_questions,
+        favoriteReplies: response.data.favorite_replies
       }
     } catch(error) {
       console.log(error)
