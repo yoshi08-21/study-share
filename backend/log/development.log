@@ -15367,3 +15367,31 @@ Completed 200 OK in 26ms (Views: 0.6ms | ActiveRecord: 11.1ms | Allocations: 281
   [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` ORDER BY `books`.`id` ASC LIMIT 1[0m
   [1m[36mFavoriteReview Load (1.1ms)[0m  [1m[34mSELECT `favorite_reviews`.* FROM `favorite_reviews` WHERE `favorite_reviews`.`book_id` = 1[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_reviews` WHERE `favorite_reviews`.`book_id` = 1[0m
+  [1m[36mQuestion Load (1.9ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` ORDER BY `questions`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1 OFFSET 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (8.8ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sample6によるテスト返信１', 4, 2, '2023-05-23 23:42:52.692110', '2023-05-23 23:42:52.692110')[0m
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (2.2ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sample6によるテスト返信2', 4, 2, '2023-05-23 23:42:56.662481', '2023-05-23 23:42:56.662481')[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (1.8ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sample6によるテスト返信3', 4, 2, '2023-05-23 23:43:01.172314', '2023-05-23 23:43:01.172314')[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mQuestion Load (2.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` ORDER BY `questions`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (4.3ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sampleによるテスト返信1', 1, 2, '2023-05-24 02:41:17.980816', '2023-05-24 02:41:17.980816')[0m
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (2.4ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sampleによるテスト返信2', 1, 2, '2023-05-24 02:41:20.952331', '2023-05-24 02:41:20.952331')[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  [1m[36mReply Create (1.3ms)[0m  [1m[32mINSERT INTO `replies` (`content`, `user_id`, `question_id`, `created_at`, `updated_at`) VALUES ('sampleによるテスト返信3', 1, 2, '2023-05-24 02:41:23.856223', '2023-05-24 02:41:23.856223')[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m

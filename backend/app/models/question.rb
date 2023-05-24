@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   belongs_to :user
   belongs_to :book
   has_many :favorite_questions, dependent: :destroy
+  has_many :replies
 
 
   validates :title,    presence: true, length: { maximum: 60 }
