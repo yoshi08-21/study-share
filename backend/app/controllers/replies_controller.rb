@@ -14,11 +14,14 @@ class RepliesController < ApplicationController
     book = Book.find_by(id: params[:book_id])
     question = Question.includes(:user).find_by(id: params[:question_id])
     reply = Reply.includes(:user).find_by(id: params[:id])
+    favorite_replies = FavoriteReply.where(reply_id: reply.id)
+    favorite_replies_count = favorite_replies.count
     if reply
       render json: {
         book: book,
         question: question.as_json(include: :user),
         reply: reply.as_json(include: :user),
+        favorite_replies_count: favorite_replies_count
       }
     else
       render json: reply.errors
@@ -64,6 +67,17 @@ class RepliesController < ApplicationController
       end
     else
       render json: { error: "権限がありません" }, status: 400
+    end
+  end
+
+  def is_favorite
+    current_user = User.find_by(id: params[:user_id])
+    reply = Reply.find_by(id: params[:reply_id])
+    favorite_reply = FavoriteReply.find_by(user_id: current_user.id, reply_id: reply.id)
+    if favorite_reply
+      render json: { is_favorite: true, favorite_reply_id: favorite_reply.id }
+    else
+      render json: false
     end
   end
 
