@@ -14,6 +14,23 @@
     <p>本文:{{ this.reply.content }}</p>
     <h3>replied by<span class="link-text" @click="redirectToUser(replyUser)"> {{ this.replyUser.name }} </span></h3>
 
+    <br>
+    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
+    <template v-if="this.currentUser && this.replyUser.id !== this.currentUser.id">
+      <template v-if="!isFavorite">
+        <v-btn @click="addToFavorite">いいね！する</v-btn>
+        <P>いいね！（{{ this.favoriteRepliesCount }}件）</P>
+      </template>
+      <template v-else>
+        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
+        <P>いいね！（{{ this.favoriteRepliesCount }}件）</P>
+      </template>
+    </template>
+    <template v-else>
+      <P>いいね！（{{ this.favoriteRepliesCount }}件）</P>
+    </template>
+
+
     <!-- 自分の返信のみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.replyUser.id == this.currentUser.id">
@@ -82,6 +99,7 @@ export default {
         questionUser: responce.data.question.user,
         reply: responce.data.reply,
         replyUser: responce.data.reply.user,
+        favoriteRepliesCount: responce.data.favorite_replies_count,
         params
       };
     } catch(error) {
@@ -104,6 +122,22 @@ export default {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+  },
+  async created() {
+    try {
+      const response = await axios.get("replies/is_favorite", {
+        params: {
+          user_id: this.$store.getters["auth/getCurrentUserId"],
+          reply_id: this.$route.params.id
+        }
+      })
+      console.log(response)
+      this.isFavorite = response.data.is_favorite
+      this.favoriteReplyId = response.data.favorite_reply_id
+    } catch(error) {
+      console.log("エラー文です")
+      console.log(error)
+    }
   },
   mounted() {
     if (this.$route.query.message) {
@@ -161,6 +195,46 @@ export default {
         this.snackbar = true
         this.flashMessage = "返信を削除できませんでした"
         this.dialog = false
+      }
+    },
+    async addToFavorite() {
+      try {
+        const response = await axios.post(`/replies/${this.reply.id}/favorite_replies`, {
+          user_id: this.currentUser.id
+        })
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！しました"
+        this.isFavorite = true
+        this.favoriteReplyId = response.data.id
+        this.favoriteRepliesCount += 1
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "すでにいいね！されています"
+      }
+    },
+    async removeFromFavorite() {
+      try {
+        const response = await axios.delete(`/replies/${this.reply.id}/favorite_replies/${this.favoriteReplyId}`, {
+          params: {
+            user_id: this.currentUser.id
+          }
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！を削除しました"
+        this.isFavorite = !this.isFavorite
+        this.favoriteReplyId = null
+        this.favoriteRepliesCount -= 1
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "いいね！されていません"
       }
     },
 
