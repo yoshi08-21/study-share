@@ -12,6 +12,7 @@ const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpac
 const _3a7b0901 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
 const _368e3cc2 = () => interopDefault(import('../pages/books/_book_id/questions/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_id" */))
 const _db10b3e0 = () => interopDefault(import('../pages/books/_book_id/reviews/_id.vue' /* webpackChunkName: "pages/books/_book_id/reviews/_id" */))
+const _dbcd9bbe = () => interopDefault(import('../pages/books/_book_id/questions/_question_id/replies/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_question_id/replies/_id" */))
 const _2a6ffc20 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -57,6 +58,10 @@ export const routerOptions = {
     path: "/books/:book_id?/reviews/:id?",
     component: _db10b3e0,
     name: "books-book_id-reviews-id"
+  }, {
+    path: "/books/:book_id?/questions/:question_id?/replies/:id?",
+    component: _dbcd9bbe,
+    name: "books-book_id-questions-question_id-replies-id"
   }, {
     path: "/",
     component: _2a6ffc20,

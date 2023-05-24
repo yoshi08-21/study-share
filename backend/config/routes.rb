@@ -8,13 +8,15 @@ Rails.application.routes.draw do
       get "show_other_user/:id", to: "users#show_other_user"
     end
   end
-  resources :books do
+  resources :books, only: [:index, :show, :create, :update, :destroy] do
     resources :favorite_books, only: [:create, :destroy]
     collection do
       get "is_favorite"
     end
-    resources :reviews
-    resources :questions, only: [:index, :show, :create, :update, :destroy]
+    resources :reviews, only: [:index, :show, :create, :update, :destroy]
+    resources :questions, only: [:index, :show, :create, :update, :destroy] do
+      resources :replies, only: [:index, :show, :create, :update, :destroy]
+    end
 
   end
   resources :reviews do
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
     end
   end
   resources :subject_questions
-  resources :replies
+  resources :replies, only: [:index]
   resources :subject_question_replies
 
 end

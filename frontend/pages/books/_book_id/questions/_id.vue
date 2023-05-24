@@ -27,6 +27,7 @@
       <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
     </template>
 
+
     <!-- 自分の質問のみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.user.id == this.currentUser.id">
@@ -36,6 +37,22 @@
 
     <br><br>
     <v-btn @click="redirectToBook">参考書に戻る</v-btn>
+
+    <br><br><hr>
+    <v-btn @click="openReplyDialog">返信を投稿する</v-btn>
+
+    <!-- 新規返信投稿ダイアログ -->
+    <v-dialog v-model="replyDialog">
+      <v-card>
+        <v-card-title>
+          Dialog Title
+        </v-card-title>
+        <v-card-text>
+          <reply-form @submitReply="submitReply" @closeDialog="replyDialog = false"></reply-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
 
     <!-- 質問編集ダイアログ -->
     <v-dialog v-model="dialog">
@@ -54,8 +71,8 @@
       </v-card>
     </v-dialog>
 
-        <!-- 質問削除の確認ダイアログ -->
-        <v-dialog v-model="showDeleteConfirmation">
+    <!-- 質問削除の確認ダイアログ -->
+    <v-dialog v-model="showDeleteConfirmation">
       <v-card>
         <v-card-title>
           削除した質問は復元できません！
@@ -73,6 +90,9 @@
     </v-dialog>
 
     <br>
+    <question-replies :replies="replies" :book_id="book.id"></question-replies>
+
+    <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
 </template>
@@ -80,27 +100,34 @@
 <script>
 
 import EditQuestion from '../../../../components/questions/EditQuestion.vue'
+import QuestionReplies from '../../../../components/replies/QuestionReplies.vue'
+import ReplyForm from '../../../../components/replies/ReplyForm.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditQuestion },
+  components: { EditQuestion, QuestionReplies, ReplyForm },
   async asyncData({ params }) {
-
     try {
-      const responce = await axios.get(`/books/${params.book_id}/questions/${params.id}`)
-      console.log(responce.data)
+      const [questionResponse, repliesResponse] = await Promise.all([
+        axios.get(`/books/${params.book_id}/questions/${params.id}`),
+        axios.get(`/books/${params.book_id}/questions/${params.id}/replies`)
+      ])
+      const questionData = questionResponse.data
+      const replies = repliesResponse.data
+      console.log(questionData)
+      console.log(replies)
       return {
-        book: responce.data.book,
-        question: responce.data.question,
-        user: responce.data.question.user,
-        favoriteQuestionsCount: responce.data.favorite_questions_count,
+        book: questionData.book,
+        question: questionData.question,
+        user: questionData.question.user,
+        favoriteQuestionsCount: questionData.favorite_questions_count,
+        replies,
         params
       };
     } catch(error) {
       console.log(error)
       throw error
     }
-
   },
   data() {
     return {
@@ -111,6 +138,7 @@ export default {
       flashMessage: "テストメッセージ",
       isFavorite: false,
       favoriteQuestionId: "",
+      replyDialog: false,
 
     }
   },
@@ -232,6 +260,34 @@ export default {
         this.snackbar = true
         this.flashMessage = "いいね！されていません"
       }
+    },
+    openReplyDialog() {
+      if(this.currentUser) {
+        this.replyDialog = true
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
+      }
+    },
+    async submitReply(data) {
+      try {
+        const response = await axios.post(`/books/${this.book.id}/questions/${this.question.id}/replies`, {
+            user_id: this.currentUser.id,
+            content: data.content,
+          }
+        )
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "返信の投稿が完了しました"
+        this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "返信を投稿できませんでした"
+      }
+      this.questionDialog = false
+
     }
   }
 }
