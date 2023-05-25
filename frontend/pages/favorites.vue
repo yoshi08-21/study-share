@@ -45,7 +45,7 @@
     </v-flex>
 
     <h3>いいねした返信</h3>
-    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteReply, index) in favoriteReplies" :key="'question_' + index">
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteReply, index) in favoriteReplies" :key="'reply_' + index">
       <v-card :to="`/books/${favoriteReply.question.book_id}/questions/${favoriteReply.question_id}/replies/${favoriteReply.id}`">
         <v-card-text>{{ favoriteReply.content }}</v-card-text>
         <template v-if="favoriteReply.user">
@@ -53,6 +53,31 @@
         </template>
         <template v-if="favoriteReply.question">
           <v-card-actions>to:{{ favoriteReply.question.title }}</v-card-actions>
+        </template>
+      </v-card>
+    </v-flex>
+
+    <h3>いいねした科目別質問</h3>
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteSubjectQuestion, index) in favoriteSubjectQuestions" :key="'subjectQuestion_' + index">
+      <v-card :to="`/subjectQuestions/${favoriteSubjectQuestion.id}`">
+        <v-card-title>{{ favoriteSubjectQuestion.title }} </v-card-title>
+        <v-card-text>{{ favoriteSubjectQuestion.content }}</v-card-text>
+        <template v-if="favoriteSubjectQuestion.user">
+          <v-card-actions>科目:{{ favoriteSubjectQuestion.subject }}</v-card-actions>
+          <v-card-actions>by:{{ favoriteSubjectQuestion.user.name }}</v-card-actions>
+        </template>
+      </v-card>
+    </v-flex>
+
+    <h3>いいねした科目別質問への返信</h3>
+    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteSubjectQuestionReply, index) in favoriteSubjectQuestionReplies" :key="'subjectQuestionReply_' + index">
+      <v-card :to="`/subjectQuestions/${favoriteSubjectQuestionReply.subject_question_id}/subjectQuestionReplies/${favoriteSubjectQuestionReply.id}`">
+        <v-card-text>{{ favoriteSubjectQuestionReply.content }}</v-card-text>
+        <template v-if="favoriteSubjectQuestionReply.user">
+          <v-card-actions>by:{{ favoriteSubjectQuestionReply.user.name }}</v-card-actions>
+        </template>
+        <template v-if="favoriteSubjectQuestionReply.question">
+          <v-card-actions>to:{{ favoriteSubjectQuestionReply.question.title }}</v-card-actions>
         </template>
       </v-card>
     </v-flex>
@@ -78,7 +103,10 @@ export default {
         favoriteBooks: response.data.favorite_books,
         favoriteReviews: response.data.favorite_reviews,
         favoriteQuestions: response.data.favorite_questions,
-        favoriteReplies: response.data.favorite_replies
+        favoriteReplies: response.data.favorite_replies,
+        favoriteSubjectQuestions: response.data.favorite_subject_questions,
+        favoriteSubjectQuestionReplies: response.data.favorite_subject_question_replies
+
       }
     } catch(error) {
       console.log(error)
