@@ -83,6 +83,8 @@ class QuestionsController < ApplicationController
     questions = Question.includes(:user, :book).all
     if questions
       render json: questions, include: [:user, :book]
+    else
+      render jso: questions.errors
     end
   end
 

@@ -11,6 +11,7 @@ const _d0175066 = () => interopDefault(import('../pages/auth/signUp.vue' /* webp
 const _f110b94e = () => interopDefault(import('../pages/questions/questions.vue' /* webpackChunkName: "pages/questions/questions" */))
 const _0216141d = () => interopDefault(import('../pages/subjectQuestions/subjectQuestions.vue' /* webpackChunkName: "pages/subjectQuestions/subjectQuestions" */))
 const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpackChunkName: "pages/books/_id" */))
+const _1b0a7764 = () => interopDefault(import('../pages/subjectQuestions/_id.vue' /* webpackChunkName: "pages/subjectQuestions/_id" */))
 const _3a7b0901 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
 const _368e3cc2 = () => interopDefault(import('../pages/books/_book_id/questions/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_id" */))
 const _db10b3e0 = () => interopDefault(import('../pages/books/_book_id/reviews/_id.vue' /* webpackChunkName: "pages/books/_book_id/reviews/_id" */))
@@ -56,6 +57,10 @@ export const routerOptions = {
     path: "/books/:id?",
     component: _ea3048ba,
     name: "books-id"
+  }, {
+    path: "/subjectQuestions/:id?",
+    component: _1b0a7764,
+    name: "subjectQuestions-id"
   }, {
     path: "/users/:id?",
     component: _3a7b0901,

@@ -21,31 +21,25 @@
         <v-text-field></v-text-field><v-btn>検索</v-btn>
       </v-card-title>
       <v-card-title>
-        <v-btn block>質問を投稿する</v-btn>
+        <v-btn block disabled>参考書別の質問は参考書の詳細ページから投稿できます</v-btn>
       </v-card-title>
     </v-card>
 
     <br>
-    <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(question, index) in questions" :key="index">
-      <v-card :to="`/books/${question.book_id}/questions/${question.id}`">
-        <v-card-title>{{ question.title }}</v-card-title>
-        <v-card-text>{{ question.content }}</v-card-text>
-        <template v-if="question.user">
-          <v-card-actions>by:{{ question.user.name }}</v-card-actions>
-        </template>
-      </v-card>
-    </v-flex>
+    <all-questions :questions="questions"></all-questions>
 
-
-
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
 </template>
 
 <script>
 
+import AllQuestions from '../../components/questions/AllQuestions.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  components: { AllQuestions },
   async asyncData() {
     try {
       const responce = await axios.get("/questions/all_questions")
@@ -54,9 +48,18 @@ export default {
         questions: responce.data
       }
     } catch(error) {
-
+      console.log(error)
+      throw error
     }
-  }
+  },
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
+    }
+  },
 }
 </script>
 
