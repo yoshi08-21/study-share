@@ -47,7 +47,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subject_question_replies, only: [:index]
+  resources :subject_question_replies, only: [:index] do
+    resources :favorite_subject_question_replies, only: [:create, :destroy]
+    collection do
+      get "is_favorite"
+    end
+  end
 
 
 end
