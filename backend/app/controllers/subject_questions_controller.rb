@@ -12,12 +12,12 @@ class SubjectQuestionsController < ApplicationController
 
   def show
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:id])
-    # favorite_questions = FavoriteQuestion.where(question_id: question.id)
-    # favorite_questions_count = favorite_questions.count
+    favorite_subject_questions = FavoriteSubjectQuestion.where(subject_question_id: subject_question.id)
+    favorite_subject_questions_count = favorite_subject_questions.count
     if subject_question
       render json: {
         subject_question: subject_question.as_json(include: :user),
-        # favorite_subject_questions_count: favorite_subject_questions_count
+        favorite_subject_questions_count: favorite_subject_questions_count
       }
     else
       render json: subject_question.errors
@@ -67,10 +67,10 @@ class SubjectQuestionsController < ApplicationController
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
-    question = Question.find_by(id: params[:question_id])
-    favorite_question = FavoriteQuestion.find_by(user_id: current_user.id, question_id: question.id)
-    if favorite_question
-      render json: { is_favorite: true, favorite_question_id: favorite_question.id }
+    subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    favorite_subject_question = FavoriteSubjectQuestion.find_by(user_id: current_user.id, subject_question_id: subject_question.id)
+    if favorite_subject_question
+      render json: { is_favorite: true, favorite_subject_question_id: favorite_subject_question.id }
     else
       render json: false
     end

@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :fav_questions,       through: :favorite_questions, source: :question
   has_many :favorite_replies, dependent: :destroy
   has_many :fav_replies,       through: :favorite_replies, source: :reply
+  has_many :favorite_subject_questions, dependent: :destroy
+  has_many :fav_subject_questions,       through: :favorite_subject_questions, source: :subject_question
 
 
 
