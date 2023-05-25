@@ -28,6 +28,13 @@
     "_name": "_d0175066"
   },
   {
+    "name": "questions-questions",
+    "path": "/questions/questions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",
+    "chunkName": "pages/questions/questions",
+    "_name": "_f110b94e"
+  },
+  {
     "name": "books-id",
     "path": "/books/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id.vue",

@@ -79,6 +79,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def all_questions
+    questions = Question.includes(:user, :book).all
+    if questions
+      render json: questions, include: [:user, :book]
+    end
+  end
 
 
   private
