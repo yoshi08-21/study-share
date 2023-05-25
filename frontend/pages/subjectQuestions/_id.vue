@@ -38,6 +38,22 @@
     <br><br>
     <v-btn @click="redirectToSubjectQuestions">科目別質問一覧に戻る</v-btn>
 
+
+    <br><br><hr>
+    <v-btn @click="openSubjectQuestionReplyDialog">返信を投稿する</v-btn>
+
+    <!-- 新規返信投稿ダイアログ -->
+    <v-dialog v-model="subjectQuestionReplyDialog">
+      <v-card>
+        <v-card-title>
+          Dialog Title
+        </v-card-title>
+        <v-card-text>
+          <reply-form @submitReply="submitSubjectQuestionReply" @closeDialog="subjectQuestionReplyDialog = false"></reply-form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <!-- 質問編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
@@ -74,7 +90,8 @@
       </v-card>
     </v-dialog>
 
-
+    <br>
+    <subject-question-replies :subjectQuestionReplies="subjectQuestionReplies"></subject-question-replies>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -84,22 +101,26 @@
 <script>
 
 import EditSubjectQuestion from '../../components/subjectQuestions/EditSubjectQuestion.vue'
+import SubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionReplies.vue'
+import ReplyForm from '../../components/replies/ReplyForm.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion },
+  components: { EditSubjectQuestion, SubjectQuestionReplies, ReplyForm },
   async asyncData({ params }) {
     try {
-      // const [questionResponse, repliesResponse] = await Promise.all([
-      //   axios.get(`/books/${params.book_id}/questions/${params.id}`),
-      //   axios.get(`/books/${params.book_id}/questions/${params.id}/replies`)
-      // ])
-      const response = await axios.get(`subject_questions/${params.id}`)
-      console.log(response.data)
+      const [subjectQuestionResponse, subjectQuestionRepliesResponse] = await Promise.all([
+        axios.get(`subject_questions/${params.id}`),
+        axios.get(`subject_questions/${params.id}/subject_question_replies`)
+      ])
+      console.log(subjectQuestionResponse)
+      console.log(subjectQuestionRepliesResponse)
+      console.log(subjectQuestionRepliesResponse.data)
       return {
-        subjectQuestion: response.data.subject_question,
-        favoriteSubjectQuestionsCount: response.data.favorite_subject_questions_count,
-        user: response.data.subject_question.user,
+        subjectQuestion: subjectQuestionResponse.data.subject_question,
+        favoriteSubjectQuestionsCount: subjectQuestionResponse.data.favorite_subject_questions_count,
+        user: subjectQuestionResponse.data.subject_question.user,
+        subjectQuestionReplies: subjectQuestionRepliesResponse.data,
         params
       };
     } catch(error) {
@@ -116,7 +137,7 @@ export default {
       flashMessage: "テストメッセージ",
       isFavorite: false,
       favoriteSubjectQuestionId: "",
-      replyDialog: false,
+      subjectQuestionReplyDialog: false,
 
     }
   },
@@ -241,16 +262,16 @@ export default {
         this.flashMessage = "いいね！されていません"
       }
     },
-    openReplyDialog() {
+    openSubjectQuestionReplyDialog() {
       if(this.currentUser) {
-        this.replyDialog = true
+        this.subjectQuestionReplyDialog = true
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
     },
-    async submitReply(data) {
+    async submitSubjectQuestionReply(data) {
       try {
-        const response = await axios.post(`/books/${this.book.id}/questions/${this.question.id}/replies`, {
+        const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies`, {
             user_id: this.currentUser.id,
             content: data.content,
           }
@@ -259,15 +280,14 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の投稿が完了しました"
-        this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
+        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "返信を投稿できませんでした"
       }
-      this.questionDialog = false
-
+      this.subjectQuestionReplyDialog = false
     }
 
 

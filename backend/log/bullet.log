@@ -6,3 +6,19 @@ USE eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/users_controller.rb:52:in `destroy'
 
+2023-05-26 00:49:49[WARN] user: yoshito-t
+POST /subject_questions/1/subject_question_replies
+AVOID eager loading detected
+  SubjectQuestion => [:user]
+  Remove from your query: .includes([:user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_question_replies_controller.rb:31:in `create'
+
+2023-05-26 00:50:02[WARN] user: yoshito-t
+POST /subject_questions/1/subject_question_replies
+AVOID eager loading detected
+  SubjectQuestion => [:user]
+  Remove from your query: .includes([:user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_question_replies_controller.rb:31:in `create'
+

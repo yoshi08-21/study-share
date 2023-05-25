@@ -77,6 +77,13 @@
     "_name": "_db10b3e0"
   },
   {
+    "name": "subjectQuestions-subjectQuestion_id-subjectQuestionReplies-id",
+    "path": "/subjectQuestions/:subjectQuestion_id?/subjectQuestionReplies/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id.vue",
+    "chunkName": "pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id",
+    "_name": "_450dcc65"
+  },
+  {
     "name": "books-book_id-questions-question_id-replies-id",
     "path": "/books/:book_id?/questions/:question_id?/replies/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/questions/_question_id/replies/_id.vue",
