@@ -35,6 +35,13 @@
     "_name": "_f110b94e"
   },
   {
+    "name": "subjectQuestions-subjectQuestions",
+    "path": "/subjectQuestions/subjectQuestions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/subjectQuestions.vue",
+    "chunkName": "pages/subjectQuestions/subjectQuestions",
+    "_name": "_0216141d"
+  },
+  {
     "name": "books-id",
     "path": "/books/:id?",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id.vue",

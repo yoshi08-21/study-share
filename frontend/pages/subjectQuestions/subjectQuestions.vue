@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2>質問一覧ページ</h2>
+    <h2>科目別質問一覧ページ</h2>
 
     <v-tabs
       fixed-tabs
     >
-      <v-tab to="/questions/questions">
+    <v-tab to="/questions/questions">
         参考書別質問
       </v-tab>
       <v-tab to="/subjectQuestions/subjectQuestions">

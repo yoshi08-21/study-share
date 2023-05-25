@@ -109,6 +109,10 @@ export default {
           title: '質問一覧',
           to: '/questions/questions'
         },
+        {
+          title: '科目別質問一覧',
+          to: '/subjectQuestions/subjectQuestions'
+        },
       ],
       miniVariant: false,
       right: true,
