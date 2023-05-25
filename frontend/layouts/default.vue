@@ -106,12 +106,8 @@ export default {
           to: '/users/4'
         },
         {
-          title: 'reviews/4',
-          to: '/books/1/reviews/4'
-        },
-        {
-          title: 'questions/1',
-          to: '/books/1/questions/1'
+          title: '質問一覧',
+          to: '/questions/questions'
         },
       ],
       miniVariant: false,
