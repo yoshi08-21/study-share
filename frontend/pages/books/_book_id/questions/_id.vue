@@ -286,7 +286,7 @@ export default {
         this.snackbar = true
         this.flashMessage = "返信を投稿できませんでした"
       }
-      this.questionDialog = false
+      this.replyDialog = false
 
     }
   }
