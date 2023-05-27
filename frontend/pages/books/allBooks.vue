@@ -32,7 +32,10 @@
     </v-dialog>
 
     <br><br>
-    <each-books :books="books"></each-books>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <br>
+    <each-books :books="booksChunk"></each-books>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -65,12 +68,23 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       dialog: false,
-      image: ""
+      // 参考書登録の空データ送信用。S3の利用時には削除可
+      image: "",
+      perPage: 10,
+      page: 1,
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    booksChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.books.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.books.length / this.perPage);
     },
   },
   mounted() {
