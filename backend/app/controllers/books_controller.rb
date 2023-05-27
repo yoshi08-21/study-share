@@ -22,6 +22,9 @@ class BooksController < ApplicationController
   def create
     current_user = User.find_by(id: params[:user_id])
     book = current_user.books.build(book_params)
+    if book.image == ""
+      book.image = "/images/no_image.png"
+    end
     if book.save
       render json: book, status: 200
     else

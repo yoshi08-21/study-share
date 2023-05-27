@@ -65,7 +65,7 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       dialog: false,
-
+      image: ""
     }
   },
   computed: {
@@ -89,7 +89,8 @@ export default {
             name: data.name,
             author: data.author,
             publisher: data.publisher,
-            subject: data.subject
+            subject: data.subject,
+            image: this.image
           }
         )
         console.log(response)
