@@ -35,6 +35,13 @@
     "_name": "_0a817c20"
   },
   {
+    "name": "books-searchBooks",
+    "path": "/books/searchBooks",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/searchBooks.vue",
+    "chunkName": "pages/books/searchBooks",
+    "_name": "_612c4acb"
+  },
+  {
     "name": "questions-questions",
     "path": "/questions/questions",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",
