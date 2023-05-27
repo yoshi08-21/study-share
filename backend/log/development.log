@@ -15795,3 +15795,13 @@ Migrating to CreateFavoriteSubjectQuestionReplies (20230525155618)
   [1m[36mBook Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `books` WHERE `books`.`name` = 'sample6による参考書3' LIMIT 1[0m
   [1m[36mBook Create (2.4ms)[0m  [1m[32mINSERT INTO `books` (`name`, `author`, `publisher`, `subject`, `user_id`, `created_at`, `updated_at`) VALUES ('sample6による参考書3', 'サンプル', 'サンプル', '国語', 4, '2023-05-27 03:29:00.930201', '2023-05-27 03:29:00.930201')[0m
   [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT GET_LOCK('1817772182736899970', 0)[0m
+  [1m[35m (3.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddImageToBook (20230527130844)
+  [1m[35m (303.4ms)[0m  [1m[35mALTER TABLE `books` ADD `image` varchar(255)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230527130844')[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('1817772182736899970')[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
