@@ -76,7 +76,12 @@
               </v-row>
               <br>
               <v-actions>
-                <v-btn>登録する</v-btn>
+                <template v-if="subject == ''">
+                  <v-btn @click="submitBook(book)" disabled>登録する</v-btn>
+                </template>
+                <template v-else>
+                  <v-btn @click="submitBook(book)" color="primary">登録する</v-btn>
+                </template>
                 <v-btn @click="bookDialog = false">戻る</v-btn>
               </v-actions>
             </v-card>
@@ -85,10 +90,15 @@
       </v-row>
     </v-dialog>
 
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
 </template>
 
 <script>
+
+import axios from "@/plugins/axios"
+
 export default {
   data() {
     return {
@@ -100,6 +110,11 @@ export default {
       subject: "",
 
     }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters["auth/getCurrentUser"]
+    },
   },
   methods: {
     async searchBooks(keyword) {
@@ -137,6 +152,28 @@ export default {
     openBookDialog(book) {
       this.book = book
       this.bookDialog = true
+    },
+    async submitBook(book) {
+      try {
+        const response = await axios.post("/books", {
+          user_id: this.currentUser.id,
+          book: {
+            name: book.name,
+            author: book.author,
+            publisher: book.publisher,
+            subject: this.subject,
+            image: book.image
+          }
+        })
+        console.log(response)
+        this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "参考書を登録できませんでした"
+      }
+      this.bookDialog = false
     }
   }
 }

@@ -1,12 +1,25 @@
 <template>
   <div>
     book_show
-    <p>book_id: {{ this.$route.params.id }}</p>
-    <h4>タイトル: {{ book.name }}</h4>
-    <h4>作者: {{ book.author }}</h4>
-    <h4>出版社: {{ book.publisher }}</h4>
-    <h4>科目: {{ book.subject }}</h4>
+    <v-row>
+      <v-col cols="10">
+        <v-row>
+          <v-col cols="4">
+            <template v-if="book.image">
+              <v-img :src="book.image" alt="画像"></v-img>
+            </template>
+          </v-col>
+          <v-col cols="8">
+            <p>book_id: {{ this.$route.params.id }}</p>
+            <h4>タイトル: {{ book.name }}</h4>
+            <h4>作者: {{ book.author }}</h4>
+            <h4>出版社: {{ book.publisher }}</h4>
+            <h4>科目: {{ book.subject }}</h4>
+          </v-col>
+        </v-row>
 
+      </v-col>
+    </v-row>
     <!-- 自分が投稿した参考書のみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
