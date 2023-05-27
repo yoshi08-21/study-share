@@ -19,6 +19,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def create
+    current_user = User.find_by(id: params[:user_id])
+    book = current_user.books.build(book_params)
+    if book.save
+      render json: book, status: 200
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
   def update
     current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:id])

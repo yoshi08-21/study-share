@@ -23,8 +23,11 @@
       <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
     </div>
 
-    <!-- 以下のボタンをそれぞれのコンポーネントに設置することも検討 -->
     <br>
+    <v-btn @click="redirectToBooks">参考書一覧に戻る</v-btn>
+
+    <!-- 以下のボタンをそれぞれのコンポーネントに設置することも検討 -->
+    <br><br>
     <v-btn @click="openDialog">新規レビューを投稿する</v-btn>
     <br><br>
     <v-btn @click="openQuestionDialog">新規質問を投稿する</v-btn>
@@ -353,6 +356,9 @@ export default {
         this.flashMessage = "参考書を削除できませんでした"
         this.showDeleteConfirmation = false
       }
+    },
+    redirectToBooks() {
+      this.$router.push({ path: `/books/allBooks` })
     },
 
   }
