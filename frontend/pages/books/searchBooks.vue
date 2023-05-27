@@ -117,6 +117,8 @@ export default {
       subject: "",
       perPage: 10,
       page: 1,
+      cleanedErrorMessage: "",
+
 
     }
   },
@@ -185,10 +187,23 @@ export default {
         console.log(response)
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
-        console.log(error)
-        this.snackbarColor = "red accent-2"
-        this.snackbar = true
-        this.flashMessage = "参考書を登録できませんでした"
+        if (error.response && error.response.data) {
+          console.log(error)
+          console.log(error.response)
+          console.log(error.response.data)
+          const errors = error.response.data.errors
+          for (const error of errors) {
+            if (error.includes("Name")) {
+              this.cleanedErrorMessage = error.replace("Name ", "")
+            }
+          }
+          console.log(this.cleanedErrorMessage); // エラーメッセージを表示
+          this.snackbarColor = "red accent-2"
+          this.snackbar = true
+          this.flashMessage = this.cleanedErrorMessage
+        } else {
+          console.log('リクエストエラー:', error);
+        }
       }
       this.bookDialog = false
     }
