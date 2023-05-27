@@ -6,7 +6,7 @@ has_many :questions, dependent: :destroy
 has_many :favorite_books, dependent: :destroy
 
 
-validates :name,      presence: true, length: { maximum: 50 }, uniqueness: true
+validates :name,      presence: true, length: { maximum: 50 }, uniqueness: { message: 'この参考書は既に登録されています' }
 validates :author,    presence: true, length: { maximum: 25 }
 validates :publisher, length: { maximum: 25 }
 validates :subject,   presence: true

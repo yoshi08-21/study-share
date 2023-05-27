@@ -28,8 +28,7 @@ class BooksController < ApplicationController
     if book.save
       render json: book, status: 200
     else
-      render json: { error: "エラーが発生しました" }, status: 400
-    end
+      render json: { errors: book.errors.full_messages }, status: :unprocessable_entity    end
   end
 
   def update
