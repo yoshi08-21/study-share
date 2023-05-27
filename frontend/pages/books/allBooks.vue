@@ -9,7 +9,7 @@
         <v-text-field></v-text-field><v-btn>検索</v-btn>
       </v-card-title>
       <v-card-title>
-        <v-btn @click="dialog = true" block>新しい参考書を登録する</v-btn>
+        <v-btn @click="openDialog" block>新しい参考書を登録する</v-btn>
       </v-card-title>
     </v-card>
 
@@ -17,7 +17,10 @@
     <v-dialog v-model="dialog">
       <v-card>
         <v-card-title>
-          参考書を登録する
+          <h2>参考書を登録する</h2>
+        </v-card-title>
+        <v-card-title>
+          <v-btn @click="redirectToSearchBooks" color="primary" block>登録する参考書を検索する</v-btn>
         </v-card-title>
         <v-card-text>
           <book-form
@@ -101,6 +104,16 @@ export default {
       }
       this.dialog = false
     },
+    openDialog() {
+      if(this.currentUser) {
+        this.dialog = true
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
+      }
+    },
+    redirectToSearchBooks() {
+      this.$router.push({ path: "/books/searchBooks" })
+    }
   }
 
 }

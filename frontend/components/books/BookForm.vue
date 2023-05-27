@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>参考書を登録する</h1>
     <v-form>
       <v-col
         class="d-flex"
