@@ -17455,3 +17455,148 @@ Processing by BooksController#index as HTML
 Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.3ms | Allocations: 2877)
 
 
+Started GET "/books/1/reviews" for ::1 at 2023-05-28 00:17:18 +0900
+Started GET "/books/1/questions" for ::1 at 2023-05-28 00:17:18 +0900
+Started GET "/books/1" for ::1 at 2023-05-28 00:17:18 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (7.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mBook Load (11.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mBook Load (13.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  ↳ app/controllers/books_controller.rb:14:in `show'
+Completed 200 OK in 70ms (Views: 3.6ms | ActiveRecord: 16.5ms | Allocations: 2488)
+
+
+  [1m[36mReview Load (12.9ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mQuestion Load (9.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (32.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 200ms (Views: 56.8ms | ActiveRecord: 76.8ms | Allocations: 21970)
+
+
+  [1m[36mUser Load (16.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 198ms (Views: 57.8ms | ActiveRecord: 95.4ms | Allocations: 28852)
+
+
+Started GET "/books/is_favorite?user_id=1&book_id=1" for ::1 at 2023-05-28 00:17:19 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:66:in `is_favorite'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:67:in `is_favorite'
+  [1m[36mFavoriteBook Load (10.2ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:68:in `is_favorite'
+Completed 200 OK in 39ms (Views: 0.1ms | ActiveRecord: 24.6ms | Allocations: 3500)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-05-28 00:22:07 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (3.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:72:in `new_reviews'
+Completed 200 OK in 37ms (Views: 33.1ms | ActiveRecord: 3.2ms | Allocations: 2978)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:22:29 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (1.3ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 99ms (Views: 97.0ms | ActiveRecord: 1.3ms | Allocations: 2876)
+
+
+Started GET "/books/1/reviews" for ::1 at 2023-05-28 00:24:02 +0900
+Started GET "/books/1/questions" for ::1 at 2023-05-28 00:24:02 +0900
+Processing by ReviewsController#index as HTML
+Started GET "/books/1" for ::1 at 2023-05-28 00:24:02 +0900
+  Parameters: {"book_id"=>"1"}
+Processing by BooksController#show as HTML
+Processing by QuestionsController#index as HTML
+  Parameters: {"id"=>"1"}
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (10.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 38ms (Views: 22.5ms | ActiveRecord: 11.8ms | Allocations: 13043)
+
+
+  [1m[36mBook Load (15.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mBook Load (5.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:14:in `show'
+Completed 200 OK in 36ms (Views: 0.8ms | ActiveRecord: 20.9ms | Allocations: 14372)
+
+
+  [1m[36mQuestion Load (6.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 52ms (Views: 13.9ms | ActiveRecord: 31.9ms | Allocations: 22336)
+
+
+Started GET "/books/is_favorite?user_id=1&book_id=1" for ::1 at 2023-05-28 00:24:02 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:66:in `is_favorite'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:67:in `is_favorite'
+  [1m[36mFavoriteBook Load (2.5ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:68:in `is_favorite'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 4.6ms | Allocations: 1576)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:29:29 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (2.8ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 6.3ms | ActiveRecord: 2.8ms | Allocations: 2875)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:31:42 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 38ms (Views: 3.0ms | ActiveRecord: 6.1ms | Allocations: 1128)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:31:42 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (1.7ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 18ms (Views: 16.3ms | ActiveRecord: 1.7ms | Allocations: 2887)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:32:31 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.4ms | Allocations: 2865)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:33:40 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 21ms (Views: 17.4ms | ActiveRecord: 3.4ms | Allocations: 2865)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:34:43 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (4.7ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 35ms (Views: 30.3ms | ActiveRecord: 4.7ms | Allocations: 2865)
+
+
