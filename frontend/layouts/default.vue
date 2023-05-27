@@ -113,6 +113,10 @@ export default {
           title: '科目別質問一覧',
           to: '/subjectQuestions/subjectQuestions'
         },
+        {
+          title: '参考書一覧',
+          to: '/books/allBooks'
+        },
       ],
       miniVariant: false,
       right: true,

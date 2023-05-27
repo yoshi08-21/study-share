@@ -7,6 +7,15 @@
     <h4>出版社: {{ book.publisher }}</h4>
     <h4>科目: {{ book.subject }}</h4>
 
+    <!-- 自分が投稿した参考書のみ編集・削除ボタンを表示 -->
+    <br>
+    <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
+      <v-btn @click="editBookDialog=true">編集する</v-btn>
+      <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+    </template>
+
+
+    <br><br>
     <div v-if="!isFavorite">
       <v-btn @click="addToFavorites">お気に入りに追加する</v-btn>
     </div>
@@ -20,6 +29,43 @@
     <br><br>
     <v-btn @click="openQuestionDialog">新規質問を投稿する</v-btn>
 
+
+    <!-- 参考書編集ダイアログ -->
+    <v-dialog v-model="editBookDialog">
+      <v-card>
+        <v-card-title>
+          参考書を編集する
+        </v-card-title>
+        <v-card-text>
+          <edit-book
+            :name="book.name"
+            :author="book.author"
+            :publisher="book.publisher"
+            :subject="book.subject"
+            @submitBook="editBook"
+            @closeDialog="editBookDialog = false"
+          ></edit-book>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+        <!-- 参考書削除の確認ダイアログ -->
+        <v-dialog v-model="showDeleteConfirmation">
+      <v-card>
+        <v-card-title>
+          削除した参考書は復元できません！
+        </v-card-title>
+        <v-card-text>
+          <strong>
+            参考書を削除しますか？
+          </strong>
+        </v-card-text>
+        <v-card-actions class="justify-content-center">
+          <v-btn @click="deleteBook">削除する</v-btn>
+          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <!-- 新規レビュー投稿ダイアログ -->
     <v-dialog v-model="dialog">
@@ -65,6 +111,8 @@ import ReviewForm from '../../components/reviews/ReviewForm.vue'
 import QuestionForm from '../../components/questions/QuestionForm.vue'
 import BookReviews from '../../components/reviews/BookReviews.vue'
 import BookQuestions from '../../components/questions/BookQuestions.vue'
+import EditBook from '../../components/books/EditBook.vue'
+
 import axios from "@/plugins/axios"
 
 
@@ -75,7 +123,8 @@ export default {
     VDialog,
     VDivider,
     BookReviews,
-    BookQuestions
+    BookQuestions,
+    EditBook
   },
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params }) {
@@ -116,6 +165,8 @@ export default {
       perPage: 10,
       page: 1,
       questionDialog: false,
+      editBookDialog: false,
+      showDeleteConfirmation: false,
 
     }
   },
@@ -262,7 +313,47 @@ export default {
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
-    }
+    },
+    async editBook(data) {
+      try {
+        const response = await axios.patch(`/books/${this.book.id}`, {
+          name: data.name,
+          author: data.author,
+          publisher: data.publisher,
+          subject: data.subject,
+          current_user_id: this.currentUser.id
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "参考書の編集が完了しました"
+        this.book.name = response.data.name
+        this.book.author = response.data.author
+        this.book.publisher = response.data.publisher
+        this.book.subject = response.data.subject
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "質問を編集できませんでした"
+      }
+      this.editBookDialog = false
+    },
+    async deleteBook() {
+      try {
+        const response = await axios.delete(`/books/${this.book.id}`, {
+          params: { current_user_id: this.currentUser.id }
+        })
+        console.log(response)
+        this.$router.push({ path: `/books/allBooks`, query: { message: '参考書を削除しました' } })
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "参考書を削除できませんでした"
+        this.showDeleteConfirmation = false
+      }
+    },
 
   }
 }
