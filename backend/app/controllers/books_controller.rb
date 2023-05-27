@@ -19,6 +19,36 @@ class BooksController < ApplicationController
     end
   end
 
+  def update
+    current_user = User.find_by(id: params[:current_user_id])
+    book = Book.find_by(id: params[:id])
+    author = book.user
+    if validate_authorship(current_user, author)
+      if book.update(book_params)
+        render json: book, status: 200
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
+    else
+      render json: { error: "権限がありません" }, status: 400
+    end
+  end
+
+  def destroy
+    current_user = User.find_by(id: params[:current_user_id])
+    book = Book.find_by(id: params[:id])
+    author = book.user
+    if validate_authorship(current_user, author)
+      if book.destroy
+        head :no_content
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
+    else
+      render json: { error: "権限がありません" }, status: 400
+    end
+  end
+
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
     book = Book.find_by(id: params[:book_id])
@@ -30,4 +60,9 @@ class BooksController < ApplicationController
     end
   end
 
+  private
+
+    def book_params
+      params.require(:book).permit(:name, :author, :publisher, :subject, :user_id)
+    end
 end
