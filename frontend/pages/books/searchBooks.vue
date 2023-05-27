@@ -12,26 +12,33 @@
     </v-card>
 
     <br><br>
-    <v-row>
-      <v-col cols="12" md="6"
-        v-for="(book, index) in searchResults" :key="index">
-        <v-card class="mx-auto" max-height="250">
-          <v-row>
-            <v-col cols="3">
-              <v-img :src="book.image"></v-img>
-            </v-col>
-            <v-col cols="8">
-              <v-card-title>{{ book.name }}</v-card-title>
-              {{ book.description }}
-              <v-spacer></v-spacer>
-              <v-card-actions>
-                <v-btn @click="openBookDialog(book)">参考書を登録する</v-btn>
-              </v-card-actions>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
+    <template v-if="searchResults.length !== 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+      <br>
+      <v-row>
+        <v-col cols="12" md="6"
+          v-for="(book, index) in booksChunk" :key="index">
+          <v-card class="mx-auto" max-height="250">
+            <v-row>
+              <v-col cols="3">
+                <v-img :src="book.image"></v-img>
+              </v-col>
+              <v-col cols="8">
+                <v-card-title>{{ book.name }}</v-card-title>
+                {{ book.description }}
+                <v-spacer></v-spacer>
+                <v-card-actions>
+                  <v-btn @click="openBookDialog(book)">参考書を登録する</v-btn>
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <br>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+  </template>
+
 
     <!-- 選択した参考書の確認ダイアログ -->
     <v-dialog v-model="bookDialog" max-width="1000px">
@@ -108,12 +115,22 @@ export default {
       book: {},
       items: ["英語", "数学", "国語", "社会", "理科" ],
       subject: "",
+      perPage: 10,
+      page: 1,
 
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    booksChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.searchResults.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.searchResults.length / this.perPage);
     },
   },
   methods: {
@@ -123,7 +140,7 @@ export default {
         const baseUrl = "https://www.googleapis.com/books/v1/volumes?"
         const params = {
           q: `intitle:${keyword}`,
-          maxResults:3
+          maxResults: 40
         }
         const queryParams = new URLSearchParams(params)
         const response = await fetch(baseUrl + queryParams)

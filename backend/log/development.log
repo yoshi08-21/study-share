@@ -17600,3 +17600,57 @@ Processing by BooksController#index as HTML
 Completed 200 OK in 35ms (Views: 30.3ms | ActiveRecord: 4.7ms | Allocations: 2865)
 
 
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:41:55 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (17.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 88ms (Views: 1.9ms | ActiveRecord: 21.6ms | Allocations: 852)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:42:13 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 10ms (Views: 3.0ms | ActiveRecord: 4.5ms | Allocations: 713)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:42:51 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (13.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 70ms (Views: 0.4ms | ActiveRecord: 13.2ms | Allocations: 712)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:44:01 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (3.5ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 53ms (Views: 49.3ms | ActiveRecord: 3.5ms | Allocations: 2878)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:47:46 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (9.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 26ms (Views: 3.9ms | ActiveRecord: 9.3ms | Allocations: 715)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-05-28 00:51:19 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 9ms (Views: 1.9ms | ActiveRecord: 5.1ms | Allocations: 712)
+
+
+Started GET "/books" for ::1 at 2023-05-28 00:51:44 +0900
+Processing by BooksController#index as HTML
+  [1m[36mBook Load (7.8ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 29ms (Views: 18.8ms | ActiveRecord: 7.8ms | Allocations: 2865)
+
+
