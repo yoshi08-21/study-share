@@ -10,6 +10,7 @@ const _ffdb8438 = () => interopDefault(import('../pages/auth/login.vue' /* webpa
 const _d0175066 = () => interopDefault(import('../pages/auth/signUp.vue' /* webpackChunkName: "pages/auth/signUp" */))
 const _0a817c20 = () => interopDefault(import('../pages/books/allBooks.vue' /* webpackChunkName: "pages/books/allBooks" */))
 const _612c4acb = () => interopDefault(import('../pages/books/searchBooks.vue' /* webpackChunkName: "pages/books/searchBooks" */))
+const _4723a890 = () => interopDefault(import('../pages/browsingHistories/allBrowsingHistories.vue' /* webpackChunkName: "pages/browsingHistories/allBrowsingHistories" */))
 const _f110b94e = () => interopDefault(import('../pages/questions/questions.vue' /* webpackChunkName: "pages/questions/questions" */))
 const _0216141d = () => interopDefault(import('../pages/subjectQuestions/subjectQuestions.vue' /* webpackChunkName: "pages/subjectQuestions/subjectQuestions" */))
 const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpackChunkName: "pages/books/_id" */))
@@ -56,6 +57,10 @@ export const routerOptions = {
     path: "/books/searchBooks",
     component: _612c4acb,
     name: "books-searchBooks"
+  }, {
+    path: "/browsingHistories/allBrowsingHistories",
+    component: _4723a890,
+    name: "browsingHistories-allBrowsingHistories"
   }, {
     path: "/questions/questions",
     component: _f110b94e,

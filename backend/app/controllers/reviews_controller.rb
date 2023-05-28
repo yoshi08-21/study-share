@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:book_id])
     review = Review.includes(:user).find_by(id: params[:id])
     if review
@@ -18,6 +19,9 @@ class ReviewsController < ApplicationController
         book: book,
         review: review.as_json(include: :user),
       }
+      if current_user && !exist_review_browsing_history?(current_user, review)
+        save_review_browsing_history(current_user, review)
+      end
     else
       render json: review.errors
     end
@@ -91,6 +95,21 @@ class ReviewsController < ApplicationController
 
     def review_params
       params.require(:review).permit(:title, :content, :rating, :user_id, :book_id)
+    end
+
+    def exist_review_browsing_history?(current_user, review)
+      current_user.watched_reviews.include?(review)
+    end
+
+    def save_review_browsing_history(current_user, review)
+      review_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(review_id: nil)
+      max_browsing_histories = 10
+      if review_browsing_histories.count >= max_browsing_histories
+        review_browsing_histories.first.destroy
+        current_user.browsing_histories.create(review_id: review.id)
+      else
+        current_user.browsing_histories.create(review_id: review.id)
+      end
     end
 
 
