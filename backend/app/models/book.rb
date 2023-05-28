@@ -7,6 +7,7 @@ class Book < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :favorite_books, dependent: :destroy
+  has_many :browsing_histories, dependent: :destroy
 
 
   validates :name,      presence: true, length: { maximum: 50 }, uniqueness: { message: 'この参考書は既に登録されています' }

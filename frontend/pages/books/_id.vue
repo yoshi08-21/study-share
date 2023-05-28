@@ -143,10 +143,14 @@ export default {
     EditBook
   },
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
       const [bookResponse, reviewsResponse, questionsResponse] = await Promise.all([
-        axios.get(`/books/${params.id}`),
+        axios.get(`/books/${params.id}`, {
+          params: {
+            current_user_id: store.getters["auth/getCurrentUser"].id
+          }
+        }),
         axios.get(`/books/${params.id}/reviews`),
         axios.get(`/books/${params.id}/questions`)
       ])
