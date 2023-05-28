@@ -5,7 +5,7 @@
 
     <h3>閲覧した参考書（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedBook, index) in watchedBooks" :key="index">
+    <v-flex mb-5 v-for="(watchedBook, index) in watchedBooks" :key="'book_' + index">
       <v-row>
         <v-col cols="10">
           <v-card :to="`/books/${watchedBook.id}`">
@@ -37,7 +37,7 @@
 
     <h3>閲覧したレビュー（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedReview, index) in watchedReviews" :key="index">
+    <v-flex mb-5 v-for="(watchedReview, index) in watchedReviews" :key="'review_' + index">
       <v-row>
         <v-col cols="10">
           <v-card :to="`/books/${watchedReview.book_id}/reviews/${watchedReview.id}`">
@@ -62,6 +62,34 @@
       </v-row>
     </v-flex>
 
+    <h3>閲覧した質問（最大10件）</h3>
+    <br>
+    <v-flex mb-5 v-for="(watchedQuestion, index) in watchedQuestions" :key="'question_' + index">
+      <v-row>
+        <v-col cols="10">
+          <v-card :to="`/books/${watchedQuestion.book_id}/questions/${watchedQuestion.id}`">
+            <v-row>
+              <v-col cols="2">
+                <template v-if="watchedQuestion.image">
+                  <v-img :src="watchedQuestion.image" alt="画像"></v-img>
+                </template>
+              </v-col>
+              <v-col cols="10">
+                <v-card-title>タイトル: {{ watchedQuestion.title }}</v-card-title>
+                <v-card-text>
+                  <p>{{ watchedQuestion.content }}</p>
+                </v-card-text>
+                <v-card-actions>
+                  by: {{ watchedQuestion.user.name }}
+                  <v-spacer></v-spacer>
+                  to: {{ watchedQuestion.book.name }}
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-flex>
 
   </div>
 </template>
@@ -81,7 +109,8 @@ export default {
       console.log(response.data)
       return {
         watchedBooks: response.data.book_browsing_histories,
-        watchedReviews: response.data.review_browsing_histories
+        watchedReviews: response.data.review_browsing_histories,
+        watchedQuestions: response.data.question_browsing_histories,
       }
     } catch(error) {
       console.log(error)

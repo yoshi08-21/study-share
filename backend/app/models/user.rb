@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :browsing_histories, dependent: :destroy
   has_many :watched_books,     through: :browsing_histories, source: :book
   has_many :watched_reviews,     through: :browsing_histories, source: :review
+  has_many :watched_questions,     through: :browsing_histories, source: :question
 
 
 

@@ -301,7 +301,6 @@ export default {
         const response = await axios.post(`/books/${this.params.id}/questions`, {
             user_id: this.currentUser.id,
             book_id: this.params.id,
-            // 以下の２つが空になっている
             title: data.title,
             content: data.content,
             subject: this.book.subject

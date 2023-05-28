@@ -11,6 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:book_id])
     question = Question.includes(:user).find_by(id: params[:id])
     favorite_questions = FavoriteQuestion.where(question_id: question.id)
@@ -21,6 +22,9 @@ class QuestionsController < ApplicationController
         question: question.as_json(include: :user),
         favorite_questions_count: favorite_questions_count
       }
+      if current_user && !exist_question_browsing_history?(current_user, question)
+        save_question_browsing_history(current_user, question)
+      end
     else
       render json: question.errors
     end
@@ -93,6 +97,21 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:title, :content, :subject, :user_id, :book_id)
+    end
+
+    def exist_question_browsing_history?(current_user, question)
+      current_user.watched_questions.include?(question)
+    end
+
+    def save_question_browsing_history(current_user, question)
+      question_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(question_id: nil)
+      max_browsing_histories = 10
+      if question_browsing_histories.count >= max_browsing_histories
+        question_browsing_histories.first.destroy
+        current_user.browsing_histories.create(question_id: question.id)
+      else
+        current_user.browsing_histories.create(question_id: question.id)
+      end
     end
 
 end
