@@ -74,7 +74,7 @@
                     <v-select
                       v-model="subject"
                       :items="items"
-                      label="科目"
+                      label="科目（必須）"
                       dense
                       outlined
                     ></v-select>

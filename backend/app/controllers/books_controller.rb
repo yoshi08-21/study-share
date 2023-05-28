@@ -7,7 +7,25 @@ class BooksController < ApplicationController
       render json: books
     else
       render json: books.errors
-    end
+  end
+    # current_user = User.find_by(id: params[:current_user_id])
+    # books = Book.includes(:favorite_books).all
+    # books_with_favorites = books.map do |book|
+    #   favorite_book = book.favorite_books.find_by(user_id: current_user.id)
+    #   {
+    #     id: book.id,
+    #     name: book.name,
+    #     # 他のBookモデルの属性も必要に応じて組み込む
+    #     is_favorite: favorite_book.present?,
+    #     favorite_book_id: favorite_book&.id
+    #   }
+      # book.as_json.merge(is_favorite: current_user.fav_books.include?(book))
+    # end
+    # if books_with_favorites
+    #   render json: books_with_favorites
+    # else
+    #   render json: books_with_favorites.errors
+    # end
   end
 
   def show
