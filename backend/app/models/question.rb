@@ -4,6 +4,8 @@ class Question < ApplicationRecord
   belongs_to :book
   has_many :favorite_questions, dependent: :destroy
   has_many :replies
+  has_many :browsing_histories, dependent: :destroy
+
 
 
   validates :title,    presence: true, length: { maximum: 60 }

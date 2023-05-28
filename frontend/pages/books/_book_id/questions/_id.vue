@@ -106,10 +106,14 @@ import axios from "@/plugins/axios"
 
 export default {
   components: { EditQuestion, QuestionReplies, ReplyForm },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
       const [questionResponse, repliesResponse] = await Promise.all([
-        axios.get(`/books/${params.book_id}/questions/${params.id}`),
+        axios.get(`/books/${params.book_id}/questions/${params.id}`, {
+          params: {
+            current_user_id: store.getters["auth/getCurrentUser"].id
+          }
+        }),
         axios.get(`/books/${params.book_id}/questions/${params.id}/replies`)
       ])
       const questionData = questionResponse.data
