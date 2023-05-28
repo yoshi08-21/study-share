@@ -117,6 +117,10 @@ export default {
           title: '参考書一覧',
           to: '/books/allBooks'
         },
+        {
+          title: '閲覧履歴',
+          to: '/browsingHistories/allBrowsingHistories'
+        },
       ],
       miniVariant: false,
       right: true,

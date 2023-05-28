@@ -3,6 +3,7 @@
     <h2>お気に入り一覧</h2>
     <!-- 後でコンポーネントで置き換える -->
     <!-- 配列の空のときのメッセージも追加する -->
+    <!-- 作成したコンポーネントは閲覧履歴と共有する -->
 
     <h3>お気に入りの参考書</h3>
     <v-flex xs12 sm6 md4 lg3 mb-5 v-for="(favoriteBook, index) in favoriteBooks" :key="'book_' + index">

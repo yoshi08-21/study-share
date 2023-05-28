@@ -7,7 +7,7 @@ class BooksController < ApplicationController
       render json: books
     else
       render json: books.errors
-  end
+    end
     # current_user = User.find_by(id: params[:current_user_id])
     # books = Book.includes(:favorite_books).all
     # books_with_favorites = books.map do |book|
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
     #     is_favorite: favorite_book.present?,
     #     favorite_book_id: favorite_book&.id
     #   }
-      # book.as_json.merge(is_favorite: current_user.fav_books.include?(book))
+    # book.as_json.merge(is_favorite: current_user.fav_books.include?(book))
     # end
     # if books_with_favorites
     #   render json: books_with_favorites
@@ -34,9 +34,8 @@ class BooksController < ApplicationController
     if book
       render json: book
       if current_user && !exist_book_browsing_history?(current_user, book)
-        current_user.browsing_histories.create(book_id: book.id)
+        save_book_browsing_history(current_user, book)
       end
-      # current_user&.browsing_histories.create(book_id: book.id)
     else
       render json:book.errors
     end
@@ -51,7 +50,8 @@ class BooksController < ApplicationController
     if book.save
       render json: book, status: 200
     else
-      render json: { errors: book.errors.full_messages }, status: :unprocessable_entity    end
+      render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -103,5 +103,16 @@ class BooksController < ApplicationController
 
     def exist_book_browsing_history?(current_user, book)
       current_user.watched_books.include?(book)
+    end
+
+    def save_book_browsing_history(current_user, book)
+      book_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(book_id: nil)
+      max_browsing_histories = 10
+      if book_browsing_histories.count >= max_browsing_histories
+        book_browsing_histories.first.destroy
+        current_user.browsing_histories.create(book_id: book.id)
+      else
+        current_user.browsing_histories.create(book_id: book.id)
+      end
     end
 end

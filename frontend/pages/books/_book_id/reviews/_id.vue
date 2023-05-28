@@ -95,9 +95,13 @@ export default {
   components: {
     EditReview
   },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
-      const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`)
+      const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`, {
+        params: {
+          current_user_id: store.getters["auth/getCurrentUser"].id
+        }
+      })
       console.log(responce.data.review)
       console.log(responce.data.book)
       console.log(responce.data.review.user)

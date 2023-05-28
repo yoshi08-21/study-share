@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :fav_subject_question_replies,       through: :favorite_subject_question_replies, source: :subject_question_reply
   has_many :browsing_histories, dependent: :destroy
   has_many :watched_books,     through: :browsing_histories, source: :book
+  has_many :watched_reviews,     through: :browsing_histories, source: :review
 
 
 

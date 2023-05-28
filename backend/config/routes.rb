@@ -53,6 +53,7 @@ Rails.application.routes.draw do
       get "is_favorite"
     end
   end
+  resources :browsing_histories, only: [:index]
 
 
 end

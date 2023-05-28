@@ -42,6 +42,13 @@
     "_name": "_612c4acb"
   },
   {
+    "name": "browsingHistories-allBrowsingHistories",
+    "path": "/browsingHistories/allBrowsingHistories",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/browsingHistories/allBrowsingHistories.vue",
+    "chunkName": "pages/browsingHistories/allBrowsingHistories",
+    "_name": "_4723a890"
+  },
+  {
     "name": "questions-questions",
     "path": "/questions/questions",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",
