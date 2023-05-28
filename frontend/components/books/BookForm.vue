@@ -9,13 +9,13 @@
         <v-select
           v-model="subject"
           :items="items"
-          label="科目"
+          label="科目（必須）"
           dense
           outlined
         ></v-select>
       </v-col>
-      <v-text-field counter label="タイトル" :rules="titleRules" v-model="name"></v-text-field>
-      <v-text-field counter label="著者" :rules="authorRules" v-model="author"></v-text-field>
+      <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="name"></v-text-field>
+      <v-text-field counter label="著者（必須）" :rules="authorRules" v-model="author"></v-text-field>
       <v-text-field counter label="出版社" :rules="publisherRules" v-model="publisher"></v-text-field>
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
