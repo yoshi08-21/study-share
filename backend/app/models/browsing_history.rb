@@ -1,4 +1,4 @@
-class BrowsingHietory < ApplicationRecord
+class BrowsingHistory < ApplicationRecord
 
   belongs_to :user
   belongs_to :book,   optional: true

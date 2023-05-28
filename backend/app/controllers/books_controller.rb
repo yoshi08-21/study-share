@@ -29,9 +29,14 @@ class BooksController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:id])
     if book
       render json: book
+      if current_user && !exist_book_browsing_history?(current_user, book)
+        current_user.browsing_histories.create(book_id: book.id)
+      end
+      # current_user&.browsing_histories.create(book_id: book.id)
     else
       render json:book.errors
     end
@@ -94,5 +99,9 @@ class BooksController < ApplicationController
 
     def book_params
       params.require(:book).permit(:name, :author, :publisher, :subject, :image, :user_id)
+    end
+
+    def exist_book_browsing_history?(current_user, book)
+      current_user.watched_books.include?(book)
     end
 end
