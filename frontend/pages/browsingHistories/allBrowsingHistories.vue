@@ -12,8 +12,7 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(tabItem, index) in tabs" :key="index">
-        <!-- <component :is="tabItem.component"></component> -->
-        内容
+        <component :is="tabItem.component"></component>
       </v-tab-item>
     </v-tabs-items>
 
@@ -83,9 +82,12 @@ export default {
     return {
       tab: 0,
       tabs: [
-        { label: 'Tab 1', component: 'Tab1Component' },
-        { label: 'Tab 2', component: 'Tab2Component' },
-        { label: 'Tab 3', component: 'Tab3Component' }
+        { label: "閲覧した参考書", component: "EachBooks" },
+        { label: "閲覧したレビュー", component: "EachReviews" },
+        { label: "閲覧した質問", component: "EachQuestions" },
+        { label: "閲覧した科目別質問", component: "EachSubjectQuestions" },
+        { label: "閲覧した返信", component: "EachReplies" },
+        { label: "閲覧した返信（科目別質問）", component: "EachSubjectQuestionReplies" },
     ]
     }
   }
