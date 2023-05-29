@@ -39,7 +39,8 @@
 
     <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <all-subject-questions :subjectQuestions="subjectQuestionsChunk"></all-subject-questions>
+    <br>
+    <each-subject-questions :subjectQuestions="subjectQuestionsChunk"></each-subject-questions>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
@@ -49,12 +50,12 @@
 
 <script>
 
-import AllSubjectQuestions from '../../components/subjectQuestions/AllSubjectQuestions.vue'
 import SubjectQuestionForm from '../../components/subjectQuestions/SubjectQuestionForm.vue'
+import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQuestions.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { AllSubjectQuestions, SubjectQuestionForm },
+  components: { SubjectQuestionForm, EachSubjectQuestions },
   async asyncData() {
     try {
       const responce = await axios.get("/subject_questions")

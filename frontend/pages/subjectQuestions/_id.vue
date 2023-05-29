@@ -92,7 +92,8 @@
 
     <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></subject-question-replies>
+    <br>
+    <each-subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></each-subject-question-replies>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
@@ -103,12 +104,12 @@
 <script>
 
 import EditSubjectQuestion from '../../components/subjectQuestions/EditSubjectQuestion.vue'
-import SubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionReplies.vue'
 import ReplyForm from '../../components/replies/ReplyForm.vue'
+import EachSubjectQuestionReplies from '../../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion, SubjectQuestionReplies, ReplyForm },
+  components: { EditSubjectQuestion, ReplyForm, EachSubjectQuestionReplies },
   async asyncData({ params, store }) {
     try {
       const [subjectQuestionResponse, subjectQuestionRepliesResponse] = await Promise.all([

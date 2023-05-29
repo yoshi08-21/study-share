@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h3>質問一覧</h3>
-    <br>
     <v-flex mb-5 v-for="(question, index) in questions" :key="'question_' + index">
       <v-row>
         <v-col cols="10">
@@ -20,6 +18,12 @@
                 <v-card-actions>
                   by: {{ question.user.name }}
                   <v-spacer></v-spacer>
+                  to: {{ question.book.name }}
+                  <v-col cols="2">
+                    <template v-if="question.book.image">
+                      <v-img :src="question.book.image" alt="画像"></v-img>
+                    </template>
+                  </v-col>
                 </v-card-actions>
               </v-col>
             </v-row>

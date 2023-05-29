@@ -3,185 +3,61 @@
     <h2>閲覧履歴</h2>
     <!-- 作成したコンポーネントはお気に入りと共有する -->
 
+
+    <v-tabs v-model="tab">
+      <v-tab v-for="(tabItem, index) in tabs" :key="index">
+        {{ tabItem.label }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item v-for="(tabItem, index) in tabs" :key="index">
+        <!-- <component :is="tabItem.component"></component> -->
+        内容
+      </v-tab-item>
+    </v-tabs-items>
+
+
     <h3>閲覧した参考書（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedBook, index) in watchedBooks" :key="'book_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/books/${watchedBook.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedBook.image">
-                  <v-img :src="watchedBook.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>タイトル: {{ watchedBook.name }}</v-card-title>
-                <v-card-text>
-                  <h4>著者: {{ watchedBook.author }}</h4>
-                  <h4>出版社: {{ watchedBook.publisher }}</h4>
-                  <h4>科目: {{ watchedBook.subject }}</h4>
-                </v-card-text>
-              </v-col>
-            </v-row>
-            <!-- <v-card-actions v-if="book.is_favorite == false">
-              <v-btn @click.stop="add">お気に入りに追加する</v-btn>
-            </v-card-actions>
-            <v-card-actions v-else>
-              <v-btn @click.stop="add">お気に入りから削除する</v-btn>
-            </v-card-actions> -->
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-books :books="watchedBooks"></each-books>
 
     <h3>閲覧したレビュー（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedReview, index) in watchedReviews" :key="'review_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/books/${watchedReview.book_id}/reviews/${watchedReview.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedReview.image">
-                  <v-img :src="watchedReview.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>タイトル: {{ watchedReview.title }}</v-card-title>
-                <v-card-text>
-                  <p>{{ watchedReview.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ watchedReview.user.name }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-reviews :reviews="watchedReviews"></each-reviews>
 
     <h3>閲覧した質問（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedQuestion, index) in watchedQuestions" :key="'question_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/books/${watchedQuestion.book_id}/questions/${watchedQuestion.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedQuestion.image">
-                  <v-img :src="watchedQuestion.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>タイトル: {{ watchedQuestion.title }}</v-card-title>
-                <v-card-text>
-                  <p>{{ watchedQuestion.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ watchedQuestion.user.name }}
-                  <v-spacer></v-spacer>
-                  to: {{ watchedQuestion.book.name }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-questions :questions="watchedQuestions"></each-questions>
 
     <h3>閲覧した科目別質問（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedSubjectQuestion, index) in watchedSubjectQuestions" :key="'subject_question_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/subjectQuestions/${watchedSubjectQuestion.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedSubjectQuestion.image">
-                  <v-img :src="watchedSubjectQuestion.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>タイトル: {{ watchedSubjectQuestion.title }}</v-card-title>
-                <v-card-text>
-                  <p>{{ watchedSubjectQuestion.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ watchedSubjectQuestion.user.name }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-subject-questions :subjectQuestions="watchedSubjectQuestions"></each-subject-questions>
 
     <h3>閲覧した返信（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedReply, index) in watchedReplies" :key="'question_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/books/${watchedReply.question.book_id}/questions/${watchedReply.question_id}/replies/${watchedReply.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedReply.image">
-                  <v-img :src="watchedReply.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-text>
-                  <p>{{ watchedReply.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ watchedReply.user.name }}
-                  <v-spacer></v-spacer>
-                  to: {{ watchedReply.question.title }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-replies :replies="watchedReplies"></each-replies>
 
     <h3>閲覧した科目別質問への返信（最大10件）</h3>
     <br>
-    <v-flex mb-5 v-for="(watchedSubjectQuestionReply, index) in watchedSubjectQuestionReplies" :key="'question_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/subjectQuestions/${watchedSubjectQuestionReply.subject_question_id}/subjectQuestionReplies/${watchedSubjectQuestionReply.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="watchedSubjectQuestionReply.image">
-                  <v-img :src="watchedSubjectQuestionReply.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-text>
-                  <p>{{ watchedSubjectQuestionReply.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ watchedSubjectQuestionReply.user.name }}
-                  <v-spacer></v-spacer>
-                  to: {{ watchedSubjectQuestionReply.subject_question.title }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-subject-question-replies :subjectQuestionReplies="watchedSubjectQuestionReplies"></each-subject-question-replies>
 
   </div>
 </template>
 
 <script>
 
+import EachBooks from '../../components/books/EachBooks.vue'
+import EachReviews from '../../components/reviews/EachReviews.vue'
+import EachQuestions from '../../components/questions/EachQuestions.vue'
+import EachReplies from '../../components/replies/EachReplies.vue'
+import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQuestions.vue'
+import EachSubjectQuestionReplies from '../../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import axios from "@/plugins/axios"
 
+
 export default {
+  components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies },
   async asyncData({ store }) {
     try {
       const response = await axios.get("/browsing_histories", {
@@ -201,6 +77,16 @@ export default {
     } catch(error) {
       console.log(error)
       throw error
+    }
+  },
+  data() {
+    return {
+      tab: 0,
+      tabs: [
+        { label: 'Tab 1', component: 'Tab1Component' },
+        { label: 'Tab 2', component: 'Tab2Component' },
+        { label: 'Tab 3', component: 'Tab3Component' }
+    ]
     }
   }
 }

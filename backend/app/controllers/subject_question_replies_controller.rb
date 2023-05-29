@@ -2,9 +2,9 @@ class SubjectQuestionRepliesController < ApplicationController
 
   def index
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
-    subject_question_replies = subject_question.subject_question_replies.includes(:user)
+    subject_question_replies = subject_question.subject_question_replies.includes(:user, :subject_question)
     if subject_question_replies
-      render json: subject_question_replies, include: "user"
+      render json: subject_question_replies, include: [:user, :subject_question]
     else
       render json: subject_question_replies.errors
     end

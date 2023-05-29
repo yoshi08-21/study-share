@@ -1,8 +1,5 @@
 <template>
   <div>
-    <h3>返信一覧</h3>
-
-    <br>
     <v-flex mb-5 v-for="(reply, index) in replies" :key="'reply_' + index">
       <v-row>
         <v-col cols="10">
@@ -18,6 +15,8 @@
                     <h5>画像</h5>
                     <v-icon>mdi-image-plus</v-icon>
                   </template>
+                  <v-spacer></v-spacer>
+                  to: {{ reply.question.title }}
                 </v-card-actions>
               </v-col>
             </v-row>

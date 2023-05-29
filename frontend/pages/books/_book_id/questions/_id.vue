@@ -91,7 +91,7 @@
 
     <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <question-replies :replies="repliesChunk" :book_id="book.id"></question-replies>
+    <question-replies :replies="repliesChunk"></question-replies>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
