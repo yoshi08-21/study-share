@@ -37,8 +37,10 @@
       </v-card>
     </v-dialog>
 
-
-    <all-subject-questions :subjectQuestions="subjectQuestions"></all-subject-questions>
+    <br>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <all-subject-questions :subjectQuestions="subjectQuestionsChunk"></all-subject-questions>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -71,12 +73,22 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
+      perPage: 10,
+      page: 1,
 
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    subjectQuestionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.subjectQuestions.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.subjectQuestions.length / this.perPage);
     },
   },
   mounted() {

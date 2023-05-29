@@ -35,7 +35,6 @@ export default {
   methods: {
     submitForm() {
       this.$emit('submitReply', { content: this.content, })
-      this.content = ""
     },
   }
 }

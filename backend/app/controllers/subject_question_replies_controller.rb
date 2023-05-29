@@ -11,6 +11,7 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:current_user_id])
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:subject_question_id])
     subject_question_reply = SubjectQuestionReply.includes(:user).find_by(id: params[:id])
     favorite_subject_question_replies = FavoriteSubjectQuestionReply.where(subject_question_reply_id: subject_question_reply.id)
@@ -21,6 +22,9 @@ class SubjectQuestionRepliesController < ApplicationController
         subject_question_reply: subject_question_reply.as_json(include: :user),
         favorite_subject_question_replies_count: favorite_subject_question_replies_count
       }
+      if current_user && !exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
+        save_subject_question_reply_browsing_history(current_user, subject_question_reply)
+      end
     else
       render json: subject_question_reply.errors
     end
@@ -86,7 +90,20 @@ class SubjectQuestionRepliesController < ApplicationController
       params.require(:subject_question_reply).permit(:content, :user_id, :subject_question_id)
     end
 
+    def exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
+      current_user.watched_subject_question_replies.include?(subject_question_reply)
+    end
 
+    def save_subject_question_reply_browsing_history(current_user, subject_question_reply)
+      subject_question_reply_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(subject_question_reply_id: nil)
+      max_browsing_histories = 10
+      if subject_question_reply_browsing_histories.count >= max_browsing_histories
+        subject_question_reply_browsing_histories.first.destroy
+        current_user.browsing_histories.create(subject_question_reply_id: subject_question_reply.id)
+      else
+        current_user.browsing_histories.create(subject_question_reply_id: subject_question_reply.id)
+      end
+    end
 
 
 end
