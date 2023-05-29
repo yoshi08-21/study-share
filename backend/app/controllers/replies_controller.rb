@@ -11,6 +11,7 @@ class RepliesController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:book_id])
     question = Question.includes(:user).find_by(id: params[:question_id])
     reply = Reply.includes(:user).find_by(id: params[:id])
@@ -23,6 +24,9 @@ class RepliesController < ApplicationController
         reply: reply.as_json(include: :user),
         favorite_replies_count: favorite_replies_count
       }
+      if current_user && !exist_reply_browsing_history?(current_user, reply)
+        save_reply_browsing_history(current_user, reply)
+      end
     else
       render json: reply.errors
     end
@@ -87,5 +91,21 @@ class RepliesController < ApplicationController
     def reply_params
       params.require(:reply).permit(:content, :user_id, :question_id)
     end
+
+    def exist_reply_browsing_history?(current_user, reply)
+      current_user.watched_replies.include?(reply)
+    end
+
+    def save_reply_browsing_history(current_user, reply)
+      reply_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(reply_id: nil)
+      max_browsing_histories = 10
+      if reply_browsing_histories.count >= max_browsing_histories
+        reply_browsing_histories.first.destroy
+        current_user.browsing_histories.create(reply_id: reply.id)
+      else
+        current_user.browsing_histories.create(reply_id: reply.id)
+      end
+    end
+
 
 end

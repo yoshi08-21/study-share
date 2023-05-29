@@ -22,6 +22,9 @@ class User < ApplicationRecord
   has_many :watched_books,     through: :browsing_histories, source: :book
   has_many :watched_reviews,     through: :browsing_histories, source: :review
   has_many :watched_questions,     through: :browsing_histories, source: :question
+  has_many :watched_subject_questions,     through: :browsing_histories, source: :subject_question
+  has_many :watched_replies,     through: :browsing_histories, source: :reply
+  has_many :watched_subject_question_replies,     through: :browsing_histories, source: :subject_question_reply
 
 
 

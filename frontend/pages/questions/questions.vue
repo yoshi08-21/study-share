@@ -26,7 +26,10 @@
     </v-card>
 
     <br>
-    <all-questions :questions="questions"></all-questions>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <all-questions :questions="questionsChunk"></all-questions>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -51,6 +54,25 @@ export default {
       console.log(error)
       throw error
     }
+  },
+  data() {
+    return {
+      perPage: 10,
+      page: 1,
+    }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters["auth/getCurrentUser"]
+    },
+    questionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.questions.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.questions.length / this.perPage);
+    },
   },
   mounted() {
     if (this.$route.query.message) {

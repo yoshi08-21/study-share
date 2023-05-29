@@ -115,4 +115,5 @@ class BooksController < ApplicationController
         current_user.browsing_histories.create(book_id: book.id)
       end
     end
+
 end

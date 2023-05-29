@@ -89,9 +89,13 @@ import axios from "@/plugins/axios"
 
 export default {
   components: { EditReply },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
-      const responce = await axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies/${params.id}`)
+      const responce = await axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies/${params.id}`, {
+        params: {
+          current_user_id: store.getters["auth/getCurrentUser"].id
+        }
+      })
       console.log(responce.data)
       return {
         book: responce.data.book,

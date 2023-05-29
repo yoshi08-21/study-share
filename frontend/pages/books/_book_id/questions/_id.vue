@@ -90,7 +90,9 @@
     </v-dialog>
 
     <br>
-    <question-replies :replies="replies" :book_id="book.id"></question-replies>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <question-replies :replies="repliesChunk" :book_id="book.id"></question-replies>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -143,12 +145,22 @@ export default {
       isFavorite: false,
       favoriteQuestionId: "",
       replyDialog: false,
+      perPage: 10,
+      page: 1,
 
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    repliesChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.replies.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.replies.length / this.perPage);
     },
   },
   async created() {

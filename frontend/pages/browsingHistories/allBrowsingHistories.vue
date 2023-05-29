@@ -91,6 +91,89 @@
       </v-row>
     </v-flex>
 
+    <h3>閲覧した科目別質問（最大10件）</h3>
+    <br>
+    <v-flex mb-5 v-for="(watchedSubjectQuestion, index) in watchedSubjectQuestions" :key="'subject_question_' + index">
+      <v-row>
+        <v-col cols="10">
+          <v-card :to="`/subjectQuestions/${watchedSubjectQuestion.id}`">
+            <v-row>
+              <v-col cols="2">
+                <template v-if="watchedSubjectQuestion.image">
+                  <v-img :src="watchedSubjectQuestion.image" alt="画像"></v-img>
+                </template>
+              </v-col>
+              <v-col cols="10">
+                <v-card-title>タイトル: {{ watchedSubjectQuestion.title }}</v-card-title>
+                <v-card-text>
+                  <p>{{ watchedSubjectQuestion.content }}</p>
+                </v-card-text>
+                <v-card-actions>
+                  by: {{ watchedSubjectQuestion.user.name }}
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-flex>
+
+    <h3>閲覧した返信（最大10件）</h3>
+    <br>
+    <v-flex mb-5 v-for="(watchedReply, index) in watchedReplies" :key="'question_' + index">
+      <v-row>
+        <v-col cols="10">
+          <v-card :to="`/books/${watchedReply.question.book_id}/questions/${watchedReply.question_id}/replies/${watchedReply.id}`">
+            <v-row>
+              <v-col cols="2">
+                <template v-if="watchedReply.image">
+                  <v-img :src="watchedReply.image" alt="画像"></v-img>
+                </template>
+              </v-col>
+              <v-col cols="10">
+                <v-card-text>
+                  <p>{{ watchedReply.content }}</p>
+                </v-card-text>
+                <v-card-actions>
+                  by: {{ watchedReply.user.name }}
+                  <v-spacer></v-spacer>
+                  to: {{ watchedReply.question.title }}
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-flex>
+
+    <h3>閲覧した科目別質問への返信（最大10件）</h3>
+    <br>
+    <v-flex mb-5 v-for="(watchedSubjectQuestionReply, index) in watchedSubjectQuestionReplies" :key="'question_' + index">
+      <v-row>
+        <v-col cols="10">
+          <v-card :to="`/subjectQuestions/${watchedSubjectQuestionReply.subject_question_id}/subjectQuestionReplies/${watchedSubjectQuestionReply.id}`">
+            <v-row>
+              <v-col cols="2">
+                <template v-if="watchedSubjectQuestionReply.image">
+                  <v-img :src="watchedSubjectQuestionReply.image" alt="画像"></v-img>
+                </template>
+              </v-col>
+              <v-col cols="10">
+                <v-card-text>
+                  <p>{{ watchedSubjectQuestionReply.content }}</p>
+                </v-card-text>
+                <v-card-actions>
+                  by: {{ watchedSubjectQuestionReply.user.name }}
+                  <v-spacer></v-spacer>
+                  to: {{ watchedSubjectQuestionReply.subject_question.title }}
+                </v-card-actions>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-flex>
+
   </div>
 </template>
 
@@ -111,6 +194,9 @@ export default {
         watchedBooks: response.data.book_browsing_histories,
         watchedReviews: response.data.review_browsing_histories,
         watchedQuestions: response.data.question_browsing_histories,
+        watchedSubjectQuestions: response.data.subject_question_browsing_histories,
+        watchedReplies: response.data.reply_browsing_histories,
+        watchedSubjectQuestionReplies: response.data.subject_question_reply_browsing_histories,
       }
     } catch(error) {
       console.log(error)

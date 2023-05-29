@@ -91,7 +91,9 @@
     </v-dialog>
 
     <br>
-    <subject-question-replies :subjectQuestionReplies="subjectQuestionReplies"></subject-question-replies>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></subject-question-replies>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -107,10 +109,14 @@ import axios from "@/plugins/axios"
 
 export default {
   components: { EditSubjectQuestion, SubjectQuestionReplies, ReplyForm },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
       const [subjectQuestionResponse, subjectQuestionRepliesResponse] = await Promise.all([
-        axios.get(`subject_questions/${params.id}`),
+        axios.get(`subject_questions/${params.id}`, {
+          params: {
+            current_user_id: store.getters["auth/getCurrentUser"].id
+          }
+        }),
         axios.get(`subject_questions/${params.id}/subject_question_replies`)
       ])
       console.log(subjectQuestionResponse)
@@ -138,12 +144,22 @@ export default {
       isFavorite: false,
       favoriteSubjectQuestionId: "",
       subjectQuestionReplyDialog: false,
+      perPage: 10,
+      page: 1,
 
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    subjectQuestionReplyChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.subjectQuestionReplies.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.subjectQuestionReplies.length / this.perPage);
     },
   },
   async created() {
