@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h3>レビュー一覧</h3>
-
     <br>
     <v-flex mb-5 v-for="(review, index) in reviews" :key="'review_' + index">
       <v-row>
@@ -20,6 +18,12 @@
                   by: {{ review.user.name }}
                 </v-card-actions>
               </v-col>
+              <v-col cols="2">
+                to: {{ review.book.name }}
+                <template v-if="review.book.image">
+                  <v-img :src="review.book.image" alt="画像"></v-img>
+                </template>
+              </v-col>
             </v-row>
           </v-card>
         </v-col>
@@ -33,7 +37,6 @@
 export default {
   props: {
     reviews: [],
-    book_id: Number
   }
 }
 </script>

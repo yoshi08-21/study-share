@@ -3,7 +3,7 @@ class BrowsingHistoriesController < ApplicationController
   def index
     current_user = User.find_by(id: params[:current_user_id])
     book_browsing_histories = current_user.watched_books
-    review_browsing_histories = current_user.watched_reviews.includes(:user)
+    review_browsing_histories = current_user.watched_reviews.includes(:user, :book)
     question_browsing_histories = current_user.watched_questions.includes(:user, :book)
     subject_question_browsing_histories = current_user.watched_subject_questions.includes(:user)
     reply_browsing_histories = current_user.watched_replies.includes(:user, :question)
@@ -12,7 +12,7 @@ class BrowsingHistoriesController < ApplicationController
     if current_user
       render json: {
         book_browsing_histories: book_browsing_histories,
-        review_browsing_histories: review_browsing_histories.as_json(include: :user),
+        review_browsing_histories: review_browsing_histories.as_json(include: [:user, :book]),
         question_browsing_histories: question_browsing_histories.as_json(include: [:user, :book]),
         subject_question_browsing_histories: subject_question_browsing_histories.as_json(include: :user),
         reply_browsing_histories: reply_browsing_histories.as_json(include: [:user, :question]),

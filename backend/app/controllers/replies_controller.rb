@@ -2,9 +2,9 @@ class RepliesController < ApplicationController
 
   def index
     question = Question.find_by(id: params[:question_id])
-    replies = question.replies.includes(:user)
+    replies = question.replies.includes(:user, :question)
     if replies
-      render json: replies, include: "user"
+      render json: replies, include: [:user, :question]
     else
       render json: replies.errors
     end
