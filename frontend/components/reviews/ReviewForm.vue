@@ -45,9 +45,6 @@ export default {
   methods: {
     submitForm() {
       this.$emit('submitReview', { title: this.title, content: this.content, rating: this.rating })
-      this.rating = 1
-      this.title = ""
-      this.content = ""
     },
   }
 }

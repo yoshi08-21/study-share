@@ -33,9 +33,8 @@ class FavoriteReviewsController < ApplicationController
     end
 
     def create_notification_favorite_review(current_user, review)
-      favorite_reveiew_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
-      if favorite_reveiew_notification.blank?
-        # レコード作成時のログを確認後、可能であればストロングパラメーターを使う
+      favorite_review_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
+      if favorite_review_notification.blank?
         notification = current_user.sent_notifications.build(
           target_user_id: review.user_id,
           review_id: review.id,
@@ -47,9 +46,9 @@ class FavoriteReviewsController < ApplicationController
     end
 
     def delete_notification_favorite_review(current_user, review)
-      favorite_reveiew_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
-      if favorite_reveiew_notification
-        favorite_reveiew_notification.destroy
+      favorite_review_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
+      if favorite_review_notification
+        favorite_review_notification.destroy
       end
     end
 
