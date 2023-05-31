@@ -5,33 +5,47 @@
     <!-- 配列の空のときのメッセージも追加する -->
     <!-- 作成したコンポーネントは閲覧履歴と共有する -->
 
-    <h3>お気に入りの参考書</h3>
-    <br>
-    <each-books :books="favoriteBooks"></each-books>
-    <each-books></each-books>
+    <v-tabs v-model="tab">
+      <v-tab v-for="(tabItem, index) in tabs" :key="index">
+        {{ tabItem.label }}
+      </v-tab>
+    </v-tabs>
 
+    <template v-if="tab === 0">
+      <h3>お気に入りに追加した参考書（最大10件）</h3>
+      <br>
+      <each-books :books="favoriteBooks"></each-books>
+    </template>
 
-    <h3>いいねしたレビュー</h3>
-    <br>
-    <each-reviews :reviews="favoriteReviews"></each-reviews>
+    <template v-else-if="tab === 1">
+      <h3>いいね!したレビュー（最大10件）</h3>
+      <br>
+      <each-reviews :reviews="favoriteReviews"></each-reviews>
+    </template>
 
+    <template v-else-if="tab === 2">
+      <h3>いいね!した質問（最大10件）</h3>
+      <br>
+      <each-questions :questions="favoriteQuestions"></each-questions>
+    </template>
 
-    <h3>いいねした質問</h3>
-    <br>
-    <each-questions :questions="favoriteQuestions"></each-questions>
+    <template v-else-if="tab === 3">
+      <h3>いいね!した科目別質問（最大10件）</h3>
+      <br>
+      <each-subject-questions :subjectQuestions="favoriteSubjectQuestions"></each-subject-questions>
+    </template>
 
-    <h3>いいねした科目別質問</h3>
-    <br>
-    <each-subject-questions :subjectQuestions="favoriteSubjectQuestions"></each-subject-questions>
+    <template v-else-if="tab === 4">
+      <h3>いいね!した返信（最大10件）</h3>
+      <br>
+      <each-replies :replies="favoriteReplies"></each-replies>
+    </template>
 
-    <h3>いいねした返信</h3>
-    <br>
-    <each-replies :replies="favoriteReplies"></each-replies>
-
-    <h3>いいねした科目別質問への返信</h3>
-    <br>
-    <each-subject-question-replies :subjectQuestionReplies="favoriteSubjectQuestionReplies"></each-subject-question-replies>
-
+    <template v-else-if="tab === 5">
+      <h3>いいね!した科目別質問への返信（最大10件）</h3>
+      <br>
+      <each-subject-question-replies :subjectQuestionReplies="favoriteSubjectQuestionReplies"></each-subject-question-replies>
+    </template>
 
   </div>
 </template>
@@ -71,6 +85,15 @@ export default {
   },
   data() {
     return {
+      tab: 0,
+      tabs: [
+        { label: "お気に入りに追加した参考書" },
+        { label: "いいね！したレビュー" },
+        { label: "いいね！した質問" },
+        { label: "いいね！した科目別質問" },
+        { label: "いいね！した返信" },
+        { label: "いいね！した返信（科目別質問）" },
+      ]
 
     }
   }
@@ -78,5 +101,13 @@ export default {
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
 
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

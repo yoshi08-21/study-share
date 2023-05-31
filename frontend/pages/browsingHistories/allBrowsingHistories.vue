@@ -3,43 +3,47 @@
     <h2>閲覧履歴</h2>
     <!-- 作成したコンポーネントはお気に入りと共有する -->
 
-
     <v-tabs v-model="tab">
       <v-tab v-for="(tabItem, index) in tabs" :key="index">
         {{ tabItem.label }}
       </v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item v-for="(tabItem, index) in tabs" :key="index">
-        <component :is="tabItem.component"></component>
-      </v-tab-item>
-    </v-tabs-items>
+    <template v-if="tab === 0">
+      <h3>閲覧した参考書（最大10件）</h3>
+      <br>
+      <each-books :books="watchedBooks"></each-books>
+    </template>
 
+    <template v-else-if="tab === 1">
+      <h3>閲覧したレビュー（最大10件）</h3>
+      <br>
+      <each-reviews :reviews="watchedReviews"></each-reviews>
+    </template>
 
-    <h3>閲覧した参考書（最大10件）</h3>
-    <br>
-    <each-books :books="watchedBooks"></each-books>
+    <template v-else-if="tab === 2">
+      <h3>閲覧した質問（最大10件）</h3>
+      <br>
+      <each-questions :questions="watchedQuestions"></each-questions>
+    </template>
 
-    <h3>閲覧したレビュー（最大10件）</h3>
-    <br>
-    <each-reviews :reviews="watchedReviews"></each-reviews>
+    <template v-else-if="tab === 3">
+      <h3>閲覧した科目別質問（最大10件）</h3>
+      <br>
+      <each-subject-questions :subjectQuestions="watchedSubjectQuestions"></each-subject-questions>
+    </template>
 
-    <h3>閲覧した質問（最大10件）</h3>
-    <br>
-    <each-questions :questions="watchedQuestions"></each-questions>
+    <template v-else-if="tab === 4">
+      <h3>閲覧した返信（最大10件）</h3>
+      <br>
+      <each-replies :replies="watchedReplies"></each-replies>
+    </template>
 
-    <h3>閲覧した科目別質問（最大10件）</h3>
-    <br>
-    <each-subject-questions :subjectQuestions="watchedSubjectQuestions"></each-subject-questions>
-
-    <h3>閲覧した返信（最大10件）</h3>
-    <br>
-    <each-replies :replies="watchedReplies"></each-replies>
-
-    <h3>閲覧した科目別質問への返信（最大10件）</h3>
-    <br>
-    <each-subject-question-replies :subjectQuestionReplies="watchedSubjectQuestionReplies"></each-subject-question-replies>
+    <template v-else-if="tab === 5">
+      <h3>閲覧した科目別質問への返信（最大10件）</h3>
+      <br>
+      <each-subject-question-replies :subjectQuestionReplies="watchedSubjectQuestionReplies"></each-subject-question-replies>
+    </template>
 
   </div>
 </template>
@@ -82,13 +86,13 @@ export default {
     return {
       tab: 0,
       tabs: [
-        { label: "閲覧した参考書", component: "EachBooks" },
-        { label: "閲覧したレビュー", component: "EachReviews" },
-        { label: "閲覧した質問", component: "EachQuestions" },
-        { label: "閲覧した科目別質問", component: "EachSubjectQuestions" },
-        { label: "閲覧した返信", component: "EachReplies" },
-        { label: "閲覧した返信（科目別質問）", component: "EachSubjectQuestionReplies" },
-    ]
+        { label: "閲覧した参考書" },
+        { label: "閲覧したレビュー" },
+        { label: "閲覧した質問" },
+        { label: "閲覧した科目別質問" },
+        { label: "閲覧した返信" },
+        { label: "閲覧した返信（科目別質問）" },
+      ]
     }
   }
 }
