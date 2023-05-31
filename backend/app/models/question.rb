@@ -5,6 +5,7 @@ class Question < ApplicationRecord
   has_many :favorite_questions, dependent: :destroy
   has_many :replies
   has_many :browsing_histories, dependent: :destroy
+  has_many :notifications,              dependent: :destroy
 
 
 

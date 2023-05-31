@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  action_user_id: 1
+  target_user_id: 1
+  review_id: 1
+  question_id: 1
+  reply_id: 1
+  subect_question_id: 1
+  subject_question_reply_id: 1
+  action_type: MyString
+  action_to: MyString
+  is_checked: false
+
+two:
+  action_user_id: 1
+  target_user_id: 1
+  review_id: 1
+  question_id: 1
+  reply_id: 1
+  subect_question_id: 1
+  subject_question_reply_id: 1
+  action_type: MyString
+  action_to: MyString
+  is_checked: false

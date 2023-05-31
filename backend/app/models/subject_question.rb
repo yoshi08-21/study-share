@@ -4,6 +4,7 @@ class SubjectQuestion < ApplicationRecord
   has_many :subject_question_replies
   has_many :favorite_subject_questions, dependent: :destroy
   has_many :browsing_histories, dependent: :destroy
+  has_many :notifications,              dependent: :destroy
 
 
   validates :title,    presence: true, length: { maximum: 60 }

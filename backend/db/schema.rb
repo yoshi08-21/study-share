@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_28_081346) do
+ActiveRecord::Schema.define(version: 2023_05_31_014357) do
 
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -74,6 +74,21 @@ ActiveRecord::Schema.define(version: 2023_05_28_081346) do
   create_table "favorite_subject_questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "subject_question_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "action_user_id"
+    t.integer "target_user_id"
+    t.integer "review_id"
+    t.integer "question_id"
+    t.integer "reply_id"
+    t.integer "subect_question_id"
+    t.integer "subject_question_reply_id"
+    t.string "action_type"
+    t.string "action_to"
+    t.boolean "is_checked"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

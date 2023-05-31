@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     end
   end
   resources :browsing_histories, only: [:index]
+  resources :notifications, only: [:index]
 
 
 end

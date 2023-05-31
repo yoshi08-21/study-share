@@ -94,16 +94,8 @@ export default {
           to: '/mypage',
         },
         {
-          title: 'books/1',
-          to: '/books/1',
-        },
-        {
           title: '新規登録',
           to: '/auth/signup'
-        },
-        {
-          title: 'sample6詳細ページ',
-          to: '/users/4'
         },
         {
           title: '質問一覧',
@@ -120,6 +112,10 @@ export default {
         {
           title: '閲覧履歴',
           to: '/browsingHistories/allBrowsingHistories'
+        },
+        {
+          title: '通知一覧',
+          to: '/notifications/allNotifications'
         },
       ],
       miniVariant: false,
