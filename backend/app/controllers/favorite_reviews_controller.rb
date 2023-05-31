@@ -6,6 +6,7 @@ class FavoriteReviewsController < ApplicationController
     favorite_review = current_user.favorite_reviews.build(review_id: review.id)
     if !exist_favorite_review?(current_user, review)
       favorite_review.save
+      create_notification_favorite_review(current_user, review)
       render json: favorite_review, status: 200
     else
       render json: { error: "エラーが発生しました" }, status: 400
@@ -17,6 +18,7 @@ class FavoriteReviewsController < ApplicationController
     review = Review.find_by(id: params[:review_id])
     favorite_review = FavoriteReview.find_by(user_id: current_user.id, review_id: review.id)
     if favorite_review.destroy
+      delete_notification_favorite_review(current_user, review)
       render json: { status: :ok }
     else
       render json: { error: "エラーが発生しました" }, status: 400
@@ -31,14 +33,23 @@ class FavoriteReviewsController < ApplicationController
     end
 
     def create_notification_favorite_review(current_user, review)
-      favorite_reveiew_notification = Notification.find_by(target_user_id: current_user.id, review_id: review.id)
+      favorite_reveiew_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
       if favorite_reveiew_notification.blank?
         # レコード作成時のログを確認後、可能であればストロングパラメーターを使う
-        current_user.sent_notifications.build(
+        notification = current_user.sent_notifications.build(
           target_user_id: review.user_id,
           review_id: review.id,
-          action:
+          action_type: "Favorite",
+          action_to: "Review",
         )
+        notification.save if notification.valid?
+      end
+    end
+
+    def delete_notification_favorite_review(current_user, review)
+      favorite_reveiew_notification = Notification.find_by(action_user_id: current_user.id, review_id: review.id, action_type: "Favorite")
+      if favorite_reveiew_notification
+        favorite_reveiew_notification.destroy
       end
     end
 
