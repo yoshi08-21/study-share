@@ -60,6 +60,9 @@
         <v-list-item v-if="this.currentUser">
           「{{ this.currentUser.name }}」でログイン中
         </v-list-item>
+        <v-list-item v-if="this.currentUser">
+          <v-btn @click="logout">ログアウト（デバッグ用）</v-btn>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
