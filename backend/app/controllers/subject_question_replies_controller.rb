@@ -36,6 +36,7 @@ class SubjectQuestionRepliesController < ApplicationController
     subject_question_reply = current_user.subject_question_replies.build(subject_question_reply_params)
     subject_question_reply.subject_question_id = subject_question.id
     if subject_question_reply.save
+      create_notification_subject_question_reply(current_user, subject_question.user, subject_question, subject_question_reply)
       render json: subject_question_reply, status: 200
     else
       render json: { error: "エラーが発生しました" }, status: 400
@@ -102,6 +103,35 @@ class SubjectQuestionRepliesController < ApplicationController
         current_user.browsing_histories.create(subject_question_reply_id: subject_question_reply.id)
       else
         current_user.browsing_histories.create(subject_question_reply_id: subject_question_reply.id)
+      end
+    end
+
+    def create_notification_subject_question_reply(current_user, subject_question_author, subject_question, subject_question_reply)
+      # 質問の投稿者に通知を作成する
+      # 自分の質問に自分で返信を投稿したときは通知を作成しない
+      if current_user.id != subject_question_author.id
+        subject_question_reply_notification = current_user.sent_notifications.build(
+          target_user_id: subject_question_author.id,
+          subject_question_id: subject_question.id,
+          subject_question_reply_id: subject_question_reply.id,
+          action_type: "SubjectQuestionReply",
+          action_to: "SubjectQuestionReply"
+        )
+        subject_question_reply_notification.save if subject_question_reply_notification.valid?
+      end
+
+      # 返信が投稿されたとき、投稿者以外のその質問に返信しているユーザー全員に通知を作成する
+      # 自分には通知を作成しない、質問の投稿者にも通知を作成しない（上の処理で質問の投稿者には通知が作成されるため、２重になってしまう）
+      replied_users_id = SubjectQuestionReply.select(:user_id).where(subject_question_id: subject_question.id).where.not(user_id: current_user.id).where.not(user_id: subject_question_author.id).distinct
+      replied_users_id.each do |replied_user_id|
+        notification = current_user.sent_notifications.build(
+          target_user_id: replied_user_id.user_id,
+          subject_question_id: subject_question.id,
+          subject_question_reply_id: subject_question_reply.id,
+          action_type: "SubjectQuestionReply",
+          action_to: "SubjectQuestionReply"
+        )
+        notification.save if notification.valid?
       end
     end
 
