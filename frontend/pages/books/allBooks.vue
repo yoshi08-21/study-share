@@ -6,7 +6,7 @@
     <v-card>
       <v-card-title>
         参考書：検索ボックス
-        <v-text-field></v-text-field><v-btn>検索</v-btn>
+        <v-text-field v-model="searchBooksKeyword"></v-text-field><v-btn @click="searchBooks">検索</v-btn>
       </v-card-title>
       <v-card-title>
         <v-btn @click="openDialog" block>新しい参考書を登録する</v-btn>
@@ -77,6 +77,7 @@ export default {
       image: "",
       perPage: 10,
       page: 1,
+      searchBooksKeyword: "",
     }
   },
   computed: {
@@ -133,7 +134,11 @@ export default {
     },
     redirectToSearchBooks() {
       this.$router.push({ path: "/books/searchBooks" })
-    }
+    },
+    searchBooks() {
+      this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+      this.searchBooksKeyword = ""
+    },
   }
 
 }
