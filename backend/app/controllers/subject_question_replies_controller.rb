@@ -114,7 +114,7 @@ class SubjectQuestionRepliesController < ApplicationController
           target_user_id: subject_question_author.id,
           subject_question_id: subject_question.id,
           subject_question_reply_id: subject_question_reply.id,
-          action_type: "SubjectQuestionReply",
+          action_type: "Reply",
           action_to: "SubjectQuestionReply"
         )
         subject_question_reply_notification.save if subject_question_reply_notification.valid?
@@ -128,7 +128,7 @@ class SubjectQuestionRepliesController < ApplicationController
           target_user_id: replied_user_id.user_id,
           subject_question_id: subject_question.id,
           subject_question_reply_id: subject_question_reply.id,
-          action_type: "SubjectQuestionReply",
+          action_type: "Reply",
           action_to: "SubjectQuestionReply"
         )
         notification.save if notification.valid?
