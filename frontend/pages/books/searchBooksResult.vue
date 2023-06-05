@@ -5,8 +5,31 @@
 </template>
 
 <script>
-export default {
 
+import axios from "@/plugins/axios"
+
+export default {
+  async asyncData({ route }) {
+    try {
+      const response = await axios.get("/books/search_books", {
+        params: {
+          searchBooksKeyword: route.query.searchBooksKeyword
+        }
+      })
+      console.log(response.data)
+    } catch(error) {
+      console.log(error)
+      throw error
+    }
+  },
+  data() {
+    return {
+      searchBooksKeyword: ""
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
 

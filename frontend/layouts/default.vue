@@ -82,7 +82,6 @@
 <script>
 
 import { getAuth, signOut } from "firebase/auth"
-import axios from "@/plugins/axios"
 
 
 export default {
@@ -162,20 +161,10 @@ export default {
         console.log(error)
       }
     },
-    async searchBooks() {
-      try {
-        const response = await axios.get("/books/search_books", {
-          params: {
-            searchBooksKeyword: this.searchBooksKeyword,
-          }
-        })
-        console.log(response.data)
-      } catch(error) {
-        console.log(error)
-        throw error
-      }
+    searchBooks() {
+      this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+      this.searchBooksKeyword = ""
     }
-
   }
 }
 </script>
