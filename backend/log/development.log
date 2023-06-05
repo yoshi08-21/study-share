@@ -30531,3 +30531,48 @@ Processing by BooksController#search_books as HTML
 Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.5ms | Allocations: 1103)
 
 
+Started GET "/books/search_books" for ::1 at 2023-06-05 21:39:20 +0900
+Processing by BooksController#search_books as HTML
+  [1m[36mBook Load (38.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%%' OR author LIKE '%%' OR publisher LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 116ms (Views: 8.7ms | ActiveRecord: 40.4ms | Allocations: 3474)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:41:29 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (3.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 14ms (Views: 9.5ms | ActiveRecord: 3.1ms | Allocations: 1735)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:41:36 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (16.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 106ms (Views: 14.2ms | ActiveRecord: 54.1ms | Allocations: 10852)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:41:38 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.5ms | Allocations: 1782)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:42:03 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (1.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 1.4ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:42:07 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.5ms | Allocations: 1735)
+
+
