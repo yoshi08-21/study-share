@@ -39,8 +39,7 @@
       <v-btn @click="searchBooks">検索</v-btn>
       <v-spacer />
       <div>
-        <!-- メソッドに切り替えて、未ログイン時のリダイレクトを追加する -->
-        <v-btn to="/favorites">お気に入り</v-btn>
+        <v-btn @click="goToFavorites">お気に入り</v-btn>
       </div>
       <div v-if="!isLoggedIn">
         <v-btn to="/auth/login">ログイン</v-btn>
@@ -164,6 +163,13 @@ export default {
     searchBooks() {
       this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
+    },
+    goToFavorites() {
+      if(this.currentUser) {
+        this.$router.push({ path: "/favorites" })
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
+      }
     }
   }
 }
