@@ -3,9 +3,8 @@
     <h2>「{{ this.searchBooksKeyword }}」の検索結果</h2>
 
     <div v-if="searchBooksResult.length > 0">
-      <div v-for="book in searchBooksResult" :key="book.id">
-        <p>{{ book.name }}</p>
-      </div>
+      <br>
+      <each-books :books="searchBooksResult"></each-books>
     </div>
     <div v-else>
       <p>検索結果はありません</p>
@@ -15,9 +14,11 @@
 
 <script>
 
+import EachBooks from '../../components/books/EachBooks.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  components: { EachBooks },
   async asyncData({ route }) {
     try {
       const response = await axios.get("/books/search_books", {
@@ -61,6 +62,7 @@ export default {
           }
         })
         console.log(response.data)
+        this.searchBooksKeyword = searchBooksKeyword
         return response.data
       } catch(error) {
         console.log(error)
