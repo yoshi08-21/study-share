@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>「{{ this.searchBooksKeyword }}」の検索結果</h2>
+    <h2>「{{ this.searchBooksKeyword }}」の検索結果{{ this.totalCount }}件 </h2>
 
     <div v-if="searchBooksResult.length > 0">
       <br>
@@ -28,7 +28,8 @@ export default {
       })
       console.log(response.data)
       return {
-        searchBooksResult: response.data,
+        searchBooksResult: response.data.books,
+        totalCount: response.data.books_count,
         searchBooksKeyword: route.query.searchBooksKeyword
       }
     } catch(error) {
@@ -41,7 +42,8 @@ export default {
       if(newValue !== oldValue) {
         this.updateSearchResult(newValue)
           .then(results => {
-            this.searchBooksResult = results
+            this.searchBooksResult = results.books
+            this.totalCount = results.books_count
           })
           .catch(error => {
             console.log(error)
