@@ -8,72 +8,15 @@
       <div v-if="notification.action_type == 'Favorite'">
 
         <div v-if="notification.action_to == 'Review'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/books/${notification.review.book_id}/reviews/${notification.review.id}`">あなたのレビュー</nuxt-link>にいいね!しました
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはFavoriteに対する通知</p>
-                      <p>これはReviewに対するFavorite</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <favorite-review-notification :notification="notification"></favorite-review-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'Question'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/books/${notification.question.book_id}/questions/${notification.question.id}`">あなたの質問</nuxt-link>にいいね!しました
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはFavoriteに対する通知</p>
-                      <p>これはQuestionに対するFavorite</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <favorite-question-notifications :notification="notification"></favorite-question-notifications>
         </div>
 
         <div v-else-if="notification.action_to == 'Reply'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}/replies/${notification.reply.id}`">あなたの返信</nuxt-link>にいいね!しました
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはFavoriteに対する通知</p>
-                      <p>これはReplyに対するFavorite</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <favorite-reply-notifications :notification="notification"></favorite-reply-notifications>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestion'">
@@ -190,9 +133,13 @@
 
 <script>
 
+import FavoriteReviewNotification from '../../components/notifications/FavoriteReviewNotification.vue'
+import FavoriteQuestionNotifications from '../../components/notifications/FavoriteQuestionNotifications.vue'
+import FavoriteReplyNotifications from '../../components/notifications/FavoriteReplyNotifications.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  components: { FavoriteReviewNotification, FavoriteQuestionNotifications, FavoriteReplyNotifications },
   async asyncData({ store }) {
     try {
       const response = await axios.get("/notifications", {
