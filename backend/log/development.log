@@ -31181,3 +31181,313 @@ Processing by BooksController#search_books as HTML
 Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.4ms | Allocations: 1319)
 
 
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 02:19:37 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 10ms (Views: 8.9ms | ActiveRecord: 0.8ms | Allocations: 3651)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 02:19:42 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.4ms | Allocations: 3104)
+
+
+Started POST "/books" for ::1 at 2023-06-06 02:20:24 +0900
+Processing by BooksController#create as HTML
+  Parameters: {"user_id"=>7, "book"=>{"name"=>"数学的思考トレーニング", "author"=>"不明", "publisher"=>"PHP研究所", "subject"=>"数学", "image"=>"http://books.google.com/books/content?id=yo0OEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:45:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/books_controller.rb:50:in `create'
+  [1m[36mBook Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `books` WHERE `books`.`name` = '数学的思考トレーニング' LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:50:in `create'
+  [1m[36mBook Create (20.6ms)[0m  [1m[32mINSERT INTO `books` (`name`, `author`, `publisher`, `subject`, `user_id`, `created_at`, `updated_at`, `image`) VALUES ('数学的思考トレーニング', '不明', 'PHP研究所', '数学', 7, '2023-06-05 17:20:24.807463', '2023-06-05 17:20:24.807463', 'http://books.google.com/books/content?id=yo0OEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')[0m
+  ↳ app/controllers/books_controller.rb:50:in `create'
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/books_controller.rb:50:in `create'
+Completed 200 OK in 37ms (Views: 0.9ms | ActiveRecord: 24.5ms | Allocations: 4356)
+
+
+Started GET "/books/17?current_user_id=7" for ::1 at 2023-06-06 02:20:24 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"17"}
+Started GET "/books/17/reviews" for ::1 at 2023-06-06 02:20:24 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Started GET "/books/17/questions" for ::1 at 2023-06-06 02:20:24 +0900
+Processing by ReviewsController#index as HTML
+  [1m[36mBook Load (2.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  Parameters: {"book_id"=>"17"}
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"17"}
+  [1m[36mBook Load (2.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mBook Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `books` INNER JOIN `browsing_histories` ON `books`.`id` = `browsing_histories`.`book_id` WHERE `browsing_histories`.`user_id` = 7 AND `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:115:in `exist_book_browsing_history?'
+  [1m[36mBook Load (2.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 7 AND `browsing_histories`.`book_id` IS NOT NULL[0m
+  ↳ app/controllers/books_controller.rb:121:in `save_book_browsing_history'
+  [1m[36mReview Load (2.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 17[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 12ms (Views: 3.3ms | ActiveRecord: 4.9ms | Allocations: 4333)
+
+
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/books_controller.rb:125:in `save_book_browsing_history'
+  [1m[36mQuestion Load (4.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 17[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 21ms (Views: 11.2ms | ActiveRecord: 6.9ms | Allocations: 4954)
+
+
+  [1m[36mBrowsingHistory Create (3.0ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `book_id`, `created_at`, `updated_at`) VALUES (7, 17, '2023-06-05 17:20:24.894937', '2023-06-05 17:20:24.894937')[0m
+  ↳ app/controllers/books_controller.rb:125:in `save_book_browsing_history'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/books_controller.rb:125:in `save_book_browsing_history'
+Completed 200 OK in 35ms (Views: 0.5ms | ActiveRecord: 9.4ms | Allocations: 9039)
+
+
+Started GET "/books/is_favorite?user_id=7&book_id=17" for ::1 at 2023-06-06 02:20:25 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "book_id"=>"17"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+  [1m[36mFavoriteBook Load (0.5ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 7 AND `favorite_books`.`book_id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:90:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 1.3ms | Allocations: 1513)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:20:39 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.5ms | Allocations: 1344)
+
+
+Started GET "/books/17/questions" for ::1 at 2023-06-06 02:20:42 +0900
+Processing by QuestionsController#index as HTML
+Started GET "/books/17?current_user_id=7" for ::1 at 2023-06-06 02:20:42 +0900
+  Parameters: {"book_id"=>"17"}
+Started GET "/books/17/reviews" for ::1 at 2023-06-06 02:20:42 +0900
+Processing by BooksController#show as HTML
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  Parameters: {"current_user_id"=>"7", "id"=>"17"}
+Processing by ReviewsController#index as HTML
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  Parameters: {"book_id"=>"17"}
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 17[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Completed 200 OK in 7ms (Views: 1.3ms | ActiveRecord: 1.6ms | Allocations: 2203)
+
+
+  [1m[36mBook Load (1.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 17[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 14ms (Views: 8.8ms | ActiveRecord: 1.9ms | Allocations: 3026)
+
+
+  [1m[36mBook Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `books` INNER JOIN `browsing_histories` ON `books`.`id` = `browsing_histories`.`book_id` WHERE `browsing_histories`.`user_id` = 7 AND `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:115:in `exist_book_browsing_history?'
+Completed 200 OK in 21ms (Views: 0.5ms | ActiveRecord: 4.7ms | Allocations: 4855)
+
+
+Started GET "/books/is_favorite?user_id=7&book_id=17" for ::1 at 2023-06-06 02:20:42 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "book_id"=>"17"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+  [1m[36mFavoriteBook Load (18.5ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 7 AND `favorite_books`.`book_id` = 17 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:90:in `is_favorite'
+Completed 200 OK in 23ms (Views: 0.1ms | ActiveRecord: 19.4ms | Allocations: 1511)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 02:20:57 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:22:27 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.5ms | Allocations: 1739)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:24:44 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 25ms (Views: 8.0ms | ActiveRecord: 7.3ms | Allocations: 10199)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:48:35 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (37.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 104ms (Views: 2.2ms | ActiveRecord: 73.3ms | Allocations: 2013)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:48:47 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (6.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 30ms (Views: 13.0ms | ActiveRecord: 7.2ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:48:50 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 20ms (Views: 12.7ms | ActiveRecord: 3.9ms | Allocations: 2251)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:48:56 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (4.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 10ms (Views: 2.1ms | ActiveRecord: 5.4ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:49:51 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 11ms (Views: 2.6ms | ActiveRecord: 1.8ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:53:53 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (7.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (6.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 38ms (Views: 18.9ms | ActiveRecord: 13.7ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:54:19 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 8ms (Views: 2.3ms | ActiveRecord: 3.6ms | Allocations: 2255)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:54:59 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 8ms (Views: 2.7ms | ActiveRecord: 1.1ms | Allocations: 2247)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:55:05 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (7.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 16ms (Views: 2.0ms | ActiveRecord: 8.3ms | Allocations: 1856)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:56:08 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 1.3ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:56:13 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (1.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 9ms (Views: 3.7ms | ActiveRecord: 2.1ms | Allocations: 2247)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:56:56 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.8ms | Allocations: 1854)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 02:57:02 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"社会"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%社会%' OR author LIKE '%社会%' OR publisher LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%社会%' OR author LIKE '%社会%' OR publisher LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 1.2ms | Allocations: 1828)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E5%9B%BD%E8%AA%9E" for ::1 at 2023-06-06 02:57:06 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"国語"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 7ms (Views: 3.7ms | ActiveRecord: 1.1ms | Allocations: 2224)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB" for ::1 at 2023-06-06 02:57:11 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"サンプル"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%サンプル%' OR author LIKE '%サンプル%' OR publisher LIKE '%サンプル%' OR subject LIKE '%サンプル%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%サンプル%' OR author LIKE '%サンプル%' OR publisher LIKE '%サンプル%' OR subject LIKE '%サンプル%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 10ms (Views: 5.2ms | ActiveRecord: 1.8ms | Allocations: 2814)
+
+
