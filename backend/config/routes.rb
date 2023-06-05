@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :favorite_books, only: [:create, :destroy]
     collection do
       get "is_favorite"
+      get "search_books"
     end
     resources :reviews, only: [:index, :show, :create, :update, :destroy]
     resources :questions, only: [:index, :show, :create, :update, :destroy] do

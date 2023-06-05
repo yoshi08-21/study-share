@@ -30409,3 +30409,125 @@ Processing by NotificationsController#index as HTML
 Completed 200 OK in 249ms (Views: 239.1ms | ActiveRecord: 8.0ms | Allocations: 171026)
 
 
+Started GET "/books/search_books?searchBoosksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:17:40 +0900
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBoosksKeyword"=>"英語"}
+  [1m[36mBook Load (4.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 35ms (Views: 10.9ms | ActiveRecord: 10.2ms | Allocations: 14790)
+
+
+Started GET "/books/search_books?searchBoosksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:20:30 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBoosksKeyword"=>"英語"}
+デバッグ情報
+  [1m[36mBook Load (8.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 30ms (Views: 10.7ms | ActiveRecord: 12.9ms | Allocations: 10681)
+
+
+Started GET "/books/search_books?searchBoosksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:22:07 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBoosksKeyword"=>"英語"}
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '英語')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 11ms (Views: 2.3ms | ActiveRecord: 0.9ms | Allocations: 4127)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-05 21:22:14 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 32ms (Views: 20.2ms | ActiveRecord: 11.7ms | Allocations: 7240)
+
+
+Started GET "/books/search_books?searchBoosksKeyword=" for ::1 at 2023-06-05 21:22:30 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBoosksKeyword"=>""}
+  [1m[36mBook Load (2.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE 'サンプル')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 24ms (Views: 8.2ms | ActiveRecord: 5.3ms | Allocations: 8417)
+
+
+Started GET "/books/search_books?searchBoosksKeyword=" for ::1 at 2023-06-05 21:22:50 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBoosksKeyword"=>""}
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%サンプル%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 24ms (Views: 8.9ms | ActiveRecord: 8.4ms | Allocations: 8819)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB" for ::1 at 2023-06-05 21:23:39 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"サンプル"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%サンプル%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 27ms (Views: 8.5ms | ActiveRecord: 9.7ms | Allocations: 8864)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:23:44 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.4ms | Allocations: 725)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-05 21:23:51 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 2.5ms | ActiveRecord: 0.9ms | Allocations: 936)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-05 21:23:56 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (13.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 60ms (Views: 0.7ms | ActiveRecord: 15.4ms | Allocations: 21590)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-05 21:23:56 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.4ms | Allocations: 3144)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-05 21:24:00 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 937)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-05 21:25:59 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (2.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 27ms (Views: 11.1ms | ActiveRecord: 7.6ms | Allocations: 8707)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:26:10 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.4ms | Allocations: 1769)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%97%A5%E6%9C%AC" for ::1 at 2023-06-05 21:26:25 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"日本"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%日本%' OR author LIKE '%日本%' OR publisher LIKE '%日本%' OR subject LIKE '%日本%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.5ms | Allocations: 1103)
+
+

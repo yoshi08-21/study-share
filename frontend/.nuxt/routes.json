@@ -42,6 +42,13 @@
     "_name": "_612c4acb"
   },
   {
+    "name": "books-searchBooksResult",
+    "path": "/books/searchBooksResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/searchBooksResult.vue",
+    "chunkName": "pages/books/searchBooksResult",
+    "_name": "_0f0c6648"
+  },
+  {
     "name": "browsingHistories-allBrowsingHistories",
     "path": "/browsingHistories/allBrowsingHistories",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/browsingHistories/allBrowsingHistories.vue",

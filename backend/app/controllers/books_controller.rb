@@ -95,6 +95,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def search_books
+    search_books_keyword = params[:searchBooksKeyword]
+    books = Book.where("name LIKE ?", "%#{search_books_keyword}%").or(Book.where("author LIKE ?", "%#{search_books_keyword}%")).or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%")).or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
+    if books
+      render json: books
+    else
+      render json: { error: "検索結果がありません" }
+    end
+  end
+
   private
 
     def book_params
