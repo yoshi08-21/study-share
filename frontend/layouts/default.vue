@@ -29,6 +29,14 @@
       <v-toolbar-title>
         <nuxt-link to="/">{{ title.title }}</nuxt-link>
       </v-toolbar-title>
+      <v-text-field
+        v-model="searchBooksKeyword"
+        label="参考書を検索"
+        placeholder="キーワードを入力 例: (英語 文法)"
+        filled
+        style="margin-left: 10px;"
+      ></v-text-field>
+      <v-btn @click="searchBooks">検索</v-btn>
       <v-spacer />
       <div>
         <!-- メソッドに切り替えて、未ログイン時のリダイレクトを追加する -->
@@ -74,7 +82,7 @@
 <script>
 
 import { getAuth, signOut } from "firebase/auth"
-// import axios from "../plugins/axios"
+import axios from "@/plugins/axios"
 
 
 export default {
@@ -128,7 +136,8 @@ export default {
         title: "StudyFeedback",
         to: "/"
       },
-      user: {}
+      user: {},
+      searchBooksKeyword: ""
     }
   },
   computed: {
@@ -151,6 +160,19 @@ export default {
         this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
       } catch(error) {
         console.log(error)
+      }
+    },
+    async searchBooks() {
+      try {
+        const response = await axios.get("/books/search_books", {
+          params: {
+            searchBooksKeyword: this.searchBooksKeyword,
+          }
+        })
+        console.log(response.data)
+      } catch(error) {
+        console.log(error)
+        throw error
       }
     }
 
