@@ -12,57 +12,19 @@
         </div>
 
         <div v-else-if="notification.action_to == 'Question'">
-          <favorite-question-notifications :notification="notification"></favorite-question-notifications>
+          <favorite-question-notification :notification="notification"></favorite-question-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'Reply'">
-          <favorite-reply-notifications :notification="notification"></favorite-reply-notifications>
+          <favorite-reply-notification :notification="notification"></favorite-reply-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestion'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/subjectQuestions/${notification.subject_question.id}`">あなたの質問(科目別質問)</nuxt-link>にいいね!しました
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはFavoriteに対する通知</p>
-                      <p>これはSubjectQuestionに対するFavorite</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <favorite-subject-question-notification :notification="notification"></favorite-subject-question-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestionReply'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`">あなたの返信(科目別質問)</nuxt-link>にいいね!しました
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはFavoriteに対する通知</p>
-                      <p>これはSubjectQuestionReplyに対するFavorite</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <favorite-subject-question-reply-notification :notification="notification"></favorite-subject-question-reply-notification>
         </div>
 
 
@@ -70,57 +32,11 @@
 
       <div v-else-if="notification.action_type == 'Reply'">
         <div v-if="notification.action_to == 'Reply'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}`">あなたの質問</nuxt-link>に
-                      <nuxt-link :to="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}/replies/${notification.reply.id}`">返信</nuxt-link>しました
-                    </p>
-                    <p>
-                      →「{{ notification.reply.content }}」
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはReplyに対する通知</p>
-                      <p>これはReplyに対するReplyNotification</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <reply-to-question-notification :notification="notification"></reply-to-question-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestionReply'">
-          <v-row>
-            <v-col cols="10">
-              <v-card>
-                <v-row>
-                  <v-col cols="12">
-                    <p>
-                      <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
-                      <nuxt-link :to="`/subjectQuestions/${notification.subject_question.id}`">あなたの質問(科目別質問)</nuxt-link>に
-                      <nuxt-link :to="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`">返信</nuxt-link>しました
-                    </p>
-                    <p>
-                      →「{{ notification.subject_question_reply.content }}」
-                    </p>
-                    <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-                    <v-card-text>
-                      <p>to: {{ notification.action_to }}</p>
-                      <p>これはReplyに対する通知</p>
-                      <p>これはSubjectQuestionReplyに対するReplyNotification</p>
-                    </v-card-text>
-                  </v-col>
-                </v-row>
-              </v-card>
-            </v-col>
-          </v-row>
+          <reply-to-subject-question-notification :notification="notification"></reply-to-subject-question-notification>
         </div>
 
       </div>
@@ -134,12 +50,24 @@
 <script>
 
 import FavoriteReviewNotification from '../../components/notifications/FavoriteReviewNotification.vue'
-import FavoriteQuestionNotifications from '../../components/notifications/FavoriteQuestionNotifications.vue'
-import FavoriteReplyNotifications from '../../components/notifications/FavoriteReplyNotifications.vue'
+import FavoriteQuestionNotification from '../../components/notifications/FavoriteQuestionNotification.vue'
+import FavoriteReplyNotification from '../../components/notifications/FavoriteReplyNotification.vue'
+import FavoriteSubjectQuestionNotification from '../../components/notifications/FavoriteSubjectQuestionNotification.vue'
+import FavoriteSubjectQuestionReplyNotification from '../../components/notifications/FavoriteSubjectQuestionReplyNotification.vue'
+import ReplyToQuestionNotification from '../../components/notifications/ReplyToQuestionNotification.vue'
+import ReplyToSubjectQuestionNotification from '../../components/notifications/ReplyToSubjectQuestionNotification.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { FavoriteReviewNotification, FavoriteQuestionNotifications, FavoriteReplyNotifications },
+  components: {
+    FavoriteReviewNotification,
+    FavoriteQuestionNotification,
+    FavoriteReplyNotification,
+    FavoriteSubjectQuestionNotification,
+    FavoriteSubjectQuestionReplyNotification,
+    ReplyToQuestionNotification,
+    ReplyToSubjectQuestionNotification
+  },
   async asyncData({ store }) {
     try {
       const response = await axios.get("/notifications", {
