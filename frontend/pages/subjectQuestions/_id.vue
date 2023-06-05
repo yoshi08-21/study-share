@@ -294,9 +294,6 @@ export default {
           }
         )
         console.log(response)
-        this.snackbarColor = "primary"
-        this.snackbar = true
-        this.flashMessage = "返信の投稿が完了しました"
         this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
         console.log(error)
