@@ -49,6 +49,13 @@
     "_name": "_4723a890"
   },
   {
+    "name": "notifications-allNotifications",
+    "path": "/notifications/allNotifications",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/notifications/allNotifications.vue",
+    "chunkName": "pages/notifications/allNotifications",
+    "_name": "_2a742db0"
+  },
+  {
     "name": "questions-questions",
     "path": "/questions/questions",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",

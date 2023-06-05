@@ -5,6 +5,8 @@ class SubjectQuestionReply < ApplicationRecord
 
   has_many :favorite_subject_question_replies, dependent: :destroy
   has_many :browsing_histories, dependent: :destroy
+  has_many :notifications,              dependent: :destroy
+
 
   validates :content,  presence: true, length: { maximum: 1000 }
   validates :user_id,  presence: true

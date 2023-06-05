@@ -34,10 +34,11 @@ class RepliesController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:user_id])
-    question = Question.find_by(id: params[:question_id])
+    question = Question.includes(:user).find_by(id: params[:question_id])
     reply = current_user.replies.build(reply_params)
     reply.question_id = question.id
     if reply.save
+      create_notification_reply(current_user, question.user, question, reply)
       render json: reply, status: 200
     else
       render json: { error: "エラーが発生しました" }, status: 400
@@ -107,5 +108,33 @@ class RepliesController < ApplicationController
       end
     end
 
+    def create_notification_reply(current_user, question_author, question, reply)
+      # 質問の投稿者に通知を作成する
+      # 自分の質問に自分で返信を投稿したときは通知を作成しない
+      if current_user.id != question_author.id
+        reply_notification = current_user.sent_notifications.build(
+          target_user_id: question_author.id,
+          question_id: question.id,
+          reply_id: reply.id,
+          action_type: "Reply",
+          action_to: "Reply"
+        )
+        reply_notification.save if reply_notification.valid?
+      end
+
+      # 返信が投稿されたとき、投稿者以外のその質問に返信しているユーザー全員に通知を作成する
+      # 自分には通知を作成しない、質問の投稿者にも通知を作成しない（上の処理で質問の投稿者には通知が作成されるため、２重になってしまう）
+      replied_users_id = Reply.select(:user_id).where(question_id: question.id).where.not(user_id: current_user.id).where.not(user_id: question_author.id).distinct
+      replied_users_id.each do |replied_user_id|
+        notification = current_user.sent_notifications.build(
+          target_user_id: replied_user_id.user_id,
+          question_id: question.id,
+          reply_id: reply.id,
+          action_type: "Reply",
+          action_to: "Reply"
+        )
+        notification.save if notification.valid?
+      end
+    end
 
 end
