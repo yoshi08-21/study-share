@@ -30576,3 +30576,406 @@ Processing by BooksController#search_books as HTML
 Completed 200 OK in 5ms (Views: 3.0ms | ActiveRecord: 0.5ms | Allocations: 1735)
 
 
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:44:11 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.6ms | Allocations: 1735)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:46:08 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.6ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:46:10 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.8ms | Allocations: 1735)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:50:12 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-05 21:50:16 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 1.2ms | Allocations: 1735)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:50:30 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (6.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 13ms (Views: 6.3ms | ActiveRecord: 6.2ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-05 21:50:33 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 1129)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-05 21:50:36 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E3%81%BB%E3%81%AA%EF%BD%99" for ::1 at 2023-06-05 21:50:39 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"ほなｙ"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%ほなｙ%' OR author LIKE '%ほなｙ%' OR publisher LIKE '%ほなｙ%' OR subject LIKE '%ほなｙ%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 907)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E3%81%BB%E3%81%AA%EF%BD%99" for ::1 at 2023-06-05 21:51:15 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"ほなｙ"}
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%ほなｙ%' OR author LIKE '%ほなｙ%' OR publisher LIKE '%ほなｙ%' OR subject LIKE '%ほなｙ%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 1.1ms | Allocations: 904)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E3%81%BB%E3%81%AA%EF%BD%99" for ::1 at 2023-06-05 21:51:17 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"ほなｙ"}
+  [1m[36mBook Load (1.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%ほなｙ%' OR author LIKE '%ほなｙ%' OR publisher LIKE '%ほなｙ%' OR subject LIKE '%ほなｙ%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 1.4ms | Allocations: 904)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 00:31:24 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 495ms (Views: 6.0ms | ActiveRecord: 93.3ms | Allocations: 21154)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 00:31:25 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (27.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 35ms (Views: 7.3ms | ActiveRecord: 27.0ms | Allocations: 3666)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 00:31:31 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (1.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 1.0ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 00:33:16 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.6ms | Allocations: 712)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 00:33:16 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 9ms (Views: 8.6ms | ActiveRecord: 0.6ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:50:12 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (8.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 25ms (Views: 0.4ms | ActiveRecord: 11.9ms | Allocations: 820)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:50:12 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (5.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 24ms (Views: 17.9ms | ActiveRecord: 5.4ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:51:12 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (6.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 35ms (Views: 2.5ms | ActiveRecord: 6.6ms | Allocations: 712)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:51:13 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 20ms (Views: 18.4ms | ActiveRecord: 0.7ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:54:52 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (26.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 92ms (Views: 0.6ms | ActiveRecord: 26.1ms | Allocations: 711)
+
+
+Started GET "/books/undefined?current_user_id=7" for ::1 at 2023-06-06 01:54:53 +0900
+Started GET "/books/undefined/questions" for ::1 at 2023-06-06 01:54:53 +0900
+Processing by BooksController#show as HTML
+Started GET "/books/undefined/reviews" for ::1 at 2023-06-06 01:54:53 +0900
+  Parameters: {"current_user_id"=>"7", "id"=>"undefined"}
+Processing by QuestionsController#index as HTML
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"undefined"}
+  Parameters: {"book_id"=>"undefined"}
+  [1m[36mUser Load (26.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (34.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 500 Internal Server Error in 145ms (ActiveRecord: 61.6ms | Allocations: 2461)
+
+
+  
+NoMethodError (undefined method `errors' for nil:NilClass):
+  
+app/controllers/books_controller.rb:40:in `show'
+  [1m[36mBook Load (74.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  [1m[36mBook Load (80.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Completed 500 Internal Server Error in 161ms (ActiveRecord: 102.9ms | Allocations: 3913)
+
+
+  
+NoMethodError (undefined method `reviews' for nil:NilClass):
+  
+app/controllers/reviews_controller.rb:5:in `index'
+Completed 500 Internal Server Error in 279ms (ActiveRecord: 105.9ms | Allocations: 7379)
+
+
+  
+NoMethodError (undefined method `questions' for nil:NilClass):
+  
+app/controllers/questions_controller.rb:5:in `index'
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:54:56 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 11ms (Views: 9.8ms | ActiveRecord: 0.5ms | Allocations: 3820)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:55:15 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (1.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 7ms (Views: 4.7ms | ActiveRecord: 1.7ms | Allocations: 3629)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:55:34 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.5ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:55:36 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.7ms | Allocations: 747)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:55:37 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 10ms (Views: 9.0ms | ActiveRecord: 0.3ms | Allocations: 3630)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:57:00 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 714)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:57:00 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.6ms | Allocations: 3629)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:57:08 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:57:34 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 711)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:57:34 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:57:42 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (2.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 10ms (Views: 6.8ms | ActiveRecord: 2.8ms | Allocations: 3629)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 01:58:11 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (11.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 11.5ms | Allocations: 711)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 01:58:11 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.5ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 01:58:15 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (17.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 21ms (Views: 2.1ms | ActiveRecord: 17.2ms | Allocations: 1769)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:07:22 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (11.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 32ms (Views: 3.7ms | ActiveRecord: 18.0ms | Allocations: 1876)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:07:22 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 5ms (Views: 2.9ms | ActiveRecord: 0.7ms | Allocations: 1735)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:07:29 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.6ms | Allocations: 1120)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 02:08:27 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (5.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 12ms (Views: 5.6ms | ActiveRecord: 5.6ms | Allocations: 3629)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:08:31 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.6ms | Allocations: 1735)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:08:34 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 6ms (Views: 3.6ms | ActiveRecord: 0.7ms | Allocations: 1117)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 02:11:12 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (32.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 34ms (Views: 0.3ms | ActiveRecord: 32.1ms | Allocations: 711)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 02:11:12 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[36mBook Load (10.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 12ms (Views: 1.6ms | ActiveRecord: 10.0ms | Allocations: 1117)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:11:23 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (2.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 2.3ms | Allocations: 1735)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 02:11:26 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 711)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 02:11:26 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.4ms | Allocations: 1735)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%EF%BD%88%E3%81%95" for ::1 at 2023-06-06 02:11:35 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"ｈさ"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%ｈさ%' OR author LIKE '%ｈさ%' OR publisher LIKE '%ｈさ%' OR subject LIKE '%ｈさ%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 903)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 02:11:40 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"社会"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%社会%' OR author LIKE '%社会%' OR publisher LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/books_controller.rb:102:in `search_books'
+Completed 200 OK in 4ms (Views: 2.2ms | ActiveRecord: 0.7ms | Allocations: 1316)
+
+
