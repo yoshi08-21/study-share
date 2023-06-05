@@ -56,9 +56,6 @@ export default {
   methods: {
     submitForm() {
       this.$emit('submitSubjectQuestion', { title: this.title, content: this.content, subject: this.subject })
-      this.title = ""
-      this.content = ""
-      this.subject = ""
     },
   }
 }
