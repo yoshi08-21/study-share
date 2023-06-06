@@ -112,10 +112,16 @@ export default {
   components: { EditSubjectQuestion, ReplyForm, EachSubjectQuestionReplies },
   async asyncData({ params, store }) {
     try {
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const [subjectQuestionResponse, subjectQuestionRepliesResponse] = await Promise.all([
         axios.get(`subject_questions/${params.id}`, {
           params: {
-            current_user_id: store.getters["auth/getCurrentUser"].id
+            current_user_id: currentUserId
           }
         }),
         axios.get(`subject_questions/${params.id}/subject_question_replies`)
@@ -165,9 +171,15 @@ export default {
   },
   async created() {
     try {
+      let currentUserId = ""
+      const currentUser = this.$store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const response = await axios.get("subject_questions/is_favorite", {
         params: {
-          user_id: this.$store.getters["auth/getCurrentUserId"],
+          user_id: currentUserId,
           subject_question_id: this.$route.params.id
         }
       })

@@ -92,9 +92,15 @@ export default {
   components: { EditReply },
   async asyncData({ params, store }) {
     try {
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const responce = await axios.get(`/subject_questions/${params.subjectQuestion_id}/subject_question_replies/${params.id}`, {
         params: {
-          current_user_id: store.getters["auth/getCurrentUser"].id
+          current_user_id: currentUserId
         }
       })
       console.log(responce.data)
@@ -129,9 +135,15 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get("subject_question_replies/is_favorite", {
+      let currentUserId = ""
+      const currentUser = this.$store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
+        const response = await axios.get("subject_question_replies/is_favorite", {
         params: {
-          user_id: this.$store.getters["auth/getCurrentUserId"],
+          user_id: currentUserId,
           subject_question_reply_id: this.$route.params.id
         }
       })

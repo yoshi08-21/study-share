@@ -87,7 +87,7 @@ class BooksController < ApplicationController
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
     book = Book.find_by(id: params[:book_id])
-    favorite_book = FavoriteBook.find_by(user_id: current_user.id, book_id: book.id)
+    favorite_book = FavoriteBook.find_by(user_id: current_user.id, book_id: book.id) if current_user
     if favorite_book
       render json: { is_favorite: true, favorite_book_id: favorite_book.id }
     else

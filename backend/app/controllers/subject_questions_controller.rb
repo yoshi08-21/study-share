@@ -72,7 +72,7 @@ class SubjectQuestionsController < ApplicationController
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
-    favorite_subject_question = FavoriteSubjectQuestion.find_by(user_id: current_user.id, subject_question_id: subject_question.id)
+    favorite_subject_question = FavoriteSubjectQuestion.find_by(user_id: current_user.id, subject_question_id: subject_question.id) if current_user
     if favorite_subject_question
       render json: { is_favorite: true, favorite_subject_question_id: favorite_subject_question.id }
     else

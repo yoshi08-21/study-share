@@ -33222,3 +33222,2602 @@ Processing by SubjectQuestionsController#search_subject_questions as HTML
 Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 8.6ms | Allocations: 2859)
 
 
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 23:36:28 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"社会"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 2839)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 23:36:31 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.3ms | Allocations: 3322)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 23:36:34 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.3ms | Allocations: 3302)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 23:36:40 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 34ms (Views: 31.4ms | ActiveRecord: 2.1ms | Allocations: 22355)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 23:36:43 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 30ms (Views: 27.9ms | ActiveRecord: 1.3ms | Allocations: 22299)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:36:46 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 20ms (Views: 18.4ms | ActiveRecord: 0.8ms | Allocations: 12338)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:36:48 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.8ms | Allocations: 12337)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 23:37:04 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.4ms | Allocations: 3316)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:37:08 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.7ms | Allocations: 12335)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 23:37:16 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.3ms | Allocations: 3302)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:45:08 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (23.9ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 62ms (Views: 61.3ms | ActiveRecord: 33.9ms | Allocations: 3790)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:45:15 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (1.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 1.2ms | Allocations: 3629)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:45:18 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (10.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 17ms (Views: 5.9ms | ActiveRecord: 10.6ms | Allocations: 3629)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-06 23:45:34 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 2.9ms | Allocations: 728)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-06 23:45:34 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 22ms (Views: 0.3ms | ActiveRecord: 1.3ms | Allocations: 712)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:45:41 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.3ms | Allocations: 3633)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 23:48:10 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (27.1ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 31ms (Views: 3.9ms | ActiveRecord: 27.1ms | Allocations: 3318)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:40:23 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (18.3ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 127ms (Views: 109.6ms | ActiveRecord: 34.5ms | Allocations: 3411)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:40:27 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 33ms (Views: 32.0ms | ActiveRecord: 0.4ms | Allocations: 3303)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:40:33 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (11.2ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 69ms (Views: 57.6ms | ActiveRecord: 11.2ms | Allocations: 3316)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:40:39 +0900
+Processing by BooksController#show as HTML
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:40:40 +0900
+  Parameters: {"id"=>"1"}
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:40:40 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mUser Load (12.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (29.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 98ms (Views: 0.7ms | ActiveRecord: 41.6ms | Allocations: 2219)
+
+
+  [1m[36mBook Load (5.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mBook Load (22.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mReview Load (18.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (13.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (13.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+Completed 200 OK in 145ms (Views: 61.8ms | ActiveRecord: 36.3ms | Allocations: 22694)
+
+
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 167ms (Views: 64.8ms | ActiveRecord: 59.7ms | Allocations: 31099)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:40:57 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:40:57 +0900
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:40:57 +0900
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (1.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  [1m[36mBook Load (2.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mBook Load (3.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 3.3ms | Allocations: 2396)
+
+
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mReview Load (32.1ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 72ms (Views: 59.9ms | ActiveRecord: 5.3ms | Allocations: 21292)
+
+
+  [1m[36mUser Load (10.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 85ms (Views: 34.7ms | ActiveRecord: 45.9ms | Allocations: 29686)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:40:58 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (1.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 16ms (Views: 14.1ms | ActiveRecord: 1.4ms | Allocations: 3316)
+
+
+Started GET "/books/3" for ::1 at 2023-06-07 01:40:59 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"3"}
+Started GET "/books/3/reviews" for ::1 at 2023-06-07 01:40:59 +0900
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"3"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 3 LIMIT 1[0m
+  [1m[36mBook Load (2.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 2.3ms | Allocations: 1968)
+
+
+Started GET "/books/3/questions" for ::1 at 2023-06-07 01:40:59 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"3"}
+  [1m[36mReview Load (4.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 3[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mBook Load (18.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mUser Load (16.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 33ms (Views: 6.1ms | ActiveRecord: 22.8ms | Allocations: 5815)
+
+
+  [1m[36mQuestion Load (10.1ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 3[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 33ms (Views: 1.2ms | ActiveRecord: 28.9ms | Allocations: 3913)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:43:25 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.7ms | Allocations: 3302)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:43:26 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:43:26 +0900
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mBook Load (17.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 17.9ms | Allocations: 8708)
+
+
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:43:26 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (15.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+Completed 200 OK in 21ms (Views: 17.9ms | ActiveRecord: 1.3ms | Allocations: 13826)
+
+
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 46ms (Views: 28.1ms | ActiveRecord: 16.4ms | Allocations: 30445)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-07 01:43:42 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.4ms | Allocations: 3633)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-07 01:45:27 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 8ms (Views: 6.9ms | ActiveRecord: 0.5ms | Allocations: 3630)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-07 01:45:30 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.4ms | Allocations: 3629)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 01:45:49 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 33ms (Views: 30.9ms | ActiveRecord: 1.5ms | Allocations: 22300)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 01:47:43 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 46ms (Views: 44.5ms | ActiveRecord: 1.4ms | Allocations: 22299)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 01:47:46 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 48ms (Views: 43.2ms | ActiveRecord: 4.2ms | Allocations: 22301)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 01:47:49 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 01:47:49 +0900
+  [1m[36mUser Load (17.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mBook Load (2.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (3.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mQuestion Load (1.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[35m (9.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 106ms (Views: 0.6ms | ActiveRecord: 55.7ms | Allocations: 12005)
+
+
+  [1m[36mReply Load (2.1ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 95ms (Views: 55.8ms | ActiveRecord: 27.9ms | Allocations: 28376)
+
+
+Started GET "/books/1/questions/2/replies/2" for ::1 at 2023-06-07 01:48:41 +0900
+Processing by RepliesController#show as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2", "id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:14:in `show'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mReply Load (5.7ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[35m (6.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_replies` WHERE `favorite_replies`.`reply_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:19:in `show'
+Completed 200 OK in 60ms (Views: 0.4ms | ActiveRecord: 23.4ms | Allocations: 8877)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 01:48:45 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 01:48:45 +0900
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+Processing by RepliesController#index as HTML
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (3.3ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 76ms (Views: 66.5ms | ActiveRecord: 4.9ms | Allocations: 22719)
+
+
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 6.3ms | Allocations: 11349)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 01:48:48 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (13.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 78ms (Views: 32.4ms | ActiveRecord: 13.8ms | Allocations: 12356)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 01:48:53 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 1.1ms | Allocations: 12333)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 01:49:31 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.9ms | Allocations: 12332)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 01:49:34 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 45ms (Views: 40.3ms | ActiveRecord: 4.0ms | Allocations: 12333)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:49:35 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:49:35 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (3.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (12.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (5.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (12.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 40ms (Views: 0.3ms | ActiveRecord: 22.5ms | Allocations: 5472)
+
+
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 105ms (Views: 55.3ms | ActiveRecord: 44.2ms | Allocations: 27012)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:49:38 +0900
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:49:38 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (1.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (5.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  [1m[36mSubjectQuestionReply Load (2.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (11.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 40ms (Views: 32.0ms | ActiveRecord: 4.8ms | Allocations: 23206)
+
+
+  [1m[35m (21.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 52ms (Views: 0.2ms | ActiveRecord: 38.3ms | Allocations: 25750)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:50:01 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (1.1ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 3.8ms | Allocations: 3359)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:50:01 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.6ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 105ms (Views: 100.2ms | ActiveRecord: 1.8ms | Allocations: 20907)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 01:50:03 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.8ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 43ms (Views: 0.3ms | ActiveRecord: 9.1ms | Allocations: 8038)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:50:05 +0900
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:50:05 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by SubjectQuestionRepliesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  Parameters: {"subject_question_id"=>"1"}
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (1.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (6.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+Completed 200 OK in 70ms (Views: 0.2ms | ActiveRecord: 9.5ms | Allocations: 10423)
+
+
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 53ms (Views: 29.6ms | ActiveRecord: 2.0ms | Allocations: 24040)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:50:08 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:50:08 +0900
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  [1m[36mSubjectQuestion Load (1.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  Parameters: {"subject_question_id"=>"1"}
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (2.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+Completed 200 OK in 38ms (Views: 0.5ms | ActiveRecord: 5.0ms | Allocations: 11004)
+
+
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 63ms (Views: 55.3ms | ActiveRecord: 4.2ms | Allocations: 23394)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 01:50:11 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 21ms (Views: 0.4ms | ActiveRecord: 2.2ms | Allocations: 5417)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:51:54 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:51:54 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Load (1.1ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 2.3ms | Allocations: 4173)
+
+
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.6ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 37ms (Views: 29.3ms | ActiveRecord: 2.1ms | Allocations: 22060)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:51:57 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:51:57 +0900
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 2.4ms | Allocations: 4040)
+
+
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.7ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 52ms (Views: 45.8ms | ActiveRecord: 1.8ms | Allocations: 20907)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 01:52:00 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.7ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 19ms (Views: 0.7ms | ActiveRecord: 3.0ms | Allocations: 5414)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:52:01 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 9ms (Views: 0.5ms | ActiveRecord: 1.6ms | Allocations: 3348)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:52:01 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.6ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 32ms (Views: 28.3ms | ActiveRecord: 1.8ms | Allocations: 20904)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:52:11 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:52:11 +0900
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (2.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (3.2ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 43ms (Views: 0.5ms | ActiveRecord: 7.2ms | Allocations: 10834)
+
+
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 69ms (Views: 54.8ms | ActiveRecord: 7.0ms | Allocations: 23804)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 01:52:13 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 17ms (Views: 1.5ms | ActiveRecord: 2.1ms | Allocations: 5413)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 01:54:16 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 28ms (Views: 26.6ms | ActiveRecord: 1.3ms | Allocations: 22318)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 01:54:17 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 01:54:17 +0900
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (6.5ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 78ms (Views: 0.3ms | ActiveRecord: 8.4ms | Allocations: 24179)
+
+
+Completed 200 OK in 74ms (Views: 63.1ms | ActiveRecord: 8.0ms | Allocations: 22604)
+
+
+Started GET "/books/1/questions/2/replies/2" for ::1 at 2023-06-07 01:54:19 +0900
+Processing by RepliesController#show as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2", "id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:14:in `show'
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mReply Load (0.3ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_replies` WHERE `favorite_replies`.`reply_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:19:in `show'
+Completed 200 OK in 13ms (Views: 0.4ms | ActiveRecord: 2.3ms | Allocations: 6088)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 01:54:21 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 01:54:21 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mBook Load (1.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (1.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (0.8ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (6.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 37ms (Views: 0.6ms | ActiveRecord: 10.5ms | Allocations: 24560)
+
+
+Completed 200 OK in 28ms (Views: 20.7ms | ActiveRecord: 4.7ms | Allocations: 22190)
+
+
+Started GET "/books/1/questions/2/replies/2" for ::1 at 2023-06-07 01:54:24 +0900
+Processing by RepliesController#show as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2", "id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mReply Load (0.4ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_replies` WHERE `favorite_replies`.`reply_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:19:in `show'
+Completed 200 OK in 25ms (Views: 2.9ms | ActiveRecord: 6.2ms | Allocations: 6080)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 01:54:26 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 01:54:26 +0900
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (1.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (1.5ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 28ms (Views: 20.8ms | ActiveRecord: 5.1ms | Allocations: 22193)
+
+
+  [1m[35m (14.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 37ms (Views: 0.5ms | ActiveRecord: 17.6ms | Allocations: 25693)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 01:54:30 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.4ms | Allocations: 3316)
+
+
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:54:32 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 19ms (Views: 14.5ms | ActiveRecord: 2.2ms | Allocations: 14250)
+
+
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:54:32 +0900
+Started GET "/books/1" for ::1 at 2023-06-07 01:54:32 +0900
+Processing by BooksController#show as HTML
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mBook Load (1.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  [1m[36mReview Load (0.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 2008)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 24ms (Views: 19.2ms | ActiveRecord: 1.9ms | Allocations: 16093)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:54:35 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:54:35 +0900
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:54:35 +0900
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (2.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 11ms (Views: 0.5ms | ActiveRecord: 3.3ms | Allocations: 2931)
+
+
+  [1m[36mReview Load (0.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mBook Load (7.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 26ms (Views: 19.0ms | ActiveRecord: 2.9ms | Allocations: 16492)
+
+
+  [1m[36mQuestion Load (8.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (16.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 54ms (Views: 13.0ms | ActiveRecord: 35.2ms | Allocations: 29470)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:55:05 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:55:05 +0900
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:55:05 +0900
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 7ms (Views: 0.8ms | ActiveRecord: 1.2ms | Allocations: 1945)
+
+
+Processing by QuestionsController#index as HTML
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mReview Load (1.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 28ms (Views: 18.9ms | ActiveRecord: 7.3ms | Allocations: 21498)
+
+
+Completed 200 OK in 36ms (Views: 29.2ms | ActiveRecord: 2.8ms | Allocations: 28372)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 01:55:08 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (3.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 11ms (Views: 0.6ms | ActiveRecord: 4.9ms | Allocations: 1272)
+
+
+Started GET "/books/1/questions" for ::1 at 2023-06-07 01:55:08 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 01:55:08 +0900
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mQuestion Load (2.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mBook Load (9.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mReview Load (4.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 43ms (Views: 28.4ms | ActiveRecord: 9.6ms | Allocations: 16072)
+
+
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 64ms (Views: 42.8ms | ActiveRecord: 16.6ms | Allocations: 28164)
+
+
+Started GET "/books/1/reviews/4" for ::1 at 2023-06-07 01:55:10 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 3473)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 01:55:14 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 66ms (Views: 64.5ms | ActiveRecord: 0.8ms | Allocations: 12350)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 01:55:15 +0900
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 01:55:15 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  Parameters: {"id"=>"1"}
+  [1m[36mSubjectQuestion Load (1.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestionReply Load (1.8ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 29ms (Views: 23.1ms | ActiveRecord: 3.2ms | Allocations: 21665)
+
+
+  [1m[36mSubjectQuestion Load (25.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 43ms (Views: 0.2ms | ActiveRecord: 32.8ms | Allocations: 25401)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 01:55:17 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (26.3ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (11.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 51ms (Views: 0.3ms | ActiveRecord: 39.4ms | Allocations: 5410)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:00:43 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 3348)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:00:43 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (1.2ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 31ms (Views: 27.0ms | ActiveRecord: 2.1ms | Allocations: 20903)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:00:46 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:00:46 +0900
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+Completed 200 OK in 20ms (Views: 0.3ms | ActiveRecord: 5.1ms | Allocations: 4083)
+
+
+  [1m[36mSubjectQuestion Load (3.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (1.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (3.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 87ms (Views: 68.5ms | ActiveRecord: 8.2ms | Allocations: 21668)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 02:00:49 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.8ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 2.8ms | Allocations: 5412)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:02:05 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:02:05 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (5.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (7.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (4.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 40ms (Views: 0.4ms | ActiveRecord: 18.6ms | Allocations: 4131)
+
+
+  [1m[36mSubjectQuestion Load (8.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (4.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (19.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 89ms (Views: 23.1ms | ActiveRecord: 35.9ms | Allocations: 23885)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:02:09 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (11.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 27ms (Views: 0.5ms | ActiveRecord: 16.9ms | Allocations: 3350)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:02:09 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 54ms (Views: 48.6ms | ActiveRecord: 1.8ms | Allocations: 20904)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 02:02:10 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (13.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 26ms (Views: 0.5ms | ActiveRecord: 14.8ms | Allocations: 5412)
+
+
+Started GET "/subject_question_replies/is_favorite?subject_question_reply_id=1" for ::1 at 2023-06-07 02:02:10 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"subject_question_reply_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.7ms | Allocations: 1840)
+
+
+  
+NoMethodError (undefined method `id' for nil:NilClass):
+  
+app/controllers/subject_question_replies_controller.rb:79:in `is_favorite'
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:02:36 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:02:36 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (1.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (2.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 17ms (Views: 0.5ms | ActiveRecord: 4.0ms | Allocations: 5228)
+
+
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 42ms (Views: 35.3ms | ActiveRecord: 4.7ms | Allocations: 23801)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:02:40 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:02:40 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (1.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 27ms (Views: 0.2ms | ActiveRecord: 7.9ms | Allocations: 4808)
+
+
+  [1m[36mSubjectQuestionReply Load (1.2ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 34ms (Views: 27.9ms | ActiveRecord: 2.6ms | Allocations: 22871)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 02:02:42 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 19ms (Views: 0.3ms | ActiveRecord: 2.7ms | Allocations: 5410)
+
+
+Started GET "/subject_question_replies/is_favorite?user_id=&subject_question_reply_id=1" for ::1 at 2023-06-07 02:02:42 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "subject_question_reply_id"=>"1"}
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 2.9ms | Allocations: 1503)
+
+
+  
+NoMethodError (undefined method `id' for nil:NilClass):
+  
+app/controllers/subject_question_replies_controller.rb:79:in `is_favorite'
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:04:21 +0900
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:04:21 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.3ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+Completed 200 OK in 397ms (Views: 30.6ms | ActiveRecord: 340.8ms | Allocations: 43509)
+
+
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 495ms (Views: 0.7ms | ActiveRecord: 259.6ms | Allocations: 62055)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:04:25 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:04:25 +0900
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+Processing by SubjectQuestionRepliesController#index as HTML
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  Parameters: {"subject_question_id"=>"1"}
+Completed 200 OK in 17ms (Views: 0.4ms | ActiveRecord: 3.5ms | Allocations: 4098)
+
+
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 66ms (Views: 61.6ms | ActiveRecord: 1.9ms | Allocations: 21195)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1" for ::1 at 2023-06-07 02:04:27 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (5.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+Completed 200 OK in 27ms (Views: 0.4ms | ActiveRecord: 9.2ms | Allocations: 6925)
+
+
+Started GET "/subject_question_replies/is_favorite?user_id=&subject_question_reply_id=1" for ::1 at 2023-06-07 02:04:27 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "subject_question_reply_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1319)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-07 02:09:31 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 45ms (Views: 0.5ms | ActiveRecord: 4.9ms | Allocations: 20422)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-07 02:09:31 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 725)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 02:09:34 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 68ms (Views: 56.0ms | ActiveRecord: 7.6ms | Allocations: 36620)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 02:09:38 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 29ms (Views: 20.0ms | ActiveRecord: 3.6ms | Allocations: 18769)
+
+
+Started GET "/subject_questions/1?current_user_id=1" for ::1 at 2023-06-07 02:09:39 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:09:39 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+Completed 200 OK in 46ms (Views: 0.2ms | ActiveRecord: 5.4ms | Allocations: 10610)
+
+
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 37ms (Views: 25.6ms | ActiveRecord: 4.2ms | Allocations: 27699)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=1" for ::1 at 2023-06-07 02:09:39 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"1"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 2.4ms | Allocations: 1730)
+
+
+Started GET "/subject_questions/1/subject_question_replies/1?current_user_id=1" for ::1 at 2023-06-07 02:09:41 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"current_user_id"=>"1", "subject_question_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+  [1m[36mSubjectQuestionReply Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_question_replies` INNER JOIN `browsing_histories` ON `subject_question_replies`.`id` = `browsing_histories`.`subject_question_reply_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:95:in `exist_subject_question_reply_browsing_history?'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:101:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Load (1.1ms)[0m  [1m[34mSELECT `browsing_histories`.* FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL ORDER BY `browsing_histories`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Destroy (29.1ms)[0m  [1m[31mDELETE FROM `browsing_histories` WHERE `browsing_histories`.`id` = 119[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (10.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Create (25.1ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_reply_id`, `created_at`, `updated_at`) VALUES (1, 1, '2023-06-06 17:09:41.375943', '2023-06-06 17:09:41.375943')[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+Completed 200 OK in 134ms (Views: 0.4ms | ActiveRecord: 95.1ms | Allocations: 17350)
+
+
+Started GET "/subject_question_replies/is_favorite?user_id=1&subject_question_reply_id=1" for ::1 at 2023-06-07 02:09:41 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_reply_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `favorite_subject_question_replies`.* FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`user_id` = 1 AND `favorite_subject_question_replies`.`subject_question_reply_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:79:in `is_favorite'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 1830)
+
+
+Started GET "/subject_questions/1?current_user_id=1" for ::1 at 2023-06-07 02:09:45 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:09:45 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (1.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (1.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.2ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (8.4ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 35ms (Views: 28.5ms | ActiveRecord: 3.4ms | Allocations: 24430)
+
+
+Completed 200 OK in 40ms (Views: 0.2ms | ActiveRecord: 12.3ms | Allocations: 25715)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=1" for ::1 at 2023-06-07 02:09:45 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.8ms | Allocations: 1514)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 02:09:49 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 26ms (Views: 24.2ms | ActiveRecord: 1.0ms | Allocations: 12337)
+
+
+Started GET "/subject_questions/9?current_user_id=1" for ::1 at 2023-06-07 02:09:51 +0900
+Started GET "/subject_questions/9/subject_question_replies" for ::1 at 2023-06-07 02:09:51 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"subject_question_id"=>"9"}
+  Parameters: {"current_user_id"=>"1", "id"=>"9"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (5.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (3.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.0ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 9[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 12ms (Views: 2.6ms | ActiveRecord: 6.9ms | Allocations: 2883)
+
+
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 9[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_questions_controller.rb:119:in `save_subject_question_browsing_history'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+  [1m[36mBrowsingHistory Create (0.5ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_id`, `created_at`, `updated_at`) VALUES (1, 9, '2023-06-06 17:09:51.423690', '2023-06-06 17:09:51.423690')[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 9.3ms | Allocations: 8426)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=9" for ::1 at 2023-06-07 02:09:51 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"9"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 9 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.4ms | Allocations: 3544)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 02:09:54 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.8ms | Allocations: 12332)
+
+
+Started GET "/subject_questions/1?current_user_id=1" for ::1 at 2023-06-07 02:09:55 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:09:55 +0900
+  [1m[36mSubjectQuestion Load (1.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestionReply Load (2.1ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mSubjectQuestion Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 4.0ms | Allocations: 6188)
+
+
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 34ms (Views: 28.0ms | ActiveRecord: 3.5ms | Allocations: 23782)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=1" for ::1 at 2023-06-07 02:09:55 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 1510)
+
+
+Started GET "/subject_questions/1/subject_question_replies/8?current_user_id=1" for ::1 at 2023-06-07 02:09:58 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"current_user_id"=>"1", "subject_question_id"=>"1", "id"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 8[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+  [1m[36mSubjectQuestionReply Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_question_replies` INNER JOIN `browsing_histories` ON `subject_question_replies`.`id` = `browsing_histories`.`subject_question_reply_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:95:in `exist_subject_question_reply_browsing_history?'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:101:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Load (0.5ms)[0m  [1m[34mSELECT `browsing_histories`.* FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL ORDER BY `browsing_histories`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Destroy (12.1ms)[0m  [1m[31mDELETE FROM `browsing_histories` WHERE `browsing_histories`.`id` = 120[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (11.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Create (1.3ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_reply_id`, `created_at`, `updated_at`) VALUES (1, 8, '2023-06-06 17:09:58.752956', '2023-06-06 17:09:58.752956')[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+Completed 200 OK in 56ms (Views: 0.3ms | ActiveRecord: 32.0ms | Allocations: 11165)
+
+
+Started GET "/subject_question_replies/is_favorite?user_id=1&subject_question_reply_id=8" for ::1 at 2023-06-07 02:09:58 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_reply_id"=>"8"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `favorite_subject_question_replies`.* FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`user_id` = 1 AND `favorite_subject_question_replies`.`subject_question_reply_id` = 8 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:79:in `is_favorite'
+Completed 200 OK in 25ms (Views: 0.1ms | ActiveRecord: 18.5ms | Allocations: 3484)
+
+
+Started DELETE "/subject_question_replies/8/favorite_subject_question_replies/undefined?user_id=1" for ::1 at 2023-06-07 02:10:01 +0900
+Processing by FavoriteSubjectQuestionRepliesController#destroy as HTML
+  Parameters: {"user_id"=>"1", "subject_question_reply_id"=>"8", "id"=>"undefined"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:17:in `destroy'
+  [1m[36mSubjectQuestionReply Load (0.3ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:18:in `destroy'
+  [1m[36mFavoriteSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `favorite_subject_question_replies`.* FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`user_id` = 1 AND `favorite_subject_question_replies`.`subject_question_reply_id` = 8 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:19:in `destroy'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:20:in `destroy'
+  [1m[36mFavoriteSubjectQuestionReply Destroy (10.4ms)[0m  [1m[31mDELETE FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`id` = 9[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:20:in `destroy'
+  [1m[36mNotification Load (15.2ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`action_user_id` = 1 AND `notifications`.`subject_question_reply_id` = 8 AND `notifications`.`action_type` = 'Favorite' LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:49:in `delete_notification_favorite_subject_question_reply'
+Completed 200 OK in 84ms (Views: 0.3ms | ActiveRecord: 67.9ms | Allocations: 6411)
+
+
+Started POST "/subject_question_replies/8/favorite_subject_question_replies" for ::1 at 2023-06-07 02:10:01 +0900
+Processing by FavoriteSubjectQuestionRepliesController#create as HTML
+  Parameters: {"user_id"=>1, "subject_question_reply_id"=>"8", "favorite_subject_question_reply"=>{"user_id"=>1}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:4:in `create'
+  [1m[36mSubjectQuestionReply Load (0.3ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:5:in `create'
+  [1m[36mSubjectQuestionReply Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_question_replies` INNER JOIN `favorite_subject_question_replies` ON `subject_question_replies`.`id` = `favorite_subject_question_replies`.`subject_question_reply_id` WHERE `favorite_subject_question_replies`.`user_id` = 1 AND `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:32:in `exist_favorite_subject_question_reply?'
+  [1m[36mCACHE SubjectQuestionReply Load (0.0ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:8:in `create'
+  [1m[36mFavoriteSubjectQuestionReply Create (1.8ms)[0m  [1m[32mINSERT INTO `favorite_subject_question_replies` (`user_id`, `subject_question_reply_id`, `created_at`, `updated_at`) VALUES (1, 8, '2023-06-06 17:10:02.000871', '2023-06-06 17:10:02.000871')[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:8:in `create'
+  [1m[36mNotification Load (3.1ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`action_user_id` = 1 AND `notifications`.`subject_question_reply_id` = 8 AND `notifications`.`action_type` = 'Favorite' LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:36:in `create_notification_favorite_subject_question_reply'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:44:in `create_notification_favorite_subject_question_reply'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:44:in `create_notification_favorite_subject_question_reply'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:44:in `create_notification_favorite_subject_question_reply'
+  [1m[36mNotification Create (31.3ms)[0m  [1m[32mINSERT INTO `notifications` (`action_user_id`, `target_user_id`, `subject_question_reply_id`, `action_type`, `action_to`, `created_at`, `updated_at`) VALUES (1, 4, 8, 'Favorite', 'SubjectQuestionReply', '2023-06-06 17:10:02.049853', '2023-06-06 17:10:02.049853')[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:44:in `create_notification_favorite_subject_question_reply'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_question_replies_controller.rb:44:in `create_notification_favorite_subject_question_reply'
+Completed 200 OK in 96ms (Views: 0.4ms | ActiveRecord: 51.3ms | Allocations: 15859)
+
+
+Started GET "/subject_questions/1?current_user_id=1" for ::1 at 2023-06-07 02:10:02 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:10:02 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (1.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.8ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+Completed 200 OK in 32ms (Views: 24.9ms | ActiveRecord: 3.7ms | Allocations: 23618)
+
+
+  [1m[36mSubjectQuestion Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 42ms (Views: 0.2ms | ActiveRecord: 8.5ms | Allocations: 26954)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=1" for ::1 at 2023-06-07 02:10:02 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 1514)
+
+
+Started GET "/subject_questions/1/subject_question_replies/2?current_user_id=1" for ::1 at 2023-06-07 02:10:05 +0900
+Processing by SubjectQuestionRepliesController#show as HTML
+  Parameters: {"current_user_id"=>"1", "subject_question_id"=>"1", "id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (1.3ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:16:in `show'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`subject_question_reply_id` = 2[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:18:in `show'
+  [1m[36mSubjectQuestionReply Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_question_replies` INNER JOIN `browsing_histories` ON `subject_question_replies`.`id` = `browsing_histories`.`subject_question_reply_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_question_replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:95:in `exist_subject_question_reply_browsing_history?'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:101:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Load (0.4ms)[0m  [1m[34mSELECT `browsing_histories`.* FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 1 AND `browsing_histories`.`subject_question_reply_id` IS NOT NULL ORDER BY `browsing_histories`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Destroy (12.7ms)[0m  [1m[31mDELETE FROM `browsing_histories` WHERE `browsing_histories`.`id` = 121[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (10.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:102:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mBrowsingHistory Create (5.7ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_reply_id`, `created_at`, `updated_at`) VALUES (1, 2, '2023-06-06 17:10:05.355726', '2023-06-06 17:10:05.355726')[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:103:in `save_subject_question_reply_browsing_history'
+Completed 200 OK in 62ms (Views: 0.3ms | ActiveRecord: 34.3ms | Allocations: 11141)
+
+
+Started GET "/subject_question_replies/is_favorite?user_id=1&subject_question_reply_id=2" for ::1 at 2023-06-07 02:10:05 +0900
+Processing by SubjectQuestionRepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_reply_id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:77:in `is_favorite'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:78:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `favorite_subject_question_replies`.* FROM `favorite_subject_question_replies` WHERE `favorite_subject_question_replies`.`user_id` = 1 AND `favorite_subject_question_replies`.`subject_question_reply_id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:79:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 1512)
+
+
+Started GET "/subject_questions/1?current_user_id=1" for ::1 at 2023-06-07 02:10:06 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:10:06 +0900
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (2.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (2.1ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 1 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 8.1ms | Allocations: 11631)
+
+
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 31ms (Views: 22.8ms | ActiveRecord: 5.6ms | Allocations: 24711)
+
+
+Started GET "/subject_questions/is_favorite?user_id=1&subject_question_id=1" for ::1 at 2023-06-07 02:10:06 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 1 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.0ms | Allocations: 1510)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 02:10:07 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 1.3ms | Allocations: 12347)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-07 02:11:31 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (60.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 80ms (Views: 12.6ms | ActiveRecord: 62.4ms | Allocations: 9991)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:11:34 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.5ms | Allocations: 3570)
+
+
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:11:37 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (2.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:11:37 +0900
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Processing by ReviewsController#index as HTML
+  [1m[36mQuestion Load (1.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+Started GET "/books/1" for ::1 at 2023-06-07 02:11:37 +0900
+  Parameters: {"book_id"=>"1"}
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mBook Load (6.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+Processing by BooksController#show as HTML
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 35ms (Views: 23.4ms | ActiveRecord: 5.5ms | Allocations: 16540)
+
+
+  [1m[36mReview Load (13.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 45ms (Views: 19.7ms | ActiveRecord: 20.8ms | Allocations: 28391)
+
+
+  [1m[36mUser Load (45.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (46.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 128ms (Views: 0.3ms | ActiveRecord: 92.5ms | Allocations: 16457)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 02:12:50 +0900
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:12:50 +0900
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:12:50 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by ReviewsController#index as HTML
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  Parameters: {"book_id"=>"1"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (1.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mBook Load (1.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  [1m[36mReview Load (1.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 2.6ms | Allocations: 2741)
+
+
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mQuestion Load (9.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+Completed 200 OK in 39ms (Views: 31.9ms | ActiveRecord: 4.5ms | Allocations: 22244)
+
+
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 57ms (Views: 37.6ms | ActiveRecord: 12.4ms | Allocations: 30231)
+
+
+Started GET "/books/is_favorite?user_id=&book_id=1" for ::1 at 2023-06-07 02:13:04 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "book_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (1.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+Completed 200 OK in 150ms (Views: 0.2ms | ActiveRecord: 58.0ms | Allocations: 24474)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:13:05 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.5ms | Allocations: 3421)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:13:09 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.4ms | Allocations: 3302)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 02:13:11 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:13:11 +0900
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (1.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Processing by ReviewsController#index as HTML
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:13:11 +0900
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  Parameters: {"book_id"=>"1"}
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 3.0ms | Allocations: 3161)
+
+
+  [1m[36mBook Load (1.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Processing by QuestionsController#index as HTML
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (1.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mQuestion Load (14.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 76ms (Views: 44.3ms | ActiveRecord: 7.3ms | Allocations: 32164)
+
+
+  [1m[36mUser Load (12.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 111ms (Views: 66.4ms | ActiveRecord: 32.1ms | Allocations: 43649)
+
+
+Started GET "/books/is_favorite?user_id=&book_id=1" for ::1 at 2023-06-07 02:13:11 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "book_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 1055)
+
+
+Started GET "/books/1/reviews/4" for ::1 at 2023-06-07 02:13:18 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mReview Load (15.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 18.8ms | Allocations: 3516)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 02:13:22 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:13:22 +0900
+  ↳ app/controllers/books_controller.rb:32:in `show'
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:13:22 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (2.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+Processing by ReviewsController#index as HTML
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  Parameters: {"book_id"=>"1"}
+  [1m[36mBook Load (2.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 3.2ms | Allocations: 2475)
+
+
+  [1m[36mBook Load (1.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mQuestion Load (1.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+Completed 200 OK in 29ms (Views: 16.4ms | ActiveRecord: 9.5ms | Allocations: 21517)
+
+
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 35ms (Views: 28.2ms | ActiveRecord: 3.4ms | Allocations: 29070)
+
+
+Started GET "/books/is_favorite?user_id=&book_id=1" for ::1 at 2023-06-07 02:13:22 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "book_id"=>"1"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.4ms | Allocations: 1013)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:13:48 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.4ms | Allocations: 3315)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:13:52 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.7ms | Allocations: 3302)
+
+
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:13:53 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:13:53 +0900
+Started GET "/books/1" for ::1 at 2023-06-07 02:13:53 +0900
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Processing by BooksController#show as HTML
+Processing by ReviewsController#index as HTML
+  [1m[36mQuestion Load (1.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  Parameters: {"id"=>"1"}
+  Parameters: {"book_id"=>"1"}
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (1.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mBook Load (7.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+Completed 200 OK in 14ms (Views: 0.5ms | ActiveRecord: 7.8ms | Allocations: 6806)
+
+
+Completed 200 OK in 34ms (Views: 25.9ms | ActiveRecord: 4.4ms | Allocations: 16254)
+
+
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mReview Load (0.9ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 57ms (Views: 26.3ms | ActiveRecord: 2.8ms | Allocations: 29044)
+
+
+Started GET "/books/is_favorite?user_id=&book_id=1" for ::1 at 2023-06-07 02:13:53 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "book_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 1013)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:14:22 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 19ms (Views: 9.9ms | ActiveRecord: 4.9ms | Allocations: 10819)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:14:25 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.8ms | Allocations: 3315)
+
+
+Started GET "/books/1" for ::1 at 2023-06-07 02:14:27 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:14:27 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:14:27 +0900
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mBook Load (2.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 200 OK in 84ms (Views: 32.2ms | ActiveRecord: 43.4ms | Allocations: 32857)
+
+
+Completed 200 OK in 122ms (Views: 0.5ms | ActiveRecord: 12.9ms | Allocations: 48974)
+
+
+  [1m[36mReview Load (17.9ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 71ms (Views: 26.4ms | ActiveRecord: 24.3ms | Allocations: 45123)
+
+
+Started GET "/books/is_favorite?user_id=&book_id=1" for ::1 at 2023-06-07 02:14:27 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "book_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 1173)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-07 02:14:41 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 13ms (Views: 2.0ms | ActiveRecord: 1.1ms | Allocations: 1127)
+
+
+Started GET "/users/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-06-07 02:14:41 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 712)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-07 02:14:43 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 5.5ms | ActiveRecord: 0.5ms | Allocations: 3336)
+
+
+Started GET "/books/1?current_user_id=1" for ::1 at 2023-06-07 02:14:44 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"current_user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (0.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Started GET "/books/1/questions" for ::1 at 2023-06-07 02:14:44 +0900
+Started GET "/books/1/reviews" for ::1 at 2023-06-07 02:14:44 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"1"}
+Processing by ReviewsController#index as HTML
+  [1m[36mBook Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `books` INNER JOIN `browsing_histories` ON `books`.`id` = `browsing_histories`.`book_id` WHERE `browsing_histories`.`user_id` = 1 AND `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:119:in `exist_book_browsing_history?'
+  [1m[36mBook Load (1.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  Parameters: {"book_id"=>"1"}
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Completed 200 OK in 18ms (Views: 0.3ms | ActiveRecord: 6.5ms | Allocations: 6419)
+
+
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`book_id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mBook Load (2.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:7:in `index'
+  [1m[36mReview Load (1.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 24ms (Views: 17.4ms | ActiveRecord: 3.2ms | Allocations: 15726)
+
+
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 7)[0m
+  ↳ app/controllers/reviews_controller.rb:7:in `index'
+Completed 200 OK in 39ms (Views: 25.0ms | ActiveRecord: 5.6ms | Allocations: 28925)
+
+
+Started GET "/books/is_favorite?user_id=1&book_id=1" for ::1 at 2023-06-07 02:14:44 +0900
+Processing by BooksController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:88:in `is_favorite'
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:89:in `is_favorite'
+  [1m[36mFavoriteBook Load (31.0ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:90:in `is_favorite'
+Completed 200 OK in 69ms (Views: 0.1ms | ActiveRecord: 39.4ms | Allocations: 5116)
+
+
+Started GET "/books/1/reviews/4?current_user_id=1" for ::1 at 2023-06-07 02:14:57 +0900
+Processing by ReviewsController#show as HTML
+  Parameters: {"current_user_id"=>"1", "book_id"=>"1", "id"=>"4"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:15:in `show'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/reviews_controller.rb:16:in `show'
+  [1m[36mReview Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` INNER JOIN `browsing_histories` ON `reviews`.`id` = `browsing_histories`.`review_id` WHERE `browsing_histories`.`user_id` = 1 AND `reviews`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:101:in `exist_review_browsing_history?'
+Completed 200 OK in 14ms (Views: 0.5ms | ActiveRecord: 2.6ms | Allocations: 4686)
+
+
+Started GET "/reviews/is_favorite?user_id=1&review_id=4" for ::1 at 2023-06-07 02:14:57 +0900
+Processing by ReviewsController#is_favorite as HTML
+  Parameters: {"user_id"=>"1", "review_id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:83:in `is_favorite'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:84:in `is_favorite'
+  [1m[36mFavoriteReview Load (56.3ms)[0m  [1m[34mSELECT `favorite_reviews`.* FROM `favorite_reviews` WHERE `favorite_reviews`.`user_id` = 1 AND `favorite_reviews`.`review_id` = 4 LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:85:in `is_favorite'
+Completed 200 OK in 95ms (Views: 0.1ms | ActiveRecord: 71.6ms | Allocations: 4248)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-07 02:15:03 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 5ms (Views: 4.6ms | ActiveRecord: 0.5ms | Allocations: 3709)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 02:15:06 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 1.2ms | Allocations: 22476)
+
+
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 02:15:08 +0900
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 02:15:08 +0900
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (9.8ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 68ms (Views: 45.2ms | ActiveRecord: 14.3ms | Allocations: 30668)
+
+
+  [1m[35m (15.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 72ms (Views: 0.4ms | ActiveRecord: 35.4ms | Allocations: 32307)
+
+
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 02:15:40 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 02:15:40 +0900
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mBook Load (1.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (1.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Load (1.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (2.5ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[35m (8.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 13.0ms | Allocations: 11100)
+
+
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 46ms (Views: 34.7ms | ActiveRecord: 6.8ms | Allocations: 23484)
+
+
+Started GET "/questions/is_favorite?user_id=&question_id=2" for ::1 at 2023-06-07 02:17:23 +0900
+Processing by QuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "question_id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:76:in `is_favorite'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:77:in `is_favorite'
+Completed 200 OK in 63ms (Views: 0.3ms | ActiveRecord: 5.5ms | Allocations: 23380)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-07 02:17:26 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 47ms (Views: 41.4ms | ActiveRecord: 4.9ms | Allocations: 33940)
+
+
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-07 02:17:27 +0900
+Started GET "/books/1/questions/2" for ::1 at 2023-06-07 02:17:27 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"book_id"=>"1", "id"=>"2"}
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mBook Load (8.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mReply Load (0.8ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 57ms (Views: 41.5ms | ActiveRecord: 5.8ms | Allocations: 30127)
+
+
+  [1m[35m (17.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+Completed 200 OK in 93ms (Views: 0.4ms | ActiveRecord: 29.3ms | Allocations: 33755)
+
+
+Started GET "/questions/is_favorite?user_id=&question_id=2" for ::1 at 2023-06-07 02:17:27 +0900
+Processing by QuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "question_id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:76:in `is_favorite'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:77:in `is_favorite'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 1050)
+
+
+Started GET "/books/1/questions/2/replies/2" for ::1 at 2023-06-07 02:17:29 +0900
+Processing by RepliesController#show as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2", "id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/replies_controller.rb:16:in `show'
+  [1m[36mReply Load (0.6ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4[0m
+  ↳ app/controllers/replies_controller.rb:17:in `show'
+  [1m[35m (19.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_replies` WHERE `favorite_replies`.`reply_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:19:in `show'
+Completed 200 OK in 39ms (Views: 0.6ms | ActiveRecord: 23.4ms | Allocations: 7606)
+
+
+Started GET "/replies/is_favorite?user_id=&reply_id=2" for ::1 at 2023-06-07 02:17:29 +0900
+Processing by RepliesController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "reply_id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:79:in `is_favorite'
+  [1m[36mReply Load (0.5ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:80:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 1200)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-07 02:17:36 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (12.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 42ms (Views: 20.9ms | ActiveRecord: 15.7ms | Allocations: 18766)
+
+
+Started GET "/subject_questions/1" for ::1 at 2023-06-07 02:17:37 +0900
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-07 02:17:37 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"id"=>"1"}
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (1.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestion Load (5.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[35m (65.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mUser Load (8.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+Completed 200 OK in 109ms (Views: 0.3ms | ActiveRecord: 74.6ms | Allocations: 18749)
+
+
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 136ms (Views: 114.0ms | ActiveRecord: 13.2ms | Allocations: 31878)
+
+
+Started GET "/subject_questions/is_favorite?user_id=&subject_question_id=1" for ::1 at 2023-06-07 02:17:38 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1053)
+
+
