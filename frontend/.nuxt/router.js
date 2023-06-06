@@ -14,6 +14,8 @@ const _0f0c6648 = () => interopDefault(import('../pages/books/searchBooksResult.
 const _4723a890 = () => interopDefault(import('../pages/browsingHistories/allBrowsingHistories.vue' /* webpackChunkName: "pages/browsingHistories/allBrowsingHistories" */))
 const _2a742db0 = () => interopDefault(import('../pages/notifications/allNotifications.vue' /* webpackChunkName: "pages/notifications/allNotifications" */))
 const _f110b94e = () => interopDefault(import('../pages/questions/questions.vue' /* webpackChunkName: "pages/questions/questions" */))
+const _76a4868e = () => interopDefault(import('../pages/questions/searchQuestionsResult.vue' /* webpackChunkName: "pages/questions/searchQuestionsResult" */))
+const _1b90f6e2 = () => interopDefault(import('../pages/subjectQuestions/searchSubjectQuestionsResult.vue' /* webpackChunkName: "pages/subjectQuestions/searchSubjectQuestionsResult" */))
 const _0216141d = () => interopDefault(import('../pages/subjectQuestions/subjectQuestions.vue' /* webpackChunkName: "pages/subjectQuestions/subjectQuestions" */))
 const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpackChunkName: "pages/books/_id" */))
 const _1b0a7764 = () => interopDefault(import('../pages/subjectQuestions/_id.vue' /* webpackChunkName: "pages/subjectQuestions/_id" */))
@@ -75,6 +77,14 @@ export const routerOptions = {
     path: "/questions/questions",
     component: _f110b94e,
     name: "questions-questions"
+  }, {
+    path: "/questions/searchQuestionsResult",
+    component: _76a4868e,
+    name: "questions-searchQuestionsResult"
+  }, {
+    path: "/subjectQuestions/searchSubjectQuestionsResult",
+    component: _1b90f6e2,
+    name: "subjectQuestions-searchSubjectQuestionsResult"
   }, {
     path: "/subjectQuestions/subjectQuestions",
     component: _0216141d,

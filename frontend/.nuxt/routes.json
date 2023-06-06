@@ -70,6 +70,20 @@
     "_name": "_f110b94e"
   },
   {
+    "name": "questions-searchQuestionsResult",
+    "path": "/questions/searchQuestionsResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/searchQuestionsResult.vue",
+    "chunkName": "pages/questions/searchQuestionsResult",
+    "_name": "_76a4868e"
+  },
+  {
+    "name": "subjectQuestions-searchSubjectQuestionsResult",
+    "path": "/subjectQuestions/searchSubjectQuestionsResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/searchSubjectQuestionsResult.vue",
+    "chunkName": "pages/subjectQuestions/searchSubjectQuestionsResult",
+    "_name": "_1b90f6e2"
+  },
+  {
     "name": "subjectQuestions-subjectQuestions",
     "path": "/subjectQuestions/subjectQuestions",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/subjectQuestions.vue",

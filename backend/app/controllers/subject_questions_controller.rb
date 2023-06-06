@@ -89,6 +89,19 @@ class SubjectQuestionsController < ApplicationController
     end
   end
 
+  def search_subject_questions
+    search_subject_questions_keyword = params[:searchSubjectQuestionsKeyword]
+    subject_questions = SubjectQuestion.includes(:user).where("title LIKE ?", "%#{search_subject_questions_keyword}%").or(SubjectQuestion.where("content LIKE ?", "%#{search_subject_questions_keyword}%")).or(SubjectQuestion.where("subject LIKE ?", "%#{search_subject_questions_keyword}%"))
+    subject_questions_count = subject_questions.count
+    if subject_questions
+      render json: {
+        subject_questions: subject_questions.as_json(include: :user),
+        subject_questions_count: subject_questions_count
+      }
+    else
+      render json: { error: "検索結果がありません" }
+    end
+  end
 
   private
 

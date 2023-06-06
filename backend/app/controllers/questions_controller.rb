@@ -92,6 +92,20 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def search_questions
+    search_questions_keyword = params[:searchQuestionsKeyword]
+    questions = Question.includes(:user, :book).where("title LIKE ?", "%#{search_questions_keyword}%").or(Question.where("content LIKE ?", "%#{search_questions_keyword}%")).or(Question.where("subject LIKE ?", "%#{search_questions_keyword}%"))
+    questions_count = questions.count
+    if questions
+      render json: {
+        questions: questions.as_json(include: [:user, :book]),
+        questions_count: questions_count
+      }
+    else
+      render json: { error: "検索結果がありません" }
+    end
+  end
+
 
   private
 

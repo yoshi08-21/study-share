@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     collection do
       get "is_favorite"
       get "all_questions"
+      get "search_questions"
     end
   end
   resources :replies, only: [:index] do
@@ -45,6 +46,7 @@ Rails.application.routes.draw do
     resources :subject_question_replies
     collection do
       get "is_favorite"
+      get "search_subject_questions"
     end
   end
 

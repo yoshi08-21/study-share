@@ -18,7 +18,7 @@
     <v-card>
       <v-card-title>
         質問一覧：検索ボックス
-        <v-text-field></v-text-field><v-btn>検索</v-btn>
+        <v-text-field v-model="searchQuestionsKeyword"></v-text-field><v-btn @click="searchQuestions">検索</v-btn>
       </v-card-title>
       <v-card-title>
         <v-btn block disabled>参考書別の質問は参考書の詳細ページから投稿できます</v-btn>
@@ -60,6 +60,8 @@ export default {
     return {
       perPage: 10,
       page: 1,
+      searchQuestionsKeyword: "",
+
     }
   },
   computed: {
@@ -83,6 +85,12 @@ export default {
       // this.$snackbar.show(this.$route.query.message)
     }
   },
+  methods:{
+    searchQuestions() {
+      this.$router.push({ path: "/questions/searchQuestionsResult", query: { searchQuestionsKeyword: this.searchQuestionsKeyword } })
+      this.searchQuestionsKeyword = ""
+    },
+  }
 }
 </script>
 
