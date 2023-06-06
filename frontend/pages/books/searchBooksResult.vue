@@ -2,6 +2,15 @@
   <div>
     <h2>「{{ this.searchBooksKeyword }}」の検索結果{{ this.totalCount }}件 </h2>
 
+    <v-card>
+      <v-card-title>
+        参考書を再検索する
+      </v-card-title>
+      <v-card-title>
+        <v-text-field v-model="newKeyword"></v-text-field><v-btn @click="updateQueryParams(newKeyword)">検索</v-btn>
+      </v-card-title>
+    </v-card>
+
     <div v-if="searchBooksResult.length > 0">
       <br>
       <each-books :books="searchBooksResult"></each-books>
@@ -53,6 +62,8 @@ export default {
   },
   data() {
     return {
+      newKeyword: "",
+
     }
   },
   methods: {
@@ -70,6 +81,10 @@ export default {
         console.log(error)
         throw error
       }
+    },
+    updateQueryParams(newValue) {
+      this.$router.push({ query: { searchBooksKeyword: newValue } })
+      this.newKeyword = ""
     },
   }
 }

@@ -31925,3 +31925,1300 @@ Processing by QuestionsController#all_questions as HTML
 Completed 200 OK in 34ms (Views: 32.1ms | ActiveRecord: 1.4ms | Allocations: 22321)
 
 
+Started GET "/books/1/questions/2/replies" for ::1 at 2023-06-06 18:03:29 +0900
+Started GET "/books/1/questions/2?current_user_id=7" for ::1 at 2023-06-06 18:03:29 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "book_id"=>"1", "id"=>"2"}
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"2"}
+  [1m[36mQuestion Load (19.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mUser Load (18.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mReply Load (21.7ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 2[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mBook Load (14.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (4, 1, 7)[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 144ms (Views: 32.6ms | ActiveRecord: 63.4ms | Allocations: 46118)
+
+
+  [1m[36mQuestion Load (28.1ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[35m (4.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 2[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+  [1m[36mQuestion Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `questions` INNER JOIN `browsing_histories` ON `questions`.`id` = `browsing_histories`.`question_id` WHERE `browsing_histories`.`user_id` = 7 AND `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:103:in `exist_question_browsing_history?'
+Completed 200 OK in 245ms (Views: 0.4ms | ActiveRecord: 84.4ms | Allocations: 71634)
+
+
+Started GET "/questions/is_favorite?user_id=7&question_id=2" for ::1 at 2023-06-06 18:03:29 +0900
+Processing by QuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "question_id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:76:in `is_favorite'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:77:in `is_favorite'
+  [1m[36mFavoriteQuestion Load (0.9ms)[0m  [1m[34mSELECT `favorite_questions`.* FROM `favorite_questions` WHERE `favorite_questions`.`user_id` = 7 AND `favorite_questions`.`question_id` = 2 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:78:in `is_favorite'
+Completed 200 OK in 30ms (Views: 0.1ms | ActiveRecord: 16.6ms | Allocations: 3761)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:03:30 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 27ms (Views: 25.4ms | ActiveRecord: 1.4ms | Allocations: 22485)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-06-06 18:03:43 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (1.7ms)[0m  [1m[34mSELECT `books`.* FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 8.9ms | ActiveRecord: 1.7ms | Allocations: 3561)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:03:48 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (39.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (8.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 92ms (Views: 18.9ms | ActiveRecord: 48.3ms | Allocations: 2336)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 18:03:51 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (31.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 68ms (Views: 19.4ms | ActiveRecord: 31.8ms | Allocations: 9606)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:03:55 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (2.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 143ms (Views: 139.3ms | ActiveRecord: 3.4ms | Allocations: 22410)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 18:10:13 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (27.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 89ms (Views: 2.6ms | ActiveRecord: 30.0ms | Allocations: 20797)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:10:13 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (12.1ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (8.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 86ms (Views: 60.1ms | ActiveRecord: 20.6ms | Allocations: 35820)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 18:10:23 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 30ms (Views: 0.5ms | ActiveRecord: 2.3ms | Allocations: 758)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:10:23 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (4.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 61ms (Views: 53.5ms | ActiveRecord: 6.8ms | Allocations: 22317)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:10:59 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (4.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (2.1ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 43ms (Views: 34.8ms | ActiveRecord: 7.4ms | Allocations: 22295)
+
+
+Started GET "/books/searchQuestionsResult/reviews" for ::1 at 2023-06-06 18:23:32 +0900
+Started GET "/books/searchQuestionsResult/questions" for ::1 at 2023-06-06 18:23:32 +0900
+Started GET "/books/searchQuestionsResult?current_user_id=7" for ::1 at 2023-06-06 18:23:32 +0900
+Processing by QuestionsController#index as HTML
+  Parameters: {"book_id"=>"searchQuestionsResult"}
+Processing by ReviewsController#index as HTML
+  Parameters: {"book_id"=>"searchQuestionsResult"}
+Processing by BooksController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"searchQuestionsResult"}
+  [1m[36mBook Load (37.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  [1m[36mBook Load (45.2ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/reviews_controller.rb:4:in `index'
+  ↳ app/controllers/questions_controller.rb:4:in `index'
+Completed 500 Internal Server Error in 106ms (ActiveRecord: 56.5ms | Allocations: 4124)
+
+
+Completed 500 Internal Server Error in 145ms (ActiveRecord: 52.9ms | Allocations: 5893)
+
+
+  
+NoMethodError (undefined method `reviews' for nil:NilClass):
+  
+app/controllers/reviews_controller.rb:5:in `index'
+  
+NoMethodError (undefined method `questions' for nil:NilClass):
+  
+app/controllers/questions_controller.rb:5:in `index'
+  [1m[36mUser Load (207.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:32:in `show'
+  [1m[36mBook Load (2.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = NULL LIMIT 1[0m
+  ↳ app/controllers/books_controller.rb:33:in `show'
+Completed 500 Internal Server Error in 247ms (ActiveRecord: 220.8ms | Allocations: 92043)
+
+
+  
+NoMethodError (undefined method `errors' for nil:NilClass):
+  
+app/controllers/books_controller.rb:40:in `show'
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:24:45 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (38.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (5.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 101ms (Views: 51.8ms | ActiveRecord: 46.3ms | Allocations: 22438)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E3%83%86%E3%82%B9%E3%83%88" for ::1 at 2023-06-06 18:24:51 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"テスト"}
+  [1m[35m (16.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (30.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 55ms (Views: 3.9ms | ActiveRecord: 46.7ms | Allocations: 4065)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:25:18 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 38ms (Views: 36.1ms | ActiveRecord: 1.6ms | Allocations: 22295)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%EF%BD%8E" for ::1 at 2023-06-06 18:25:22 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"ｎ"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (1.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 2.1ms | Allocations: 3986)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:29:02 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (20.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (2.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 277ms (Views: 87.7ms | ActiveRecord: 169.4ms | Allocations: 56791)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=n" for ::1 at 2023-06-06 18:29:06 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"n"}
+  [1m[35m (5.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%n%' OR content LIKE '%n%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (3.0ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%n%' OR content LIKE '%n%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 12ms (Views: 1.4ms | ActiveRecord: 8.0ms | Allocations: 1396)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:29:09 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 28ms (Views: 26.1ms | ActiveRecord: 2.2ms | Allocations: 22313)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E3%83%86%E3%82%B9%E3%83%88" for ::1 at 2023-06-06 18:29:14 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"テスト"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%テスト%' OR content LIKE '%テスト%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%テスト%' OR content LIKE '%テスト%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 4ms (Views: 1.7ms | ActiveRecord: 1.2ms | Allocations: 1659)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:29:15 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 34ms (Views: 31.9ms | ActiveRecord: 2.0ms | Allocations: 22296)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB" for ::1 at 2023-06-06 18:29:20 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"サンプル"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%サンプル%' OR content LIKE '%サンプル%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%サンプル%' OR content LIKE '%サンプル%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 7ms (Views: 3.5ms | ActiveRecord: 1.1ms | Allocations: 1287)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:29:21 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 30ms (Views: 28.1ms | ActiveRecord: 1.4ms | Allocations: 22295)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:29:25 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (10.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 15ms (Views: 1.3ms | ActiveRecord: 10.7ms | Allocations: 1283)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:29:57 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 110ms (Views: 79.1ms | ActiveRecord: 22.1ms | Allocations: 55972)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:30:01 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 8ms (Views: 2.4ms | ActiveRecord: 1.9ms | Allocations: 1837)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:30:05 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 32ms (Views: 29.9ms | ActiveRecord: 1.4ms | Allocations: 22315)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:35:30 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 6ms (Views: 1.5ms | ActiveRecord: 2.6ms | Allocations: 1723)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:38:08 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (12.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 82ms (Views: 66.2ms | ActiveRecord: 15.2ms | Allocations: 22296)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:39:25 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 7ms (Views: 2.7ms | ActiveRecord: 1.4ms | Allocations: 1724)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 18:39:29 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 1.0ms | Allocations: 1349)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 18:40:18 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"数学"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 1.7ms | Allocations: 1348)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:40:29 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (13.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 21ms (Views: 3.4ms | ActiveRecord: 14.1ms | Allocations: 1722)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 18:40:33 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"社会"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.9ms | Allocations: 1348)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 18:42:30 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"数学"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 1.1ms | Allocations: 1348)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:42:34 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (10.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 15ms (Views: 2.0ms | ActiveRecord: 11.4ms | Allocations: 1722)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:43:02 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 7ms (Views: 3.0ms | ActiveRecord: 1.3ms | Allocations: 1722)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E3%83%86%E3%82%B9%E3%83%88" for ::1 at 2023-06-06 18:43:09 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"テスト"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%テスト%' OR content LIKE '%テスト%' OR subject LIKE '%テスト%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%テスト%' OR content LIKE '%テスト%' OR subject LIKE '%テスト%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 1.2ms | Allocations: 1725)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:43:17 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"投稿"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:100:in `search_questions'
+Completed 200 OK in 6ms (Views: 2.8ms | ActiveRecord: 1.1ms | Allocations: 2981)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:44:37 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 39ms (Views: 30.4ms | ActiveRecord: 8.2ms | Allocations: 22301)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:46:48 +0900
+  
+SyntaxError (/Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/questions_controller.rb:102: syntax error, unexpected local variable or method, expecting '}'
+        questions_count: questions_count
+        ^~~~~~~~~~~~~~~
+):
+  
+app/controllers/questions_controller.rb:102: syntax error, unexpected local variable or method, expecting '}'
+app/controllers/questions_controller.rb:102: syntax error, unexpected local variable or method, expecting '}'
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 18:47:08 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 159ms (Views: 97.5ms | ActiveRecord: 32.4ms | Allocations: 55956)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:47:13 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"投稿"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 22ms (Views: 1.4ms | ActiveRecord: 2.4ms | Allocations: 14325)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:48:12 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"投稿"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 33ms (Views: 2.1ms | ActiveRecord: 2.7ms | Allocations: 14196)
+
+
+Started GET "/books/1/questions/5?current_user_id=7" for ::1 at 2023-06-06 18:48:16 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "book_id"=>"1", "id"=>"5"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+Started GET "/books/1/questions/5/replies" for ::1 at 2023-06-06 18:48:16 +0900
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"5"}
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 5[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+  [1m[36mQuestion Load (10.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Exists? (8.8ms)[0m  [1m[34mSELECT 1 AS one FROM `questions` INNER JOIN `browsing_histories` ON `questions`.`id` = `browsing_histories`.`question_id` WHERE `browsing_histories`.`user_id` = 7 AND `questions`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:117:in `exist_question_browsing_history?'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 7 AND `browsing_histories`.`question_id` IS NOT NULL[0m
+  ↳ app/controllers/questions_controller.rb:123:in `save_question_browsing_history'
+  [1m[36mReply Load (193.2ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 5[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+Completed 200 OK in 282ms (Views: 37.7ms | ActiveRecord: 221.5ms | Allocations: 15894)
+
+
+  [1m[36mTRANSACTION (2.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+  [1m[36mBrowsingHistory Create (39.4ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `question_id`, `created_at`, `updated_at`) VALUES (7, 5, '2023-06-06 09:48:16.485166', '2023-06-06 09:48:16.485166')[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+Completed 200 OK in 457ms (Views: 0.4ms | ActiveRecord: 99.0ms | Allocations: 24890)
+
+
+Started GET "/questions/is_favorite?user_id=7&question_id=5" for ::1 at 2023-06-06 18:48:16 +0900
+Processing by QuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "question_id"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:76:in `is_favorite'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:77:in `is_favorite'
+  [1m[36mFavoriteQuestion Load (0.5ms)[0m  [1m[34mSELECT `favorite_questions`.* FROM `favorite_questions` WHERE `favorite_questions`.`user_id` = 7 AND `favorite_questions`.`question_id` = 5 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:78:in `is_favorite'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 3722)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:48:17 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"投稿"}
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 30ms (Views: 2.3ms | ActiveRecord: 2.6ms | Allocations: 14278)
+
+
+Started GET "/books/1/questions/9?current_user_id=7" for ::1 at 2023-06-06 18:48:19 +0900
+Started GET "/books/1/questions/9/replies" for ::1 at 2023-06-06 18:48:19 +0900
+Processing by QuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "book_id"=>"1", "id"=>"9"}
+Processing by RepliesController#index as HTML
+  Parameters: {"book_id"=>"1", "question_id"=>"9"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:14:in `show'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:15:in `show'
+  [1m[36mQuestion Load (3.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/replies_controller.rb:4:in `index'
+  [1m[36mQuestion Load (1.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/questions_controller.rb:16:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_questions` WHERE `favorite_questions`.`question_id` = 9[0m
+  ↳ app/controllers/questions_controller.rb:18:in `show'
+  [1m[36mReply Load (7.4ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`question_id` = 9[0m
+  ↳ app/controllers/replies_controller.rb:7:in `index'
+  [1m[36mQuestion Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `questions` INNER JOIN `browsing_histories` ON `questions`.`id` = `browsing_histories`.`question_id` WHERE `browsing_histories`.`user_id` = 7 AND `questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:117:in `exist_question_browsing_history?'
+Completed 200 OK in 16ms (Views: 1.6ms | ActiveRecord: 11.2ms | Allocations: 5658)
+
+
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 7 AND `browsing_histories`.`question_id` IS NOT NULL[0m
+  ↳ app/controllers/questions_controller.rb:123:in `save_question_browsing_history'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+  [1m[36mBrowsingHistory Create (22.2ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `question_id`, `created_at`, `updated_at`) VALUES (7, 9, '2023-06-06 09:48:19.724217', '2023-06-06 09:48:19.724217')[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/questions_controller.rb:127:in `save_question_browsing_history'
+Completed 200 OK in 63ms (Views: 0.4ms | ActiveRecord: 29.2ms | Allocations: 9385)
+
+
+Started GET "/questions/is_favorite?user_id=7&question_id=9" for ::1 at 2023-06-06 18:48:19 +0900
+Processing by QuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "question_id"=>"9"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:76:in `is_favorite'
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:77:in `is_favorite'
+  [1m[36mFavoriteQuestion Load (0.3ms)[0m  [1m[34mSELECT `favorite_questions`.* FROM `favorite_questions` WHERE `favorite_questions`.`user_id` = 7 AND `favorite_questions`.`question_id` = 9 LIMIT 1[0m
+  ↳ app/controllers/questions_controller.rb:78:in `is_favorite'
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1510)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%8A%95%E7%A8%BF" for ::1 at 2023-06-06 18:48:20 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"投稿"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%投稿%' OR content LIKE '%投稿%' OR subject LIKE '%投稿%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 31ms (Views: 3.7ms | ActiveRecord: 1.9ms | Allocations: 14196)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:48:36 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 2.2ms | Allocations: 5484)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 18:53:55 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (7.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (5.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (7.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 121ms (Views: 5.0ms | ActiveRecord: 23.4ms | Allocations: 5621)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 19:04:10 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"数学"}
+  [1m[35m (6.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 52ms (Views: 0.1ms | ActiveRecord: 11.0ms | Allocations: 1373)
+
+
+Started GET "/questions/search_questions?searchQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 19:04:15 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchQuestionsKeyword"=>"英語"}
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (26.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (5.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 59ms (Views: 2.9ms | ActiveRecord: 34.9ms | Allocations: 5483)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 19:04:20 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"社会"}
+  [1m[35m (14.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%社会%' OR author LIKE '%社会%' OR publisher LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (9.3ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%社会%' OR author LIKE '%社会%' OR publisher LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 51ms (Views: 20.3ms | ActiveRecord: 24.2ms | Allocations: 2159)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 19:04:29 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 13ms (Views: 10.5ms | ActiveRecord: 1.0ms | Allocations: 2251)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E5%9B%BD%E8%AA%9E" for ::1 at 2023-06-06 19:04:46 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"国語"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 6ms (Views: 3.8ms | ActiveRecord: 1.2ms | Allocations: 2224)
+
+
+Started GET "/books/search_books?searchBooksKeyword=" for ::1 at 2023-06-06 19:05:38 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>""}
+  [1m[35m (4.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%%' OR author LIKE '%%' OR publisher LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (7.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%%' OR author LIKE '%%' OR publisher LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 202ms (Views: 112.6ms | ActiveRecord: 12.3ms | Allocations: 4047)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 19:08:13 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (1.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 52ms (Views: 48.0ms | ActiveRecord: 2.3ms | Allocations: 1855)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E5%9B%BD%E8%AA%9E" for ::1 at 2023-06-06 19:08:21 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"国語"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%国語%' OR author LIKE '%国語%' OR publisher LIKE '%国語%' OR subject LIKE '%国語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 20ms (Views: 3.7ms | ActiveRecord: 1.0ms | Allocations: 2220)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 19:08:40 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 12ms (Views: 8.0ms | ActiveRecord: 2.0ms | Allocations: 2247)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 19:13:22 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 12ms (Views: 9.4ms | ActiveRecord: 0.8ms | Allocations: 1854)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 22:58:10 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (8.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 251ms (Views: 188.0ms | ActiveRecord: 44.6ms | Allocations: 10857)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 22:58:14 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (9.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (5.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 194ms (Views: 175.2ms | ActiveRecord: 17.8ms | Allocations: 22402)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 22:58:22 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (8.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 118ms (Views: 77.6ms | ActiveRecord: 16.5ms | Allocations: 18827)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-06 22:58:23 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 82ms (Views: 80.1ms | ActiveRecord: 1.6ms | Allocations: 22332)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 22:58:25 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (5.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 32ms (Views: 25.5ms | ActiveRecord: 6.0ms | Allocations: 12335)
+
+
+Started GET "/notifications" for ::1 at 2023-06-06 23:07:59 +0900
+Processing by NotificationsController#index as HTML
+  [1m[36mUser Load (18.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IS NULL LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:3:in `index'
+Completed 500 Internal Server Error in 87ms (ActiveRecord: 41.1ms | Allocations: 3033)
+
+
+  
+NoMethodError (undefined method `id' for nil:NilClass):
+  
+app/controllers/notifications_controller.rb:10:in `index'
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 23:17:31 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (7.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 97ms (Views: 1.1ms | ActiveRecord: 19.5ms | Allocations: 20793)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:17:32 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (10.1ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (8.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 65ms (Views: 38.5ms | ActiveRecord: 18.5ms | Allocations: 18561)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:18:49 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 32ms (Views: 30.3ms | ActiveRecord: 1.4ms | Allocations: 12348)
+
+
+Started GET "/subect_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:24:04 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/subect_questions/search_subject_questions"):
+  
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:24:43 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (4.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (8.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 39ms (Views: 38.3ms | ActiveRecord: 17.3ms | Allocations: 12715)
+
+
+Started GET "/subect_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:24:46 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/subect_questions/search_subject_questions"):
+  
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:25:07 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 32ms (Views: 29.9ms | ActiveRecord: 1.4ms | Allocations: 12336)
+
+
+Started GET "/subect_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:25:12 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/subect_questions/search_subject_questions"):
+  
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:26:14 +0900
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (2.2ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 119ms (Views: 81.3ms | ActiveRecord: 19.8ms | Allocations: 44206)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 23:26:18 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 1650)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:26:18 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 31ms (Views: 29.0ms | ActiveRecord: 1.9ms | Allocations: 12420)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:26:22 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms | Allocations: 2647)
+
+
+  
+NameError (undefined local variable or method `search_subject_questions_keywordd' for #<SubjectQuestionsController:0x00000000008ca0>
+Did you mean?  search_subject_questions_keyword
+               search_subject_questions):
+  
+app/controllers/subject_questions_controller.rb:94:in `search_subject_questions'
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:26:55 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 65ms (Views: 46.8ms | ActiveRecord: 7.6ms | Allocations: 38253)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:27:02 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (6.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 18ms (Views: 0.9ms | ActiveRecord: 7.9ms | Allocations: 7562)
+
+
+Started GET "/subject_questions/2?current_user_id=7" for ::1 at 2023-06-06 23:27:06 +0900
+Started GET "/subject_questions/2/subject_question_replies" for ::1 at 2023-06-06 23:27:06 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"2"}
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"2"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (12.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[35m (9.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 2[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 7 AND `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 7 AND `browsing_histories`.`subject_question_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_questions_controller.rb:119:in `save_subject_question_browsing_history'
+  [1m[36mSubjectQuestionReply Load (8.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 2[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 55ms (Views: 1.4ms | ActiveRecord: 41.0ms | Allocations: 15500)
+
+
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+  [1m[36mBrowsingHistory Create (8.4ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_id`, `created_at`, `updated_at`) VALUES (7, 2, '2023-06-06 14:27:06.654649', '2023-06-06 14:27:06.654649')[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_questions_controller.rb:123:in `save_subject_question_browsing_history'
+Completed 200 OK in 89ms (Views: 0.2ms | ActiveRecord: 46.6ms | Allocations: 24079)
+
+
+Started GET "/subject_questions/is_favorite?user_id=7&subject_question_id=2" for ::1 at 2023-06-06 23:27:06 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "subject_question_id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 7 AND `favorite_subject_questions`.`subject_question_id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 1728)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:27:07 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 11ms (Views: 1.2ms | ActiveRecord: 1.3ms | Allocations: 7431)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:27:54 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 17ms (Views: 1.6ms | ActiveRecord: 1.7ms | Allocations: 7352)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:28:59 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (33.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 60ms (Views: 8.9ms | ActiveRecord: 47.2ms | Allocations: 10018)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:29:01 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.8ms | Allocations: 12423)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:29:07 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (5.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 16ms (Views: 0.9ms | ActiveRecord: 6.1ms | Allocations: 7388)
+
+
+Started GET "/questions/search_questions?searchSubjectQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 23:29:13 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"数学"}
+  [1m[35m (19.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (1.3ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (17.9ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 160ms (Views: 2.5ms | ActiveRecord: 76.3ms | Allocations: 35865)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:30:46 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 1.0ms | Allocations: 12368)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-06 23:30:50 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (10.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 13ms (Views: 0.4ms | ActiveRecord: 10.3ms | Allocations: 1127)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:30:50 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (2.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (9.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 93ms (Views: 81.1ms | ActiveRecord: 11.0ms | Allocations: 12409)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 23:30:56 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"数学"}
+  [1m[35m (9.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 9.7ms | Allocations: 2871)
+
+
+Started GET "/questions/search_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:31:09 +0900
+Processing by QuestionsController#search_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:98:in `search_questions'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE (title LIKE '%%' OR content LIKE '%%' OR subject LIKE '%%')[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1[0m
+  ↳ app/controllers/questions_controller.rb:101:in `search_questions'
+Completed 200 OK in 31ms (Views: 2.3ms | ActiveRecord: 2.2ms | Allocations: 21552)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:32:40 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 1.1ms | Allocations: 12333)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 23:32:44 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%数学%' OR content LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 2837)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:32:48 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"英語"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%英語%' OR content LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 12ms (Views: 1.9ms | ActiveRecord: 1.4ms | Allocations: 7354)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 23:33:01 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"社会"}
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 2840)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%EF%BD%86" for ::1 at 2023-06-06 23:33:04 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"ｆ"}
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%ｆ%' OR content LIKE '%ｆ%' OR subject LIKE '%ｆ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%ｆ%' OR content LIKE '%ｆ%' OR subject LIKE '%ｆ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 2.2ms | Allocations: 3589)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%EF%BD%8E" for ::1 at 2023-06-06 23:33:07 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"ｎ"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%ｎ%' OR content LIKE '%ｎ%' OR subject LIKE '%ｎ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%ｎ%' OR content LIKE '%ｎ%' OR subject LIKE '%ｎ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 2836)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%EF%BD%88%EF%BD%86%EF%BD%87" for ::1 at 2023-06-06 23:33:10 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"ｈｆｇ"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%ｈｆｇ%' OR content LIKE '%ｈｆｇ%' OR subject LIKE '%ｈｆｇ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%ｈｆｇ%' OR content LIKE '%ｈｆｇ%' OR subject LIKE '%ｈｆｇ%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1265)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 23:34:09 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"社会"}
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (1.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 2836)
+
+
+Started GET "/subject_questions/18?current_user_id=7" for ::1 at 2023-06-06 23:34:11 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"18"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Started GET "/subject_questions/18/subject_question_replies" for ::1 at 2023-06-06 23:34:11 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"18"}
+  [1m[36mSubjectQuestion Load (7.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 18 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 18[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 7 AND `subject_questions`.`id` = 18 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:113:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 9.0ms | Allocations: 5117)
+
+
+  [1m[36mSubjectQuestion Load (5.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 18 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (34.7ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 18[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 56ms (Views: 1.3ms | ActiveRecord: 43.2ms | Allocations: 5319)
+
+
+Started GET "/subject_questions/is_favorite?user_id=7&subject_question_id=18" for ::1 at 2023-06-06 23:34:12 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "subject_question_id"=>"18"}
+  [1m[36mUser Load (20.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (9.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 18 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (23.0ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 7 AND `favorite_subject_questions`.`subject_question_id` = 18 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 56ms (Views: 0.2ms | ActiveRecord: 53.0ms | Allocations: 1514)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 23:34:15 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"社会"}
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 2834)
+
+
+Started GET "/reviews/new_reviews" for ::1 at 2023-06-06 23:34:18 +0900
+Processing by ReviewsController#new_reviews as HTML
+  [1m[36mReview Load (2.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  ↳ app/controllers/reviews_controller.rb:76:in `new_reviews'
+Completed 200 OK in 8ms (Views: 5.6ms | ActiveRecord: 2.2ms | Allocations: 3650)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E" for ::1 at 2023-06-06 23:34:23 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"英語"}
+  [1m[35m (14.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (10.8ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%英語%' OR author LIKE '%英語%' OR publisher LIKE '%英語%' OR subject LIKE '%英語%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 30ms (Views: 2.7ms | ActiveRecord: 25.3ms | Allocations: 2590)
+
+
+Started GET "/books/search_books?searchBooksKeyword=%E6%95%B0%E5%AD%A6" for ::1 at 2023-06-06 23:34:28 +0900
+Processing by BooksController#search_books as HTML
+  Parameters: {"searchBooksKeyword"=>"数学"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:101:in `search_books'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE (name LIKE '%数学%' OR author LIKE '%数学%' OR publisher LIKE '%数学%' OR subject LIKE '%数学%')[0m
+  ↳ app/controllers/books_controller.rb:103:in `search_books'
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.9ms | Allocations: 1856)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-06 23:34:32 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.8ms | Allocations: 12395)
+
+
+Started GET "/subject_questions/search_subject_questions?searchSubjectQuestionsKeyword=%E7%A4%BE%E4%BC%9A" for ::1 at 2023-06-06 23:34:35 +0900
+Processing by SubjectQuestionsController#search_subject_questions as HTML
+  Parameters: {"searchSubjectQuestionsKeyword"=>"社会"}
+  [1m[35m (7.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:95:in `search_subject_questions'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE (title LIKE '%社会%' OR content LIKE '%社会%' OR subject LIKE '%社会%')[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7[0m
+  ↳ app/controllers/subject_questions_controller.rb:98:in `search_subject_questions'
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 8.6ms | Allocations: 2859)
+
+

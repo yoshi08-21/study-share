@@ -18,7 +18,7 @@
     <v-card>
       <v-card-title>
         質問一覧：検索ボックス
-        <v-text-field></v-text-field><v-btn>検索</v-btn>
+        <v-text-field v-model="searchSubjectQuestionsKeyword"></v-text-field><v-btn @click="searchSubjectQuestions">検索</v-btn>
       </v-card-title>
       <v-card-title>
         <v-btn @click="dialog = true" block>科目別質問を投稿する</v-btn>
@@ -76,6 +76,7 @@ export default {
       flashMessage: "テストメッセージ",
       perPage: 10,
       page: 1,
+      searchSubjectQuestionsKeyword: ""
 
     }
   },
@@ -119,6 +120,10 @@ export default {
         this.flashMessage = "質問を投稿できませんでした"
       }
       this.dialog = false
+    },
+    searchSubjectQuestions() {
+      this.$router.push({ path: "/subjectQuestions/searchSubjectQuestionsResult", query: { searchSubjectQuestionsKeyword: this.searchSubjectQuestionsKeyword } })
+      this.searchSubjectQuestionsKeyword = ""
     },
 
   }
