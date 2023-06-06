@@ -2,8 +2,10 @@
   <div>
     <h2>通知一覧</h2>
 
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+
     <br>
-    <v-flex mb-5 v-for="(notification, index) in notifications" :key="'notification_' + index">
+    <v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index">
 
       <div v-if="notification.action_type == 'Favorite'">
 
@@ -27,10 +29,10 @@
           <favorite-subject-question-reply-notification :notification="notification"></favorite-subject-question-reply-notification>
         </div>
 
-
       </div>
 
       <div v-else-if="notification.action_type == 'Reply'">
+
         <div v-if="notification.action_to == 'Reply'">
           <reply-to-question-notification :notification="notification"></reply-to-question-notification>
         </div>
@@ -40,10 +42,8 @@
         </div>
 
       </div>
-
-
-
     </v-flex>
+    <v-pagination v-model="page" :length="totalPages"></v-pagination>
   </div>
 </template>
 
@@ -84,6 +84,24 @@ export default {
       console.log(error)
       throw error
     }
+  },
+  data() {
+    return {
+      perPage: 10,
+      page: 1,
+
+    }
+  },
+  computed: {
+    notificationsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.notifications.slice(start, end)
+
+    },
+    totalPages() {
+      return Math.ceil(this.notifications.length / this.perPage);
+    },
   }
 }
 </script>

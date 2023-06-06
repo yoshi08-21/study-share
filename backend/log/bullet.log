@@ -1396,3 +1396,163 @@ AVOID eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_question_replies_controller.rb:7:in `index'
 
+2023-06-07 02:42:01[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 02:42:05[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 02:42:12[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 02:43:01[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 02:44:21[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 03:34:12[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 03:34:17[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 03:34:22[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 03:34:25[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 03:52:33[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:04:02[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:06:12[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:07:33[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:09:44[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:10:00[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:10:22[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:10:42[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:11:41[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:11:47[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-07 04:14:05[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
