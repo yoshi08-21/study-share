@@ -38,15 +38,15 @@
       ></v-text-field>
       <v-btn @click="searchBooks">検索</v-btn>
       <v-spacer />
-      <div>
-        <v-btn @click="goToFavorites">お気に入り</v-btn>
-      </div>
-      <div v-if="!isLoggedIn">
+      <template v-if="!isLoggedIn">
         <v-btn to="/auth/login">ログイン</v-btn>
-      </div>
-      <div v-else>
-        <v-btn @click="logout">ログアウト</v-btn>
-      </div>
+      </template>
+      <template v-else>
+        <div>
+          <v-btn @click="goToFavorites">お気に入り</v-btn>
+        </div>
+        <v-btn @click="goToNotifications">通知一覧</v-btn>
+      </template>
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
