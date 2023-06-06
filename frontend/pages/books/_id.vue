@@ -145,10 +145,16 @@ export default {
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params, store }) {
     try {
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const [bookResponse, reviewsResponse, questionsResponse] = await Promise.all([
         axios.get(`/books/${params.id}`, {
           params: {
-            current_user_id: store.getters["auth/getCurrentUser"].id
+            current_user_id: currentUserId
           }
         }),
         axios.get(`/books/${params.id}/reviews`),
@@ -210,9 +216,15 @@ export default {
   },
   async created() {
     try {
+      let currentUserId = ""
+      const currentUser = this.$store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const response = await axios.get("books/is_favorite", {
         params: {
-          user_id: this.$store.getters["auth/getCurrentUserId"],
+          user_id: currentUserId,
           book_id: this.$route.params.id
         }
       })

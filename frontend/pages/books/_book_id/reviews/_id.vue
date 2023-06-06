@@ -97,9 +97,15 @@ export default {
   },
   async asyncData({ params, store }) {
     try {
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`, {
         params: {
-          current_user_id: store.getters["auth/getCurrentUser"].id
+          current_user_id: currentUserId
         }
       })
       console.log(responce.data.review)
@@ -136,9 +142,15 @@ export default {
   },
   async created() {
     try {
+      let currentUserId = ""
+      const currentUser = this.$store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const response = await axios.get("reviews/is_favorite", {
         params: {
-          user_id: this.$store.getters["auth/getCurrentUserId"],
+          user_id: currentUserId,
           review_id: this.$route.params.id
         }
       })

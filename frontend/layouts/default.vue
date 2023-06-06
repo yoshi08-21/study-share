@@ -70,6 +70,12 @@
         <v-list-item v-if="this.currentUser">
           <v-btn @click="logout">ログアウト（デバッグ用）</v-btn>
         </v-list-item>
+        <v-list-item @click="goToBrowsingHistories">
+          閲覧履歴
+        </v-list-item>
+        <v-list-item @click="goToNotifications">
+          通知一覧
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
@@ -167,6 +173,20 @@ export default {
     goToFavorites() {
       if(this.currentUser) {
         this.$router.push({ path: "/favorites" })
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
+      }
+    },
+    goToBrowsingHistories() {
+      if(this.currentUser) {
+        this.$router.push({ path: "/browsingHistories/allBrowsingHistories" })
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
+      }
+    },
+    goToNotifications() {
+      if(this.currentUser) {
+        this.$router.push({ path: "/notifications/allNotifications" })
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
       }

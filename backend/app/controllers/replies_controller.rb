@@ -78,7 +78,7 @@ class RepliesController < ApplicationController
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
     reply = Reply.find_by(id: params[:reply_id])
-    favorite_reply = FavoriteReply.find_by(user_id: current_user.id, reply_id: reply.id)
+    favorite_reply = FavoriteReply.find_by(user_id: current_user.id, reply_id: reply.id) if current_user
     if favorite_reply
       render json: { is_favorite: true, favorite_reply_id: favorite_reply.id }
     else
