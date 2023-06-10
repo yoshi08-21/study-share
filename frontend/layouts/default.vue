@@ -45,7 +45,16 @@
         <div>
           <v-btn @click="goToFavorites">お気に入り</v-btn>
         </div>
-        <v-btn @click="goToNotifications">通知一覧</v-btn>
+        <v-btn @click="goToNotifications">
+          通知一覧
+          <span v-if="unreadNotifications">
+            <v-badge color="red" overlap>
+              <template v-slot:badge>
+                <v-icon>mdi-circle</v-icon>
+              </template>
+            </v-badge>
+          </span>
+        </v-btn>
       </template>
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -87,10 +96,12 @@
 <script>
 
 import { getAuth, signOut } from "firebase/auth"
+import checkNotifications from "../middleware/checkNotifications"
 
 
 export default {
   name: 'DefaultLayout',
+  middleware: [checkNotifications],
   // middleware: "getUser",
   data() {
     return {
@@ -150,6 +161,9 @@ export default {
     },
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    unreadNotifications() {
+      return this.$store.state.notifications.unreadNotifications
     }
 
   },

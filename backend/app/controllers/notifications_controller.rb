@@ -26,6 +26,16 @@ class NotificationsController < ApplicationController
     end
   end
 
+  def check_unread_notifications
+    current_user = User.find_by(id: params[:current_user_id])
+    unread_notifications = Notification.where(target_user_id: current_user.id, is_checked: false) if current_user
+    if unread_notifications && unread_notifications.any?
+      head :ok
+    else
+      head :no_content
+    end
+  end
+
   private
 
     def delete_over100_notifications(notifications)
