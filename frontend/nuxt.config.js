@@ -5,6 +5,10 @@ export default {
   ssr: false,
 
   router: {
+    // middleware: [
+    //   "@/middleware/checkNotifications.js",
+    // ],
+
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -31,6 +35,7 @@ export default {
     "@/plugins/authenticated.js",
     // "@/plugins/firebase.js",
   ],
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
