@@ -35,6 +35,15 @@ import isLoggedIn from "../../middleware/isLoggedIn"
 
 export default {
   middleware: isLoggedIn,
+  watch: {
+    "$route.query.message"(newValue, oldValue) {
+      if(newValue !== oldValue) {
+        this.flashMessage = newValue
+        this.snackbar = true
+        this.snackbarColor = "red accent-2"
+      }
+    }
+  },
   data() {
     return {
       email: "",
@@ -46,6 +55,7 @@ export default {
       emailRules: [
         value => !!value || "メールアドレスを入力してください",
         value => (value || '').length <= 60 || "最大入力文字数は250文字です",
+        value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "正しい形式のメールアドレスを入力してください"
       ],
       passwordRules: [
         value => !!value || "パスワードを入力してください",
@@ -65,6 +75,21 @@ export default {
         console.log(userCredential)
       } catch(error) {
         console.log(error)
+        let message = ""
+        if(error.code === "auth/invalid-email") {
+          message = "正しいメールアドレスを入力してください"
+        } else if(error.code === "auth/user-not-found") {
+          message = "メールアドレスが登録されていません"
+        } else if(error.code === "auth/missing-password") {
+          message = "パスワードを入力してください"
+        } else if(error.code === "auth/wrong-password") {
+          message = "パスワードが間違っています"
+        } else {
+          message = "ログインエラーが発生しました"
+        }
+        console.log(message)
+        this.$router.push({query: { message } })
+        return
       }
 
       try {
