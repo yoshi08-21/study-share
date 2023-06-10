@@ -84,6 +84,29 @@ class SubjectQuestionRepliesController < ApplicationController
     end
   end
 
+  def create_sample_notification
+    current_user = User.find_by(id: params[:current_user_id])
+    sample_user = User.find_by(id: params[:sample_user_id])
+    current_user_question = current_user.subject_questions.first
+    if current_user_question.nil?
+      current_user_question = current_user.subject_questions.create(
+        title: "通知確認用サンプル質問",
+        content: "通知確認用サンプル質問",
+        subject: "国語"
+      )
+    end
+    sample_user_new_reply = sample_user.subject_question_replies.create(
+      content: "通知確認用サンプル返信",
+      subject_question_id: current_user_question.id
+    )
+    create_notification_subject_question_reply(sample_user, current_user, current_user_question, sample_user_new_reply)
+    if sample_user_new_reply
+      render json: sample_user_new_reply
+    else
+      render json: sample_user_new_reply.errors
+    end
+  end
+
 
   private
 
