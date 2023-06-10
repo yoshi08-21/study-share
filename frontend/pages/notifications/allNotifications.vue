@@ -2,6 +2,10 @@
   <div>
     <h2>通知一覧</h2>
 
+    <p>
+      <!-- 本番環境では、通知送信専用のユーザーを作成する（ポートフォリオログインのユーザーとは一緒にしないように注意） -->
+      <v-btn @click="createSampleNotification">通知サンプル作成</v-btn>
+    </p>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
@@ -102,6 +106,26 @@ export default {
     totalPages() {
       return Math.ceil(this.notifications.length / this.perPage);
     },
+    currentUser() {
+      return this.$store.getters["auth/getCurrentUser"]
+    },
+  },
+  methods: {
+    async createSampleNotification() {
+      try {
+        const response = await axios.post("subject_question_replies/create_sample_notification", {
+          current_user_id: this.currentUser.id,
+          sample_user_id: 16,
+          content: "通知確認用サンプルメッセージ"
+        })
+        console.log(response.data)
+        this.$router.push({ path: "/", query: { message: "通知が作成されました" } })
+      } catch(error) {
+        console.log(error)
+        throw error
+      }
+    }
+
   }
 }
 </script>

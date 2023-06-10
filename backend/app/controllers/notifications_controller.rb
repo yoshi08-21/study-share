@@ -36,6 +36,7 @@ class NotificationsController < ApplicationController
     end
   end
 
+
   private
 
     def delete_over100_notifications(notifications)

@@ -204,7 +204,7 @@ export default {
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
       }
-    }
+    },
   }
 }
 </script>

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     resources :favorite_subject_question_replies, only: [:create, :destroy]
     collection do
       get "is_favorite"
+      post "create_sample_notification"
     end
   end
   resources :browsing_histories, only: [:index]
