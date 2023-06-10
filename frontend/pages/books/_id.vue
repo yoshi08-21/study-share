@@ -282,7 +282,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "気に入りに登録されていません"
+        this.flashMessage = "お気に入りに登録されていません"
       }
     },
     async submitReview(data) {
