@@ -3,8 +3,15 @@
     ログイン
     <v-col>
       <v-form>
-        <v-text-field v-model="email" label="メールアドレス"></v-text-field>
-        <v-text-field v-model="password" label="パスワード"></v-text-field>
+        <v-text-field v-model="email" :rules="emailRules" label="メールアドレス"></v-text-field>
+        <v-text-field
+        v-model="password"
+        :rules="passwordRules"
+        label="パスワード"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showPassword ? 'text' : 'password'"
+        @click:append="showPassword = !showPassword"
+        ></v-text-field>
         <v-btn @click="login">ログイン</v-btn>
       </v-form>
       <v-spacer :style="{ height: '20px' }"></v-spacer>
@@ -36,6 +43,15 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
+      emailRules: [
+        value => !!value || "メールアドレスを入力してください",
+        value => (value || '').length <= 60 || "最大入力文字数は250文字です",
+      ],
+      passwordRules: [
+        value => !!value || "パスワードを入力してください",
+      ],
+      showPassword: false,
+
     }
   },
   methods: {
@@ -46,7 +62,6 @@ export default {
         this.$store.dispatch("auth/setLoginState", true)
         this.$store.dispatch("auth/setUserUid", userCredential.user.uid)
         this.$store.dispatch("auth/setEmail", userCredential.user.email)
-        // currentUser.nameで情報が取り出せない → firebaseからのresponseが入っているため
         console.log(userCredential)
       } catch(error) {
         console.log(error)
