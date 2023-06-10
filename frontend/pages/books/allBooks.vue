@@ -13,6 +13,31 @@
       </v-card-title>
     </v-card>
 
+    <br><br><br>
+    <v-card>
+      <v-card-title>
+        ソート機能
+      </v-card-title>
+      <v-row>
+        <v-col cols="6">
+          <v-select
+          :items="items"
+          label="並び替え"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+        <v-col cols="6">
+          <v-select
+          :items="items"
+          label="科目で絞り込み"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+      </v-row>
+    </v-card>
+
     <!-- 参考書新規登録ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
