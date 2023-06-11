@@ -21,7 +21,8 @@
       <v-row>
         <v-col cols="6">
           <v-select
-          :items="items"
+          v-model="selectedSortOption"
+          :items="sortBooksOptions"
           label="並び替え"
           dense
           outlined
@@ -29,7 +30,8 @@
         </v-col>
         <v-col cols="6">
           <v-select
-          :items="items"
+          v-model="selectedBooksSubject"
+          :items="booksSubjectOptions"
           label="科目で絞り込み"
           dense
           outlined
@@ -103,16 +105,31 @@ export default {
       perPage: 10,
       page: 1,
       searchBooksKeyword: "",
+      sortBooksOptions: ["新着順", "投稿順", "評価が高い順", "レビューが多い順"],
+      booksSubjectOptions: [
+      {text:"国語", disabled: true},"現代文", "古文", "漢文",
+      {text:"社会", disabled: true}, "日本史", "世界史", "地理", "倫理・政治経済",
+      {text:"数学", disabled: true},"数学I・A", "数学Ⅱ・B", "数学Ⅲ・C",
+      {text:"英語", disabled: true},"英文法", "英文読解", "英作文", "英単語", "リスニング",
+      {text:"理科", disabled: true}, "物理", "生物", "化学", "地学",
+      {text:"その他", disabled: true},"過去問", "小論文", "その他科目",
+      ],
+      selectedSortOption: "",
+      selectedBooksSubject: ""
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+    sortedBooks() {
+      return this.sortBooks()
+    },
     booksChunk() {
+      const sortedBooks = this.sortedBooks
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
-      return this.books.slice(start, end)
+      return sortedBooks.slice(start, end)
     },
     totalPages() {
       return Math.ceil(this.books.length / this.perPage);
@@ -164,6 +181,15 @@ export default {
       this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
     },
+    sortBooks() {
+      if(this.selectedSortOption === "新着順") {
+        return this.books.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      } else if(this.selectedSortOption === "投稿順") {
+        return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      } else {
+        return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      }
+    }
   }
 
 }
