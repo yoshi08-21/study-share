@@ -185,7 +185,12 @@ export default {
         return this.books.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       } else if(this.selectedSortOption === "投稿順") {
         return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-      } else {
+      } else if(this.selectedSortOption === "評価が高い順") {
+        return this.books.sort((a, b) => b.average_rating - a.average_rating)
+      } else if(this.selectedSortOption === "レビューが多い順") {
+        return this.books.sort((a, b) => b.reviews_count - a.reviews_count)
+      }
+      else {
         return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       }
     }
