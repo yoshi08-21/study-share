@@ -19,6 +19,10 @@
                 </v-card-text>
               </v-col>
             </v-row>
+            <v-card-actions>
+              レビュー:{{ book.reviews.length }}件
+              平均評価:{{ book.average_rating }}
+            </v-card-actions>
             <!-- <v-card-actions v-if="book.is_favorite == false">
               <v-btn @click.stop="add">お気に入りに追加する</v-btn>
             </v-card-actions>
