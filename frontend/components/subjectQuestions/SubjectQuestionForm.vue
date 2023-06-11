@@ -90,7 +90,7 @@ export default {
         },
         {
           name: "その他",
-          subcategories: ["過去問", "小論文", "その他"]
+          subcategories: ["過去問", "小論文", "その他科目"]
         },
       ],
     }
