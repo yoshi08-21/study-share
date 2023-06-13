@@ -2012,3 +2012,11 @@ AVOID eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
 
+2023-06-14 06:02:26[WARN] user: yoshito-t
+GET /subject_questions/1/subject_question_replies
+AVOID eager loading detected
+  SubjectQuestionReply => [:subject_question]
+  Remove from your query: .includes([:subject_question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_question_replies_controller.rb:7:in `index'
+

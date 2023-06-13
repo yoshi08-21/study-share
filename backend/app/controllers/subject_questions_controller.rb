@@ -1,7 +1,7 @@
 class SubjectQuestionsController < ApplicationController
 
   def index
-    subject_questions = SubjectQuestion.includes(:user).all
+    subject_questions = SubjectQuestion.includes(:user).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
     if subject_questions
       render json: subject_questions, include: "user"
     else
@@ -77,15 +77,6 @@ class SubjectQuestionsController < ApplicationController
       render json: { is_favorite: true, favorite_subject_question_id: favorite_subject_question.id }
     else
       render json: false
-    end
-  end
-
-  def all_questions
-    questions = Question.includes(:user, :book).all
-    if questions
-      render json: questions, include: [:user, :book]
-    else
-      render jso: questions.errors
     end
   end
 

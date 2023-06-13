@@ -20,6 +20,10 @@
                   <v-spacer></v-spacer>
                   by: {{ subjectQuestion.user.name }}
                 </v-card-actions>
+                <p>
+                  返信: {{ subjectQuestion.subject_question_replies_count }}件
+                  いいね!: {{ subjectQuestion.favorite_subject_questions_count }}件
+                </p>
               </v-col>
             </v-row>
           </v-card>
