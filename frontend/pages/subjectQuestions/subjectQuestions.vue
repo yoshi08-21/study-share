@@ -25,6 +25,33 @@
       </v-card-title>
     </v-card>
 
+    <br><br><br>
+    <v-card>
+      <v-card-title>
+        ソート機能
+      </v-card-title>
+      <v-row>
+        <v-col cols="6">
+          <v-select
+          v-model="selectedSortOption"
+          :items="sortQuestionsOptions"
+          label="並び替え"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+        <v-col cols="6">
+          <v-select
+          v-model="selectedQuestionsSubject"
+          :items="questionsSubjectOptions"
+          label="科目で絞り込み"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+      </v-row>
+    </v-card>
+
         <!-- 新規質問投稿ダイアログ -->
         <v-dialog v-model="dialog">
       <v-card>
@@ -76,21 +103,37 @@ export default {
       flashMessage: "テストメッセージ",
       perPage: 10,
       page: 1,
-      searchSubjectQuestionsKeyword: ""
-
+      searchSubjectQuestionsKeyword: "",
+      sortQuestionsOptions: ["新着順", "投稿順", "いいね!が多い順", "返信が多い順"],
+      questionsSubjectOptions: [
+      {text:"国語", disabled: true},"現代文", "古文", "漢文",
+      {text:"社会", disabled: true}, "日本史", "世界史", "地理", "倫理・政治経済",
+      {text:"数学", disabled: true},"数学I・A", "数学Ⅱ・B", "数学Ⅲ・C",
+      {text:"英語", disabled: true},"英文法", "英文読解", "英作文", "英単語", "リスニング",
+      {text:"理科", disabled: true}, "物理", "生物", "化学", "地学",
+      {text:"その他", disabled: true},"過去問", "小論文", "その他科目",
+      ],
+      selectedSortOption: "",
+      selectedQuestionsSubject: ""
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+    subjectFilteredQuestions() {
+      return this.filterQuestions()
+    },
+    sortedQuestions() {
+      return this.sortQuestions(this.subjectFilteredQuestions)
+    },
     subjectQuestionsChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
-      return this.subjectQuestions.slice(start, end)
+      return this.sortedQuestions.slice(start, end)
     },
     totalPages() {
-      return Math.ceil(this.subjectQuestions.length / this.perPage);
+      return Math.ceil(this.sortedQuestions.length / this.perPage);
     },
   },
   mounted() {
@@ -125,7 +168,27 @@ export default {
       this.$router.push({ path: "/subjectQuestions/searchSubjectQuestionsResult", query: { searchSubjectQuestionsKeyword: this.searchSubjectQuestionsKeyword } })
       this.searchSubjectQuestionsKeyword = ""
     },
-
+    filterQuestions() {
+      if(this.selectedQuestionsSubject) {
+        const subjectFilteredQuestions = this.subjectQuestions.filter(subjectQuestion => subjectQuestion.subject === this.selectedQuestionsSubject)
+        return subjectFilteredQuestions
+      } else {
+        return this.subjectQuestions
+      }
+    },
+    sortQuestions(subjectQuestions) {
+      if(this.selectedSortOption === "新着順") {
+        return [...subjectQuestions].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      } else if(this.selectedSortOption === "投稿順") {
+        return [...subjectQuestions].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      } else if(this.selectedSortOption === "いいね!が多い順") {
+        return [...subjectQuestions].sort((a, b) => b.favorite_subject_questions_count - a.favorite_subject_questions_count)
+      } else if(this.selectedSortOption === "返信が多い順") {
+        return [...subjectQuestions].sort((a, b) => b.subject_question_replies_count - a.subject_question_replies_count)
+      } else {
+        return [...subjectQuestions].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      }
+    }
   }
 }
 </script>

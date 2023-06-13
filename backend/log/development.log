@@ -51814,3 +51814,573 @@ Processing by QuestionsController#all_questions as HTML
 Completed 200 OK in 32ms (Views: 30.5ms | ActiveRecord: 1.5ms | Allocations: 29417)
 
 
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:27:21 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (5.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (9.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 49ms (ActiveRecord: 17.2ms | Allocations: 1171)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:27:21 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (2.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 51ms (Views: 35.5ms | ActiveRecord: 9.7ms | Allocations: 24944)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:39:52 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 8ms (ActiveRecord: 1.8ms | Allocations: 1266)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:39:52 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 43ms (Views: 41.4ms | ActiveRecord: 1.1ms | Allocations: 17660)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:48:23 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 5ms (ActiveRecord: 1.5ms | Allocations: 1171)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-14 05:48:23 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (1.7ms)[0m  [1m[34mSELECT questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` IN (1, 25)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 40ms (Views: 37.1ms | ActiveRecord: 2.7ms | Allocations: 29424)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:48:37 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 5ms (ActiveRecord: 0.9ms | Allocations: 1064)
+
+
+Started GET "/questions/all_questions" for ::1 at 2023-06-14 05:48:37 +0900
+Processing by QuestionsController#all_questions as HTML
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count FROM `questions`[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` IN (1, 25)[0m
+  ↳ app/controllers/questions_controller.rb:89:in `all_questions'
+Completed 200 OK in 37ms (Views: 34.9ms | ActiveRecord: 1.7ms | Allocations: 29415)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:48:52 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 1.1ms | Allocations: 1062)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:48:52 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (1.1ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 27ms (Views: 24.6ms | ActiveRecord: 1.6ms | Allocations: 17660)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:49:46 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 0.8ms | Allocations: 1062)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:49:46 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 18ms (Views: 16.4ms | ActiveRecord: 0.8ms | Allocations: 17659)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-14 05:51:20 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 715)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:51:20 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 3ms (ActiveRecord: 0.8ms | Allocations: 1061)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:51:20 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 24ms (Views: 22.4ms | ActiveRecord: 0.9ms | Allocations: 17657)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-14 05:51:52 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.4ms | Allocations: 711)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:51:52 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 3ms (ActiveRecord: 0.8ms | Allocations: 1062)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:51:52 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 25ms (Views: 23.3ms | ActiveRecord: 1.2ms | Allocations: 17664)
+
+
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-14 05:57:18 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 36ms (Views: 0.6ms | ActiveRecord: 1.1ms | Allocations: 20794)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:57:18 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 10ms (ActiveRecord: 1.4ms | Allocations: 3326)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:57:18 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_question.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_question.id) AS favorite_subject_questions_count) FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.5ms | Allocations: 4027)
+
+
+  
+ActiveRecord::StatementInvalid (Mysql2::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') FROM `subject_questions`' at line 1):
+  
+app/controllers/subject_questions_controller.rb:6:in `index'
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-14 05:58:52 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 41ms (Views: 0.7ms | ActiveRecord: 5.9ms | Allocations: 20487)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 05:58:52 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 24ms (ActiveRecord: 2.5ms | Allocations: 3772)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 05:58:52 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.4ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count) FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 1.6ms | Allocations: 4270)
+
+
+  
+ActiveRecord::StatementInvalid (Mysql2::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') FROM `subject_questions`' at line 1):
+  
+app/controllers/subject_questions_controller.rb:6:in `index'
+Started GET "/users/uvmpuOVwOjZYKk2VyooIJFhkZnE2" for ::1 at 2023-06-14 06:00:43 +0900
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"uvmpuOVwOjZYKk2VyooIJFhkZnE2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'uvmpuOVwOjZYKk2VyooIJFhkZnE2' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:14:in `show'
+Completed 200 OK in 36ms (Views: 0.5ms | ActiveRecord: 3.7ms | Allocations: 20486)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:00:43 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 13ms (ActiveRecord: 2.1ms | Allocations: 3772)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:00:43 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (1.8ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 68ms (Views: 51.3ms | ActiveRecord: 6.7ms | Allocations: 24708)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:26 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 6ms (ActiveRecord: 1.2ms | Allocations: 1126)
+
+
+Started GET "/subject_questions/1/subject_question_replies" for ::1 at 2023-06-14 06:02:26 +0900
+Started GET "/subject_questions/1?current_user_id=7" for ::1 at 2023-06-14 06:02:26 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 7 AND `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:104:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 35ms (Views: 0.2ms | ActiveRecord: 8.6ms | Allocations: 9043)
+
+
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"1"}
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.4ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7)[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 49ms (Views: 35.3ms | ActiveRecord: 4.3ms | Allocations: 27027)
+
+
+Started GET "/subject_questions/is_favorite?user_id=7&subject_question_id=1" for ::1 at 2023-06-14 06:02:26 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "subject_question_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 7 AND `favorite_subject_questions`.`subject_question_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 3.4ms | Allocations: 3704)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:29 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 0.8ms | Allocations: 1079)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:02:29 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 84ms (Views: 77.1ms | ActiveRecord: 6.6ms | Allocations: 18206)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:30 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 5ms (ActiveRecord: 1.2ms | Allocations: 1063)
+
+
+Started GET "/subject_questions/2/subject_question_replies" for ::1 at 2023-06-14 06:02:30 +0900
+Started GET "/subject_questions/2?current_user_id=7" for ::1 at 2023-06-14 06:02:30 +0900
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"2"}
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"2"}
+  [1m[36mSubjectQuestion Load (0.8ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mSubjectQuestionReply Load (0.5ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 2[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 1.3ms | Allocations: 1591)
+
+
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+  [1m[36mSubjectQuestion Load (1.4ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 2[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 7 AND `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:104:in `exist_subject_question_browsing_history?'
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 6.3ms | Allocations: 5857)
+
+
+Started GET "/subject_questions/is_favorite?user_id=7&subject_question_id=2" for ::1 at 2023-06-14 06:02:30 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "subject_question_id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 7 AND `favorite_subject_questions`.`subject_question_id` = 2 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 1511)
+
+
+Started POST "/subject_questions/2/favorite_subject_questions" for ::1 at 2023-06-14 06:02:31 +0900
+Processing by FavoriteSubjectQuestionsController#create as HTML
+  Parameters: {"user_id"=>7, "subject_question_id"=>"2", "favorite_subject_question"=>{"user_id"=>7}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:4:in `create'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:5:in `create'
+  [1m[36mSubjectQuestion Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `favorite_subject_questions` ON `subject_questions`.`id` = `favorite_subject_questions`.`subject_question_id` WHERE `favorite_subject_questions`.`user_id` = 7 AND `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:32:in `exist_favorite_subject_question?'
+  [1m[36mCACHE SubjectQuestion Load (0.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mFavoriteSubjectQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO `favorite_subject_questions` (`user_id`, `subject_question_id`, `created_at`, `updated_at`) VALUES (7, 2, '2023-06-13 21:02:31.506656', '2023-06-13 21:02:31.506656')[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mNotification Load (0.7ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`action_user_id` = 7 AND `notifications`.`subject_question_id` = 2 AND `notifications`.`action_type` = 'Favorite' LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:36:in `create_notification_favorite_subject_question'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mNotification Create (0.5ms)[0m  [1m[32mINSERT INTO `notifications` (`action_user_id`, `target_user_id`, `subject_question_id`, `action_type`, `action_to`, `created_at`, `updated_at`) VALUES (7, 1, 2, 'Favorite', 'SubjectQuestion', '2023-06-13 21:02:31.538699', '2023-06-13 21:02:31.538699')[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+Completed 200 OK in 50ms (Views: 0.5ms | ActiveRecord: 12.6ms | Allocations: 16114)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:31 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 1.1ms | Allocations: 1066)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:02:31 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (2.1ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 27ms (Views: 24.4ms | ActiveRecord: 2.6ms | Allocations: 18242)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:33 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 3ms (ActiveRecord: 0.7ms | Allocations: 1062)
+
+
+Started GET "/subject_questions/3?current_user_id=7" for ::1 at 2023-06-14 06:02:33 +0900
+Processing by SubjectQuestionsController#show as HTML
+  Parameters: {"current_user_id"=>"7", "id"=>"3"}
+Started GET "/subject_questions/3/subject_question_replies" for ::1 at 2023-06-14 06:02:33 +0900
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:14:in `show'
+Processing by SubjectQuestionRepliesController#index as HTML
+  Parameters: {"subject_question_id"=>"3"}
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:4:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:15:in `show'
+  [1m[36mSubjectQuestionReply Load (0.9ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`subject_question_id` = 3[0m
+  ↳ app/controllers/subject_question_replies_controller.rb:7:in `index'
+Completed 200 OK in 9ms (Views: 2.9ms | ActiveRecord: 1.8ms | Allocations: 3071)
+
+
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`subject_question_id` = 3[0m
+  ↳ app/controllers/subject_questions_controller.rb:17:in `show'
+  [1m[36mSubjectQuestion Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `browsing_histories` ON `subject_questions`.`id` = `browsing_histories`.`subject_question_id` WHERE `browsing_histories`.`user_id` = 7 AND `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:104:in `exist_subject_question_browsing_history?'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `browsing_histories` WHERE `browsing_histories`.`user_id` = 7 AND `browsing_histories`.`subject_question_id` IS NOT NULL[0m
+  ↳ app/controllers/subject_questions_controller.rb:110:in `save_subject_question_browsing_history'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/subject_questions_controller.rb:114:in `save_subject_question_browsing_history'
+  [1m[36mBrowsingHistory Create (0.4ms)[0m  [1m[32mINSERT INTO `browsing_histories` (`user_id`, `subject_question_id`, `created_at`, `updated_at`) VALUES (7, 3, '2023-06-13 21:02:33.424562', '2023-06-13 21:02:33.424562')[0m
+  ↳ app/controllers/subject_questions_controller.rb:114:in `save_subject_question_browsing_history'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/subject_questions_controller.rb:114:in `save_subject_question_browsing_history'
+Completed 200 OK in 37ms (Views: 0.3ms | ActiveRecord: 9.7ms | Allocations: 13180)
+
+
+Started GET "/subject_questions/is_favorite?user_id=7&subject_question_id=3" for ::1 at 2023-06-14 06:02:33 +0900
+Processing by SubjectQuestionsController#is_favorite as HTML
+  Parameters: {"user_id"=>"7", "subject_question_id"=>"3"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:73:in `is_favorite'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:74:in `is_favorite'
+  [1m[36mFavoriteSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `favorite_subject_questions`.* FROM `favorite_subject_questions` WHERE `favorite_subject_questions`.`user_id` = 7 AND `favorite_subject_questions`.`subject_question_id` = 3 LIMIT 1[0m
+  ↳ app/controllers/subject_questions_controller.rb:75:in `is_favorite'
+Completed 200 OK in 43ms (Views: 0.1ms | ActiveRecord: 1.8ms | Allocations: 1513)
+
+
+Started POST "/subject_questions/3/favorite_subject_questions" for ::1 at 2023-06-14 06:02:35 +0900
+Processing by FavoriteSubjectQuestionsController#create as HTML
+  Parameters: {"user_id"=>7, "subject_question_id"=>"3", "favorite_subject_question"=>{"user_id"=>7}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:4:in `create'
+  [1m[36mSubjectQuestion Load (0.3ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:5:in `create'
+  [1m[36mSubjectQuestion Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `subject_questions` INNER JOIN `favorite_subject_questions` ON `subject_questions`.`id` = `favorite_subject_questions`.`subject_question_id` WHERE `favorite_subject_questions`.`user_id` = 7 AND `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:32:in `exist_favorite_subject_question?'
+  [1m[36mCACHE SubjectQuestion Load (0.0ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mFavoriteSubjectQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO `favorite_subject_questions` (`user_id`, `subject_question_id`, `created_at`, `updated_at`) VALUES (7, 3, '2023-06-13 21:02:35.476607', '2023-06-13 21:02:35.476607')[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:8:in `create'
+  [1m[36mNotification Load (0.4ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`action_user_id` = 7 AND `notifications`.`subject_question_id` = 3 AND `notifications`.`action_type` = 'Favorite' LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:36:in `create_notification_favorite_subject_question'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mNotification Create (0.5ms)[0m  [1m[32mINSERT INTO `notifications` (`action_user_id`, `target_user_id`, `subject_question_id`, `action_type`, `action_to`, `created_at`, `updated_at`) VALUES (7, 1, 3, 'Favorite', 'SubjectQuestion', '2023-06-13 21:02:35.486392', '2023-06-13 21:02:35.486392')[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_subject_questions_controller.rb:44:in `create_notification_favorite_subject_question'
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 4.9ms | Allocations: 9174)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:02:36 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 3ms (ActiveRecord: 0.7ms | Allocations: 1061)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:02:36 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (0.9ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 26ms (Views: 24.3ms | ActiveRecord: 1.4ms | Allocations: 18203)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:03:08 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 1.0ms | Allocations: 1061)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:03:08 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (1.6ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 47ms (Views: 44.4ms | ActiveRecord: 2.2ms | Allocations: 18203)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=7" for ::1 at 2023-06-14 06:03:52 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"7"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 7 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:32:in `check_unread_notifications'
+Completed 204 No Content in 5ms (ActiveRecord: 1.1ms | Allocations: 1061)
+
+
+Started GET "/subject_questions" for ::1 at 2023-06-14 06:03:52 +0900
+Processing by SubjectQuestionsController#index as HTML
+  [1m[36mSubjectQuestion Load (1.4ms)[0m  [1m[34mSELECT subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count FROM `subject_questions`[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 4, 7, 14)[0m
+  ↳ app/controllers/subject_questions_controller.rb:6:in `index'
+Completed 200 OK in 45ms (Views: 42.9ms | ActiveRecord: 2.0ms | Allocations: 18206)
+
+

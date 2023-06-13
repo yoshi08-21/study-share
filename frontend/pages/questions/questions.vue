@@ -119,7 +119,7 @@ export default {
       return sortedQuestions.slice(start, end)
     },
     totalPages() {
-      return Math.ceil(this.questions.length / this.perPage);
+      return Math.ceil(this.sortedQuestions.length / this.perPage);
     },
   },
   mounted() {
