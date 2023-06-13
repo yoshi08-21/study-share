@@ -59,11 +59,14 @@
     </v-dialog>
 
     <br><br>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    <template v-if="!sortedBooks.length == 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
     <br>
     <each-books :books="booksChunk"></each-books>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
-
+    <template v-if="!sortedBooks.length == 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
@@ -121,8 +124,11 @@ export default {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+    subjectFilteredBooks() {
+      return this.filterBooks()
+    },
     sortedBooks() {
-      return this.sortBooks()
+      return this.sortBooks(this.subjectFilteredBooks)
     },
     booksChunk() {
       const sortedBooks = this.sortedBooks
@@ -131,7 +137,7 @@ export default {
       return sortedBooks.slice(start, end)
     },
     totalPages() {
-      return Math.ceil(this.books.length / this.perPage);
+      return Math.ceil(this.sortedBooks.length / this.perPage);
     },
   },
   mounted() {
@@ -180,20 +186,28 @@ export default {
       this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
     },
-    sortBooks() {
+    // selectedBookSubjectに応じてbooksの絞り込みを行う。subjectが空の場合は元の配列をそのまま返す
+    filterBooks() {
+      if(this.selectedBooksSubject) {
+        const subjectFilteredBooks = this.books.filter(book => book.subject === this.selectedBooksSubject)
+        return subjectFilteredBooks
+      } else {
+        return this.books
+      }
+    },
+    sortBooks(books) {
       if(this.selectedSortOption === "新着順") {
-        return this.books.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        return [...books].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       } else if(this.selectedSortOption === "投稿順") {
-        return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+        return [...books].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       } else if(this.selectedSortOption === "評価が高い順") {
-        return this.books.sort((a, b) => b.average_rating - a.average_rating)
+        return [...books].sort((a, b) => b.average_rating - a.average_rating)
       } else if(this.selectedSortOption === "レビューが多い順") {
-        return this.books.sort((a, b) => b.reviews_count - a.reviews_count)
+        return [...books].sort((a, b) => b.reviews_count - a.reviews_count)
+      } else {
+        return [...books].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       }
-      else {
-        return this.books.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-      }
-    }
+    },
   }
 
 }

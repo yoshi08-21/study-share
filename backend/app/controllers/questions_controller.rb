@@ -84,7 +84,7 @@ class QuestionsController < ApplicationController
   end
 
   def all_questions
-    questions = Question.includes(:user, :book).all
+    questions = Question.includes(:user, :book).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
     if questions
       render json: questions, include: [:user, :book]
     else

@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   include RecordChecker
 
   def index
-    books = Book.includes(:reviews).select('books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating')
+    books = Book.includes(:reviews).select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating")
     if books
       render json: books, include: "reviews"
     else
