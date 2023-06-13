@@ -1972,3 +1972,43 @@ USE eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
 
+2023-06-14 04:35:55[WARN] user: yoshito-t
+GET /books/1/questions/2/replies
+AVOID eager loading detected
+  Reply => [:question]
+  Remove from your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
+
+2023-06-14 04:36:34[WARN] user: yoshito-t
+GET /books/1/questions/2/replies
+AVOID eager loading detected
+  Reply => [:question]
+  Remove from your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
+
+2023-06-14 04:37:24[WARN] user: yoshito-t
+GET /books/1/questions/2/replies
+AVOID eager loading detected
+  Reply => [:question]
+  Remove from your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
+
+2023-06-14 04:37:40[WARN] user: yoshito-t
+GET /books/1/questions/2/replies
+AVOID eager loading detected
+  Reply => [:question]
+  Remove from your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
+
+2023-06-14 04:40:24[WARN] user: yoshito-t
+GET /books/1/questions/2/replies
+AVOID eager loading detected
+  Reply => [:question]
+  Remove from your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/replies_controller.rb:7:in `index'
+

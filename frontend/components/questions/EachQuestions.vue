@@ -24,6 +24,10 @@
                       <v-img :src="question.book.image" alt="画像"></v-img>
                     </template>
                   </v-col>
+                  <p>
+                    返信: {{ question.replies_count }}
+                    いいね!: {{ question.favorite_questions_count }}
+                  </p>
                 </v-card-actions>
               </v-col>
             </v-row>
