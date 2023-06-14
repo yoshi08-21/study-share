@@ -171,6 +171,7 @@ export default {
     filterQuestions() {
       if(this.selectedQuestionsSubject) {
         const subjectFilteredQuestions = this.subjectQuestions.filter(subjectQuestion => subjectQuestion.subject === this.selectedQuestionsSubject)
+        this.page = 1
         return subjectFilteredQuestions
       } else {
         return this.subjectQuestions

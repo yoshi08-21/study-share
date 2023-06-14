@@ -19,11 +19,9 @@
                 </v-card-text>
               </v-col>
             </v-row>
-            <v-card-actions>
-              レビュー:{{ book.reviews_count }}件
-              平均評価:{{ book.average_rating }}
-              お気に入り: {{ book.favorite_books_count }}
-            </v-card-actions>
+              レビュー:{{ book.reviews.length }}件
+              平均評価:{{ book.avg_rating }}
+              お気に入り: {{ book.favorite_books.length }}件
           </v-card>
         </v-col>
       </v-row>

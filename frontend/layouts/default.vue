@@ -181,7 +181,7 @@ export default {
       }
     },
     searchBooks() {
-      this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+      this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
     },
     goToFavorites() {

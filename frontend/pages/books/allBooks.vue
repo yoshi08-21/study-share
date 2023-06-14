@@ -107,7 +107,7 @@ export default {
       perPage: 10,
       page: 1,
       searchBooksKeyword: "",
-      sortBooksOptions: ["新着順", "投稿順", "評価が高い順", "レビューが多い順"],
+      sortBooksOptions: ["新着順", "投稿順", "評価が高い順", "レビューが多い順", "お気に入り登録数が多い順"],
       booksSubjectOptions: [
       {text:"国語", disabled: true},"現代文", "古文", "漢文",
       {text:"社会", disabled: true}, "日本史", "世界史", "地理", "倫理・政治経済",
@@ -180,16 +180,17 @@ export default {
       }
     },
     redirectToSearchBooks() {
-      this.$router.push({ path: "/books/searchBooks" })
+      this.$router.push({ path: "/books/googleApiSearchBooks" })
     },
     searchBooks() {
-      this.$router.push({ path: "/books/searchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+      this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
     },
     // selectedBookSubjectに応じてbooksの絞り込みを行う。subjectが空の場合は元の配列をそのまま返す
     filterBooks() {
       if(this.selectedBooksSubject) {
         const subjectFilteredBooks = this.books.filter(book => book.subject === this.selectedBooksSubject)
+        this.page = 1
         return subjectFilteredBooks
       } else {
         return this.books
@@ -204,6 +205,8 @@ export default {
         return [...books].sort((a, b) => b.average_rating - a.average_rating)
       } else if(this.selectedSortOption === "レビューが多い順") {
         return [...books].sort((a, b) => b.reviews_count - a.reviews_count)
+      } else if(this.selectedSortOption === "お気に入り登録数が多い順") {
+        return [...books].sort((a, b) => b.favorite_books_count - a.favorite_books_count)
       } else {
         return [...books].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       }

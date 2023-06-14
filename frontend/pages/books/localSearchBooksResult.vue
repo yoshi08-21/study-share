@@ -12,8 +12,10 @@
     </v-card>
 
     <div v-if="searchBooksResult.length > 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
-      <each-books :books="searchBooksResult"></each-books>
+      <each-local-search-result :books="booksChunk"></each-local-search-result>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </div>
     <div v-else>
       <p>検索結果はありません</p>
@@ -23,11 +25,11 @@
 
 <script>
 
-import EachBooks from '../../components/books/EachBooks.vue'
+import EachLocalSearchResult from '../../components/books/EachLocalSearchResult.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EachBooks },
+  components: { EachLocalSearchResult },
   async asyncData({ route }) {
     try {
       const response = await axios.get("/books/search_books", {
@@ -63,8 +65,19 @@ export default {
   data() {
     return {
       newKeyword: "",
-
+      perPage: 10,
+      page: 1,
     }
+  },
+  computed: {
+    booksChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.searchBooksResult.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.searchBooksResult.length / this.perPage);
+    },
   },
   methods: {
     async updateSearchResult(searchBooksKeyword) {
@@ -76,6 +89,7 @@ export default {
         })
         console.log(response.data)
         this.searchBooksKeyword = searchBooksKeyword
+        this.page = 1
         return response.data
       } catch(error) {
         console.log(error)

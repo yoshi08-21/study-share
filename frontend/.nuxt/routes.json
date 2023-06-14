@@ -35,18 +35,18 @@
     "_name": "_0a817c20"
   },
   {
-    "name": "books-searchBooks",
-    "path": "/books/searchBooks",
-    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/searchBooks.vue",
-    "chunkName": "pages/books/searchBooks",
-    "_name": "_612c4acb"
+    "name": "books-googleApiSearchBooks",
+    "path": "/books/googleApiSearchBooks",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/googleApiSearchBooks.vue",
+    "chunkName": "pages/books/googleApiSearchBooks",
+    "_name": "_0a7c5830"
   },
   {
-    "name": "books-searchBooksResult",
-    "path": "/books/searchBooksResult",
-    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/searchBooksResult.vue",
-    "chunkName": "pages/books/searchBooksResult",
-    "_name": "_0f0c6648"
+    "name": "books-localSearchBooksResult",
+    "path": "/books/localSearchBooksResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/localSearchBooksResult.vue",
+    "chunkName": "pages/books/localSearchBooksResult",
+    "_name": "_3b56b5ca"
   },
   {
     "name": "browsingHistories-allBrowsingHistories",

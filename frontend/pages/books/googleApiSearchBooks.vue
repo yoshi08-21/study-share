@@ -4,7 +4,7 @@
 
     <v-card>
       <v-card-title>
-        参考書：検索ボックス
+        新規登録する参考書を検索
         <v-text-field v-model="keyword"></v-text-field>
         <!-- <input type="text" v-model="keyword"> -->
         <v-btn @click="searchBooks(keyword)">検索</v-btn>
@@ -204,8 +204,8 @@ export default {
             image : image ? image.thumbnail : "",
             description: description ? description.slice(0, 40) : ""
           })
-
         }
+        this.page = 1
       } catch(error) {
         console.log(error)
         throw error
