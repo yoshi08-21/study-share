@@ -2020,3 +2020,59 @@ AVOID eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_question_replies_controller.rb:7:in `index'
 
+2023-06-14 09:42:11[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-14 10:09:53[WARN] user: yoshito-t
+GET /books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E
+AVOID eager loading detected
+  Book => ["reviews", :reviews]
+  Remove from your query: .includes([:reviews, :reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:106:in `search_books'
+
+2023-06-14 10:10:32[WARN] user: yoshito-t
+GET /books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E
+AVOID eager loading detected
+  Book => ["reviews", :reviews]
+  Remove from your query: .includes([:reviews, :reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:106:in `search_books'
+
+2023-06-14 10:10:49[WARN] user: yoshito-t
+GET /books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E
+AVOID eager loading detected
+  Book => ["reviews", :reviews]
+  Remove from your query: .includes([:reviews, :reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:106:in `search_books'
+
+2023-06-14 10:11:28[WARN] user: yoshito-t
+GET /books/search_books?searchBooksKeyword=%E8%8B%B1%E8%AA%9E
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:106:in `search_books'
+
+2023-06-14 12:12:25[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+
+2023-06-14 12:12:27[WARN] user: yoshito-t
+GET /notifications?current_user_id=7
+USE eager loading detected
+  Notification => [:action_user]
+  Add to your query: .includes([:action_user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/notifications_controller.rb:12:in `index'
+

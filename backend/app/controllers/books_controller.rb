@@ -2,7 +2,8 @@ class BooksController < ApplicationController
   include RecordChecker
 
   def index
-    books = Book.includes(:reviews).select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating")
+    books = Book.includes(:reviews)
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
     if books
       render json: books, include: "reviews"
     else
@@ -97,11 +98,17 @@ class BooksController < ApplicationController
 
   def search_books
     search_books_keyword = params[:searchBooksKeyword]
-    books = Book.where("name LIKE ?", "%#{search_books_keyword}%").or(Book.where("author LIKE ?", "%#{search_books_keyword}%")).or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%")).or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
+    books = Book.includes(:reviews, :favorite_books).where("name LIKE ?", "%#{search_books_keyword}%")
+                .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
+                .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
+                .or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
     books_count = books.count
-    if books
+    if books.present?
+      books.each do |book|
+        book.avg_rating = book.reviews.average(:rating)
+      end
       render json: {
-        books: books,
+        books: books.as_json(include: [:reviews, :favorite_books]),
         books_count: books_count
       }
     else
