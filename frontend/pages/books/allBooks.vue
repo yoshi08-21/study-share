@@ -9,7 +9,7 @@
         <v-text-field v-model="searchBooksKeyword"></v-text-field><v-btn @click="searchBooks">検索</v-btn>
       </v-card-title>
       <v-card-title>
-        <v-btn @click="openDialog" block>新しい参考書を登録する</v-btn>
+        <v-btn @click="openDialog" color="primary" block>新しい参考書を登録する</v-btn>
       </v-card-title>
     </v-card>
 
