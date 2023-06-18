@@ -82,8 +82,12 @@ class SubjectQuestionsController < ApplicationController
 
   def search_subject_questions
     search_subject_questions_keyword = params[:searchSubjectQuestionsKeyword]
-    subject_questions = SubjectQuestion.includes(:user).where("title LIKE ?", "%#{search_subject_questions_keyword}%").or(SubjectQuestion.where("content LIKE ?", "%#{search_subject_questions_keyword}%")).or(SubjectQuestion.where("subject LIKE ?", "%#{search_subject_questions_keyword}%"))
-    subject_questions_count = subject_questions.count
+    subject_questions = SubjectQuestion.includes(:user)
+                        .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+                        .where("title LIKE ?", "%#{search_subject_questions_keyword}%")
+                        .or(SubjectQuestion.where("content LIKE ?", "%#{search_subject_questions_keyword}%"))
+                        .or(SubjectQuestion.where("subject LIKE ?", "%#{search_subject_questions_keyword}%"))
+    subject_questions_count = subject_questions.length
     if subject_questions
       render json: {
         subject_questions: subject_questions.as_json(include: :user),

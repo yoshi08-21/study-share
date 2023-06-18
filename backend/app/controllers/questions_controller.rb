@@ -94,8 +94,12 @@ class QuestionsController < ApplicationController
 
   def search_questions
     search_questions_keyword = params[:searchQuestionsKeyword]
-    questions = Question.includes(:user, :book).where("title LIKE ?", "%#{search_questions_keyword}%").or(Question.where("content LIKE ?", "%#{search_questions_keyword}%")).or(Question.where("subject LIKE ?", "%#{search_questions_keyword}%"))
-    questions_count = questions.count
+    questions = Question.includes(:user, :book)
+                        .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+                        .where("title LIKE ?", "%#{search_questions_keyword}%")
+                        .or(Question.where("content LIKE ?", "%#{search_questions_keyword}%"))
+                        .or(Question.where("subject LIKE ?", "%#{search_questions_keyword}%"))
+    questions_count = questions.length
     if questions
       render json: {
         questions: questions.as_json(include: [:user, :book]),
