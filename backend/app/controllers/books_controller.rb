@@ -97,16 +97,16 @@ class BooksController < ApplicationController
   end
 
   def search_books
+    current_user_id = User.find_by(id: params[:current_user_id]).id
     search_books_keyword = params[:searchBooksKeyword]
-    books = Book.includes(:reviews, :favorite_books).where("name LIKE ?", "%#{search_books_keyword}%")
+    books = Book.includes(:reviews, :favorite_books)
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE user_id = #{current_user_id} AND book_id = books.id) AS is_favorite")
+                .where("name LIKE ?", "%#{search_books_keyword}%")
                 .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
-    books_count = books.count
+    books_count = books.length
     if books.present?
-      books.each do |book|
-        book.avg_rating = book.reviews.average(:rating)
-      end
       render json: {
         books: books.as_json(include: [:reviews, :favorite_books]),
         books_count: books_count

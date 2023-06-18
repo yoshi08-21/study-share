@@ -2,6 +2,7 @@ class NotificationsController < ApplicationController
   def index
     current_user = User.find_by(id: params[:current_user_id])
     notifications = Notification.includes(
+      :action_user,
       review: :user,
       question: :user,
       reply: [:user, :question],

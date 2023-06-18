@@ -11,10 +11,10 @@
       </v-card-title>
     </v-card>
 
-    <div v-if="searchBooksResult.length > 0">
+    <div v-if="searchBooksResult && searchBooksResult.length > 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
-      <each-local-search-result :books="booksChunk"></each-local-search-result>
+      <each-books :books="booksChunk"></each-books>
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </div>
     <div v-else>
@@ -25,16 +25,17 @@
 
 <script>
 
-import EachLocalSearchResult from '../../components/books/EachLocalSearchResult.vue'
+import EachBooks from '../../components/books/EachBooks.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EachLocalSearchResult },
-  async asyncData({ route }) {
+  components: { EachBooks },
+  async asyncData({ route, store }) {
     try {
       const response = await axios.get("/books/search_books", {
         params: {
-          searchBooksKeyword: route.query.searchBooksKeyword
+          searchBooksKeyword: route.query.searchBooksKeyword,
+          current_user_id: store.getters["auth/getCurrentUserId"]
         }
       })
       console.log(response.data)
@@ -84,7 +85,8 @@ export default {
       try {
         const response = await axios.get("/books/search_books", {
           params: {
-            searchBooksKeyword
+            searchBooksKeyword,
+            current_user_id: this.$store.getters["auth/getCurrentUserId"]
           }
         })
         console.log(response.data)
