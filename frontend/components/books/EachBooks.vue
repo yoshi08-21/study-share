@@ -71,11 +71,14 @@ export default {
           console.log(response.data)
           book.check_favorite = 1
           book.favorite_books_count += 1
+          this.snackbarColor = "primary"
           this.snackbar = true
           this.flashMessage = "お気に入りに追加しました"
         } catch(error) {
           console.log(error)
-          console.log("すでにお気に入りに登録されています")
+          this.snackbarColor = "red accent-2"
+          this.snackbar = true
+          this.flashMessage = "すでにお気に入りに登録されています"
         }
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
@@ -101,7 +104,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "気に入りに登録されていません"
+        this.flashMessage = "お気に入りに登録されていません"
       }
     },
   }
