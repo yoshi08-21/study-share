@@ -35,10 +35,15 @@ export default {
       const response = await axios.get("/books/search_books", {
         params: {
           searchBooksKeyword: route.query.searchBooksKeyword,
+          // currentUserがnullの場合、デフォルト値の０が返ってくる
           current_user_id: store.getters["auth/getCurrentUserId"]
         }
       })
       console.log(response.data)
+      console.log(response.data.books[0].check_favorite)
+      console.log(response.data.books[1].check_favorite)
+      console.log(response.data.books[2].check_favorite)
+      console.log(response.data.books[3].check_favorite)
       return {
         searchBooksResult: response.data.books,
         totalCount: response.data.books_count,

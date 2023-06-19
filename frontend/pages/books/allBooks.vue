@@ -80,11 +80,11 @@ import axios from "@/plugins/axios"
 
 export default {
   components: { EachBooks, BookForm },
-  async asyncData() {
+  async asyncData({ store }) {
     try {
       const response = await axios.get("/books", {
         params: {
-          current_user_id: 1
+          current_user_id: store.getters["auth/getCurrentUserId"]
         }
       })
       console.log(response.data)

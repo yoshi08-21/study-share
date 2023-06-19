@@ -2,8 +2,9 @@ class BooksController < ApplicationController
   include RecordChecker
 
   def index
+    current_user_id = params[:current_user_id]
     books = Book.includes(:reviews)
-                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
+                  .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
     if books
       render json: books, include: "reviews"
     else
@@ -97,10 +98,11 @@ class BooksController < ApplicationController
   end
 
   def search_books
-    current_user_id = User.find_by(id: params[:current_user_id]).id
+    # currentUserがnullの場合、デフォルト値の０が返ってくる
+    current_user_id = params[:current_user_id]
     search_books_keyword = params[:searchBooksKeyword]
     books = Book.includes(:reviews, :favorite_books)
-                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE user_id = #{current_user_id} AND book_id = books.id) AS is_favorite")
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
                 .where("name LIKE ?", "%#{search_books_keyword}%")
                 .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
