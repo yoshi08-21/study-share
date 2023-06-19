@@ -56,7 +56,11 @@ export const getters = {
     return state.currentUser
   },
   getCurrentUserId(state) {
-    return state.currentUser.id
+    if (state.currentUser) {
+      return state.currentUser.id
+    } else {
+      return 0
+    }
   }
 
 }

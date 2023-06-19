@@ -36,5 +36,17 @@ class FavoriteBooksController < ApplicationController
     end
   end
 
+  def destroy_from_item_list
+    current_user = User.find_by(id: params[:user_id])
+    book = Book.find_by(id: params[:book_id])
+    favorite_book = current_user.favorite_books.find_by(book_id: book.id)
+    if favorite_book.destroy
+      render json: { status: :ok }
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
+
 
 end
