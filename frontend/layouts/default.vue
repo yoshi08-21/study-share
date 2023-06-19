@@ -63,7 +63,11 @@
     <v-main>
       <v-container>
         <Nuxt />
-        <v-btn @click="showUserMemo = true" fab fixed class="fab-button">ボタン</v-btn>
+        <v-btn @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
+          <v-icon dark>
+        mdi-pencil
+      </v-icon>
+        </v-btn>
         <v-overlay
           :value="showUserMemo"
           :z-index="zIndex"
@@ -73,15 +77,16 @@
             v-model="showUserMemo"
             hide-overlay
             persistent
-            max-height="800px"
             max-width="800px"
+            transition="dialog-bottom-transition"
           >
             <v-card
             >
               <v-card-title>
-                Dialog Title
+                ユーザーメモ
               </v-card-title>
               <v-card-text>
+                気になったことや覚えておきたいことなどをメモして保存できます
                 <v-textarea
                   v-model="userMemo"
                   auto-grow
@@ -90,7 +95,7 @@
                   rows="10"
                   label="ユーザーメモ"
                   ></v-textarea>
-                  <v-btn>保存する</v-btn>
+                <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
                 <v-btn @click="showUserMemo = false">閉じる</v-btn>
               </v-card-text>
             </v-card>
@@ -189,7 +194,7 @@ export default {
       showUserMemo: false,
       overlay: false,
       zIndex: 0,
-      userMemo: ""
+      userMemo: "",
     }
   },
   computed: {
