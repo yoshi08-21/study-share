@@ -70,6 +70,7 @@ export default {
           })
           console.log(response.data)
           book.check_favorite = 1
+          book.favorite_books_count += 1
           this.snackbar = true
           this.flashMessage = "お気に入りに追加しました"
         } catch(error) {
@@ -91,6 +92,7 @@ export default {
           }
         })
         console.log(response)
+        book.favorite_books_count -= 1
         book.check_favorite = 0
         this.snackbar = true
         this.snackbarColor = "primary"
