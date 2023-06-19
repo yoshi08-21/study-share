@@ -63,6 +63,7 @@
     <v-main>
       <v-container>
         <Nuxt />
+        <v-btn fab fixed class="fab-button">ボタン</v-btn>
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -212,5 +213,11 @@ export default {
 <style>
 .v-main {
   background-color: #edebe8;
+}
+
+.fab-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
 }
 </style>
