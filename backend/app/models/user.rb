@@ -39,6 +39,7 @@ class User < ApplicationRecord
   validates :second_choice_school, length: { maximum: 30 }
   validates :third_choice_school, length: { maximum: 30 }
   validates :introduction, length: { maximum: 200 }
+  validates :memo, length: { maximum: 10000 }
 
 
 

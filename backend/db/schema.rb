@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_31_132242) do
+ActiveRecord::Schema.define(version: 2023_06_19_233623) do
 
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 2023_05_31_132242) do
     t.boolean "admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "memo"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -86,7 +86,7 @@
                 ユーザーメモ
               </v-card-title>
               <v-card-text>
-                気になったことや覚えておきたいことなどをメモして保存できます
+                気になったことや覚えておきたいことなどをメモして保存できます（最大１万文字）
                 <v-textarea
                   v-model="userMemo"
                   auto-grow
@@ -94,6 +94,7 @@
                   shaped
                   rows="10"
                   label="ユーザーメモ"
+                  counter
                   ></v-textarea>
                 <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
                 <v-btn @click="showUserMemo = false">閉じる</v-btn>
