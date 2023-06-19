@@ -63,7 +63,39 @@
     <v-main>
       <v-container>
         <Nuxt />
-        <v-btn fab fixed class="fab-button">ボタン</v-btn>
+        <v-btn @click="showUserMemo = true" fab fixed class="fab-button">ボタン</v-btn>
+        <v-overlay
+          :value="showUserMemo"
+          :z-index="zIndex"
+          opacity="0"
+        >
+          <v-dialog
+            v-model="showUserMemo"
+            hide-overlay
+            persistent
+            max-height="800px"
+            max-width="800px"
+          >
+            <v-card
+            >
+              <v-card-title>
+                Dialog Title
+              </v-card-title>
+              <v-card-text>
+                <v-textarea
+                  v-model="userMemo"
+                  auto-grow
+                  filled
+                  shaped
+                  rows="10"
+                  label="ユーザーメモ"
+                  ></v-textarea>
+                  <v-btn>保存する</v-btn>
+                <v-btn @click="showUserMemo = false">閉じる</v-btn>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-overlay>
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -153,7 +185,11 @@ export default {
         to: "/"
       },
       user: {},
-      searchBooksKeyword: ""
+      searchBooksKeyword: "",
+      showUserMemo: false,
+      overlay: false,
+      zIndex: 0,
+      userMemo: ""
     }
   },
   computed: {
@@ -219,5 +255,11 @@ export default {
   position: fixed;
   right: 20px;
   bottom: 20px;
+}
+
+.set-right-bottom {
+  position: fixed;
+  right: 20;
+  bottom: 20;
 }
 </style>
