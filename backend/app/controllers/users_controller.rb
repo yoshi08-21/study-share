@@ -59,10 +59,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def save_user_memo
+    current_user = User.find_by(id: params[:current_user_id])
+    memo = params[:memo]
+    if current_user.update(memo: memo)
+      render json: current_user, status: 200
+    else
+      render json: current_user.errors, status: 400
+    end
+
+  end
+
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :uid, :introduction, :first_choice_school, :second_choice_school, :third_choice_school)
+      params.require(:user).permit(:name, :email, :uid, :introduction, :first_choice_school, :second_choice_school, :third_choice_school, :memo)
     end
 
     def check_admin?(user)
