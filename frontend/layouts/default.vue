@@ -65,7 +65,7 @@
         <Nuxt />
         <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
           <v-icon dark>
-            mdi-pencil
+            mdi-book-edit
           </v-icon>
         </v-btn>
         <v-overlay
