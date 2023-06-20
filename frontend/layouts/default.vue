@@ -63,10 +63,10 @@
     <v-main>
       <v-container>
         <Nuxt />
-        <v-btn @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
+        <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
           <v-icon dark>
-        mdi-pencil
-      </v-icon>
+            mdi-pencil
+          </v-icon>
         </v-btn>
         <v-overlay
           :value="showUserMemo"
@@ -102,6 +102,8 @@
             </v-card>
           </v-dialog>
         </v-overlay>
+        <br>
+        <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -136,12 +138,24 @@
 
 import { getAuth, signOut } from "firebase/auth"
 import checkNotifications from "../middleware/checkNotifications"
+import axios from "@/plugins/axios"
 
 
 export default {
   name: 'DefaultLayout',
   middleware: [checkNotifications],
-  // middleware: "getUser",
+  // ログアウト→ログイン時にユーザーメモが更新されるようにする
+  watch: {
+    "currentUser"(newValue, oldValue) {
+      if(newValue !== oldValue) {
+        if(this.currentUser) {
+          this.userMemo = this.currentUser.memo
+        } else {
+          this.userMemo = ""
+        }
+      }
+    }
+  },
   data() {
     return {
       clipped: false,
@@ -195,7 +209,10 @@ export default {
       showUserMemo: false,
       overlay: false,
       zIndex: 0,
-      userMemo: "",
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
+      userMemo: ""
     }
   },
   computed: {
@@ -207,8 +224,12 @@ export default {
     },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications
+    },
+  },
+  created() {
+    if(this.currentUser) {
+      this.userMemo = this.currentUser.memo
     }
-
   },
   methods: {
     async logout() {
@@ -218,6 +239,7 @@ export default {
         this.$store.dispatch("auth/setLoginState", false)
         this.$store.dispatch("auth/setUserUid", "")
         this.$store.dispatch("auth/setEmail", "")
+        this.userMemo = ""
         this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
       } catch(error) {
         console.log(error)
@@ -248,6 +270,20 @@ export default {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
       }
     },
+    async saveUserMemo() {
+      try {
+        const response = await axios.patch("/users/save_user_memo", {
+          current_user_id: this.currentUser.id,
+          memo: this.userMemo
+        })
+        console.log(response.data)
+        this.snackbar = true
+        this.flashMessage = "メモを保存しました"
+      } catch(error) {
+        console.log(error)
+        throw error
+      }
+    }
   }
 }
 </script>
