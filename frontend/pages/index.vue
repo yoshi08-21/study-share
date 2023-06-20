@@ -19,12 +19,34 @@
     <hr>
     <v-sheet>
       <v-slide-group multiple show-arrows>
-        <v-slide-group v-for="newReview in newReviews" :key="newReview.id">
-          <v-card style="margin: 0 20px 0 20; width: 320px; height: 240px;">
-            <v-card-title>{{ newReview.title }}</v-card-title>
-            <v-card-text class="text--primary">{{ newReview.content }}</v-card-text>
-          </v-card>
-        </v-slide-group>v-slide-item>
+        <v-slide-group>
+          <v-slide-item v-for="newReview in newReviews" :key="newReview.id">
+            <v-card :to="`/books/${newReview.book_id}/reviews/${newReview.id}`">
+              <v-row>
+                <v-col cols="10">
+                  <v-card-title>
+                    タイトル: {{ newReview.title }}
+                    評価：<v-rating v-model="newReview.rating" :readonly="true" background-color="orange lighten-3" color="orange"></v-rating>({{ newReview.rating }})
+                  </v-card-title>
+                  <v-card-text>
+                    <p>{{ newReview.content }}</p>
+                  </v-card-text>
+                  <v-card-actions>
+                    by: {{ newReview.user.name }}
+                  </v-card-actions>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="2">
+                  to: {{ newReview.book.name }}
+                  <template v-if="newReview.book.image">
+                    <v-img :src="newReview.book.image" alt="画像"></v-img>
+                  </template>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
       </v-slide-group>
     </v-sheet>
     <br>
