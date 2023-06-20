@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get "show_other_user/:id", to: "users#show_other_user"
+      patch "save_user_memo"
     end
   end
   resources :books, only: [:index, :show, :create, :update, :destroy] do
