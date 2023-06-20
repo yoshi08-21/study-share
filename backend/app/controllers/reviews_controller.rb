@@ -70,10 +70,9 @@ class ReviewsController < ApplicationController
   end
 
   def new_reviews
-    reviews = Review.all
-    # 後でレビューの並び替え・件数の制限を実装する
+    reviews = Review.includes(:user, :book).order("created_at DESC").limit(5)
     if reviews
-      render json: reviews
+      render json: reviews, include: [:user, :book]
     else
       render json: reviews.errors
     end
