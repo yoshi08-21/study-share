@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   get "/favorites", to: "favorites#index"
   delete "/favorite_books/destroy_from_item_list", to: "favorite_books#destroy_from_item_list"
 
+  resources :pages, only: [:index] do
+    collection do
+      get "new_reviews"
+      get "popular_books"
+    end
+  end
+
   resources :users do
     collection do
       get "show_other_user/:id", to: "users#show_other_user"
@@ -25,7 +32,6 @@ Rails.application.routes.draw do
   resources :reviews do
     resources :favorite_reviews, only: [:create, :destroy]
     collection do
-      get "new_reviews"
       get "is_favorite"
     end
   end
