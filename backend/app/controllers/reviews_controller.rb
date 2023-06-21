@@ -69,15 +69,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def new_reviews
-    reviews = Review.includes(:user, :book).order("created_at DESC").limit(5)
-    if reviews
-      render json: reviews, include: [:user, :book]
-    else
-      render json: reviews.errors
-    end
-  end
-
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
     review = Review.find_by(id: params[:review_id])
