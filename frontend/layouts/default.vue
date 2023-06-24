@@ -96,6 +96,7 @@
                   label="ユーザーメモ"
                   counter
                   ></v-textarea>
+                  <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
                 <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
                 <v-btn @click="showUserMemo = false">閉じる</v-btn>
               </v-card-text>
