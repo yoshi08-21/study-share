@@ -85,6 +85,7 @@
     </v-sheet>
 
 
+
 <!--
     <template>
   <v-row align="center">
@@ -157,11 +158,130 @@
   </v-row>
 </template> -->
 
+<!-- トップページでログアウトしてもレコメンドが残り続けるバグを解消 -->
 
-    <br>
-    <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
-    <hr>
-    <h1>サンプル</h1>
+    <tepmlate v-if="currentUser">
+      <template v-if="currentUser.first_choice_school">
+        <br>
+        <h3>{{ currentUser.first_choice_school }}を志望している人が使っている参考書</h3>
+        <hr>
+        <v-sheet>
+          <v-slide-group multiple show-arrows>
+            <v-slide-group>
+              <v-slide-item v-for="firstChoiceSchoolBook in firstChoiceSchoolBooks" :key="firstChoiceSchoolBook.id">
+                <v-card :to="`/books/${firstChoiceSchoolBook.id}`">
+                  <v-row>
+                    <v-col cols="2">
+                      <template v-if="firstChoiceSchoolBook.image">
+                        <v-img :src="firstChoiceSchoolBook.image" alt="画像"></v-img>
+                      </template>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-card-title>タイトル: {{ firstChoiceSchoolBook.name }}</v-card-title>
+                      <v-card-text>
+                        <h4>著者: {{ firstChoiceSchoolBook.author }}</h4>
+                        <h4>出版社: {{ firstChoiceSchoolBook.publisher }}</h4>
+                        <h4>科目: {{ firstChoiceSchoolBook.subject }}</h4>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                  <v-card-actions>
+                    レビュー:{{ firstChoiceSchoolBook.reviews_count }}件
+                    平均評価:{{ firstChoiceSchoolBook.average_rating }}
+                    お気に入り: {{ firstChoiceSchoolBook.favorite_books_count }}
+                  </v-card-actions>
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+          </v-slide-group>
+        </v-sheet>
+      </template>
+
+      <template v-if="currentUser.second_choice_school">
+
+        <br>
+        <h3>{{ currentUser.second_choice_school }}を志望している人が使っている参考書</h3>
+        <hr>
+        <v-sheet>
+          <v-slide-group multiple show-arrows>
+            <v-slide-group>
+              <v-slide-item v-for="secondChoiceSchoolBook in secondChoiceSchoolBooks" :key="secondChoiceSchoolBook.id">
+                <v-card :to="`/books/${secondChoiceSchoolBook.id}`">
+                  <v-row>
+                    <v-col cols="2">
+                      <template v-if="secondChoiceSchoolBook.image">
+                        <v-img :src="secondChoiceSchoolBook.image" alt="画像"></v-img>
+                      </template>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-card-title>タイトル: {{ secondChoiceSchoolBook.name }}</v-card-title>
+                      <v-card-text>
+                        <h4>著者: {{ secondChoiceSchoolBook.author }}</h4>
+                        <h4>出版社: {{ secondChoiceSchoolBook.publisher }}</h4>
+                        <h4>科目: {{ secondChoiceSchoolBook.subject }}</h4>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                  <v-card-actions>
+                    レビュー:{{ secondChoiceSchoolBook.reviews_count }}件
+                    平均評価:{{ secondChoiceSchoolBook.average_rating }}
+                    お気に入り: {{ secondChoiceSchoolBook.favorite_books_count }}
+                  </v-card-actions>
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+          </v-slide-group>
+        </v-sheet>
+      </template>
+
+      <template v-if="currentUser.third_choice_school">
+        <br>
+        <h3>{{ currentUser.third_choice_school }}を志望している人が使っている参考書</h3>
+        <hr>
+        <v-sheet>
+          <v-slide-group multiple show-arrows>
+            <v-slide-group>
+              <v-slide-item v-for="thirdChoiceSchoolBook in thirdChoiceSchoolBooks" :key="thirdChoiceSchoolBook.id">
+                <v-card :to="`/books/${thirdChoiceSchoolBook.id}`">
+                  <v-row>
+                    <v-col cols="2">
+                      <template v-if="thirdChoiceSchoolBook.image">
+                        <v-img :src="thirdChoiceSchoolBook.image" alt="画像"></v-img>
+                      </template>
+                    </v-col>
+                    <v-col cols="10">
+                      <v-card-title>タイトル: {{ thirdChoiceSchoolBook.name }}</v-card-title>
+                      <v-card-text>
+                        <h4>著者: {{ thirdChoiceSchoolBook.author }}</h4>
+                        <h4>出版社: {{ thirdChoiceSchoolBook.publisher }}</h4>
+                        <h4>科目: {{ thirdChoiceSchoolBook.subject }}</h4>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                  <v-card-actions>
+                    レビュー:{{ thirdChoiceSchoolBook.reviews_count }}件
+                    平均評価:{{ thirdChoiceSchoolBook.average_rating }}
+                    お気に入り: {{ thirdChoiceSchoolBook.favorite_books_count }}
+                  </v-card-actions>
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+          </v-slide-group>
+        </v-sheet>
+      </template>
+
+      <template v-if="currentUser.first_choice_school === null && currentUser.second_choice_school === null && currentUser.third_choice_school == null">
+        <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
+        <p>志望大学を登録すると使用できます</p>
+      </template>
+
+    </tepmlate>
+    <template v-else>
+      <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
+      <p>ログイン後に使用できます</p>
+    </template>
+
+
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -180,23 +300,41 @@ export default {
   async asyncData({ store }) {
     try {
 
-      // let currentUserId = null
-      // const currentUser = store.getters["auth/getCurrentUser"]
-      // if (currentUser && currentUser.id) {
-      //   currentUserId = currentUser.id
-      // }
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
 
-      const [newReviewsResponse, popularBooksResponse] = await Promise.all([
-        axios.get("/pages/new_reviews"),
-        axios.get("/pages/popular_books")
-      ])
+      const promises = [axios.get("/pages/new_reviews"), axios.get("/pages/popular_books")]
+
+      if(currentUserId !== null) {
+        promises.push(axios.get("/pages/get_same_university_books", {
+          params: {
+            current_user_id: currentUserId
+          }
+        }))
+      } else {
+        promises.push(axios.get("/pages/get_same_university_books", {
+          params: {
+            current_user_id: 0
+          }
+        }))
+      }
+
+      const [newReviewsResponse, popularBooksResponse, sameUniversityBooksResponse] = await Promise.all(promises)
       const newReviews = newReviewsResponse.data
       const popularBooks = popularBooksResponse.data
+      const sameUniversityBooks = sameUniversityBooksResponse.data
       console.log(newReviews)
       console.log(popularBooks)
+      console.log(sameUniversityBooks)
       return{
         newReviews,
-        popularBooks
+        popularBooks,
+        firstChoiceSchoolBooks: sameUniversityBooks.first_choice_school_books,
+        secondChoiceSchoolBooks: sameUniversityBooks.second_choice_school_books,
+        thirdChoiceSchoolBooks: sameUniversityBooks.third_choice_school_books
       }
     } catch(error) {
       console.log(error)

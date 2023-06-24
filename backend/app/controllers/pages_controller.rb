@@ -22,5 +22,41 @@ class PagesController < ApplicationController
     end
   end
 
+  def get_same_university_books
+    current_user = User.find_by(id: params[:current_user_id])
+    if current_user && current_user.first_choice_school
+      first_choice_school_books = Book.joins(favorite_books: :user)
+                                        .where("users.first_choice_school = ?",current_user.first_choice_school)
+                                        .group(:book_id)
+                                        .order("count(favorite_books.id) DESC")
+                                        .limit(5)
+                                        .includes([:reviews])
+    end
+    if current_user && current_user.second_choice_school
+      second_choice_school_books = Book.joins(favorite_books: :user)
+                                        .where("users.first_choice_school = ?",current_user.second_choice_school)
+                                        .group(:book_id)
+                                        .order("count(favorite_books.id) DESC")
+                                        .limit(5)
+                                        .includes([:reviews])
+    end
+    if current_user && current_user.third_choice_school
+      third_choice_school_books = Book.joins(favorite_books: :user)
+                                        .where("users.first_choice_school = ?",current_user.third_choice_school)
+                                        .group(:book_id)
+                                        .order("count(favorite_books.id) DESC")
+                                        .limit(5)
+                                        .includes([:reviews])
+    end
+    books = {
+      first_choice_school_books: first_choice_school_books,
+      second_choice_school_books: second_choice_school_books,
+      third_choice_school_books: third_choice_school_books
+    }
+    books.compact!
+    if books
+      render json: books, include: "reviews"
+    end
+  end
 
 end

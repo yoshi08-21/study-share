@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get "new_reviews"
       get "popular_books"
+      get "get_same_university_books"
     end
   end
 
