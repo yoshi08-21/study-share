@@ -36,8 +36,8 @@
     </template>
 
     <br>
-    <v-btn @click="previousQuestion">前の質問</v-btn>
-    <v-btn @click="nextQuestion">次の質問</v-btn>
+    <v-btn @click="previousQuestion">前の「{{ subjectQuestion.subject }}」の質問</v-btn>
+    <v-btn @click="nextQuestion">次の「{{ subjectQuestion.subject }}」の質問</v-btn>
 
     <br><br>
     <v-btn @click="redirectToSubjectQuestions">科目別質問一覧に戻る</v-btn>
