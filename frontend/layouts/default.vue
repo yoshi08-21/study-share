@@ -5,7 +5,7 @@
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
-      app
+      temporary
     >
       <v-list>
         <v-list-item
