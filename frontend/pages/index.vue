@@ -51,38 +51,7 @@
     </v-sheet>
     <br>
     <h3>みんなが使っている参考書</h3>
-    <hr>
-
-    <v-sheet>
-      <v-slide-group multiple show-arrows>
-        <v-slide-group>
-          <v-slide-item v-for="popularBook in popularBooks" :key="popularBook.id">
-            <v-card :to="`/books/${popularBook.id}`">
-              <v-row>
-                <v-col cols="2">
-                  <template v-if="popularBook.image">
-                    <v-img :src="popularBook.image" alt="画像"></v-img>
-                  </template>
-                </v-col>
-                <v-col cols="10">
-                  <v-card-title>タイトル: {{ popularBook.name }}</v-card-title>
-                  <v-card-text>
-                    <h4>著者: {{ popularBook.author }}</h4>
-                    <h4>出版社: {{ popularBook.publisher }}</h4>
-                    <h4>科目: {{ popularBook.subject }}</h4>
-                  </v-card-text>
-                </v-col>
-              </v-row>
-              <v-card-actions>
-                レビュー:{{ popularBook.reviews_count }}件
-                平均評価:{{ popularBook.average_rating }}
-                お気に入り: {{ popularBook.favorite_books_count }}
-              </v-card-actions>
-            </v-card>
-          </v-slide-item>
-        </v-slide-group>
-      </v-slide-group>
-    </v-sheet>
+    <top-page-each-books :books="popularBooks"></top-page-each-books>
 
 
 
@@ -159,115 +128,25 @@
 </template> -->
 
 <!-- トップページでログアウトしてもレコメンドが残り続けるバグを解消 -->
+<!-- 一覧ページでレビュー件数や平均評価が０の場合に、空白ではなく０を表示するように変更 -->
 
     <tepmlate v-if="currentUser">
       <template v-if="currentUser.first_choice_school">
         <br>
         <h3>{{ currentUser.first_choice_school }}を志望している人が使っている参考書</h3>
-        <hr>
-        <v-sheet>
-          <v-slide-group multiple show-arrows>
-            <v-slide-group>
-              <v-slide-item v-for="firstChoiceSchoolBook in firstChoiceSchoolBooks" :key="firstChoiceSchoolBook.id">
-                <v-card :to="`/books/${firstChoiceSchoolBook.id}`">
-                  <v-row>
-                    <v-col cols="2">
-                      <template v-if="firstChoiceSchoolBook.image">
-                        <v-img :src="firstChoiceSchoolBook.image" alt="画像"></v-img>
-                      </template>
-                    </v-col>
-                    <v-col cols="10">
-                      <v-card-title>タイトル: {{ firstChoiceSchoolBook.name }}</v-card-title>
-                      <v-card-text>
-                        <h4>著者: {{ firstChoiceSchoolBook.author }}</h4>
-                        <h4>出版社: {{ firstChoiceSchoolBook.publisher }}</h4>
-                        <h4>科目: {{ firstChoiceSchoolBook.subject }}</h4>
-                      </v-card-text>
-                    </v-col>
-                  </v-row>
-                  <v-card-actions>
-                    レビュー:{{ firstChoiceSchoolBook.reviews_count }}件
-                    平均評価:{{ firstChoiceSchoolBook.average_rating }}
-                    お気に入り: {{ firstChoiceSchoolBook.favorite_books_count }}
-                  </v-card-actions>
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
-          </v-slide-group>
-        </v-sheet>
+        <top-page-each-books :books="firstChoiceSchoolBooks"></top-page-each-books>
       </template>
 
       <template v-if="currentUser.second_choice_school">
-
         <br>
         <h3>{{ currentUser.second_choice_school }}を志望している人が使っている参考書</h3>
-        <hr>
-        <v-sheet>
-          <v-slide-group multiple show-arrows>
-            <v-slide-group>
-              <v-slide-item v-for="secondChoiceSchoolBook in secondChoiceSchoolBooks" :key="secondChoiceSchoolBook.id">
-                <v-card :to="`/books/${secondChoiceSchoolBook.id}`">
-                  <v-row>
-                    <v-col cols="2">
-                      <template v-if="secondChoiceSchoolBook.image">
-                        <v-img :src="secondChoiceSchoolBook.image" alt="画像"></v-img>
-                      </template>
-                    </v-col>
-                    <v-col cols="10">
-                      <v-card-title>タイトル: {{ secondChoiceSchoolBook.name }}</v-card-title>
-                      <v-card-text>
-                        <h4>著者: {{ secondChoiceSchoolBook.author }}</h4>
-                        <h4>出版社: {{ secondChoiceSchoolBook.publisher }}</h4>
-                        <h4>科目: {{ secondChoiceSchoolBook.subject }}</h4>
-                      </v-card-text>
-                    </v-col>
-                  </v-row>
-                  <v-card-actions>
-                    レビュー:{{ secondChoiceSchoolBook.reviews_count }}件
-                    平均評価:{{ secondChoiceSchoolBook.average_rating }}
-                    お気に入り: {{ secondChoiceSchoolBook.favorite_books_count }}
-                  </v-card-actions>
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
-          </v-slide-group>
-        </v-sheet>
+        <top-page-each-books :books="secondChoiceSchoolBooks"></top-page-each-books>
       </template>
 
       <template v-if="currentUser.third_choice_school">
         <br>
         <h3>{{ currentUser.third_choice_school }}を志望している人が使っている参考書</h3>
-        <hr>
-        <v-sheet>
-          <v-slide-group multiple show-arrows>
-            <v-slide-group>
-              <v-slide-item v-for="thirdChoiceSchoolBook in thirdChoiceSchoolBooks" :key="thirdChoiceSchoolBook.id">
-                <v-card :to="`/books/${thirdChoiceSchoolBook.id}`">
-                  <v-row>
-                    <v-col cols="2">
-                      <template v-if="thirdChoiceSchoolBook.image">
-                        <v-img :src="thirdChoiceSchoolBook.image" alt="画像"></v-img>
-                      </template>
-                    </v-col>
-                    <v-col cols="10">
-                      <v-card-title>タイトル: {{ thirdChoiceSchoolBook.name }}</v-card-title>
-                      <v-card-text>
-                        <h4>著者: {{ thirdChoiceSchoolBook.author }}</h4>
-                        <h4>出版社: {{ thirdChoiceSchoolBook.publisher }}</h4>
-                        <h4>科目: {{ thirdChoiceSchoolBook.subject }}</h4>
-                      </v-card-text>
-                    </v-col>
-                  </v-row>
-                  <v-card-actions>
-                    レビュー:{{ thirdChoiceSchoolBook.reviews_count }}件
-                    平均評価:{{ thirdChoiceSchoolBook.average_rating }}
-                    お気に入り: {{ thirdChoiceSchoolBook.favorite_books_count }}
-                  </v-card-actions>
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
-          </v-slide-group>
-        </v-sheet>
+        <top-page-each-books :books="thirdChoiceSchoolBooks"></top-page-each-books>
       </template>
 
       <template v-if="currentUser.first_choice_school === null && currentUser.second_choice_school === null && currentUser.third_choice_school == null">
@@ -291,11 +170,13 @@
 </template>
 
 <script>
+import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
 
 import axios from "../plugins/axios"
 
 
 export default {
+  components: { TopPageEachBooks },
   name: 'IndexPage',
   async asyncData({ store }) {
     try {
