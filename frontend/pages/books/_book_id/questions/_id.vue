@@ -27,6 +27,8 @@
       <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
     </template>
 
+    <v-btn @click="previousQuestion">前の質問</v-btn>
+    <v-btn @click="nextQuestion">次の質問</v-btn>
 
     <!-- 自分の質問のみ編集・削除ボタンを表示 -->
     <br>
@@ -116,23 +118,27 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const [questionResponse, repliesResponse] = await Promise.all([
+      const [questionResponse, questionsResponse, repliesResponse] = await Promise.all([
         axios.get(`/books/${params.book_id}/questions/${params.id}`, {
           params: {
             current_user_id: currentUserId
           }
         }),
+        axios.get(`/books/${params.book_id}/questions`),
         axios.get(`/books/${params.book_id}/questions/${params.id}/replies`)
       ])
       const questionData = questionResponse.data
+      const questions = questionsResponse.data
       const replies = repliesResponse.data
       console.log(questionData)
       console.log(replies)
+      console.log(questions)
       return {
         book: questionData.book,
         question: questionData.question,
         user: questionData.question.user,
         favoriteQuestionsCount: questionData.favorite_questions_count,
+        questions,
         replies,
         params
       };
@@ -312,7 +318,32 @@ export default {
         this.flashMessage = "返信を投稿できませんでした"
       }
       this.replyDialog = false
-
+    },
+    nextQuestion() {
+      const index = this.questions.findIndex(item => item.id === this.question.id)
+      const nextIndex = index + 1
+      const nextQuestion = this.questions[nextIndex]
+      const lastItem = this.questions[this.questions.length - 1]
+      if(this.question.id !== lastItem.id) {
+        this.$router.push({ path: `/books/${this.book.id}/questions/${nextQuestion.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後の質問です"
+      }
+    },
+    previousQuestion() {
+      const index = this.questions.findIndex(item => item.id === this.question.id)
+      const previousIndex = index - 1
+      const previousQuestion = this.questions[previousIndex]
+      const firstItem = this.questions[0]
+      if(this.question.id !== firstItem.id) {
+        this.$router.push({ path: `/books/${this.book.id}/questions/${previousQuestion.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初の質問です"
+      }
     }
   }
 }
