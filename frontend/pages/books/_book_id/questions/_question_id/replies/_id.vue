@@ -274,7 +274,7 @@ export default {
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"
-        this.flashMessage = "最後の質問です"
+        this.flashMessage = "最後の返信です"
       }
     },
     previousReply() {
@@ -287,7 +287,7 @@ export default {
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"
-        this.flashMessage = "最初の質問です"
+        this.flashMessage = "最初の返信です"
       }
     }
 
