@@ -76,7 +76,6 @@
           <v-dialog
             v-model="showUserMemo"
             hide-overlay
-            persistent
             max-width="800px"
             transition="dialog-bottom-transition"
           >
