@@ -98,6 +98,16 @@ class SubjectQuestionsController < ApplicationController
     end
   end
 
+  def questions_to_specific_subject
+    subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    subject_questions_to_specific_subject = SubjectQuestion.where(subject: subject_question.subject)
+    if subject_questions_to_specific_subject
+      render json: subject_questions_to_specific_subject
+    else
+      render json: subject_questions_to_specific_subject.errors
+    end
+  end
+
   private
 
     def subject_question_params

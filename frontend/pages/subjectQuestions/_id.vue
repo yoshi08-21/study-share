@@ -35,6 +35,10 @@
       <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
     </template>
 
+    <br>
+    <v-btn @click="previousQuestion">前の質問</v-btn>
+    <v-btn @click="nextQuestion">次の質問</v-btn>
+
     <br><br>
     <v-btn @click="redirectToSubjectQuestions">科目別質問一覧に戻る</v-btn>
 
@@ -118,21 +122,27 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const [subjectQuestionResponse, subjectQuestionRepliesResponse] = await Promise.all([
+      const [subjectQuestionResponse, subjectQuestionsResponse, subjectQuestionRepliesResponse] = await Promise.all([
         axios.get(`subject_questions/${params.id}`, {
           params: {
             current_user_id: currentUserId
           }
         }),
+        axios.get("/subject_questions/questions_to_specific_subject", {
+          params: {
+            subject_question_id: params.id
+          }
+        }),
         axios.get(`subject_questions/${params.id}/subject_question_replies`)
       ])
-      console.log(subjectQuestionResponse)
-      console.log(subjectQuestionRepliesResponse)
+      console.log(subjectQuestionResponse.data)
+      console.log(subjectQuestionsResponse.data)
       console.log(subjectQuestionRepliesResponse.data)
       return {
         subjectQuestion: subjectQuestionResponse.data.subject_question,
         favoriteSubjectQuestionsCount: subjectQuestionResponse.data.favorite_subject_questions_count,
         user: subjectQuestionResponse.data.subject_question.user,
+        subjectQuestions: subjectQuestionsResponse.data,
         subjectQuestionReplies: subjectQuestionRepliesResponse.data,
         params
       };
@@ -314,7 +324,34 @@ export default {
         this.flashMessage = "返信を投稿できませんでした"
       }
       this.subjectQuestionReplyDialog = false
+    },
+    nextQuestion() {
+      const index = this.subjectQuestions.findIndex(item => item.id === this.subjectQuestion.id)
+      const nextIndex = index + 1
+      const nextSubjectQuestion = this.subjectQuestions[nextIndex]
+      const lastItem = this.subjectQuestions[this.subjectQuestions.length - 1]
+      if(this.subjectQuestion.id !== lastItem.id) {
+        this.$router.push({ path: `/subjectQuestions/${nextSubjectQuestion.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後の質問です"
+      }
+    },
+    previousQuestion() {
+      const index = this.subjectQuestions.findIndex(item => item.id === this.subjectQuestion.id)
+      const previousIndex = index - 1
+      const previousSubjectQuestion = this.subjectQuestions[previousIndex]
+      const firstItem = this.subjectQuestions[0]
+      if(this.subjectQuestion.id !== firstItem.id) {
+        this.$router.push({ path: `/subjectQuestions/${previousSubjectQuestion.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初の質問です"
+      }
     }
+
 
 
   },

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     collection do
       get "is_favorite"
       get "search_subject_questions"
+      get "questions_to_specific_subject"
     end
   end
 
