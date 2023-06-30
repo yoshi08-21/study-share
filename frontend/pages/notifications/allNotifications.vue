@@ -60,9 +60,11 @@ import FavoriteSubjectQuestionNotification from '../../components/notifications/
 import FavoriteSubjectQuestionReplyNotification from '../../components/notifications/FavoriteSubjectQuestionReplyNotification.vue'
 import ReplyToQuestionNotification from '../../components/notifications/ReplyToQuestionNotification.vue'
 import ReplyToSubjectQuestionNotification from '../../components/notifications/ReplyToSubjectQuestionNotification.vue'
+import authCheck from '../../middleware/authCheck'
 import axios from "@/plugins/axios"
 
 export default {
+  middleware: authCheck,
   components: {
     FavoriteReviewNotification,
     FavoriteQuestionNotification,
