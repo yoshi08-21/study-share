@@ -42,6 +42,10 @@
     </template>
 
     <br><br>
+    <v-btn @click="previousReview">前のレビュー</v-btn>
+    <v-btn @click="nextReview">次のレビュー</v-btn>
+
+    <br><br>
     <v-btn @click="redirectToBook">参考書に戻る</v-btn>
 
     <!-- レビュー編集ダイアログ -->
@@ -103,20 +107,30 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const responce = await axios.get(`/books/${params.book_id}/reviews/${params.id}`, {
-        params: {
-          current_user_id: currentUserId
-        }
-      })
-      console.log(responce.data.review)
-      console.log(responce.data.book)
-      console.log(responce.data.review.user)
+      const  [reviewResponse, reviewsResponse] = await Promise.all([
+        axios.get(`/books/${params.book_id}/reviews/${params.id}`, {
+          params: {
+            current_user_id: currentUserId
+          }
+        }),
+        axios.get(`/books/${params.book_id}/reviews`)
+      ])
+        const book = reviewResponse.data.book
+        const review = reviewResponse.data.review
+        const user = reviewResponse.data.review.user
+        const reviews = reviewsResponse.data
+        console.log(reviewResponse.data)
+        console.log(reviewsResponse.data)
+      // console.log(responce.data.review.user)
       return {
-        book: responce.data.book,
-        review: responce.data.review,
-        user: responce.data.review.user,
+        book,
+        review,
+        user,
+        reviews,
         params
-      };
+      }
+
+
     } catch(error) {
       console.log(error)
       throw error
@@ -259,6 +273,32 @@ export default {
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね！されていません"
+      }
+    },
+    nextReview() {
+      const index = this.reviews.findIndex(item => item.id === this.review.id)
+      const nextIndex = index + 1
+      const nextReview = this.reviews[nextIndex]
+      const lastItem = this.reviews[this.reviews.length - 1]
+      if(this.review.id !== lastItem.id) {
+        this.$router.push({ path: `/books/${this.book.id}/reviews/${nextReview.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後のレビューです"
+      }
+    },
+    previousReview() {
+      const index = this.reviews.findIndex(item => item.id === this.review.id)
+      const previousIndex = index - 1
+      const previousReview = this.reviews[previousIndex]
+      const firstItem = this.reviews[0]
+      if(this.review.id !== firstItem.id) {
+        this.$router.push({ path: `/books/${this.book.id}/reviews/${previousReview.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初のレビューです"
       }
     }
   }
