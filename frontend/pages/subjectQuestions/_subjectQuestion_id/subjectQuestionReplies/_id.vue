@@ -37,6 +37,10 @@
       <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
     </template>
 
+    <br>
+    <v-btn @click="previousReply">前の返信</v-btn>
+    <v-btn @click="nextReply">次の返信</v-btn>
+
     <!-- 返信編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
@@ -98,18 +102,24 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const responce = await axios.get(`/subject_questions/${params.subjectQuestion_id}/subject_question_replies/${params.id}`, {
-        params: {
-          current_user_id: currentUserId
-        }
-      })
-      console.log(responce.data)
+      const [subjectQuestionReplyResponse, subjectQuestionRepliesResponse] = await Promise.all([
+        axios.get(`/subject_questions/${params.subjectQuestion_id}/subject_question_replies/${params.id}`, {
+          params: {
+            current_user_id: currentUserId
+          }
+        }),
+        axios.get(`/subject_questions/${params.subjectQuestion_id}/subject_question_replies`)
+      ])
+
+      console.log(subjectQuestionReplyResponse.data)
+      console.log(subjectQuestionRepliesResponse.data)
       return {
-        subjectQuestion: responce.data.subject_question,
-        subjectQuestionUser: responce.data.subject_question.user,
-        subjectQuestionReply: responce.data.subject_question_reply,
-        subjectQuestionReplyUser: responce.data.subject_question_reply.user,
-        favoriteSubjectQuestionRepliesCount: responce.data.favorite_subject_question_replies_count,
+        subjectQuestion: subjectQuestionReplyResponse.data.subject_question,
+        subjectQuestionUser: subjectQuestionReplyResponse.data.subject_question.user,
+        subjectQuestionReply: subjectQuestionReplyResponse.data.subject_question_reply,
+        subjectQuestionReplyUser: subjectQuestionReplyResponse.data.subject_question_reply.user,
+        favoriteSubjectQuestionRepliesCount: subjectQuestionReplyResponse.data.favorite_subject_question_replies_count,
+        subjectQuestionReplies: subjectQuestionRepliesResponse.data,
         params
       };
     } catch(error) {
@@ -250,7 +260,32 @@ export default {
         this.flashMessage = "いいね！されていません"
       }
     },
-
+    nextReply() {
+      const index = this.subjectQuestionReplies.findIndex(item => item.id === this.subjectQuestionReply.id)
+      const nextIndex = index + 1
+      const nextSubjectQuestionReply = this.subjectQuestionReplies[nextIndex]
+      const lastItem = this.subjectQuestionReplies[this.subjectQuestionReplies.length - 1]
+      if(this.subjectQuestionReply.id !== lastItem.id) {
+        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${nextSubjectQuestionReply.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後の返信です"
+      }
+    },
+    previousReply() {
+      const index = this.subjectQuestionReplies.findIndex(item => item.id === this.subjectQuestionReply.id)
+      const previousIndex = index - 1
+      const previousSubjectQuestionReply = this.subjectQuestionReplies[previousIndex]
+      const firstItem = this.subjectQuestionReplies[0]
+      if(this.subjectQuestionReply.id !== firstItem.id) {
+        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${previousSubjectQuestionReply.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初の返信です"
+      }
+    }
   }
 }
 </script>
