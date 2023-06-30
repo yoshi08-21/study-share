@@ -58,9 +58,11 @@ import EachQuestions from '../components/questions/EachQuestions.vue'
 import EachReplies from '../components/replies/EachReplies.vue'
 import EachSubjectQuestions from '../components/subjectQuestions/EachSubjectQuestions.vue'
 import EachSubjectQuestionReplies from '../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
+import authCheck from '../middleware/authCheck'
 import axios from "@/plugins/axios"
 
 export default {
+  middleware: authCheck,
   components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, },
   async asyncData({ store }) {
     try {
