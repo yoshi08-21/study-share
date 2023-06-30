@@ -38,6 +38,11 @@
       <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
     </template>
 
+    <br>
+    <v-btn @click="previousReply">前の返信</v-btn>
+    <v-btn @click="nextReply">次の返信</v-btn>
+
+
     <br><br>
     <v-btn @click="redirectToQuestion">質問詳細に戻る</v-btn>
 
@@ -97,19 +102,25 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const responce = await axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies/${params.id}`, {
-        params: {
-          current_user_id: currentUserId
-        }
-      })
-      console.log(responce.data)
+      const [replyResponse, repliesResponse] = await Promise.all([
+        axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies/${params.id}`, {
+          params: {
+            current_user_id: currentUserId
+          }
+        }),
+        axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies`)
+      ])
+
+      console.log(replyResponse.data)
+      console.log(repliesResponse.data)
       return {
-        book: responce.data.book,
-        question: responce.data.question,
-        questionUser: responce.data.question.user,
-        reply: responce.data.reply,
-        replyUser: responce.data.reply.user,
-        favoriteRepliesCount: responce.data.favorite_replies_count,
+        book: replyResponse.data.book,
+        question: replyResponse.data.question,
+        questionUser: replyResponse.data.question.user,
+        reply: replyResponse.data.reply,
+        replyUser: replyResponse.data.reply.user,
+        favoriteRepliesCount: replyResponse.data.favorite_replies_count,
+        replies: repliesResponse.data,
         params
       };
     } catch(error) {
@@ -253,6 +264,32 @@ export default {
         this.flashMessage = "いいね！されていません"
       }
     },
+    nextReply() {
+      const index = this.replies.findIndex(item => item.id === this.reply.id)
+      const nextIndex = index + 1
+      const nextReply = this.replies[nextIndex]
+      const lastItem = this.replies[this.replies.length - 1]
+      if(this.reply.id !== lastItem.id) {
+        this.$router.push({ path: `/books/${this.question.book_id}/questions/${this.reply.question_id}/replies/${nextReply.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後の質問です"
+      }
+    },
+    previousReply() {
+      const index = this.replies.findIndex(item => item.id === this.reply.id)
+      const previousIndex = index - 1
+      const previousReply = this.replies[previousIndex]
+      const firstItem = this.replies[0]
+      if(this.reply.id !== firstItem.id) {
+        this.$router.push({ path: `/books/${this.question.book_id}/questions/${this.reply.question_id}/replies/${previousReply.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初の質問です"
+      }
+    }
 
   }
 }

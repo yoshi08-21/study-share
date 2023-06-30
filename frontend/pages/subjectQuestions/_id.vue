@@ -351,14 +351,7 @@ export default {
         this.flashMessage = "最初の質問です"
       }
     }
-
-
-
   },
-
-
-
-
 }
 </script>
 
