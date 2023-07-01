@@ -8,10 +8,12 @@
 
 <script>
 
+import checkUserExistence from '../../middleware/checkUserExistence'
 import axios from "@/plugins/axios"
 
 
 export default {
+  middleware: checkUserExistence,
   async asyncData({ params }) {
     try {
       const response = await axios.get(`/users/show_other_user/${params.id}`)

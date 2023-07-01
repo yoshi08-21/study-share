@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if user
       render json: user
     else
-      render json: user.errors
+      head :no_content
     end
   end
 
