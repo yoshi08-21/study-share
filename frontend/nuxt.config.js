@@ -4,12 +4,6 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
-  router: {
-    // middleware: [
-    //   "@/middleware/checkNotifications.js",
-    // ],
-
-  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - frontend',
@@ -35,6 +29,13 @@ export default {
     "@/plugins/authenticated.js",
     // "@/plugins/firebase.js",
   ],
+
+  // router: {
+  //   middleware: [
+  //     "@/middleware/redirectNotFound.js"
+  //   ],
+  // },
+
 
 
   // Auto import components: https://go.nuxtjs.dev/config-components

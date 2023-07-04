@@ -56,6 +56,13 @@
     "_name": "_4723a890"
   },
   {
+    "name": "errors-errorPage",
+    "path": "/errors/errorPage",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/errors/errorPage.vue",
+    "chunkName": "pages/errors/errorPage",
+    "_name": "_49b4ce96"
+  },
+  {
     "name": "notifications-allNotifications",
     "path": "/notifications/allNotifications",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/notifications/allNotifications.vue",
