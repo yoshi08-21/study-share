@@ -12,4 +12,7 @@ middleware['checkUserExistence'] = middleware['checkUserExistence'].default || m
 middleware['isLoggedIn'] = require('../middleware/isLoggedIn.js')
 middleware['isLoggedIn'] = middleware['isLoggedIn'].default || middleware['isLoggedIn']
 
+middleware['redirectNotFound'] = require('../middleware/redirectNotFound.js')
+middleware['redirectNotFound'] = middleware['redirectNotFound'].default || middleware['redirectNotFound']
+
 export default middleware
