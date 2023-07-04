@@ -108,6 +108,15 @@ class SubjectQuestionsController < ApplicationController
     end
   end
 
+  def check_existence
+    subject_question = SubjectQuestion.find_by(id: params[:id])
+    if subject_question
+      head :ok
+    else
+      head :not_found
+    end
+  end
+
   private
 
     def subject_question_params

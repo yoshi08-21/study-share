@@ -67,8 +67,17 @@ class UsersController < ApplicationController
     else
       render json: current_user.errors, status: 400
     end
-
   end
+
+  def check_existence
+    user = User.find_by(id: params[:id])
+    if user
+      head :ok
+    else
+      head :not_found
+    end
+  end
+
 
   private
 
