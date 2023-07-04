@@ -118,6 +118,15 @@ class BooksController < ApplicationController
     end
   end
 
+  def check_existence
+    book = Book.find_by(id: params[:id])
+    if book
+      head :ok
+    else
+      head :not_fount
+    end
+  end
+
   private
 
     def book_params

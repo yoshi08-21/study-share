@@ -1,4 +1,8 @@
 
 export default function({ route, redirect }) {
-  console.log("mddle")
+  if(route.matched.length === 0) {
+    return redirect({
+      path: "/errors/errorPage",
+    })
+  }
 }

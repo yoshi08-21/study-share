@@ -110,6 +110,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def check_existence
+    book = Book.find_by(id: params[:book_id])
+    question = Question.find_by(id: params[:id])
+    if book && question
+      head :ok
+    else
+      head :not_found
+    end
+  end
+
 
   private
 

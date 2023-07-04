@@ -86,6 +86,17 @@ class RepliesController < ApplicationController
     end
   end
 
+  def check_existence
+    book = Book.find_by(id: params[:book_id])
+    question = Question.find_by(id: params[:question_id])
+    reply = Reply.find_by(id: params[:id])
+    if book && question && reply
+      head :ok
+    else
+      head :not_found
+    end
+  end
+
 
   private
 

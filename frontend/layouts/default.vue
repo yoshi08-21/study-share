@@ -138,12 +138,14 @@
 
 import { getAuth, signOut } from "firebase/auth"
 import checkNotifications from "../middleware/checkNotifications"
+import redirectNotFound from "../middleware/redirectNotFound"
+import checkResourceExistence from "../middleware/checkResourceExistence"
 import axios from "@/plugins/axios"
 
 
 export default {
   name: 'DefaultLayout',
-  middleware: [checkNotifications],
+  middleware: [checkNotifications, redirectNotFound, checkResourceExistence],
   // ログアウト→ログイン時にユーザーメモが更新されるようにする
   watch: {
     "currentUser"(newValue, oldValue) {
@@ -195,6 +197,14 @@ export default {
         {
           title: '通知一覧',
           to: '/notifications/allNotifications'
+        },
+        {
+          title: '存在しないページ',
+          to: '/notFound'
+        },
+        {
+          title: '存在しないレビュー',
+          to: '/books/1/reviews/343'
         },
       ],
       miniVariant: false,

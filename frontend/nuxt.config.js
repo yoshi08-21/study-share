@@ -30,13 +30,14 @@ export default {
     // "@/plugins/firebase.js",
   ],
 
+
   // router: {
   //   middleware: [
-  //     "@/middleware/redirectNotFound.js"
+  //     '@/middleware/redirectNotFound.js'
   //   ],
   // },
 
-
+  debug: true,
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

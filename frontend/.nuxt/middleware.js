@@ -6,6 +6,9 @@ middleware['authCheck'] = middleware['authCheck'].default || middleware['authChe
 middleware['checkNotifications'] = require('../middleware/checkNotifications.js')
 middleware['checkNotifications'] = middleware['checkNotifications'].default || middleware['checkNotifications']
 
+middleware['checkResourceExistence'] = require('../middleware/checkResourceExistence.js')
+middleware['checkResourceExistence'] = middleware['checkResourceExistence'].default || middleware['checkResourceExistence']
+
 middleware['checkUserExistence'] = require('../middleware/checkUserExistence.js')
 middleware['checkUserExistence'] = middleware['checkUserExistence'].default || middleware['checkUserExistence']
 
