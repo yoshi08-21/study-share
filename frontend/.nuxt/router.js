@@ -18,8 +18,10 @@ const _f110b94e = () => interopDefault(import('../pages/questions/questions.vue'
 const _76a4868e = () => interopDefault(import('../pages/questions/searchQuestionsResult.vue' /* webpackChunkName: "pages/questions/searchQuestionsResult" */))
 const _1b90f6e2 = () => interopDefault(import('../pages/subjectQuestions/searchSubjectQuestionsResult.vue' /* webpackChunkName: "pages/subjectQuestions/searchSubjectQuestionsResult" */))
 const _0216141d = () => interopDefault(import('../pages/subjectQuestions/subjectQuestions.vue' /* webpackChunkName: "pages/subjectQuestions/subjectQuestions" */))
+const _a1309ee0 = () => interopDefault(import('../pages/surveys/allSurveys.vue' /* webpackChunkName: "pages/surveys/allSurveys" */))
 const _ea3048ba = () => interopDefault(import('../pages/books/_id.vue' /* webpackChunkName: "pages/books/_id" */))
 const _1b0a7764 = () => interopDefault(import('../pages/subjectQuestions/_id.vue' /* webpackChunkName: "pages/subjectQuestions/_id" */))
+const _9923ee5c = () => interopDefault(import('../pages/surveys/_id.vue' /* webpackChunkName: "pages/surveys/_id" */))
 const _3a7b0901 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
 const _368e3cc2 = () => interopDefault(import('../pages/books/_book_id/questions/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_id" */))
 const _db10b3e0 = () => interopDefault(import('../pages/books/_book_id/reviews/_id.vue' /* webpackChunkName: "pages/books/_book_id/reviews/_id" */))
@@ -95,6 +97,10 @@ export const routerOptions = {
     component: _0216141d,
     name: "subjectQuestions-subjectQuestions"
   }, {
+    path: "/surveys/allSurveys",
+    component: _a1309ee0,
+    name: "surveys-allSurveys"
+  }, {
     path: "/books/:id?",
     component: _ea3048ba,
     name: "books-id"
@@ -102,6 +108,10 @@ export const routerOptions = {
     path: "/subjectQuestions/:id?",
     component: _1b0a7764,
     name: "subjectQuestions-id"
+  }, {
+    path: "/surveys/:id?",
+    component: _9923ee5c,
+    name: "surveys-id"
   }, {
     path: "/users/:id?",
     component: _3a7b0901,

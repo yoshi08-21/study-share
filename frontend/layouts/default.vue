@@ -206,6 +206,10 @@ export default {
           title: '存在しないレビュー',
           to: '/books/1/reviews/343'
         },
+        {
+          title: 'アンケート',
+          to: '/surveys/allSurveys'
+        },
       ],
       miniVariant: false,
       right: true,
