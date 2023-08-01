@@ -8,7 +8,6 @@ class Survey < ApplicationRecord
   validates :option2,  presence: true, length: { maximum: 100 }
   validates :option3, length: { maximum: 100 }
   validates :option4, length: { maximum: 100 }
-  validates :status,  presence: true
   validates :user_id,  presence: true
 
 end
