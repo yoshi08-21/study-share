@@ -9,6 +9,10 @@
     <v-btn>2. {{ survey.option2 }}</v-btn>
     <v-btn v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
     <v-btn v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -28,7 +32,23 @@ export default {
       console.log(error)
       throw error
     }
-  }
+  },
+  data() {
+    return {
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
+    }
+  },
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
+    }
+  },
+
 }
 </script>
 

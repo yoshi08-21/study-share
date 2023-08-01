@@ -21,7 +21,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:survey][:user_id])
     survey = current_user.surveys.build(survey_params)
     if survey.save
       render json: survey
@@ -34,6 +34,6 @@ class SurveysController < ApplicationController
   private
 
     def survey_params
-      params.require(:survey).permit(:title, :content, :option1, :option2, :option3, :option4, :image, :status, :user_id)
+      params.require(:survey).permit(:title, :content, :genre, :option1, :option2, :option3, :option4, :image, :status, :user_id)
     end
 end

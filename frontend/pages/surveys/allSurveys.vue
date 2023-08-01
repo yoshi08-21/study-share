@@ -37,11 +37,11 @@
         <v-card-title>
           <h2>新規アンケートを作成する</h2>
         </v-card-title>
-        <v-card-title>
-          <v-btn @click="redirectToSearchBooks" color="primary" block>登録する参考書を検索する</v-btn>
-        </v-card-title>
         <v-card-text>
-          <survey-form></survey-form>
+          <survey-form
+            @submitSurvey="submitSurvey"
+            @closeDialog="dialog = false"
+          ></survey-form>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -75,13 +75,28 @@ export default {
     },
   },
   methods: {
-    // async createSurvey() {
-    //   try {
-    //     const response = await axios.post
-    //   } catch (error) {
-
-    //   }
-    // },
+    async submitSurvey(data) {
+      try {
+        const response = await axios.post("/surveys", {
+          survey: {
+            title: data.title,
+            content: data.content,
+            genre: data.genre,
+            option1: data.option1,
+            option2: data.option2,
+            option3: data.option3,
+            option4: data.option4,
+            status: 0,
+            user_id: this.currentUser.id
+          },
+        })
+        console.log(response.data)
+        this.$router.push({ path: `/surveys/${response.data.id}`, query: { message: 'アンケートを作成しました' }  })
+      } catch (error) {
+        console.log(error)
+        throw error
+      }
+    },
     openDialog() {
       if(this.currentUser) {
         this.dialog = true
