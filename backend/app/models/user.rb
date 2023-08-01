@@ -27,7 +27,7 @@ class User < ApplicationRecord
   has_many :watched_subject_question_replies,     through: :browsing_histories, source: :subject_question_reply
   has_many :sent_notifications, class_name: 'Notification', foreign_key: 'action_user_id', dependent: :destroy
   has_many :received_notifications, class_name: 'Notification', foreign_key: 'target_user_id', dependent: :destroy
-
+  has_many :surveys
 
 
 
