@@ -26,7 +26,7 @@ class SurveysController < ApplicationController
     if survey.save
       render json: survey
     else
-      render json: survey.errors
+      render json: { error: "エラーが発生しました" }, status: 400
     end
   end
 

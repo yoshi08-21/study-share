@@ -10,6 +10,10 @@
     <v-btn v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
     <v-btn v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
 
+    <br><br>
+    <!-- アンケートの作成時に確認画面を表示する -->
+    <v-btn>削除する</v-btn>
+
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
