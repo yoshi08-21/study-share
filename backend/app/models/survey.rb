@@ -1,6 +1,9 @@
 class Survey < ApplicationRecord
 
+
   belongs_to :user
+
+  has_many :survey_answers
 
   validates :title,  presence: true, length: { maximum: 50 }
   validates :content,  presence: true, length: { maximum: 1000 }
