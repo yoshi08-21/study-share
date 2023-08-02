@@ -47,6 +47,9 @@
     </v-dialog>
 
 
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -66,6 +69,9 @@ export default {
   data() {
     return {
       dialog: false,
+      snackbar: false,
+      snackbarColor: "primary",
+      flashMessage: "テストメッセージ",
 
     }
   },
@@ -94,8 +100,11 @@ export default {
         this.$router.push({ path: `/surveys/${response.data.id}`, query: { message: 'アンケートを作成しました' }  })
       } catch (error) {
         console.log(error)
-        throw error
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "アンケートを作成できませんでした"
       }
+      this.dialog = false
     },
     openDialog() {
       if(this.currentUser) {

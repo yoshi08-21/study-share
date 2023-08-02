@@ -9,25 +9,53 @@
       <v-select
         :items="genres"
         v-model="selectedGenre"
-        label="ジャンル"
+        label="ジャンル(必須)"
         outlined
       ></v-select>
     </v-col>
       <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title"></v-text-field>
-      <v-text-field counter label="本文（必須）" :rules="contentRules" v-model="content"></v-text-field>
+      <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content"></v-textarea>
       <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1"></v-text-field>
       <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2"></v-text-field>
       <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3"></v-text-field>
       <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4"></v-text-field>
+      <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="submitForm"> 登録する</v-btn>
+          <v-btn color="primary" @click="confirmationDialog = true">確認画面を表示する</v-btn>
         </v-col>
         <v-col cols="2" class="align-start">
           <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
         </v-col>
       </v-row>
     </v-form>
+
+    <!-- アンケート内容確認ダイアログ -->
+    <v-dialog v-model="confirmationDialog">
+      <v-card>
+        <v-card-title>
+          <h2>内容確認</h2>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo></v-text-field>
+          <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo></v-textarea>
+          <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo></v-text-field>
+          <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo></v-text-field>
+          <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo></v-text-field>
+          <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo></v-text-field>
+        </v-card-text>
+        <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
+        <v-row>
+        <v-col cols="2" class="align-start custom-button-margin">
+          <v-btn color="primary" @click="submitForm"> 登録する</v-btn>
+        </v-col>
+        <v-col cols="2" class="align-start">
+          <v-btn @click="confirmationDialog = false">戻る</v-btn>
+        </v-col>
+      </v-row>
+      </v-card>
+    </v-dialog>
+
 
   </div>
 </template>
@@ -64,6 +92,8 @@ export default {
       option2: "",
       option3: "",
       option4: "",
+      confirmationDialog: false,
+
 
 
     }
