@@ -5,11 +5,14 @@
     <h3>アンケートタイトル: {{ survey.title }}</h3>
     <h4>アンケート本文: {{ survey.content }}</h4>
 
-    <v-btn>1. {{ survey.option1 }}</v-btn>
-    <v-btn>2. {{ survey.option2 }}</v-btn>
-    <v-btn v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-    <v-btn v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+    <v-btn @click="createSurveyAnswer(1)">1. {{ survey.option1 }}</v-btn>
+    <v-btn @click="createSurveyAnswer(2)">2. {{ survey.option2 }}</v-btn>
+    <v-btn @click="createSurveyAnswer(3)" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+    <v-btn @click="createSurveyAnswer(4)" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
 
+    <!-- アンケート作者にはreadonlyのボタンを表示する -->
+
+    <!-- アンケートの回答後は回答数と割合が書いてあるボタンに切り替えて、メソッドも切り替える -->
     <br><br>
     <template v-if="currentUser && survey.user_id === currentUser.id && survey.status == 0">
       <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
@@ -106,12 +109,12 @@ export default {
   methods: {
     async deleteSurvey() {
       try {
-        const responce = await axios.delete(`surveys/${this.survey.id}`, {
+        const response = await axios.delete(`surveys/${this.survey.id}`, {
           params: {
             user_id: this.currentUser.id
           }
         })
-        console.log(responce.data)
+        console.log(response.data)
         this.$router.push({ path: "/surveys/allSurveys", query: { message: "アンケートを削除しました" } })
       } catch (error) {
         console.log(error)
@@ -132,6 +135,20 @@ export default {
         this.flashMessage = "アンケートを締め切りました"
         this.closeSurveyConfimation = false
         this.survey.status = 1
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async createSurveyAnswer(selectedOption) {
+      try {
+        const response = await axios.post(`/surveys/${this.survey.id}/survey_answers`, {
+          survey_answer: {
+            selected_option: selectedOption,
+            user_id: this.currentUser.id,
+            survey_id: this.survey.id
+          }
+        })
+        console.log(response.data)
       } catch (error) {
         console.log(error)
       }
