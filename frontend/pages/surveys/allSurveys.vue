@@ -80,6 +80,14 @@ export default {
       return this.$store.getters["auth/getCurrentUser"]
     },
   },
+  mounted() {
+    if (this.$route.query.message) {
+      this.snackbarColor = "primary"
+      this.snackbar = true
+      this.flashMessage = this.$route.query.message
+      // this.$snackbar.show(this.$route.query.message)
+    }
+  },
   methods: {
     async submitSurvey(data) {
       try {
