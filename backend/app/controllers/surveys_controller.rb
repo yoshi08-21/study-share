@@ -45,6 +45,21 @@ class SurveysController < ApplicationController
     end
   end
 
+  def close_survey
+    current_user = User.find_by(id: params[:user_id])
+    survey = Survey.find_by(id: params[:id])
+    author = survey.user
+    if validate_authorship(current_user, author)
+      survey.status = 1
+      if survey.save
+        head :ok
+      else
+        render json: { error: "エラーが発生しました" }, status: 400
+      end
+    else
+      render json: { error: "権限がありません" }, status: 400
+    end
+  end
 
   private
 

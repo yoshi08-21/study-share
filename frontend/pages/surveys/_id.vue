@@ -11,9 +11,32 @@
     <v-btn v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
 
     <br><br>
+    <template v-if="currentUser && survey.user_id === currentUser.id && survey.status == 0">
+      <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
+    </template>
+
     <template v-if="currentUser && survey.user_id === currentUser.id">
       <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
     </template>
+
+
+    <!-- アンケート締め切りの確認ダイアログ -->
+    <v-dialog v-model="closeSurveyConfimation">
+      <v-card>
+        <v-card-title>
+          アンケートを締め切ると、以降は回答ができなくなります。
+        </v-card-title>
+        <v-card-text>
+          <strong>
+            アンケートを締め切りますか？
+          </strong>
+        </v-card-text>
+        <v-card-actions class="justify-content-center">
+          <v-btn @click="closeSurvey">アンケートを締め切る</v-btn>
+          <v-btn @click="closeSurveyConfimation=false">戻る</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <!-- アンケート削除の確認ダイアログ -->
     <v-dialog v-model="showDeleteConfirmation">
@@ -63,6 +86,7 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       showDeleteConfirmation: false,
+      closeSurveyConfimation: false,
 
     }
   },
@@ -95,6 +119,21 @@ export default {
         this.snackbar = true
         this.flashMessage = "アンケートを削除できませんでした"
         this.showDeleteConfirmation = false
+      }
+    },
+    async closeSurvey() {
+      try {
+        const response = await axios.patch(`/surveys/${this.survey.id}/close_survey`, {
+          user_id: this.currentUser.id
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "アンケートを締め切りました"
+        this.closeSurveyConfimation = false
+        this.survey.status = 1
+      } catch (error) {
+        console.log(error)
       }
     }
   }
