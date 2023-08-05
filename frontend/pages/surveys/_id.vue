@@ -5,10 +5,73 @@
     <h3>アンケートタイトル: {{ survey.title }}</h3>
     <h4>アンケート本文: {{ survey.content }}</h4>
 
-    <v-btn @click="createSurveyAnswer(1)">1. {{ survey.option1 }}</v-btn>
-    <v-btn @click="createSurveyAnswer(2)">2. {{ survey.option2 }}</v-btn>
-    <v-btn @click="createSurveyAnswer(3)" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-    <v-btn @click="createSurveyAnswer(4)" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+    <br><br>
+    <template v-if="existAnswer === false">
+      <p>アンケート回答前ボタン</p>
+      <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+      </v-btn-toggle>
+    </template>
+
+    <template v-else>
+      <p>アンケート回答後ボタン</p>
+      <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+        <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+      </v-btn-toggle>
+    </template>
+
+    <v-btn @click="existAnswer = !existAnswer">アンケート回答状態切替</v-btn>
+    <v-btn @click="selectedAnswer = '2'">２を回答済みにする</v-btn>
+    <v-btn @click="selectedAnswer = '3'">3を回答済みにする</v-btn>
+
+
+    <!-- <v-radio-group
+      v-model="row"
+      column
+    >
+      <v-radio
+        label="Option 1"
+        value="radio-1"
+      ></v-radio>
+      <v-radio
+        label="Option 2"
+        value="radio-2"
+      ></v-radio>
+    </v-radio-group>
+
+    <v-row>
+    <v-col
+      cols="12"
+      sm="6"
+      class="py-2"
+    >
+      <p>Exclusive</p>
+
+      <v-btn-toggle v-model="toggle_exclusive" style="flex-direction: column;">
+        <v-btn block>
+          選択肢１
+        </v-btn>
+
+        <v-btn>
+          <v-icon>mdi-format-align-center</v-icon>
+        </v-btn>
+
+        <v-btn>
+          <v-icon>mdi-format-align-right</v-icon>
+        </v-btn>
+
+        <v-btn>
+          <v-icon>mdi-format-align-justify</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+    </v-col>
+    </v-row> -->
 
     <!-- アンケート作者にはreadonlyのボタンを表示する -->
 
@@ -90,6 +153,8 @@ export default {
       flashMessage: "テストメッセージ",
       showDeleteConfirmation: false,
       closeSurveyConfimation: false,
+      existAnswer: false,
+      selectedAnswer: "",
 
     }
   },
@@ -149,6 +214,37 @@ export default {
           }
         })
         console.log(response.data)
+        this.existAnswer = true
+      } catch (error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "すでに回答済みです"
+      }
+    },
+    async changeSurveyAnswer(selectedOption) {
+      try {
+        const response = await axios.patch(`/surveys/${this.survey.id}/survey_answers/change_survey_answer`, {
+          survey_answer: {
+            selected_option: selectedOption,
+            user_id: this.currentUser.id,
+            survey_id: this.survey.id
+          }
+        })
+        console.log(response.data)
+        // レスポンスで処理を切り替える
+        if(response.status === 204) {
+          this.existAnswer = false
+          this.snackbarColor = "primary"
+          this.snackbar = true
+          this.flashMessage = "回答を取り消しました"
+        } else if(response.status === 200) {
+          this.existAnswer = true
+          this.snackbarColor = "primary"
+          this.snackbar = true
+          this.flashMessage = "回答を変更しました"
+        }
+        // レスポンスで回答が返ってきたらそのまま、返ってこなければ回答後の表示を戻す
       } catch (error) {
         console.log(error)
       }
@@ -158,6 +254,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.large-button {
+  width: 500px;
+}
 
 </style>

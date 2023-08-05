@@ -83,7 +83,11 @@ Rails.application.routes.draw do
   end
 
   resources :surveys, only: [:index, :show, :create, :destroy] do
-    resources :survey_answers, only: [:index, :create]
+    resources :survey_answers, only: [:index, :create] do
+      collection do
+        patch "change_survey_answer"
+      end
+    end
     member do
       patch "close_survey"
     end
