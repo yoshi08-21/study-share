@@ -29,6 +29,17 @@ class SurveyAnswersController < ApplicationController
     end
   end
 
+  def check_current_user_answer
+    current_user = User.find_by(id: params[:user_id])
+    survey = Survey.find_by(id: params[:survey_id])
+    survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
+    if survey_answer
+      render json: survey_answer, status: :ok
+    else
+      head :no_content
+    end
+  end
+
 
   private
 
