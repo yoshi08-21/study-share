@@ -163,6 +163,32 @@ export default {
       return this.$store.getters["auth/getCurrentUser"]
     },
   },
+  async created() {
+    try {
+      let currentUserId = ""
+      const currentUser = this.$store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
+      const response = await axios.get(`/surveys/${this.$route.params.id}/survey_answers/check_current_user_answer`, {
+        params: {
+          user_id: currentUserId,
+          survey_id: this.$route.params.id
+        }
+      })
+      console.log(response.status)
+      console.log(response.data)
+      if(response.status === 200) {
+        this.existAnswer = true
+        this.selectedAnswer = response.data.selected_option.toString()
+      } else if(response.status === 204) {
+        this.existAnswer = false
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
   mounted() {
     if (this.$route.query.message) {
       this.snackbarColor = "primary"
@@ -215,6 +241,8 @@ export default {
         })
         console.log(response.data)
         this.existAnswer = true
+        this.snackbar = true
+        this.flashMessage = "アンケートに回答しました"
       } catch (error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

@@ -86,6 +86,7 @@ Rails.application.routes.draw do
     resources :survey_answers, only: [:index, :create] do
       collection do
         patch "change_survey_answer"
+        get "check_current_user_answer"
       end
     end
     member do
