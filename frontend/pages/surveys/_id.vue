@@ -6,72 +6,60 @@
     <h4>アンケート本文: {{ survey.content }}</h4>
 
     <br><br>
-    <template v-if="existAnswer === false">
-      <p>アンケート回答前ボタン</p>
-      <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
-    </template>
+    <template v-if="currentUser && currentUser.id !== survey.user_id">
+      <!-- current_userがいる ＆ current_userがアンケートの作成者ではない -->
+      <template v-if="existAnswer === false">
+        <p>アンケート回答前ボタン</p>
+        <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+          <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+          <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+          <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+          <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+        </v-btn-toggle>
+      </template>
 
-    <template v-else>
-      <p>アンケート回答後ボタン</p>
-      <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-        <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
+      <template v-else>
+        <p>アンケート回答後ボタン</p>
+        <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+          <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+          <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+          <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+          <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+        </v-btn-toggle>
+      </template>
     </template>
 
     <v-btn @click="existAnswer = !existAnswer">アンケート回答状態切替</v-btn>
     <v-btn @click="selectedAnswer = '2'">２を回答済みにする</v-btn>
     <v-btn @click="selectedAnswer = '3'">3を回答済みにする</v-btn>
 
+    <br><br><br>
+    <template v-if="existAnswer === true">
+      <h3>アンケート回答結果</h3>
+    </template>
 
-    <!-- <v-radio-group
-      v-model="row"
-      column
-    >
-      <v-radio
-        label="Option 1"
-        value="radio-1"
-      ></v-radio>
-      <v-radio
-        label="Option 2"
-        value="radio-2"
-      ></v-radio>
-    </v-radio-group>
-
-    <v-row>
-    <v-col
-      cols="12"
-      sm="6"
-      class="py-2"
-    >
-      <p>Exclusive</p>
-
-      <v-btn-toggle v-model="toggle_exclusive" style="flex-direction: column;">
-        <v-btn block>
-          選択肢１
-        </v-btn>
-
-        <v-btn>
-          <v-icon>mdi-format-align-center</v-icon>
-        </v-btn>
-
-        <v-btn>
-          <v-icon>mdi-format-align-right</v-icon>
-        </v-btn>
-
-        <v-btn>
-          <v-icon>mdi-format-align-justify</v-icon>
-        </v-btn>
+    <template v-else-if="currentUser && currentUser.id === survey.user_id">
+      <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
+      <v-btn-toggle style="flex-direction: column;">
+        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
       </v-btn-toggle>
-    </v-col>
-    </v-row> -->
+      <br>
+      <h3>アンケート回答結果</h3>
+    </template>
+
+    <template v-else-if="!currentUser">
+      <!-- current_userがいない(未ログイン状態) -->
+      <v-btn-toggle style="flex-direction: column;">
+        <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+      </v-btn-toggle>
+    </template>
+
 
     <!-- アンケート作者にはreadonlyのボタンを表示する -->
 
@@ -276,6 +264,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    redirectToLogin() {
+      this.$router.push({ path: "/auth/login", query: { message: "アンケート機能をご利用いただくにはログインが必要です" } })
     }
   }
 
