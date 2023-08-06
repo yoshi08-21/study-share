@@ -28,7 +28,12 @@
         </v-btn-toggle>
         <h3>アンケート回答結果</h3>
         <!-- ブロック化して、横に並べる。ifを使用して存在する選択肢の結果のみを表示する -->
-        <h5>1=> {{ selectedOption1Count }}件 2=> {{ selectedOption2Count }}件 3=> {{ selectedOption3Count }}件 4=> {{ selectedOption4Count }}件</h5>
+        <h3>
+          1=> {{ selectedOption1Count }}件 : {{ option1Percentage }}%
+          2=> {{ selectedOption2Count }}件 : {{ option2Percentage }}%
+          3=> {{ selectedOption3Count }}件 : {{ option3Percentage }}%
+          4=> {{ selectedOption4Count }}件 : {{ option4Percentage }}%
+        </h3>
       </template>
     </template>
 
@@ -75,12 +80,6 @@
         <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
       </v-btn-toggle>
     </template>
-
-
-
-    <!-- アンケート作者にはreadonlyのボタンを表示する -->
-
-    <!-- アンケートの回答後は回答数と割合が書いてあるボタンに切り替えて、メソッドも切り替える -->
 
     <!-- アンケート締め切りの確認ダイアログ -->
     <v-dialog v-model="closeSurveyConfimation">
@@ -170,6 +169,9 @@ export default {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+    totalAnswersCount() {
+      return this.surveyAnswers.length
+    },
     selectedOption1Count() {
       return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 1).length
     },
@@ -181,7 +183,19 @@ export default {
     },
     selectedOption4Count() {
       return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 4).length
-    }
+    },
+    option1Percentage() {
+      return (this.selectedOption1Count / this.totalAnswersCount) * 100
+    },
+    option2Percentage() {
+      return (this.selectedOption2Count / this.totalAnswersCount) * 100
+    },
+    option3Percentage() {
+      return (this.selectedOption3Count / this.totalAnswersCount) * 100
+    },
+    option4Percentage() {
+      return (this.selectedOption4Count / this.totalAnswersCount) * 100
+    },
 
   },
   async created() {
