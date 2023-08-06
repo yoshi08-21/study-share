@@ -40,6 +40,15 @@ class SurveyAnswersController < ApplicationController
     end
   end
 
+  def get_survey_answers
+    survey_answers = SurveyAnswer.where(survey_id: params[:survey_id])
+    if survey_answers
+      render json: survey_answers
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
+    end
+  end
+
 
   private
 

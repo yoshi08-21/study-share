@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       collection do
         patch "change_survey_answer"
         get "check_current_user_answer"
+        get "get_survey_answers"
       end
     end
     member do
