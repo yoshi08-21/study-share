@@ -61,6 +61,18 @@ class SurveysController < ApplicationController
     end
   end
 
+  def is_favorite
+    current_user = User.find_by(id: params[:user_id])
+    survey = Survey.find_by(id: params[:id])
+    favorite_survey = FavoriteSurvey.find_by(user_id: current_user.id, survey_id: survey.id) if current_user
+    if favorite_survey
+      render json: { is_favorite: true, favorite_survey_id: favorite_survey.id }
+    else
+      render json: false
+    end
+
+  end
+
   private
 
     def survey_params

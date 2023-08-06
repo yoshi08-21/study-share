@@ -90,8 +90,10 @@ Rails.application.routes.draw do
         get "get_survey_answers"
       end
     end
+    resources :favorite_surveys, only: [:create, :destroy]
     member do
       patch "close_survey"
+      get "is_favorite"
     end
   end
 

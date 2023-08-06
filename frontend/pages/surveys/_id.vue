@@ -108,6 +108,23 @@
       </v-btn-toggle>
     </template>
 
+
+    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
+    <template v-if="currentUser && survey.user_id !== this.currentUser.id">
+      <template v-if="!isFavorite">
+        <v-btn @click="addToFavorite">いいね！する</v-btn>
+        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
+      </template>
+      <template v-else>
+        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
+        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
+      </template>
+    </template>
+    <template v-else>
+      「いいね？件」
+    </template>
+
+
     <!-- アンケート締め切りの確認ダイアログ -->
     <v-dialog v-model="closeSurveyConfimation">
       <v-card>
@@ -191,6 +208,10 @@ export default {
       closeSurveyConfimation: false,
       existAnswer: false,
       selectedAnswer: "",
+      isFavorite: false,
+      favoriteSurveyId: "",
+
+
 
     }
   },
@@ -252,20 +273,31 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const response = await axios.get(`/surveys/${this.$route.params.id}/survey_answers/check_current_user_answer`, {
-        params: {
-          user_id: currentUserId,
-          survey_id: this.$route.params.id
-        }
-      })
-      console.log(response.status)
-      console.log(response.data)
-      if(response.status === 200) {
+      const [currentUserAnswerResponse, isFavoriteResponse] = await Promise.all([
+        axios.get(`/surveys/${this.$route.params.id}/survey_answers/check_current_user_answer`, {
+          params: {
+            user_id: currentUserId,
+            survey_id: this.$route.params.id
+          }
+        }),
+        axios.get(`/surveys/${this.$route.params.id}/is_favorite`, {
+          params: {
+            user_id: currentUserId,
+          }
+        })
+      ])
+
+      console.log(currentUserAnswerResponse.status)
+      console.log(currentUserAnswerResponse.data)
+      console.log(isFavoriteResponse.data)
+      if(currentUserAnswerResponse.status === 200) {
         this.existAnswer = true
-        this.selectedAnswer = response.data.selected_option.toString()
-      } else if(response.status === 204) {
+        this.selectedAnswer = currentUserAnswerResponse.data.selected_option.toString()
+      } else if(currentUserAnswerResponse.status === 204) {
         this.existAnswer = false
       }
+      this.isFavorite = isFavoriteResponse.data
+      this.favoriteSurveyId = isFavoriteResponse.data.favorite_survey_id
     } catch (error) {
       console.log(error)
     }
@@ -380,7 +412,48 @@ export default {
     },
     redirectToLogin() {
       this.$router.push({ path: "/auth/login", query: { message: "アンケート機能をご利用いただくにはログインが必要です" } })
-    }
+    },
+    async addToFavorite() {
+      try {
+        const response = await axios.post(`/surveys/${this.survey.id}/favorite_surveys`, {
+          user_id: this.currentUser.id
+        })
+        console.log(response)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！しました"
+        this.isFavorite = true
+        this.favoriteSurveyId = response.data.id
+        // this.favoriteQuestionsCount += 1
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "すでにいいね！されています"
+      }
+    },
+    async removeFromFavorite() {
+      try {
+        const response = await axios.delete(`/surveys/${this.survey.id}/favorite_surveys/${this.favoriteSurveyId}`, {
+          params: {
+            user_id: this.currentUser.id
+          }
+        })
+        console.log(response.data)
+        this.snackbarColor = "primary"
+        this.snackbar = true
+        this.flashMessage = "いいね！を削除しました"
+        this.isFavorite = !this.isFavorite
+        this.favoriteQuestionId = null
+        // this.favoriteQuestionsCount -= 1
+      } catch(error) {
+        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "いいね！されていません"
+      }
+    },
+
   }
 
 }
