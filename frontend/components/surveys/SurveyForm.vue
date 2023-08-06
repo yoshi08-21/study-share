@@ -37,6 +37,7 @@
           <h2>内容確認</h2>
         </v-card-title>
         <v-card-text>
+          <br><h3>選択されたジャンル: {{ selectedGenre }}</h3><br>
           <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo></v-text-field>
           <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo></v-textarea>
           <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo></v-text-field>

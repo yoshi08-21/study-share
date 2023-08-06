@@ -26,20 +26,15 @@
           <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
           <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
         </v-btn-toggle>
+        <h3>アンケート回答結果</h3>
       </template>
     </template>
 
-    <v-btn @click="existAnswer = !existAnswer">アンケート回答状態切替</v-btn>
-    <v-btn @click="selectedAnswer = '2'">２を回答済みにする</v-btn>
-    <v-btn @click="selectedAnswer = '3'">3を回答済みにする</v-btn>
-
-    <br><br><br>
-    <template v-if="existAnswer === true">
-      <h3>アンケート回答結果</h3>
-    </template>
-
-    <template v-else-if="currentUser && currentUser.id === survey.user_id">
-      <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
+    <template v-else-if="currentUser && survey.status === true">
+      <!-- current_userがいる ＆ アンケートが締め切られている -->
+      <v-alert type="error" dense text prominent border="left">
+        アンケートは締め切られています。
+      </v-alert>
       <v-btn-toggle style="flex-direction: column;">
         <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
         <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
@@ -48,6 +43,25 @@
       </v-btn-toggle>
       <br>
       <h3>アンケート回答結果</h3>
+    </template>
+
+    <template v-else-if="currentUser && currentUser.id === survey.user_id">
+      <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
+      <p>*自分のアンケートには回答ができません</p>
+      <v-btn-toggle style="flex-direction: column;">
+        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+      </v-btn-toggle>
+      <br>
+      <h3>アンケート回答結果</h3>
+      <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
+      <template v-if="survey.status == 0">
+      <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
+    </template>
+
+
     </template>
 
     <template v-else-if="!currentUser">
@@ -61,18 +75,10 @@
     </template>
 
 
+
     <!-- アンケート作者にはreadonlyのボタンを表示する -->
 
     <!-- アンケートの回答後は回答数と割合が書いてあるボタンに切り替えて、メソッドも切り替える -->
-    <br><br>
-    <template v-if="currentUser && survey.user_id === currentUser.id && survey.status == 0">
-      <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
-    </template>
-
-    <template v-if="currentUser && survey.user_id === currentUser.id">
-      <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
-    </template>
-
 
     <!-- アンケート締め切りの確認ダイアログ -->
     <v-dialog v-model="closeSurveyConfimation">
