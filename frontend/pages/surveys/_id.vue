@@ -34,6 +34,19 @@
           3=> {{ selectedOption3Count }}件 : {{ option3Percentage }}%
           4=> {{ selectedOption4Count }}件 : {{ option4Percentage }}%
         </h3>
+
+        <survey-result-linears
+          :survey="survey"
+          :selectedOption1Count="selectedOption1Count"
+          :selectedOption2Count="selectedOption2Count"
+          :selectedOption3Count="selectedOption3Count"
+          :selectedOption4Count="selectedOption4Count"
+          :option1Percentage="option1Percentage"
+          :option2Percentage="option2Percentage"
+          :option3Percentage="option3Percentage"
+          :option4Percentage="option4Percentage"
+        ></survey-result-linears>
+
       </template>
     </template>
 
@@ -131,9 +144,11 @@
 
 <script>
 
+import SurveyResultLinears from '../../components/surveys/SurveyResultLinears.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  components: { SurveyResultLinears },
   async asyncData({ params }) {
     try {
       const [surveyResponse, surveyAnswersResponse] = await Promise.all([
