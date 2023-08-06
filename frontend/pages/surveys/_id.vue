@@ -27,14 +27,6 @@
           <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
         </v-btn-toggle>
         <h3>アンケート回答結果</h3>
-        <!-- ブロック化して、横に並べる。ifを使用して存在する選択肢の結果のみを表示する -->
-        <h3>
-          1=> {{ selectedOption1Count }}件 : {{ option1Percentage }}%
-          2=> {{ selectedOption2Count }}件 : {{ option2Percentage }}%
-          3=> {{ selectedOption3Count }}件 : {{ option3Percentage }}%
-          4=> {{ selectedOption4Count }}件 : {{ option4Percentage }}%
-        </h3>
-
         <survey-result-linears
           :survey="survey"
           :selectedOption1Count="selectedOption1Count"
@@ -46,7 +38,6 @@
           :option3Percentage="option3Percentage"
           :option4Percentage="option4Percentage"
         ></survey-result-linears>
-
       </template>
     </template>
 
@@ -63,6 +54,17 @@
       </v-btn-toggle>
       <br>
       <h3>アンケート回答結果</h3>
+      <survey-result-linears
+        :survey="survey"
+        :selectedOption1Count="selectedOption1Count"
+        :selectedOption2Count="selectedOption2Count"
+        :selectedOption3Count="selectedOption3Count"
+        :selectedOption4Count="selectedOption4Count"
+        :option1Percentage="option1Percentage"
+        :option2Percentage="option2Percentage"
+        :option3Percentage="option3Percentage"
+        :option4Percentage="option4Percentage"
+      ></survey-result-linears>
     </template>
 
     <template v-else-if="currentUser && currentUser.id === survey.user_id">
@@ -76,6 +78,18 @@
       </v-btn-toggle>
       <br>
       <h3>アンケート回答結果</h3>
+      <survey-result-linears
+        :survey="survey"
+        :selectedOption1Count="selectedOption1Count"
+        :selectedOption2Count="selectedOption2Count"
+        :selectedOption3Count="selectedOption3Count"
+        :selectedOption4Count="selectedOption4Count"
+        :option1Percentage="option1Percentage"
+        :option2Percentage="option2Percentage"
+        :option3Percentage="option3Percentage"
+        :option4Percentage="option4Percentage"
+      ></survey-result-linears>
+
       <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
       <template v-if="survey.status == 0">
       <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
@@ -200,16 +214,33 @@ export default {
       return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 4).length
     },
     option1Percentage() {
-      return (this.selectedOption1Count / this.totalAnswersCount) * 100
+      if(this.totalAnswersCount === 0) {
+        return 0
+      } else {
+        return (this.selectedOption1Count / this.totalAnswersCount) * 100
+      }
     },
     option2Percentage() {
-      return (this.selectedOption2Count / this.totalAnswersCount) * 100
+      if(this.totalAnswersCount === 0) {
+        return 0
+      } else {
+        return (this.selectedOption2Count / this.totalAnswersCount) * 100
+      }
     },
     option3Percentage() {
-      return (this.selectedOption3Count / this.totalAnswersCount) * 100
+      if(this.totalAnswersCount === 0) {
+        return 0
+      } else {
+        return (this.selectedOption3Count / this.totalAnswersCount) * 100
+      }
     },
     option4Percentage() {
-      return (this.selectedOption4Count / this.totalAnswersCount) * 100
+
+      if(this.totalAnswersCount === 0) {
+        return 0
+      } else {
+        return (this.selectedOption4Count / this.totalAnswersCount) * 100
+      }
     },
 
   },

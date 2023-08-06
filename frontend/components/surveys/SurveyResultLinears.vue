@@ -49,11 +49,22 @@ export default {
     selectedOption2Count: Number,
     selectedOption3Count: Number,
     selectedOption4Count: Number,
-    option1Percentage: Number,
-    option2Percentage: Number,
-    option3Percentage: Number,
-    option4Percentage: Number,
-
+    option1Percentage: {
+      type: Number,
+      default: 0
+    },
+    option2Percentage: {
+      type: Number,
+      default: 0
+    },
+    option3Percentage: {
+      type: Number,
+      default: 0
+    },
+    option4Percentage: {
+      type: Number,
+      default: 0
+    },
   },
   data() {
     return {
