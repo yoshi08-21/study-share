@@ -29,6 +29,7 @@ class User < ApplicationRecord
   has_many :received_notifications, class_name: 'Notification', foreign_key: 'target_user_id', dependent: :destroy
   has_many :surveys
   has_many :survey_answers
+  has_many :favorite_surveys, dependent: :destroy
 
 
 

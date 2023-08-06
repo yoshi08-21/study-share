@@ -2,6 +2,34 @@
   <div>
     <h2>アンケート一覧</h2>
 
+    <br><br><br>
+    <v-card>
+      <v-card-title>
+        ソート機能
+      </v-card-title>
+      <v-row>
+        <v-col cols="6">
+          <v-select
+          v-model="selectedSortOption"
+          :items="sortsurveysOptions"
+          label="並び替え"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+        <v-col cols="6">
+          <v-select
+          v-model="selectedSurveyGenre"
+          :items="surveyGenreOptions"
+          label="ジャンルで絞り込み"
+          dense
+          outlined
+        ></v-select>
+        </v-col>
+      </v-row>
+    </v-card>
+
+
     <br>
     <v-btn @click="openDialog">新規アンケートを作成する</v-btn>
 
@@ -72,13 +100,17 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
-
+      sortsurveysOptions: ["新着順", "投稿順", "回答が多い順", "お気に入り登録数が多い順"],
+      surveyGenreOptions: ["国語", "社会", "数学", "英語", "理科", "参考書", "進路・大学", "その他"],
+      selectedSortOption: "",
+      selectedSurveyGenre: "",
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+
   },
   mounted() {
     if (this.$route.query.message) {
@@ -121,6 +153,9 @@ export default {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
     },
+    filterSurveys() {
+
+    }
 
   }
 }
