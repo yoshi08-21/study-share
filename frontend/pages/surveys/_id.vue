@@ -27,6 +27,8 @@
           <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
         </v-btn-toggle>
         <h3>アンケート回答結果</h3>
+        <!-- ブロック化して、横に並べる。ifを使用して存在する選択肢の結果のみを表示する -->
+        <h5>1=> {{ selectedOption1Count }}件 2=> {{ selectedOption2Count }}件 3=> {{ selectedOption3Count }}件 4=> {{ selectedOption4Count }}件</h5>
       </template>
     </template>
 
@@ -116,6 +118,11 @@
       </v-card>
     </v-dialog>
 
+    <!-- アンケートの回答結果を表示する -->
+    <!-- 回答を切り替えた際に、回答数と割合がリアルタイムで変更されるようにする -->
+
+    <!-- responseからフィルタリングを行ってcomputedに格納する。 -->
+
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -130,10 +137,17 @@ import axios from "@/plugins/axios"
 export default {
   async asyncData({ params }) {
     try {
-      const response = await axios.get(`/surveys/${params.id}`)
-      console.log(response.data)
+      const [surveyResponse, surveyAnswersResponse] = await Promise.all([
+        axios.get(`/surveys/${params.id}`),
+        axios.get(`/surveys/${params.id}/survey_answers/get_survey_answers`)
+      ])
+      const survey = surveyResponse.data
+      const surveyAnswers = surveyAnswersResponse.data
+      console.log(survey)
+      console.log(surveyAnswers)
       return {
-        survey: response.data
+        survey,
+        surveyAnswers
       }
     } catch(error) {
       console.log(error)
@@ -156,6 +170,19 @@ export default {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
     },
+    selectedOption1Count() {
+      return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 1).length
+    },
+    selectedOption2Count() {
+      return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 2).length
+    },
+    selectedOption3Count() {
+      return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 3).length
+    },
+    selectedOption4Count() {
+      return this.surveyAnswers.filter(surverAnswer => surverAnswer.selected_option === 4).length
+    }
+
   },
   async created() {
     try {
@@ -234,6 +261,8 @@ export default {
           }
         })
         console.log(response.data)
+        this.surveyAnswers.push(response.data)
+        console.log(this.surveyAnswers)
         this.existAnswer = true
         this.snackbar = true
         this.flashMessage = "アンケートに回答しました"
@@ -260,15 +289,33 @@ export default {
           this.snackbarColor = "primary"
           this.snackbar = true
           this.flashMessage = "回答を取り消しました"
+          this.removeSurveyAnswersReponse(this.currentUser.id)
+          console.log(this.surveyAnswers)
         } else if(response.status === 200) {
           this.existAnswer = true
           this.snackbarColor = "primary"
           this.snackbar = true
           this.flashMessage = "回答を変更しました"
+          this.changeSurveyAnswersResponse(this.currentUser.id, selectedOption)
+          console.log(this.surveyAnswers)
         }
-        // レスポンスで回答が返ってきたらそのまま、返ってこなければ回答後の表示を戻す
+        // 該当の部分
       } catch (error) {
         console.log(error)
+      }
+    },
+    // 回答が取り消された場合に、surveyAnswersの配列から該当の回答を削除する
+    removeSurveyAnswersReponse(userId) {
+      const index = this.surveyAnswers.findIndex(surveyAnswer => surveyAnswer.user_id === userId)
+      if(index !== -1) {
+        this.surveyAnswers.splice(index, 1)
+      }
+    },
+    // 回答が変更された場合に、surveyAnswersの配列該当の回答を変更する
+    changeSurveyAnswersResponse(userId, newSelectedOption) {
+      const index = this.surveyAnswers.findIndex(surverAnswer => surverAnswer.user_id === userId)
+      if(index !== -1) {
+        this.surveyAnswers[index].selected_option = newSelectedOption
       }
     },
     redirectToLogin() {
