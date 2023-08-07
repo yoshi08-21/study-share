@@ -34,7 +34,7 @@
     <v-btn @click="openDialog">新規アンケートを作成する</v-btn>
 
     <br><br>
-    <each-surveys :surveys="surveys"></each-surveys>
+    <each-surveys :surveys="surveysChunk"></each-surveys>
 
     <!-- アンケートはダイアログで作成する -->
     <!-- 選択肢はボタンを押すと追加できるようにしたい -->
@@ -81,15 +81,32 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
-      sortsurveysOptions: ["新着順", "投稿順", "回答が多い順", "お気に入り登録数が多い順"],
+      sortsurveysOptions: ["新着順", "投稿順", "回答が多い順", "いいね!が多い順"],
       surveyGenreOptions: ["国語", "社会", "数学", "英語", "理科", "参考書", "進路・大学", "その他"],
       selectedSortOption: "",
       selectedSurveyGenre: "",
+      page: 1,
+      perPage: 10,
     }
   },
   computed: {
     currentUser() {
       return this.$store.getters["auth/getCurrentUser"]
+    },
+    genreFilteredSurveys() {
+      return this.filterSurveys()
+    },
+    sortedSurveys() {
+      return this.sortSurveys(this.genreFilteredSurveys)
+    },
+    surveysChunk() {
+      const sortedsurveys = this.sortedSurveys
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return sortedsurveys.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.sortedsurveys.length / this.perPage);
     },
 
   },
@@ -135,8 +152,28 @@ export default {
       }
     },
     filterSurveys() {
+      if(this.selectedSurveyGenre) {
+        const genreFilteredSurveys = this.surveys.filter(survey => survey.genre === this.selectedSurveyGenre)
+        this.page = 1
+        return genreFilteredSurveys
+      } else {
+        return this.surveys
+      }
+    },
+    sortSurveys(surveys) {
+      if(this.selectedSortOption === "新着順") {
+        return [...surveys].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      } else if(this.selectedSortOption === "投稿順") {
+        return [...surveys].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      } else if(this.selectedSortOption === "回答が多い順") {
+        return [...surveys].sort((a, b) => b.survey_answers_count - a.survey_answers_count)
+      } else if(this.selectedSortOption === "いいね!が多い順") {
+        return [...surveys].sort((a, b) => b.favorite_surveys_count - a.favorite_books_count)
+      } else {
+        return [...surveys].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+      }
+    },
 
-    }
 
   }
 }
