@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_many :survey_answers
   has_many :favorite_surveys, dependent: :destroy
   has_many :fav_surveys,       through: :favorite_surveys, source: :survey
+  has_many :watched_surveys,     through: :browsing_histories, source: :survey
 
 
 

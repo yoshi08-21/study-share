@@ -8,6 +8,7 @@ class BrowsingHistoriesController < ApplicationController
     subject_question_browsing_histories = current_user.watched_subject_questions.includes(:user).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
     reply_browsing_histories = current_user.watched_replies.includes(:user, :question)
     subject_question_reply_browsing_histories = current_user.watched_subject_question_replies.includes(:user, :subject_question)
+    survey_browsing_histories = current_user.watched_surveys.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
 
     if current_user
       render json: {
@@ -16,7 +17,8 @@ class BrowsingHistoriesController < ApplicationController
         question_browsing_histories: question_browsing_histories.as_json(include: [:user, :book]),
         subject_question_browsing_histories: subject_question_browsing_histories.as_json(include: :user),
         reply_browsing_histories: reply_browsing_histories.as_json(include: [:user, :question]),
-        subject_question_reply_browsing_histories:subject_question_reply_browsing_histories.as_json(include: [:user, :subject_question]),
+        subject_question_reply_browsing_histories: subject_question_reply_browsing_histories.as_json(include: [:user, :subject_question]),
+        survey_browsing_histories: survey_browsing_histories.as_json(include: :user)
       }
     else
       render json: { error: "エラーが発生しました" }

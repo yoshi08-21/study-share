@@ -11,6 +11,7 @@ class SurveysController < ApplicationController
   end
 
   def show
+    current_user = User.find_by(id: params[:user_id])
     survey = Survey.includes(:user).find_by(id: params[:id])
     favorite_surveys = FavoriteSurvey.where(survey_id: survey.id)
     favorite_surveys_count = favorite_surveys.count
@@ -19,6 +20,9 @@ class SurveysController < ApplicationController
         survey: survey.as_json(include: :user),
         favorite_surveys_count: favorite_surveys_count
       }
+      if current_user && !exist_survey_browsing_history?(current_user, survey)
+        save_survey_browsing_history(current_user, survey)
+      end
     else
       render json: survey.errors
     end
@@ -82,4 +86,21 @@ class SurveysController < ApplicationController
     def survey_params
       params.require(:survey).permit(:title, :content, :genre, :option1, :option2, :option3, :option4, :image, :status, :user_id)
     end
+
+    def exist_survey_browsing_history?(current_user, survey)
+      current_user.watched_surveys.include?(survey)
+    end
+
+    def save_survey_browsing_history(current_user, survey)
+      survey_browsing_histories = BrowsingHistory.where(user_id: current_user.id).where.not(survey_id: nil)
+      max_browsing_histories = 10
+      if survey_browsing_histories.count >= max_browsing_histories
+        survey_browsing_histories.first.destroy
+        current_user.browsing_histories.create(survey_id: survey.id)
+      else
+        current_user.browsing_histories.create(survey_id: survey.id)
+      end
+    end
+
+
 end
