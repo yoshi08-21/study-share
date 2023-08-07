@@ -34,7 +34,16 @@
     <v-btn @click="openDialog">新規アンケートを作成する</v-btn>
 
     <br><br>
+    <template v-if="!sortedSurveys.length == 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
+    <br>
     <each-surveys :surveys="surveysChunk"></each-surveys>
+    <br>
+    <template v-if="!sortedSurveys.length == 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
+
 
     <!-- アンケートはダイアログで作成する -->
     <!-- 選択肢はボタンを押すと追加できるようにしたい -->
@@ -106,7 +115,7 @@ export default {
       return sortedsurveys.slice(start, end)
     },
     totalPages() {
-      return Math.ceil(this.sortedsurveys.length / this.perPage);
+      return Math.ceil(this.sortedSurveys.length / this.perPage);
     },
 
   },
