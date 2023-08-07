@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
 
 
   def index
-    surveys = Survey.all.includes(:user)
+    surveys = Survey.all.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
     if surveys
       render json: surveys, include: "user"
     else
@@ -12,9 +12,13 @@ class SurveysController < ApplicationController
 
   def show
     survey = Survey.includes(:user).find_by(id: params[:id])
-    # 別テーブルから回答情報を取得する必要がある
+    favorite_surveys = FavoriteSurvey.where(survey_id: survey.id)
+    favorite_surveys_count = favorite_surveys.count
     if survey
-      render json: survey, include: "user"
+      render json: {
+        survey: survey.as_json(include: :user),
+        favorite_surveys_count: favorite_surveys_count
+      }
     else
       render json: survey.errors
     end

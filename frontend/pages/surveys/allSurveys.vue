@@ -34,27 +34,7 @@
     <v-btn @click="openDialog">新規アンケートを作成する</v-btn>
 
     <br><br>
-    <v-flex mb-5 v-for="(survey, index) in surveys" :key="'survey_' + index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/surveys/${survey.id}`">
-            <v-row>
-              <v-col cols="10">
-                <v-card-title>
-                  タイトル: {{ survey.title }}
-                </v-card-title>
-                <v-card-text>
-                  <p>{{ survey.content }}</p>
-                </v-card-text>
-                <v-card-actions>
-                  by: {{ survey.user.name }}
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <each-surveys :surveys="surveys"></each-surveys>
 
     <!-- アンケートはダイアログで作成する -->
     <!-- 選択肢はボタンを押すと追加できるようにしたい -->
@@ -83,10 +63,11 @@
 
 <script>
 import SurveyForm from '../../components/surveys/SurveyForm.vue'
+import EachSurveys from '../../components/surveys/EachSurveys.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { SurveyForm },
+  components: { SurveyForm, EachSurveys },
   async asyncData() {
     const response = await axios.get("/surveys")
     console.log(response.data)

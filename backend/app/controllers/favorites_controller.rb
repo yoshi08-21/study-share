@@ -8,6 +8,7 @@ class FavoritesController < ApplicationController
     favorite_replies = current_user.fav_replies.includes(:user, :question)
     favorite_subject_questions = current_user.fav_subject_questions.includes(:user).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
     favorite_subject_question_replies = current_user.fav_subject_question_replies.includes(:user, :subject_question)
+    favorite_surveys = current_user.fav_surveys.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
     if current_user
       render json: {
         favorite_books: favorite_books,
@@ -15,7 +16,8 @@ class FavoritesController < ApplicationController
         favorite_questions: favorite_questions.as_json(include: [:user, :book]),
         favorite_replies: favorite_replies.as_json(include: [:user, :question]),
         favorite_subject_questions: favorite_subject_questions.as_json(include: :user),
-        favorite_subject_question_replies: favorite_subject_question_replies.as_json(include: [:user, :subject_question])
+        favorite_subject_question_replies: favorite_subject_question_replies.as_json(include: [:user, :subject_question]),
+        favorite_surveys: favorite_surveys.as_json(include: :user)
       },
       status: 200
     else
