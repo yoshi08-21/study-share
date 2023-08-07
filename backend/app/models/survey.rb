@@ -5,6 +5,8 @@ class Survey < ApplicationRecord
 
   has_many :survey_answers, dependent: :destroy
   has_many :favorite_surveys, dependent: :destroy
+  has_many :browsing_histories, dependent: :destroy
+
 
   validates :title,  presence: true, length: { maximum: 50 }
   validates :content,  presence: true, length: { maximum: 1000 }

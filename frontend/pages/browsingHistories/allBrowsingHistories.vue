@@ -45,6 +45,12 @@
       <each-subject-question-replies :subjectQuestionReplies="watchedSubjectQuestionReplies"></each-subject-question-replies>
     </template>
 
+    <template v-else-if="tab === 6">
+      <h3>閲覧したアンケート（最大10件）</h3>
+      <br>
+      <each-surveys :surveys="watchedSurveys"></each-surveys>
+    </template>
+
   </div>
 </template>
 
@@ -57,12 +63,13 @@ import EachReplies from '../../components/replies/EachReplies.vue'
 import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQuestions.vue'
 import EachSubjectQuestionReplies from '../../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import authCheck from '../../middleware/authCheck'
+import EachSurveys from '../../components/surveys/EachSurveys.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
   middleware: authCheck,
-  components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies },
+  components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys },
   async asyncData({ store }) {
     try {
       const response = await axios.get("/browsing_histories", {
@@ -78,6 +85,7 @@ export default {
         watchedSubjectQuestions: response.data.subject_question_browsing_histories,
         watchedReplies: response.data.reply_browsing_histories,
         watchedSubjectQuestionReplies: response.data.subject_question_reply_browsing_histories,
+        watchedSurveys: response.data.survey_browsing_histories,
       }
     } catch(error) {
       console.log(error)
@@ -94,6 +102,7 @@ export default {
         { label: "閲覧した科目別質問" },
         { label: "閲覧した返信" },
         { label: "閲覧した返信（科目別質問）" },
+        { label: "閲覧したアンケート" },
       ]
     }
   }

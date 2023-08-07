@@ -7,6 +7,7 @@ class BrowsingHistory < ApplicationRecord
   belongs_to :reply,    optional: true
   belongs_to :subject_question, optional: true
   belongs_to :subject_question_reply, optional: true
+  belongs_to :survey, optional: true
 
   validates :user_id,   presence: true
 

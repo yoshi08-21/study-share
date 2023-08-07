@@ -184,10 +184,21 @@ import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyResultLinears },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
     try {
+
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
       const [surveyResponse, surveyAnswersResponse] = await Promise.all([
-        axios.get(`/surveys/${params.id}`),
+        axios.get(`/surveys/${params.id}`, {
+          params: {
+            user_id: currentUserId
+          }
+        }),
         axios.get(`/surveys/${params.id}/survey_answers/get_survey_answers`)
       ])
       const survey = surveyResponse.data
