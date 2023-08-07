@@ -95,6 +95,9 @@ Rails.application.routes.draw do
       patch "close_survey"
       get "is_favorite"
     end
+    collection do
+      get "check_existence"
+    end
   end
 
 

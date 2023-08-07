@@ -78,8 +78,17 @@ class SurveysController < ApplicationController
     else
       render json: false
     end
-
   end
+
+  def check_existence
+    survey = Survey.find_by(id: params[:id])
+    if survey = Survey.find_by(id: params[:id])
+      head :ok
+    else
+      head :not_found
+    end
+  end
+
 
   private
 

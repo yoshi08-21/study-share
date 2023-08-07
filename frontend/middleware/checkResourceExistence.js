@@ -165,6 +165,27 @@ export default async function({ route, redirect }) {
   }
 
 
+    // アンケートへのバリデーション
+    if(name === "surveys-id") {
+      const surveyId = params.id
+
+      try {
+        const response = await axios.get("/surveys/check_existence", {
+          params: {
+            id: surveyId
+          }
+        })
+        if(response.status === 200) {
+          return
+        }
+      } catch(error) {
+        return redirect({
+          path: "/",
+          query: { message: "存在しないアンケートです" }
+        })
+      }
+    }
+
 
 
 
