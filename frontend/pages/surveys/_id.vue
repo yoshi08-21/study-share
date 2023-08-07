@@ -4,6 +4,7 @@
 
     <h3>アンケートタイトル: {{ survey.title }}</h3>
     <h4>アンケート本文: {{ survey.content }}</h4>
+    <h4>ジャンル: {{ survey.genre }}</h4>
     <h4>by {{ survey.user.name }}</h4>
 
     <br><br>
