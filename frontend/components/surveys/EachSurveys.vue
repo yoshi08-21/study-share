@@ -19,6 +19,12 @@
                   回答数: {{ survey.survey_answers_count }}
                   いいね!: {{ survey.favorite_surveys_count }}
                 </p>
+                <template v-if="survey.status === false">
+                  <p>ステータス: 回答受付中</p>
+                </template>
+                <template v-else>
+                  <p>ステータス: 締切済み</p>
+                </template>
               </v-col>
             </v-row>
           </v-card>
