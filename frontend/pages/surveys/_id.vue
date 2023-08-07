@@ -7,8 +7,42 @@
     <h4>ジャンル: {{ survey.genre }}</h4>
     <h4>by {{ survey.user.name }}</h4>
 
+    <template v-if="survey.status === false">
+      <h4>ステータス: 回答受付中</h4>
+    </template>
+    <template v-else>
+      <h4>ステータス: 締切済み</h4>
+    </template>
+
     <br><br>
-    <template v-if="currentUser && currentUser.id !== survey.user_id">
+    <template v-if="currentUser && survey.status === true">
+      <!-- current_userがいる ＆ アンケートが締め切られている -->
+      <v-alert type="error" dense text prominent border="left">
+        アンケートは締め切られています。
+      </v-alert>
+      <v-btn-toggle style="flex-direction: column;">
+        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+      </v-btn-toggle>
+      <br>
+      <h3>アンケート回答結果</h3>
+      <survey-result-linears
+        :survey="survey"
+        :selectedOption1Count="selectedOption1Count"
+        :selectedOption2Count="selectedOption2Count"
+        :selectedOption3Count="selectedOption3Count"
+        :selectedOption4Count="selectedOption4Count"
+        :option1Percentage="option1Percentage"
+        :option2Percentage="option2Percentage"
+        :option3Percentage="option3Percentage"
+        :option4Percentage="option4Percentage"
+      ></survey-result-linears>
+
+    </template>
+
+    <template v-else-if="currentUser && currentUser.id !== survey.user_id">
       <!-- current_userがいる ＆ current_userがアンケートの作成者ではない -->
       <template v-if="existAnswer === false">
         <p>アンケート回答前ボタン</p>
@@ -43,32 +77,7 @@
       </template>
     </template>
 
-    <template v-else-if="currentUser && survey.status === true">
-      <!-- current_userがいる ＆ アンケートが締め切られている -->
-      <v-alert type="error" dense text prominent border="left">
-        アンケートは締め切られています。
-      </v-alert>
-      <v-btn-toggle style="flex-direction: column;">
-        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
-      <br>
-      <h3>アンケート回答結果</h3>
-      <survey-result-linears
-        :survey="survey"
-        :selectedOption1Count="selectedOption1Count"
-        :selectedOption2Count="selectedOption2Count"
-        :selectedOption3Count="selectedOption3Count"
-        :selectedOption4Count="selectedOption4Count"
-        :option1Percentage="option1Percentage"
-        :option2Percentage="option2Percentage"
-        :option3Percentage="option3Percentage"
-        :option4Percentage="option4Percentage"
-      ></survey-result-linears>
 
-    </template>
 
 
     <template v-else-if="currentUser && currentUser.id === survey.user_id">
@@ -478,7 +487,7 @@ export default {
 <style scoped>
 
 .large-button {
-  width: 500px;
+  width: 900px;
 }
 
 </style>

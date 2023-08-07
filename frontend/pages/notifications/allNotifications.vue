@@ -33,6 +33,10 @@
           <favorite-subject-question-reply-notification :notification="notification"></favorite-subject-question-reply-notification>
         </div>
 
+        <div v-if="notification.action_to === 'Survey'">
+          <favorite-survey-notification :notification="notification"></favorite-survey-notification>
+        </div>
+
       </div>
 
       <div v-else-if="notification.action_type == 'Reply'">
@@ -45,6 +49,10 @@
           <reply-to-subject-question-notification :notification="notification"></reply-to-subject-question-notification>
         </div>
 
+      </div>
+
+      <div v-else-if="notification.action_type === 'SurveyAnswer'">
+        <answer-to-survey-notification :notification="notification"></answer-to-survey-notification>
       </div>
     </v-flex>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
@@ -61,6 +69,8 @@ import FavoriteSubjectQuestionReplyNotification from '../../components/notificat
 import ReplyToQuestionNotification from '../../components/notifications/ReplyToQuestionNotification.vue'
 import ReplyToSubjectQuestionNotification from '../../components/notifications/ReplyToSubjectQuestionNotification.vue'
 import authCheck from '../../middleware/authCheck'
+import FavoriteSurveyNotification from '../../components/notifications/FavoriteSurveyNotification.vue'
+import AnswerToSurveyNotification from '../../components/surveys/AnswerToSurveyNotification.vue'
 import axios from "@/plugins/axios"
 
 export default {
@@ -72,7 +82,9 @@ export default {
     FavoriteSubjectQuestionNotification,
     FavoriteSubjectQuestionReplyNotification,
     ReplyToQuestionNotification,
-    ReplyToSubjectQuestionNotification
+    ReplyToSubjectQuestionNotification,
+    FavoriteSurveyNotification,
+    AnswerToSurveyNotification
   },
   async asyncData({ store }) {
     try {

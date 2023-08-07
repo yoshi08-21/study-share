@@ -309,7 +309,7 @@ export default {
             content: data.content,
           }
         )
-        console.log(response)
+        console.log(response.data)
         this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
         console.log(error)

@@ -2,10 +2,11 @@ class SurveyAnswersController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:survey_answer][:user_id])
-    survey = Survey.find_by(id: params[:survey_answer][:survey_id])
+    survey = Survey.includes(:user).find_by(id: params[:survey_answer][:survey_id])
     survey_answer = current_user.survey_answers.build(survey_answer_params)
     if !exist_survey_answer?(current_user, survey)
       if survey_answer.save
+        create_notification_survey_answer(current_user, survey.user, survey)
         render json: survey_answer
       else
         render json: { error: "エラーが発生しました" }, status: 400
@@ -73,6 +74,22 @@ class SurveyAnswersController < ApplicationController
       else
         return false
       end
+    end
+
+    def create_notification_survey_answer(current_user, survey_author, survey)
+      # アンケートの投稿者に通知を作成する
+      # すでにアンケートへの回答の通知があった場合、一度削除してから再度作成する
+      survey_answer_notification = Notification.find_by(action_user_id: current_user.id, survey_id: survey.id, action_type: "SurveyAnswer")
+      if survey_answer_notification
+        survey_answer_notification.destroy
+      end
+      survey_answer_notification = current_user.sent_notifications.build(
+        target_user_id: survey_author.id,
+        survey_id: survey.id,
+        action_type: "SurveyAnswer",
+        action_to: "SurveyAnswer"
+      )
+      survey_answer_notification.save if survey_answer_notification.valid?
     end
 
 end
