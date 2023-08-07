@@ -137,6 +137,11 @@
       <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
     </template>
 
+    <br><br>
+    <p>
+      <v-btn @click="previousSurvey">前のアンケート</v-btn>
+      <v-btn @click="nextSurvey">次のアンケート</v-btn>
+    </p>
 
     <!-- アンケート締め切りの確認ダイアログ -->
     <v-dialog v-model="closeSurveyConfimation">
@@ -202,22 +207,26 @@ export default {
         currentUserId = currentUser.id
       }
 
-      const [surveyResponse, surveyAnswersResponse] = await Promise.all([
+      const [surveyResponse, surveyAnswersResponse, surveysResponse] = await Promise.all([
         axios.get(`/surveys/${params.id}`, {
           params: {
             user_id: currentUserId
           }
         }),
-        axios.get(`/surveys/${params.id}/survey_answers/get_survey_answers`)
+        axios.get(`/surveys/${params.id}/survey_answers/get_survey_answers`),
+        axios.get("/surveys")
       ])
       const survey = surveyResponse.data
       const surveyAnswers = surveyAnswersResponse.data
+      const surveys = surveysResponse.data
       console.log(survey)
       console.log(surveyAnswers)
+      console.log(surveys)
       return {
         survey: survey.survey,
         favoriteSurveysCount: survey.favorite_surveys_count,
-        surveyAnswers
+        surveyAnswers,
+        surveys
       }
     } catch(error) {
       console.log(error)
@@ -478,6 +487,33 @@ export default {
         this.flashMessage = "いいね！されていません"
       }
     },
+    nextSurvey() {
+      const index = this.surveys.findIndex(item => item.id === this.survey.id)
+      const nextIndex = index + 1
+      const nextSurvey = this.surveys[nextIndex]
+      const lastItem = this.surveys[this.surveys.length - 1]
+      if(this.survey.id !== lastItem.id) {
+        this.$router.push({ path: `/surveys/${nextSurvey.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最後のアンケートです"
+      }
+    },
+    previousSurvey() {
+      const index = this.surveys.findIndex(item => item.id === this.survey.id)
+      const previousIndex = index - 1
+      const previousSurvey = this.surveys[previousIndex]
+      const firstItem = this.surveys[0]
+      if(this.survey.id !== firstItem.id) {
+        this.$router.push({ path: `/surveys/${previousSurvey.id}` })
+      } else {
+        this.snackbar = true
+        this.snackbarColor = "blue-grey"
+        this.flashMessage = "最初のアンケートです"
+      }
+    }
+
 
   }
 
