@@ -112,6 +112,7 @@ export default {
       ])
 
       console.log(replyResponse.data)
+      console.log(replyResponse)
       console.log(repliesResponse.data)
       return {
         book: replyResponse.data.book,

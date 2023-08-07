@@ -100,7 +100,7 @@ export default async function({ route, redirect }) {
     const replyId = params.id
 
     try {
-      const response = await axios.get("/questions/check_existence", {
+      const response = await axios.get("/replies/check_existence", {
         params: {
           book_id: bookId,
           question_id: questionId,
