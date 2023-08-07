@@ -7,7 +7,8 @@ class NotificationsController < ApplicationController
       question: :user,
       reply: [:user, :question],
       subject_question: :user,
-      subject_question_reply: [:user, :subject_question]
+      subject_question_reply: [:user, :subject_question],
+      survey: :user
     ).where(target_user_id: current_user.id).order(created_at: :desc)
     if notifications
       render json: notifications, include: [
@@ -16,7 +17,8 @@ class NotificationsController < ApplicationController
         question: { include: :user },
         reply: { include: [:user, :question] },
         subject_question: { include: :user },
-        subject_question_reply: { include: [:user, :subject_question] }
+        subject_question_reply: { include: [:user, :subject_question] },
+        survey: { include: :user }
       ]
       notifications.where(is_checked: false).each do |notification|
         notification.update_attribute(:is_checked, true)
