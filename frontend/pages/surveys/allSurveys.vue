@@ -168,7 +168,7 @@ export default {
       } else if(this.selectedSortOption === "回答が多い順") {
         return [...surveys].sort((a, b) => b.survey_answers_count - a.survey_answers_count)
       } else if(this.selectedSortOption === "いいね!が多い順") {
-        return [...surveys].sort((a, b) => b.favorite_surveys_count - a.favorite_books_count)
+        return [...surveys].sort((a, b) => b.favorite_surveys_count - a.favorite_surveys_count)
       } else {
         return [...surveys].sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
       }
