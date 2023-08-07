@@ -12,40 +12,48 @@
     </v-tabs>
 
     <template v-if="tab === 0">
-      <h3>お気に入りに追加した参考書（最大10件）</h3>
+      <h3>お気に入りに追加した参考書</h3>
       <br>
       <each-books :books="favoriteBooks"></each-books>
     </template>
 
     <template v-else-if="tab === 1">
-      <h3>いいね!したレビュー（最大10件）</h3>
+      <h3>いいね!したレビュー</h3>
       <br>
       <each-reviews :reviews="favoriteReviews"></each-reviews>
     </template>
 
     <template v-else-if="tab === 2">
-      <h3>いいね!した質問（最大10件）</h3>
+      <h3>いいね!した質問</h3>
       <br>
       <each-questions :questions="favoriteQuestions"></each-questions>
     </template>
 
     <template v-else-if="tab === 3">
-      <h3>いいね!した科目別質問（最大10件）</h3>
+      <h3>いいね!した科目別質問</h3>
       <br>
       <each-subject-questions :subjectQuestions="favoriteSubjectQuestions"></each-subject-questions>
     </template>
 
     <template v-else-if="tab === 4">
-      <h3>いいね!した返信（最大10件）</h3>
+      <h3>いいね!した返信</h3>
       <br>
       <each-replies :replies="favoriteReplies"></each-replies>
     </template>
 
     <template v-else-if="tab === 5">
-      <h3>いいね!した科目別質問への返信（最大10件）</h3>
+      <h3>いいね!した科目別質問への返信</h3>
       <br>
       <each-subject-question-replies :subjectQuestionReplies="favoriteSubjectQuestionReplies"></each-subject-question-replies>
     </template>
+
+    <template v-else-if="tab === 6">
+      <h3>いいね!したアンケート</h3>
+      <br>
+      <each-surveys :surveys="favoriteSurveys"></each-surveys>
+
+    </template>
+
 
   </div>
 </template>
@@ -59,11 +67,12 @@ import EachReplies from '../components/replies/EachReplies.vue'
 import EachSubjectQuestions from '../components/subjectQuestions/EachSubjectQuestions.vue'
 import EachSubjectQuestionReplies from '../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import authCheck from '../middleware/authCheck'
+import EachSurveys from '../components/surveys/EachSurveys.vue'
 import axios from "@/plugins/axios"
 
 export default {
   middleware: authCheck,
-  components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, },
+  components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   async asyncData({ store }) {
     try {
       const response = await axios.get("/favorites", {
@@ -78,7 +87,8 @@ export default {
         favoriteQuestions: response.data.favorite_questions,
         favoriteReplies: response.data.favorite_replies,
         favoriteSubjectQuestions: response.data.favorite_subject_questions,
-        favoriteSubjectQuestionReplies: response.data.favorite_subject_question_replies
+        favoriteSubjectQuestionReplies: response.data.favorite_subject_question_replies,
+        favoriteSurveys: response.data.favorite_surveys
 
       }
     } catch(error) {
@@ -95,6 +105,8 @@ export default {
         { label: "いいね！した科目別質問" },
         { label: "いいね！した返信" },
         { label: "いいね！した返信（科目別質問）" },
+        { label: "いいね！したアンケート" },
+
       ]
 
     }

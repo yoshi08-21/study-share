@@ -4,6 +4,7 @@
 
     <h3>アンケートタイトル: {{ survey.title }}</h3>
     <h4>アンケート本文: {{ survey.content }}</h4>
+    <h4>by {{ survey.user.name }}</h4>
 
     <br><br>
     <template v-if="currentUser && currentUser.id !== survey.user_id">
@@ -65,7 +66,9 @@
         :option3Percentage="option3Percentage"
         :option4Percentage="option4Percentage"
       ></survey-result-linears>
+
     </template>
+
 
     <template v-else-if="currentUser && currentUser.id === survey.user_id">
       <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
@@ -89,13 +92,9 @@
         :option3Percentage="option3Percentage"
         :option4Percentage="option4Percentage"
       ></survey-result-linears>
-
-      <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
       <template v-if="survey.status == 0">
-      <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
-    </template>
-
-
+        <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
+      </template>
     </template>
 
     <template v-else-if="!currentUser">
@@ -113,15 +112,19 @@
     <template v-if="currentUser && survey.user_id !== this.currentUser.id">
       <template v-if="!isFavorite">
         <v-btn @click="addToFavorite">いいね！する</v-btn>
-        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
+        <P>いいね！（{{ favoriteSurveysCount }}件）</P>
       </template>
       <template v-else>
         <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
-        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
+        <P>いいね！（{{ favoriteSurveysCount }}件）</P>
       </template>
     </template>
     <template v-else>
-      「いいね？件」
+      <P>いいね！（{{ favoriteSurveysCount }}件）</P>
+    </template>
+
+    <template v-if="currentUser && currentUser.id === survey.user_id">
+      <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
     </template>
 
 
@@ -191,7 +194,8 @@ export default {
       console.log(survey)
       console.log(surveyAnswers)
       return {
-        survey,
+        survey: survey.survey,
+        favoriteSurveysCount: survey.favorite_surveys_count,
         surveyAnswers
       }
     } catch(error) {
@@ -424,7 +428,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteSurveyId = response.data.id
-        // this.favoriteQuestionsCount += 1
+        this.favoriteSurveysCount += 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -445,7 +449,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteQuestionId = null
-        // this.favoriteQuestionsCount -= 1
+        this.favoriteSurveysCount -= 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many :surveys
   has_many :survey_answers
   has_many :favorite_surveys, dependent: :destroy
+  has_many :fav_surveys,       through: :favorite_surveys, source: :survey
 
 
 
