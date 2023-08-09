@@ -15,9 +15,13 @@ class SubjectQuestionsController < ApplicationController
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:id])
     favorite_subject_questions = FavoriteSubjectQuestion.where(subject_question_id: subject_question.id)
     favorite_subject_questions_count = favorite_subject_questions.count
+    if subject_question.image.attached?
+      image_url = rails_blob_url(subject_question.image)
+    end
+      subject_question_json = subject_question.as_json(include: :user).merge(image: image_url)
     if subject_question
       render json: {
-        subject_question: subject_question.as_json(include: :user),
+        subject_question: subject_question_json,
         favorite_subject_questions_count: favorite_subject_questions_count
       }
       if current_user && !exist_subject_question_browsing_history?(current_user, subject_question)
@@ -30,7 +34,7 @@ class SubjectQuestionsController < ApplicationController
 
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:subject_question][:user_id])
     subject_question = current_user.subject_questions.build(subject_question_params)
     if subject_question.save
       render json: subject_question, status: 200
@@ -40,12 +44,13 @@ class SubjectQuestionsController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:current_user_id])
+    current_user = User.find_by(id: params[:subject_question][:user_id])
     subject_question = SubjectQuestion.find_by(id: params[:id])
     author = subject_question.user
     if validate_authorship(current_user, author)
       if subject_question.update(subject_question_params)
-        render json: subject_question, status: 200
+        image_url = subject_question.image.attached? ? rails_blob_url(subject_question.image) : nil
+        render json: { subject_question: subject_question, image_url: image_url }, status: 200
       else
         render json: { error: "エラーが発生しました" }, status: 400
       end
@@ -120,7 +125,7 @@ class SubjectQuestionsController < ApplicationController
   private
 
     def subject_question_params
-      params.require(:subject_question).permit(:title, :content, :subject, :user_id)
+      params.require(:subject_question).permit(:title, :content, :subject, :user_id, :image)
     end
 
     def exist_subject_question_browsing_history?(current_user, subject_question)
