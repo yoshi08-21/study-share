@@ -146,14 +146,18 @@ export default {
   },
   methods: {
     async submitSubjectQuestion(data) {
+      const formData = new FormData()
+
+      formData.append("subject_question[user_id]", this.currentUser.id);
+      formData.append("subject_question[title]", data.title);
+      formData.append("subject_question[content]", data.content);
+      formData.append("subject_question[subject]", data.subject);
+      if (data.image) {
+          formData.append("subject_question[image]", data.image);
+      }
+
       try {
-        const response = await axios.post("/subject_questions", {
-            user_id: this.currentUser.id,
-            title: data.title,
-            content: data.content,
-            subject: data.subject
-          }
-        )
+        const response = await axios.post("/subject_questions", formData)
         console.log(response)
         this.$router.push({ path: `/subjectQuestions/${response.data.id}`, query: { message: '質問の投稿が完了しました' } })
       } catch(error) {

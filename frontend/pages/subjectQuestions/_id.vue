@@ -8,6 +8,18 @@
     <h4>タイトル:{{ this.subjectQuestion.title }}</h4>
     <p>本文:{{ this.subjectQuestion.content }}</p>
     <h4>科目:{{ this.subjectQuestion.subject }}</h4>
+
+    <tepmplate v-if="subjectQuestion.image">
+      <v-img
+        :src="subjectQuestion.image"
+        @click="showFullImage = true"
+        max-height="200"
+        max-width="200"
+        contain
+      ></v-img>
+      *画像をクリックすると拡大して表示できます
+    </tepmplate>
+
     <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
     <br>
@@ -94,6 +106,19 @@
       </v-card>
     </v-dialog>
 
+    <!-- 大きいサイズの画像表示用のダイアログ -->
+    <v-dialog v-model="showFullImage">
+      <v-card>
+        <h3>画像を表示する</h3>
+        <v-img
+          :src="subjectQuestion.image"
+          max-height="400"
+          max-width="400"
+          contain
+        ></v-img>
+      </v-card>
+    </v-dialog>
+
     <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
     <br>
@@ -163,6 +188,7 @@ export default {
       subjectQuestionReplyDialog: false,
       perPage: 10,
       page: 1,
+      showFullImage: false,
 
     }
   },
@@ -223,13 +249,18 @@ export default {
       }
     },
     async editSubjectQuestion(data) {
+      const formData = new FormData()
+
+      formData.append("subject_question[user_id]", this.currentUser.id);
+      formData.append("subject_question[title]", data.title);
+      formData.append("subject_question[content]", data.content);
+      formData.append("subject_question[subject]", data.subject);
+      if (data.image) {
+          formData.append("subject_question[image]", data.image);
+      }
+
       try {
-        const response = await axios.patch(`/subject_questions/${this.subjectQuestion.id}`, {
-          title: data.title,
-          content: data.content,
-          subject: data.subject,
-          current_user_id: this.currentUser.id
-        })
+        const response = await axios.patch(`/subject_questions/${this.subjectQuestion.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
@@ -237,7 +268,9 @@ export default {
         this.subjectQuestion.title = response.data.title
         this.subjectQuestion.content = response.data.content
         this.subjectQuestion.subject = response.data.subject
-
+        if (response.data.image_url) {
+          this.subjectQuestion.image = response.data.image_url
+        }
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
