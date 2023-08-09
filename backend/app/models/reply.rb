@@ -1,5 +1,7 @@
 class Reply < ApplicationRecord
 
+  include CustomValidation
+
   belongs_to :user
   belongs_to :question
 
@@ -8,9 +10,14 @@ class Reply < ApplicationRecord
   has_many :notifications,              dependent: :destroy
 
 
+  has_one_attached :image
+
   validates :content,  presence: true, length: { maximum: 1000 }
   validates :user_id,  presence: true
   validates :question_id,  presence: true
+
+
+
 
 
 end

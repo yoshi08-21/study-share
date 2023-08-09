@@ -319,7 +319,7 @@ export default {
       formData.append("question[content]", data.content);
       formData.append("question[subject]", this.book.subject);
       if (data.image) {
-          formData.append('question[image]', data.image);
+          formData.append("question[image]", data.image);
       }
 
       try {

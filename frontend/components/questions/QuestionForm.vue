@@ -24,11 +24,6 @@
           {{ errorMessage }}
         </v-alert>
       </template>
-      <!-- <v-img
-        :src="selectdImageData"
-        max-height="150"
-        max-width="250"
-      ></v-img> -->
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
           <template v-if="error === true">

@@ -10,7 +10,7 @@
     <h4>タイトル:{{ this.question.title }}</h4>
     <p>本文:{{ this.question.content }}</p>
 
-    <tepmplate v-if="question.image !== null">
+    <tepmplate v-if="question.image">
       <v-img
         :src="question.image"
         @click="showFullImage = true"
@@ -102,9 +102,9 @@
       </v-card>
     </v-dialog>
 
+    <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
       <v-card>
-
         <h3>画像を表示する</h3>
         <v-img
           :src="question.image"
@@ -113,7 +113,6 @@
           contain
         ></v-img>
       </v-card>
-
     </v-dialog>
 
     <br>
@@ -336,12 +335,16 @@ export default {
       }
     },
     async submitReply(data) {
+      const formData = new FormData()
+
+      formData.append("reply[user_id]", this.currentUser.id);
+      formData.append("reply[content]", data.content);
+      if (data.image) {
+          formData.append("reply[image]", data.image);
+      }
+
       try {
-        const response = await axios.post(`/books/${this.book.id}/questions/${this.question.id}/replies`, {
-            user_id: this.currentUser.id,
-            content: data.content,
-          }
-        )
+        const response = await axios.post(`/books/${this.book.id}/questions/${this.question.id}/replies`, formData)
         console.log(response.data)
         this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
