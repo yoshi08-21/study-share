@@ -4,10 +4,10 @@
     <v-form>
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="title"></v-text-field>
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
-        *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
-        <br>
-        *添付できる画像のファイルサイズは3MBまでです
-        <br><br>
+      *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
+      <br>
+      *添付できる画像のファイルサイズは3MBまでです
+      <br><br>
       <v-file-input
         v-model="selectedFile"
         accept="image/jpeg, image/png"
