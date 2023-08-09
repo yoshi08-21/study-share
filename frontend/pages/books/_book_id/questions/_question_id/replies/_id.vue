@@ -12,6 +12,18 @@
     <br><br><hr>
     <h3>返信</h3>
     <p>本文:{{ this.reply.content }}</p>
+
+    <tepmplate v-if="reply.image">
+      <v-img
+        :src="reply.image"
+        @click="showFullImage = true"
+        max-height="200"
+        max-width="200"
+        contain
+      ></v-img>
+      *画像をクリックすると拡大して表示できます
+    </tepmplate>
+
     <h3>replied by<span class="link-text" @click="redirectToUser(replyUser)"> {{ this.replyUser.name }} </span></h3>
 
     <br>
@@ -80,6 +92,19 @@
       </v-card>
     </v-dialog>
 
+    <!-- 大きいサイズの画像表示用のダイアログ -->
+    <v-dialog v-model="showFullImage">
+      <v-card>
+        <h3>画像を表示する</h3>
+        <v-img
+          :src="reply.image"
+          max-height="400"
+          max-width="400"
+          contain
+        ></v-img>
+      </v-card>
+    </v-dialog>
+
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -138,6 +163,8 @@ export default {
       flashMessage: "テストメッセージ",
       isFavorite: false,
       favoriteReplyId: "",
+      showFullImage: false,
+
     }
   },
   computed: {
@@ -192,16 +219,24 @@ export default {
       this.$router.push({ path: `/books/${this.book.id}` })
     },
     async editReply(data) {
+      const formData = new FormData()
+
+      formData.append("reply[user_id]", this.currentUser.id);
+      formData.append("reply[content]", data.content);
+      if (data.image) {
+          formData.append("reply[image]", data.image);
+      }
+
       try {
-        const response = await axios.patch(`/books/${this.book.id}/questions/${this.question.id}/replies/${this.reply.id}`, {
-          content: data.content,
-          current_user_id: this.currentUser.id
-        })
+        const response = await axios.patch(`/books/${this.book.id}/questions/${this.question.id}/replies/${this.reply.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の編集が完了しました"
         this.reply.content = response.data.content
+        if (response.data.image_url) {
+          this.reply.image = response.data.image_url
+        }
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

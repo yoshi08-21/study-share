@@ -17,11 +17,15 @@ class RepliesController < ApplicationController
     reply = Reply.includes(:user).find_by(id: params[:id])
     favorite_replies = FavoriteReply.where(reply_id: reply.id)
     favorite_replies_count = favorite_replies.count
+    if reply.image.attached?
+      image_url = rails_blob_url(reply.image)
+    end
+      reply_json = reply.as_json(include: :user).merge(image: image_url)
     if reply
       render json: {
         book: book,
         question: question.as_json(include: :user),
-        reply: reply.as_json(include: :user),
+        reply: reply_json,
         favorite_replies_count: favorite_replies_count
       }
       if current_user && !exist_reply_browsing_history?(current_user, reply)
@@ -33,7 +37,7 @@ class RepliesController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:reply][:user_id])
     question = Question.includes(:user).find_by(id: params[:question_id])
     reply = current_user.replies.build(reply_params)
     reply.question_id = question.id
@@ -46,12 +50,13 @@ class RepliesController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:current_user_id])
+    current_user = User.find_by(id: params[:reply][:user_id])
     reply = Reply.find_by(id: params[:id])
     author = reply.user
     if validate_authorship(current_user, author)
       if reply.update(reply_params)
-        render json: reply, status: 200
+        image_url = reply.image.attached? ? rails_blob_url(reply.image) : nil
+        render json: { reply: reply, image_url: image_url }, status: 200
       else
         render json: { error: "エラーが発生しました" }, status: 400
       end
@@ -101,7 +106,7 @@ class RepliesController < ApplicationController
   private
 
     def reply_params
-      params.require(:reply).permit(:content, :user_id, :question_id)
+      params.require(:reply).permit(:content, :user_id, :question_id, :image)
     end
 
     def exist_reply_browsing_history?(current_user, reply)
