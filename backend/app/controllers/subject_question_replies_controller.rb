@@ -16,10 +16,15 @@ class SubjectQuestionRepliesController < ApplicationController
     subject_question_reply = SubjectQuestionReply.includes(:user).find_by(id: params[:id])
     favorite_subject_question_replies = FavoriteSubjectQuestionReply.where(subject_question_reply_id: subject_question_reply.id)
     favorite_subject_question_replies_count = favorite_subject_question_replies.count
+    if subject_question_reply.image.attached?
+      image_url = rails_blob_url(subject_question_reply.image)
+    end
+      subject_question_reply_json = subject_question_reply.as_json(include: :user).merge(image: image_url)
+
     if subject_question_reply
       render json: {
         subject_question: subject_question.as_json(include: :user),
-        subject_question_reply: subject_question_reply.as_json(include: :user),
+        subject_question_reply: subject_question_reply_json,
         favorite_subject_question_replies_count: favorite_subject_question_replies_count
       }
       if current_user && !exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
@@ -31,7 +36,7 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:subject_question_reply][:user_id])
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:subject_question_id])
     subject_question_reply = current_user.subject_question_replies.build(subject_question_reply_params)
     subject_question_reply.subject_question_id = subject_question.id
@@ -44,12 +49,13 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:current_user_id])
+    current_user = User.find_by(id: params[:subject_question_reply][:user_id])
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
     author = subject_question_reply.user
     if validate_authorship(current_user, author)
       if subject_question_reply.update(subject_question_reply_params)
-        render json: subject_question_reply, status: 200
+        image_url = subject_question_reply.image.attached? ? rails_blob_url(subject_question_reply.image) : nil
+        render json: { subject_question_reply: subject_question_reply, image_url: image_url }, status: 200
       else
         render json: { error: "エラーが発生しました" }, status: 400
       end
@@ -122,7 +128,7 @@ class SubjectQuestionRepliesController < ApplicationController
   private
 
     def subject_question_reply_params
-      params.require(:subject_question_reply).permit(:content, :user_id, :subject_question_id)
+      params.require(:subject_question_reply).permit(:content, :user_id, :subject_question_id, :image)
     end
 
     def exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
