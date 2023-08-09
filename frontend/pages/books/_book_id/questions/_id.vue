@@ -13,9 +13,12 @@
     <tepmplate v-if="question.image !== null">
       <v-img
         :src="question.image"
+        @click="showFullImage = true"
         max-height="200"
         max-width="200"
+        contain
       ></v-img>
+      *画像をクリックすると拡大して表示できます
     </tepmplate>
     <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
@@ -99,6 +102,20 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="showFullImage">
+      <v-card>
+
+        <h3>画像を表示する</h3>
+        <v-img
+          :src="question.image"
+          max-height="400"
+          max-width="400"
+          contain
+        ></v-img>
+      </v-card>
+
+    </v-dialog>
+
     <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
     <question-replies :replies="repliesChunk"></question-replies>
@@ -167,6 +184,7 @@ export default {
       replyDialog: false,
       perPage: 10,
       page: 1,
+      showFullImage: false,
 
     }
   },
