@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
 
+  include ImageCompressionConcern
+
   def index
     book = Book.find_by(id: params[:book_id])
     questions = book.questions.includes(:user)
@@ -18,6 +20,7 @@ class QuestionsController < ApplicationController
     favorite_questions_count = favorite_questions.count
     if question.image.attached?
       image_url = rails_blob_url(question.image)
+      # image_url = rails_representation_url(question.image.variant(resize_to_fill: [100, 100]))
     end
       question_json = question.as_json(include: :user).merge(image: image_url)
     if question
@@ -38,6 +41,11 @@ class QuestionsController < ApplicationController
     current_user = User.find_by(id: params[:question][:user_id])
     book = Book.find_by(id: params[:question][:book_id])
     question = current_user.questions.build(question_params)
+    # if params[:question][:image]
+    #   compressed_image = compress_image(params[:question][:image])
+    #   question.image = compressed_image
+    # end
+
     question.book_id = book.id
     if question.save
       render json: question, status: 200
@@ -47,12 +55,13 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:current_user_id])
+    current_user = User.find_by(id: params[:question][:user_id])
     question = Question.find_by(id: params[:id])
     author = question.user
     if validate_authorship(current_user, author)
       if question.update(question_params)
-        render json: question, status: 200
+        image_url = question.image.attached? ? rails_blob_url(question.image) : nil
+        render json: { question: question, image_url: image_url }, status: 200
       else
         render json: { error: "エラーが発生しました" }, status: 400
       end

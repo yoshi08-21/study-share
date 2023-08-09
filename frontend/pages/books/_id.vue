@@ -323,16 +323,7 @@ export default {
       }
 
       try {
-        const response = await axios.post(`/books/${this.params.id}/questions`, formData
-
-        // {
-        //     user_id: this.currentUser.id,
-        //     book_id: this.params.id,
-        //     title: data.title,
-        //     content: data.content,
-        //     subject: this.book.subject
-        //   }
-        )
+        const response = await axios.post(`/books/${this.params.id}/questions`, formData)
         console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true

@@ -13,8 +13,8 @@
     <tepmplate v-if="question.image !== null">
       <v-img
         :src="question.image"
-        max-height="150"
-        max-width="250"
+        max-height="200"
+        max-width="200"
       ></v-img>
     </tepmplate>
     <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
@@ -227,19 +227,26 @@ export default {
       }
     },
     async editQuestion(data) {
+      const formData = new FormData()
+
+      formData.append("question[user_id]", this.currentUser.id);
+      formData.append("question[title]", data.title);
+      formData.append("question[content]", data.content);
+      if (data.image) {
+          formData.append('question[image]', data.image);
+      }
+
       try {
-        const response = await axios.patch(`/books/${this.params.book_id}/questions/${this.question.id}`, {
-          title: data.title,
-          content: data.content,
-          current_user_id: this.currentUser.id
-        })
+        const response = await axios.patch(`/books/${this.params.book_id}/questions/${this.question.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "質問の編集が完了しました"
-        this.question.title = response.data.title
-        this.question.content = response.data.content
-
+        this.question.title = response.data.question.title
+        this.question.content = response.data.question.content
+        if (response.data.image_url) {
+          this.question.image = response.data.image_url
+        }
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
