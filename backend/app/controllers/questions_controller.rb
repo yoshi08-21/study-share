@@ -16,10 +16,14 @@ class QuestionsController < ApplicationController
     question = Question.includes(:user).find_by(id: params[:id])
     favorite_questions = FavoriteQuestion.where(question_id: question.id)
     favorite_questions_count = favorite_questions.count
+    if question.image.attached?
+      image_url = rails_blob_url(question.image)
+    end
+      question_json = question.as_json(include: :user).merge(image: image_url)
     if question
       render json: {
         book: book,
-        question: question.as_json(include: :user),
+        question: question_json,
         favorite_questions_count: favorite_questions_count
       }
       if current_user && !exist_question_browsing_history?(current_user, question)
@@ -31,8 +35,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:user_id])
-    book = Book.find_by(id: params[:book_id])
+    current_user = User.find_by(id: params[:question][:user_id])
+    book = Book.find_by(id: params[:question][:book_id])
     question = current_user.questions.build(question_params)
     question.book_id = book.id
     if question.save
@@ -124,7 +128,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:title, :content, :subject, :user_id, :book_id)
+      params.require(:question).permit(:title, :content, :subject, :user_id, :book_id, :image)
     end
 
     def exist_question_browsing_history?(current_user, question)

@@ -310,14 +310,28 @@ export default {
       this.dialog = false
     },
     async submitQuestion(data) {
+
+      const formData = new FormData()
+
+      formData.append("question[user_id]", this.currentUser.id);
+      formData.append("question[book_id]", this.params.id);
+      formData.append("question[title]", data.title);
+      formData.append("question[content]", data.content);
+      formData.append("question[subject]", this.book.subject);
+      if (data.image) {
+          formData.append('question[image]', data.image);
+      }
+
       try {
-        const response = await axios.post(`/books/${this.params.id}/questions`, {
-            user_id: this.currentUser.id,
-            book_id: this.params.id,
-            title: data.title,
-            content: data.content,
-            subject: this.book.subject
-          }
+        const response = await axios.post(`/books/${this.params.id}/questions`, formData
+
+        // {
+        //     user_id: this.currentUser.id,
+        //     book_id: this.params.id,
+        //     title: data.title,
+        //     content: data.content,
+        //     subject: this.book.subject
+        //   }
         )
         console.log(response)
         this.snackbarColor = "primary"
