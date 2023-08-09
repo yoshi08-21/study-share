@@ -2,10 +2,13 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :book
+
   has_many :favorite_questions, dependent: :destroy
   has_many :replies
   has_many :browsing_histories, dependent: :destroy
   has_many :notifications,              dependent: :destroy
+
+  has_one_attached :image
 
 
 

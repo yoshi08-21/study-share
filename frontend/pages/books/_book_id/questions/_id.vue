@@ -9,6 +9,14 @@
     <h3>質問</h3>
     <h4>タイトル:{{ this.question.title }}</h4>
     <p>本文:{{ this.question.content }}</p>
+
+    <tepmplate v-if="question.image !== null">
+      <v-img
+        :src="question.image"
+        max-height="150"
+        max-width="250"
+      ></v-img>
+    </tepmplate>
     <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
     <br>
