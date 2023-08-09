@@ -342,12 +342,16 @@ export default {
       }
     },
     async submitSubjectQuestionReply(data) {
+      const formData = new FormData()
+
+      formData.append("subject_question_reply[user_id]", this.currentUser.id);
+      formData.append("subject_question_reply[content]", data.content);
+      if (data.image) {
+          formData.append("subject_question_reply[image]", data.image);
+      }
+
       try {
-        const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies`, {
-            user_id: this.currentUser.id,
-            content: data.content,
-          }
-        )
+        const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies`, formData)
         console.log(response)
         this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {

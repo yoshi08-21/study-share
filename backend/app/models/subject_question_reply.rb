@@ -1,5 +1,7 @@
 class SubjectQuestionReply < ApplicationRecord
 
+  include CustomValidation
+
   belongs_to :user
   belongs_to :subject_question
 
@@ -7,6 +9,7 @@ class SubjectQuestionReply < ApplicationRecord
   has_many :browsing_histories, dependent: :destroy
   has_many :notifications,              dependent: :destroy
 
+  has_one_attached :image
 
   validates :content,  presence: true, length: { maximum: 1000 }
   validates :user_id,  presence: true

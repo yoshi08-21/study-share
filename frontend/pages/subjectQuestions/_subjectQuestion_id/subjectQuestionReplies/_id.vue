@@ -11,6 +11,17 @@
     <br><br><hr>
     <h3>返信</h3>
     <p>本文:{{ this.subjectQuestionReply.content }}</p>
+    <tepmplate v-if="subjectQuestionReply.image">
+      <v-img
+        :src="subjectQuestionReply.image"
+        @click="showFullImage = true"
+        max-height="200"
+        max-width="200"
+        contain
+      ></v-img>
+      *画像をクリックすると拡大して表示できます
+    </tepmplate>
+
     <h3>replied by<span class="link-text" @click="redirectToUser(subjectQuestionReplyUser)"> {{ this.subjectQuestionReplyUser.name }} </span></h3>
 
 
@@ -75,6 +86,18 @@
       </v-card>
     </v-dialog>
 
+    <!-- 大きいサイズの画像表示用のダイアログ -->
+    <v-dialog v-model="showFullImage">
+      <v-card>
+        <h3>画像を表示する</h3>
+        <v-img
+          :src="subjectQuestionReply.image"
+          max-height="400"
+          max-width="400"
+          contain
+        ></v-img>
+      </v-card>
+    </v-dialog>
 
 
     <br><br>
@@ -136,6 +159,7 @@ export default {
       flashMessage: "テストメッセージ",
       isFavorite: false,
       favoriteSubjectQuestionReplyId: "",
+      showFullImage: false,
     }
   },
   computed: {
@@ -187,16 +211,24 @@ export default {
       this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}` })
     },
     async editSubjectQuestionReply(data) {
+      const formData = new FormData()
+
+      formData.append("subject_question_reply[user_id]", this.currentUser.id);
+      formData.append("subject_question_reply[content]", data.content);
+      if (data.image) {
+          formData.append("subject_question_reply[image]", data.image);
+      }
+
       try {
-        const response = await axios.patch(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies/${this.subjectQuestionReply.id}`, {
-          content: data.content,
-          current_user_id: this.currentUser.id
-        })
+        const response = await axios.patch(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies/${this.subjectQuestionReply.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の編集が完了しました"
         this.subjectQuestionReply.content = response.data.content
+        if (response.data.image_url) {
+          this.subjectQuestionReply.image = response.data.image_url
+        }
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
