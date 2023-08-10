@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get "is_favorite"
       get "search_books"
       get "check_existence"
+      get "download_book_image"
 
     end
     resources :reviews, only: [:index, :show, :create, :update, :destroy]

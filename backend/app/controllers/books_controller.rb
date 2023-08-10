@@ -1,5 +1,7 @@
 class BooksController < ApplicationController
+
   include RecordChecker
+  require 'open-uri'
 
   def index
     current_user_id = params[:current_user_id]
@@ -122,6 +124,12 @@ class BooksController < ApplicationController
     else
       head :not_fount
     end
+  end
+
+  def download_book_image
+    url = params[:image_url]
+    downloaded_image = open(url)
+    send_data downloaded_image.read, filename: 'downloaded-image.jpg', disposition: 'inline', stream: 'true', buffer_size: '4096'
   end
 
   private
