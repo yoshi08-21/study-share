@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_07_143304) do
+ActiveRecord::Schema.define(version: 2023_08_10_044013) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -190,7 +190,6 @@ ActiveRecord::Schema.define(version: 2023_08_07_143304) do
     t.string "option2"
     t.string "option3"
     t.string "option4"
-    t.string "image"
     t.boolean "status"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
