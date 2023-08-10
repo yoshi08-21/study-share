@@ -12,6 +12,7 @@
     </v-card>
 
     <br><br>
+    <!-- 取得した参考書の一覧表示 -->
     <template v-if="searchResults.length !== 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
@@ -21,7 +22,7 @@
           <v-card class="mx-auto" max-height="250">
             <v-row>
               <v-col cols="3">
-                <v-img :src="book.image"></v-img>
+                <v-img :src="book.imageUrl"></v-img>
               </v-col>
               <v-col cols="8">
                 <v-card-title>{{ book.name }}</v-card-title>
@@ -52,7 +53,7 @@
               <v-row>
                 <v-col cols="2">
                   <v-abatar size="10px">
-                    <v-img :src="book.image"></v-img>
+                    <v-img :src="book.imageUrl"></v-img>
                   </v-abatar>
                 </v-col>
                 <v-col cols="10">
@@ -189,19 +190,21 @@ export default {
         }
         const queryParams = new URLSearchParams(params)
         const response = await fetch(baseUrl + queryParams)
-        .then(response => response.json())
-        console.log(response.items)
-        for (const book of response.items) {
+        const data = await response.json()
+
+        console.log(data)
+        console.log(response)
+        for (const book of data.items) {
           const name = book.volumeInfo.title
           const author = book.volumeInfo.author
           const publisher = book.volumeInfo.publisher
-          const image = book.volumeInfo.imageLinks
+          const imageUrl = book.volumeInfo.imageLinks
           const description = book.volumeInfo.description
           this.searchResults.push({
             name: name || "不明",
             author: author || "不明",
             publisher: publisher || "不明",
-            image : image ? image.thumbnail : "",
+            imageUrl : imageUrl ? imageUrl.thumbnail : "",
             description: description ? description.slice(0, 40) : ""
           })
         }
@@ -216,18 +219,26 @@ export default {
       this.subject = ""
       this.bookDialog = true
     },
+    async downloadImageFromUrl(url) {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new File([blob], "downloaded-image.jpg", { type: blob.type });
+    },
     async submitBook(book) {
+      const formData = new FormData()
+
+      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("book[name]", book.name);
+      formData.append("book[author]", book.author);
+      formData.append("book[publisher]", book.publisher);
+      formData.append("book[subject]", this.subject);
+      if (book.imageUrl) {
+        const imageFile = await this.downloadImageFromUrl(book.imageUrl);
+        formData.append("book[image]", imageFile);
+      }
+
       try {
-        const response = await axios.post("/books", {
-          user_id: this.currentUser.id,
-          book: {
-            name: book.name,
-            author: book.author,
-            publisher: book.publisher,
-            subject: this.subject,
-            image: book.image
-          }
-        })
+        const response = await axios.post("/books", formData)
         console.log(response)
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
