@@ -9,6 +9,8 @@ class Survey < ApplicationRecord
   has_many :browsing_histories, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  has_one_attached :image
+
   validates :title,  presence: true, length: { maximum: 50 }
   validates :content,  presence: true, length: { maximum: 1000 }
   validates :option1,  presence: true, length: { maximum: 50 }

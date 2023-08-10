@@ -129,20 +129,27 @@ export default {
   },
   methods: {
     async submitSurvey(data) {
+      const formData = new FormData()
+
+      formData.append("survey[user_id]", this.currentUser.id);
+      formData.append("survey[genre]", data.genre);
+      formData.append("survey[title]", data.title);
+      formData.append("survey[content]", data.content);
+      formData.append("survey[option1]", data.option1);
+      formData.append("survey[option2]", data.option2);
+      if(data.option3) {
+        formData.append("survey[option3]", data.option3);
+      }
+      if(data.option4) {
+        formData.append("survey[option4]", data.option4);
+      }
+      formData.append("survey[status]", 0);
+      if (data.image) {
+          formData.append("survey[image]", data.image);
+      }
+
       try {
-        const response = await axios.post("/surveys", {
-          survey: {
-            title: data.title,
-            content: data.content,
-            genre: data.genre,
-            option1: data.option1,
-            option2: data.option2,
-            option3: data.option3,
-            option4: data.option4,
-            status: 0,
-            user_id: this.currentUser.id
-          },
-        })
+        const response = await axios.post("/surveys", formData)
         console.log(response.data)
         this.$router.push({ path: `/surveys/${response.data.id}`, query: { message: 'アンケートを作成しました' }  })
       } catch (error) {

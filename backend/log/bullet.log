@@ -4140,3 +4140,27 @@ AVOID eager loading detected
 Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:19:in `popular_books'
 
+2023-08-10 13:43:39[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:favorite_books]
+  Remove from your query: .includes([:favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:19:in `popular_books'
+
+2023-08-10 13:43:42[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:favorite_books]
+  Remove from your query: .includes([:favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:19:in `popular_books'
+
+2023-08-10 13:57:29[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:favorite_books]
+  Remove from your query: .includes([:favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:19:in `popular_books'
+

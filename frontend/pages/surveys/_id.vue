@@ -5,6 +5,18 @@
     <h3>アンケートタイトル: {{ survey.title }}</h3>
     <h4>アンケート本文: {{ survey.content }}</h4>
     <h4>ジャンル: {{ survey.genre }}</h4>
+
+    <tepmplate v-if="survey.image">
+      <v-img
+        :src="survey.image"
+        @click="showFullImage = true"
+        max-height="200"
+        max-width="200"
+        contain
+      ></v-img>
+      *画像をクリックすると拡大して表示できます
+    </tepmplate>
+
     <h4>by {{ survey.user.name }}</h4>
 
     <template v-if="survey.status === false">
@@ -179,11 +191,18 @@
       </v-card>
     </v-dialog>
 
-    <!-- アンケートの回答結果を表示する -->
-    <!-- 回答を切り替えた際に、回答数と割合がリアルタイムで変更されるようにする -->
-
-    <!-- responseからフィルタリングを行ってcomputedに格納する。 -->
-
+    <!-- 大きいサイズの画像表示用のダイアログ -->
+    <v-dialog v-model="showFullImage">
+      <v-card>
+        <h3>画像を表示する</h3>
+        <v-img
+          :src="survey.image"
+          max-height="400"
+          max-width="400"
+          contain
+        ></v-img>
+      </v-card>
+    </v-dialog>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -244,9 +263,7 @@ export default {
       selectedAnswer: "",
       isFavorite: false,
       favoriteSurveyId: "",
-
-
-
+      showFullImage: false,
     }
   },
   computed: {
