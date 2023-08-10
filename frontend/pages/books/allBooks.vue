@@ -150,16 +150,19 @@ export default {
   },
   methods: {
     async submitBook(data) {
+      const formData = new FormData()
+
+      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("book[name]", data.name);
+      formData.append("book[author]", data.author);
+      formData.append("book[publisher]", data.publisher);
+      formData.append("book[subject]", data.subject);
+      if (data.image) {
+          formData.append("book[image]", data.image);
+      }
+
       try {
-        const response = await axios.post("/books", {
-            user_id: this.currentUser.id,
-            name: data.name,
-            author: data.author,
-            publisher: data.publisher,
-            subject: data.subject,
-            image: this.image
-          }
-        )
+        const response = await axios.post("/books", formData)
         console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
