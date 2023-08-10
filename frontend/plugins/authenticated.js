@@ -10,7 +10,7 @@ const auth = ({ $firebase, store }) => {
     return new Promise((resolve) => {
       firebase.auth().onAuthStateChanged(async user => {
         if (user) {
-          const { data } = await axios.get(`/users/${user.uid}`)
+          const { data } = await axios.get(`/users/find_user_by_uid/${user.uid}`)
           store.dispatch("auth/addUserInfo", user)
           store.dispatch("auth/setCurrentUser", data).then(() => {
             resolve()

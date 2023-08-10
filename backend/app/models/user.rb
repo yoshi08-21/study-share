@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  include CustomValidation
+
   has_many :books
   has_many :reviews, dependent: :destroy
   has_many :questions, dependent: :destroy
@@ -33,8 +35,7 @@ class User < ApplicationRecord
   has_many :fav_surveys,       through: :favorite_surveys, source: :survey
   has_many :watched_surveys,     through: :browsing_histories, source: :survey
 
-
-
+  has_one_attached :image
 
   validates :name,  presence: true, length: { maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

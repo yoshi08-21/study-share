@@ -52,7 +52,7 @@ class BooksController < ApplicationController
 
         book.image.attach(io: temp_file, filename: 'default_image.jpg', content_type: 'image/jpeg')
         temp_file.close
-        temp_file.unlink # 一時ファイルを削除
+        temp_file.unlink
       end
       render json: book, status: 200
     else

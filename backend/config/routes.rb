@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get "show_other_user/:id", to: "users#show_other_user"
+      get "find_user_by_uid/:uid", to: "users#find_user_by_uid"
       patch "save_user_memo"
       get "check_existence"
     end
