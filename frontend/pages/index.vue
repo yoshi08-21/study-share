@@ -39,9 +39,6 @@
               <v-row>
                 <v-col cols="2">
                   to: {{ newReview.book.name }}
-                  <template v-if="newReview.book.image">
-                    <v-img :src="newReview.book.image" alt="画像"></v-img>
-                  </template>
                 </v-col>
               </v-row>
             </v-card>
