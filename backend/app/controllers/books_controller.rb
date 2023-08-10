@@ -6,30 +6,20 @@ class BooksController < ApplicationController
   def index
     current_user_id = params[:current_user_id]
     books = Book.includes(:reviews)
+                  .with_attached_image
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
-    if books
-      render json: books, include: "reviews"
+
+    books_with_images = books.map do |book|
+      if book.image.attached?
+        image_url = rails_blob_url(book.image)
+      end
+      book.as_json.merge(image: image_url)
+    end
+    if books_with_images
+      render json: books_with_images, include: "reviews"
     else
       render json: books.errors
     end
-    # current_user = User.find_by(id: params[:current_user_id])
-    # books = Book.includes(:favorite_books).all
-    # books_with_favorites = books.map do |book|
-    #   favorite_book = book.favorite_books.find_by(user_id: current_user.id)
-    #   {
-    #     id: book.id,
-    #     name: book.name,
-    #     # 他のBookモデルの属性も必要に応じて組み込む
-    #     is_favorite: favorite_book.present?,
-    #     favorite_book_id: favorite_book&.id
-    #   }
-    # book.as_json.merge(is_favorite: current_user.fav_books.include?(book))
-    # end
-    # if books_with_favorites
-    #   render json: books_with_favorites
-    # else
-    #   render json: books_with_favorites.errors
-    # end
   end
 
   def show
@@ -106,15 +96,22 @@ class BooksController < ApplicationController
     current_user_id = params[:current_user_id]
     search_books_keyword = params[:searchBooksKeyword]
     books = Book.includes(:reviews, :favorite_books)
+                .with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
                 .where("name LIKE ?", "%#{search_books_keyword}%")
                 .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
+    books_with_images = books.map do |book|
+      if book.image.attached?
+        image_url = rails_blob_url(book.image)
+      end
+      book.as_json.merge(image: image_url)
+    end
     books_count = books.length
-    if books.present?
+    if books_with_images.present?
       render json: {
-        books: books.as_json(include: [:reviews, :favorite_books]),
+        books: books_with_images, include: [:reviews, :favorite_books],
         books_count: books_count
       }
     else

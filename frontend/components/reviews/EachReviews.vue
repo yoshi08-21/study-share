@@ -20,9 +20,6 @@
               </v-col>
               <v-col cols="2">
                 to: {{ review.book.name }}
-                <template v-if="review.book.image">
-                  <v-img :src="review.book.image" alt="画像"></v-img>
-                </template>
               </v-col>
             </v-row>
           </v-card>
