@@ -43,6 +43,17 @@ class BooksController < ApplicationController
     current_user = User.find_by(id: params[:book][:user_id])
     book = current_user.books.build(book_params)
     if book.save
+      unless book.image.attached?
+        s3_object = Aws::S3::Resource.new.bucket('study-feedback-bucket').object('no image.png')
+
+        temp_file = Tempfile.new('downloaded_image', binmode: true)
+        temp_file.write(s3_object.get.body.read)
+        temp_file.rewind
+
+        book.image.attach(io: temp_file, filename: 'default_image.jpg', content_type: 'image/jpeg')
+        temp_file.close
+        temp_file.unlink # 一時ファイルを削除
+      end
       render json: book, status: 200
     else
       render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
