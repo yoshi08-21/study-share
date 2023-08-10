@@ -2,15 +2,40 @@
   <div>
     <h1>ユーザー情報を編集する</h1>
     <v-form>
+      <v-file-input
+        v-model="selectedFile"
+        accept="image/jpeg, image/png"
+        show-size
+        truncate-length="15"
+        outlined
+        label="プロフィール画像を登録"
+        prepend-icon="mdi-image-plus"
+        style="width: 500px;"
+        @change="checkFileSize"
+      ></v-file-input>
+      *画像は「.jpeg」「.jpg」「.png」のみ登録できます
+      <br>
+      *登録できる画像のファイルサイズは3MBまでです
+
       <v-text-field counter label="名前" :rules="nameRules" v-model="editedName"></v-text-field>
       <v-textarea outlined counter label="自己紹介" :rules="contentRules" v-model="editedIntroduction"></v-textarea>
       <v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool"></v-text-field>
       <v-text-field counter label="第二志望" :rules="schoolNameRules" v-model="editedSecondChoiceSchool"></v-text-field>
       <v-text-field counter label="第三志望" :rules="schoolNameRules" v-model="editedThirdChoiceSchool"></v-text-field>
 
+      <template v-if="errorMessage">
+        <v-alert type="error" dense text border="left">
+          {{ errorMessage }}
+        </v-alert>
+      </template>
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="submitForm">編集する</v-btn>
+          <template v-if="error === true">
+            <v-btn color="primary" disabled @click="submitForm">編集する</v-btn>
+          </template>
+          <template v-else>
+            <v-btn color="primary" @click="submitForm">編集する</v-btn>
+          </template>
         </v-col>
         <v-col cols="2" class="align-start">
           <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
@@ -78,6 +103,10 @@ export default {
       value => (value || '').length <= 30 || "最大入力文字数は30文字です",
       ],
       showDeleteConfirmation: false,
+      selectedFile: null,
+      errorMessage: "",
+      error: false,
+
 
     }
   },
@@ -89,11 +118,23 @@ export default {
         firstChoiceSchool: this.editedFirstChoiceSchool,
         secondChoiceSchool: this.editedSecondChoiceSchool,
         thirdChoiceSchool: this.editedThirdChoiceSchool,
+        image: this.selectedFile
       })
     },
     deleteLocalUser() {
       this.$emit("deleteUser")
-    }
+    },
+    checkFileSize(file) {
+      console.log(file)
+      const maxSize = 3145728
+      if (file && file.size > maxSize) {
+        this.errorMessage = "添付できるファイルは3MBまでです"
+        this.error = true
+      } else {
+        this.errorMessage = ""
+        this.error = false
+      }
+    },
   }
 }
 </script>

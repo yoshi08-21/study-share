@@ -6,6 +6,7 @@
       <v-text-field v-model="name" label="ユーザー名"></v-text-field>
       <v-text-field v-model="email" label="メールアドレス"></v-text-field>
       <v-text-field v-model="password" label="パスワード"></v-text-field>
+      <v-text-field v-model="password" label="パスワード確認"></v-text-field>
       <v-btn @click="signUp">登録</v-btn>
     </v-col>
   </div>

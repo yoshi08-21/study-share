@@ -1,17 +1,27 @@
 <template>
-  <div v-if="currentUser">
+  <div>
     <h3>マイページ</h3>
-    ID: {{ currentUser.id }}
+    ID: {{ user.id }}
     <br>
-    name: {{ currentUser.name }}
+    name: {{ user.name }}
     <br>
-    自己紹介: {{ currentUser.introduction }}
+    自己紹介: {{ user.introduction }}
     <br>
-    第一志望: {{ currentUser.first_choice_school }}
+    第一志望: {{ user.first_choice_school }}
     <br>
-    第二志望: {{ currentUser.second_choice_school }}
+    第二志望: {{ user.second_choice_school }}
     <br>
-    第三志望: {{ currentUser.third_choice_school }}
+    第三志望: {{ user.third_choice_school }}
+    <br>
+    <tepmplate v-if="user.image">
+      <v-img
+        :src="user.image"
+        max-height="200"
+        max-width="200"
+        contain
+      ></v-img>
+    </tepmplate>
+
 
     <br><br>
     <v-btn @click="dialog = true">ユーザー情報を編集</v-btn>
@@ -25,11 +35,11 @@
         </v-card-title>
         <v-card-text>
           <edit-user
-            :name="currentUser.name"
-            :introduction="currentUser.introduction"
-            :first_choice_school="currentUser.first_choice_school"
-            :second_choice_school="currentUser.second_choice_school"
-            :third_choice_school="currentUser.third_choice_school"
+            :name="user.name"
+            :introduction="user.introduction"
+            :first_choice_school="user.first_choice_school"
+            :second_choice_school="user.second_choice_school"
+            :third_choice_school="user.third_choice_school"
             @editUser="editUser"
             @deleteUser="deleteLocalUser"
             @closeDialog="dialog = false"
@@ -56,6 +66,25 @@ import axios from "@/plugins/axios"
 export default {
   components: { EditUser },
   middleware: authCheck,
+  async asyncData({ store }) {
+    try {
+      let currentUserId = null
+      const currentUser = store.getters["auth/getCurrentUser"]
+      if (currentUser && currentUser.id) {
+        currentUserId = currentUser.id
+      }
+
+      const response = await axios.get(`/users/${currentUserId}`)
+      console.log(response.data)
+      const user = response.data
+      return {
+        user,
+      }
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  },
   data() {
     return {
       snackbar: false,
@@ -81,20 +110,33 @@ export default {
   },
   methods: {
     async editUser(data) {
+      const formData = new FormData()
+
+      formData.append("user[name]", data.name);
+      formData.append("user[introduction]", data.introduction);
+      formData.append("user[first_choice_school]", data.firstChoiceSchool);
+      formData.append("user[secont_choice_school]", data.secondChoiceSchool);
+      formData.append("user[third_choice_school]", data.thirdChoiceSchool);
+      if (data.image) {
+          formData.append('user[image]', data.image);
+      }
+
       try {
-        const response = await axios.patch(`/users/${this.currentUser.id}`, {
-          name: data.name,
-          introduction: data.introduction,
-          first_choice_school: data.firstChoiceSchool,
-          second_choice_school: data.secondChoiceSchool,
-          third_choice_school: data.thirdChoiceSchool,
-        })
+        const response = await axios.patch(`/users/${this.currentUser.id}`, formData)
         console.log(response.data)
         // もう一度getリクエストを送って、storeのcurrentUserにセットし直す
         this.updateUser()
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "ユーザーの編集が完了しました"
+        this.user.name = response.data.user.name
+        this.user.introduction = response.data.user.introduction
+        this.user.first_choice_school = response.data.user.first_choice_school
+        this.user.second_choice_school = response.data.user.second_choice_school
+        this.user.third_choice_school = response.data.user.third_choice_school
+        if (response.data.image_url) {
+          this.user.image = response.data.image_url
+        }
         this.dialog = false
       } catch(error) {
         console.log(error)
@@ -106,7 +148,7 @@ export default {
     },
     async updateUser() {
       try {
-        const response = await axios.get(`/users/${this.currentUser.uid}`)
+        const response = await axios.get(`/users/${this.user.id}`)
         this.updatedUser = response.data
         this.$store.dispatch("auth/setCurrentUser", this.updatedUser)
       } catch(error) {
