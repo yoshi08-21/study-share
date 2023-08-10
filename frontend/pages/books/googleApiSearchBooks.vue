@@ -233,10 +233,14 @@ export default {
       formData.append("book[publisher]", book.publisher);
       formData.append("book[subject]", this.subject);
       if (book.imageUrl) {
-        const imageFile = await this.downloadImageFromUrl(book.imageUrl);
-        formData.append("book[image]", imageFile);
+        const encodedUrl = encodeURIComponent(book.imageUrl);
+        const response = await axios.get(`/books/download_book_image?image_url=${encodedUrl}`, {
+          responseType: 'blob'
+        });
+        console.log(response)
+        const imageBlob = new Blob([response.data], { type: response.headers['content-type'] });
+        formData.append("book[image]", imageBlob, "downloaded-image.jpg");
       }
-
       try {
         const response = await axios.post("/books", formData)
         console.log(response)

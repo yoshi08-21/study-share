@@ -194,7 +194,6 @@ export default {
       questionDialog: false,
       editBookDialog: false,
       showDeleteConfirmation: false,
-
     }
   },
   computed: {
@@ -352,22 +351,30 @@ export default {
       }
     },
     async editBook(data) {
+      const formData = new FormData()
+
+      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("book[name]", data.name);
+      formData.append("book[author]", data.author);
+      formData.append("book[publisher]", data.publisher);
+      formData.append("book[subject]", data.subject);
+      if (data.image) {
+          formData.append("book[image]", data.image);
+      }
+
       try {
-        const response = await axios.patch(`/books/${this.book.id}`, {
-          name: data.name,
-          author: data.author,
-          publisher: data.publisher,
-          subject: data.subject,
-          current_user_id: this.currentUser.id
-        })
+        const response = await axios.patch(`/books/${this.book.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "参考書の編集が完了しました"
-        this.book.name = response.data.name
-        this.book.author = response.data.author
-        this.book.publisher = response.data.publisher
-        this.book.subject = response.data.subject
+        this.book.name = response.data.book.name
+        this.book.author = response.data.book.author
+        this.book.publisher = response.data.book.publisher
+        this.book.subject = response.data.book.subject
+        if (response.data.image_url) {
+          this.book.image = response.data.image_url
+        }
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   include RecordChecker
-  require 'open-uri'
+  require 'httparty'
 
   def index
     current_user_id = params[:current_user_id]
@@ -35,8 +35,12 @@ class BooksController < ApplicationController
   def show
     current_user = User.find_by(id: params[:current_user_id])
     book = Book.find_by(id: params[:id])
+    if book.image.attached?
+      image_url = rails_blob_url(book.image)
+    end
+      book_json = book.as_json.merge(image: image_url)
     if book
-      render json: book
+      render json: book_json
       if current_user && !exist_book_browsing_history?(current_user, book)
         save_book_browsing_history(current_user, book)
       end
@@ -56,12 +60,13 @@ class BooksController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:current_user_id])
+    current_user = User.find_by(id: params[:book][:user_id])
     book = Book.find_by(id: params[:id])
     author = book.user
     if validate_authorship(current_user, author)
       if book.update(book_params)
-        render json: book, status: 200
+        image_url = book.image.attached? ? rails_blob_url(book.image) : nil
+        render json: { book: book, image_url: image_url }, status: 200
       else
         render json: { error: "エラーが発生しました" }, status: 400
       end
@@ -128,8 +133,12 @@ class BooksController < ApplicationController
 
   def download_book_image
     url = params[:image_url]
-    downloaded_image = open(url)
-    send_data downloaded_image.read, filename: 'downloaded-image.jpg', disposition: 'inline', stream: 'true', buffer_size: '4096'
+    response = HTTParty.get(url)
+    if response.code == 200
+      send_data response.body, filename: 'downloaded-image.jpg', disposition: 'inline', type: response.headers['content-type']
+    else
+      render json: { error: 'Failed to download image.' }, status: :unprocessable_entity
+    end
   end
 
   private

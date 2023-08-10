@@ -1,0 +1,170 @@
+[
+  {
+    "name": "favorites",
+    "path": "/favorites",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/favorites.vue",
+    "chunkName": "pages/favorites",
+    "_name": "_02462825"
+  },
+  {
+    "name": "myPage",
+    "path": "/myPage",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/myPage.vue",
+    "chunkName": "pages/myPage",
+    "_name": "_4859987d"
+  },
+  {
+    "name": "auth-login",
+    "path": "/auth/login",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/login.vue",
+    "chunkName": "pages/auth/login",
+    "_name": "_ffdb8438"
+  },
+  {
+    "name": "auth-signUp",
+    "path": "/auth/signUp",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/auth/signUp.vue",
+    "chunkName": "pages/auth/signUp",
+    "_name": "_d0175066"
+  },
+  {
+    "name": "books-allBooks",
+    "path": "/books/allBooks",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/allBooks.vue",
+    "chunkName": "pages/books/allBooks",
+    "_name": "_0a817c20"
+  },
+  {
+    "name": "books-googleApiSearchBooks",
+    "path": "/books/googleApiSearchBooks",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/googleApiSearchBooks.vue",
+    "chunkName": "pages/books/googleApiSearchBooks",
+    "_name": "_0a7c5830"
+  },
+  {
+    "name": "books-localSearchBooksResult",
+    "path": "/books/localSearchBooksResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/localSearchBooksResult.vue",
+    "chunkName": "pages/books/localSearchBooksResult",
+    "_name": "_3b56b5ca"
+  },
+  {
+    "name": "browsingHistories-allBrowsingHistories",
+    "path": "/browsingHistories/allBrowsingHistories",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/browsingHistories/allBrowsingHistories.vue",
+    "chunkName": "pages/browsingHistories/allBrowsingHistories",
+    "_name": "_4723a890"
+  },
+  {
+    "name": "errors-errorPage",
+    "path": "/errors/errorPage",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/errors/errorPage.vue",
+    "chunkName": "pages/errors/errorPage",
+    "_name": "_49b4ce96"
+  },
+  {
+    "name": "notifications-allNotifications",
+    "path": "/notifications/allNotifications",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/notifications/allNotifications.vue",
+    "chunkName": "pages/notifications/allNotifications",
+    "_name": "_2a742db0"
+  },
+  {
+    "name": "questions-questions",
+    "path": "/questions/questions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",
+    "chunkName": "pages/questions/questions",
+    "_name": "_f110b94e"
+  },
+  {
+    "name": "questions-searchQuestionsResult",
+    "path": "/questions/searchQuestionsResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/searchQuestionsResult.vue",
+    "chunkName": "pages/questions/searchQuestionsResult",
+    "_name": "_76a4868e"
+  },
+  {
+    "name": "subjectQuestions-searchSubjectQuestionsResult",
+    "path": "/subjectQuestions/searchSubjectQuestionsResult",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/searchSubjectQuestionsResult.vue",
+    "chunkName": "pages/subjectQuestions/searchSubjectQuestionsResult",
+    "_name": "_1b90f6e2"
+  },
+  {
+    "name": "subjectQuestions-subjectQuestions",
+    "path": "/subjectQuestions/subjectQuestions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/subjectQuestions.vue",
+    "chunkName": "pages/subjectQuestions/subjectQuestions",
+    "_name": "_0216141d"
+  },
+  {
+    "name": "surveys-allSurveys",
+    "path": "/surveys/allSurveys",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/surveys/allSurveys.vue",
+    "chunkName": "pages/surveys/allSurveys",
+    "_name": "_a1309ee0"
+  },
+  {
+    "name": "books-id",
+    "path": "/books/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_id.vue",
+    "chunkName": "pages/books/_id",
+    "_name": "_ea3048ba"
+  },
+  {
+    "name": "subjectQuestions-id",
+    "path": "/subjectQuestions/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/_id.vue",
+    "chunkName": "pages/subjectQuestions/_id",
+    "_name": "_1b0a7764"
+  },
+  {
+    "name": "surveys-id",
+    "path": "/surveys/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/surveys/_id.vue",
+    "chunkName": "pages/surveys/_id",
+    "_name": "_9923ee5c"
+  },
+  {
+    "name": "users-id",
+    "path": "/users/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/users/_id.vue",
+    "chunkName": "pages/users/_id",
+    "_name": "_3a7b0901"
+  },
+  {
+    "name": "books-book_id-questions-id",
+    "path": "/books/:book_id?/questions/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/questions/_id.vue",
+    "chunkName": "pages/books/_book_id/questions/_id",
+    "_name": "_368e3cc2"
+  },
+  {
+    "name": "books-book_id-reviews-id",
+    "path": "/books/:book_id?/reviews/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/reviews/_id.vue",
+    "chunkName": "pages/books/_book_id/reviews/_id",
+    "_name": "_db10b3e0"
+  },
+  {
+    "name": "subjectQuestions-subjectQuestion_id-subjectQuestionReplies-id",
+    "path": "/subjectQuestions/:subjectQuestion_id?/subjectQuestionReplies/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id.vue",
+    "chunkName": "pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id",
+    "_name": "_450dcc65"
+  },
+  {
+    "name": "books-book_id-questions-question_id-replies-id",
+    "path": "/books/:book_id?/questions/:question_id?/replies/:id?",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/books/_book_id/questions/_question_id/replies/_id.vue",
+    "chunkName": "pages/books/_book_id/questions/_question_id/replies/_id",
+    "_name": "_dbcd9bbe"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_2a6ffc20"
+  }
+]

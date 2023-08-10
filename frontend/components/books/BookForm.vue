@@ -6,15 +6,41 @@
         cols="12"
         sm="6"
       >
-      <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
-    </v-col>
-    <h3 v-if="subject">選択された科目：{{ subject }}</h3>
+        <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
+      </v-col>
+      <h3 v-if="subject">選択された科目：{{ subject }}</h3>
+      <br><br>
+      <v-file-input
+        v-model="selectedFile"
+        accept="image/jpeg, image/png"
+        show-size
+        truncate-length="15"
+        outlined
+        label="参考書の画像を登録してください"
+        prepend-icon="mdi-image-plus"
+        style="width: 500px;"
+        @change="checkFileSize"
+      ></v-file-input>
+      *画像は「.jpeg」「.jpg」「.png」のみ登録できます
+      <br>
+      *登録できる画像のファイルサイズは3MBまでです
+
       <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="name"></v-text-field>
       <v-text-field counter label="著者（必須）" :rules="authorRules" v-model="author"></v-text-field>
       <v-text-field counter label="出版社" :rules="publisherRules" v-model="publisher"></v-text-field>
+      <template v-if="errorMessage">
+        <v-alert type="error" dense text border="left">
+          {{ errorMessage }}
+        </v-alert>
+      </template>
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="submitForm"> 登録する</v-btn>
+          <template v-if="error === true">
+            <v-btn color="primary" disabled @click="submitForm">登録する</v-btn>
+          </template>
+          <template v-else>
+            <v-btn color="primary" @click="submitForm">登録する</v-btn>
+          </template>
         </v-col>
         <v-col cols="2" class="align-start">
           <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
@@ -97,18 +123,26 @@ export default {
           subcategories: ["過去問", "小論文", "その他科目"]
         },
       ],
-
-
+      selectedFile: null,
+      errorMessage: "",
+      error: false,
     }
   },
   methods: {
     submitForm() {
-      this.$emit('submitBook', { name: this.name, author: this.author, publisher: this.publisher, subject: this.subject })
-      this.name = ""
-      this.author = ""
-      this.publisher = ""
-      this.subject = ""
+      this.$emit('submitBook', { name: this.name, author: this.author, publisher: this.publisher, subject: this.subject, image: this.selectedFile })
     },
+    checkFileSize(file) {
+      console.log(file)
+      const maxSize = 3145728
+      if (file && file.size > maxSize) {
+        this.errorMessage = "添付できるファイルは3MBまでです"
+        this.error = true
+      } else {
+        this.errorMessage = ""
+        this.error = false
+      }
+    }
   }
 }
 </script>
