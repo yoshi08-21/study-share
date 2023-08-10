@@ -19,10 +19,35 @@
       <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2"></v-text-field>
       <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3"></v-text-field>
       <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4"></v-text-field>
+      *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
+      <br>
+      *添付できる画像のファイルサイズは3MBまでです
+      <br><br>
+      <v-file-input
+        v-model="selectedFile"
+        accept="image/jpeg, image/png"
+        show-size
+        truncate-length="15"
+        outlined
+        label="ファイルを選択"
+        prepend-icon="mdi-image-plus"
+        style="width: 500px;"
+        @change="checkFileSize"
+      ></v-file-input>
+      <template v-if="errorMessage">
+        <v-alert type="error" dense text border="left">
+          {{ errorMessage }}
+        </v-alert>
+      </template>
       <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
       <v-row>
         <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="confirmationDialog = true">確認画面を表示する</v-btn>
+          <template v-if="error === true">
+            <v-btn color="primary" disabled @click="confirmationDialog = true">確認画面を表示する</v-btn>
+          </template>
+          <template v-else>
+            <v-btn color="primary" @click="confirmationDialog = true">確認画面を表示する</v-btn>
+          </template>
         </v-col>
         <v-col cols="2" class="align-start">
           <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
@@ -44,6 +69,18 @@
           <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo></v-text-field>
           <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo></v-text-field>
           <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo></v-text-field>
+          <v-file-input
+            v-model="selectedFile"
+            accept="image/jpeg, image/png"
+            show-size
+            truncate-length="15"
+            outlined
+            label="ファイルを選択"
+            prepend-icon="mdi-image-plus"
+            style="width: 500px;"
+            disabled
+          ></v-file-input>
+
         </v-card-text>
         <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
         <v-row>
@@ -94,9 +131,9 @@ export default {
       option3: "",
       option4: "",
       confirmationDialog: false,
-
-
-
+      selectedFile: null,
+      errorMessage: "",
+      error: false
     }
   },
   methods: {
@@ -107,6 +144,7 @@ export default {
         genre: this.selectedGenre,
         option1: this.option1,
         option2: this.option2,
+        image: this.selectedFile
       }
 
       if(this.option3 !== "") {
@@ -118,6 +156,17 @@ export default {
       }
       this.$emit('submitSurvey', survey)
     },
+    checkFileSize(file) {
+      console.log(file)
+      const maxSize = 3145728
+      if (file && file.size > maxSize) {
+        this.errorMessage = "添付できるファイルは3MBまでです"
+        this.error = true
+      } else {
+        this.errorMessage = ""
+        this.error = false
+      }
+    }
   }
 }
 </script>

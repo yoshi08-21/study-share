@@ -15,9 +15,14 @@ class SurveysController < ApplicationController
     survey = Survey.includes(:user).find_by(id: params[:id])
     favorite_surveys = FavoriteSurvey.where(survey_id: survey.id)
     favorite_surveys_count = favorite_surveys.count
+    if survey.image.attached?
+      image_url = rails_blob_url(survey.image)
+    end
+      survey_json = survey.as_json(include: :user).merge(image: image_url)
+
     if survey
       render json: {
-        survey: survey.as_json(include: :user),
+        survey: survey_json,
         favorite_surveys_count: favorite_surveys_count
       }
       if current_user && !exist_survey_browsing_history?(current_user, survey)
