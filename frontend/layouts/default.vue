@@ -26,7 +26,10 @@
     <v-app-bar fixed app>
     <v-row class="d-flex align-center justify-center">
         <v-col cols="1">
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer">
+            <v-icon>mdi-menu-open</v-icon>
+          </v-app-bar-nav-icon>
+
         </v-col>
         <v-col cols="2">
           <v-toolbar-title>
@@ -52,27 +55,40 @@
           </v-row>
         </v-col>
         <v-col cols="2">
-          <v-row>
+          <v-row justify="center">
             <template v-if="!isLoggedIn">
               <v-col cols="12">
                 <v-btn to="/auth/login">ログイン</v-btn>
               </v-col>
             </template>
             <template v-else>
-              <v-col cols="6">
-                <v-btn @click="goToFavorites">お気に入り</v-btn>
-              </v-col>
-              <v-col cols="6">
-                <v-btn @click="goToNotifications">
-                  通知一覧
-                  <span v-if="unreadNotifications">
-                    <v-badge color="red" overlap>
-                      <template v-slot:badge>
-                        <v-icon>mdi-circle</v-icon>
-                      </template>
-                    </v-badge>
-                  </span>
+              <v-col cols="5">
+                <v-btn @click="goToFavorites" icon x-large>
+                  <v-icon>mdi-star</v-icon>
                 </v-btn>
+              </v-col>
+              <v-col cols="5">
+                <template v-if="unreadNotifications">
+
+                  <v-btn @click="goToNotifications" icon x-large>
+                    <v-badge overlap>
+                      <v-icon>mdi-bell</v-icon>
+                    </v-badge>
+                  </v-btn>
+
+                </template>
+                <template v-else>
+                  <v-btn @click="goToNotifications" icon x-large>
+                    <v-icon>mdi-bell</v-icon>
+                    <span v-if="unreadNotifications">
+                      <v-badge color="red" overlap>
+                        <template v-slot:badge>
+                          <v-icon>mdi-circle</v-icon>
+                        </template>
+                      </v-badge>
+                    </span>
+                  </v-btn>
+                </template>
               </v-col>
             </template>
           </v-row>
@@ -135,12 +151,6 @@
 
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
         <v-list-item v-if="this.currentUser">
           「{{ this.currentUser.name }}」でログイン中
         </v-list-item>
@@ -189,7 +199,6 @@ export default {
   },
   data() {
     return {
-      clipped: false,
       drawer: false,
       fixed: false,
       items: [
@@ -240,7 +249,6 @@ export default {
           to: '/surveys/allSurveys'
         },
       ],
-      miniVariant: false,
       right: true,
       rightDrawer: false,
       title: {
