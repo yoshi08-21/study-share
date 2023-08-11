@@ -94,7 +94,7 @@ export default {
 
       try {
         const uid = this.$store.getters["auth/getUserUid"]
-        const response = await axios.get(`/users/${uid}`)
+        const response = await axios.get(`/users/find_user_by_uid/${uid}`)
         this.user = response.data
         this.$store.dispatch("auth/setCurrentUser", this.user)
         console.log(response)
