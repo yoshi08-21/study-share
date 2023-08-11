@@ -11,9 +11,11 @@
       </v-card-title>
     </v-card>
 
-    <div v-if="searchQuestionsResult.length > 0">
+    <div v-if="searchQuestionsResult && searchQuestionsResult.length > 0">
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
-      <each-questions :questions="searchQuestionsResult"></each-questions>
+      <each-questions :questions="questionsChunk"></each-questions>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </div>
     <div v-else>
       <p>検索結果はありません</p>
@@ -63,7 +65,19 @@ export default {
   data() {
     return {
       newKeyword: "",
+      perPage: 10,
+      page: 1,
     }
+  },
+  computed: {
+    questionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.searchQuestionsResult.slice(start, end)
+    },
+    totalPages() {
+      return Math.ceil(this.searchQuestionsResult.length / this.perPage);
+    },
   },
   methods: {
     updateQueryParams(newValue) {
@@ -79,6 +93,7 @@ export default {
         })
         console.log(response.data)
         this.searchQuestionsKeyword = searchQuestionsKeyword
+        this.page = 1
         return response.data
       } catch(error) {
         console.log(error)
