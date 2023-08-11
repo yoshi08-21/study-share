@@ -40,7 +40,6 @@ export default {
         }
       })
       console.log(response.data)
-      console.log(response.data.books[0].check_favorite)
       return {
         searchBooksResult: response.data.books,
         totalCount: response.data.books_count,
