@@ -95,8 +95,12 @@ class UsersController < ApplicationController
 
   def find_user_by_uid
     user = User.find_by(uid: params[:uid])
+    if user.image.attached?
+      image_url = rails_blob_url(user.image)
+    end
+      user_json = user.as_json.merge(image: image_url)
     if user
-      render json: user
+      render json: user_json
     else
       render json: user.errors
     end
