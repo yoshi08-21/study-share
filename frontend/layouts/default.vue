@@ -103,9 +103,53 @@
         </v-col>
 
         <v-col cols="1">
-          <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
+          <template v-if="currentUser">
+            <v-row justify="center">
+              <v-menu
+                left
+                min-width="200px"
+                rounded
+                offset-y
+                transition="slide-y-transition"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn icon x-large v-on="on">
+                    <v-avatar size="55">
+                      <v-img :src="currentUser.image"></v-img>
+                    </v-avatar>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-list-item-content class="justify-center">
+                    <div class="mx-auto text-center">
+                      <v-avatar size="60">
+                        <v-img :src="currentUser.image"></v-img>
+                      </v-avatar>
+                      <h3>{{ currentUser.name }}</h3>
+                      <p class="text-caption mt-1">
+                        {{ currentUser.email }}
+                      </p>
+                      <v-divider class="my-3"></v-divider>
+                      <v-btn rounded text @click="goToMypage">
+                        マイページ
+                      </v-btn>
+                      <v-divider class="my-3"></v-divider>
+                      <v-btn rounded text @click="goToBrowsingHistories">
+                        閲覧履歴
+                      </v-btn>
+                      <v-divider class="my-3"></v-divider>
+                      <v-btn rounded text @click="logout">
+                        ログアウト
+                      </v-btn>
+                    </div>
+                  </v-list-item-content>
+                </v-card>
+              </v-menu>
+            </v-row>
+          </template>
+          <!-- <template v-else>
+
+          </template> -->
         </v-col>
 
       </v-row>
@@ -157,23 +201,6 @@
         <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
       </v-container>
     </v-main>
-
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item v-if="this.currentUser">
-          「{{ this.currentUser.name }}」でログイン中
-        </v-list-item>
-        <v-list-item v-if="this.currentUser">
-          <v-btn @click="logout">ログアウト（デバッグ用）</v-btn>
-        </v-list-item>
-        <v-list-item @click="goToBrowsingHistories">
-          閲覧履歴
-        </v-list-item>
-        <v-list-item @click="goToNotifications">
-          通知一覧
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -308,6 +335,13 @@ export default {
     searchBooks() {
       this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
       this.searchBooksKeyword = ""
+    },
+    goToMypage() {
+      if(this.currentUser) {
+        this.$router.push({ path: "/mypage" })
+      } else {
+        this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" }})
+      }
     },
     goToFavorites() {
       if(this.currentUser) {
