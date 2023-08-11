@@ -24,18 +24,19 @@
     </v-navigation-drawer>
 
     <v-app-bar fixed app>
-    <v-row class="d-flex align-center justify-center">
+      <v-row class="d-flex align-center justify-center">
         <v-col cols="1">
           <v-app-bar-nav-icon @click.stop="drawer = !drawer">
             <v-icon>mdi-menu-open</v-icon>
           </v-app-bar-nav-icon>
-
         </v-col>
+
         <v-col cols="2">
           <v-toolbar-title>
             <nuxt-link to="/">{{ title.title }}</nuxt-link>
           </v-toolbar-title>
         </v-col>
+
         <v-col cols="6">
           <v-row class="d-flex align-center justify-center">
             <v-col cols="10">
@@ -54,6 +55,7 @@
             </v-col>
           </v-row>
         </v-col>
+
         <v-col cols="2">
           <v-row justify="center">
             <template v-if="!isLoggedIn">
@@ -63,36 +65,43 @@
             </template>
             <template v-else>
               <v-col cols="5">
-                <v-btn @click="goToFavorites" icon x-large>
-                  <v-icon>mdi-star</v-icon>
-                </v-btn>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on">
+                      <v-icon>mdi-star</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>お気に入り</span>
+                </v-tooltip>
               </v-col>
               <v-col cols="5">
                 <template v-if="unreadNotifications">
-
-                  <v-btn @click="goToNotifications" icon x-large>
-                    <v-badge overlap>
-                      <v-icon>mdi-bell</v-icon>
-                    </v-badge>
-                  </v-btn>
-
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                        <v-badge overlap>
+                          <v-icon>mdi-bell</v-icon>
+                        </v-badge>
+                      </v-btn>
+                    </template>
+                    <span>通知一覧</span>
+                  </v-tooltip>
                 </template>
                 <template v-else>
-                  <v-btn @click="goToNotifications" icon x-large>
-                    <v-icon>mdi-bell</v-icon>
-                    <span v-if="unreadNotifications">
-                      <v-badge color="red" overlap>
-                        <template v-slot:badge>
-                          <v-icon>mdi-circle</v-icon>
-                        </template>
-                      </v-badge>
-                    </span>
-                  </v-btn>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                        <v-icon>mdi-bell</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>通知一覧</span>
+                  </v-tooltip>
                 </template>
               </v-col>
             </template>
           </v-row>
         </v-col>
+
         <v-col cols="1">
           <v-btn icon @click.stop="rightDrawer = !rightDrawer">
             <v-icon>mdi-menu</v-icon>
