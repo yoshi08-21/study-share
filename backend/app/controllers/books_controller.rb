@@ -126,7 +126,7 @@ class BooksController < ApplicationController
         books_count: books_count
       }
     else
-      render json: { error: "検索結果がありません" }
+      render json: { message: "検索結果がありません", data: [] }
     end
   end
 
