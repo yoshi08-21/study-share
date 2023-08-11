@@ -5,13 +5,14 @@
       fixed
       temporary
     >
-      <v-list>
+      <v-list rounded>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
           router
           exact
+          color="primary"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -239,48 +240,32 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-home',
           title: 'トップページ',
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-account',
           title: 'マイページ',
           to: '/mypage',
         },
         {
-          title: '新規登録',
-          to: '/auth/signup'
-        },
-        {
-          title: '質問一覧',
-          to: '/questions/questions'
-        },
-        {
-          title: '科目別質問一覧',
-          to: '/subjectQuestions/subjectQuestions'
-        },
-        {
+          icon: "mdi-bookshelf",
           title: '参考書一覧',
           to: '/books/allBooks'
         },
         {
-          title: '閲覧履歴',
-          to: '/browsingHistories/allBrowsingHistories'
+          icon: "mdi-comment-question",
+          title: '質問一覧',
+          to: '/questions/questions'
         },
         {
-          title: '通知一覧',
-          to: '/notifications/allNotifications'
+          icon: "mdi-comment-question-outline",
+          title: '科目別質問一覧',
+          to: '/subjectQuestions/subjectQuestions'
         },
         {
-          title: '存在しないページ',
-          to: '/notFound'
-        },
-        {
-          title: '存在しないレビュー',
-          to: '/books/1/reviews/343'
-        },
-        {
+          icon: "mdi-account-search",
           title: 'アンケート',
           to: '/surveys/allSurveys'
         },
