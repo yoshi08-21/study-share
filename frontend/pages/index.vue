@@ -12,7 +12,6 @@
     <div v-show="isLoggedIn">
       <p>ログイン中です</p>
     </div>
-    <v-btn @click="getUser">ユーザーを取得</v-btn>
 
     <br>
     <h3>新着レビュー</h3>
@@ -240,18 +239,6 @@ export default {
       return this.$store.getters["auth/getCurrentUser"]
     },
   },
-  methods: {
-    async getUser() {
-      try {
-        const uid = this.$store.getters["auth/getUserUid"]
-        const response = await axios.get(`/users/${uid}`)
-        this.user = response.data
-        console.log(response)
-      } catch(error) {
-        console.log(error)
-      }
-    },
-  },
   mounted() {
     if (this.$route.query.message) {
       this.snackbarColor = "primary"
@@ -259,6 +246,8 @@ export default {
       this.flashMessage = this.$route.query.message
       // this.$snackbar.show(this.$route.query.message)
     }
+  },
+  methods: {
   },
 
 
