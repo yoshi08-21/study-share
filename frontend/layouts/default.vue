@@ -2,8 +2,6 @@
   <v-app>
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
       fixed
       temporary
     >
@@ -24,42 +22,70 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
-        <nuxt-link to="/">{{ title.title }}</nuxt-link>
-      </v-toolbar-title>
-      <v-text-field
-        v-model="searchBooksKeyword"
-        label="参考書を検索"
-        placeholder="キーワードを入力 例: (英語 文法)"
-        filled
-        style="margin-left: 10px;"
-      ></v-text-field>
-      <v-btn @click="searchBooks">検索</v-btn>
-      <v-spacer />
-      <template v-if="!isLoggedIn">
-        <v-btn to="/auth/login">ログイン</v-btn>
-      </template>
-      <template v-else>
-        <div>
-          <v-btn @click="goToFavorites">お気に入り</v-btn>
-        </div>
-        <v-btn @click="goToNotifications">
-          通知一覧
-          <span v-if="unreadNotifications">
-            <v-badge color="red" overlap>
-              <template v-slot:badge>
-                <v-icon>mdi-circle</v-icon>
-              </template>
-            </v-badge>
-          </span>
-        </v-btn>
-      </template>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+
+    <v-app-bar fixed app>
+    <v-row class="d-flex align-center justify-center">
+        <v-col cols="1">
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        </v-col>
+        <v-col cols="2">
+          <v-toolbar-title>
+            <nuxt-link to="/">{{ title.title }}</nuxt-link>
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="6">
+          <v-row class="d-flex align-center justify-center">
+            <v-col cols="10">
+              <v-text-field
+                v-model="searchBooksKeyword"
+                label="参考書を検索"
+                placeholder="キーワードを入力 例: (英語 文法)"
+                filled
+                dense
+                outlined
+                style="margin-top: 25px;"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="2">
+              <v-btn @click="searchBooks">検索</v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="2">
+          <v-row>
+            <template v-if="!isLoggedIn">
+              <v-col cols="12">
+                <v-btn to="/auth/login">ログイン</v-btn>
+              </v-col>
+            </template>
+            <template v-else>
+              <v-col cols="6">
+                <v-btn @click="goToFavorites">お気に入り</v-btn>
+              </v-col>
+              <v-col cols="6">
+                <v-btn @click="goToNotifications">
+                  通知一覧
+                  <span v-if="unreadNotifications">
+                    <v-badge color="red" overlap>
+                      <template v-slot:badge>
+                        <v-icon>mdi-circle</v-icon>
+                      </template>
+                    </v-badge>
+                  </span>
+                </v-btn>
+              </v-col>
+            </template>
+          </v-row>
+        </v-col>
+        <v-col cols="1">
+          <v-btn icon @click.stop="rightDrawer = !rightDrawer">
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </v-col>
+
+      </v-row>
     </v-app-bar>
+
     <v-main>
       <v-container>
         <Nuxt />
@@ -106,6 +132,7 @@
         <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
       </v-container>
     </v-main>
+
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
         <v-list-item @click.native="right = !right">
@@ -128,9 +155,11 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+
   </v-app>
 </template>
 
