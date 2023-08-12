@@ -1,3 +1,4 @@
+export { default as NormalHeader } from '../../components/global/NormalHeader.vue'
 export { default as ShowSnackbar } from '../../components/global/ShowSnackbar.vue'
 
 // nuxt/nuxt.js#8607
