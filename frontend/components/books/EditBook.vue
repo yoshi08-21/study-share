@@ -93,7 +93,7 @@ export default {
       editedSubject: this.subject,
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 60 || "最大入力文字数は60文字です",
+        value => (value || '').length <= 50 || "最大入力文字数は50文字です",
       ],
       authorRules: [
         value => !!value || "タイトルを入力してください",

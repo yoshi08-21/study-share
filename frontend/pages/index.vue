@@ -25,122 +25,113 @@
         show-arrows
         style="background-color: #edebe8;"
       >
-          <v-slide-item v-for="newReview in newReviews" :key="newReview.id" v-slot="{ toggle }">
-            <v-card
-              height="330"
-              width="450"
-              outlined
-              class="ma-4"
-              @click="toggle"
-              raised
-              shaped
+        <v-slide-item v-for="newReview in newReviews" :key="newReview.id" v-slot="{ toggle }">
+          <v-card
+            height="330"
+            width="450"
+            outlined
+            class="ma-4"
+            @click="toggle"
+            raised
+            shaped
 
-            >
-                  <v-card-title>
-                    <nuxt-link :to="`/books/${newReview.book_id}/reviews/${newReview.id}`" style="color: black;">{{ $truncate(newReview.title, 15) }}</nuxt-link>
-                  </v-card-title>
-                  <v-card-subtitle>
-                    <v-row class="d-flex align-center">
-                      <v-col cols="6">
-                        <v-rating
-                          v-model="newReview.rating"
-                          :readonly="true"
-                          background-color="orange lighten-3"
-                          color="orange"
-                          dense
-                          large
-                        >
-                        </v-rating>
-                      </v-col>
-                      <v-col cols="2">
-                        ({{ newReview.rating }})
-                      </v-col>
-                    </v-row>
-                  </v-card-subtitle>
-                  <v-card-text style="height: 135px;">
-                    <v-textarea
-                      :value="newReview.content"
-                      readonly
-                      filled
-                      rounded
-                      dense
-                      no-resize
-                    >
-                    </v-textarea>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-row class="d-flex justify-center align-center">
-                      <v-col cols="6">
-                        <div @click="goToUser(newReview.user)" style="padding: 10px;">
-                          <v-avatar>
-                            <v-img :src="newReview.user.image"></v-img>
-                          </v-avatar>
-                          <span style="text-decoration: underline;">{{ $truncate(newReview.user.name, 9) }}</span>
-                        </div>
-                      </v-col>
-                      <v-col cols="6">
-                        <nuxt-link :to="`/books/${newReview.book.id}`">
+          >
+            <v-card-title>
+              <nuxt-link :to="`/books/${newReview.book_id}/reviews/${newReview.id}`" style="color: black;">{{ $truncate(newReview.title, 15) }}</nuxt-link>
+            </v-card-title>
+            <v-card-subtitle>
+              <v-row class="d-flex align-center">
+                <v-col cols="6">
+                  <v-rating
+                    v-model="newReview.rating"
+                    :readonly="true"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    dense
+                    large
+                  >
+                  </v-rating>
+                </v-col>
+                <v-col cols="2">
+                  <h2>
 
-                          <v-icon>mdi-book-open-variant</v-icon>
-                          {{ $truncate(newReview.book.name, 9)}}
-                        </nuxt-link>
-                      </v-col>
-                    </v-row>
-                  </v-card-actions>
-            </v-card>
+                    ({{ newReview.rating }})
+                  </h2>
+                </v-col>
+              </v-row>
+            </v-card-subtitle>
+            <v-card-text style="height: 135px;">
+              <v-textarea
+                :value="newReview.content"
+                readonly
+                filled
+                rounded
+                dense
+                no-resize
+              >
+              </v-textarea>
+            </v-card-text>
+            <v-card-actions>
+              <v-row class="d-flex justify-center align-center">
+                <v-col cols="6">
+                  <div @click="goToUser(newReview.user)" style="padding: 10px;">
+                    <v-avatar>
+                      <v-img :src="newReview.user.image"></v-img>
+                    </v-avatar>
+                    <span style="text-decoration: underline;">{{ $truncate(newReview.user.name, 9) }}</span>
+                  </div>
+                </v-col>
+                <v-col cols="6">
+                  <nuxt-link :to="`/books/${newReview.book.id}`">
+
+                    <v-icon>mdi-book-open-variant</v-icon>
+                    {{ $truncate(newReview.book.name, 9)}}
+                  </nuxt-link>
+                </v-col>
+              </v-row>
+            </v-card-actions>
+          </v-card>
         </v-slide-item>
       </v-slide-group>
     </v-sheet>
 
 
     <br>
-    <h3>みんなが使っている参考書</h3>
+    <h2>みんなが使っている参考書</h2>
+    <hr><br>
     <top-page-each-books :books="popularBooks"></top-page-each-books>
 
-
-  <!-- <v-window v-model="model">
-    <v-window-item v-for="(item, i) in items" :key="i">
-      <v-row>
-        <v-col v-for="(subItem, j) in getSubItems(i)" :key="j" cols="4">
-          <v-card>
-            <v-card-title>{{ subItem.title }}</v-card-title>
-            <v-card-text>{{ subItem.text }}</v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-window-item>
-  </v-window>
- -->
-
-
-
+    <br>
     <tepmlate v-if="currentUser">
       <template v-if="currentUser.first_choice_school">
         <br>
-        <h3>{{ currentUser.first_choice_school }}を志望している人が使っている参考書</h3>
+        <h2>{{ currentUser.first_choice_school }}を志望している人が使っている参考書</h2>
+        <hr><br>
         <top-page-each-books :books="firstChoiceSchoolBooks"></top-page-each-books>
       </template>
 
       <template v-if="currentUser.second_choice_school">
         <br>
-        <h3>{{ currentUser.second_choice_school }}を志望している人が使っている参考書</h3>
+        <h2>{{ currentUser.second_choice_school }}を志望している人が使っている参考書</h2>
+        <hr><br>
         <top-page-each-books :books="secondChoiceSchoolBooks"></top-page-each-books>
       </template>
 
       <template v-if="currentUser.third_choice_school">
         <br>
-        <h3>{{ currentUser.third_choice_school }}を志望している人が使っている参考書</h3>
+        <h2>{{ currentUser.third_choice_school }}を志望している人が使っている参考書</h2>
+        <hr><br>
         <top-page-each-books :books="thirdChoiceSchoolBooks"></top-page-each-books>
       </template>
 
-      <template v-if="currentUser.first_choice_school === null && currentUser.second_choice_school === null && currentUser.third_choice_school == null">
-        <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
+      <template v-if="currentUser.first_choice_school === null || currentUser.first_choice_school === '' && currentUser.second_choice_school === null || currentUser.second_choice_school === '' && currentUser.third_choice_school === null || currentUser.third_choice_school === ''">
+        <h2>あなたと同じ大学を志望している人が使っている参考書</h2>
         <p>志望大学を登録すると使用できます</p>
       </template>
 
     </tepmlate>
     <template v-else>
-      <h3>あなたと同じ大学を志望している人が使っている参考書</h3>
+      <h2>あなたと同じ大学を志望している人が使っている参考書</h2>
       <p>ログイン後に使用できます</p>
     </template>
 
