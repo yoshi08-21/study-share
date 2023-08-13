@@ -24,67 +24,85 @@
       </v-list>
     </v-navigation-drawer>
 
+    <!-- index.vueを表示する場合のみ特別なヘッダーを表示 -->
+    <template v-if="showSpecialHeader === false">
+      <normal-header
+        :currentUser="currentUser"
+        @toggleDrawer="drawer = !drawer"
+        @searchBooks="searchBooks"
+        @goToMypage="goToMypage"
+        @goToFavorites="goToFavorites"
+        @goToBrowsingHistories="goToBrowsingHistories"
+        @goToNotifications="goToNotifications"
+        @logout="logout"
+      >
+      </normal-header>
+    </template>
+    <template v-else>
+      <special-header
+        :currentUser="currentUser"
+        @toggleDrawer="drawer = !drawer"
+        @searchBooks="searchBooks"
+        @goToMypage="goToMypage"
+        @goToFavorites="goToFavorites"
+        @goToBrowsingHistories="goToBrowsingHistories"
+        @goToNotifications="goToNotifications"
+        @logout="logout"
+      >
+      </special-header>
+    </template>
 
 
-    <normal-header
-      :currentUser="currentUser"
-      @toggleDrawer="drawer = !drawer"
-      @searchBooks="searchBooks"
-      @goToMypage="goToMypage"
-      @goToFavorites="goToFavorites"
-      @goToBrowsingHistories="goToBrowsingHistories"
-      @goToNotifications="goToNotifications"
-      @logout="logout"
-    >
-    </normal-header>
 
-
-    <v-main>
-      <v-container>
-        <Nuxt />
-        <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
-          <v-icon dark>
-            mdi-book-edit
-          </v-icon>
-        </v-btn>
-        <v-overlay
-          :value="showUserMemo"
-          :z-index="zIndex"
-          opacity="0"
-        >
-          <v-dialog
-            v-model="showUserMemo"
-            hide-overlay
-            max-width="800px"
-            transition="dialog-bottom-transition"
+    <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" style="height: 100vh;">
+      <v-main id="scrolling-techniques-3">
+        <v-container>
+          <Nuxt />
+          <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
+            <v-icon dark>
+              mdi-book-edit
+            </v-icon>
+          </v-btn>
+          <v-overlay
+            :value="showUserMemo"
+            :z-index="zIndex"
+            opacity="0"
           >
-            <v-card
+            <v-dialog
+              v-model="showUserMemo"
+              hide-overlay
+              max-width="800px"
+              transition="dialog-bottom-transition"
             >
-              <v-card-title>
-                ユーザーメモ
-              </v-card-title>
-              <v-card-text>
-                気になったことや覚えておきたいことなどをメモして保存できます（最大１万文字）
-                <v-textarea
-                  v-model="userMemo"
-                  auto-grow
-                  filled
-                  shaped
-                  rows="10"
-                  label="ユーザーメモ"
-                  counter
-                  ></v-textarea>
-                  <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
-                <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
-                <v-btn @click="showUserMemo = false">閉じる</v-btn>
-              </v-card-text>
-            </v-card>
-          </v-dialog>
-        </v-overlay>
-        <br>
-        <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
-      </v-container>
-    </v-main>
+              <v-card
+              >
+                <v-card-title>
+                  ユーザーメモ
+                </v-card-title>
+                <v-card-text>
+                  気になったことや覚えておきたいことなどをメモして保存できます（最大１万文字）
+                  <v-textarea
+                    v-model="userMemo"
+                    auto-grow
+                    filled
+                    shaped
+                    rows="10"
+                    label="ユーザーメモ"
+                    counter
+                    ></v-textarea>
+                    <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
+                  <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
+                  <v-btn @click="showUserMemo = false">閉じる</v-btn>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+          </v-overlay>
+          <br>
+          <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+        </v-container>
+      </v-main>
+    </v-sheet>
+
 
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -100,11 +118,12 @@ import checkNotifications from "../middleware/checkNotifications"
 import redirectNotFound from "../middleware/redirectNotFound"
 import checkResourceExistence from "../middleware/checkResourceExistence"
 import NormalHeader from '../components/global/NormalHeader.vue'
+import SpecialHeader from '../components/global/SpecialHeader.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
-  components: { NormalHeader },
+  components: { NormalHeader, SpecialHeader },
   name: 'DefaultLayout',
   middleware: [checkNotifications, redirectNotFound, checkResourceExistence],
   // ログアウト→ログイン時にユーザーメモが更新されるようにする
@@ -156,7 +175,7 @@ export default {
         },
       ],
       title: {
-        title: "StudyFeedback",
+        title: "StudyShare",
         to: "/"
       },
       user: {},
@@ -167,7 +186,8 @@ export default {
       snackbar: false,
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
-      userMemo: ""
+      userMemo: "",
+
     }
   },
   computed: {
@@ -180,6 +200,9 @@ export default {
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications
     },
+    showSpecialHeader() {
+      return this.$store.getters["header/getShowSpecialHeader"]
+    }
   },
   created() {
     if(this.currentUser) {
@@ -266,4 +289,11 @@ export default {
   right: 20;
   bottom: 20;
 }
+
+body .v-toolbar--prominent .v-toolbar__content {
+    align-items: center;
+}
+
+
+
 </style>

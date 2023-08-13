@@ -229,9 +229,7 @@ export default {
       this.$router.push({ path: `/books/${this.book.id}` })
     },
     redirectToUser() {
-      console.log("currentUser:" + this.currentUser.id)
-      console.log("user:" + this.user.id)
-      if(this.currentUser.id !== this.user.id ) {
+      if( !this.currentUser || this.currentUser.id !== this.user.id ) {
         this.$router.push({ path: `/users/${this.user.id}` })
       } else {
         this.$router.push({ path: "/mypage" })

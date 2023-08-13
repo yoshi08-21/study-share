@@ -8,3 +8,4 @@ You can directly use them in pages and other components without the need to impo
 
 - `<NormalHeader>` | `<normal-header>` (components/global/NormalHeader.vue)
 - `<ShowSnackbar>` | `<show-snackbar>` (components/global/ShowSnackbar.vue)
+- `<SpecialHeader>` | `<special-header>` (components/global/SpecialHeader.vue)

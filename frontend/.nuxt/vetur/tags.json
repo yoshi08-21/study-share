@@ -4,5 +4,8 @@
   },
   "ShowSnackbar": {
     "description": "Auto imported from components/global/ShowSnackbar.vue"
+  },
+  "SpecialHeader": {
+    "description": "Auto imported from components/global/SpecialHeader.vue"
   }
 }

@@ -1,5 +1,6 @@
 export { default as NormalHeader } from '../../components/global/NormalHeader.vue'
 export { default as ShowSnackbar } from '../../components/global/ShowSnackbar.vue'
+export { default as SpecialHeader } from '../../components/global/SpecialHeader.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

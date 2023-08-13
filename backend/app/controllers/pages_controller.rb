@@ -1,9 +1,29 @@
 class PagesController < ApplicationController
 
   def new_reviews
-    reviews = Review.includes(:user, :book).order("created_at DESC").limit(5)
+    reviews = Review.includes(:user, :book)
+                      .includes(user: :image_attachment)
+                      .order("created_at DESC")
+                      .limit(10)
+
+    reviews_with_images = reviews.map do |review|
+      review_data = review.as_json
+      if review.user.image.attached?
+        user_data = review.user.as_json
+        user_data["image"] = rails_blob_url(review.user.image)
+        review_data["user"] = user_data
+      else
+        user_data = review.user.as_json
+        review_data["user"] = user_data
+      end
+
+      book_data = review.book.as_json
+      review_data["book"] = book_data
+
+      review_data
+    end
     if reviews
-      render json: reviews, include: [:user, :book]
+      render json: reviews_with_images
     else
       render json: reviews.errors
     end
@@ -15,7 +35,7 @@ class PagesController < ApplicationController
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                   .group("books.id")
                   .order("favorite_books_count DESC")
-                  .limit(5)
+                  .limit(10)
 
     books_with_images = books.map do |book|
       if book.image.attached?
@@ -38,7 +58,7 @@ class PagesController < ApplicationController
                                         .where("users.first_choice_school = ?",current_user.first_choice_school)
                                         .group(:book_id)
                                         .order("count(favorite_books.id) DESC")
-                                        .limit(5)
+                                        .limit(10)
                                         .includes([:reviews])
 
       first_choice_school_books_with_images = first_choice_school_books.map do |book|
@@ -54,7 +74,7 @@ class PagesController < ApplicationController
                                         .where("users.first_choice_school = ?",current_user.second_choice_school)
                                         .group(:book_id)
                                         .order("count(favorite_books.id) DESC")
-                                        .limit(5)
+                                        .limit(50)
                                         .includes([:reviews])
 
       second_choice_school_books_with_images = second_choice_school_books.map do |book|
@@ -70,7 +90,7 @@ class PagesController < ApplicationController
                                         .where("users.first_choice_school = ?",current_user.third_choice_school)
                                         .group(:book_id)
                                         .order("count(favorite_books.id) DESC")
-                                        .limit(5)
+                                        .limit(10)
                                         .includes([:reviews])
 
       third_choice_school_books_with_images = third_choice_school_books.map do |book|
