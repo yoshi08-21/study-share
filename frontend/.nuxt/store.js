@@ -18,6 +18,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('../store/auth.js'), 'auth.js')
+  resolveStoreModules(require('../store/header.js'), 'header.js')
   resolveStoreModules(require('../store/notifications.js'), 'notifications.js')
 
   // If the environment supports hot reloading...
@@ -26,6 +27,7 @@ let store = {};
     // Whenever any Vuex module is updated...
     module.hot.accept([
       '../store/auth.js',
+      '../store/header.js',
       '../store/notifications.js',
     ], () => {
       // Update `root.modules` with the latest definitions.

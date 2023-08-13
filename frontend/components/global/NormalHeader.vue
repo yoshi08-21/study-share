@@ -32,6 +32,7 @@
         </v-row>
       </v-col>
 
+      <!-- ログインの有無で表示を切り替え -->
       <v-col cols="2">
         <v-row justify="center">
           <template v-if="!isLoggedIn">
@@ -78,6 +79,7 @@
         </v-row>
       </v-col>
 
+      <!-- プロフィール画像をクリックで開くメニュー -->
       <v-col cols="1">
         <template v-if="currentUser">
           <v-row justify="center">
@@ -141,7 +143,7 @@ export default {
       drawer: false,
       fixed: false,
       title: {
-        title: "StudyFeedback",
+        title: "StudyShare",
         to: "/"
       },
       searchBooksKeyword: "",
@@ -151,9 +153,6 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters["auth/getLoggedIn"]
-    },
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
     },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications

@@ -10,6 +10,7 @@
     <h4>タイトル:{{ this.question.title }}</h4>
     <p>本文:{{ this.question.content }}</p>
 
+
     <tepmplate v-if="question.image">
       <v-img
         :src="question.image"
