@@ -1,45 +1,79 @@
 <template>
   <div>
-    <h2>参考書一覧</h2>
 
     <br><br><br>
-    <v-card>
-      <v-card-title>
-        参考書：検索ボックス
-        <v-text-field v-model="searchBooksKeyword"></v-text-field><v-btn @click="searchBooks">検索</v-btn>
-      </v-card-title>
-      <v-card-title>
-        <v-btn @click="openDialog" color="primary" block>新しい参考書を登録する</v-btn>
-      </v-card-title>
-    </v-card>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card width="85%">
+          <v-card-title>
+            <v-row class="d-flex justify-center">
+              <v-col cols="11">
+                <v-text-field
+                  v-model="searchBooksKeyword"
+                  filled
+                  outlined
+                  dense
+                  label="参考書を検索"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="1">
+                <v-btn @click="searchBooks">検索</v-btn>
+              </v-col>
+            </v-row>
+            <v-btn
+              @click="openDialog"
+              color="primary"
+              block
+              rounded
+              large
+            >
+            新しい参考書を登録する</v-btn>
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
 
-    <br><br><br>
-    <v-card>
-      <v-card-title>
-        ソート機能
-      </v-card-title>
-      <v-row>
-        <v-col cols="6">
-          <v-select
-          v-model="selectedSortOption"
-          :items="sortBooksOptions"
-          label="並び替え"
-          dense
-          outlined
-        ></v-select>
-        </v-col>
-        <v-col cols="6">
-          <v-select
-          v-model="selectedBooksSubject"
-          :items="booksSubjectOptions"
-          label="科目で絞り込み"
-          dense
-          outlined
-        ></v-select>
-        </v-col>
-      </v-row>
-    </v-card>
 
+    <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card width="85%">
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-card-title>
+                ソート機能
+              </v-card-title>
+            </v-col>
+          </v-row>
+          <v-card-actions>
+            <v-row>
+              <v-col cols="6">
+                <v-select
+                v-model="selectedSortOption"
+                :items="sortBooksOptions"
+                label="並び替え"
+                outlined
+                chips
+                clearable
+              ></v-select>
+              </v-col>
+              <v-col cols="6">
+                <v-select
+                v-model="selectedBooksSubject"
+                :items="booksSubjectOptions"
+                label="科目で絞り込み"
+                outlined
+                chips
+                clearable
+              ></v-select>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+
+      </v-col>
+    </v-row>
     <!-- 参考書新規登録ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
