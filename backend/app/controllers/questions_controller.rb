@@ -5,10 +5,38 @@ class QuestionsController < ApplicationController
   def index
     book = Book.find_by(id: params[:book_id])
     questions = book.questions.includes(:user)
-    if questions
-      render json: questions, include: "user"
+
+    questions_with_images = questions.map do |question|
+      question_data = question.as_json
+      if question.image.attached?
+        question_data["image"] = rails_blob_url(question.image)
+      end
+
+      if question.book.image.attached?
+        book_data = question.book.as_json
+        book_data["image"] = rails_blob_url(question.book.image)
+        question_data["book"] = book_data
+      else
+        book_data = question.book.as_json
+        question_data["book"] = book_data
+      end
+
+      if question.user.image.attached?
+        user_data = question.user.as_json
+        user_data["image"] = rails_blob_url(question.user.image)
+        question_data["user"] = user_data
+      else
+        user_data = question.user.as_json
+        question_data["user"] = user_data
+      end
+
+      question_data
+    end
+
+    if questions_with_images
+      render json: questions_with_images
     else
-      render json: questinos.errors
+      render json: questions_with_images.errors
     end
   end
 
@@ -98,10 +126,38 @@ class QuestionsController < ApplicationController
 
   def all_questions
     questions = Question.includes(:user, :book).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
-    if questions
-      render json: questions, include: [:user, :book]
+
+    questions_with_images = questions.map do |question|
+      question_data = question.as_json
+      if question.image.attached?
+        question_data["image"] = rails_blob_url(question.image)
+      end
+
+      if question.book.image.attached?
+        book_data = question.book.as_json
+        book_data["image"] = rails_blob_url(question.book.image)
+        question_data["book"] = book_data
+      else
+        book_data = question.book.as_json
+        question_data["book"] = book_data
+      end
+
+      if question.user.image.attached?
+        user_data = question.user.as_json
+        user_data["image"] = rails_blob_url(question.user.image)
+        question_data["user"] = user_data
+      else
+        user_data = question.user.as_json
+        question_data["user"] = user_data
+      end
+
+      question_data
+    end
+
+    if questions_with_images
+      render json: questions_with_images
     else
-      render jso: questions.errors
+      render jso: questions_with_images.errors
     end
   end
 
