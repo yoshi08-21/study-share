@@ -2,10 +2,26 @@ class SubjectQuestionsController < ApplicationController
 
   def index
     subject_questions = SubjectQuestion.includes(:user).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
-    if subject_questions
-      render json: subject_questions, include: "user"
+
+    subject_questions_with_images = subject_questions.map do |subject_question|
+      subject_question_data = subject_question.as_json
+
+      if subject_question.user.image.attached?
+        user_data = subject_question.user.as_json
+        user_data["image"] = rails_blob_url(subject_question.user.image)
+        subject_question_data["user"] = user_data
+      else
+        user_data = subject_question.user.as_json
+        subject_question_data["user"] = user_data
+      end
+
+      subject_question_data
+    end
+
+    if subject_questions_with_images
+      render json: subject_questions_with_images
     else
-      render json: subject_questions.errors
+      render json: subject_questions_with_images.errors
     end
   end
 

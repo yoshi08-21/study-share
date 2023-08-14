@@ -86,6 +86,7 @@
     </template>
     <br>
     <each-books :books="booksChunk"></each-books>
+    <br>
     <template v-if="!sortedBooks.length == 0">
       <v-pagination
         v-model="page"
