@@ -55,7 +55,7 @@
 
 
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" style="height: 100vh;">
-      <v-main id="scrolling-techniques-3">
+      <v-main>
         <v-container>
           <Nuxt />
           <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">

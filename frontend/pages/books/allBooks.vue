@@ -34,7 +34,6 @@
       </v-col>
     </v-row>
 
-
     <br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -71,9 +70,30 @@
             </v-row>
           </v-card-actions>
         </v-card>
-
       </v-col>
     </v-row>
+
+
+    <br><br>
+    <template v-if="!sortedBooks.length == 0">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        :total-visible="10"
+      >
+    </v-pagination>
+    </template>
+    <br>
+    <each-books :books="booksChunk"></each-books>
+    <template v-if="!sortedBooks.length == 0">
+      <v-pagination
+        v-model="page"
+        :length="totalPages"
+        :total-visible="10"
+      >
+      </v-pagination>
+    </template>
+
     <!-- 参考書新規登録ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
@@ -92,15 +112,6 @@
       </v-card>
     </v-dialog>
 
-    <br><br>
-    <template v-if="!sortedBooks.length == 0">
-      <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    </template>
-    <br>
-    <each-books :books="booksChunk"></each-books>
-    <template v-if="!sortedBooks.length == 0">
-      <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    </template>
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
