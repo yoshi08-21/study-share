@@ -34,7 +34,6 @@
               </v-col>
             </v-row>
             <v-btn
-              @click="openDialog"
               color="primary"
               block
               rounded

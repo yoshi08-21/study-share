@@ -129,9 +129,6 @@ class QuestionsController < ApplicationController
 
     questions_with_images = questions.map do |question|
       question_data = question.as_json
-      if question.image.attached?
-        question_data["image"] = rails_blob_url(question.image)
-      end
 
       if question.book.image.attached?
         book_data = question.book.as_json

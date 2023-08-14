@@ -1,13 +1,11 @@
 <template>
   <div>
-
     <v-row mb-5 v-for="(question, index) in questions" :key="'question_' + index" class="justify-center">
       <v-col cols="10">
         <v-card
           elevation="8"
           height="250"
         >
-
           <v-row>
             <v-col cols="2" class="mt-8">
               <div @click="goToUser(question.user)" style="cursor: pointer;">

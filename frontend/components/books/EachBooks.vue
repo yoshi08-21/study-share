@@ -4,27 +4,27 @@
       <v-col cols="10">
         <v-card
           elevation="8"
-          height="250"
+          height="240"
         >
           <v-row>
             <v-col cols="3" class="d-flex justify-center">
-              <div v-if="book.image" class="d-flex justify-center" style="height: 230px;">
+              <div v-if="book.image" class="d-flex justify-center" style="height: 210px;">
                 <v-img
                   :src="book.image"
                   alt="画像"
                   contain
-                  max-height="230"
-                  max-width="200"
+                  max-height="200"
+                  max-width="180"
                 >
                 </v-img>
               </div>
             </v-col>
             <v-col cols="7" class="mt-n4">
-              <div style="height: 110px;">
+              <div style="height: 107px;">
                 <v-card-title>
                   <nuxt-link :to="`/books/${book.id}`">{{ $truncate(book.name, 50) }}</nuxt-link>
                 </v-card-title>
-                <v-card-subtitle>
+                <v-card-subtitle style="margin-top: -20px;">
                   <v-row class="d-flex align-center">
                     <v-col cols="4">
                       <v-rating
