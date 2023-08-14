@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar fixed app>
+  <v-app-bar
+    hide-on-scroll
+    fix
+    app
+    scroll-target="#scrolling-techniques-3"
+  >
     <v-row class="d-flex align-center justify-center">
       <v-col cols="1">
         <v-app-bar-nav-icon @click.stop="toggleDrawer">

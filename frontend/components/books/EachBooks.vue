@@ -1,39 +1,81 @@
 <template>
   <div>
-    <v-flex mb-5 v-for="(book, index) in books" :key="index">
-      <v-row>
-        <v-col cols="10">
-          <v-card :to="`/books/${book.id}`">
-            <v-row>
-              <v-col cols="2">
-                <template v-if="book.image">
-                  <v-img :src="book.image" alt="画像"></v-img>
-                </template>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>タイトル: {{ book.name }}</v-card-title>
-                <v-card-text>
-                  <h4>著者: {{ book.author }}</h4>
-                  <h4>出版社: {{ book.publisher }}</h4>
-                  <h4>科目: {{ book.subject }}</h4>
-                </v-card-text>
-              </v-col>
-            </v-row>
-            <v-card-actions>
-              レビュー:{{ book.reviews_count }}件
-              平均評価:{{ book.average_rating }}
-              お気に入り: {{ book.favorite_books_count }}
-              <tamplate  v-if="currentUser">
-                <v-btn v-if="book.check_favorite == 0" @click="addToFavorites(book, $event)">お気に入り</v-btn>
-                <v-btn v-else @click="removeFromFavorite(book, $event)">お気に入り解除</v-btn>
-              </tamplate>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-flex>
+    <v-row mb-5 v-for="(book, index) in books" :key="index" class="justify-center">
+      <v-col cols="10">
+        <v-card
+          elevation="8"
+          height="250"
+        >
+          <v-row>
+            <v-col cols="3" class="d-flex justify-center">
+              <div v-if="book.image" class="d-flex justify-center" style="height: 230px;">
+                <v-img
+                  :src="book.image"
+                  alt="画像"
+                  contain
+                  max-height="230"
+                  max-width="200"
+                >
+                </v-img>
+              </div>
+            </v-col>
+            <v-col cols="7" class="mt-n4">
+              <div style="height: 110px;">
+                <v-card-title>
+                  <nuxt-link :to="`/books/${book.id}`">{{ $truncate(book.name, 50) }}</nuxt-link>
+                </v-card-title>
+                <v-card-subtitle>
+                  <v-row class="d-flex align-center">
+                    <v-col cols="4">
+                      <v-rating
+                        v-model="book.average_rating"
+                        :readonly="true"
+                        background-color="orange lighten-3"
+                        color="orange"
+                        dense
+                      >
+                      </v-rating>
+                    </v-col>
+                    <v-col cols="3">
+                      <h2>
+                        ({{ book.average_rating }})
+                      </h2>
+                    </v-col>
+                  </v-row>
+                </v-card-subtitle>
+              </div>
 
-    <br>
+                <v-card-text>
+                <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
+                <h4>出版社: {{ book.publisher }}</h4>
+                <h4>著者: {{ book.author }}</h4>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-row class="d-flex align-center justify-center">
+                  <v-col cols="4">
+                    <v-icon>mdi-comment-text-outline</v-icon>
+                    レビュー:{{ book.reviews_count }}件
+                  </v-col>
+                  <v-col cols="4">
+                    <v-icon>mdi-heart-multiple</v-icon>
+                    お気に入り: {{ book.favorite_books_count }}
+                  </v-col>
+                </v-row>
+              </v-card-actions>
+            </v-col>
+            <v-col cols="2" class="d-flex justify-center ml-n5">
+              <template v-if="currentUser">
+                <v-btn v-if="book.check_favorite == 0" @click="addToFavorites(book, $event)" class="mt-8">お気に入り</v-btn>
+                <v-btn v-else @click="removeFromFavorite(book, $event)" class="mt-8">お気に入り解除</v-btn>
+              </template>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- スナックバー表示用 -->
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
   </div>
