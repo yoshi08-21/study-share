@@ -22,10 +22,10 @@ class PagesController < ApplicationController
 
       review_data
     end
-    if reviews
+    if reviews_with_images
       render json: reviews_with_images
     else
-      render json: reviews.errors
+      render json: reviews_with_images.errors
     end
   end
 

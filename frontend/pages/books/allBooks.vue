@@ -28,7 +28,8 @@
               rounded
               large
             >
-            新しい参考書を登録する</v-btn>
+            新しい参考書を登録する
+          </v-btn>
           </v-card-title>
         </v-card>
       </v-col>
