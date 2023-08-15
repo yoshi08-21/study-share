@@ -1,28 +1,29 @@
 <template>
   <div>
-    <br><br>
-    <div class="d-flex justify-space-between" style="margin-bottom: 10px;">
+
+    <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>参考書詳細</h2>
       <nuxt-link :to="`/books/allBooks`">参考書一覧に戻る</nuxt-link>
     </div>
     <v-card
-      height="350"
+      min-height="350"
     >
       <v-row>
-        <v-col cols="3">
+        <v-col cols="3" class="d-flex justify-center">
           <div v-if="book.image">
               <v-img
                 :src="book.image"
                 alt="画像"
                 contain
-                max-haight="230"
-                max-width="210"
+                haight="230"
+                width="210"
               ></v-img>
             </div>
         </v-col>
         <v-col cols="7">
           <v-card-title>
-            {{ book.name }}
+            <h3> {{ book.name }}</h3>
+
           </v-card-title>
           <v-card-subtitle style="margin-top: -20px;">
             <v-row class="d-flex align-center">
@@ -47,47 +48,82 @@
 
           <v-card-content>
             <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
-
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
-            <p>{{ book.description }}</p>
+            <br>
+            <tamplate v-if="book.description">
+              <h4>説明</h4>
+              <v-textarea
+                :value="book.description"
+                readonly
+                outlined
+                rounded
+                dense
+                auto-grow
+              >
+              </v-textarea>
+            </tamplate>
           </v-card-content>
+          <br><br>
           <v-card-actions>
-            <br><br>
-            <div v-if="!isFavorite">
-              <v-btn @click="addToFavorites">お気に入りに追加する</v-btn>
-            </div>
-            <div v-else>
-              <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
-            </div>
-
+            <v-row class="d-flex align-center">
+              <v-col cols="3">
+                <v-icon>mdi-comment-text-outline</v-icon>
+                レビュー:{{ book.reviews_count }}件
+              </v-col>
+              <v-col cols="3">
+                <v-icon>mdi-comment-question-outline</v-icon>
+                質問:{{ book.reviews_count }}件
+              </v-col>
+              <v-col cols="3">
+                <v-icon>mdi-heart-multiple</v-icon>
+                お気に入り:{{ book.favorite_books_count }}
+              </v-col>
+              <v-col cols="3">
+                <div v-if="!isFavorite">
+                  <v-btn @click="addToFavorites" color="primary">お気に入りに追加する</v-btn>
+                </div>
+                <div v-else>
+                  <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
+                </div>
+              </v-col>
+            </v-row>
           </v-card-actions>
-
         </v-col>
-        <v-col cols="2">
-          <v-btn></v-btn>
-          <v-btn></v-btn>
+        <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
+          <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
+            <v-btn @click="editBookDialog=true" style="margin-bottom: 10px;">編集する</v-btn>
+            <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+          </template>
         </v-col>
       </v-row>
     </v-card>
 
-    <!-- 自分が投稿した参考書のみ編集・削除ボタンを表示 -->
-    <br>
-    <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
-      <v-btn @click="editBookDialog=true">編集する</v-btn>
-      <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
-    </template>
-
-
-
-    <br>
-    <v-btn @click="redirectToBooks">参考書一覧に戻る</v-btn>
-
-    <!-- 以下のボタンをそれぞれのコンポーネントに設置することも検討 -->
-    <br><br>
-    <v-btn @click="openDialog">新規レビューを投稿する</v-btn>
-    <br><br>
-    <v-btn @click="openQuestionDialog">新規質問を投稿する</v-btn>
+    <br><br><br><br>
+    <v-card height="100px">
+      <v-row style="height: 100%;">
+        <v-col cols="6" class="d-flex justify-center align-center">
+          <v-btn
+            @click="openDialog"
+            x-large
+            rounded
+            color="success"
+          >
+          新規レビューを投稿する
+        </v-btn>
+        </v-col>
+        <v-col cols="6" class="d-flex justify-center align-center">
+          <v-btn
+            @click="openQuestionDialog"
+            x-large
+            rounded
+            color="success"
+          >
+            新規質問を投稿する
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
 
 
     <!-- 参考書編集ダイアログ -->
@@ -338,6 +374,7 @@ export default {
           this.favoriteBookId = response.data.favorite_book_id
           this.snackbar = true
           this.flashMessage = "お気に入りに追加しました"
+          this.book.favorite_books_count += 1
         } catch(error) {
           console.log(error)
           console.log("すでにお気に入りに登録されています")
@@ -359,6 +396,7 @@ export default {
         this.isFavorite = !this.isFavorite
         this.snackbar = true
         this.flashMessage = "お気に入りから削除しました"
+        this.book.favorite_books_count -= 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
