@@ -110,13 +110,41 @@
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
+
     <br>
     <v-divider height="50"></v-divider>
+    <br>
+    <v-tabs
+      v-model="tab"
+      centered
+      grow
+      height="60"
+      elavation="3"
+    >
+      <v-tab v-for="(tabItem, index) in tabs" :key="index">
+        <span @click="page = 1">
+          {{ tabItem.label }}
+        </span>
+      </v-tab>
+    </v-tabs>
 
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <book-reviews :reviews="reviewsChunk" :book_id="book.id" ></book-reviews>
-    <book-questions :questions="questionsChunk" :book_id="book.id"></book-questions>
+
+    <template v-if="tab === 0">
+      <br><br>
+      <book-reviews :reviews="reviewsChunk"></book-reviews>
+    </template>
+
+    <template v-else-if="tab === 1">
+      <br><br>
+      <book-questions :questions="questionsChunk"></book-questions>
+    </template>
+
+    <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
+
+
+
   </div>
 </template>
 
@@ -194,6 +222,12 @@ export default {
       questionDialog: false,
       editBookDialog: false,
       showDeleteConfirmation: false,
+      tab: 0,
+      tabs: [
+        { label: "レビュー" },
+        { label: "質問" },
+      ]
+
     }
   },
   computed: {
