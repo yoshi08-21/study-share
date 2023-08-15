@@ -204,6 +204,7 @@ export default {
       formData.append("book[author]", data.author);
       formData.append("book[publisher]", data.publisher);
       formData.append("book[subject]", data.subject);
+      formData.append("book[description]", data.description);
       if (data.image) {
           formData.append("book[image]", data.image);
       }

@@ -50,6 +50,7 @@
 
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
+            <p>{{ book.description }}</p>
           </v-card-content>
           <v-card-actions>
             <br><br>
@@ -101,6 +102,7 @@
             :author="book.author"
             :publisher="book.publisher"
             :subject="book.subject"
+            :description="book.description"
             @submitBook="editBook"
             @closeDialog="editBookDialog = false"
           ></edit-book>
@@ -437,6 +439,7 @@ export default {
       formData.append("book[author]", data.author);
       formData.append("book[publisher]", data.publisher);
       formData.append("book[subject]", data.subject);
+      formData.append("book[description]", data.description);
       if (data.image) {
           formData.append("book[image]", data.image);
       }
@@ -451,6 +454,7 @@ export default {
         this.book.author = response.data.book.author
         this.book.publisher = response.data.book.publisher
         this.book.subject = response.data.book.subject
+        this.book.description = response.data.book.description
         if (response.data.image_url) {
           this.book.image = response.data.image_url
         }
