@@ -119,29 +119,28 @@
       centered
       grow
       height="60"
-      elavation="3"
     >
-      <v-tab v-for="(tabItem, index) in tabs" :key="index">
-        <span @click="page = 1">
+      <v-tab v-for="(tabItem, index) in tabs" :key="index" @click="page = 1">
           {{ tabItem.label }}
-        </span>
       </v-tab>
     </v-tabs>
 
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <template v-if="tab === 0">
+      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
       <br><br>
       <book-reviews :reviews="reviewsChunk"></book-reviews>
+      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
     </template>
 
     <template v-else-if="tab === 1">
+      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
       <br><br>
       <book-questions :questions="questionsChunk"></book-questions>
+      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
     </template>
 
     <br>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
 
 
@@ -244,8 +243,11 @@ export default {
       const end = start + this.perPage
       return this.questions.slice(start, end)
     },
-    totalPages() {
+    reviewsTotalPages() {
       return Math.ceil(this.reviews.length / this.perPage);
+    },
+    questionsTotalPages() {
+      return Math.ceil(this.questions.length / this.perPage);
     },
   },
   async created() {
