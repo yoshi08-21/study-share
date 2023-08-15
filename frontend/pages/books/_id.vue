@@ -1,25 +1,75 @@
 <template>
   <div>
-    book_show
-    <v-row>
-      <v-col cols="10">
-        <v-row>
-          <v-col cols="4">
-            <template v-if="book.image">
-              <v-img :src="book.image" alt="画像"></v-img>
-            </template>
-          </v-col>
-          <v-col cols="8">
-            <p>book_id: {{ this.$route.params.id }}</p>
-            <h4>タイトル: {{ book.name }}</h4>
+    <br><br>
+    <div class="d-flex justify-space-between" style="margin-bottom: 10px;">
+      <h2>参考書詳細</h2>
+      <nuxt-link :to="`/books/allBooks`">参考書一覧に戻る</nuxt-link>
+    </div>
+    <v-card
+      height="350"
+    >
+      <v-row>
+        <v-col cols="3">
+          <div v-if="book.image">
+              <v-img
+                :src="book.image"
+                alt="画像"
+                contain
+                max-haight="230"
+                max-width="210"
+              ></v-img>
+            </div>
+        </v-col>
+        <v-col cols="7">
+          <v-card-title>
+            {{ book.name }}
+          </v-card-title>
+          <v-card-subtitle style="margin-top: -20px;">
+            <v-row class="d-flex align-center">
+              <v-col cols="4">
+                <v-rating
+                  v-model="book.average_rating"
+                  :readonly="true"
+                  background-color="orange lighten-3"
+                  color="orange"
+                  dense
+                  large
+                >
+                </v-rating>
+              </v-col>
+              <v-col cols="3">
+                <h2>
+                  ({{ book.average_rating }})
+                </h2>
+              </v-col>
+            </v-row>
+          </v-card-subtitle>
+
+          <v-card-content>
+            <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
+
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
-            <h4>科目: {{ book.subject }}</h4>
-          </v-col>
-        </v-row>
+          </v-card-content>
+          <v-card-actions>
+            <br><br>
+            <div v-if="!isFavorite">
+              <v-btn @click="addToFavorites">お気に入りに追加する</v-btn>
+            </div>
+            <div v-else>
+              <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
+            </div>
 
-      </v-col>
-    </v-row>
+          </v-card-actions>
+
+        </v-col>
+        <v-col cols="2">
+          <v-btn></v-btn>
+          <v-btn></v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
     <!-- 自分が投稿した参考書のみ編集・削除ボタンを表示 -->
     <br>
     <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
@@ -28,13 +78,6 @@
     </template>
 
 
-    <br><br>
-    <div v-if="!isFavorite">
-      <v-btn @click="addToFavorites">お気に入りに追加する</v-btn>
-    </div>
-    <div v-else>
-      <v-btn @click="removeFromFavorite">お気に入りから削除する</v-btn>
-    </div>
 
     <br>
     <v-btn @click="redirectToBooks">参考書一覧に戻る</v-btn>
