@@ -63,7 +63,7 @@
                   <v-card-text>
                     <p>著者: {{ book.author }}</p>
                     <p>出版社: {{ book.publisher }}</p>
-                    <p>説明文: {{ book.description }}</p>
+                    <p>説明文: {{ book.fullDescription }}</p>
                   </v-card-text>
                 </v-col>
               </v-row>
@@ -205,7 +205,8 @@ export default {
             author: author || "不明",
             publisher: publisher || "不明",
             imageUrl : imageUrl ? imageUrl.thumbnail : "",
-            description: description ? description.slice(0, 40) : ""
+            description: description ? description.slice(0, 40) : "",
+            fullDescription: description ? description.slice(0, 1000) : ""
           })
         }
         this.page = 1
@@ -232,6 +233,7 @@ export default {
       formData.append("book[author]", book.author);
       formData.append("book[publisher]", book.publisher);
       formData.append("book[subject]", this.subject);
+      formData.append("book[description]", book.fullDescription)
       if (book.imageUrl) {
         const encodedUrl = encodeURIComponent(book.imageUrl);
         const response = await axios.get(`/books/download_book_image?image_url=${encodedUrl}`, {

@@ -156,7 +156,7 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:name, :author, :publisher, :subject, :image, :user_id)
+      params.require(:book).permit(:name, :author, :publisher, :subject, :image, :user_id, :description)
     end
 
     def exist_book_browsing_history?(current_user, book)

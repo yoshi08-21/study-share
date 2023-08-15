@@ -29,6 +29,7 @@
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedName"></v-text-field>
       <v-text-field counter label="著者" :rules="authorRules" v-model="editedAuthor"></v-text-field>
       <v-text-field counter label="出版社" :rules="publisherRules" v-model="editedPublisher"></v-text-field>
+      <v-textarea counter outlined label="参考書の説明" :rules="descriptionRules" v-model="editedDescription"></v-textarea>
       <template v-if="errorMessage">
         <v-alert type="error" dense text border="left">
           {{ errorMessage }}
@@ -80,7 +81,8 @@ export default {
     name: String,
     author: String,
     publisher: String,
-    subject: String
+    subject: String,
+    description: String,
   },
   components: {
     VTextField,
@@ -91,6 +93,7 @@ export default {
       editedAuthor: this.author,
       editedPublisher: this.publisher,
       editedSubject: this.subject,
+      editedDescription: this.description,
       titleRules: [
         value => !!value || "タイトルを入力してください",
         value => (value || '').length <= 50 || "最大入力文字数は50文字です",
@@ -101,6 +104,9 @@ export default {
       ],
       publisherRules: [
         value => (value || '').length <= 25 || "最大入力文字数は25文字です",
+      ],
+      descriptionRules: [
+        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
       ],
       selectSubjectDialog: false,
       categories: [
@@ -137,7 +143,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitBook', { name: this.editedName, author: this.editedAuthor, publisher: this.editedPublisher, subject: this.editedSubject, image: this.selectedFile })
+      this.$emit('submitBook', { name: this.editedName, author: this.editedAuthor, publisher: this.editedPublisher, subject: this.editedSubject, image: this.selectedFile, description: this.editedDescription })
     },
     checkFileSize(file) {
       console.log(file)
