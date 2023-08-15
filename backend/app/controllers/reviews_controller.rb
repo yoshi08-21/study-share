@@ -3,10 +3,29 @@ class ReviewsController < ApplicationController
   def index
     book = Book.find_by(id: params[:book_id])
     reviews = book.reviews.includes(:user)
-    if reviews
-      render json: reviews, include: "user"
+
+    reviews_with_images = reviews.map do |review|
+      review_data = review.as_json
+
+        book_data = review.book.as_json
+        review_data["book"] = book_data
+
+      if review.user.image.attached?
+        user_data = review.user.as_json
+        user_data["image"] = rails_blob_url(review.user.image)
+        review_data["user"] = user_data
+      else
+        user_data = review.user.as_json
+        review_data["user"] = user_data
+      end
+
+      review_data
+    end
+
+    if reviews_with_images
+      render json: reviews_with_images
     else
-      render json: reviews.errors
+      render json: reviews_with_images.errors
     end
   end
 

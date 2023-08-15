@@ -1,10 +1,6 @@
 <template>
   <div>
-    <h2>お気に入り一覧</h2>
-    <!-- 後でコンポーネントで置き換える -->
-    <!-- 配列の空のときのメッセージも追加する -->
-    <!-- 作成したコンポーネントは閲覧履歴と共有する -->
-
+    <br>
     <v-tabs v-model="tab">
       <v-tab v-for="(tabItem, index) in tabs" :key="index">
         {{ tabItem.label }}
@@ -12,44 +8,37 @@
     </v-tabs>
 
     <template v-if="tab === 0">
-      <h3>お気に入りに追加した参考書</h3>
-      <br>
+      <br><br><br>
       <each-books :books="favoriteBooks"></each-books>
     </template>
 
     <template v-else-if="tab === 1">
-      <h3>いいね!したレビュー</h3>
-      <br>
+      <br><br><br>
       <each-reviews :reviews="favoriteReviews"></each-reviews>
     </template>
 
     <template v-else-if="tab === 2">
-      <h3>いいね!した質問</h3>
-      <br>
+      <br><br><br>
       <each-questions :questions="favoriteQuestions"></each-questions>
     </template>
 
     <template v-else-if="tab === 3">
-      <h3>いいね!した科目別質問</h3>
-      <br>
+      <br><br><br>
       <each-subject-questions :subjectQuestions="favoriteSubjectQuestions"></each-subject-questions>
     </template>
 
     <template v-else-if="tab === 4">
-      <h3>いいね!した返信</h3>
-      <br>
+      <br><br><br>
       <each-replies :replies="favoriteReplies"></each-replies>
     </template>
 
     <template v-else-if="tab === 5">
-      <h3>いいね!した科目別質問への返信</h3>
-      <br>
+      <br><br><br>
       <each-subject-question-replies :subjectQuestionReplies="favoriteSubjectQuestionReplies"></each-subject-question-replies>
     </template>
 
     <template v-else-if="tab === 6">
-      <h3>いいね!したアンケート</h3>
-      <br>
+      <br><br><br>
       <each-surveys :surveys="favoriteSurveys"></each-surveys>
 
     </template>
