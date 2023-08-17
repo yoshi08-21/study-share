@@ -35,7 +35,7 @@
             <h3>科目: {{ subjectQuestion.subject }}</h3>
           </v-card-subtitle>
 
-          <v-card-content>
+          <v-card-text>
             <v-textarea
               :value="subjectQuestion.content"
               readonly
@@ -45,7 +45,7 @@
               auto-grow
             >
             </v-textarea>
-          </v-card-content>
+          </v-card-text>
 
           <template v-if="subjectQuestion.image">
             <v-row>

@@ -59,7 +59,7 @@
             <h2>{{ review.title }}</h2>
             </v-card-subtitle>
 
-          <v-card-content>
+          <v-card-text>
             <v-textarea
               :value="review.content"
               readonly
@@ -69,7 +69,7 @@
               auto-grow
             >
             </v-textarea>
-          </v-card-content>
+          </v-card-text>
 
           <br>
           <v-card-actions>

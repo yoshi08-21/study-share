@@ -38,7 +38,7 @@
             <h3>{{ question.title }}</h3>
           </v-card-title>
 
-          <v-card-content>
+          <v-card-text>
             <v-textarea
               :value="question.content"
               readonly
@@ -48,7 +48,7 @@
               auto-grow
             >
             </v-textarea>
-          </v-card-content>
+          </v-card-text>
 
           <template v-if="question.image">
             <v-row>

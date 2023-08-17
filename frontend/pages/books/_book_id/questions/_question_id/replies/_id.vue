@@ -5,7 +5,6 @@
     </div>
     <v-card
       elevation="8"
-      height="250"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
@@ -24,11 +23,13 @@
             </v-row>
           </div>
         </v-col>
-        <v-col cols="7" class="mt-n2">
+        <v-col cols="7">
+
           <v-card-title>
-            <nuxt-link :to="`/books/${question.book_id}/questions/${question.id}`">{{ $truncate(question.title, 20) }}</nuxt-link>
+            <nuxt-link :to="`/books/${question.book_id}/questions/${question.id}`">{{ question.title }}</nuxt-link>
           </v-card-title>
-          <v-card-text >
+
+          <v-card-text>
             <v-textarea
               :value="question.content"
               readonly
@@ -37,13 +38,12 @@
               dense
               no-resize
               rows="4"
-              style="height: 125px;"
+              style="height: 150px;"
             >
             </v-textarea>
-
           </v-card-text>
-          <v-card-actions>
 
+          <v-card-actions>
             <v-row class="d-flex align-center justify-center">
               <v-col cols="4">
                 <v-icon>mdi-comment-text-outline</v-icon>
@@ -57,6 +57,7 @@
             <p>
             </p>
           </v-card-actions>
+
         </v-col>
         <v-col cols="3" class="mt-3">
           <div style="height: 250px;">
@@ -181,10 +182,6 @@
       @nextContent="nextReply"
     >
     </content-navigator>
-
-
-
-
 
 
     <!-- 返信編集ダイアログ -->

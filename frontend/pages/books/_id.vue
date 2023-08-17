@@ -45,7 +45,7 @@
             </v-row>
           </v-card-subtitle>
 
-          <v-card-content>
+          <v-card-text>
             <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
@@ -62,7 +62,7 @@
               >
               </v-textarea>
             </tamplate>
-          </v-card-content>
+          </v-card-text>
           <br><br>
           <v-card-actions>
             <v-row class="d-flex align-center">
