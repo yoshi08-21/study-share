@@ -1,6 +1,6 @@
 <template>
   <v-card
-    height="300"
+    min-height="300"
   >
     <v-row>
       <v-col cols="3" class="d-flex justify-center">
@@ -40,11 +40,11 @@
           </v-row>
         </v-card-subtitle>
 
-        <v-card-content>
+        <v-card-text>
           <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
           <h4>作者: {{ book.author }}</h4>
           <h4>出版社: {{ book.publisher }}</h4>
-        </v-card-content>
+        </v-card-text>
         <br><br>
         <v-card-actions>
           <v-row class="d-flex align-center">

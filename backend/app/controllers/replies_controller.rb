@@ -38,7 +38,6 @@ class RepliesController < ApplicationController
     reply_user = reply.user
     reply_user_json = attach_image_to_user(reply_user)
 
-
     if reply_json
       render json: {
         book: book_json,
