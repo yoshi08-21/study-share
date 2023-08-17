@@ -21,10 +21,7 @@ class ReviewsController < ApplicationController
     book = Book.with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:book_id])
-    if book.image.attached?
-      image_url = rails_blob_url(book.image)
-    end
-    book_json = book.as_json.merge(image: image_url)
+    book_json = attach_image_to_book(book)
 
     review = Review.select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .find_by(id: params[:id])
@@ -32,10 +29,7 @@ class ReviewsController < ApplicationController
     review_json["created_at"] = format_japanese_time(review.created_at)
 
     review_user = User.with_attached_image.find_by(id: review.user_id)
-    if review_user.image.attached?
-      user_image_url = rails_blob_url(review_user.image)
-    end
-    review_user_json = review_user.as_json.merge(image: user_image_url)
+    review_user_json = attach_image_to_review_user(review_user)
 
     if review_json
       render json: {

@@ -1,22 +1,13 @@
 class SubjectQuestionsController < ApplicationController
 
+  include SharedActions::AttachImage
+  include SharedActions::DateTime
+
+
   def index
-    subject_questions = SubjectQuestion.includes(:user).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
-
-    subject_questions_with_images = subject_questions.map do |subject_question|
-      subject_question_data = subject_question.as_json
-
-      if subject_question.user.image.attached?
-        user_data = subject_question.user.as_json
-        user_data["image"] = rails_blob_url(subject_question.user.image)
-        subject_question_data["user"] = user_data
-      else
-        user_data = subject_question.user.as_json
-        subject_question_data["user"] = user_data
-      end
-
-      subject_question_data
-    end
+    subject_questions = SubjectQuestion.includes(user: { image_attachment: :blob })
+                                        .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+    subject_questions_with_images = attach_image_to_subject_questions(subject_questions)
 
     if subject_questions_with_images
       render json: subject_questions_with_images
@@ -28,23 +19,27 @@ class SubjectQuestionsController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
-    subject_question = SubjectQuestion.includes(:user).find_by(id: params[:id])
-    favorite_subject_questions = FavoriteSubjectQuestion.where(subject_question_id: subject_question.id)
-    favorite_subject_questions_count = favorite_subject_questions.count
-    if subject_question.image.attached?
-      image_url = rails_blob_url(subject_question.image)
-    end
-      subject_question_json = subject_question.as_json(include: :user).merge(image: image_url)
-    if subject_question
+    subject_question = SubjectQuestion.includes(user: { image_attachment: :blob })
+                                      .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+                                      .find_by(id: params[:id])
+    subject_question_json = attach_image_to_question(subject_question)
+    subject_question["created_at"] = format_japanese_time(subject_question.created_at)
+
+
+    subject_question_user = User.with_attached_image.find_by(id: subject_question.user_id)
+    subject_question_user_json = attach_image_to_question_user(subject_question_user)
+
+
+    if subject_question_json
       render json: {
         subject_question: subject_question_json,
-        favorite_subject_questions_count: favorite_subject_questions_count
+        subject_question_user: subject_question_user_json
       }
       if current_user && !exist_subject_question_browsing_history?(current_user, subject_question)
         save_subject_question_browsing_history(current_user, subject_question)
       end
     else
-      render json: subject_question.errors
+      render json: subject_question_json.errors
     end
   end
 

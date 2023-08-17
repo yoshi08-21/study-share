@@ -1,62 +1,164 @@
 <template>
   <div>
-    <h2>科目別質問：詳細ページ</h2>
-    <h3>質問id: {{ this.subjectQuestion.id }}</h3>
+    <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
+      <h2>質問詳細 (科目別)</h2>
+      <nuxt-link :to="`/subjectQuestions/subjectQuestions`">質問一覧に戻る</nuxt-link>
+    </div>
+    <v-card
+      elevation="8"
+      style="padding-bottom: 1px;"
+    >
+      <v-row>
+        <v-col cols="2" class="mt-8">
+          <div @click="goToUser(user)" style="cursor: pointer;">
+          <v-row>
+            <v-col class="d-flex justify-center align-center text-center">
+              <v-avatar size="100">
+                <v-img :src="user.image" alt="画像" contain></v-img>
+              </v-avatar>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="d-flex justify-center align-center text-center">
+                <span style="text-decoration: underline;">{{ $truncate(user.name, 10) }}</span>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+        <v-col cols="8" class="mt-n2">
 
-    <br>
-    <h3>質問</h3>
-    <h4>タイトル:{{ this.subjectQuestion.title }}</h4>
-    <p>本文:{{ this.subjectQuestion.content }}</p>
-    <h4>科目:{{ this.subjectQuestion.subject }}</h4>
+          <v-card-title>
+            <h3>{{ subjectQuestion.title }}</h3>
+          </v-card-title>
 
-    <tepmplate v-if="subjectQuestion.image">
-      <v-img
-        :src="subjectQuestion.image"
-        @click="showFullImage = true"
-        max-height="200"
-        max-width="200"
-        contain
-      ></v-img>
-      *画像をクリックすると拡大して表示できます
-    </tepmplate>
+          <v-card-subtitle style="margin-top: 10px;">
+            <h3>科目: {{ subjectQuestion.subject }}</h3>
+          </v-card-subtitle>
 
-    <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
+          <v-card-content>
+            <v-textarea
+              :value="subjectQuestion.content"
+              readonly
+              outlined
+              rounded
+              dense
+              auto-grow
+            >
+            </v-textarea>
+          </v-card-content>
 
-    <br>
-    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
-    <template v-if="this.currentUser && this.user.id !== this.currentUser.id">
-      <template v-if="!isFavorite">
-        <v-btn @click="addToFavorite">いいね！する</v-btn>
-        <P>いいね！（{{ this.favoriteSubjectQuestionsCount }}件）</P>
-      </template>
-      <template v-else>
-        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
-        <P>いいね！（{{ this.favoriteSubjectQuestionsCount }}件）</P>
-      </template>
-    </template>
-    <template v-else>
-      <P>いいね！（{{ this.favoriteSubjectQuestionsCount }}件）</P>
-    </template>
+          <template v-if="subjectQuestion.image">
+            <v-row>
+              <v-col class="d-flex justify-center">
+                <v-img
+                  @click="showFullImage = true"
+                  :src="subjectQuestion.image"
+                  alt="画像"
+                  contain
+                  max-height="250"
+                  max-width="250"
+                  style="cursor: pointer;"
+                ></v-img>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="d-flex justify-center">
+                *画像をクリックすると拡大できます
+              </v-col>
+            </v-row>
+          </template>
 
+          <br>
+          <v-card-actions>
+            <v-row class="d-flex align-center justify-center">
+              <v-col cols="4">
+                <favorite-button
+                  :currentUser="currentUser"
+                  :user="user"
+                  :isFavorite="isFavorite"
+                  :favoriteCount="subjectQuestion.favorite_subject_questions_count"
+                  @addToFavorite="addToFavorite"
+                  @removeFromFavorite="removeFromFavorite"
+                ></favorite-button>
+              </v-col>
+              <v-col cols="4">
+                <v-icon>mdi-comment-text-outline</v-icon>
+                  返信: {{ subjectQuestion.subject_question_replies_count }}
+              </v-col>
+              <v-col cols="4">
+                <v-icon>mdi-calendar-clock</v-icon>
+                {{ subjectQuestion.created_at }}
+              </v-col>
+            </v-row>
+          </v-card-actions>
 
-
-    <!-- 自分の質問のみ編集・削除ボタンを表示 -->
-    <br>
-    <template v-if="this.currentUser && this.user.id == this.currentUser.id">
-      <v-btn @click="dialog=true">編集する</v-btn>
-      <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
-    </template>
-
-    <br>
-    <v-btn @click="previousQuestion">前の「{{ subjectQuestion.subject }}」の質問</v-btn>
-    <v-btn @click="nextQuestion">次の「{{ subjectQuestion.subject }}」の質問</v-btn>
+        </v-col>
+        <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
+          <template v-if="currentUser && user.id == currentUser.id">
+            <v-btn @click="dialog=true" style="margin-bottom: 10px;">編集する</v-btn>
+            <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+          </template>
+        </v-col>
+      </v-row>
+    </v-card>
 
     <br><br>
-    <v-btn @click="redirectToSubjectQuestions">科目別質問一覧に戻る</v-btn>
+    <content-navigator
+      :content="`${subjectQuestion.subject}の質問`"
+      @previousContent="previousQuestion"
+      @nextContent="nextQuestion"
+    >
+    </content-navigator>
 
+    <br><br>
+    <hr>
 
-    <br><br><hr>
-    <v-btn @click="openSubjectQuestionReplyDialog">返信を投稿する</v-btn>
+    <br><br><br><br>
+    <v-card height="100px">
+      <v-row style="height: 100%;">
+        <v-col class="d-flex justify-center align-center">
+          <v-btn
+            @click="openSubjectQuestionReplyDialog"
+            x-large
+            rounded
+            color="success"
+            width="600px"
+          >
+          返信を投稿する
+        </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <br><br>
+    <template v-if="subjectQuestionReplies.length !== 0">
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <h2>返信一覧</h2>
+        </v-col>
+      </v-row>
+      <br>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+      <each-subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></each-subject-question-replies>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
+    <template v-else>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <h2>返信一覧</h2>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <v-alert
+            type="info"
+          >
+          返信は投稿されていません
+          </v-alert>
+        </v-col>
+      </v-row>
+    </template>
+
 
     <!-- 新規返信投稿ダイアログ -->
     <v-dialog v-model="subjectQuestionReplyDialog">
@@ -108,22 +210,37 @@
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
-      <v-card>
-        <h3>画像を表示する</h3>
-        <v-img
-          :src="subjectQuestion.image"
-          max-height="400"
-          max-width="400"
-          contain
-        ></v-img>
+      <v-card
+        max-height="800px"
+        style="padding: 10px;"
+      >
+        <v-row>
+          <v-col cols="6" class="d-flex justify-start">
+            <v-card-title>拡大画像</v-card-title>
+          </v-col>
+          <v-col cols="6" class="d-flex justify-end align-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
+        <hr>
+        <v-row style="margin-top: 10px; margin-bottom: 5px;">
+          <v-col class="d-flex justify-center">
+            <v-img
+              :src="subjectQuestion.image"
+              max-height="500"
+              max-width="500"
+              contain
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
       </v-card>
     </v-dialog>
 
-    <br>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <br>
-    <each-subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></each-subject-question-replies>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -135,10 +252,12 @@
 import EditSubjectQuestion from '../../components/subjectQuestions/EditSubjectQuestion.vue'
 import ReplyForm from '../../components/replies/ReplyForm.vue'
 import EachSubjectQuestionReplies from '../../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
+import FavoriteButton from '../../components/global/FavoriteButton.vue'
+import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion, ReplyForm, EachSubjectQuestionReplies },
+  components: { EditSubjectQuestion, ReplyForm, EachSubjectQuestionReplies, FavoriteButton, ContentNavigator },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -165,8 +284,7 @@ export default {
       console.log(subjectQuestionRepliesResponse.data)
       return {
         subjectQuestion: subjectQuestionResponse.data.subject_question,
-        favoriteSubjectQuestionsCount: subjectQuestionResponse.data.favorite_subject_questions_count,
-        user: subjectQuestionResponse.data.subject_question.user,
+        user: subjectQuestionResponse.data.subject_question_user,
         subjectQuestions: subjectQuestionsResponse.data,
         subjectQuestionReplies: subjectQuestionRepliesResponse.data,
         params
@@ -239,9 +357,7 @@ export default {
     redirectToSubjectQuestions() {
       this.$router.push({ path: "/subjectQuestions/subjectQuestions" })
     },
-    redirectToUser() {
-      console.log("currentUser:" + this.currentUser.id)
-      console.log("user:" + this.user.id)
+    goToUser() {
       if(this.currentUser.id !== this.user.id ) {
         this.$router.push({ path: `/users/${this.user.id}` })
       } else {
@@ -305,7 +421,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteSubjectQuestionId = response.data.id
-        this.favoriteSubjectQuestionsCount += 1
+        this.subjectQuestion.favorite_subject_questions_count +=1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -326,7 +442,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteSubjectQuestionId = null
-        this.favoriteSubjectQuestionsCount -= 1
+        this.subjectQuestion.favorite_subject_questions_count -=1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
