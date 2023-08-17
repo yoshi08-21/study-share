@@ -2,11 +2,12 @@ class QuestionsController < ApplicationController
 
   include ImageCompressionConcern
   include SharedActions::AttachImage
+  include SharedActions::DateTime
 
 
   def index
     book = Book.find_by(id: params[:book_id])
-    questions = Question.includes(:book, user: { image_attachment: :blob })
+    questions = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                           .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
                           .where(book_id: book.id)
 
@@ -24,26 +25,37 @@ class QuestionsController < ApplicationController
     book = Book.with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:book_id])
-
-
-    question = Question.includes(:user).find_by(id: params[:id])
-    favorite_questions = FavoriteQuestion.where(question_id: question.id)
-    favorite_questions_count = favorite_questions.count
-    if question.image.attached?
-      image_url = rails_blob_url(question.image)
+    if book.image.attached?
+      image_url = rails_blob_url(book.image)
     end
-      question_json = question.as_json(include: :user).merge(image: image_url)
-    if question
+    book_json = book.as_json.merge(image: image_url)
+
+    question = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
+                        .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+                        .find_by(id: params[:id])
+    if question.image.attached?
+      question_image_url = rails_blob_url(question.image)
+    end
+      question_json = question.as_json.merge(image: question_image_url)
+      question_json["created_at"] = format_japanese_time(question.created_at)
+
+      question_user = User.with_attached_image.find_by(id: question.user_id)
+      if question_user.image.attached?
+        user_image_url = rails_blob_url(question_user.image)
+      end
+      question_user_json = question_user.as_json.merge(image: user_image_url)
+
+    if question_json
       render json: {
-        book: book,
+        book: book_json,
         question: question_json,
-        favorite_questions_count: favorite_questions_count
+        question_user: question_user_json
       }
       if current_user && !exist_question_browsing_history?(current_user, question)
         save_question_browsing_history(current_user, question)
       end
     else
-      render json: question.errors
+      render json: question_json.errors
     end
   end
 
@@ -107,7 +119,8 @@ class QuestionsController < ApplicationController
   end
 
   def all_questions
-    questions = Question.includes(:user, :book).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+    questions = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
+                          .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
     questions_with_images = attach_image_to_questions(questions)
 
     if questions_with_images

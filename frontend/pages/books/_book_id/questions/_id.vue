@@ -1,59 +1,201 @@
 <template>
   <div>
-    <h2>質問詳細</h2>
-    <h3>質問id: {{ this.question.id }}</h3>
-
-    <h4>参考書情報</h4>
-    <p>タイトル:{{  this.book.name }}</p>
-
-    <h3>質問</h3>
-    <h4>タイトル:{{ this.question.title }}</h4>
-    <p>本文:{{ this.question.content }}</p>
+    <div style="margin-bottom: 10px;">
+      <h3>参考書情報</h3>
+    </div>
+    <book-information :book="book"></book-information>
 
 
-    <tepmplate v-if="question.image">
-      <v-img
-        :src="question.image"
-        @click="showFullImage = true"
-        max-height="200"
-        max-width="200"
-        contain
-      ></v-img>
-      *画像をクリックすると拡大して表示できます
-    </tepmplate>
-    <h3>questioned by<span class="link-text" @click="redirectToUser"> {{ this.user.name }} </span></h3>
 
-    <br>
-    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
-    <template v-if="this.currentUser && this.user.id !== this.currentUser.id">
-      <template v-if="!isFavorite">
-        <v-btn @click="addToFavorite">いいね！する</v-btn>
-        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
-      </template>
-      <template v-else>
-        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
-        <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
-      </template>
-    </template>
-    <template v-else>
-      <P>いいね！（{{ this.favoriteQuestionsCount }}件）</P>
-    </template>
+    <br><br><br>
+    <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
+      <h2>質問詳細</h2>
+      <nuxt-link :to="`/books/${book.id}`">参考書詳細に戻る</nuxt-link>
+    </div>
+    <v-card
+      elevation="8"
+      style="padding-bottom: 1px;"
+    >
+      <v-row>
+        <v-col cols="2" class="mt-8">
+          <div @click="goToUser(user)" style="cursor: pointer;">
+          <v-row>
+            <v-col class="d-flex justify-center align-center text-center">
+              <v-avatar size="100">
+                <v-img :src="user.image" alt="画像" contain></v-img>
+              </v-avatar>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="d-flex justify-center align-center text-center">
+                <span style="text-decoration: underline;">{{ $truncate(user.name, 10) }}</span>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+        <v-col cols="8" class="mt-n2">
+          <v-card-title>
+            <h3>{{ question.title }}</h3>
+          </v-card-title>
+          <v-card-content>
+            <v-textarea
+              :value="question.content"
+              readonly
+              outlined
+              rounded
+              dense
+              auto-grow
+            >
+            </v-textarea>
+          </v-card-content>
 
-    <v-btn @click="previousQuestion">前の質問</v-btn>
-    <v-btn @click="nextQuestion">次の質問</v-btn>
+          <template v-if="question.image">
+            <v-row>
+              <v-col class="d-flex justify-center">
+                <v-img
+                  @click="showFullImage = true"
+                  :src="question.image"
+                  alt="画像"
+                  contain
+                  max-height="250"
+                  max-width="250"
+                  style="cursor: pointer;"
+                ></v-img>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="d-flex justify-center">
+                *画像をクリックすると拡大できます
+              </v-col>
+            </v-row>
+          </template>
 
-    <!-- 自分の質問のみ編集・削除ボタンを表示 -->
-    <br>
-    <template v-if="this.currentUser && this.user.id == this.currentUser.id">
-      <v-btn @click="dialog=true">編集する</v-btn>
-      <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
-    </template>
+
+          <br><br>
+          <v-card-actions>
+            <v-row class="d-flex align-center justify-center">
+              <v-col cols="4">
+                <template v-if="currentUser && user.id !== currentUser.id">
+                  <template v-if="!isFavorite">
+                    <v-btn
+                      @click="addToFavorite"
+                      class="mx-2"
+                      fab
+                      dark
+                      small
+                      color="pink"
+                      outlined
+                    >
+                      <v-icon dark>
+                        mdi-heart-plus-outline
+                      </v-icon>
+                    </v-btn>
+                    ({{ question.favorite_questions_count }})
+                  </template>
+                  <template v-else>
+                    <v-btn
+                      @click="removeFromFavorite"
+                      class="mx-2"
+                      fab
+                      dark
+                      small
+                      color="pink"
+                    >
+                      <v-icon dark>
+                        mdi-heart
+                      </v-icon>
+                    </v-btn>
+                    ({{ question.favorite_questions_count }})
+                  </template>
+                </template>
+                <template v-else>
+                  <v-icon>mdi-heart-multiple</v-icon>
+                  いいね! ({{ question.favorite_questions_count }})
+                </template>
+              </v-col>
+              <v-col cols="4">
+                    <v-icon>mdi-comment-text-outline</v-icon>
+                    返信: {{ question.replies_count }}
+                  </v-col>
+              <v-col cols="4">
+                <v-icon>mdi-calendar-clock</v-icon>
+                {{ question.created_at }}
+              </v-col>
+            </v-row>
+            <p>
+            </p>
+          </v-card-actions>
+        </v-col>
+        <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
+          <template v-if="currentUser && user.id == currentUser.id">
+            <v-btn @click="dialog=true" style="margin-bottom: 10px;">編集する</v-btn>
+            <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+          </template>
+        </v-col>
+      </v-row>
+    </v-card>
 
     <br><br>
-    <v-btn @click="redirectToBook">参考書に戻る</v-btn>
+    <v-row class="d-flex justify-space-between">
+      <v-col cols="6" class="d-flex justify-start">
+        <v-btn @click="previousQuestion" x-large><v-icon>mdi-arrow-left-bold</v-icon>前の質問</v-btn>
+      </v-col>
+      <v-col cols="6" class="d-flex justify-end">
+        <v-btn @click="nextQuestion" x-large>次の質問<v-icon>mdi-arrow-right-bold</v-icon></v-btn>
+      </v-col>
+    </v-row>
+
 
     <br><br><hr>
-    <v-btn @click="openReplyDialog">返信を投稿する</v-btn>
+
+    <br><br><br><br>
+    <v-card height="100px">
+      <v-row style="height: 100%;">
+        <v-col class="d-flex justify-center align-center">
+          <v-btn
+            @click="openReplyDialog"
+            x-large
+            rounded
+            color="success"
+            width="600px"
+          >
+          返信を投稿する
+        </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
+
+    <br><br>
+    <template v-if="replies.length !== 0">
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <h2>返信一覧</h2>
+        </v-col>
+      </v-row>
+      <br>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+      <question-replies :replies="repliesChunk"></question-replies>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
+    <template v-else>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <h2>返信一覧</h2>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col class="d-flex justify-center">
+          <v-alert
+            type="info"
+          >
+          返信は投稿されていません
+          </v-alert>
+        </v-col>
+      </v-row>
+    </template>
+
+
 
     <!-- 新規返信投稿ダイアログ -->
     <v-dialog v-model="replyDialog">
@@ -105,21 +247,38 @@
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
-      <v-card>
-        <h3>画像を表示する</h3>
-        <v-img
-          :src="question.image"
-          max-height="400"
-          max-width="400"
-          contain
-        ></v-img>
+
+      <v-card
+        max-height="800px"
+        style="padding: 10px;"
+      >
+        <v-row>
+          <v-col cols="6" class="d-flex justify-start">
+            <v-card-title>拡大画像</v-card-title>
+          </v-col>
+          <v-col cols="6" class="d-flex justify-end align-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
+        <hr>
+        <v-row style="margin-top: 10px; margin-bottom: 5px;">
+          <v-col class="d-flex justify-center">
+            <v-img
+              :src="question.image"
+              max-height="500"
+              max-width="500"
+              contain
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
+
       </v-card>
     </v-dialog>
-
-    <br>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
-    <question-replies :replies="repliesChunk"></question-replies>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -131,10 +290,11 @@
 import EditQuestion from '../../../../components/questions/EditQuestion.vue'
 import QuestionReplies from '../../../../components/replies/QuestionReplies.vue'
 import ReplyForm from '../../../../components/replies/ReplyForm.vue'
+import BookInformation from '../../../../components/books/BookInformation.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditQuestion, QuestionReplies, ReplyForm },
+  components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -161,7 +321,7 @@ export default {
       return {
         book: questionData.book,
         question: questionData.question,
-        user: questionData.question.user,
+        user: questionData.question_user,
         favoriteQuestionsCount: questionData.favorite_questions_count,
         questions,
         replies,
@@ -299,7 +459,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteQuestionId = response.data.id
-        this.favoriteQuestionsCount += 1
+        this.question.favorite_questions_count +=1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -320,7 +480,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteQuestionId = null
-        this.favoriteQuestionsCount -= 1
+        this.question.favorite_questions_count -=1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

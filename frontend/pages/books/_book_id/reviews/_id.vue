@@ -17,7 +17,6 @@
     </div>
     <v-card
       elevation="8"
-      min-height="400"
       style="padding-bottom: 1px;"
     >
       <v-row>
@@ -143,13 +142,6 @@
     </v-row>
 
 
-
-
-
-
-
-
-    <br>
 
 
 

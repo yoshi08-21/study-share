@@ -4,28 +4,10 @@ class ReviewsController < ApplicationController
 
   def index
     book = Book.find_by(id: params[:book_id])
-    reviews = Review.includes(:book, user: { image_attachment: :blob })
+    reviews = Review.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                     .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .where(book_id: book.id)
-
-    reviews_with_images = reviews.map do |review|
-      review_data = review.as_json
-
-      book_data = review.book.as_json
-      review_data["book"] = book_data
-
-      if review.user.image.attached?
-        user_data = review.user.as_json
-        user_data["image"] = rails_blob_url(review.user.image)
-        review_data["user"] = user_data
-      else
-        user_data = review.user.as_json
-        review_data["user"] = user_data
-      end
-      review_data["created_at"] = format_japanese_time(review.created_at)
-
-      review_data
-    end
+    reviews_with_images = attach_image_to_reviews(reviews)
 
     if reviews_with_images
       render json: reviews_with_images
