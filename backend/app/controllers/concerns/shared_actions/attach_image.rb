@@ -1,6 +1,8 @@
 module SharedActions::AttachImage
   extend ActiveSupport::Concern
 
+  include SharedActions::DateTime
+
 
   def attach_image_to_books(books)
     books_with_images = books.map do |book|
@@ -11,6 +13,36 @@ module SharedActions::AttachImage
     end
 
       books_with_images
+  end
+
+  def attach_image_to_reviews (reviews)
+    reviews_with_images = reviews.map do |review|
+      review_data = review.as_json
+
+      if review.book.image.attached?
+        book_data = review.book.as_json
+        book_data["image"] = rails_blob_url(review.book.image)
+        review_data["book"] = book_data
+      else
+        book_data = review.book.as_json
+        review_data["book"] = book_data
+      end
+
+      if review.user.image.attached?
+        user_data = review.user.as_json
+        user_data["image"] = rails_blob_url(review.user.image)
+        review_data["user"] = user_data
+      else
+        user_data = review.user.as_json
+        review_data["user"] = user_data
+      end
+
+      review_data["created_at"] = format_japanese_time(review.created_at)
+
+      review_data
+    end
+
+    reviews_with_images
   end
 
   def attach_image_to_questions(questions)
@@ -35,12 +67,15 @@ module SharedActions::AttachImage
         question_data["user"] = user_data
       end
 
+      question_data["created_at"] = format_japanese_time(question.created_at)
+
       question_data
     end
 
     questions_with_images
   end
 
+  # Bookが必要ない点で↑と異なる
   def attach_image_to_subject_questions(subject_questions)
     subject_questions_with_images = subject_questions.map do |question|
       question_data = question.as_json
@@ -53,6 +88,8 @@ module SharedActions::AttachImage
         user_data = question.user.as_json
         question_data["user"] = user_data
       end
+
+      question_data["created_at"] = format_japanese_time(question.created_at)
 
       question_data
     end
