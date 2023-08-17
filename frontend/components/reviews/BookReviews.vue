@@ -4,7 +4,7 @@
       <v-col cols="10">
         <v-card
           elevation="8"
-          height="250"
+          height="260"
         >
           <v-row>
             <v-col cols="2" class="mt-8">
@@ -27,7 +27,26 @@
               <v-card-title>
                 <nuxt-link :to="`/books/${review.book_id}/reviews/${review.id}`">{{ $truncate(review.title, 30) }}</nuxt-link>
               </v-card-title>
-              <v-card-text >
+              <v-card-subtitle style="margin-top: -20px;">
+                  <v-row class="d-flex align-center">
+                    <v-col cols="3">
+                      <v-rating
+                        v-model="review.rating"
+                        :readonly="true"
+                        background-color="orange lighten-3"
+                        color="orange"
+                        dense
+                      >
+                      </v-rating>
+                    </v-col>
+                    <v-col cols="2">
+                      <h2>
+                        ({{ review.rating }})
+                      </h2>
+                    </v-col>
+                  </v-row>
+                </v-card-subtitle>
+              <v-card-text>
                 <v-textarea
                   :value="review.content"
                   readonly
@@ -41,16 +60,15 @@
                 </v-textarea>
 
               </v-card-text>
-              <v-card-actions>
-
+              <v-card-actions style="margin-top: -20px;">
                 <v-row class="d-flex align-center justify-center">
                   <v-col cols="4">
-                    <v-icon>mdi-comment-text-outline</v-icon>
-                    返信: {{ review.replies_count }}
+                    <v-icon>mdi-heart-multiple</v-icon>
+                    いいね! ({{ review.favorite_reviews_count }})
                   </v-col>
                   <v-col cols="4">
-                    <v-icon>mdi-heart-multiple</v-icon>
-                    いいね!: {{ review.favorite_questions_count }}
+                    <v-icon>mdi-calendar-clock</v-icon>
+                    {{ review.created_at }}
                   </v-col>
                 </v-row>
                 <p>

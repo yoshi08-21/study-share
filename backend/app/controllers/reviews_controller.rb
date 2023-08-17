@@ -1,14 +1,18 @@
 class ReviewsController < ApplicationController
+  include SharedActions::AttachImage
+  include SharedActions::DateTime
 
   def index
     book = Book.find_by(id: params[:book_id])
-    reviews = book.reviews.includes(:user)
+    reviews = Review.includes(:book, user: { image_attachment: :blob })
+                    .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
+                    .where(book_id: book.id)
 
     reviews_with_images = reviews.map do |review|
       review_data = review.as_json
 
-        book_data = review.book.as_json
-        review_data["book"] = book_data
+      book_data = review.book.as_json
+      review_data["book"] = book_data
 
       if review.user.image.attached?
         user_data = review.user.as_json
@@ -18,6 +22,7 @@ class ReviewsController < ApplicationController
         user_data = review.user.as_json
         review_data["user"] = user_data
       end
+      review_data["created_at"] = format_japanese_time(review.created_at)
 
       review_data
     end
@@ -31,18 +36,36 @@ class ReviewsController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
-    book = Book.find_by(id: params[:book_id])
-    review = Review.includes(:user).find_by(id: params[:id])
-    if review
+    book = Book.with_attached_image
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
+                .find_by(id: params[:book_id])
+    if book.image.attached?
+      image_url = rails_blob_url(book.image)
+    end
+    book_json = book.as_json.merge(image: image_url)
+
+    review = Review.select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
+                    .find_by(id: params[:id])
+    review_json = review.as_json
+    review_json["created_at"] = format_japanese_time(review.created_at)
+
+    review_user = User.with_attached_image.find_by(id: review.user_id)
+    if review_user.image.attached?
+      user_image_url = rails_blob_url(review_user.image)
+    end
+    review_user_json = review_user.as_json.merge(image: user_image_url)
+
+    if review_json
       render json: {
-        book: book,
-        review: review.as_json(include: :user),
+        book: book_json,
+        review: review_json,
+        review_user: review_user_json
       }
       if current_user && !exist_review_browsing_history?(current_user, review)
         save_review_browsing_history(current_user, review)
       end
     else
-      render json: review.errors
+      render json: review_json.errors
     end
   end
 

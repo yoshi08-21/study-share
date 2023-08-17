@@ -19,9 +19,9 @@
                 </v-card-text>
               </v-col>
             </v-row>
-              レビュー:{{ book.reviews.length }}件
-              平均評価:{{ book.avg_rating }}
-              お気に入り: {{ book.favorite_books.length }}件
+              レビュー: {{ book.reviews.length }}件
+              平均評価: {{ book.avg_rating }}
+              お気に入り ({{ book.favorite_books.length }})
           </v-card>
         </v-col>
       </v-row>
