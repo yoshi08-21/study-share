@@ -33,8 +33,8 @@ class QuestionsController < ApplicationController
     question_json = attach_image_to_question(question)
     question_json["created_at"] = format_japanese_time(question.created_at)
 
-    question_user = User.with_attached_image.find_by(id: question.user_id)
-    question_user_json = attach_image_to_question_user(question_user)
+    question_user = question.user
+    question_user_json = attach_image_to_user(question_user)
 
     if question_json
       render json: {

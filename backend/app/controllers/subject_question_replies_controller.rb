@@ -1,5 +1,9 @@
 class SubjectQuestionRepliesController < ApplicationController
 
+  include SharedActions::AttachImage
+  include SharedActions::DateTime
+
+
   def index
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
     subject_question_replies = subject_question.subject_question_replies.includes(:user, :subject_question)

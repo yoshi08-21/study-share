@@ -46,11 +46,11 @@
                 <v-row class="d-flex align-center justify-center">
                   <v-col cols="4">
                     <v-icon>mdi-comment-text-outline</v-icon>
-                    返信: {{ question.replies_count }}
+                    返信: {{ question.replies_count }}件
                   </v-col>
                   <v-col cols="4">
                     <v-icon>mdi-heart-multiple</v-icon>
-                    いいね!: {{ question.favorite_questions_count }}
+                    いいね! ({{ question.favorite_questions_count }})
                   </v-col>
                   <v-col cols="4">
                     <v-icon>mdi-calendar-clock</v-icon>

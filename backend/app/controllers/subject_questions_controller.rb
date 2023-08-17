@@ -27,7 +27,7 @@ class SubjectQuestionsController < ApplicationController
 
 
     subject_question_user = User.with_attached_image.find_by(id: subject_question.user_id)
-    subject_question_user_json = attach_image_to_question_user(subject_question_user)
+    subject_question_user_json = attach_image_to_user(subject_question_user)
 
 
     if subject_question_json

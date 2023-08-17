@@ -23,13 +23,14 @@ class ReviewsController < ApplicationController
                 .find_by(id: params[:book_id])
     book_json = attach_image_to_book(book)
 
-    review = Review.select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
+    review = Review.includes(user: { image_attachment: :blob })
+                    .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .find_by(id: params[:id])
     review_json = review.as_json
     review_json["created_at"] = format_japanese_time(review.created_at)
 
-    review_user = User.with_attached_image.find_by(id: review.user_id)
-    review_user_json = attach_image_to_review_user(review_user)
+    review_user = review.user
+    review_user_json = attach_image_to_user(review_user)
 
     if review_json
       render json: {
