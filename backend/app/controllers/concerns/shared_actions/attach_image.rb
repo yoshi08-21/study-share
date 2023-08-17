@@ -14,7 +14,7 @@ module SharedActions::AttachImage
       book.as_json.merge(image: image_url)
     end
 
-      books_with_images
+    books_with_images
   end
 
   def attach_image_to_reviews (reviews)
@@ -111,13 +111,13 @@ module SharedActions::AttachImage
     book_json
   end
 
-  def attach_image_to_review_user(review_user)
-    if review_user.image.attached?
-      user_image_url = rails_blob_url(review_user.image)
+  def attach_image_to_user(user)
+    if user.image.attached?
+      user_image_url = rails_blob_url(user.image)
     end
-    review_user_json = review_user.as_json.merge(image: user_image_url)
+    user_json = user.as_json.merge(image: user_image_url)
 
-    review_user_json
+    user_json
   end
 
   def attach_image_to_question(question)
@@ -129,15 +129,14 @@ module SharedActions::AttachImage
     question_json
   end
 
-  def attach_image_to_question_user(question_user)
-    if question_user.image.attached?
-      user_image_url = rails_blob_url(question_user.image)
+  def attach_image_to_reply(reply)
+    if reply.image.attached?
+      image_url = rails_blob_url(reply.image)
     end
-    question_user_json = question_user.as_json.merge(image: user_image_url)
+    reply_json = reply.as_json(include: :user).merge(image: image_url)
 
-    question_user_json
+    reply_json
   end
-
 
 
 end

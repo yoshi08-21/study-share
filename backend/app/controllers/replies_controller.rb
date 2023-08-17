@@ -1,5 +1,10 @@
 class RepliesController < ApplicationController
 
+  include SharedActions::AttachImage
+  include SharedActions::DateTime
+
+
+
   def index
     question = Question.find_by(id: params[:question_id])
     replies = question.replies.includes(:user, :question)
@@ -12,21 +17,35 @@ class RepliesController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
-    book = Book.find_by(id: params[:book_id])
-    question = Question.includes(:user).find_by(id: params[:question_id])
-    reply = Reply.includes(:user).find_by(id: params[:id])
-    favorite_replies = FavoriteReply.where(reply_id: reply.id)
-    favorite_replies_count = favorite_replies.count
-    if reply.image.attached?
-      image_url = rails_blob_url(reply.image)
-    end
-      reply_json = reply.as_json(include: :user).merge(image: image_url)
-    if reply
+    book = Book.with_attached_image
+                .find_by(id: params[:book_id])
+    book_json = attach_image_to_book(book)
+
+    question = Question.includes(user: { image_attachment: :blob })
+                        .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+                        .find_by(id: params[:question_id])
+
+    question_user = question.user
+    question_user_json = attach_image_to_user(question_user)
+
+    reply = Reply.with_attached_image
+                  .includes(user: { image_attachment: :blob })
+                  .select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
+                  .find_by(id: params[:id])
+    reply_json = attach_image_to_reply(reply)
+    reply_json["created_at"] = format_japanese_time(reply.created_at)
+
+    reply_user = reply.user
+    reply_user_json = attach_image_to_user(reply_user)
+
+
+    if reply_json
       render json: {
-        book: book,
-        question: question.as_json(include: :user),
+        book: book_json,
+        question: question,
+        question_user: question_user_json,
         reply: reply_json,
-        favorite_replies_count: favorite_replies_count
+        reply_user: reply_user_json,
       }
       if current_user && !exist_reply_browsing_history?(current_user, reply)
         save_reply_browsing_history(current_user, reply)
