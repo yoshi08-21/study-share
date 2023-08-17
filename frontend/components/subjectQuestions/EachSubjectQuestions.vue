@@ -52,6 +52,10 @@
                     <v-icon>mdi-heart-multiple</v-icon>
                     いいね!: {{ subjectQuestion.favorite_subject_questions_count }}
                   </v-col>
+                  <v-col cols="4">
+                    <v-icon>mdi-calendar-clock</v-icon>
+                    {{ subjectQuestion.created_at }}
+                  </v-col>
                 </v-row>
                 <p>
                 </p>

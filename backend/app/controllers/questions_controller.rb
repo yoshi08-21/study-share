@@ -1,34 +1,16 @@
 class QuestionsController < ApplicationController
 
   include ImageCompressionConcern
+  include SharedActions::AttachImage
+
 
   def index
     book = Book.find_by(id: params[:book_id])
-    questions = book.questions.includes(:book, user: { image_attachment: :blob })
+    questions = Question.includes(:book, user: { image_attachment: :blob })
+                          .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+                          .where(book_id: book.id)
 
-    questions_with_images = questions.map do |question|
-      question_data = question.as_json
-
-      if question.book.image.attached?
-        book_data = question.book.as_json
-        book_data["image"] = rails_blob_url(question.book.image)
-        question_data["book"] = book_data
-      else
-        book_data = question.book.as_json
-        question_data["book"] = book_data
-      end
-
-      if question.user.image.attached?
-        user_data = question.user.as_json
-        user_data["image"] = rails_blob_url(question.user.image)
-        question_data["user"] = user_data
-      else
-        user_data = question.user.as_json
-        question_data["user"] = user_data
-      end
-
-      question_data
-    end
+    questions_with_images = attach_image_to_questions(questions)
 
     if questions_with_images
       render json: questions_with_images
@@ -126,30 +108,7 @@ class QuestionsController < ApplicationController
 
   def all_questions
     questions = Question.includes(:user, :book).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
-
-    questions_with_images = questions.map do |question|
-      question_data = question.as_json
-
-      if question.book.image.attached?
-        book_data = question.book.as_json
-        book_data["image"] = rails_blob_url(question.book.image)
-        question_data["book"] = book_data
-      else
-        book_data = question.book.as_json
-        question_data["book"] = book_data
-      end
-
-      if question.user.image.attached?
-        user_data = question.user.as_json
-        user_data["image"] = rails_blob_url(question.user.image)
-        question_data["user"] = user_data
-      else
-        user_data = question.user.as_json
-        question_data["user"] = user_data
-      end
-
-      question_data
-    end
+    questions_with_images = attach_image_to_questions(questions)
 
     if questions_with_images
       render json: questions_with_images
