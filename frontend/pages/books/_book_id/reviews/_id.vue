@@ -3,12 +3,8 @@
     <div style="margin-bottom: 10px;">
       <h3>参考書情報</h3>
     </div>
-
     <book-information :book="book"></book-information>
-    <br><br><br>
 
-
-    <hr>
 
     <br><br><br>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
@@ -37,6 +33,7 @@
           </div>
         </v-col>
         <v-col cols="8" class="mt-n2">
+
           <v-card-title>
             <v-row class="d-flex align-center" style="margin-top: 10px;">
               <v-col cols="4">
@@ -57,9 +54,11 @@
               </v-col>
             </v-row>
           </v-card-title>
+
           <v-card-subtitle style="margin-top: 20px;">
             <h2>{{ review.title }}</h2>
             </v-card-subtitle>
+
           <v-card-content>
             <v-textarea
               :value="review.content"
@@ -71,47 +70,20 @@
             >
             </v-textarea>
           </v-card-content>
-          <br><br>
+
+          <br>
           <v-card-actions>
             <v-row class="d-flex align-end justify-center">
               <v-col cols="4">
-                <template v-if="currentUser && user.id !== currentUser.id">
-                  <template v-if="!isFavorite">
-                    <v-btn
-                      @click="addToFavorite"
-                      class="mx-2"
-                      fab
-                      dark
-                      small
-                      color="pink"
-                      outlined
-                    >
-                      <v-icon dark>
-                        mdi-heart-plus-outline
-                      </v-icon>
-                    </v-btn>
-                    ({{ review.favorite_reviews_count }})
-                  </template>
-                  <template v-else>
-                    <v-btn
-                      @click="removeFromFavorite"
-                      class="mx-2"
-                      fab
-                      dark
-                      small
-                      color="pink"
-                    >
-                      <v-icon dark>
-                        mdi-heart
-                      </v-icon>
-                    </v-btn>
-                    ({{ review.favorite_reviews_count }})
-                  </template>
-                </template>
-                <template v-else>
-                  <v-icon>mdi-heart-multiple</v-icon>
-                  いいね! ({{ review.favorite_reviews_count }})
-                </template>
+                <favorite-button
+                  :currentUser="currentUser"
+                  :user="user"
+                  :isFavorite="isFavorite"
+                  :favoriteCount="review.favorite_reviews_count"
+                  @addToFavorite="addToFavorite"
+                  @removeFromFavorite="removeFromFavorite"
+                >
+                </favorite-button>
               </v-col>
               <v-col cols="4">
                 <v-icon>mdi-calendar-clock</v-icon>
@@ -121,6 +93,7 @@
             <p>
             </p>
           </v-card-actions>
+
         </v-col>
         <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
           <template v-if="currentUser && user.id == currentUser.id">
@@ -132,20 +105,14 @@
     </v-card>
 
     <br><br>
-    <v-row class="d-flex justify-space-between">
-      <v-col cols="6" class="d-flex justify-start">
-        <v-btn @click="previousReview" x-large><v-icon>mdi-arrow-left-bold</v-icon>前のレビュー</v-btn>
-      </v-col>
-      <v-col cols="6" class="d-flex justify-end">
-        <v-btn @click="nextReview" x-large>次のレビュー<v-icon>mdi-arrow-right-bold</v-icon></v-btn>
-      </v-col>
-    </v-row>
+    <content-navigator
+      :content="'レビュー'"
+      @previousContent="previousReview"
+      @nextContent="nextReview"
+    >
+    </content-navigator>
 
 
-
-
-
-    <br><br>
     <!-- レビュー編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
@@ -182,8 +149,6 @@
       </v-card>
     </v-dialog>
 
-
-    <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
 </template>
@@ -192,12 +157,16 @@
 
 import EditReview from '../../../../components/reviews/EditReview.vue'
 import BookInformation from '../../../../components/books/BookInformation.vue'
+import FavoriteButton from '../../../../components/global/FavoriteButton.vue'
+import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
 import axios from "@/plugins/axios"
 
 export default {
   components: {
     EditReview,
     BookInformation,
+    FavoriteButton,
+    ContentNavigator,
   },
   async asyncData({ params, store }) {
     try {

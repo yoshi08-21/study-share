@@ -6,7 +6,6 @@
     <book-information :book="book"></book-information>
 
 
-
     <br><br><br>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>質問詳細</h2>
@@ -34,9 +33,11 @@
           </div>
         </v-col>
         <v-col cols="8" class="mt-n2">
+
           <v-card-title>
             <h3>{{ question.title }}</h3>
           </v-card-title>
+
           <v-card-content>
             <v-textarea
               :value="question.content"
@@ -70,61 +71,30 @@
             </v-row>
           </template>
 
-
-          <br><br>
+          <br>
           <v-card-actions>
             <v-row class="d-flex align-center justify-center">
               <v-col cols="4">
-                <template v-if="currentUser && user.id !== currentUser.id">
-                  <template v-if="!isFavorite">
-                    <v-btn
-                      @click="addToFavorite"
-                      class="mx-2"
-                      fab
-                      dark
-                      small
-                      color="pink"
-                      outlined
-                    >
-                      <v-icon dark>
-                        mdi-heart-plus-outline
-                      </v-icon>
-                    </v-btn>
-                    ({{ question.favorite_questions_count }})
-                  </template>
-                  <template v-else>
-                    <v-btn
-                      @click="removeFromFavorite"
-                      class="mx-2"
-                      fab
-                      dark
-                      small
-                      color="pink"
-                    >
-                      <v-icon dark>
-                        mdi-heart
-                      </v-icon>
-                    </v-btn>
-                    ({{ question.favorite_questions_count }})
-                  </template>
-                </template>
-                <template v-else>
-                  <v-icon>mdi-heart-multiple</v-icon>
-                  いいね! ({{ question.favorite_questions_count }})
-                </template>
+                <favorite-button
+                  :currentUser="currentUser"
+                  :user="user"
+                  :isFavorite="isFavorite"
+                  :favoriteCount="question.favorite_questions_count"
+                  @addToFavorite="addToFavorite"
+                  @removeFromFavorite="removeFromFavorite"
+                ></favorite-button>
               </v-col>
               <v-col cols="4">
-                    <v-icon>mdi-comment-text-outline</v-icon>
-                    返信: {{ question.replies_count }}
-                  </v-col>
+                <v-icon>mdi-comment-text-outline</v-icon>
+                  返信: {{ question.replies_count }}
+              </v-col>
               <v-col cols="4">
                 <v-icon>mdi-calendar-clock</v-icon>
                 {{ question.created_at }}
               </v-col>
             </v-row>
-            <p>
-            </p>
           </v-card-actions>
+
         </v-col>
         <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
           <template v-if="currentUser && user.id == currentUser.id">
@@ -136,17 +106,15 @@
     </v-card>
 
     <br><br>
-    <v-row class="d-flex justify-space-between">
-      <v-col cols="6" class="d-flex justify-start">
-        <v-btn @click="previousQuestion" x-large><v-icon>mdi-arrow-left-bold</v-icon>前の質問</v-btn>
-      </v-col>
-      <v-col cols="6" class="d-flex justify-end">
-        <v-btn @click="nextQuestion" x-large>次の質問<v-icon>mdi-arrow-right-bold</v-icon></v-btn>
-      </v-col>
-    </v-row>
+    <content-navigator
+      :content="'質問'"
+      @previousContent="previousQuestion"
+      @nextContent="nextQuestion"
+    >
+    </content-navigator>
 
-
-    <br><br><hr>
+    <br><br>
+    <hr>
 
     <br><br><br><br>
     <v-card height="100px">
@@ -164,7 +132,6 @@
         </v-col>
       </v-row>
     </v-card>
-
 
     <br><br>
     <template v-if="replies.length !== 0">
@@ -291,10 +258,12 @@ import EditQuestion from '../../../../components/questions/EditQuestion.vue'
 import QuestionReplies from '../../../../components/replies/QuestionReplies.vue'
 import ReplyForm from '../../../../components/replies/ReplyForm.vue'
 import BookInformation from '../../../../components/books/BookInformation.vue'
+import favoriteButton from '../../../../components/global/FavoriteButton.vue'
+import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation },
+  components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation, favoriteButton, ContentNavigator },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null

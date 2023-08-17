@@ -1,3 +1,5 @@
+export { default as ContentNavigator } from '../../components/global/ContentNavigator.vue'
+export { default as FavoriteButton } from '../../components/global/FavoriteButton.vue'
 export { default as NormalHeader } from '../../components/global/NormalHeader.vue'
 export { default as ShowSnackbar } from '../../components/global/ShowSnackbar.vue'
 export { default as SpecialHeader } from '../../components/global/SpecialHeader.vue'
