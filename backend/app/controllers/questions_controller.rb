@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
   def index
     book = Book.find_by(id: params[:book_id])
-    questions = book.questions.includes(:user)
+    questions = book.questions.includes(:book, user: { image_attachment: :blob })
 
     questions_with_images = questions.map do |question|
       question_data = question.as_json
@@ -39,13 +39,16 @@ class QuestionsController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
-    book = Book.find_by(id: params[:book_id])
+    book = Book.with_attached_image
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
+                .find_by(id: params[:book_id])
+
+
     question = Question.includes(:user).find_by(id: params[:id])
     favorite_questions = FavoriteQuestion.where(question_id: question.id)
     favorite_questions_count = favorite_questions.count
     if question.image.attached?
       image_url = rails_blob_url(question.image)
-      # image_url = rails_representation_url(question.image.variant(resize_to_fill: [100, 100]))
     end
       question_json = question.as_json(include: :user).merge(image: image_url)
     if question

@@ -64,11 +64,11 @@
             <v-row>
               <v-col cols="6">
                 <v-icon>mdi-comment-text-outline</v-icon>
-                レビュー:{{ book.reviews_count }}件
+                レビュー: {{ book.reviews_count }}件
               </v-col>
               <v-col cols="6">
                 <v-icon>mdi-heart-multiple</v-icon>
-                お気に入り: {{ book.favorite_books_count }}
+                お気に入り ({{ book.favorite_books_count }})
               </v-col>
             </v-row>
           </v-card-actions>

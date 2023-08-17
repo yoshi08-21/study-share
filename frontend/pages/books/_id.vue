@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>参考書詳細</h2>
       <nuxt-link :to="`/books/allBooks`">参考書一覧に戻る</nuxt-link>
@@ -69,15 +68,15 @@
             <v-row class="d-flex align-center">
               <v-col cols="3">
                 <v-icon>mdi-comment-text-outline</v-icon>
-                レビュー:{{ book.reviews_count }}件
+                レビュー: {{ book.reviews_count }}件
               </v-col>
               <v-col cols="3">
                 <v-icon>mdi-comment-question-outline</v-icon>
-                質問:{{ book.reviews_count }}件
+                質問: {{ book.reviews_count }}件
               </v-col>
               <v-col cols="3">
                 <v-icon>mdi-heart-multiple</v-icon>
-                お気に入り:{{ book.favorite_books_count }}
+                お気に入り ({{ book.favorite_books_count }})
               </v-col>
               <v-col cols="3">
                 <div v-if="!isFavorite">
@@ -91,7 +90,7 @@
           </v-card-actions>
         </v-col>
         <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
-          <template v-if="this.currentUser && this.book.user_id == this.currentUser.id">
+          <template v-if="currentUser && book.user_id == currentUser.id">
             <v-btn @click="editBookDialog=true" style="margin-bottom: 10px;">編集する</v-btn>
             <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
           </template>
