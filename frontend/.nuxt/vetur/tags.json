@@ -1,4 +1,10 @@
 {
+  "ContentNavigator": {
+    "description": "Auto imported from components/global/ContentNavigator.vue"
+  },
+  "FavoriteButton": {
+    "description": "Auto imported from components/global/FavoriteButton.vue"
+  },
   "NormalHeader": {
     "description": "Auto imported from components/global/NormalHeader.vue"
   },
