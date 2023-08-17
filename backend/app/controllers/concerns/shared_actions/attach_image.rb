@@ -4,6 +4,8 @@ module SharedActions::AttachImage
   include SharedActions::DateTime
 
 
+  # ↓配列の各要素に対してimageをアタッチするアクション一覧
+
   def attach_image_to_books(books)
     books_with_images = books.map do |book|
       if book.image.attached?
@@ -97,6 +99,44 @@ module SharedActions::AttachImage
     subject_questions_with_images
   end
 
+
+  # 個別の要素に対してimageをアタッチするアクション一覧
+
+  def attach_image_to_book(book)
+    if book.image.attached?
+      image_url = rails_blob_url(book.image)
+    end
+    book_json = book.as_json.merge(image: image_url)
+
+    book_json
+  end
+
+  def attach_image_to_review_user(review_user)
+    if review_user.image.attached?
+      user_image_url = rails_blob_url(review_user.image)
+    end
+    review_user_json = review_user.as_json.merge(image: user_image_url)
+
+    review_user_json
+  end
+
+  def attach_image_to_question(question)
+    if question.image.attached?
+      question_image_url = rails_blob_url(question.image)
+    end
+    question_json = question.as_json.merge(image: question_image_url)
+
+    question_json
+  end
+
+  def attach_image_to_question_user(question_user)
+    if question_user.image.attached?
+      user_image_url = rails_blob_url(question_user.image)
+    end
+    question_user_json = question_user.as_json.merge(image: user_image_url)
+
+    question_user_json
+  end
 
 
 

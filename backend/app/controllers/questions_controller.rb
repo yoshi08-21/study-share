@@ -25,25 +25,16 @@ class QuestionsController < ApplicationController
     book = Book.with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:book_id])
-    if book.image.attached?
-      image_url = rails_blob_url(book.image)
-    end
-    book_json = book.as_json.merge(image: image_url)
+    book_json = attach_image_to_book(book)
 
     question = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                         .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
                         .find_by(id: params[:id])
-    if question.image.attached?
-      question_image_url = rails_blob_url(question.image)
-    end
-      question_json = question.as_json.merge(image: question_image_url)
-      question_json["created_at"] = format_japanese_time(question.created_at)
+    question_json = attach_image_to_question(question)
+    question_json["created_at"] = format_japanese_time(question.created_at)
 
-      question_user = User.with_attached_image.find_by(id: question.user_id)
-      if question_user.image.attached?
-        user_image_url = rails_blob_url(question_user.image)
-      end
-      question_user_json = question_user.as_json.merge(image: user_image_url)
+    question_user = User.with_attached_image.find_by(id: question.user_id)
+    question_user_json = attach_image_to_question_user(question_user)
 
     if question_json
       render json: {

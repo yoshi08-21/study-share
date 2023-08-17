@@ -214,7 +214,6 @@
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
-
       <v-card
         max-height="800px"
         style="padding: 10px;"
@@ -243,9 +242,9 @@
             <v-btn @click="showFullImage = false">閉じる</v-btn>
           </v-col>
         </v-row>
-
       </v-card>
     </v-dialog>
+
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
