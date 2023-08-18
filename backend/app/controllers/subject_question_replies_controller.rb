@@ -6,11 +6,17 @@ class SubjectQuestionRepliesController < ApplicationController
 
   def index
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
-    subject_question_replies = subject_question.subject_question_replies.includes(:user, :subject_question)
-    if subject_question_replies
-      render json: subject_question_replies, include: [:user, :subject_question]
+
+    subject_question_replies = SubjectQuestionReply.with_attached_image
+    .includes(user: { image_attachment: :blob }, subject_question: { image_attachment: :blob })
+    .select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
+    .where(subject_question_id: subject_question.id)
+    subject_question_replies_with_images = attach_image_to_subject_question_replies(subject_question_replies)
+
+    if subject_question_replies_with_images
+      render json: subject_question_replies_with_images
     else
-      render json: subject_question_replies.errors
+      render json: subject_question_replies_with_images.errors
     end
   end
 

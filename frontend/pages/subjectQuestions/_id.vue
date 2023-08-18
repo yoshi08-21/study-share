@@ -139,7 +139,9 @@
       </v-row>
       <br>
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
-      <each-subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></each-subject-question-replies>
+      <br>
+      <subject-question-subject-question-replies :subjectQuestionReplies="subjectQuestionReplyChunk"></subject-question-subject-question-replies>
+      <br>
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </template>
     <template v-else>
@@ -251,13 +253,13 @@
 
 import EditSubjectQuestion from '../../components/subjectQuestions/EditSubjectQuestion.vue'
 import ReplyForm from '../../components/replies/ReplyForm.vue'
-import EachSubjectQuestionReplies from '../../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import FavoriteButton from '../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../components/global/ContentNavigator.vue'
+import SubjectQuestionSubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionSubjectQuestionReplies.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion, ReplyForm, EachSubjectQuestionReplies, FavoriteButton, ContentNavigator },
+  components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null

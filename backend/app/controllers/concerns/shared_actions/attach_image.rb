@@ -99,6 +99,68 @@ module SharedActions::AttachImage
     subject_questions_with_images
   end
 
+  def attach_image_to_replies(replies)
+    replies_with_images = replies.map do |reply|
+      reply_data = reply.as_json
+
+      if reply.image.attached?
+        reply_data["image"] = rails_blob_url(reply.image)
+      end
+
+      if reply.user.image.attached?
+        user_data = reply.user.as_json
+        user_data["image"] = rails_blob_url(reply.user.image)
+        reply_data["user"] = user_data
+      else
+        user_data = reply.user.as_json
+        reply_data["user"] = user_data
+      end
+
+      question_data = reply.question.as_json
+      reply_data["question"] = question_data
+
+      reply_data["created_at"] = format_japanese_time(reply.created_at)
+
+      reply_data
+    end
+
+    replies_with_images
+  end
+
+
+  def attach_image_to_subject_question_replies(subject_question_replies)
+    subject_question_replies_with_images = subject_question_replies.map do |subject_question_reply|
+      subject_question_reply_data = subject_question_reply.as_json
+
+      if subject_question_reply.image.attached?
+        subject_question_reply_data["image"] = rails_blob_url(subject_question_reply.image)
+      end
+
+      if subject_question_reply.user.image.attached?
+        user_data = subject_question_reply.user.as_json
+        user_data["image"] = rails_blob_url(subject_question_reply.user.image)
+        subject_question_reply_data["user"] = user_data
+      else
+        user_data = subject_question_reply.user.as_json
+        subject_question_reply_data["user"] = user_data
+      end
+
+      if subject_question_reply.subject_question.image.attached?
+        subject_question_data = subject_question_reply.subject_question.as_json
+        subject_question_data["image"] = rails_blob_url(subject_question_reply.subject_question.image)
+        subject_question_reply_data["subject_question"] = subject_question_data
+      else
+        subject_question_data = subject_question_reply.subject_question.as_json
+        subject_question_reply_data["subject_question"] = subject_question_data
+      end
+
+      subject_question_reply_data["created_at"] = format_japanese_time(subject_question_reply.created_at)
+
+      subject_question_reply_data
+    end
+
+    subject_question_replies_with_images
+  end
 
   # 個別の要素に対してimageをアタッチするアクション一覧
 

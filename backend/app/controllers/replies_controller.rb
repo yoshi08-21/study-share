@@ -7,11 +7,17 @@ class RepliesController < ApplicationController
 
   def index
     question = Question.find_by(id: params[:question_id])
-    replies = question.replies.includes(:user, :question)
-    if replies
-      render json: replies, include: [:user, :question]
+
+    replies = Reply.with_attached_image
+                    .includes(:question, user: { image_attachment: :blob })
+                    .select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
+                    .where(question_id: question.id)
+    replies_with_images = attach_image_to_replies(replies)
+
+    if replies_with_images
+      render json: replies_with_images
     else
-      render json: replies.errors
+      render json: replies_with_images.errors
     end
   end
 

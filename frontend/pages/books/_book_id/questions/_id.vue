@@ -142,7 +142,9 @@
       </v-row>
       <br>
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
+      <br>
       <question-replies :replies="repliesChunk"></question-replies>
+      <br>
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </template>
     <template v-else>
@@ -363,9 +365,7 @@ export default {
     redirectToBook() {
       this.$router.push({ path: `/books/${this.book.id}` })
     },
-    redirectToUser() {
-      console.log("currentUser:" + this.currentUser.id)
-      console.log("user:" + this.user.id)
+    goToUser() {
       if(this.currentUser.id !== this.user.id ) {
         this.$router.push({ path: `/users/${this.user.id}` })
       } else {
