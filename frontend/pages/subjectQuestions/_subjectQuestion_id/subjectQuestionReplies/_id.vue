@@ -328,7 +328,7 @@ export default {
     }
   },
   methods: {
-    redirectToUser(user) {
+    goToUser(user) {
       console.log("currentUser:" + this.currentUser.id)
       console.log("user:" + user.id)
       if(this.currentUser.id !== user.id ) {

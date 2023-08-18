@@ -1,14 +1,13 @@
 <template>
   <div>
-
-    <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index">
+    <v-row mb-5 v-for="(subjectQuestionReply, index) in subjectQuestionReplies" :key="'subjectQuestionReply_' + index">
       <v-col>
-        <template v-if="reply.user_id !== reply.question.user_id">
+        <template v-if="subjectQuestionReply.user_id !== subjectQuestionReply.subject_question.user_id">
           <!-- 質問の投稿者以外の返信 -->
           <v-row class="justify-start">
             <v-col cols="10">
               <v-card
-                :to="`/books/${reply.question.book_id}/questions/${reply.question_id}/replies/${reply.id}`"
+                :to="`/subjectQuestions/${subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${subjectQuestionReply.id}`"
                 elevation="8"
                 height="200"
               >
@@ -17,20 +16,20 @@
                     <v-row>
                       <v-col class="d-flex justify-center align-center text-center">
                         <v-avatar size="80">
-                          <v-img :src="reply.user.image" alt="画像" contain></v-img>
+                          <v-img :src="subjectQuestionReply.user.image" alt="画像" contain></v-img>
                         </v-avatar>
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col class="d-flex justify-center align-center text-center">
-                        <span style="text-decoration: underline;">{{ $truncate(reply.user.name, 10) }}</span>
+                        <span style="text-decoration: underline;">{{ $truncate(subjectQuestionReply.user.name, 10) }}</span>
                       </v-col>
                     </v-row>
                   </v-col>
                   <v-col cols="9" class="mt-n2">
                     <v-card-text>
                       <v-textarea
-                        :value="reply.content"
+                        :value="subjectQuestionReply.content"
                         readonly
                         filled
                         rounded
@@ -45,7 +44,7 @@
                     <v-card-actions>
 
                       <v-row class="d-flex align-center justify-center">
-                        <template v-if="reply.image">
+                        <template v-if="subjectQuestionReply.image">
                           <v-col cols="3">
                             <v-icon>mdi-file-image-plus</v-icon>
                             画像
@@ -53,11 +52,11 @@
                         </template>
                         <v-col cols="3">
                           <v-icon>mdi-heart-multiple</v-icon>
-                          いいね! ({{ reply.favorite_replies_count }})
+                          いいね! ({{ subjectQuestionReply.favorite_subject_question_replies_count }})
                         </v-col>
                         <v-col cols="3">
                           <v-icon>mdi-calendar-clock</v-icon>
-                          {{ reply.created_at }}
+                          {{ subjectQuestionReply.created_at }}
                         </v-col>
                       </v-row>
                       <p>
@@ -75,7 +74,7 @@
           <v-row class="justify-end">
             <v-col cols="10">
               <v-card
-                :to="`/books/${reply.question.book_id}/questions/${reply.question_id}/replies/${reply.id}`"
+                :to="`/subjectQuestions/${subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${subjectQuestionReply.id}`"
                 elevation="8"
                 height="200"
                 style="background-color: lightgreen;"
@@ -84,7 +83,7 @@
                   <v-col cols="9" class="mt-n2">
                     <v-card-text>
                       <v-textarea
-                        :value="reply.content"
+                        :value="subjectQuestionReply.content"
                         readonly
                         rounded
                         dense
@@ -99,7 +98,7 @@
                     <v-card-actions>
 
                       <v-row class="d-flex align-center justify-center">
-                        <template v-if="reply.image">
+                        <template v-if="subjectQuestionReply.image">
                           <v-col cols="3">
                             <v-icon>mdi-file-image-plus</v-icon>
                             画像
@@ -107,11 +106,11 @@
                         </template>
                         <v-col cols="3">
                           <v-icon>mdi-heart-multiple</v-icon>
-                          いいね! ({{ reply.favorite_replies_count }})
+                          いいね! ({{ subjectQuestionReply.favorite_subject_question_replies_count }})
                         </v-col>
                         <v-col cols="3">
                           <v-icon>mdi-calendar-clock</v-icon>
-                          {{ reply.created_at }}
+                          {{ subjectQuestionReply.created_at }}
                         </v-col>
                       </v-row>
                       <p>
@@ -122,13 +121,13 @@
                     <v-row>
                       <v-col class="d-flex justify-center align-center text-center">
                         <v-avatar size="80">
-                          <v-img :src="reply.user.image" alt="画像" contain></v-img>
+                          <v-img :src="subjectQuestionReply.user.image" alt="画像" contain></v-img>
                         </v-avatar>
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col class="d-flex justify-center align-center text-center">
-                        <span style="text-decoration: underline;">{{ $truncate(reply.user.name, 10) }}</span>
+                        <span style="text-decoration: underline;">{{ $truncate(subjectQuestionReply.user.name, 10) }}</span>
                       </v-col>
                     </v-row>
                   </v-col>
@@ -140,31 +139,14 @@
       </v-col>
     </v-row>
 
-
-  </div>
+</div>
 </template>
 
 <script>
 export default {
   props: {
-    replies: [],
+    subjectQuestionReplies: [],
   },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
-  },
-  methods: {
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
-
-  }
-
 }
 </script>
 
