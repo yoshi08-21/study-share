@@ -52,57 +52,115 @@
       </special-header>
     </template>
 
-
-
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" style="height: 100vh;">
       <v-main>
         <v-container>
           <Nuxt />
-          <v-btn v-if="currentUser" @click="showUserMemo = true" fab fixed large color="cyan" class="fab-button">
+          <v-btn
+            v-if="currentUser"
+            @click="showUserMemo = true"
+            fab
+            fixed
+            large
+            color="cyan"
+            class="fab-button"
+          >
             <v-icon dark>
               mdi-book-edit
             </v-icon>
           </v-btn>
-          <v-overlay
-            :value="showUserMemo"
-            :z-index="zIndex"
-            opacity="0"
-          >
-            <v-dialog
-              v-model="showUserMemo"
-              hide-overlay
-              max-width="800px"
-              transition="dialog-bottom-transition"
-            >
-              <v-card
-              >
-                <v-card-title>
-                  ユーザーメモ
-                </v-card-title>
-                <v-card-text>
-                  気になったことや覚えておきたいことなどをメモして保存できます（最大１万文字）
-                  <v-textarea
-                    v-model="userMemo"
-                    auto-grow
-                    filled
-                    shaped
-                    rows="10"
-                    label="ユーザーメモ"
-                    counter
-                    ></v-textarea>
-                    <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
-                  <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
-                  <v-btn @click="showUserMemo = false">閉じる</v-btn>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-          </v-overlay>
+
+          <div class="text-center">
+            <v-bottom-sheet v-model="sheet">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                v-bind="attrs"
+                v-on="on"
+                fab
+                fixed
+                dark
+                large
+                color="teal"
+                style="position: fixed; right: 20px; bottom: 20px;"
+                >
+                <v-icon dark>
+                    mdi-format-list-bulleted-square
+                  </v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-subheader>Menu</v-subheader>
+                <v-list-item
+                  v-for="tile in tiles"
+                  :key="tile.title"
+                  :to="tile.to"
+                  router
+                  exact
+                  @click="sheet = false"
+                >
+                  <v-list-item-avatar>
+                    <v-icon>{{ tile.icon }}</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-title>{{ tile.title }}</v-list-item-title>
+                </v-list-item>
+                <v-row>
+                  <v-col class="d-flex justify-center">
+                    <v-btn
+                    @click="sheet = false"
+                    color="primary"
+                    width="80%"
+                    >
+                      閉じる
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-list>
+            </v-bottom-sheet>
+          </div>
+
+
           <br>
           <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
         </v-container>
       </v-main>
     </v-sheet>
 
+
+
+    <!-- ユーザーメモダイアログ -->
+    <v-overlay
+      :value="showUserMemo"
+      :z-index="zIndex"
+      opacity="0"
+    >
+      <v-dialog
+        v-model="showUserMemo"
+        hide-overlay
+        max-width="1000px"
+        transition="dialog-bottom-transition"
+      >
+        <v-card
+        >
+          <v-card-title>
+            ユーザーメモ
+          </v-card-title>
+          <v-card-text>
+            気になったことや覚えておきたいことなどをメモして保存できます（最大１万文字）
+            <v-textarea
+              v-model="userMemo"
+              filled
+              shaped
+              rows="10"
+              label="ユーザーメモ"
+              counter
+              ></v-textarea>
+              <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
+            <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
+            <v-btn @click="showUserMemo = false">閉じる</v-btn>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </v-overlay>
 
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -148,6 +206,7 @@ export default {
           title: 'トップページ',
           to: '/',
         },
+        // 未ログイン時のログインページへのリダイレクトはmypage.vueのmiddlewareで行われる
         {
           icon: 'mdi-account',
           title: 'マイページ',
@@ -187,6 +246,15 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       userMemo: "",
+      sheet: false,
+      tiles: [
+        { icon: "mdi-home", title: "トップページ", to: "/" },
+        { icon: "mdi-account", title: "マイページ", to: "/mypage" },
+        { icon: "mdi-bookshelf", title: "参考書一覧", to: "/books/allBooks" },
+        { icon: "mdi-comment-question", title: "質問一覧", to: "/questions/questions" },
+        { icon: "mdi-comment-question-outline", title: "科目別質問一覧", to: "/subjectQuestions/subjectQuestions" },
+        { icon: "mdi-account-search", title: "アンケート", to: "/surveys/allSurveys" },
+      ],
 
     }
   },
@@ -281,13 +349,19 @@ export default {
 .fab-button {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 100px;
 }
 
-.set-right-bottom {
+.fab-button2 {
   position: fixed;
-  right: 20;
-  bottom: 20;
+  right: 20px;
+  bottom: 40px;
+}
+
+.set-center-bottom {
+  position: fixed;
+  bottom: 20px;
+  z-index: 100;
 }
 
 body .v-toolbar--prominent .v-toolbar__content {
