@@ -162,6 +162,28 @@ module SharedActions::AttachImage
     subject_question_replies_with_images
   end
 
+  def attach_image_to_surveys(surveys)
+    surveys_with_images = surveys.map do |survey|
+      survey_data = survey.as_json
+
+      if survey.user.image.attached?
+        user_data = survey.user.as_json
+        user_data["image"] = rails_blob_url(survey.user.image)
+        survey_data["user"] = user_data
+      else
+        user_data = survey.user.as_json
+        survey_data["user"] = user_data
+      end
+
+      survey_data["created_at"] = format_japanese_time(survey.created_at)
+
+      survey_data
+    end
+
+    surveys_with_images
+  end
+
+
   # 個別の要素に対してimageをアタッチするアクション一覧
 
   def attach_image_to_book(book)
@@ -195,9 +217,18 @@ module SharedActions::AttachImage
     if reply.image.attached?
       image_url = rails_blob_url(reply.image)
     end
-    reply_json = reply.as_json(include: :user).merge(image: image_url)
+    reply_json = reply.as_json.merge(image: image_url)
 
     reply_json
+  end
+
+  def attach_image_to_survey(survey)
+    if survey.image.attached?
+      image_url = rails_blob_url(survey.image)
+    end
+    survey_json = survey.as_json.merge(image: image_url)
+
+    survey_json
   end
 
 

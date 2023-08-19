@@ -1,44 +1,86 @@
 <template>
   <div>
-    <h2>アンケート一覧</h2>
-
-    <br><br><br>
-    <v-card>
-      <v-card-title>
-        ソート機能
-      </v-card-title>
-      <v-row>
-        <v-col cols="6">
-          <v-select
-          v-model="selectedSortOption"
-          :items="sortsurveysOptions"
-          label="並び替え"
-          dense
-          outlined
-        ></v-select>
-        </v-col>
-        <v-col cols="6">
-          <v-select
-          v-model="selectedSurveyGenre"
-          :items="surveyGenreOptions"
-          label="ジャンルで絞り込み"
-          dense
-          outlined
-        ></v-select>
-        </v-col>
-      </v-row>
-    </v-card>
-
-
-    <br>
-    <v-btn @click="openDialog">新規アンケートを作成する</v-btn>
 
     <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card width="85%">
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-card-title>
+                ソート機能
+              </v-card-title>
+            </v-col>
+          </v-row>
+          <v-card-actions>
+            <v-row>
+              <v-col cols="6">
+                <v-select
+                v-model="selectedSortOption"
+                :items="sortsurveysOptions"
+                label="並び替え"
+                outlined
+                chips
+                clearable
+              ></v-select>
+              </v-col>
+              <v-col cols="6">
+                <v-select
+                v-model="selectedSurveyGenre"
+                :items="surveyGenreOptions"
+                label="ジャンルで絞り込み"
+                outlined
+                chips
+                clearable
+              ></v-select>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
+
+    <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card width="85%" height="120" class="d-flex align-center">
+          <v-card-text>
+            <v-btn
+              @click="openDialog"
+              color="primary"
+              rounded
+              x-large
+              block
+              >
+            新規アンケートを作成する
+          </v-btn>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+
+    <br><br>
+    <v-row>
+      <v-col cols="6" class="d-flex justify-center">
+        <v-card width="300" class="justify-center" elevation="5">
+
+          <v-switch
+            @click="page = 1"
+            v-model="hideClosedSurvey"
+            label="回答受付中のアンケートのみ表示"
+            color="indigo"
+          ></v-switch>
+        </v-card>
+      </v-col>
+    </v-row>
+
     <template v-if="!sortedSurveys.length == 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </template>
     <br>
-    <each-surveys :surveys="surveysChunk"></each-surveys>
+    <each-surveys :surveys="surveysChunk" :hideClosedSurvey="hideClosedSurvey"></each-surveys>
     <br>
     <template v-if="!sortedSurveys.length == 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
@@ -96,6 +138,7 @@ export default {
       selectedSurveyGenre: "",
       page: 1,
       perPage: 10,
+      hideClosedSurvey: false,
     }
   },
   computed: {
@@ -108,14 +151,21 @@ export default {
     sortedSurveys() {
       return this.sortSurveys(this.genreFilteredSurveys)
     },
+    activeSurveysBasedOnHideClosed() {
+      if(this.hideClosedSurvey === true) {
+        return this.sortedSurveys.filter(survey => survey.status === false)
+      } else {
+        return this.sortedSurveys
+      }
+    },
     surveysChunk() {
-      const sortedsurveys = this.sortedSurveys
+      const activeSurveysBasedOnHideClosed = this.activeSurveysBasedOnHideClosed
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
-      return sortedsurveys.slice(start, end)
+      return activeSurveysBasedOnHideClosed.slice(start, end)
     },
     totalPages() {
-      return Math.ceil(this.sortedSurveys.length / this.perPage);
+      return Math.ceil(this.activeSurveysBasedOnHideClosed.length / this.perPage);
     },
 
   },

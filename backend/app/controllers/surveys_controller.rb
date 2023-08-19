@@ -1,12 +1,18 @@
 class SurveysController < ApplicationController
 
+  include SharedActions::AttachImage
+  include SharedActions::DateTime
+
 
   def index
-    surveys = Survey.all.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
-    if surveys
-      render json: surveys, include: "user"
+    surveys = Survey.all
+                    .includes( user: { image_attachment: :blob })
+                    .select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    surveys_with_images = attach_image_to_surveys(surveys)
+    if surveys_with_images
+      render json: surveys_with_images
     else
-      render json: surveys.errors
+      render json: surveys_with_images.errors
     end
   end
 
