@@ -22,7 +22,8 @@ class BrowsingHistoriesController < ApplicationController
     subject_question_reply_browsing_histories = current_user.watched_subject_question_replies.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
     subject_question_reply_browsing_histories_with_images = attach_image_to_subject_question_replies(subject_question_reply_browsing_histories)
 
-    survey_browsing_histories = current_user.watched_surveys.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    survey_browsing_histories = current_user.watched_surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    survey_browsing_histories_with_images = attach_image_to_surveys(survey_browsing_histories)
 
     if current_user
       render json: {
@@ -32,7 +33,7 @@ class BrowsingHistoriesController < ApplicationController
         reply_browsing_histories: reply_browsing_hitories_with_images,
         subject_question_browsing_histories: subject_question_browsing_histories_with_images,
         subject_question_reply_browsing_histories: subject_question_reply_browsing_histories_with_images,
-        survey_browsing_histories: survey_browsing_histories.as_json(include: :user)
+        survey_browsing_histories: survey_browsing_histories_with_images
       }
     else
       render json: { error: "エラーが発生しました" }

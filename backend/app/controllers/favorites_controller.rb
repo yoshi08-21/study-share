@@ -23,7 +23,9 @@ class FavoritesController < ApplicationController
     favorite_subject_question_replies = current_user.fav_subject_question_replies.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
     favorite_subject_question_replies_with_images = attach_image_to_subject_question_replies(favorite_subject_question_replies)
 
-    favorite_surveys = current_user.fav_surveys.includes(:user).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    favorite_surveys = current_user.fav_surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    favorite_surveys_with_images = attach_image_to_surveys(favorite_surveys)
+
     if current_user
       render json: {
         favorite_books: favorite_books_with_images,
@@ -32,7 +34,7 @@ class FavoritesController < ApplicationController
         favorite_replies: favorite_replies_with_images,
         favorite_subject_questions: favorite_subject_questions_with_images,
         favorite_subject_question_replies: favorite_subject_question_replies_with_images,
-        favorite_surveys: favorite_surveys.as_json(include: :user)
+        favorite_surveys: favorite_surveys_with_images
       },
       status: 200
     else

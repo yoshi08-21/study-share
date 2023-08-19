@@ -1,159 +1,291 @@
 <template>
   <div>
-    <h2>アンケート詳細</h2>
+    <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
+      <h2>アンケート詳細</h2>
+      <nuxt-link :to="'/surveys/allSurveys'">アンケート一覧に戻る</nuxt-link>
+    </div>
+    <v-col cols="12">
+      <v-card
+        elevation="2"
+      >
+        <v-row>
+          <v-col cols="12" class="mt-n2">
+            <v-card-title>
+              <v-row>
+                <v-col cols="12">
+                  {{ survey.title }}
+                </v-col>
+              </v-row>
+            </v-card-title>
 
-    <h3>アンケートタイトル: {{ survey.title }}</h3>
-    <h4>アンケート本文: {{ survey.content }}</h4>
-    <h4>ジャンル: {{ survey.genre }}</h4>
+            <v-card-subtitle style="margin-top: 10px;">
+              <v-row class="d-flex justify-space-between align-center">
+                <v-col cols="4">
+                  <h3>ジャンル: {{ survey.genre }}</h3>
+                </v-col>
+                <v-col cols="4">
+                  <template v-if="survey.status === false">
+                    <v-alert type="success" text border="left">
+                      回答受付中
+                    </v-alert>
+                  </template>
+                  <template v-else>
+                    <v-alert type="error" dense text border="left">
+                      締め切り済み
+                    </v-alert>
+                  </template>
+                </v-col>
+              </v-row>
+            </v-card-subtitle>
 
-    <tepmplate v-if="survey.image">
-      <v-img
-        :src="survey.image"
-        @click="showFullImage = true"
-        max-height="200"
-        max-width="200"
-        contain
-      ></v-img>
-      *画像をクリックすると拡大して表示できます
-    </tepmplate>
+            <v-card-text>
+              <v-textarea
+              :value="survey.content"
+              readonly
+              outlined
+              rounded
+              dense
+              auto-grow
+            >
+            </v-textarea>
+            </v-card-text>
 
-    <h4>by {{ survey.user.name }}</h4>
+            <template v-if="survey.image">
+            <v-row>
+              <v-col class="d-flex justify-center">
+                <v-img
+                  @click="showFullImage = true"
+                  :src="survey.image"
+                  alt="画像"
+                  contain
+                  max-height="250"
+                  max-width="250"
+                  style="cursor: pointer;"
+                ></v-img>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="d-flex justify-center">
+                *画像をクリックすると拡大できます
+              </v-col>
+            </v-row>
+          </template>
 
-    <template v-if="survey.status === false">
-      <h4>ステータス: 回答受付中</h4>
-    </template>
-    <template v-else>
-      <h4>ステータス: 締切済み</h4>
-    </template>
+            <v-card-actions>
+              <v-row class="d-flex align-center justify-center">
+                <v-col cols="3">
+                  <div @click="goToUser(surveyUser)" style="padding: 10px; cursor: pointer;">
+                  <v-avatar>
+                    <v-img :src="surveyUser.image"></v-img>
+                  </v-avatar>
+                  <span style="text-decoration: underline;">{{ $truncate(surveyUser.name, 9) }}</span>
+                </div>
+                </v-col>
+                <v-col cols="3">
+                  <v-icon>mdi-comment-text-multiple</v-icon>
+                  回答数:  {{ survey.survey_answers_count }}件
+                </v-col>
+                <v-col cols="3">
+                  <favorite-button
+                    :currentUser="currentUser"
+                    :user="surveyUser"
+                    :isFavorite="isFavorite"
+                    :favoriteCount="survey.favorite_surveys_count"
+                    @addToFavorite="addToFavorite"
+                    @removeFromFavorite="removeFromFavorite"
+                  ></favorite-button>
+                </v-col>
+                <v-col cols="3">
+                  <v-icon>mdi-calendar-clock</v-icon>
+                  {{ survey.created_at }}
+                </v-col>
+              </v-row>
+            </v-card-actions>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-col>
 
+    <!-- アンケート締め切り・削除ボタン -->
     <br><br>
-    <template v-if="currentUser && survey.status === true">
-      <!-- current_userがいる ＆ アンケートが締め切られている -->
-      <v-alert type="error" dense text prominent border="left">
-        アンケートは締め切られています。
-      </v-alert>
-      <v-btn-toggle style="flex-direction: column;">
-        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
-      <br>
-      <h3>アンケート回答結果</h3>
-      <survey-result-linears
-        :survey="survey"
-        :selectedOption1Count="selectedOption1Count"
-        :selectedOption2Count="selectedOption2Count"
-        :selectedOption3Count="selectedOption3Count"
-        :selectedOption4Count="selectedOption4Count"
-        :option1Percentage="option1Percentage"
-        :option2Percentage="option2Percentage"
-        :option3Percentage="option3Percentage"
-        :option4Percentage="option4Percentage"
-      ></survey-result-linears>
-
-    </template>
-
-    <template v-else-if="currentUser && currentUser.id !== survey.user_id">
-      <!-- current_userがいる ＆ current_userがアンケートの作成者ではない -->
-      <template v-if="existAnswer === false">
-        <p>アンケート回答前ボタン</p>
-        <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-          <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-          <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-          <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-          <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-        </v-btn-toggle>
-      </template>
-
-      <template v-else>
-        <p>アンケート回答後ボタン</p>
-        <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-          <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-          <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-          <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-          <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-        </v-btn-toggle>
-        <h3>アンケート回答結果</h3>
-        <survey-result-linears
-          :survey="survey"
-          :selectedOption1Count="selectedOption1Count"
-          :selectedOption2Count="selectedOption2Count"
-          :selectedOption3Count="selectedOption3Count"
-          :selectedOption4Count="selectedOption4Count"
-          :option1Percentage="option1Percentage"
-          :option2Percentage="option2Percentage"
-          :option3Percentage="option3Percentage"
-          :option4Percentage="option4Percentage"
-        ></survey-result-linears>
-      </template>
-    </template>
-
-
-
-
-    <template v-else-if="currentUser && currentUser.id === survey.user_id">
-      <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
-      <p>*自分のアンケートには回答ができません</p>
-      <v-btn-toggle style="flex-direction: column;">
-        <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
-      <br>
-      <h3>アンケート回答結果</h3>
-      <survey-result-linears
-        :survey="survey"
-        :selectedOption1Count="selectedOption1Count"
-        :selectedOption2Count="selectedOption2Count"
-        :selectedOption3Count="selectedOption3Count"
-        :selectedOption4Count="selectedOption4Count"
-        :option1Percentage="option1Percentage"
-        :option2Percentage="option2Percentage"
-        :option3Percentage="option3Percentage"
-        :option4Percentage="option4Percentage"
-      ></survey-result-linears>
-      <template v-if="survey.status == 0">
-        <v-btn @click="closeSurveyConfimation = true">アンケートを締め切る</v-btn>
-      </template>
-    </template>
-
-    <template v-else-if="!currentUser">
-      <!-- current_userがいない(未ログイン状態) -->
-      <v-btn-toggle style="flex-direction: column;">
-        <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-        <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-        <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-        <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-      </v-btn-toggle>
-    </template>
-
-
-    <!-- 自分のレビューもしくは未ログイン時はいいねの件数だけ表示 -->
-    <template v-if="currentUser && survey.user_id !== this.currentUser.id">
-      <template v-if="!isFavorite">
-        <v-btn @click="addToFavorite">いいね！する</v-btn>
-        <P>いいね！（{{ favoriteSurveysCount }}件）</P>
-      </template>
-      <template v-else>
-        <v-btn @click="removeFromFavorite">いいね！を削除する</v-btn>
-        <P>いいね！（{{ favoriteSurveysCount }}件）</P>
-      </template>
-    </template>
-    <template v-else>
-      <P>いいね！（{{ favoriteSurveysCount }}件）</P>
-    </template>
-
     <template v-if="currentUser && currentUser.id === survey.user_id">
-      <v-btn @click="showDeleteConfirmation = true">削除する</v-btn>
+      <v-row class="d-flex justify-center">
+        <v-col cols="10">
+          <v-card height="150px">
+            <v-row style="height: 100%;">
+              <v-col cols="6" class="d-flex justify-center align-center">
+                <v-btn
+                @click="closeSurveyConfimation = true"
+                  x-large
+                  color="info"
+                  width="300"
+                >
+                  アンケートを締め切る
+                </v-btn>
+              </v-col>
+              <v-col cols="6" class="d-flex justify-center align-center">
+                <v-btn
+                  @click="showDeleteConfirmation = true"
+                  x-large
+                  color="blue-grey"
+                  width="300"
+                >
+                  削除する
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card>
+
+        </v-col>
+      </v-row>
     </template>
 
+
+
+    <!-- アンケートの回答ボタン -->
     <br><br>
-    <p>
-      <v-btn @click="previousSurvey">前のアンケート</v-btn>
-      <v-btn @click="nextSurvey">次のアンケート</v-btn>
-    </p>
+    <v-card>
+
+      <v-card-title class="d-flex justify-center">
+        <h3>回答</h3>
+      </v-card-title>
+
+        <template v-if="currentUser && survey.status === true">
+          <!-- current_userがいる ＆ アンケートが締め切られている -->
+          <v-alert type="error" dense text prominent border="left">
+            アンケートは締め切られています。
+          </v-alert>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-btn-toggle style="flex-direction: column;">
+                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+              </v-btn-toggle>
+            </v-col>
+          </v-row>
+          <br><br>
+          <v-row>
+            <v-col class="text-center">
+              <h3>アンケート回答結果</h3>
+              <survey-result-linears
+                :survey="survey"
+                :selectedOption1Count="selectedOption1Count"
+                :selectedOption2Count="selectedOption2Count"
+                :selectedOption3Count="selectedOption3Count"
+                :selectedOption4Count="selectedOption4Count"
+                :option1Percentage="option1Percentage"
+                :option2Percentage="option2Percentage"
+                :option3Percentage="option3Percentage"
+                :option4Percentage="option4Percentage"
+              ></survey-result-linears>
+            </v-col>
+          </v-row>
+        </template>
+
+
+        <template v-else-if="currentUser && currentUser.id !== survey.user_id">
+          <!-- current_userがいる ＆ current_userがアンケートの作成者ではない -->
+          <template v-if="existAnswer === false">
+            <v-row>
+              <v-col class="d-flex justify-center">
+                <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+                  <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                </v-btn-toggle>
+              </v-col>
+            </v-row>
+          </template>
+          <template v-else>
+            <v-row>
+              <v-col class="d-flex justify-center">
+                <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
+                  <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                </v-btn-toggle>
+              </v-col>
+            </v-row>
+            <br><br>
+            <v-row>
+              <v-col class="text-center">
+                <h3>アンケート回答結果</h3>
+                <survey-result-linears
+                  :survey="survey"
+                  :selectedOption1Count="selectedOption1Count"
+                  :selectedOption2Count="selectedOption2Count"
+                  :selectedOption3Count="selectedOption3Count"
+                  :selectedOption4Count="selectedOption4Count"
+                  :option1Percentage="option1Percentage"
+                  :option2Percentage="option2Percentage"
+                  :option3Percentage="option3Percentage"
+                  :option4Percentage="option4Percentage"
+                ></survey-result-linears>
+              </v-col>
+            </v-row>
+          </template>
+        </template>
+
+
+        <template v-else-if="currentUser && currentUser.id === survey.user_id">
+          <!-- current_userがいる ＆ current_userがアンケートの作成者である -->
+          <v-alert type="info" dense text prominent border="left">
+            自分のアンケートには回答ができません
+          </v-alert>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-btn-toggle style="flex-direction: column;">
+                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+              </v-btn-toggle>
+            </v-col>
+          </v-row>
+          <br><br>
+          <v-row>
+            <v-col class="text-center">
+              <h3>アンケート回答結果</h3>
+              <survey-result-linears
+                :survey="survey"
+                :selectedOption1Count="selectedOption1Count"
+                :selectedOption2Count="selectedOption2Count"
+                :selectedOption3Count="selectedOption3Count"
+                :selectedOption4Count="selectedOption4Count"
+                :option1Percentage="option1Percentage"
+                :option2Percentage="option2Percentage"
+                :option3Percentage="option3Percentage"
+                :option4Percentage="option4Percentage"
+              ></survey-result-linears>
+            </v-col>
+          </v-row>
+        </template>
+
+
+        <template v-else-if="!currentUser">
+          <!-- current_userがいない(未ログイン状態) -->
+          <v-btn-toggle style="flex-direction: column;">
+            <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+            <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+            <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+            <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+          </v-btn-toggle>
+        </template>
+    </v-card>
+
+
+    <br><br>
+    <content-navigator
+      :content="'アンケート'"
+      @previousContent="previousSurvey"
+      @nextContent="nextSurvey"
+    >
+    </content-navigator>
+
 
     <!-- アンケート締め切りの確認ダイアログ -->
     <v-dialog v-model="closeSurveyConfimation">
@@ -193,14 +325,34 @@
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
-      <v-card>
-        <h3>画像を表示する</h3>
-        <v-img
-          :src="survey.image"
-          max-height="400"
-          max-width="400"
-          contain
-        ></v-img>
+      <v-card
+        max-height="800px"
+        style="padding: 10px;"
+      >
+        <v-row>
+          <v-col cols="6" class="d-flex justify-start">
+            <v-card-title>拡大画像</v-card-title>
+          </v-col>
+          <v-col cols="6" class="d-flex justify-end align-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
+        <hr>
+        <v-row style="margin-top: 10px; margin-bottom: 5px;">
+          <v-col class="d-flex justify-center">
+            <v-img
+              :src="survey.image"
+              max-height="500"
+              max-width="500"
+              contain
+            ></v-img>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-btn @click="showFullImage = false">閉じる</v-btn>
+          </v-col>
+        </v-row>
       </v-card>
     </v-dialog>
 
@@ -213,10 +365,12 @@
 <script>
 
 import SurveyResultLinears from '../../components/surveys/SurveyResultLinears.vue'
+import FavoriteButton from '../../components/global/FavoriteButton.vue'
+import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { SurveyResultLinears },
+  components: { SurveyResultLinears, FavoriteButton, ContentNavigator },
   async asyncData({ params, store }) {
     try {
 
@@ -243,7 +397,7 @@ export default {
       console.log(surveys)
       return {
         survey: survey.survey,
-        favoriteSurveysCount: survey.favorite_surveys_count,
+        surveyUser: survey.survey_user,
         surveyAnswers,
         surveys
       }
@@ -475,7 +629,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteSurveyId = response.data.id
-        this.favoriteSurveysCount += 1
+        this.survey.favorite_surveys_count += 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -496,7 +650,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteQuestionId = null
-        this.favoriteSurveysCount -= 1
+        this.survey.favorite_surveys_count -= 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -529,8 +683,14 @@ export default {
         this.snackbarColor = "blue-grey"
         this.flashMessage = "最初のアンケートです"
       }
-    }
-
+    },
+    goToUser(user) {
+      if( !this.currentUser || this.currentUser.id !== user.id ) {
+        this.$router.push({ path: `/users/${user.id}` })
+      } else {
+        this.$router.push({ path: "/mypage" })
+      }
+    },
 
   }
 
