@@ -105,8 +105,8 @@
           <v-btn
             @click="openDialog"
             x-large
-            rounded
             color="success"
+            width="400"
           >
           新規レビューを投稿する
         </v-btn>
@@ -115,8 +115,8 @@
           <v-btn
             @click="openQuestionDialog"
             x-large
-            rounded
             color="success"
+            width="400"
           >
             新規質問を投稿する
           </v-btn>

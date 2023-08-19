@@ -64,8 +64,7 @@
     <br><br>
     <v-row>
       <v-col cols="6" class="d-flex justify-center">
-        <v-card width="300" class="justify-center" elevation="5">
-
+        <v-card width="350" elevation="5" style="padding: 0 30px;">
           <v-switch
             @click="page = 1"
             v-model="hideClosedSurvey"

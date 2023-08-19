@@ -70,8 +70,6 @@
       </template>
     </v-row>
 
-
-
   </div>
 </template>
 
