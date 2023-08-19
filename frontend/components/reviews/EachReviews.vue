@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row mb-5 v-for="(review, index) in reviews" :key="'review_' + index" class="justify-center">
+    <v-row v-for="(review, index) in reviews" :key="'review_' + index" class="justify-center">
       <v-col cols="10">
         <v-card
           elevation="8"
@@ -25,7 +25,7 @@
             </v-col>
             <v-col cols="7" class="mt-n2">
               <v-card-title>
-                <nuxt-link :to="`/books/${review.book_id}/reviews/${review.id}`">{{ $truncate(review.title, 30) }}</nuxt-link>
+                <nuxt-link :to="`/books/${review.book_id}/reviews/${review.id}`">{{ $truncate(review.title, 20) }}</nuxt-link>
               </v-card-title>
               <v-card-subtitle style="margin-top: -20px;">
                   <v-row class="d-flex align-center">

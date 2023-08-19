@@ -88,7 +88,7 @@ export default {
     return {
       tab: 0,
       tabs: [
-        { label: "お気に入りに追加した参考書" },
+        { label: "お気に入りの参考書" },
         { label: "いいね！したレビュー" },
         { label: "いいね！した質問" },
         { label: "いいね！した科目別質問" },
