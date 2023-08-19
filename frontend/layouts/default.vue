@@ -126,7 +126,6 @@
     </v-sheet>
 
 
-
     <!-- ユーザーメモダイアログ -->
     <v-overlay
       :value="showUserMemo"
@@ -161,6 +160,7 @@
         </v-card>
       </v-dialog>
     </v-overlay>
+
 
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>

@@ -31835,3 +31835,380 @@ Call stack
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `map'
   /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `index'
 
+2023-08-19 03:21:37[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-08-19 03:21:37[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-08-19 03:21:37[WARN] user: yoshito-t
+GET /pages/get_same_university_books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:66:in `block in get_same_university_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `get_same_university_books'
+
+2023-08-19 03:21:42[WARN] user: yoshito-t
+GET /books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:14:in `block in index'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `index'
+
+2023-08-19 03:22:00[WARN] user: yoshito-t
+GET /browsing_histories?current_user_id=1
+USE eager loading detected
+  Reply => [:question]
+  Add to your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:119:in `block in attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/browsing_histories_controller.rb:17:in `index'
+
+2023-08-19 03:22:00[WARN] user: yoshito-t
+GET /browsing_histories?current_user_id=1
+USE eager loading detected
+  SubjectQuestionReply => [:subject_question]
+  Add to your query: .includes([:subject_question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:148:in `block in attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/browsing_histories_controller.rb:23:in `index'
+
+2023-08-19 03:22:00[WARN] user: yoshito-t
+GET /browsing_histories?current_user_id=1
+AVOID eager loading detected
+  Question => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:65:in `block in attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/browsing_histories_controller.rb:14:in `index'
+
+2023-08-19 03:22:00[WARN] user: yoshito-t
+GET /browsing_histories?current_user_id=1
+AVOID eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Remove from your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/browsing_histories_controller.rb:14:in `index'
+
+2023-08-19 03:22:06[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  Reply => [:question]
+  Add to your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:119:in `block in attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:17:in `index'
+
+2023-08-19 03:22:06[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  SubjectQuestionReply => [:subject_question]
+  Add to your query: .includes([:subject_question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:148:in `block in attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:24:in `index'
+
+2023-08-19 03:22:06[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  Question => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:65:in `block in attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:14:in `index'
+
+2023-08-19 03:22:06[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  SubjectQuestion => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:90:in `block in attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 03:22:06[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Remove from your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 05:40:40[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-08-19 05:40:40[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-08-19 05:40:40[WARN] user: yoshito-t
+GET /pages/get_same_university_books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:66:in `block in get_same_university_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `get_same_university_books'
+
+2023-08-19 07:00:39[WARN] user: yoshito-t
+GET /books/1/questions/2?current_user_id=1
+AVOID eager loading detected
+  Question => [:book]
+  Remove from your query: .includes([:book])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/questions_controller.rb:36:in `show'
+
+2023-08-19 07:00:57[WARN] user: yoshito-t
+GET /subject_questions/1?current_user_id=1
+AVOID eager loading detected
+  SubjectQuestion => [:user]
+  Remove from your query: .includes([:user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:186:in `attach_image_to_question'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_questions_controller.rb:25:in `show'
+
+2023-08-19 07:01:03[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  Reply => [:question]
+  Add to your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:119:in `block in attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:17:in `index'
+
+2023-08-19 07:01:03[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  SubjectQuestionReply => [:subject_question]
+  Add to your query: .includes([:subject_question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:148:in `block in attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:24:in `index'
+
+2023-08-19 07:01:03[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  Question => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:65:in `block in attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:14:in `index'
+
+2023-08-19 07:01:03[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  SubjectQuestion => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:90:in `block in attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 07:01:03[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Remove from your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 07:01:09[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  Reply => [:question]
+  Add to your query: .includes([:question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:119:in `block in attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:103:in `attach_image_to_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:17:in `index'
+
+2023-08-19 07:01:09[WARN] user: yoshito-t
+GET /favorites?user_id=1
+USE eager loading detected
+  SubjectQuestionReply => [:subject_question]
+  Add to your query: .includes([:subject_question])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:148:in `block in attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:132:in `attach_image_to_subject_question_replies'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:24:in `index'
+
+2023-08-19 07:01:09[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  Question => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:65:in `block in attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:51:in `attach_image_to_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:14:in `index'
+
+2023-08-19 07:01:09[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  SubjectQuestion => [:image_attachment]
+  Remove from your query: .includes([:image_attachment])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:90:in `block in attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 07:01:09[WARN] user: yoshito-t
+GET /favorites?user_id=1
+AVOID eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Remove from your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:82:in `attach_image_to_subject_questions'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/favorites_controller.rb:21:in `index'
+
+2023-08-19 07:03:10[WARN] user: yoshito-t
+GET /books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:14:in `block in index'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `index'
+
+2023-08-19 07:07:20[WARN] user: yoshito-t
+GET /books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:14:in `block in index'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `index'
+
+2023-08-19 15:57:06[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-08-19 15:57:06[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-08-19 15:57:06[WARN] user: yoshito-t
+GET /pages/get_same_university_books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:66:in `block in get_same_university_books'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/pages_controller.rb:64:in `get_same_university_books'
+
+2023-08-19 15:58:18[WARN] user: yoshito-t
+GET /books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:14:in `block in index'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `map'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:12:in `index'
+
+2023-08-19 15:58:19[WARN] user: yoshito-t
+GET /books/1?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/books_controller.rb:33:in `show'
+
+2023-08-19 17:48:07[WARN] user: yoshito-t
+GET /books/1/questions/2?current_user_id=1
+AVOID eager loading detected
+  Question => [:book]
+  Remove from your query: .includes([:book])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/questions_controller.rb:36:in `show'
+
+2023-08-19 17:53:50[WARN] user: yoshito-t
+GET /subject_questions/12?current_user_id=1
+AVOID eager loading detected
+  SubjectQuestion => [:user]
+  Remove from your query: .includes([:user])
+Call stack
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/concerns/shared_actions/attach_image.rb:186:in `attach_image_to_question'
+  /Users/yoshito-t/Desktop/spa-portfolio-app/backend/app/controllers/subject_questions_controller.rb:25:in `show'
+
