@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@nuxtjs/proxy": "^2.1.0"
+    "@nuxtjs/proxy": "^2.1.0",
+    "moment": "^2.29.4"
   }
 }

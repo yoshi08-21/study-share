@@ -48,22 +48,13 @@
       </v-row>
 
       <!-- ユーザー削除確認ダイアログ -->
-      <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除されたユーザーは復元することができません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            ユーザーを削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteLocalUser">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+      <delete-confirmation-dialog
+        :showDeleteConfirmation="showDeleteConfirmation"
+        :contentTitle="'ユーザー'"
+        @deleteContent="deleteLocalUser"
+        @closeDeleteConfirmation="showDeleteConfirmation = false"
+      >
+      </delete-confirmation-dialog>
 
 
     </v-form>
@@ -72,6 +63,7 @@
 
 <script>
 import { VTextField, VTextarea} from 'vuetify/lib'
+import DeleteConfirmationDialog from '../global/DeleteConfirmationDialog.vue'
 
 export default {
   props: {
@@ -84,6 +76,7 @@ export default {
   components: {
     VTextField,
     VTextarea,
+    DeleteConfirmationDialog,
   },
   data() {
     return {
