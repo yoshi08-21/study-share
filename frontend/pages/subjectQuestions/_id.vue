@@ -165,8 +165,8 @@
     <!-- 新規返信投稿ダイアログ -->
     <v-dialog v-model="subjectQuestionReplyDialog">
       <v-card>
-        <v-card-title>
-          Dialog Title
+        <v-card-title style="justify-content: center;">
+          <h2>返信を投稿する</h2>
         </v-card-title>
         <v-card-text>
           <reply-form @submitReply="submitSubjectQuestionReply" @closeDialog="subjectQuestionReplyDialog = false"></reply-form>
@@ -177,8 +177,8 @@
     <!-- 質問編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          質問を編集する
+        <v-card-title style="justify-content: center;">
+          <h2>質問を編集する</h2>
         </v-card-title>
         <v-card-text>
           <edit-subject-question
@@ -193,22 +193,15 @@
     </v-dialog>
 
     <!-- 質問削除の確認ダイアログ -->
-    <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除した質問は復元できません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            質問を削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteSubjectQuestion">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <delete-confirmation-dialog
+      :showDeleteConfirmation="showDeleteConfirmation"
+      :contentTitle="'質問'"
+      @deleteContent="deleteSubjectQuestion"
+      @closeDeleteConfirmation="showDeleteConfirmation = false"
+    >
+    </delete-confirmation-dialog>
+
+
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
@@ -256,10 +249,11 @@ import ReplyForm from '../../components/replies/ReplyForm.vue'
 import FavoriteButton from '../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import SubjectQuestionSubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionSubjectQuestionReplies.vue'
+import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies },
+  components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null

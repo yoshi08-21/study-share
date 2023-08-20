@@ -30,8 +30,8 @@
     <!-- ユーザー情報の編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          ユーザー情報を編集する
+        <v-card-title style="justify-content: center;">
+          <h2>ユーザー情報を編集する</h2>
         </v-card-title>
         <v-card-text>
           <edit-user

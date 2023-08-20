@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>返信を編集する</h1>
-    <br>
+    <br><br>
     <v-form>
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent"></v-textarea>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
@@ -24,25 +23,20 @@
           {{ errorMessage }}
         </v-alert>
       </template>
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <template v-if="error === true">
-            <v-btn color="primary" disabled @click="submitForm">投稿する</v-btn>
-          </template>
-          <template v-else>
-            <v-btn color="primary" @click="submitForm">投稿する</v-btn>
-          </template>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
+      <submit-button
+        :error="error"
+        :buttonTitle="'編集する'"
+        @submitForm="submitForm"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
     </v-form>
   </div>
 </template>
 
 <script>
 import { VTextarea } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   props: {
@@ -50,6 +44,7 @@ export default {
   },
   components: {
     VTextarea,
+    SubmitButton,
   },
   data() {
     return {

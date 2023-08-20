@@ -99,12 +99,12 @@
     <!-- 参考書新規登録ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
+        <v-card-title style="justify-content: center;">
           <h2>参考書を登録する</h2>
         </v-card-title>
-        <v-card-title>
-          <v-btn @click="redirectToSearchBooks" color="primary" block>登録する参考書を検索する</v-btn>
-        </v-card-title>
+        <div style="padding: 30px;">
+          <v-btn @click="redirectToSearchBooks" color="primary" block style="height: 50px;">登録する参考書を検索する</v-btn>
+        </div>
         <v-card-text>
           <book-form
             @submitBook="submitBook"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>質問を投稿する</h1>
+    <br>
     <v-form>
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="title"></v-text-field>
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
@@ -24,30 +24,26 @@
           {{ errorMessage }}
         </v-alert>
       </template>
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <template v-if="error === true">
-            <v-btn color="primary" disabled @click="submitForm">投稿する</v-btn>
-          </template>
-          <template v-else>
-            <v-btn color="primary" @click="submitForm">投稿する</v-btn>
-          </template>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
+      <submit-button
+        :error="error"
+        :buttonTitle="'投稿する'"
+        @submitForm="submitForm"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
     </v-form>
   </div>
 </template>
 
 <script>
 import { VTextField, VTextarea } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   components: {
     VTextField,
     VTextarea,
+    SubmitButton,
   },
   data() {
     return {
@@ -81,20 +77,6 @@ export default {
         this.error = false
       }
     }
-    // onFileSelected(files) { // 引数をfilesに変更
-    //   console.log("onFileSelected")
-    //   const file = files[0];
-    //   if (file) {
-    //     const reader = new FileReader();
-
-    //     reader.onload = (e) => {
-    //       this.selectdImageData = e.target.result;
-    //       console.log(e.target.result)
-    //     };
-    //     console.log(this.selectdImageData)
-    //     reader.readAsDataURL(file);
-    //     }
-    //   }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>レビューを編集する</h1>
+    <br>
     <v-form>
       <v-rating
         v-model="editedRating"
@@ -14,16 +14,13 @@
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent"></v-textarea>
 
 
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="submitForm">編集する</v-btn>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
-
-
+      <submit-button
+        :error="error"
+        :buttonTitle="'編集する'"
+        @submitForm="submitForm"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
 
 
     </v-form>
@@ -32,6 +29,7 @@
 
 <script>
 import { VTextField, VTextarea, VRating } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   props: {
@@ -42,7 +40,8 @@ export default {
   components: {
     VTextField,
     VTextarea,
-    VRating
+    VRating,
+    SubmitButton,
   },
   data() {
     return {

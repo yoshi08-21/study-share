@@ -187,8 +187,8 @@
     <!-- 返信編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          返信を編集する
+        <v-card-title style="justify-content: center;">
+          <h2>返信を編集する</h2>
         </v-card-title>
         <v-card-text>
           <edit-reply
@@ -376,7 +376,7 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の編集が完了しました"
-        this.reply.content = response.data.content
+        this.reply.content = response.data.reply.content
         if (response.data.image_url) {
           this.reply.image = response.data.image_url
         }

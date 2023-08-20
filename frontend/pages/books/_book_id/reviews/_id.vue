@@ -116,8 +116,8 @@
     <!-- レビュー編集ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          レビューを編集する
+        <v-card-title style="justify-content: center;">
+          <h2>レビューを編集する</h2>
         </v-card-title>
         <v-card-text>
           <edit-review
@@ -132,22 +132,14 @@
     </v-dialog>
 
     <!-- レビュー削除の確認ダイアログ -->
-    <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除したレビューは復元できません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            レビューを削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteReview">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <delete-confirmation-dialog
+      :showDeleteConfirmation="showDeleteConfirmation"
+      :contentTitle="'レビュー'"
+      @deleteContent="deleteReview"
+      @closeDeleteConfirmation="showDeleteConfirmation = false"
+    >
+    </delete-confirmation-dialog>
+
 
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
   </div>
@@ -159,6 +151,7 @@ import EditReview from '../../../../components/reviews/EditReview.vue'
 import BookInformation from '../../../../components/books/BookInformation.vue'
 import FavoriteButton from '../../../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
+import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
 import axios from "@/plugins/axios"
 
 export default {
@@ -167,6 +160,7 @@ export default {
     BookInformation,
     FavoriteButton,
     ContentNavigator,
+    DeleteConfirmationDialog,
   },
   async asyncData({ params, store }) {
     try {

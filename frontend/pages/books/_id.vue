@@ -46,7 +46,8 @@
           </v-card-subtitle>
 
           <v-card-text>
-            <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
+            <h2 style="margin-bottom: 5px;">科目: {{ book.subject }}</h2>
+            <br>
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
             <br>
@@ -128,8 +129,9 @@
     <!-- 参考書編集ダイアログ -->
     <v-dialog v-model="editBookDialog">
       <v-card>
-        <v-card-title>
-          参考書を編集する
+        <v-card-title style="justify-content: center;">
+          <h2>参考書を編集する</h2>
+        </v-card-title>
         </v-card-title>
         <v-card-text>
           <edit-book
@@ -145,29 +147,20 @@
       </v-card>
     </v-dialog>
 
-        <!-- 参考書削除の確認ダイアログ -->
-        <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除した参考書は復元できません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            参考書を削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteBook">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <!-- 参考書削除の確認ダイアログ -->
+    <delete-confirmation-dialog
+      :showDeleteConfirmation="showDeleteConfirmation"
+      :contentTitle="'参考書'"
+      @deleteContent="deleteBook"
+      @closeDeleteConfirmation="showDeleteConfirmation = false"
+    >
+    </delete-confirmation-dialog>
 
     <!-- 新規レビュー投稿ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          Dialog Title
+        <v-card-title style="justify-content: center;">
+          <h2>レビューを投稿する</h2>
         </v-card-title>
         <v-card-text>
           <review-form @submitReview="submitReview" @closeDialog="dialog = false"></review-form>
@@ -178,8 +171,8 @@
         <!-- 新規質問投稿ダイアログ -->
         <v-dialog v-model="questionDialog">
       <v-card>
-        <v-card-title>
-          Dialog Title（質問）
+        <v-card-title style="justify-content: center;">
+          <h2>質問を投稿する</h2>
         </v-card-title>
         <v-card-text>
           <question-form @submitQuestion="submitQuestion" @closeDialog="questionDialog = false"></question-form>
@@ -235,6 +228,7 @@ import QuestionForm from '../../components/questions/QuestionForm.vue'
 import BookReviews from '../../components/reviews/BookReviews.vue'
 import BookQuestions from '../../components/questions/BookQuestions.vue'
 import EditBook from '../../components/books/EditBook.vue'
+import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 
 import axios from "@/plugins/axios"
 
@@ -248,7 +242,8 @@ export default {
     VDivider,
     BookReviews,
     BookQuestions,
-    EditBook
+    EditBook,
+    DeleteConfirmationDialog
   },
   // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params, store }) {
@@ -414,9 +409,6 @@ export default {
           }
         )
         console.log(response)
-        this.snackbarColor = "primary"
-        this.snackbar = true
-        this.flashMessage = "レビューの投稿が完了しました"
         this.$router.push({ path: `/books/${this.book.id}/reviews/${response.data.id}`, query: { message: 'レビューの投稿が完了しました' } })
       } catch(error) {
         console.log(error)

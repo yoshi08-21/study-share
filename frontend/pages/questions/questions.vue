@@ -1,10 +1,11 @@
 <template>
   <div>
-
+    <br><br>
     <v-tabs
-      fixed-tabs
+      grow
+      elevation="6"
     >
-      <v-tab to="/questions/questions">
+      <v-tab to="/questions/questions" >
         参考書別質問
       </v-tab>
       <v-tab to="/subjectQuestions/subjectQuestions">
