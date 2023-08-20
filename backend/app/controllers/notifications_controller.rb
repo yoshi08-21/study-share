@@ -1,4 +1,8 @@
 class NotificationsController < ApplicationController
+
+  include SharedActions::DateTime
+
+
   def index
     current_user = User.find_by(id: params[:current_user_id])
     notifications = Notification.includes(
@@ -10,6 +14,7 @@ class NotificationsController < ApplicationController
       subject_question_reply: [:user, :subject_question],
       survey: :user
     ).where(target_user_id: current_user.id).order(created_at: :desc)
+
     if notifications
       render json: notifications, include: [
         :action_user,

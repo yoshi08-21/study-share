@@ -1,20 +1,18 @@
 <template>
   <div>
-    <v-row>
+    <v-row class="justify-center">
       <v-col cols="10">
-        <v-card>
+        <v-card min-height="100px">
           <v-row>
             <v-col cols="12">
-              <p>
+              <v-card-subtitle style="font-size: 17px;">
+                <v-icon>mdi-account-heart</v-icon>
                 <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
                 <nuxt-link :to="`/books/${notification.review.book_id}/reviews/${notification.review.id}`">あなたのレビュー</nuxt-link>にいいね!しました
-              </p>
-              <v-card-title>通知の種類: {{ notification.action_type }}</v-card-title>
-              <v-card-text>
-                <p>to: {{ notification.action_to }}</p>
-                <p>これはFavoriteに対する通知</p>
-                <p>これはReviewに対するFavorite</p>
-              </v-card-text>
+              </v-card-subtitle>
+              <v-card-actions style="justify-content: end;">
+                {{ notification.created_at }}
+              </v-card-actions>
             </v-col>
           </v-row>
         </v-card>

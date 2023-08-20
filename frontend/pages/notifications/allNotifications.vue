@@ -1,56 +1,124 @@
 <template>
   <div>
-    <h2>通知一覧</h2>
+    <h2 style="text-align: center;">通知一覧</h2>
 
-    <p>
-      <!-- 本番環境では、通知送信専用のユーザーを作成する（ポートフォリオログインのユーザーとは一緒にしないように注意） -->
-      <v-btn @click="createSampleNotification">通知サンプル作成</v-btn>
-    </p>
+    <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card width="70%">
+          <v-card-title>
+            <v-row class="d-flex justify-center">
+              <v-col cols="9">
+                <!-- 本番環境では、通知送信専用のユーザーを作成する（ポートフォリオログインのユーザーとは一緒にしないように注意） -->
+                <v-btn @click="createSampleNotification" block>通知サンプル作成</v-btn>
+              </v-col>
+            </v-row>
+          </v-card-title>
+          <v-card-text style="text-align: center;">
+            <h4>
+              ボタンを押すと通知が作成されます。通知機能の確認にお使いください。
+            </h4>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <br><br>
+
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
 
     <br>
+    <p style="text-align: center;">
+      *通知が100件を超えると古い通知から削除されます
+    </p>
     <v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index">
 
+      <!-- 「お気に入り」・「いいね」がされたときの通知 -->
       <div v-if="notification.action_type == 'Favorite'">
 
         <div v-if="notification.action_to == 'Review'">
-          <favorite-review-notification :notification="notification"></favorite-review-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/books/${notification.review.book_id}/reviews/${notification.review.id}`"
+            :contentTitle="'レビュー'"
+          >
+          </favorite-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'Question'">
-          <favorite-question-notification :notification="notification"></favorite-question-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/books/${notification.question.book_id}/questions/${notification.question.id}`"
+            :contentTitle="'質問'"
+          >
+          </favorite-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'Reply'">
-          <favorite-reply-notification :notification="notification"></favorite-reply-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}/replies/${notification.reply.id}`"
+            :contentTitle="'返信'"
+          >
+          </favorite-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestion'">
-          <favorite-subject-question-notification :notification="notification"></favorite-subject-question-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/subjectQuestions/${notification.subject_question.id}`"
+            :contentTitle="'質問'"
+          >
+          </favorite-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestionReply'">
-          <favorite-subject-question-reply-notification :notification="notification"></favorite-subject-question-reply-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`"
+            :contentTitle="'返信'"
+          >
+          </favorite-notification>
         </div>
 
         <div v-if="notification.action_to === 'Survey'">
-          <favorite-survey-notification :notification="notification"></favorite-survey-notification>
+          <favorite-notification
+            :notification="notification"
+            :contentUrl="`/surveys/${notification.survey_id}`"
+            :contentTitle="'アンケート'"
+          >
+          </favorite-notification>
         </div>
 
       </div>
 
+      <!-- 「返信」がされたときの通知 -->
       <div v-else-if="notification.action_type == 'Reply'">
 
         <div v-if="notification.action_to == 'Reply'">
-          <reply-to-question-notification :notification="notification"></reply-to-question-notification>
+          <reply-notification
+            :notification="notification"
+            :questionInNotification="notification.question"
+            :replyInNotification="notification.reply"
+            :questionUrl="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}`"
+            :replyUrl="`/books/${notification.reply.question.book_id}/questions/${notification.reply.question_id}/replies/${notification.reply.id}`"
+          >
+          </reply-notification>
         </div>
 
         <div v-else-if="notification.action_to == 'SubjectQuestionReply'">
-          <reply-to-subject-question-notification :notification="notification"></reply-to-subject-question-notification>
+          <reply-notification
+            :notification="notification"
+            :questionInNotification="notification.subject_question"
+            :replyInNotification="notification.subject_question_reply"
+            :questionUrl="`/subjectQuestions/${notification.subject_question.id}`"
+            :replyUrl="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`"
+          >
+          </reply-notification>
         </div>
 
       </div>
 
+      <!-- アンケートに「回答」がされたときの通知 -->
       <div v-else-if="notification.action_type === 'SurveyAnswer'">
         <answer-to-survey-notification :notification="notification"></answer-to-survey-notification>
       </div>
@@ -61,30 +129,18 @@
 
 <script>
 
-import FavoriteReviewNotification from '../../components/notifications/FavoriteReviewNotification.vue'
-import FavoriteQuestionNotification from '../../components/notifications/FavoriteQuestionNotification.vue'
-import FavoriteReplyNotification from '../../components/notifications/FavoriteReplyNotification.vue'
-import FavoriteSubjectQuestionNotification from '../../components/notifications/FavoriteSubjectQuestionNotification.vue'
-import FavoriteSubjectQuestionReplyNotification from '../../components/notifications/FavoriteSubjectQuestionReplyNotification.vue'
-import ReplyToQuestionNotification from '../../components/notifications/ReplyToQuestionNotification.vue'
-import ReplyToSubjectQuestionNotification from '../../components/notifications/ReplyToSubjectQuestionNotification.vue'
 import authCheck from '../../middleware/authCheck'
-import FavoriteSurveyNotification from '../../components/notifications/FavoriteSurveyNotification.vue'
-import AnswerToSurveyNotification from '../../components/surveys/AnswerToSurveyNotification.vue'
+import AnswerToSurveyNotification from '../../components/notifications/AnswerToSurveyNotification.vue'
+import FavoriteNotification from '../../components/notifications/FavoriteNotification.vue'
+import ReplyNotification from '../../components/notifications/ReplyNotification.vue'
 import axios from "@/plugins/axios"
 
 export default {
   middleware: authCheck,
   components: {
-    FavoriteReviewNotification,
-    FavoriteQuestionNotification,
-    FavoriteReplyNotification,
-    FavoriteSubjectQuestionNotification,
-    FavoriteSubjectQuestionReplyNotification,
-    ReplyToQuestionNotification,
-    ReplyToSubjectQuestionNotification,
-    FavoriteSurveyNotification,
-    AnswerToSurveyNotification
+    AnswerToSurveyNotification,
+    FavoriteNotification,
+    ReplyNotification
   },
   async asyncData({ store }) {
     try {
