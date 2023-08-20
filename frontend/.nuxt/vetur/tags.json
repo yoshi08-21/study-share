@@ -2,6 +2,9 @@
   "ContentNavigator": {
     "description": "Auto imported from components/global/ContentNavigator.vue"
   },
+  "DeleteConfirmationDialog": {
+    "description": "Auto imported from components/global/DeleteConfirmationDialog.vue"
+  },
   "FavoriteButton": {
     "description": "Auto imported from components/global/FavoriteButton.vue"
   },
@@ -13,5 +16,8 @@
   },
   "SpecialHeader": {
     "description": "Auto imported from components/global/SpecialHeader.vue"
+  },
+  "SubmitButton": {
+    "description": "Auto imported from components/global/SubmitButton.vue"
   }
 }

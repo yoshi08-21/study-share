@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>参考書を編集する</h1>
+    <br>
     <v-form>
       <v-col
         class="d-flex"
@@ -26,6 +26,7 @@
       <br>
       *登録できる画像のファイルサイズは3MBまでです
 
+      <br><br>
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedName"></v-text-field>
       <v-text-field counter label="著者" :rules="authorRules" v-model="editedAuthor"></v-text-field>
       <v-text-field counter label="出版社" :rules="publisherRules" v-model="editedPublisher"></v-text-field>
@@ -35,19 +36,16 @@
           {{ errorMessage }}
         </v-alert>
       </template>
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <template v-if="error === true">
-            <v-btn color="primary" disabled @click="submitForm">編集する</v-btn>
-          </template>
-          <template v-else>
-            <v-btn color="primary" @click="submitForm">編集する</v-btn>
-          </template>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
+
+
+      <submit-button
+        :error="error"
+        :buttonTitle="'編集する'"
+        @submitForm="submitForm"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
+
     </v-form>
 
     <!-- 科目選択ダイアログ -->
@@ -75,6 +73,7 @@
 
 <script>
 import { VTextField } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   props: {
@@ -86,6 +85,7 @@ export default {
   },
   components: {
     VTextField,
+    SubmitButton,
   },
   data() {
     return {

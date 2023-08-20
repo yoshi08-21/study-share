@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ユーザー情報を編集する</h1>
+    <br><br>
     <v-form>
       <v-file-input
         v-model="selectedFile"
@@ -17,6 +17,7 @@
       <br>
       *登録できる画像のファイルサイズは3MBまでです
 
+      <br><br>
       <v-text-field counter label="名前" :rules="nameRules" v-model="editedName"></v-text-field>
       <v-textarea outlined counter label="自己紹介" :rules="contentRules" v-model="editedIntroduction"></v-textarea>
       <v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool"></v-text-field>
@@ -29,18 +30,18 @@
         </v-alert>
       </template>
       <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
+        <v-col cols="3" class="align-start custom-button-margin">
           <template v-if="error === true">
-            <v-btn color="primary" disabled @click="submitForm">編集する</v-btn>
+            <v-btn color="primary" disabled @click="submitForm" width="250">編集する</v-btn>
           </template>
           <template v-else>
-            <v-btn color="primary" @click="submitForm">編集する</v-btn>
+            <v-btn color="primary" @click="submitForm" width="250">編集する</v-btn>
           </template>
         </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
+        <v-col cols="3" class="align-start">
+          <v-btn @click="$emit('closeDialog')" width="250">閉じる</v-btn>
         </v-col>
-        <v-col cols="8" class="text-right">
+        <v-col cols="6" class="text-right">
           <!-- ダイアログの表示を挟む -->
           <v-btn color="error" class="justify-end" @click="showDeleteConfirmation=true">ユーザーを削除する</v-btn>
         </v-col>

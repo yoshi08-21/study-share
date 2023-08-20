@@ -1,35 +1,79 @@
 <template>
   <div>
-    <h2>参考書検索</h2>
 
-    <v-card>
-      <v-card-title>
-        新規登録する参考書を検索
-        <v-text-field v-model="keyword"></v-text-field>
-        <!-- <input type="text" v-model="keyword"> -->
-        <v-btn @click="searchBooks(keyword)">検索</v-btn>
-      </v-card-title>
-    </v-card>
+    <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card height="130px" width="85%">
+          <v-card-title style="height: 100%; align-items: center;">
+            <v-row>
+              <v-col cols="11">
+                <v-text-field
+                  v-model="keyword"
+                  filled
+                  outlined
+                  dense
+                  label="参考書を検索"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="1">
+                <v-btn @click="searchBooks(keyword)">検索</v-btn>
+              </v-col>
+            </v-row>
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+
 
     <br><br>
     <!-- 取得した参考書の一覧表示 -->
     <template v-if="searchResults.length !== 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
-      <v-row>
-        <v-col cols="12" md="6"
-          v-for="(book, index) in booksChunk" :key="index">
-          <v-card class="mx-auto" max-height="250">
+      <v-row mb-5 v-for="(book, index) in booksChunk" :key="index" class="justify-center">
+        <v-col cols="10">
+          <v-card
+            elevation="2"
+            max-height="300"
+            style="margin-bottom: 5px;"
+          >
             <v-row>
-              <v-col cols="3">
-                <v-img :src="book.imageUrl"></v-img>
+              <v-col cols="3" class="d-flex justify-center">
+                <div v-if="book.imageUrl" class="d-flex justify-center" style="height: 210px;">
+                  <v-img
+                    :src="book.imageUrl"
+                    alt="画像"
+                    contain
+                    max-height="200"
+                    max-width="180"
+                  >
+                  </v-img>
+                </div>
               </v-col>
-              <v-col cols="8">
-                <v-card-title>{{ book.name }}</v-card-title>
-                {{ book.description }}
-                <v-spacer></v-spacer>
+              <v-col cols="9" class="mt-n4">
+                <div>
+                  <v-card-title>
+                    {{ $truncate(book.name, 100) }}
+                  </v-card-title>
+                </div>
+
+                  <v-card-text>
+                  <h4>出版社: {{ book.publisher }}</h4>
+                  <h4>著者: {{ book.author }}</h4>
+                  <br>
+                  <p>
+                    {{ book.description }}
+                  </p>
+                </v-card-text>
+
                 <v-card-actions>
-                  <v-btn @click="openBookDialog(book)">参考書を登録する</v-btn>
+                  <v-row class="d-flex align-center justify-center">
+                    <v-col cols="4">
+                      <v-btn @click="openBookDialog(book)" large>参考書を登録する</v-btn>
+                    </v-col>
+                  </v-row>
                 </v-card-actions>
               </v-col>
             </v-row>
@@ -41,20 +85,34 @@
   </template>
 
 
+
+
+
+
+
+
+
     <!-- 選択した参考書の確認ダイアログ -->
     <v-dialog v-model="bookDialog" max-width="1000px">
       <v-row>
         <v-col cols="12">
           <v-card v-if="book">
-            <v-card-title>
-              <h2>この参考書を登録します</h2>
+            <v-card-title style="justify-content: center;">
+              <h2>参考書を登録する</h2>
             </v-card-title>
-            <v-card class="mx-auto">
+            <v-card>
               <v-row>
                 <v-col cols="2">
-                  <v-abatar size="10px">
-                    <v-img :src="book.imageUrl"></v-img>
-                  </v-abatar>
+                  <div v-if="book.imageUrl" class="d-flex justify-center" style="height: 210px;">
+                  <v-img
+                    :src="book.imageUrl"
+                    alt="画像"
+                    contain
+                    max-height="250"
+                    max-width="230"
+                  >
+                  </v-img>
+                </div>
                 </v-col>
                 <v-col cols="10">
                   <v-card-title>
@@ -68,25 +126,64 @@
                 </v-col>
               </v-row>
               <br>
-              <v-row>
-                <v-col cols="4">
-                  <v-actions>
-                    科目を選択してください（必須）
-                    <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
-                  </v-actions>
-                </v-col>
-                <h3 v-if="subject">選択された科目：{{ subject }}</h3>
-              </v-row>
+              <v-card-actions>
+                <v-row class="d-flex justify-center">
+                  <v-col cols="8" class="d-flex justify-center">
+                    <v-card
+                      height="100"
+                      width="500"
+                      style="padding: 10px;"
+                      elevation="0"
+                    >
+                    <v-row>
+                      <v-col class="d-flex justify-center">
+                        <v-btn @click="selectSubjectDialog = true" block>科目を選択する</v-btn>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col class="d-flex justify-center">
+                        <h3 v-if="subject">選択された科目：{{ subject }}</h3>
+                      </v-col>
+                    </v-row>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-card-actions>
               <br>
-              <v-actions>
-                <template v-if="subject == ''">
-                  <v-btn @click="submitBook(book)" disabled>登録する</v-btn>
-                </template>
-                <template v-else>
-                  <v-btn @click="submitBook(book)" color="primary">登録する</v-btn>
-                </template>
-                <v-btn @click="closeBookDialog">戻る</v-btn>
-              </v-actions>
+              <v-row class="d-flex justify-space-around">
+                <v-col cols="6" class="d-flex justify-center">
+                  <template v-if="subject == ''">
+                    <v-btn
+                      @click="submitBook(book)"
+                      color="primary"
+                      disabled
+                      width="400"
+                      large
+                    >
+                      登録する
+                    </v-btn>
+                  </template>
+                  <template v-else>
+                    <v-btn
+                      @click="submitBook(book)"
+                      color="primary"
+                      width="400"
+                      large
+                    >
+                      登録する
+                    </v-btn>
+                  </template>
+                </v-col>
+                <v-col cols="6" class="d-flex justify-center">
+                  <v-btn
+                    @click="closeBookDialog"
+                    large
+                    width="400"
+                  >
+                    戻る
+                  </v-btn>
+                </v-col>
+              </v-row>
             </v-card>
           </v-card>
         </v-col>

@@ -6,7 +6,7 @@
         cols="12"
         sm="6"
       >
-        <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
+        <v-btn @click="selectSubjectDialog = true">科目を選択する(必須)</v-btn>
       </v-col>
       <h3 v-if="subject">選択された科目：{{ subject }}</h3>
       <br><br>
@@ -16,7 +16,7 @@
         show-size
         truncate-length="15"
         outlined
-        label="参考書の画像を登録してください"
+        label="参考書の画像を選択"
         prepend-icon="mdi-image-plus"
         style="width: 500px;"
         @change="checkFileSize"
@@ -25,6 +25,7 @@
       <br>
       *登録できる画像のファイルサイズは3MBまでです
 
+      <br><br>
       <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="name"></v-text-field>
       <v-text-field counter label="著者（必須）" :rules="authorRules" v-model="author"></v-text-field>
       <v-text-field counter label="出版社" :rules="publisherRules" v-model="publisher"></v-text-field>
@@ -34,20 +35,16 @@
           {{ errorMessage }}
         </v-alert>
       </template>
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <template v-if="error === true">
-            <v-btn color="primary" disabled @click="submitForm">登録する</v-btn>
-          </template>
-          <template v-else>
-            <v-btn color="primary" @click="submitForm">登録する</v-btn>
-          </template>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
+
+      <submit-button
+        :error="error"
+        :buttonTitle="'登録する'"
+        @submitForm="submitForm"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
     </v-form>
+
 
     <!-- 科目選択ダイアログ -->
     <v-dialog v-model="selectSubjectDialog" max-width="500px">
@@ -74,10 +71,12 @@
 
 <script>
 import { VTextField } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   components: {
     VTextField,
+    SubmitButton,
   },
   data() {
     return {

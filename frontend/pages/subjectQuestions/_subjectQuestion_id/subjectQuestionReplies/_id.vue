@@ -182,22 +182,13 @@
     </v-dialog>
 
     <!-- 質問削除の確認ダイアログ -->
-    <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除した返信は復元できません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            返信を削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteSubjectQuestionReply">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <delete-confirmation-dialog
+      :showDeleteConfirmation="showDeleteConfirmation"
+      :contentTitle="'返信'"
+      @deleteContent="deleteSubjectQuestionReply"
+      @closeDeleteConfirmation="showDeleteConfirmation = false"
+    >
+    </delete-confirmation-dialog>
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
@@ -243,11 +234,12 @@
 
 import EditReply from '../../../../components/replies/EditReply.vue'
 import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
+import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
-  components: { EditReply, ContentNavigator },
+  components: { EditReply, ContentNavigator, DeleteConfirmationDialog },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null

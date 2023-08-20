@@ -1,8 +1,8 @@
 <template>
   <div>
-
+    <br><br>
     <v-tabs
-      fixed-tabs
+      grow
     >
     <v-tab to="/questions/questions">
         参考書別質問
@@ -89,8 +89,8 @@
     <!-- 新規質問投稿ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
-          Dialog Title
+        <v-card-title style="justify-content: center;">
+          <h2>質問を投稿する</h2>
         </v-card-title>
         <v-card-text>
           <subject-question-form @submitSubjectQuestion="submitSubjectQuestion" @closeDialog="dialog = false"></subject-question-form>
