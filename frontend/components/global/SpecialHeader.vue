@@ -3,11 +3,11 @@
     fix
     app
     shrink-on-scroll
-    src="https://study-feedback-bucket.s3.ap-northeast-1.amazonaws.com/Study Share.png"
+    src="https://study-feedback-bucket.s3.ap-northeast-1.amazonaws.com/Study Share3.png"
     fade-img-on-scroll
     scroll-target="#scrolling-techniques-3"
     class="my-app-bar"
-    height="500"
+    height="400"
   >
     <template v-slot:img="{ props }">
       <v-img
@@ -33,7 +33,7 @@
           <v-col cols="10">
             <v-text-field
               v-model="searchBooksKeyword"
-              label="This is Special Header!"
+              label="参考書を検索"
               placeholder="キーワードを入力 例: (英語 文法)"
               filled
               dense

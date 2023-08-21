@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  include SharedActions::AttachImage
+
+
   def index
     users = User.all
     if users
@@ -10,22 +13,104 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(id: params[:id])
+    user = User.with_attached_image.find_by(id: params[:id])
     if user.image.attached?
       image_url = rails_blob_url(user.image)
     end
-      user_json = user.as_json.merge(image: image_url)
-    if user
-      render json: user_json
+    user_json = user.as_json.merge(image: image_url)
+
+    my_reviews = user.reviews.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob }).select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
+    my_reviews_with_images = attach_image_to_reviews(my_reviews)
+    my_favorite_reviews_count = FavoriteReview.joins(:review).where(review: { user_id: user.id }).count
+
+    my_questions = user.questions.with_attached_image.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob }).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+    my_questions_with_images = attach_image_to_questions(my_questions)
+    my_favorite_questions_count = FavoriteQuestion.joins(:question).where(questions: { user_id: user.id }).count
+
+    my_replies = user.replies.with_attached_image.includes(:question, user: { image_attachment: :blob }).select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
+    my_replies_with_images = attach_image_to_replies(my_replies)
+    my_favorite_replies_count = FavoriteReply.joins(:reply).where(reply: { user_id: user.id }).count
+
+    my_subject_questions = user.subject_questions.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+    my_subject_questions_with_images = attach_image_to_subject_questions(my_subject_questions)
+    my_favorite_subject_questions_count = FavoriteSubjectQuestion.joins(:subject_question).where(subject_question: { user_id: user.id }).count
+
+    my_subject_question_replies = user.subject_question_replies.with_attached_image.includes(:subject_question, user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
+    my_subject_question_replies_with_images = attach_image_to_subject_question_replies(my_subject_question_replies)
+    my_favorite_subject_question_replies_count = FavoriteSubjectQuestionReply.joins(:subject_question_reply).where(subject_question_reply: { user_id: user.id }).count
+
+    my_surveys = user.surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    my_surveys_with_images = attach_image_to_surveys(my_surveys)
+    my_favorite_surveys_count = FavoriteSurvey.joins(:survey).where(survey: { user_id: user.id }).count
+
+    if user_json
+      render json: {
+        user: user_json,
+        my_reviews: my_reviews_with_images,
+        my_questions: my_questions_with_images,
+        my_replies: my_replies_with_images,
+        my_subject_questions: my_subject_questions_with_images,
+        my_subject_question_replies: my_subject_question_replies_with_images,
+        my_surveys: my_surveys_with_images,
+        my_favorite_reviews_count: my_favorite_reviews_count,
+        my_favorite_questions_count: my_favorite_questions_count,
+        my_favorite_replies_count: my_favorite_replies_count,
+        my_favorite_subject_questions_count: my_favorite_subject_questions_count,
+        my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
+        my_favorite_surveys_count: my_favorite_surveys_count
+      }
     else
-      render json: user.errors
+      render json: user_json.errors
     end
   end
 
   def show_other_user
     user = User.find_by(id: params[:id])
-    if user
-      render json: user
+    if user.image.attached?
+      image_url = rails_blob_url(user.image)
+    end
+    user_json = user.as_json.merge(image: image_url)
+
+    my_reviews = user.reviews.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob }).select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
+    my_reviews_with_images = attach_image_to_reviews(my_reviews)
+    my_favorite_reviews_count = FavoriteReview.joins(:review).where(review: { user_id: user.id }).count
+
+    my_questions = user.questions.with_attached_image.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob }).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
+    my_questions_with_images = attach_image_to_questions(my_questions)
+    my_favorite_questions_count = FavoriteQuestion.joins(:question).where(questions: { user_id: user.id }).count
+
+    my_replies = user.replies.with_attached_image.includes(:question, user: { image_attachment: :blob }).select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
+    my_replies_with_images = attach_image_to_replies(my_replies)
+    my_favorite_replies_count = FavoriteReply.joins(:reply).where(reply: { user_id: user.id }).count
+
+    my_subject_questions = user.subject_questions.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+    my_subject_questions_with_images = attach_image_to_subject_questions(my_subject_questions)
+    my_favorite_subject_questions_count = FavoriteSubjectQuestion.joins(:subject_question).where(subject_question: { user_id: user.id }).count
+
+    my_subject_question_replies = user.subject_question_replies.with_attached_image.includes(:subject_question, user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
+    my_subject_question_replies_with_images = attach_image_to_subject_question_replies(my_subject_question_replies)
+    my_favorite_subject_question_replies_count = FavoriteSubjectQuestionReply.joins(:subject_question_reply).where(subject_question_reply: { user_id: user.id }).count
+
+    my_surveys = user.surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    my_surveys_with_images = attach_image_to_surveys(my_surveys)
+    my_favorite_surveys_count = FavoriteSurvey.joins(:survey).where(survey: { user_id: user.id }).count
+
+    if user_json
+      render json: {
+        user: user_json,
+        my_reviews: my_reviews_with_images,
+        my_questions: my_questions_with_images,
+        my_replies: my_replies_with_images,
+        my_subject_questions: my_subject_questions_with_images,
+        my_subject_question_replies: my_subject_question_replies_with_images,
+        my_surveys: my_surveys_with_images,
+        my_favorite_reviews_count: my_favorite_reviews_count,
+        my_favorite_questions_count: my_favorite_questions_count,
+        my_favorite_replies_count: my_favorite_replies_count,
+        my_favorite_subject_questions_count: my_favorite_subject_questions_count,
+        my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
+        my_favorite_surveys_count: my_favorite_surveys_count
+      }
     else
       head :no_content
     end

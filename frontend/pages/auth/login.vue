@@ -1,6 +1,6 @@
 <template>
   <div>
-    ログイン
+    <h2 style="text-align: center;">ログイン</h2>
     <v-col>
       <v-form>
         <v-text-field v-model="email" :rules="emailRules" label="メールアドレス"></v-text-field>

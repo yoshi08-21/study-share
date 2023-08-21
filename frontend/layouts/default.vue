@@ -154,8 +154,12 @@
               counter
               ></v-textarea>
               <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
-            <v-btn @click="saveUserMemo" color="primary">保存する</v-btn>
-            <v-btn @click="showUserMemo = false">閉じる</v-btn>
+            <submit-button
+              :buttonTitle="'保存する'"
+              @submitForm="saveUserMemo"
+              @closeDialog="showUserMemo = false"
+            >
+            </submit-button>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -177,11 +181,12 @@ import redirectNotFound from "../middleware/redirectNotFound"
 import checkResourceExistence from "../middleware/checkResourceExistence"
 import NormalHeader from '../components/global/NormalHeader.vue'
 import SpecialHeader from '../components/global/SpecialHeader.vue'
+import SubmitButton from '../components//global/SubmitButton.vue'
 import axios from "@/plugins/axios"
 
 
 export default {
-  components: { NormalHeader, SpecialHeader },
+  components: { NormalHeader, SpecialHeader, SubmitButton },
   name: 'DefaultLayout',
   middleware: [checkNotifications, redirectNotFound, checkResourceExistence],
   // ログアウト→ログイン時にユーザーメモが更新されるようにする
