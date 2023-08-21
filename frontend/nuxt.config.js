@@ -32,11 +32,11 @@ export default {
   ],
 
 
-  // router: {
-  //   middleware: [
-  //     '@/middleware/redirectNotFound.js'
-  //   ],
-  // },
+  router: {
+    scrollBehavior(to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
+  },
 
   debug: true,
 

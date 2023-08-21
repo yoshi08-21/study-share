@@ -13,13 +13,13 @@ class BrowsingHistoriesController < ApplicationController
     question_browsing_histories = current_user.watched_questions.with_attached_image.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob }).select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
     question_browsing_histories_with_images  = attach_image_to_questions(question_browsing_histories)
 
-    reply_browsing_histories = current_user.watched_replies.with_attached_image.includes(user: { image_attachment: :blob }).select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
+    reply_browsing_histories = current_user.watched_replies.with_attached_image.includes(:question, user: { image_attachment: :blob }).select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
     reply_browsing_hitories_with_images = attach_image_to_replies(reply_browsing_histories)
 
     subject_question_browsing_histories = current_user.watched_subject_questions.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
     subject_question_browsing_histories_with_images = attach_image_to_subject_questions(subject_question_browsing_histories)
 
-    subject_question_reply_browsing_histories = current_user.watched_subject_question_replies.with_attached_image.includes(user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
+    subject_question_reply_browsing_histories = current_user.watched_subject_question_replies.with_attached_image.includes(:subject_question ,user: { image_attachment: :blob }).select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
     subject_question_reply_browsing_histories_with_images = attach_image_to_subject_question_replies(subject_question_reply_browsing_histories)
 
     survey_browsing_histories = current_user.watched_surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")

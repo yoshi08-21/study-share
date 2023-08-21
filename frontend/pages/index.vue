@@ -1,20 +1,30 @@
 <template>
   <div>
+    <br><br>
+    <template v-if="!currentUser">
+      <div>
+        <h1 style="text-align: center;">Welcome To StudyShare!</h1>
+        <br>
+        <h2><v-icon color="green">mdi-information-box-outline</v-icon> StudyShareは学習に関するあらゆる情報を共有できるサイトです</h2>
+        <br><br>
+        <h3><v-icon color="green">mdi-information-box-outline</v-icon> 参考書へのレビューを投稿することができます</h3>
+        <h4>・自分が使ったことのある参考書へのレビューを投稿したり、他ユーザーのレビューを見たりして、自分に合った最高の参考書を見つけましょう!</h4>
+        <br><br>
+        <h3><v-icon color="green">mdi-information-box-outline</v-icon> 参考書への質問や科目別の質問、アンケートを投稿することができます</h3>
+        <h4>・参考書に対して気になることや、勉強をする中でわからないことがあればどんどん質問しましょう!</h4>
+        <h4>・参考書選びや大学選びなどで迷うことがあれば、アンケートを作成して他ユーザーに意見を求めましょう!</h4>
+        <br><br>
+        <h3><v-icon color="green">mdi-information-box-outline</v-icon> 投稿されている質問で回答できるものがあれば、ぜひ回答してください</h3>
+        <h4>・質問に返信することは質問者を助けるだけでなく、アウトプットを通じてあなたの知識の整理にも必ず役立ちます!</h4>
+        <br><br>
+        <h1 style="text-align: center;"><v-icon color="red">mdi-fire</v-icon> StudyShareで賢く勉強を進め、志望する大学に合格しましょう! <v-icon color="red">mdi-fire</v-icon></h1>
+      </div>
+    </template>
+    <template v-else>
+      <h1 style="text-align: center;">Welcome To StudyShare!</h1>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </template>
 
-    <h1>Welcome To StudyShare</h1>
-    <h2>このアプリは、学んだことをフィードバックできるサイトです</h2>
-    <h2>参考書に対するレビューや質問を通じて、学んだことを共有しましょう！</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
-    <h2>コンテンツ</h2>
     <br>
     <h2>新着レビュー</h2>
     <hr><br>

@@ -1,14 +1,28 @@
 <template>
   <div>
-    ユーザー登録
-    <v-col>
+    <h2 style="text-align: center;">ユーザー登録</h2>
+    <br>
 
-      <v-text-field v-model="name" label="ユーザー名"></v-text-field>
-      <v-text-field v-model="email" label="メールアドレス"></v-text-field>
-      <v-text-field v-model="password" label="パスワード"></v-text-field>
-      <v-text-field v-model="password" label="パスワード確認"></v-text-field>
-      <v-btn @click="signUp">登録</v-btn>
-    </v-col>
+    <v-text-field v-model="name" label="ユーザー名"></v-text-field>
+    <v-text-field v-model="email" :rules="emailRules" label="メールアドレス"></v-text-field>
+    <v-text-field
+      v-model="password"
+      :rules="passwordRules"
+      label="パスワード"
+      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPassword ? 'text' : 'password'"
+      @click:append="showPassword = !showPassword"
+      ></v-text-field>
+      <v-text-field
+      v-model="passwordConfirmation"
+      :rules="passwordConfirmationRules"
+      label="パスワード確認"
+      :append-icon="showPasswordConfirmation ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPasswordConfirmation ? 'text' : 'password'"
+      @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+      ></v-text-field>
+      <br>
+      <v-btn @click="signUp" block>登録</v-btn>
   </div>
 </template>
 
@@ -26,7 +40,23 @@ export default {
       name: "",
       email: "",
       password: "",
-      uid: ""
+      passwordConfirmation: "",
+      uid: "",
+      emailRules: [
+        value => !!value || "メールアドレスを入力してください",
+        value => (value || '').length <= 60 || "最大入力文字数は250文字です",
+        value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "正しい形式のメールアドレスを入力してください"
+      ],
+      passwordRules: [
+        value => !!value || "パスワードを入力してください",
+      ],
+      passwordConfirmationRules: [
+        value => value === this.password || "パスワードが一致していません",
+      ],
+      showPassword: false,
+      showPasswordConfirmation: false,
+
+
     }
   },
   methods: {

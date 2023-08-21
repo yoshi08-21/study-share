@@ -145,14 +145,8 @@ module SharedActions::AttachImage
         subject_question_reply_data["user"] = user_data
       end
 
-      if subject_question_reply.subject_question.image.attached?
-        subject_question_data = subject_question_reply.subject_question.as_json
-        subject_question_data["image"] = rails_blob_url(subject_question_reply.subject_question.image)
-        subject_question_reply_data["subject_question"] = subject_question_data
-      else
-        subject_question_data = subject_question_reply.subject_question.as_json
-        subject_question_reply_data["subject_question"] = subject_question_data
-      end
+      subject_question_data = subject_question_reply.subject_question.as_json
+      subject_question_reply_data["subject_question"] = subject_question_data
 
       subject_question_reply_data["created_at"] = format_japanese_time(subject_question_reply.created_at)
 
