@@ -12,10 +12,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do
+  resources :users, only: [:show, :create, :update, :destroy] do
     collection do
-      get "show_other_user/:id", to: "users#show_other_user"
-      get "find_user_by_uid/:uid", to: "users#find_user_by_uid"
+      get "show_other_user/:id", to: "users#show_other_user", as: "show_other_user"
+      get "find_user_by_uid/:uid", to: "users#find_user_by_uid", as: "find_user_by_uid"
       patch "save_user_memo"
       get "check_existence"
     end
