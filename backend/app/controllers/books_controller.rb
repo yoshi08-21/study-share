@@ -28,18 +28,20 @@ class BooksController < ApplicationController
                 .with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:id])
+    return head :not_found if !book
 
     if book.image.attached?
       image_url = rails_blob_url(book.image)
     end
       book_json = book.as_json.merge(image: image_url)
-    if book
+
+    if book_json
       render json: book_json
       if current_user && !exist_book_browsing_history?(current_user, book)
         save_book_browsing_history(current_user, book)
       end
     else
-      render json:book.errors
+      render json:book_json.errors
     end
   end
 
@@ -60,7 +62,7 @@ class BooksController < ApplicationController
       end
       render json: book, status: 200
     else
-      render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: book.errors.full_messages }, status: 400
     end
   end
 
@@ -130,7 +132,7 @@ class BooksController < ApplicationController
         books_count: books_count
       }
     else
-      render json: { message: "検索結果がありません", data: [] }
+      render json: { message: "検索結果がありません", data: [] }, status: :not_found
     end
   end
 
@@ -139,7 +141,7 @@ class BooksController < ApplicationController
     if book
       head :ok
     else
-      head :not_fount
+      head :not_found
     end
   end
 
