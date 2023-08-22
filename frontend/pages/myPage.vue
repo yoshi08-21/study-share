@@ -121,19 +121,19 @@
               <hr><br>
               <v-row>
                 <v-col>
-                  <v-btn @click="goToFavorites" x-large style="height: 100px; width: 150px;">
+                  <v-btn @click="goToFavorites" x-large style="height: 100px; width: 155px;">
                     <v-icon>mdi-star-outline</v-icon>
                     お気に入り
                   </v-btn>
-                  <v-btn @click="goToBrowsingHistories" x-large style="height: 100px; width: 150px;">
+                  <v-btn @click="goToBrowsingHistories" x-large style="height: 100px; width: 155px;">
                     <v-icon>mdi-history</v-icon>
                     閲覧履歴
                   </v-btn>
-                  <v-btn @click="dialog = true" x-large style="height: 100px; width: 150px;">
+                  <v-btn @click="dialog = true" x-large style="height: 100px; width: 155px;">
                     <v-icon>mdi-account-edit-outline</v-icon>
                     ユーザー編集
                   </v-btn>
-                  <v-btn @click="logout" x-large style="height: 100px; width: 150px;">
+                  <v-btn @click="logout" x-large style="height: 100px; width: 155px;">
                     <v-icon>mdi-exit-run</v-icon>
                     ログアウト
                   </v-btn>
