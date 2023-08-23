@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   end
   resources :subject_questions, only: [:index, :show, :create, :update, :destroy] do
     resources :favorite_subject_questions, only: [:create, :destroy]
-    resources :subject_question_replies
+    resources :subject_question_replies, only: [:index, :show, :create, :update, :destroy]
     collection do
       get "is_favorite"
       get "search_subject_questions"
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subject_question_replies, only: [:index] do
+  resources :subject_question_replies, only: [] do
     resources :favorite_subject_question_replies, only: [:create, :destroy]
     collection do
       get "is_favorite"

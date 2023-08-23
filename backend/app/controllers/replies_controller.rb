@@ -4,32 +4,30 @@ class RepliesController < ApplicationController
   include SharedActions::DateTime
 
 
-
   def index
     question = Question.find_by(id: params[:question_id])
-
     replies = Reply.with_attached_image
                     .includes(:question, user: { image_attachment: :blob })
                     .select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
                     .where(question_id: question.id)
-    replies_with_images = attach_image_to_replies(replies)
+    return render json: [] if replies.blank?
 
-    if replies_with_images
-      render json: replies_with_images
-    else
-      render json: replies_with_images.errors
-    end
+    replies_with_images = attach_image_to_replies(replies)
+    render json: replies_with_images
   end
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
+
     book = Book.with_attached_image
                 .find_by(id: params[:book_id])
+    return head :not_found unless book
     book_json = attach_image_to_book(book)
 
     question = Question.includes(user: { image_attachment: :blob })
                         .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
                         .find_by(id: params[:question_id])
+    return head :not_found unless question
 
     question_user = question.user
     question_user_json = attach_image_to_user(question_user)
@@ -38,26 +36,23 @@ class RepliesController < ApplicationController
                   .includes(user: { image_attachment: :blob })
                   .select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
                   .find_by(id: params[:id])
+    return head :not_found unless reply
     reply_json = attach_image_to_reply(reply)
     reply_json["created_at"] = format_japanese_time(reply.created_at)
 
     reply_user = reply.user
     reply_user_json = attach_image_to_user(reply_user)
 
-    if reply_json
-      render json: {
-        book: book_json,
-        question: question,
-        question_user: question_user_json,
-        reply: reply_json,
-        reply_user: reply_user_json,
-      }
-      if current_user && !exist_reply_browsing_history?(current_user, reply)
-        save_reply_browsing_history(current_user, reply)
-      end
-    else
-      render json: reply.errors
+    if current_user && !exist_reply_browsing_history?(current_user, reply)
+      save_reply_browsing_history(current_user, reply)
     end
+    render json: {
+      book: book_json,
+      question: question,
+      question_user: question_user_json,
+      reply: reply_json,
+      reply_user: reply_user_json,
+    }
   end
 
   def create

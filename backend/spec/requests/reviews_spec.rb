@@ -7,7 +7,7 @@ RSpec.describe "Reviews", type: :request do
   let(:review) { create(:review, user_id: user.id, book_id: book.id) }
 
   describe "レビューの一覧表示" do
-    context "参考書に3件のレビューが登録されていると" do
+    context "参考書に3件のレビューが投稿されていると" do
       it "3件のレビューが表示される" do
         review
         create(:review, book_id: book.id)
@@ -20,7 +20,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body).length).to eq(3)
       end
     end
-    context "参考書にレビューが登録されていないと" do
+    context "参考書にレビューが投稿されていないと" do
       it "空の配列が返ってくる" do
         get book_reviews_path(book), params: {
           current_user_id: user.id
@@ -34,6 +34,8 @@ RSpec.describe "Reviews", type: :request do
   describe "レビューの詳細表示" do
     context "存在するレビューの詳細ページに遷移すると" do
       it "レビューの詳細情報が取得できる" do
+        user = create(:user, name: "レビュー投稿者")
+        book = create(:book, name: "日本史の教科書", user_id: user.id)
         review = create(:review, title: "テストタイトル", content: "テスト本文", rating: 5, user_id: user.id, book_id: book.id)
 
         get book_review_path(book, review)
@@ -41,9 +43,11 @@ RSpec.describe "Reviews", type: :request do
 
         json_response = JSON.parse(response.body)
         aggregate_failures do
+          expect(json_response["book"]["name"]).to eq("日本史の教科書")
           expect(json_response["review"]["title"]).to eq("テストタイトル")
           expect(json_response["review"]["content"]).to eq("テスト本文")
           expect(json_response["review"]["rating"]).to eq(5)
+          expect(json_response["review_user"]["name"]).to eq("レビュー投稿者")
         end
       end
     end

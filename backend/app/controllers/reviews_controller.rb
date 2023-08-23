@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
     reviews = Review.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                     .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .where(book_id: book.id)
-
     return render json: [] if reviews.blank?
 
     reviews_with_images = attach_image_to_reviews(reviews)
