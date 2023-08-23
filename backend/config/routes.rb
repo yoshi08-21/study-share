@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       get "search_books"
       get "check_existence"
       get "download_book_image"
-
     end
     resources :reviews, only: [:index, :show, :create, :update, :destroy]
     resources :questions, only: [:index, :show, :create, :update, :destroy] do
@@ -42,7 +41,7 @@ Rails.application.routes.draw do
       get "check_existence"
     end
   end
-  resources :questions, only: [:index] do
+  resources :questions, only: [] do
     resources :favorite_questions, only: [:create, :destroy]
     collection do
       get "is_favorite"
