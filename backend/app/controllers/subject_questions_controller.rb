@@ -7,42 +7,32 @@ class SubjectQuestionsController < ApplicationController
   def index
     subject_questions = SubjectQuestion.includes(user: { image_attachment: :blob })
                                         .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
+    return render json: [] if subject_questions.blank?
+
     subject_questions_with_images = attach_image_to_subject_questions(subject_questions)
-
-    if subject_questions_with_images
-      render json: subject_questions_with_images
-    else
-      render json: subject_questions_with_images.errors
-    end
+    render json: subject_questions_with_images
   end
-
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
     subject_question = SubjectQuestion.includes(user: { image_attachment: :blob })
                                       .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
                                       .find_by(id: params[:id])
+    return head :not_found unless subject_question
     subject_question_json = attach_image_to_question(subject_question)
     subject_question["created_at"] = format_japanese_time(subject_question.created_at)
-
 
     subject_question_user = User.with_attached_image.find_by(id: subject_question.user_id)
     subject_question_user_json = attach_image_to_user(subject_question_user)
 
-
-    if subject_question_json
-      render json: {
-        subject_question: subject_question_json,
-        subject_question_user: subject_question_user_json
-      }
-      if current_user && !exist_subject_question_browsing_history?(current_user, subject_question)
-        save_subject_question_browsing_history(current_user, subject_question)
-      end
-    else
-      render json: subject_question_json.errors
+    if current_user && !exist_subject_question_browsing_history?(current_user, subject_question)
+      save_subject_question_browsing_history(current_user, subject_question)
     end
+    render json: {
+      subject_question: subject_question_json,
+      subject_question_user: subject_question_user_json
+    }
   end
-
 
   def create
     current_user = User.find_by(id: params[:subject_question][:user_id])
@@ -110,18 +100,17 @@ class SubjectQuestionsController < ApplicationController
         subject_questions_count: subject_questions_count
       }
     else
-      render json: { error: "検索結果がありません" }
+      render json: { results: [] }, status: :ok
     end
   end
 
+  # 渡されたidで検索した質問の科目と同じ科目の質問を返す
   def questions_to_specific_subject
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    return head :not_found unless subject_question
+
     subject_questions_to_specific_subject = SubjectQuestion.where(subject: subject_question.subject)
-    if subject_questions_to_specific_subject
-      render json: subject_questions_to_specific_subject
-    else
-      render json: subject_questions_to_specific_subject.errors
-    end
+    render json: subject_questions_to_specific_subject
   end
 
   def check_existence
