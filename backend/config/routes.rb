@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
 
   end
-  resources :reviews do
+  resources :reviews, only: [] do
     resources :favorite_reviews, only: [:create, :destroy]
     collection do
       get "is_favorite"
@@ -51,14 +51,14 @@ Rails.application.routes.draw do
       get "check_existence"
     end
   end
-  resources :replies, only: [:index] do
+  resources :replies, only: [] do
     resources :favorite_replies, only: [:create, :destroy]
     collection do
       get "is_favorite"
       get "check_existence"
     end
   end
-  resources :subject_questions do
+  resources :subject_questions, only: [:index, :show, :create, :update, :destroy] do
     resources :favorite_subject_questions, only: [:create, :destroy]
     resources :subject_question_replies
     collection do

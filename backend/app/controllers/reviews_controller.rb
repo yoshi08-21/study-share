@@ -7,43 +7,40 @@ class ReviewsController < ApplicationController
     reviews = Review.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                     .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .where(book_id: book.id)
-    reviews_with_images = attach_image_to_reviews(reviews)
 
-    if reviews_with_images
-      render json: reviews_with_images
-    else
-      render json: reviews_with_images.errors
-    end
+    return render json: [] if reviews.blank?
+
+    reviews_with_images = attach_image_to_reviews(reviews)
+    render json: reviews_with_images
   end
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
+
     book = Book.with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:book_id])
+    return head :not_found unless book
     book_json = attach_image_to_book(book)
 
     review = Review.includes(user: { image_attachment: :blob })
                     .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .find_by(id: params[:id])
+    return head :not_found unless review
     review_json = review.as_json
     review_json["created_at"] = format_japanese_time(review.created_at)
 
     review_user = review.user
     review_user_json = attach_image_to_user(review_user)
 
-    if review_json
-      render json: {
-        book: book_json,
-        review: review_json,
-        review_user: review_user_json
-      }
-      if current_user && !exist_review_browsing_history?(current_user, review)
-        save_review_browsing_history(current_user, review)
-      end
-    else
-      render json: review_json.errors
+    if current_user && !exist_review_browsing_history?(current_user, review)
+      save_review_browsing_history(current_user, review)
     end
+    render json: {
+      book: book_json,
+      review: review_json,
+      review_user: review_user_json
+    }
   end
 
   def create

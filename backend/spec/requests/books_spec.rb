@@ -27,6 +27,17 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+    context "参考書が登録されていない状態で参考書一覧ページに遷移すると" do
+      it "空の配列が帰ってくる" do
+        user
+
+        get books_path, params: {
+          current_user_id: 1
+        }
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)).to eq([])
+      end
+    end
   end
   describe "参考書の詳細表示" do
     context "存在する参考書の詳細ページに遷移すると" do
@@ -47,28 +58,6 @@ RSpec.describe "Books", type: :request do
     context "存在しない参考書の詳細ページに遷移すると" do
       it "参考書の取得に失敗する" do
         get book_path(-1)
-        expect(response).to have_http_status(404)
-      end
-    end
-  end
-  describe "参考書情報の取得" do
-    context "check_existenceで存在する参考書をチェックすると" do
-      it "成功する" do
-        user
-        book = create(:book, name: "参考書1", user_id: user.id)
-        get check_existence_books_path, params: {
-          id: book.id
-        }
-        expect(response).to have_http_status(200)
-      end
-    end
-    context "check_existenceで存在する参考書をチェックすると" do
-      it "失敗する" do
-        user
-        create(:book, name: "参考書1", user_id: user.id)
-        get check_existence_books_path, params: {
-          id: -1
-        }
         expect(response).to have_http_status(404)
       end
     end
@@ -108,8 +97,7 @@ RSpec.describe "Books", type: :request do
         get book_path(json_response["id"])
         expect(response).to have_http_status(200)
 
-        json_book_response = JSON.parse(response.body)
-        expect(json_book_response["image"]).to include("no_image.png")
+        expect(JSON.parse(response.body)["image"]).to include("no_image.png")
       end
     end
     context "参考書の登録時に画像が未選択の場合" do
@@ -133,8 +121,7 @@ RSpec.describe "Books", type: :request do
         get book_path(json_response["id"])
         expect(response).to have_http_status(200)
 
-        json_book_response = JSON.parse(response.body)
-        expect(json_book_response["image"]).to include("default_image.jpg")
+        expect(JSON.parse(response.body)["image"]).to include("default_image.jpg")
       end
     end
     context "不正なパラメーターで参考書を登録すると" do
@@ -179,8 +166,8 @@ RSpec.describe "Books", type: :request do
           }
         }
         expect(response).to have_http_status(200)
-        json_response = JSON.parse(response.body)
 
+        json_response = JSON.parse(response.body)
         aggregate_failures do
           expect(json_response["book"]["name"]).to eq("参考書2")
           expect(json_response["book"]["author"]).to eq("神奈川一郎")
@@ -222,8 +209,7 @@ RSpec.describe "Books", type: :request do
         }
         expect(response).to have_http_status(400)
 
-        json_response = JSON.parse(response.body)
-        expect(json_response["error"]).to eq("権限がありません")
+        expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
   end
@@ -272,9 +258,7 @@ RSpec.describe "Books", type: :request do
           searchBooksKeyword: "参考"
         }
         expect(response).to have_http_status(200)
-
-        second_json_response = JSON.parse(response.body)
-        expect(second_json_response["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
       end
     end
     context "登録されている参考書を著者名で検索すると" do
@@ -285,9 +269,7 @@ RSpec.describe "Books", type: :request do
           searchBooksKeyword: "東京太郎"
         }
         expect(response).to have_http_status(200)
-
-        first_json_response = JSON.parse(response.body)
-        expect(first_json_response["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
 
         get search_books_books_path, params: {
           current_user_id: user.id,
@@ -295,8 +277,7 @@ RSpec.describe "Books", type: :request do
         }
         expect(response).to have_http_status(200)
 
-        second_json_response = JSON.parse(response.body)
-        expect(second_json_response["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
       end
     end
     context "登録されている参考書を出版社名で検索すると" do
@@ -307,9 +288,7 @@ RSpec.describe "Books", type: :request do
           searchBooksKeyword: "東京出版"
         }
         expect(response).to have_http_status(200)
-
-        first_json_response = JSON.parse(response.body)
-        expect(first_json_response["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
 
         get search_books_books_path, params: {
           current_user_id: user.id,
@@ -317,8 +296,7 @@ RSpec.describe "Books", type: :request do
         }
         expect(response).to have_http_status(200)
 
-        second_json_response = JSON.parse(response.body)
-        expect(second_json_response["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
       end
     end
     context "登録されていない参考書を検索すると" do
@@ -329,30 +307,33 @@ RSpec.describe "Books", type: :request do
           searchBooksKeyword: "教科書"
         }
         expect(response).to have_http_status(404)
-
-        json_response = JSON.parse(response.body)
-        expect(json_response["message"]).to eq("検索結果がありません")
+        expect(JSON.parse(response.body)["message"]).to eq("検索結果がありません")
       end
     end
+  end
+  describe "参考書情報の取得" do
     context "check_existenceで存在する参考書をチェックすると" do
       it "成功する" do
+        user
+        book = create(:book, name: "参考書1", user_id: user.id)
         get check_existence_books_path, params: {
           id: book.id
         }
         expect(response).to have_http_status(200)
       end
     end
-    context "check_existenceで存在しない参考書をチェックすると" do
+    context "check_existenceで存在する参考書をチェックすると" do
       it "失敗する" do
+        user
+        create(:book, name: "参考書1", user_id: user.id)
         get check_existence_books_path, params: {
           id: -1
         }
         expect(response).to have_http_status(404)
       end
     end
-
-
   end
+
 
 
 
