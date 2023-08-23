@@ -185,7 +185,7 @@ RSpec.describe "Replies", type: :request do
           delete book_question_reply_path(book, question, reply), params: {
             current_user_id: user2.id
           }
-        }.to change(Question, :count).by(0)
+        }.to change(Reply, :count).by(0)
         expect(response).to have_http_status(400)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end

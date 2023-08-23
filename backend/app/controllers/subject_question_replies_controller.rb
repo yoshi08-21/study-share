@@ -6,18 +6,16 @@ class SubjectQuestionRepliesController < ApplicationController
 
   def index
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    return head :not_found unless subject_question
 
     subject_question_replies = SubjectQuestionReply.with_attached_image
-    .includes(user: { image_attachment: :blob }, subject_question: { image_attachment: :blob })
-    .select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
-    .where(subject_question_id: subject_question.id)
-    subject_question_replies_with_images = attach_image_to_subject_question_replies(subject_question_replies)
+                                                    .includes(user: { image_attachment: :blob }, subject_question: { image_attachment: :blob })
+                                                    .select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
+                                                    .where(subject_question_id: subject_question.id)
+    return render json: [] if subject_question_replies.blank?
 
-    if subject_question_replies_with_images
-      render json: subject_question_replies_with_images
-    else
-      render json: subject_question_replies_with_images.errors
-    end
+    subject_question_replies_with_images = attach_image_to_subject_question_replies(subject_question_replies)
+    render json: subject_question_replies_with_images
   end
 
   def show
@@ -25,7 +23,7 @@ class SubjectQuestionRepliesController < ApplicationController
     subject_question = SubjectQuestion.includes(user: { image_attachment: :blob })
                                       .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
                                       .find_by(id: params[:subject_question_id])
-
+    return head :not_found unless subject_question
     subject_question_user = subject_question.user
     subject_question_user_json = attach_image_to_user(subject_question_user)
 
@@ -33,25 +31,22 @@ class SubjectQuestionRepliesController < ApplicationController
                                                   .includes(user: { image_attachment: :blob })
                                                   .select("subject_question_replies.*, (SELECT COUNT(*) FROM favorite_subject_question_replies WHERE favorite_subject_question_replies.subject_question_reply_id = subject_question_replies.id) AS favorite_subject_question_replies_count")
                                                   .find_by(id: params[:id])
+    return head :not_found unless subject_question_reply
     subject_question_reply_json = attach_image_to_reply(subject_question_reply)
     subject_question_reply_json["created_at"] = format_japanese_time(subject_question_reply.created_at)
 
     subject_question_reply_user = subject_question_reply.user
     subject_question_reply_user_json = attach_image_to_user(subject_question_reply_user)
 
-    if subject_question_reply_json
-      render json: {
-        subject_question: subject_question,
-        subject_question_user: subject_question_user_json,
-        subject_question_reply: subject_question_reply_json,
-        subject_question_reply_user: subject_question_reply_user_json
-      }
-      if current_user && !exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
-        save_subject_question_reply_browsing_history(current_user, subject_question_reply)
-      end
-    else
-      render json: subject_question_reply.errors
+    if current_user && !exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
+      save_subject_question_reply_browsing_history(current_user, subject_question_reply)
     end
+    render json: {
+      subject_question: subject_question,
+      subject_question_user: subject_question_user_json,
+      subject_question_reply: subject_question_reply_json,
+      subject_question_reply_user: subject_question_reply_user_json
+    }
   end
 
   def create
