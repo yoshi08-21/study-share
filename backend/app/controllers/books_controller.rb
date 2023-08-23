@@ -8,7 +8,6 @@ class BooksController < ApplicationController
     books = Book.includes(:reviews)
                   .with_attached_image
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
-
     return render json: [] if books.blank?
 
     books_with_images = books.map do |book|
@@ -121,13 +120,13 @@ class BooksController < ApplicationController
       book.as_json.merge(image: image_url)
     end
     books_count = books.length
-    if books_with_images.present?
+    if books_with_images
       render json: {
         books: books_with_images, include: [:reviews, :favorite_books],
         books_count: books_count
       }
     else
-      render json: { message: "検索結果がありません", data: [] }, status: :not_found
+      render json: { results: [] }, status: :ok
     end
   end
 

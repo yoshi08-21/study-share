@@ -10,14 +10,10 @@ class QuestionsController < ApplicationController
     questions = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                           .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
                           .where(book_id: book.id)
+    return render json: [] if questions.blank?
 
     questions_with_images = attach_image_to_questions(questions)
-
-    if questions_with_images
-      render json: questions_with_images
-    else
-      render json: questions_with_images.errors
-    end
+    render json: questions_with_images
   end
 
   def show
@@ -25,40 +21,33 @@ class QuestionsController < ApplicationController
     book = Book.with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:book_id])
+    return head :not_found unless book
     book_json = attach_image_to_book(book)
 
     question = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                         .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
                         .find_by(id: params[:id])
+    return head :not_found unless question
     question_json = attach_image_to_question(question)
     question_json["created_at"] = format_japanese_time(question.created_at)
 
     question_user = question.user
     question_user_json = attach_image_to_user(question_user)
 
-    if question_json
-      render json: {
-        book: book_json,
-        question: question_json,
-        question_user: question_user_json
-      }
-      if current_user && !exist_question_browsing_history?(current_user, question)
-        save_question_browsing_history(current_user, question)
-      end
-    else
-      render json: question_json.errors
+    if current_user && !exist_question_browsing_history?(current_user, question)
+      save_question_browsing_history(current_user, question)
     end
+    render json: {
+      book: book_json,
+      question: question_json,
+      question_user: question_user_json
+    }
   end
 
   def create
     current_user = User.find_by(id: params[:question][:user_id])
     book = Book.find_by(id: params[:question][:book_id])
     question = current_user.questions.build(question_params)
-    # if params[:question][:image]
-    #   compressed_image = compress_image(params[:question][:image])
-    #   question.image = compressed_image
-    # end
-
     question.book_id = book.id
     if question.save
       render json: question, status: 200
@@ -112,13 +101,10 @@ class QuestionsController < ApplicationController
   def all_questions
     questions = Question.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                           .select("questions.*, (SELECT COUNT(*) FROM replies WHERE replies.question_id = questions.id) AS replies_count, (SELECT COUNT(*) FROM favorite_questions WHERE favorite_questions.question_id = questions.id) AS favorite_questions_count")
-    questions_with_images = attach_image_to_questions(questions)
+    return render json: [] if questions.blank?
 
-    if questions_with_images
-      render json: questions_with_images
-    else
-      render jso: questions_with_images.errors
-    end
+    questions_with_images = attach_image_to_questions(questions)
+    render json: questions_with_images
   end
 
   def search_questions
@@ -135,7 +121,7 @@ class QuestionsController < ApplicationController
         questions_count: questions_count
       }
     else
-      render json: { error: "検索結果がありません" }
+      render json: { results: [] }, status: :ok
     end
   end
 

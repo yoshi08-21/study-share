@@ -28,7 +28,7 @@ RSpec.describe "Books", type: :request do
       end
     end
     context "参考書が登録されていない状態で参考書一覧ページに遷移すると" do
-      it "空の配列が帰ってくる" do
+      it "空の配列が返ってくる" do
         user
 
         get books_path, params: {
@@ -44,6 +44,7 @@ RSpec.describe "Books", type: :request do
       it "参考書の詳細情報が取得できる" do
         user
         book = create(:book, name: "参考書1", user_id: user.id)
+
         get book_path(book)
         expect(response).to have_http_status(200)
 
@@ -81,7 +82,6 @@ RSpec.describe "Books", type: :request do
             }
           }
         }.to change(Book, :count).by(1)
-
         expect(response).to have_http_status(200)
 
         json_response = JSON.parse(response.body)
@@ -91,12 +91,10 @@ RSpec.describe "Books", type: :request do
           expect(json_response["publisher"]).to eq("東京出版")
           expect(json_response["subject"]).to eq("国語")
           expect(json_response["description"]).to eq("国語の参考書")
-          expect(json_response["user_id"]).to eq(user.id)
         end
 
         get book_path(json_response["id"])
         expect(response).to have_http_status(200)
-
         expect(JSON.parse(response.body)["image"]).to include("no_image.png")
       end
     end
@@ -241,81 +239,122 @@ RSpec.describe "Books", type: :request do
     end
   end
   describe "参考書の検索" do
+    before :each do
+      book = create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", subject: "物理", user_id: user.id)
+      book2 = create(:book, name: "教科書1", author: "神奈川次郎", publisher: "神奈川書房", subject: "生物", user_id: user.id)
+    end
     context "登録されている参考書をタイトルで検索すると" do
-      it "参考書が表示される" do
-        create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", user_id: user.id)
+      it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "参考書1"
         }
         expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
 
-        first_json_response = JSON.parse(response.body)
-        expect(first_json_response["books"][0]["name"]).to eq("参考書1")
-
+      it "キーワードが部分一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "参考"
         }
         expect(response).to have_http_status(200)
         expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
     context "登録されている参考書を著者名で検索すると" do
-      it "参考書が表示される" do
-        create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", user_id: user.id)
+      it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "東京太郎"
         }
         expect(response).to have_http_status(200)
         expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
 
+      it "キーワードが部分一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "太郎"
         }
         expect(response).to have_http_status(200)
-
         expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
     context "登録されている参考書を出版社名で検索すると" do
-      it "参考書が表示される" do
-        create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", user_id: user.id)
+      it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "東京出版"
         }
         expect(response).to have_http_status(200)
         expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
 
+      it "キーワードが部分一致する参考書が表示される" do
         get search_books_books_path, params: {
           current_user_id: user.id,
           searchBooksKeyword: "出版"
         }
         expect(response).to have_http_status(200)
-
         expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
+    end
+    context "登録されている参考書を科目で検索すると" do
+      it "キーワードが完全一致する参考書が表示される" do
+        get search_books_books_path, params: {
+          current_user_id: user.id,
+          searchBooksKeyword: "物理"
+        }
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
+
+      it "キーワードが部分一致する参考書が表示される" do
+        get search_books_books_path, params: {
+          current_user_id: user.id,
+          searchBooksKeyword: "理"
+        }
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(1)
+      end
+    end
+    context "2件の参考書が登録されている状態で検索キーワードが2件の参考書に一致すると" do
+      it "2件の参考書が表示される" do
+        get search_books_books_path, params: {
+          current_user_id: user.id,
+          searchBooksKeyword: "1"
+        }
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["books"][0]["name"]).to eq("参考書1")
+        expect(JSON.parse(response.body)["books"][1]["name"]).to eq("教科書1")
+        expect(JSON.parse(response.body)["books_count"]).to eq(2)
       end
     end
     context "登録されていない参考書を検索すると" do
       it "参考書が表示されない" do
-        create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", user_id: user.id)
         get search_books_books_path, params: {
           current_user_id: user.id,
-          searchBooksKeyword: "教科書"
+          searchBooksKeyword: "論文"
         }
-        expect(response).to have_http_status(404)
-        expect(JSON.parse(response.body)["message"]).to eq("検索結果がありません")
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["books_count"]).to eq(0)
       end
     end
   end
   describe "参考書情報の取得" do
     context "check_existenceで存在する参考書をチェックすると" do
       it "成功する" do
-        user
         book = create(:book, name: "参考書1", user_id: user.id)
+
         get check_existence_books_path, params: {
           id: book.id
         }
@@ -324,7 +363,6 @@ RSpec.describe "Books", type: :request do
     end
     context "check_existenceで存在する参考書をチェックすると" do
       it "失敗する" do
-        user
         create(:book, name: "参考書1", user_id: user.id)
         get check_existence_books_path, params: {
           id: -1

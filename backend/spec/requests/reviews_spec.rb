@@ -21,7 +21,7 @@ RSpec.describe "Reviews", type: :request do
       end
     end
     context "参考書にレビューが登録されていないと" do
-      it "空の配列が帰ってくる" do
+      it "空の配列が返ってくる" do
         get book_reviews_path(book), params: {
           current_user_id: user.id
         }
