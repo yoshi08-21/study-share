@@ -9,17 +9,16 @@ class BooksController < ApplicationController
                   .with_attached_image
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
 
+    return render json: [] if books.blank?
+
     books_with_images = books.map do |book|
       if book.image.attached?
         image_url = rails_blob_url(book.image)
       end
-      book.as_json.merge(image: image_url)
+    book.as_json.merge(image: image_url)
     end
-    if books_with_images
-      render json: books_with_images, include: "reviews"
-    else
-      render json: books.errors
-    end
+
+    render json: books_with_images, include: "reviews"
   end
 
   def show
@@ -28,21 +27,17 @@ class BooksController < ApplicationController
                 .with_attached_image
                 .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .find_by(id: params[:id])
-    return head :not_found if !book
+    return head :not_found unless book
 
     if book.image.attached?
       image_url = rails_blob_url(book.image)
     end
-      book_json = book.as_json.merge(image: image_url)
+    book_json = book.as_json.merge(image: image_url)
 
-    if book_json
-      render json: book_json
-      if current_user && !exist_book_browsing_history?(current_user, book)
-        save_book_browsing_history(current_user, book)
-      end
-    else
-      render json:book_json.errors
+    if current_user && !exist_book_browsing_history?(current_user, book)
+      save_book_browsing_history(current_user, book)
     end
+    render json: book_json
   end
 
   def create

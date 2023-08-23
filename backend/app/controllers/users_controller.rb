@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     user = User.with_attached_image.find_by(id: params[:id])
-    return head :not_found if !user
+    return head :not_found unless user
 
     if user.image.attached?
       image_url = rails_blob_url(user.image)
@@ -36,30 +36,26 @@ class UsersController < ApplicationController
     my_surveys_with_images = attach_image_to_surveys(my_surveys)
     my_favorite_surveys_count = FavoriteSurvey.joins(:survey).where(survey: { user_id: user.id }).count
 
-    if user_json
-      render json: {
-        user: user_json,
-        my_reviews: my_reviews_with_images,
-        my_questions: my_questions_with_images,
-        my_replies: my_replies_with_images,
-        my_subject_questions: my_subject_questions_with_images,
-        my_subject_question_replies: my_subject_question_replies_with_images,
-        my_surveys: my_surveys_with_images,
-        my_favorite_reviews_count: my_favorite_reviews_count,
-        my_favorite_questions_count: my_favorite_questions_count,
-        my_favorite_replies_count: my_favorite_replies_count,
-        my_favorite_subject_questions_count: my_favorite_subject_questions_count,
-        my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
-        my_favorite_surveys_count: my_favorite_surveys_count
-      }
-    else
-      render json: user_json.errors
-    end
+    render json: {
+      user: user_json,
+      my_reviews: my_reviews_with_images,
+      my_questions: my_questions_with_images,
+      my_replies: my_replies_with_images,
+      my_subject_questions: my_subject_questions_with_images,
+      my_subject_question_replies: my_subject_question_replies_with_images,
+      my_surveys: my_surveys_with_images,
+      my_favorite_reviews_count: my_favorite_reviews_count,
+      my_favorite_questions_count: my_favorite_questions_count,
+      my_favorite_replies_count: my_favorite_replies_count,
+      my_favorite_subject_questions_count: my_favorite_subject_questions_count,
+      my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
+      my_favorite_surveys_count: my_favorite_surveys_count
+    }
   end
 
   def show_other_user
     user = User.find_by(id: params[:id])
-    return head :not_found if !user
+    return head :not_found unless user
 
     if user.image.attached?
       image_url = rails_blob_url(user.image)
@@ -90,25 +86,21 @@ class UsersController < ApplicationController
     my_surveys_with_images = attach_image_to_surveys(my_surveys)
     my_favorite_surveys_count = FavoriteSurvey.joins(:survey).where(survey: { user_id: user.id }).count
 
-    if user_json
-      render json: {
-        user: user_json,
-        my_reviews: my_reviews_with_images,
-        my_questions: my_questions_with_images,
-        my_replies: my_replies_with_images,
-        my_subject_questions: my_subject_questions_with_images,
-        my_subject_question_replies: my_subject_question_replies_with_images,
-        my_surveys: my_surveys_with_images,
-        my_favorite_reviews_count: my_favorite_reviews_count,
-        my_favorite_questions_count: my_favorite_questions_count,
-        my_favorite_replies_count: my_favorite_replies_count,
-        my_favorite_subject_questions_count: my_favorite_subject_questions_count,
-        my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
-        my_favorite_surveys_count: my_favorite_surveys_count
-      }
-    else
-      head :no_content
-    end
+    render json: {
+      user: user_json,
+      my_reviews: my_reviews_with_images,
+      my_questions: my_questions_with_images,
+      my_replies: my_replies_with_images,
+      my_subject_questions: my_subject_questions_with_images,
+      my_subject_question_replies: my_subject_question_replies_with_images,
+      my_surveys: my_surveys_with_images,
+      my_favorite_reviews_count: my_favorite_reviews_count,
+      my_favorite_questions_count: my_favorite_questions_count,
+      my_favorite_replies_count: my_favorite_replies_count,
+      my_favorite_subject_questions_count: my_favorite_subject_questions_count,
+      my_favorite_subject_question_replies_count: my_favorite_subject_question_replies_count,
+      my_favorite_surveys_count: my_favorite_surveys_count
+    }
   end
 
   def create
@@ -137,7 +129,7 @@ class UsersController < ApplicationController
         image_url = user.image.attached? ? rails_blob_url(user.image) : nil
         render json: { user: user, image_url: image_url }, status: 200
       else
-        render json: user.errors, status: 400
+        render json: { error: "エラーが発生しました" }, status: 400
       end
     else
       render json: { error: "ユーザーが存在しません" }, status: 400
@@ -178,23 +170,16 @@ class UsersController < ApplicationController
     end
   end
 
-
   def find_user_by_uid
     user = User.find_by(uid: params[:uid])
-    if user
-      if user.image.attached?
-        image_url = rails_blob_url(user.image)
-      end
-        user_json = user.as_json.merge(image: image_url)
+    return head :not_found if !user
 
-      if user
-        render json: user_json
-      else
-        render json: user.errors
-      end
-    else
-      head :not_found
+    if user.image.attached?
+      image_url = rails_blob_url(user.image)
     end
+    user_json = user.as_json.merge(image: image_url)
+
+    render json: user_json
   end
 
 

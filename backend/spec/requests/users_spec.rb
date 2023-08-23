@@ -150,7 +150,7 @@ RSpec.describe "Users", type: :request do
     context "存在しないユーザーの詳細ページにアクセスすると" do
       it "エラーになる" do
         get show_other_user_users_path(-1)
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(404)
       end
     end
     context "ログイン状態でユーザーメモを更新すると" do
