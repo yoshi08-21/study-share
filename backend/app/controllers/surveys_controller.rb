@@ -8,12 +8,10 @@ class SurveysController < ApplicationController
     surveys = Survey.all
                     .includes( user: { image_attachment: :blob })
                     .select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
+    return render json: [] if surveys.blank?
+
     surveys_with_images = attach_image_to_surveys(surveys)
-    if surveys_with_images
-      render json: surveys_with_images
-    else
-      render json: surveys_with_images.errors
-    end
+    render json: surveys_with_images
   end
 
   def show
@@ -22,22 +20,19 @@ class SurveysController < ApplicationController
                     .includes( user: { image_attachment: :blob })
                     .select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
                     .find_by(id: params[:id])
+    return head :not_found unless survey
     survey_json = attach_image_to_survey(survey)
 
     survey_user = survey.user
     survey_user_json = attach_image_to_user(survey_user)
 
-    if survey_json
-      render json: {
-        survey: survey_json,
-        survey_user: survey_user_json
-      }
-      if current_user && !exist_survey_browsing_history?(current_user, survey)
-        save_survey_browsing_history(current_user, survey)
-      end
-    else
-      render json: survey_json.errors
+    if current_user && !exist_survey_browsing_history?(current_user, survey)
+      save_survey_browsing_history(current_user, survey)
     end
+    render json: {
+      survey: survey_json,
+      survey_user: survey_user_json
+    }
   end
 
   def create
