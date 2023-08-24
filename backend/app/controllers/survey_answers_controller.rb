@@ -3,19 +3,29 @@ class SurveyAnswersController < ApplicationController
   def create
     current_user = User.find_by(id: params[:survey_answer][:user_id])
     survey = Survey.includes(:user).find_by(id: params[:survey_answer][:survey_id])
-    survey_answer = current_user.survey_answers.build(survey_answer_params)
-    if !exist_survey_answer?(current_user, survey)
-      if survey_answer.save
-        create_notification_survey_answer(current_user, survey.user, survey)
-        render json: survey_answer
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
-    else
+    if is_survey_closed?(survey)
+      render json: { error: "アンケートは締め切られています" }, status: 400
+      return
+    end
+    if exist_survey_answer?(current_user, survey)
       render json: { error: "すでに回答済みです" }, status: 400
+      return
+    end
+    survey_user = survey.user
+    if current_user == survey_user
+      render json: { error: "自分のアンケートには回答できません" }, status: 400
+      return
+    end
+
+    survey_answer = current_user.survey_answers.build(survey_answer_params)
+
+    if survey_answer.save
+      create_notification_survey_answer(current_user, survey.user, survey)
+      render json: survey_answer
+    else
+      render json: { error: "エラーが発生しました" }, status: 400
     end
   end
-  # 締め切られたアンケートに投稿できないこともテストする
 
   def change_survey_answer
     survey_answer = survey_answer_params
@@ -44,10 +54,10 @@ class SurveyAnswersController < ApplicationController
 
   def get_survey_answers
     survey_answers = SurveyAnswer.where(survey_id: params[:survey_id])
-    if survey_answers
+    if !survey_answers.empty?
       render json: survey_answers
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: []
     end
   end
 
@@ -71,6 +81,15 @@ class SurveyAnswersController < ApplicationController
     def check_survey_answer(current_user, survey, survey_answer)
       selected_survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id, survey_answer: survey_answer.id)
       if selected_survey_answer
+        return true
+      else
+        return false
+      end
+    end
+
+    # アンケートが締め切られていたらtrueを返す
+    def is_survey_closed?(survey)
+      if survey.status == true
         return true
       else
         return false
