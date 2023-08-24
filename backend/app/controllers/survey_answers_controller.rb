@@ -15,6 +15,7 @@ class SurveyAnswersController < ApplicationController
       render json: { error: "すでに回答済みです" }, status: 400
     end
   end
+  # 締め切られたアンケートに投稿できないこともテストする
 
   def change_survey_answer
     survey_answer = survey_answer_params
