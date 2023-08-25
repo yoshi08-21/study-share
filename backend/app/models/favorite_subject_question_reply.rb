@@ -5,5 +5,7 @@ class FavoriteSubjectQuestionReply < ApplicationRecord
 
   validates :user_id, presence: true
   validates :subject_question_reply_id, presence: true
+  validates_uniqueness_of :subject_question_reply_id, scope: :user_id
+
 
 end

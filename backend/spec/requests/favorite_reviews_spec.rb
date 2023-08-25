@@ -8,10 +8,10 @@ RSpec.describe "FavoriteReviews", type: :request do
   let(:favorite_review) { create(:favorite_review, user_id: user.id, review_id: review.id) }
 
   describe "いいねへの登録" do
-    context "ユーザーとレビューが存在し、いいねに成功すると" do
+    context "ユーザーとレビューが存在し、他人のレビューへのいいねに成功すると" do
       it "レビューのいいねが成功する" do
         user2 = create(:user)
-        review = create(:review, user_id: user2.id)
+        review = create(:review, user_id: user2.id, book_id: book.id)
 
         expect {
           post review_favorite_reviews_path(review), params: {
@@ -51,6 +51,7 @@ RSpec.describe "FavoriteReviews", type: :request do
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(422)
+        expect(JSON.parse(response.body)["error"]).to eq("自分のレビューにはいいねできません")
       end
     end
     context "ユーザーがすでにレビューにいいねしている場合" do
