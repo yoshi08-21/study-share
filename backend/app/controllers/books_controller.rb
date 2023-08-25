@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
 
-  include RecordChecker
   require 'httparty'
 
   def index
@@ -8,7 +7,7 @@ class BooksController < ApplicationController
     books = Book.includes(:reviews)
                   .with_attached_image
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
-    return render json: [] if books.blank?
+    return render json: [] if books.empty?
 
     books_with_images = books.map do |book|
       if book.image.attached?
@@ -17,7 +16,7 @@ class BooksController < ApplicationController
     book.as_json.merge(image: image_url)
     end
 
-    render json: books_with_images, include: "reviews"
+    render json: books_with_images
   end
 
   def show
@@ -36,11 +35,14 @@ class BooksController < ApplicationController
     if current_user && !exist_book_browsing_history?(current_user, book)
       save_book_browsing_history(current_user, book)
     end
+
     render json: book_json
   end
 
   def create
     current_user = User.find_by(id: params[:book][:user_id])
+    return head :not_found unless current_user
+
     book = current_user.books.build(book_params)
     if book.save
       unless book.image.attached?
@@ -56,45 +58,53 @@ class BooksController < ApplicationController
       end
       render json: book, status: 200
     else
-      render json: { errors: book.errors.full_messages }, status: 400
+      render json: { errors: book.errors.full_messages }, status: 422
     end
   end
 
   def update
     current_user = User.find_by(id: params[:book][:user_id])
+    return head :not_found unless current_user
+
     book = Book.find_by(id: params[:id])
+    return head :not_found unless book
+
     author = book.user
-    if validate_authorship(current_user, author)
-      if book.update(book_params)
-        image_url = book.image.attached? ? rails_blob_url(book.image) : nil
-        render json: { book: book, image_url: image_url }, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if book.update(book_params)
+      image_url = book.image.attached? ? rails_blob_url(book.image) : nil
+      render json: { book: book, image_url: image_url }, status: 200
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: book.errors.full_messages }, status: 422
     end
   end
 
   def destroy
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     book = Book.find_by(id: params[:id])
+    return head :not_found unless book
+
     author = book.user
-    if validate_authorship(current_user, author)
-      if book.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if book.destroy
+      head :no_content
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: book.errors.full_messages }, status: 422
     end
   end
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     book = Book.find_by(id: params[:book_id])
-    favorite_book = FavoriteBook.find_by(user_id: current_user.id, book_id: book.id) if current_user
+    return head :not_found unless book
+
+    favorite_book = FavoriteBook.find_by(user_id: current_user.id, book_id: book.id)
     if favorite_book
       render json: { is_favorite: true, favorite_book_id: favorite_book.id }
     else
@@ -113,21 +123,20 @@ class BooksController < ApplicationController
                 .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("subject LIKE ?", "%#{search_books_keyword}%"))
+
     books_with_images = books.map do |book|
       if book.image.attached?
         image_url = rails_blob_url(book.image)
       end
       book.as_json.merge(image: image_url)
     end
+
     books_count = books.length
-    if books_with_images
-      render json: {
-        books: books_with_images, include: [:reviews, :favorite_books],
-        books_count: books_count
-      }
-    else
-      render json: { results: [] }, status: :ok
-    end
+
+    render json: {
+      books: books_with_images, include: [:reviews, :favorite_books],
+      books_count: books_count
+    }
   end
 
   def check_existence

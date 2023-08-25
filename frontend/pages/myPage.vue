@@ -338,8 +338,9 @@ export default {
     async updateUser() {
       try {
         const response = await axios.get(`/users/${this.user.id}`)
-        this.updatedUser = response.data
+        this.updatedUser = response.data.user
         this.$store.dispatch("auth/setCurrentUser", this.updatedUser)
+        console.log(response)
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
