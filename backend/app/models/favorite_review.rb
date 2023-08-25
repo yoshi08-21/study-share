@@ -5,5 +5,7 @@ class FavoriteReview < ApplicationRecord
 
   validates :user_id, presence: true
   validates :review_id, presence: true
+  validates_uniqueness_of :review_id, scope: :user_id
+
 
 end
