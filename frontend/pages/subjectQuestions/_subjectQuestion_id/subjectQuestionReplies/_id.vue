@@ -385,7 +385,7 @@ export default {
         this.flashMessage = "いいね！しました"
         this.isFavorite = true
         this.favoriteSubjectQuestionReplyId = response.data.id
-        this.favoriteSubjectQuestionRepliesCount += 1
+        this.subjectQuestionReply.favorite_subject_question_replies_count += 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -406,7 +406,7 @@ export default {
         this.flashMessage = "いいね！を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteReplyId = null
-        this.favoriteSubjectQuestionRepliesCount -= 1
+        this.subjectQuestionReply.favorite_subject_question_replies_count -= 1
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"

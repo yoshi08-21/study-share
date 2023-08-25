@@ -118,34 +118,32 @@ class UsersController < ApplicationController
 
       render json: user, status: 200
     else
-      render json: user.errors, status: 400
+      render json: { error: user.errors.full_messages }, status: 422
     end
   end
 
   def update
     user = User.find_by(id: params[:id])
-    if user
-      if user.update(user_params)
-        image_url = user.image.attached? ? rails_blob_url(user.image) : nil
-        render json: { user: user, image_url: image_url }, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return head :not_found unless user
+
+    if user.update(user_params)
+      image_url = user.image.attached? ? rails_blob_url(user.image) : nil
+      render json: { user: user, image_url: image_url }, status: 200
     else
-      render json: { error: "ユーザーが存在しません" }, status: 400
+      render json: { error: user.errors.full_messages }, status: 422
     end
   end
 
   def destroy
     user = User.find_by(id: params[:id])
-    if !check_admin?(user)
-      if user.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return head :not_found unless user
+
+    return render json: { error: "このユーザーは削除できません" }, status: 422 if user.admin == true
+
+    if user.destroy
+      head :no_content
     else
-      render json: { error: "このユーザーは削除できません" }, status: 400
+      render json: { error: user.errors.full_messages }, status: 422
     end
   end
 
@@ -154,10 +152,10 @@ class UsersController < ApplicationController
     return render json: { error: "ユーザーが見つかりません" }, status: 404 unless current_user
 
     memo = params[:memo]
-    if current_user && current_user.update(memo: memo)
+    if current_user.update(memo: memo)
       render json: current_user, status: 200
     else
-      render json: current_user.errors, status: 400
+      render json: { error: current_user.errors.full_messages }, status: 422
     end
   end
 
@@ -172,7 +170,7 @@ class UsersController < ApplicationController
 
   def find_user_by_uid
     user = User.find_by(uid: params[:uid])
-    return head :not_found if !user
+    return head :not_found unless user
 
     if user.image.attached?
       image_url = rails_blob_url(user.image)
