@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
 
   def index
     book = Book.find_by(id: params[:book_id])
+    return head :not_found unless book
+
     reviews = Review.includes(book: { image_attachment: :blob }, user: { image_attachment: :blob })
                     .select("reviews.*, (SELECT COUNT(*) FROM favorite_reviews WHERE favorite_reviews.review_id = reviews.id) AS favorite_reviews_count")
                     .where(book_id: book.id)
@@ -35,6 +37,7 @@ class ReviewsController < ApplicationController
     if current_user && !exist_review_browsing_history?(current_user, review)
       save_review_browsing_history(current_user, review)
     end
+
     render json: {
       book: book_json,
       review: review_json,
@@ -43,50 +46,62 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:review][:user_id])
+    return head :not_found unless current_user
+
     book = Book.find_by(id: params[:book_id])
+    return head :not_found unless book
+
     review = current_user.reviews.build(review_params)
     review.book_id = book.id
     if review.save
       render json: review, status: 200
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { errors: review.errors.full_messages }, status: 422
     end
   end
 
   def update
-    review = Review.find_by(id: params[:id])
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
+    review = Review.find_by(id: params[:id])
+    return head :not_found unless review
+
     author = review.user
-    if validate_authorship(current_user, author)
-      if review.update(review_params)
-        render json: review, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if review.update(review_params)
+      render json: review, status: 200
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: review.errors.full_messages }, status: 422
     end
   end
 
   def destroy
-    review = Review.find_by(id: params[:id])
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
+    review = Review.find_by(id: params[:id])
+    return head :not_found unless review
+
     author = review.user
-    if validate_authorship(current_user, author)
-      if review.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if review.destroy
+      head :no_content
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: review.errors.full_messages }, status: 422
     end
   end
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     review = Review.find_by(id: params[:review_id])
+    return head :not_found unless review
+
     favorite_review = FavoriteReview.find_by(user_id: current_user.id, review_id: review.id) if current_user
     if favorite_review
       render json: { is_favorite: true, favorite_review_id: favorite_review.id }
@@ -97,12 +112,12 @@ class ReviewsController < ApplicationController
 
   def check_existence
     book = Book.find_by(id: params[:book_id])
+    return head :not_found unless book
+
     review = Review.find_by(id: params[:id])
-    if book && review
-      head :ok
-    else
-      head :not_found
-    end
+    return head :not_found unless review
+
+    head :ok
   end
 
 
