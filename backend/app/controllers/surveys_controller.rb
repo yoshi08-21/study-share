@@ -87,6 +87,7 @@ class SurveysController < ApplicationController
     end
   end
 
+  # checkResourceExistence.jsから呼び出し
   def check_existence
     survey = Survey.find_by(id: params[:id])
     if survey = Survey.find_by(id: params[:id])

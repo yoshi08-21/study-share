@@ -134,6 +134,7 @@ class BooksController < ApplicationController
     }
   end
 
+    # checkResourceExistence.jsから呼び出し
   def check_existence
     book = Book.find_by(id: params[:id])
     return head :not_found unless book

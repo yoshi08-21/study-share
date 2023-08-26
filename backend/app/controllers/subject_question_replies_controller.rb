@@ -127,6 +127,7 @@ class SubjectQuestionRepliesController < ApplicationController
     end
   end
 
+  # checkResourceExistence.jsから呼び出し
   def check_existence
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])

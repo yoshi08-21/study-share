@@ -94,6 +94,8 @@ class SubjectQuestionsController < ApplicationController
                         .or(SubjectQuestion.where("content LIKE ?", "%#{search_subject_questions_keyword}%"))
                         .or(SubjectQuestion.where("subject LIKE ?", "%#{search_subject_questions_keyword}%"))
     subject_questions_count = subject_questions.length
+
+    subject_questions_with_images = attach_image_to_subject_questions(subject_questions)
     if subject_questions
       render json: {
         subject_questions: subject_questions.as_json(include: :user),
@@ -113,6 +115,7 @@ class SubjectQuestionsController < ApplicationController
     render json: subject_questions_to_specific_subject
   end
 
+  # checkResourceExistence.jsから呼び出し
   def check_existence
     subject_question = SubjectQuestion.find_by(id: params[:id])
     if subject_question
