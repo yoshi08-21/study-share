@@ -6,6 +6,7 @@ RSpec.describe "Books", type: :request do
   let(:book) { create(:book, user_id: user.id) }
 
   describe "参考書の一覧表示" do
+
     context "3冊の参考書が登録されている状態で参考書一覧ページに遷移すると" do
       it "3冊の参考書が表示される" do
         create(:book, name: "参考書1", user_id: user.id)
@@ -27,6 +28,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "参考書が登録されていない状態で参考書一覧ページに遷移すると" do
       it "空の配列が返ってくる" do
         get books_path, params: {
@@ -36,6 +38,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)).to eq([])
       end
     end
+
     context "参考書にレビューが投稿されていると" do
       it "レビューの件数と平均評価が表示される" do
         book = create(:book, name: "参考書1", user_id: user.id)
@@ -54,6 +57,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "参考書がお気に入りに追加されていると" do
       it "お気に入りの登録数が表示される" do
         user2 = create(:user)
@@ -68,6 +72,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)[0]["favorite_books_count"]).to eq(2)
       end
     end
+
     context "ログインしていると" do
       it "一覧ページで参考書をお気に入りに追加しているかを確認できる" do
         book = create(:book, name: "参考書1", user_id: user.id)
@@ -80,8 +85,11 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)[0]["check_favorite"]).to eq(1)
       end
     end
+
   end
+
   describe "参考書の詳細表示" do
+
     context "存在する参考書の詳細ページに遷移すると" do
       it "参考書の詳細情報が表示される" do
         image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
@@ -101,6 +109,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "参考書にレビューが投稿されていると" do
       it "レビューの件数と平均評価が表示される" do
         book = create(:book, name: "参考書1", user_id: user.id)
@@ -117,6 +126,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "参考書がお気に入りに追加されていると" do
       it "お気に入りの登録数が表示される" do
         user2 = create(:user)
@@ -129,6 +139,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["favorite_books_count"]).to eq(2)
       end
     end
+
     context "参考書に質問が投稿されていると" do
       it "質問の件数が表示される" do
         user2 = create(:user)
@@ -141,14 +152,18 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["questions_count"]).to eq(2)
       end
     end
+
     context "存在しない参考書の詳細ページに遷移すると" do
       it "参考書の取得に失敗する" do
         get book_path(-1)
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "参考書の新規登録" do
+
     context "正しいパラメーターで参考書を登録すると" do
       it "参考書の登録に成功する" do
         image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
@@ -183,6 +198,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["image"]).to include("no_image.png")
       end
     end
+
     context "参考書の登録時に画像が未選択の場合" do
       it "デフォルトの画像が添付される" do
         expect {
@@ -207,6 +223,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["image"]).to include("default_image.jpg")
       end
     end
+
     context "不正なパラメーターで参考書を登録すると" do
       it "参考書の登録に失敗する" do
         expect {
@@ -222,6 +239,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(422)
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "参考書の登録に失敗する" do
         expect {
@@ -239,8 +257,11 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "参考書の編集" do
+
     context "正しいパラメーターで参考書を編集すると" do
       it "参考書の編集に成功する" do
         book = create(:book, name: "参考書1", author: "東京太郎", user_id: user.id)
@@ -278,6 +299,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "不正なパラメーターで参考書を編集すると" do
       it "参考書の編集に失敗する" do
         book = create(:book, name: "参考書1", author: "東京太郎", user_id: user.id)
@@ -293,6 +315,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(422)
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "参考書の編集に失敗する" do
         user = create(:user)
@@ -309,6 +332,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "参考書が存在しないと" do
       it "参考書の編集に失敗する" do
         patch book_path(-1), params: {
@@ -324,6 +348,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "他人が作成した参考書を編集すると" do
       it "参考書の編集に失敗する" do
         user2 = create(:user, name: "東京二郎")
@@ -342,8 +367,11 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
+
   end
+
   describe "参考書の削除" do
+
     context "自分が作成した参考書を削除すると" do
       it "参考書の削除に成功する" do
         book = create(:book, user_id: user.id)
@@ -356,6 +384,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(204)
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "参考書の削除に失敗する" do
         user = create(:user)
@@ -369,6 +398,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "参考書が存在しないと" do
       it "参考書の削除に失敗する" do
         expect {
@@ -393,12 +423,16 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
+
   end
+
   describe "参考書の検索" do
+
     before :each do
       book = create(:book, name: "参考書1", author: "東京太郎", publisher: "東京出版", subject: "物理", user_id: user.id)
       book2 = create(:book, name: "教科書1", author: "神奈川次郎", publisher: "神奈川書房", subject: "生物", user_id: user.id)
     end
+
     context "登録されている参考書をタイトルで検索すると" do
       it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
@@ -420,6 +454,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
+
     context "登録されている参考書を著者名で検索すると" do
       it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
@@ -441,6 +476,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
+
     context "登録されている参考書を出版社名で検索すると" do
       it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
@@ -462,6 +498,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
+
     context "登録されている参考書を科目で検索すると" do
       it "キーワードが完全一致する参考書が表示される" do
         get search_books_books_path, params: {
@@ -483,6 +520,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(1)
       end
     end
+
     context "2件の参考書が登録されている状態で検索キーワードが2件の参考書に一致すると" do
       it "2件の参考書が表示される" do
         get search_books_books_path, params: {
@@ -495,6 +533,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(2)
       end
     end
+
     context "参考書にレビューが投稿されていると" do
       it "レビューの件数と平均評価が表示される" do
         book = create(:book, name: "問題集", user_id: user.id)
@@ -514,6 +553,7 @@ RSpec.describe "Books", type: :request do
         end
       end
     end
+
     context "参考書がお気に入りに追加されていると" do
       it "お気に入りの登録数が表示される" do
         user2 = create(:user)
@@ -529,6 +569,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books"][0]["favorite_books_count"]).to eq(2)
       end
     end
+
     context "ログインしていると" do
       it "検索結果で参考書をお気に入りに追加しているかを確認できる" do
         book = create(:book, name: "問題集", user_id: user.id)
@@ -542,6 +583,7 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books"][0]["check_favorite"]).to eq(1)
       end
     end
+
     context "登録されていない参考書を検索すると" do
       it "参考書が表示されない" do
         get search_books_books_path, params: {
@@ -552,8 +594,11 @@ RSpec.describe "Books", type: :request do
         expect(JSON.parse(response.body)["books_count"]).to eq(0)
       end
     end
+
   end
+
   describe "参考書情報の取得" do
+
     context "check_existenceで存在する参考書をチェックすると" do
       it "成功する" do
         book = create(:book, name: "参考書1", user_id: user.id)
@@ -564,6 +609,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
     context "check_existenceで存在する参考書をチェックすると" do
       it "失敗する" do
         create(:book, name: "参考書1", user_id: user.id)
@@ -573,6 +619,7 @@ RSpec.describe "Books", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
 

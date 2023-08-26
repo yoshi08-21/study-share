@@ -5,6 +5,7 @@ RSpec.describe "Users", type: :request do
   let(:user) { create(:user) }
 
   describe "ユーザー登録" do
+
     context "正しいパラメーターでユーザー登録すると" do
       it "ユーザー登録に成功する" do
         expect {
@@ -27,6 +28,7 @@ RSpec.describe "Users", type: :request do
         expect(user.email).to eq("kanagawa@sample.com")
       end
     end
+
     context "不正なパラメーターでユーザー登録すると" do
       it "ユーザー登録に失敗する" do
         expect {
@@ -42,8 +44,11 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(422)
       end
     end
+
   end
+
   describe "ユーザー編集" do
+
     context "正しいパラメーターでユーザー編集すると" do
       it "ユーザー編集に成功する" do
         expect(user.name).not_to eq("神奈川太郎")
@@ -73,6 +78,7 @@ RSpec.describe "Users", type: :request do
         end
       end
     end
+
     context "不正なパラメーターでユーザー編集すると" do
       it "ユーザー編集に失敗する" do
         patch user_path(user), params: {
@@ -97,8 +103,11 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "ユーザー削除" do
+
     context "admin属性のついていないユーザーを削除すると" do
       it "ユーザー削除に成功する" do
         user = create(:user)
@@ -109,6 +118,7 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(204)
       end
     end
+
     context "admin属性のついているユーザーを削除すると" do
       it "ユーザー削除に失敗する" do
         user = create(:user, admin: true)
@@ -120,14 +130,18 @@ RSpec.describe "Users", type: :request do
         expect(JSON.parse(response.body)["error"]).to eq("このユーザーは削除できません")
       end
     end
+
     context "ログインしていない(current_userがいない)と" do
       it "ユーザー削除に失敗する" do
         delete user_path(-1)
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "ユーザーのマイページ" do
+
     context "ログインした状態でマイページにアクセスすると" do
       it "自分の情報を取得できる" do
         user = create(:user, name: "東京一郎")
@@ -137,12 +151,14 @@ RSpec.describe "Users", type: :request do
         expect(JSON.parse(response.body)["user"]["name"]).to eq("東京一郎")
       end
     end
+
     context "ログインしていない状態でマイページにアクセスすると" do
       it "情報の取得に失敗する" do
         get user_path(-1)
         expect(response).to have_http_status(404)
       end
     end
+
     # context "投稿をしている状態でマイページにアクセスすると" do
     #   it "自分の投稿を取得できる" do
 
@@ -150,7 +166,9 @@ RSpec.describe "Users", type: :request do
 
     # end
   end
+
   describe "他ユーザーの詳細ページ" do
+
     context "存在する他ユーザーの詳細ページにアクセスすると" do
       it "他ユーザーの詳細情報を取得できる" do
         @user2 = create(:user, name: "京都二郎")
@@ -160,14 +178,18 @@ RSpec.describe "Users", type: :request do
         expect(JSON.parse(response.body)["user"]["name"]).to eq("京都二郎")
       end
     end
+
     context "存在しないユーザーの詳細ページにアクセスすると" do
       it "エラーになる" do
         get show_other_user_users_path(-1)
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "ユーザーメモ機能" do
+
     context "ログイン状態でユーザーメモを更新すると" do
       it "ユーザーメモの更新に成功する" do
         expect(user.memo).to eq(nil)
@@ -180,6 +202,7 @@ RSpec.describe "Users", type: :request do
         expect(JSON.parse(response.body)["memo"]).to eq("ユーザーメモ")
       end
     end
+
     context "未ログイン状態でユーザーメモを更新すると" do
       it "ユーザーメモの更新に失敗する" do
         patch save_user_memo_users_path, params: {
@@ -190,8 +213,11 @@ RSpec.describe "Users", type: :request do
         expect(response.body).to include("ユーザーが見つかりません")
       end
     end
+
   end
+
   describe "ユーザー情報の取得" do
+
     context "check_existenceで存在するユーザーをチェックすると" do
       it "成功する" do
         get check_existence_users_path, params: {
@@ -200,6 +226,7 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
     context "check_existenceで存在しないユーザーをチェックすると" do
       it "失敗する" do
         get check_existence_users_path, params: {
@@ -208,6 +235,7 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "ユーザーを正しいuidで検索すると" do
       it "検索に成功する" do
         image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
@@ -227,6 +255,7 @@ RSpec.describe "Users", type: :request do
         end
       end
     end
+
     context "ユーザーを不正なuidで検索すると" do
       it "検索に失敗する" do
         user = create(:user, name: "神奈川太郎", uid: "111")
@@ -237,6 +266,7 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
 

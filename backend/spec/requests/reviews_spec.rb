@@ -7,9 +7,11 @@ RSpec.describe "Reviews", type: :request do
   let(:review) { create(:review, user_id: user.id, book_id: book.id) }
 
   describe "レビューの一覧表示" do
+
     context "参考書に3件のレビューが投稿されていると" do
       it "3件のレビューが表示される" do
-        create(:review, title: "英語のレビュー", content: "英語のレビュー本文", book_id: book.id)
+        user = create(:user, name: "レビュー投稿者")
+        create(:review, title: "英語のレビュー", content: "英語のレビュー本文", user_id: user.id, book_id: book.id)
         create(:review, book_id: book.id)
         create(:review, book_id: book.id)
 
@@ -23,9 +25,11 @@ RSpec.describe "Reviews", type: :request do
           expect(json_response.length).to eq(3)
           expect(json_response[0]["title"]).to eq("英語のレビュー")
           expect(json_response[0]["content"]).to eq("英語のレビュー本文")
+          expect(json_response[0]["user"]["name"]).to eq("レビュー投稿者")
         end
       end
     end
+
     context "レビューにいいねがされていると" do
       it "いいねの件数が表示される" do
         user2 = create(:user)
@@ -39,6 +43,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body)[0]["favorite_reviews_count"]).to eq(2)
       end
     end
+
     context "参考書にレビューが投稿されていないと" do
       it "空の配列が返ってくる" do
         get book_reviews_path(book), params: {
@@ -48,6 +53,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body)).to eq([])
       end
     end
+
     context "参考書が存在しないと" do
       it "レビューの表示に失敗する" do
         get book_reviews_path(-1), params: {
@@ -56,9 +62,11 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
   describe "レビューの詳細表示" do
+
     context "存在するレビューの詳細ページに遷移すると" do
       it "レビューの詳細情報が表示される" do
         user = create(:user, name: "レビュー投稿者")
@@ -100,6 +108,7 @@ RSpec.describe "Reviews", type: :request do
         end
       end
     end
+
     context "レビューにいいねがされていると" do
       it "いいねの件数が表示される" do
         user2 = create(:user)
@@ -113,6 +122,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body)[0]["favorite_reviews_count"]).to eq(2)
       end
     end
+
     context "レビューが存在しないと" do
       it "レビューの表示に失敗する" do
         review = create(:review, title: "テストタイトル", content: "テスト本文", rating: 5, user_id: user.id, book_id: book.id)
@@ -121,6 +131,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "参考書が存在しないと" do
       it "レビューの表示に失敗する" do
         get book_review_path(-1, review), params: {
@@ -129,9 +140,11 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
   describe "レビューの新規投稿" do
+
     context "正しいパラメーターでレビューを投稿すると" do
       it "レビューの投稿に成功する" do
         expect {
@@ -154,6 +167,7 @@ RSpec.describe "Reviews", type: :request do
         end
       end
     end
+
     context "不正なパラメーターでレビューを投稿すると" do
       it "レビューの投稿に失敗する" do
         expect {
@@ -169,6 +183,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(422)
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "レビューの投稿に失敗する" do
         expect {
@@ -184,6 +199,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "参考書が存在しないと" do
       it "レビューの投稿に失敗する" do
         expect {
@@ -199,9 +215,11 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
   describe "レビューの編集" do
+
     context "正しいパラメーターでレビューを編集すると" do
       it "レビューの編集に成功する" do
         review = create(:review, rating: 5, title: "テストタイトル", content: "テスト本文", user_id: user.id, book_id: book.id)
@@ -229,6 +247,7 @@ RSpec.describe "Reviews", type: :request do
         end
       end
     end
+
     context "不正なパラメーターでレビューを編集すると" do
       it "レビューの編集に失敗する" do
         review = create(:review, rating: 5, title: "テストタイトル", content: "テスト本文", user_id: user.id, book_id: book.id)
@@ -244,6 +263,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(422)
       end
     end
+
     context "他人が投稿したレビューを編集すると" do
       it "レビューの編集に失敗する" do
         review = create(:review, rating: 5, title: "テストタイトル", content: "テスト本文", user_id: user.id, book_id: book.id)
@@ -261,6 +281,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "レビューの編集に失敗する" do
         patch book_review_path(book, review), params: {
@@ -274,6 +295,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "レビューが存在しないと" do
       it "レビューの編集に失敗する" do
         patch book_review_path(book, -1), params: {
@@ -287,9 +309,11 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
   describe "レビューの削除" do
+
     context "自分が作成したレビューを削除すると" do
       it "レビューの削除に成功する" do
         review
@@ -301,6 +325,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(204)
       end
     end
+
     context "他人が作成したレビューを削除すると" do
       it "レビューの削除に失敗する" do
         user2 = create(:user)
@@ -314,6 +339,7 @@ RSpec.describe "Reviews", type: :request do
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
+
     context "ログインしていない(current_userが存在しない)と" do
       it "レビューの削除に失敗する" do
         user = create(:user)
@@ -327,6 +353,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
     context "レビューが存在しないと" do
       it "レビューの削除に失敗する" do
         user = create(:user)
@@ -339,9 +366,11 @@ RSpec.describe "Reviews", type: :request do
         }.to change(Review, :count).by(0)
       end
     end
+
   end
 
   describe "レビュー情報の取得" do
+
     context "check_existenceで存在するレビューをチェックすると" do
       it "成功する" do
         review = create(:review, user_id: user.id, book_id: book.id)
@@ -352,6 +381,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
     context "check_existenceで存在しないレビューをチェックすると" do
       it "失敗する" do
         get check_existence_reviews_path, params: {
@@ -361,6 +391,7 @@ RSpec.describe "Reviews", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
 
 

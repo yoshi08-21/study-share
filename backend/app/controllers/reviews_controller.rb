@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+
   include SharedActions::AttachImage
   include SharedActions::DateTime
 
@@ -110,6 +111,7 @@ class ReviewsController < ApplicationController
     end
   end
 
+  # checkResourceExistence.jsから呼び出し
   def check_existence
     book = Book.find_by(id: params[:book_id])
     return head :not_found unless book

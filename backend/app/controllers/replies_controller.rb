@@ -6,6 +6,8 @@ class RepliesController < ApplicationController
 
   def index
     question = Question.find_by(id: params[:question_id])
+    return head :not_found unless question
+
     replies = Reply.with_attached_image
                     .includes(:question, user: { image_attachment: :blob })
                     .select("replies.*, (SELECT COUNT(*) FROM favorite_replies WHERE favorite_replies.reply_id = replies.id) AS favorite_replies_count")
@@ -46,6 +48,7 @@ class RepliesController < ApplicationController
     if current_user && !exist_reply_browsing_history?(current_user, reply)
       save_reply_browsing_history(current_user, reply)
     end
+
     render json: {
       book: book_json,
       question: question,
@@ -57,51 +60,62 @@ class RepliesController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:reply][:user_id])
+    return head :not_found unless current_user
+
     question = Question.includes(:user).find_by(id: params[:question_id])
+    return head :not_found unless question
+
     reply = current_user.replies.build(reply_params)
     reply.question_id = question.id
     if reply.save
       create_notification_reply(current_user, question.user, question, reply)
       render json: reply, status: 200
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { errors: reply.errors.full_messages }, status: 422
     end
   end
 
   def update
     current_user = User.find_by(id: params[:reply][:user_id])
+    return head :not_found unless current_user
+
     reply = Reply.find_by(id: params[:id])
+    return head :not_found unless reply
+
     author = reply.user
-    if validate_authorship(current_user, author)
-      if reply.update(reply_params)
-        image_url = reply.image.attached? ? rails_blob_url(reply.image) : nil
-        render json: { reply: reply, image_url: image_url }, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if reply.update(reply_params)
+      image_url = reply.image.attached? ? rails_blob_url(reply.image) : nil
+      render json: { reply: reply, image_url: image_url }, status: 200
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: reply.errors.full_messages }, status: 422
     end
   end
 
   def destroy
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     reply = Reply.find_by(id: params[:id])
+    return head :not_found unless reply
+
     author = reply.user
-    if validate_authorship(current_user, author)
-      if reply.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+    if reply.destroy
+      head :no_content
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: reply.errors.full_messages }, status: 422
     end
   end
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     reply = Reply.find_by(id: params[:reply_id])
+    return head :not_found unless reply
+
     favorite_reply = FavoriteReply.find_by(user_id: current_user.id, reply_id: reply.id) if current_user
     if favorite_reply
       render json: { is_favorite: true, favorite_reply_id: favorite_reply.id }
@@ -110,15 +124,18 @@ class RepliesController < ApplicationController
     end
   end
 
+  # checkResourceExistence.jsから呼び出し
   def check_existence
     book = Book.find_by(id: params[:book_id])
+    return head :not_found unless book
+
     question = Question.find_by(id: params[:question_id])
+    return head :not_found unless question
+
     reply = Reply.find_by(id: params[:id])
-    if book && question && reply
-      head :ok
-    else
-      head :not_found
-    end
+    return head :not_found unless reply
+
+    head :ok
   end
 
 
