@@ -401,11 +401,12 @@ export default {
     async submitReview(data) {
       try {
         const response = await axios.post(`/books/${this.params.id}/reviews`, {
+          review: {
             user_id: this.currentUser.id,
-            book_id: this.params.id,
             title: data.title,
             content: data.content,
             rating: data.rating
+            }
           }
         )
         console.log(response)

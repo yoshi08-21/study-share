@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  include SharedActions::AttachImage
   require 'httparty'
 
   def index
@@ -7,15 +8,9 @@ class BooksController < ApplicationController
     books = Book.includes(:reviews)
                   .with_attached_image
                   .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
-    return render json: [] if books.empty?
+    return render json: [] if books.blank?
 
-    books_with_images = books.map do |book|
-      if book.image.attached?
-        image_url = rails_blob_url(book.image)
-      end
-    book.as_json.merge(image: image_url)
-    end
-
+    books_with_images = attach_image_to_books(books)
     render json: books_with_images
   end
 
@@ -141,11 +136,9 @@ class BooksController < ApplicationController
 
   def check_existence
     book = Book.find_by(id: params[:id])
-    if book
-      head :ok
-    else
-      head :not_found
-    end
+    return head :not_found unless book
+
+    head :ok
   end
 
   def download_book_image
