@@ -377,9 +377,9 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "質問の編集が完了しました"
-        this.subjectQuestion.title = response.data.title
-        this.subjectQuestion.content = response.data.content
-        this.subjectQuestion.subject = response.data.subject
+        this.subjectQuestion.title = response.data.subject_question.title
+        this.subjectQuestion.content = response.data.subject_question.content
+        this.subjectQuestion.subject = response.data.subject_question.subject
         if (response.data.image_url) {
           this.subjectQuestion.image = response.data.image_url
         }

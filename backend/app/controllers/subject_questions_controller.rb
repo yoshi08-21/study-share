@@ -15,12 +15,13 @@ class SubjectQuestionsController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
+
     subject_question = SubjectQuestion.includes(user: { image_attachment: :blob })
                                       .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
                                       .find_by(id: params[:id])
     return head :not_found unless subject_question
     subject_question_json = attach_image_to_question(subject_question)
-    subject_question["created_at"] = format_japanese_time(subject_question.created_at)
+    subject_question_json["created_at"] = format_japanese_time(subject_question.created_at)
 
     subject_question_user = User.with_attached_image.find_by(id: subject_question.user_id)
     subject_question_user_json = attach_image_to_user(subject_question_user)
@@ -28,6 +29,7 @@ class SubjectQuestionsController < ApplicationController
     if current_user && !exist_subject_question_browsing_history?(current_user, subject_question)
       save_subject_question_browsing_history(current_user, subject_question)
     end
+
     render json: {
       subject_question: subject_question_json,
       subject_question_user: subject_question_user_json
@@ -36,48 +38,58 @@ class SubjectQuestionsController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:subject_question][:user_id])
+    return head :not_found unless current_user
+
     subject_question = current_user.subject_questions.build(subject_question_params)
     if subject_question.save
       render json: subject_question, status: 200
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { errors: subject_question.errors.full_messages }, status: 422
     end
   end
 
   def update
     current_user = User.find_by(id: params[:subject_question][:user_id])
+    return head :not_found unless current_user
+
     subject_question = SubjectQuestion.find_by(id: params[:id])
+    return head :not_found unless subject_question
+
     author = subject_question.user
-    if validate_authorship(current_user, author)
-      if subject_question.update(subject_question_params)
-        image_url = subject_question.image.attached? ? rails_blob_url(subject_question.image) : nil
-        render json: { subject_question: subject_question, image_url: image_url }, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if subject_question.update(subject_question_params)
+      image_url = subject_question.image.attached? ? rails_blob_url(subject_question.image) : nil
+      render json: { subject_question: subject_question, image_url: image_url }, status: 200
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: subject_question.errors.full_messages }, status: 422
     end
   end
 
   def destroy
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     subject_question = SubjectQuestion.find_by(id: params[:id])
+    return head :not_found unless subject_question
+
     author = subject_question.user
-    if validate_authorship(current_user, author)
-      if subject_question.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if subject_question.destroy
+      head :no_content
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { error: "エラーが発生しました" }, status: 400
     end
   end
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    return head :not_found unless subject_question
+
     favorite_subject_question = FavoriteSubjectQuestion.find_by(user_id: current_user.id, subject_question_id: subject_question.id) if current_user
     if favorite_subject_question
       render json: { is_favorite: true, favorite_subject_question_id: favorite_subject_question.id }
@@ -93,17 +105,14 @@ class SubjectQuestionsController < ApplicationController
                         .where("title LIKE ?", "%#{search_subject_questions_keyword}%")
                         .or(SubjectQuestion.where("content LIKE ?", "%#{search_subject_questions_keyword}%"))
                         .or(SubjectQuestion.where("subject LIKE ?", "%#{search_subject_questions_keyword}%"))
-    subject_questions_count = subject_questions.length
 
+    subject_questions_count = subject_questions.length
     subject_questions_with_images = attach_image_to_subject_questions(subject_questions)
-    if subject_questions
-      render json: {
-        subject_questions: subject_questions.as_json(include: :user),
-        subject_questions_count: subject_questions_count
-      }
-    else
-      render json: { results: [] }, status: :ok
-    end
+
+    render json: {
+      subject_questions: subject_questions.as_json(include: :user),
+      subject_questions_count: subject_questions_count
+    }
   end
 
   # 渡されたidで検索した質問の科目と同じ科目の質問を返す
@@ -118,11 +127,9 @@ class SubjectQuestionsController < ApplicationController
   # checkResourceExistence.jsから呼び出し
   def check_existence
     subject_question = SubjectQuestion.find_by(id: params[:id])
-    if subject_question
-      head :ok
-    else
-      head :not_found
-    end
+    return head :not_found unless subject_question
+
+    head :ok
   end
 
   private

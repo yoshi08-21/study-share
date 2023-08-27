@@ -10,7 +10,7 @@ RSpec.describe "Questions", type: :request do
 
     context "参考書に3件の質問が投稿されていると" do
       it "3件の質問が表示される" do
-        user = create(:user, name: "レビュー投稿者")
+        user = create(:user, name: "質問投稿者")
         create(:question, title: "日本史の質問", content: "日本史の質問本文", user_id: user.id, book_id: book.id)
         create(:question, user_id: user.id, book_id: book.id)
         create(:question, user_id: user.id, book_id: book.id)
@@ -22,7 +22,7 @@ RSpec.describe "Questions", type: :request do
           expect(json_response.length).to eq(3)
           expect(json_response[0]["title"]).to eq("日本史の質問")
           expect(json_response[0]["content"]).to eq("日本史の質問本文")
-          expect(json_response[0]["user"]["name"]).to eq("レビュー投稿者")
+          expect(json_response[0]["user"]["name"]).to eq("質問投稿者")
         end
       end
     end
@@ -71,7 +71,7 @@ RSpec.describe "Questions", type: :request do
 
     context "質問が3件投稿されている状態で全質問一覧ページに遷移すると" do
       it "3件の質問が表示される" do
-        user = create(:user, name: "レビュー投稿者")
+        user = create(:user, name: "質問投稿者")
         create(:question, title: "日本史の質問", content: "日本史の質問本文", user_id: user.id, book_id: book.id)
         create(:question, user_id: user.id, book_id: book.id)
         create(:question, user_id: user.id, book_id: book.id)
@@ -83,7 +83,7 @@ RSpec.describe "Questions", type: :request do
           expect(json_response.length).to eq(3)
           expect(json_response[0]["title"]).to eq("日本史の質問")
           expect(json_response[0]["content"]).to eq("日本史の質問本文")
-          expect(json_response[0]["user"]["name"]).to eq("レビュー投稿者")
+          expect(json_response[0]["user"]["name"]).to eq("質問投稿者")
         end
       end
     end
@@ -283,9 +283,9 @@ RSpec.describe "Questions", type: :request do
         expect {
           post book_questions_path(book), params: {
             question: {
-              title: "",
-              content: "",
-              subject: "",
+              title: "テスト質問タイトル",
+              content: "テスト質問本文",
+              subject: book.subject,
               user_id: -1,
               book_id: book.id
             }
@@ -300,9 +300,9 @@ RSpec.describe "Questions", type: :request do
         expect {
           post book_questions_path(-1), params: {
             question: {
-              title: "",
-              content: "",
-              subject: "",
+              title: "テスト質問タイトル",
+              content: "テスト質問本文",
+              subject: book.subject,
               user_id: user.id,
             }
           }
@@ -390,9 +390,9 @@ RSpec.describe "Questions", type: :request do
       it "質問の編集に失敗する" do
         patch book_question_path(book, question), params: {
           question: {
-            title: "",
-            content: "",
-            subject: "",
+            title: "テスト質問タイトル",
+            content: "テスト質問本文",
+            subject: book.subject,
             user_id: -1,
             book_id: book.id
           }
@@ -405,9 +405,9 @@ RSpec.describe "Questions", type: :request do
       it "質問の編集に失敗する" do
         patch book_question_path(book, -1), params: {
           question: {
-            title: "",
-            content: "",
-            subject: "",
+            title: "テスト質問タイトル",
+            content: "テスト質問本文",
+            subject: book.subject,
             user_id: user.id,
           }
         }
