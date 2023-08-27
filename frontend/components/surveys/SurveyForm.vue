@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br><br>
     <v-form>
       <v-col
         class="d-flex"
@@ -19,6 +20,7 @@
       <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2"></v-text-field>
       <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3"></v-text-field>
       <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4"></v-text-field>
+      <br>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       <br>
       *添付できる画像のファイルサイズは3MBまでです
@@ -40,27 +42,22 @@
         </v-alert>
       </template>
       <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
-      <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <template v-if="error === true">
-            <v-btn color="primary" disabled @click="confirmationDialog = true">確認画面を表示する</v-btn>
-          </template>
-          <template v-else>
-            <v-btn color="primary" @click="confirmationDialog = true">確認画面を表示する</v-btn>
-          </template>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="$emit('closeDialog')">閉じる</v-btn>
-        </v-col>
-      </v-row>
+      <submit-button
+        :error="error"
+        :buttonTitle="'確認画面を表示する'"
+        @submitForm="confirmationDialog = true"
+        @closeDialog="$emit('closeDialog')"
+      >
+      </submit-button>
     </v-form>
 
     <!-- アンケート内容確認ダイアログ -->
     <v-dialog v-model="confirmationDialog">
       <v-card>
-        <v-card-title>
+        <v-card-title style="justify-content: center;">
           <h2>内容確認</h2>
         </v-card-title>
+        <br>
         <v-card-text>
           <br><h3>選択されたジャンル: {{ selectedGenre }}</h3><br>
           <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo></v-text-field>
@@ -69,6 +66,7 @@
           <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo></v-text-field>
           <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo></v-text-field>
           <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo></v-text-field>
+          <br>
           <v-file-input
             v-model="selectedFile"
             accept="image/jpeg, image/png"
@@ -83,14 +81,13 @@
 
         </v-card-text>
         <p>＊一度作成したアンケートは編集できません。アンケートの内容を変更したい場合、一度アンケートを削除したあとに、もう一度アンケートを作成してください。</p>
-        <v-row>
-        <v-col cols="2" class="align-start custom-button-margin">
-          <v-btn color="primary" @click="submitForm"> 登録する</v-btn>
-        </v-col>
-        <v-col cols="2" class="align-start">
-          <v-btn @click="confirmationDialog = false">戻る</v-btn>
-        </v-col>
-      </v-row>
+        <submit-button
+          :error="error"
+          :buttonTitle="'作成する'"
+          @submitForm="submitForm"
+          @closeDialog="confirmationDialog = false"
+        >
+        </submit-button>
       </v-card>
     </v-dialog>
 
@@ -100,10 +97,12 @@
 
 <script>
 import { VTextField } from 'vuetify/lib'
+import SubmitButton from '../global/SubmitButton.vue'
 
 export default {
   components: {
     VTextField,
+    SubmitButton,
   },
   data() {
     return {

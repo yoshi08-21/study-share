@@ -92,7 +92,7 @@
     <!-- アンケート新規登録ダイアログ -->
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title>
+        <v-card-title style="justify-content: center;">
           <h2>新規アンケートを作成する</h2>
         </v-card-title>
         <v-card-text>
