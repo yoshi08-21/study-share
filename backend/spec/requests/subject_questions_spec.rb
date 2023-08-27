@@ -336,8 +336,6 @@ RSpec.describe "SubjectQuestions", type: :request do
       end
     end
 
-
-
   end
 
   describe "質問情報の取得" do

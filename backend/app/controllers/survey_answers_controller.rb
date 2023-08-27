@@ -2,28 +2,24 @@ class SurveyAnswersController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:survey_answer][:user_id])
+    return head :not_found unless current_user
+
     survey = Survey.includes(:user).find_by(id: params[:survey_answer][:survey_id])
-    if is_survey_closed?(survey)
-      render json: { error: "アンケートは締め切られています" }, status: 400
-      return
-    end
-    if exist_survey_answer?(current_user, survey)
-      render json: { error: "すでに回答済みです" }, status: 400
-      return
-    end
-    survey_user = survey.user
-    if current_user == survey_user
-      render json: { error: "自分のアンケートには回答できません" }, status: 400
-      return
-    end
+    return head :not_found unless survey
+
+    return render json: { error: "アンケートは締め切られています" }, status: 422 if is_survey_closed?(survey)
+
+    survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
+    return head :not_found unless survey_answer
+
+    return render json: { error: "自分のアンケートには回答できません" }, status: 422 if current_user.id == survey.user_id
 
     survey_answer = current_user.survey_answers.build(survey_answer_params)
-
     if survey_answer.save
       create_notification_survey_answer(current_user, survey.user, survey)
       render json: survey_answer
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { error: survey_answer.errors.full_messages }, status: 422
     end
   end
 
@@ -43,11 +39,16 @@ class SurveyAnswersController < ApplicationController
 
   def check_current_user_answer
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     survey = Survey.find_by(id: params[:survey_id])
+    return head :not_found unless survey
+
     survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
     if survey_answer
       render json: survey_answer, status: :ok
     else
+      # エラーとして扱う必要がない場合は204が適切
       head :no_content
     end
   end
@@ -78,14 +79,6 @@ class SurveyAnswersController < ApplicationController
       end
     end
 
-    def check_survey_answer(current_user, survey, survey_answer)
-      selected_survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id, survey_answer: survey_answer.id)
-      if selected_survey_answer
-        return true
-      else
-        return false
-      end
-    end
 
     # アンケートが締め切られていたらtrueを返す
     def is_survey_closed?(survey)

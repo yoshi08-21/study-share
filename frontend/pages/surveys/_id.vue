@@ -114,14 +114,27 @@
           <v-card height="150px">
             <v-row style="height: 100%;">
               <v-col cols="6" class="d-flex justify-center align-center">
-                <v-btn
-                @click="closeSurveyConfimation = true"
-                  x-large
-                  color="info"
-                  width="300"
-                >
-                  アンケートを締め切る
-                </v-btn>
+                <template v-if="survey.status === false">
+                  <v-btn
+                    @click="closeSurveyConfimation = true"
+                    x-large
+                    color="info"
+                    width="300"
+                  >
+                    アンケートを締め切る
+                  </v-btn>
+                </template>
+                <template v-else>
+                  <v-btn
+                    @click="closeSurveyConfimation = true"
+                    x-large
+                    color="info"
+                    width="300"
+                    disabled
+                  >
+                    アンケートを締め切る
+                  </v-btn>
+                </template>
               </v-col>
               <v-col cols="6" class="d-flex justify-center align-center">
                 <v-btn
@@ -543,7 +556,7 @@ export default {
         this.snackbar = true
         this.flashMessage = "アンケートを締め切りました"
         this.closeSurveyConfimation = false
-        this.survey.status = 1
+        this.survey.status = true
       } catch (error) {
         console.log(error)
       }
