@@ -82,13 +82,11 @@ RSpec.describe "Replies", type: :request do
       end
 
       it "返信に関連する質問の情報が表示される" do
-        image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
-        image = fixture_file_upload(image_path, 'image/png')
         user = create(:user, name: "返信投稿者")
         question_user = create(:user, name: "質問投稿者")
         book = create(:book, name: "世界史の教科書", user_id: user.id)
         question = create(:question, title: "テスト質問タイトル", content: "テスト質問本文", user_id: question_user.id, book_id: book.id)
-        reply = create(:reply, content: "テスト返信本文", image: image, question_id: question.id, user_id: user.id)
+        reply = create(:reply, content: "テスト返信本文", question_id: question.id, user_id: user.id)
         favorite_question = create(:favorite_question, user_id: user.id, question_id: question.id)
 
         get book_question_reply_path(book, question, reply)
