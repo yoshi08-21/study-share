@@ -301,40 +301,63 @@
 
 
     <!-- アンケート締め切りの確認ダイアログ -->
-    <v-dialog v-model="closeSurveyConfimation">
-      <v-card>
-        <v-card-title>
-          アンケートを締め切ると、以降は回答ができなくなります。
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            アンケートを締め切りますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="closeSurvey">アンケートを締め切る</v-btn>
-          <v-btn @click="closeSurveyConfimation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <v-dialog
+    v-model="closeSurveyConfimation"
+    width="800"
+  >
+    <v-card height="300">
+      <v-row class="d-flex justify-center">
+        <v-col>
+          <v-card-title style="height: 120px;">
+            <v-alert type="info" dense text prominent border="left" width="100%">
+              アンケートを締め切ると、以降は回答ができなくなります
+            </v-alert>
+          </v-card-title>
+          <v-card-text style="text-align: center; height: 90px;">
+            <h1>
+              アンケートを締め切りますか？
+            </h1>
+          </v-card-text>
+          <v-card-actions>
+            <v-row>
+              <v-col cols="6" class="d-flex justify-center">
+                <v-btn
+                @click="closeSurvey"
+                large
+                width="300"
+                color="error"
+                dark
+                >
+                  アンケートを締め切る
+                </v-btn>
+              </v-col>
+              <v-col cols="6" class="d-flex justify-center">
+                <v-btn
+                @click="closeSurveyConfimation = false"
+                large
+                width="300"
+
+                >
+                  戻る
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-dialog>
+
+
 
     <!-- アンケート削除の確認ダイアログ -->
-    <v-dialog v-model="showDeleteConfirmation">
-      <v-card>
-        <v-card-title>
-          削除したアンケートは復元できません！
-        </v-card-title>
-        <v-card-text>
-          <strong>
-            アンケートを削除しますか？
-          </strong>
-        </v-card-text>
-        <v-card-actions class="justify-content-center">
-          <v-btn @click="deleteSurvey">削除する</v-btn>
-          <v-btn @click="showDeleteConfirmation=false">戻る</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <delete-confirmation-dialog
+      :showDeleteConfirmation="showDeleteConfirmation"
+      :contentTitle="'アンケート'"
+      @deleteContent="deleteSurvey"
+      @closeDeleteConfirmation="showDeleteConfirmation = false"
+    >
+    </delete-confirmation-dialog>
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <v-dialog v-model="showFullImage">
@@ -380,10 +403,11 @@
 import SurveyResultLinears from '../../components/surveys/SurveyResultLinears.vue'
 import FavoriteButton from '../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../components/global/ContentNavigator.vue'
+import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { SurveyResultLinears, FavoriteButton, ContentNavigator },
+  components: { SurveyResultLinears, FavoriteButton, ContentNavigator, DeleteConfirmationDialog },
   async asyncData({ params, store }) {
     try {
 
