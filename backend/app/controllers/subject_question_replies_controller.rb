@@ -20,6 +20,7 @@ class SubjectQuestionRepliesController < ApplicationController
 
   def show
     current_user = User.find_by(id: params[:current_user_id])
+
     subject_question = SubjectQuestion.includes(user: { image_attachment: :blob })
                                       .select("subject_questions.*, (SELECT COUNT(*) FROM subject_question_replies WHERE subject_question_replies.subject_question_id = subject_questions.id) AS subject_question_replies_count, (SELECT COUNT(*) FROM favorite_subject_questions WHERE favorite_subject_questions.subject_question_id = subject_questions.id) AS favorite_subject_questions_count")
                                       .find_by(id: params[:subject_question_id])
@@ -41,6 +42,7 @@ class SubjectQuestionRepliesController < ApplicationController
     if current_user && !exist_subject_question_reply_browsing_history?(current_user, subject_question_reply)
       save_subject_question_reply_browsing_history(current_user, subject_question_reply)
     end
+
     render json: {
       subject_question: subject_question,
       subject_question_user: subject_question_user_json,
@@ -51,51 +53,63 @@ class SubjectQuestionRepliesController < ApplicationController
 
   def create
     current_user = User.find_by(id: params[:subject_question_reply][:user_id])
+    return head :not_found unless current_user
+
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:subject_question_id])
+    return head :not_found unless subject_question
+
     subject_question_reply = current_user.subject_question_replies.build(subject_question_reply_params)
     subject_question_reply.subject_question_id = subject_question.id
     if subject_question_reply.save
       create_notification_subject_question_reply(current_user, subject_question.user, subject_question, subject_question_reply)
       render json: subject_question_reply, status: 200
     else
-      render json: { error: "エラーが発生しました" }, status: 400
+      render json: { errors: subject_question_reply.errors.full_messages }, status: 422
     end
   end
 
   def update
     current_user = User.find_by(id: params[:subject_question_reply][:user_id])
+    return head :not_found unless current_user
+
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
+    return head :not_found unless subject_question_reply
+
     author = subject_question_reply.user
-    if validate_authorship(current_user, author)
-      if subject_question_reply.update(subject_question_reply_params)
-        image_url = subject_question_reply.image.attached? ? rails_blob_url(subject_question_reply.image) : nil
-        render json: { subject_question_reply: subject_question_reply, image_url: image_url }, status: 200
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if subject_question_reply.update(subject_question_reply_params)
+      image_url = subject_question_reply.image.attached? ? rails_blob_url(subject_question_reply.image) : nil
+      render json: { subject_question_reply: subject_question_reply, image_url: image_url }, status: 200
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: subject_question_reply.errors.full_messages }, status: 422
     end
   end
 
   def destroy
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
+    return head :not_found unless subject_question_reply
+
     author = subject_question_reply.user
-    if validate_authorship(current_user, author)
-      if subject_question_reply.destroy
-        head :no_content
-      else
-        render json: { error: "エラーが発生しました" }, status: 400
-      end
+    return render json: { error: "権限がありません" }, status: 422 unless validate_authorship(current_user, author)
+
+    if subject_question_reply.destroy
+      head :no_content
     else
-      render json: { error: "権限がありません" }, status: 400
+      render json: { errors: subject_question_reply.errors.full_messages }, status: 422
     end
   end
 
   def is_favorite
     current_user = User.find_by(id: params[:user_id])
+    return head :not_found unless current_user
+
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:subject_question_reply_id])
+    return head :not_found unless subject_question_reply
+
     favorite_subject_question_reply = FavoriteSubjectQuestionReply.find_by(user_id: current_user.id, subject_question_reply_id: subject_question_reply.id) if current_user
     if favorite_subject_question_reply
       render json: { is_favorite: true, favorite_subject_question_reply_id: favorite_subject_question_reply.id }
@@ -104,9 +118,25 @@ class SubjectQuestionRepliesController < ApplicationController
     end
   end
 
+
+  # checkResourceExistence.jsから呼び出し
+  def check_existence
+    subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
+    return head :not_found unless subject_question
+
+    subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
+    return head :not_found unless subject_question_reply
+
+    head :ok
+  end
+
   def create_sample_notification
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     sample_user = User.find_by(id: params[:sample_user_id])
+    return head :not_found unless sample_user
+
     current_user_question = current_user.subject_questions.first
     if current_user_question.nil?
       current_user_question = current_user.subject_questions.create(
@@ -115,29 +145,15 @@ class SubjectQuestionRepliesController < ApplicationController
         subject: "国語"
       )
     end
+
     sample_user_new_reply = sample_user.subject_question_replies.create(
       content: "通知確認用サンプル返信",
       subject_question_id: current_user_question.id
     )
     create_notification_subject_question_reply(sample_user, current_user, current_user_question, sample_user_new_reply)
-    if sample_user_new_reply
-      render json: sample_user_new_reply
-    else
-      render json: sample_user_new_reply.errors
-    end
-  end
 
-  # checkResourceExistence.jsから呼び出し
-  def check_existence
-    subject_question = SubjectQuestion.find_by(id: params[:subject_question_id])
-    subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
-    if subject_question && subject_question_reply
-      head :ok
-    else
-      head :not_found
-    end
+    render json: sample_user_new_reply
   end
-
 
 
   private
