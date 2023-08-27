@@ -6,18 +6,52 @@ RSpec.describe "SubjectQuestions", type: :request do
   let(:subject_question) { create(:subject_question, user_id: user.id) }
 
   describe "質問の一覧表示" do
+
     context "質問が3件投稿されている状態で全科目別質問一覧ページに遷移すると" do
       it "3件の質問が表示される" do
-        subject_question
+        user = create(:user, name: "質問投稿者")
+        create(:subject_question, title: "テスト質問", content: "テスト質問本文", subject: "古文", user_id: user.id)
         create(:subject_question, user_id: user.id)
         create(:subject_question, user_id: user.id)
 
         get subject_questions_path
         expect(response).to have_http_status(200)
-        expect(JSON.parse(response.body).length).to eq(3)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response.length).to eq(3)
+          expect(json_response[0]["title"]).to eq("テスト質問")
+          expect(json_response[0]["content"]).to eq("テスト質問本文")
+          expect(json_response[0]["subject"]).to eq("古文")
+          expect(json_response[0]["user"]["name"]).to eq("質問投稿者")
+        end
       end
     end
-    context "質問が投稿されていない状態で全科目別質問一覧ページに遷移すると" do
+
+    context "質問にいいねがされていると" do
+      it "いいねの件数が表示される" do
+        user2 = create(:user)
+        create(:favorite_subject_question, user_id: user.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question, user_id: user2.id, subject_question_id: subject_question.id)
+
+        get subject_questions_path
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)[0]["favorite_subject_questions_count"]).to eq(2)
+      end
+    end
+
+    context "質問に返信が投稿されていると" do
+      it "返信の件数が表示される" do
+        create(:subject_question_reply, user_id: user.id, subject_question_id: subject_question.id)
+        create(:subject_question_reply, user_id: user.id, subject_question_id: subject_question.id)
+
+        get subject_questions_path
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)[0]["subject_question_replies_count"]).to eq(2)
+      end
+    end
+
+    context "質問が投稿されていないと" do
       it "空の配列が返ってくる" do
         get subject_questions_path
         expect(response).to have_http_status(200)
@@ -25,8 +59,11 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)).to eq([])
       end
     end
+
   end
+
   describe "質問の詳細表示" do
+
     context "存在する質問の詳細ページに遷移すると" do
       it "質問の詳細情報が取得できる" do
         image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
@@ -34,9 +71,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         user = create(:user, name: "質問投稿者")
         subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", image: image, user_id: user.id)
 
-        get subject_question_path(subject_question), params: {
-          current_user_id: user.id
-        }
+        get subject_question_path(subject_question)
         expect(response).to have_http_status(200)
 
         json_response = JSON.parse(response.body)
@@ -49,7 +84,31 @@ RSpec.describe "SubjectQuestions", type: :request do
         end
       end
     end
-    context "存在しない質問の詳細ページに遷移すると" do
+
+    context "質問にいいねがされていると" do
+      it "いいねの件数が表示される" do
+        user2 = create(:user)
+        create(:favorite_subject_question, user_id: user.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question, user_id: user2.id, subject_question_id: subject_question.id)
+
+        get subject_question_path(subject_question)
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["subject_question"]["favorite_subject_questions_count"]).to eq(2)
+      end
+    end
+
+    context "質問に返信が投稿されていると" do
+      it "返信の件数が表示される" do
+        create(:subject_question_reply, user_id: user.id, subject_question_id: subject_question.id)
+        create(:subject_question_reply, user_id: user.id, subject_question_id: subject_question.id)
+
+        get subject_question_path(subject_question)
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)["subject_question"]["subject_question_replies_count"]).to eq(2)
+      end
+    end
+
+    context "質問が存在しないと" do
       it "質問の取得に失敗する" do
         get subject_question_path(-1), params: {
           current_user_id: user.id
@@ -57,8 +116,11 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "質問の新規投稿" do
+
     context "正しいパラメーターで質問を投稿すると" do
       it "質問の投稿に成功する" do
         image_path = Rails.root.join("spec", "fixtures", "files", "no_image.png")
@@ -89,6 +151,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_question"]["image"]).to include("no_image.png")
       end
     end
+
     context "不正なパラメーターで質問を投稿すると" do
       it "質問の投稿に失敗する" do
         expect {
@@ -101,12 +164,30 @@ RSpec.describe "SubjectQuestions", type: :request do
             }
           }
         }.to change(SubjectQuestion, :count).by(0)
-        expect(response).to have_http_status(400)
-        expect(JSON.parse(response.body)["error"]).to eq("エラーが発生しました")
+        expect(response).to have_http_status(422)
       end
     end
+
+    context "ログインしていない(current_userが存在しない)と" do
+      it "質問の投稿に失敗する" do
+        expect {
+          post subject_questions_path, params: {
+            subject_question: {
+              title: "テスト質問タイトル",
+              content: "テスト質問本文",
+              subject: "世界史",
+              user_id: -1,
+            }
+          }
+        }.to change(SubjectQuestion, :count).by(0)
+        expect(response).to have_http_status(404)
+      end
+    end
+
   end
+
   describe "質問の編集" do
+
     context "正しいパラメーターで質問を編集すると" do
       it "質問の編集に成功する" do
         subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
@@ -139,6 +220,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         end
       end
     end
+
     context "不正なパラメーターで質問を編集すると" do
       it "質問の編集に失敗する" do
         subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
@@ -151,10 +233,10 @@ RSpec.describe "SubjectQuestions", type: :request do
             user_id: user.id,
           }
         }
-        expect(response).to have_http_status(400)
-        expect(JSON.parse(response.body)["error"]).to eq("エラーが発生しました")
+        expect(response).to have_http_status(422)
       end
     end
+
     context "他人が投稿した質問を編集すると" do
       it "質問の編集に失敗する" do
         subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
@@ -168,12 +250,43 @@ RSpec.describe "SubjectQuestions", type: :request do
             user_id: user2.id,
           }
         }
-        expect(response).to have_http_status(400)
+        expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
       end
     end
+
+    context "ログインしていない(current_userが存在しない)と" do
+      it "質問の編集に失敗する" do
+        patch subject_question_path(subject_question), params: {
+          subject_question: {
+            title: "テスト質問タイトル",
+            content: "テスト質問本文",
+            subject: "世界史",
+            user_id: -1,
+          }
+        }
+        expect(response).to have_http_status(404)
+      end
+    end
+
+    context "質問が存在しない" do
+      it "質問の編集に失敗する" do
+        patch subject_question_path(-1), params: {
+          subject_question: {
+              title: "テスト質問タイトル",
+              content: "テスト質問本文",
+              subject: "世界史",
+              user_id: user.id,
+            }
+          }
+        expect(response).to have_http_status(404)
+      end
+    end
+
   end
+
   describe "質問の削除" do
+
     context "自分が作成した質問を削除すると" do
       it "質問の削除に成功する" do
         subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
@@ -185,6 +298,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(response).to have_http_status(204)
       end
     end
+
     context "他人が作成した質問を削除すると" do
       it "質問の削除に失敗する" do
         user2 = create(:user)
@@ -194,12 +308,40 @@ RSpec.describe "SubjectQuestions", type: :request do
             current_user_id: user2.id
           }
         }.to change(SubjectQuestion, :count).by(0)
-        expect(response).to have_http_status(400)
-        expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
+        expect(response).to have_http_status(422)
       end
     end
+
+    context "ログインしていない(current_userが存在しない)と" do
+      it "質問の削除に失敗する" do
+        subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
+        expect {
+          delete subject_question_path(subject_question), params: {
+            current_user_id: -1
+          }
+        }.to change(SubjectQuestion, :count).by(0)
+        expect(response).to have_http_status(404)
+      end
+    end
+
+    context "質問が存在しないと" do
+      it "質問の削除に失敗する" do
+        subject_question = create(:subject_question, title: "テストタイトル", content: "テスト本文", subject: "地理", user_id: user.id)
+        expect {
+          delete subject_question_path(-1), params: {
+            current_user_id: user.id
+          }
+        }.to change(SubjectQuestion, :count).by(0)
+        expect(response).to have_http_status(404)
+      end
+    end
+
+
+
   end
+
   describe "質問情報の取得" do
+
     context "check_existenceで存在する質問をチェックすると" do
       it "成功する" do
         get check_existence_subject_questions_path, params: {
@@ -208,6 +350,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(response).to have_http_status(200)
       end
     end
+
     context "check_existenceで存在しない質問をチェックすると" do
       it "失敗する" do
         get check_existence_subject_questions_path, params: {
@@ -216,12 +359,16 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(response).to have_http_status(404)
       end
     end
+
   end
+
   describe "質問の検索機能" do
+
     before :each do
       subject_question = create(:subject_question, title: "質問です", content: "to不定詞について教えてください", subject: "英文法", user_id: user.id)
       subject_question2 = create(:subject_question, title: "疑問があります", content: "織田信長とはどんな人ですか？", subject: "日本史", user_id: user.id)
     end
+
     context "質問をタイトルで検索すると" do
       it "キーワードが完全一致する質問が表示される" do
         get search_subject_questions_subject_questions_path, params: {
@@ -241,6 +388,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_questions_count"]).to eq(1)
       end
     end
+
     context "質問を本文で検索すると" do
       it "キーワードが完全一致する質問が表示される" do
         get search_subject_questions_subject_questions_path, params: {
@@ -260,6 +408,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_questions_count"]).to eq(1)
       end
     end
+
     context "質問を科目で検索すると" do
       it "キーワードが完全一致する質問が表示される" do
         get search_subject_questions_subject_questions_path, params: {
@@ -279,6 +428,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_questions_count"]).to eq(1)
       end
     end
+
     context "2件の質問が投稿されている状態で検索キーワードが2件の質問に一致すると" do
       it "2件の質問が表示される" do
         get search_subject_questions_subject_questions_path, params: {
@@ -290,6 +440,7 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_questions_count"]).to eq(2)
       end
     end
+
     context "検索キーワードが質問に一致しないと" do
       it "質問が表示されない" do
         get search_subject_questions_subject_questions_path, params: {
@@ -299,8 +450,11 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body)["subject_questions_count"]).to eq(0)
       end
     end
+
   end
+
   describe "渡された質問の科目と同じ科目の質問を返す(questions_to_specific_subject)" do
+
     context "科目:英文法の質問が渡されると" do
       it "科目:英文法の質問の配列が返される" do
         subject_question1 = create(:subject_question, title: "英文法の教科書", content: "テスト本文", subject: "英文法", user_id: user.id)
@@ -315,7 +469,23 @@ RSpec.describe "SubjectQuestions", type: :request do
         expect(JSON.parse(response.body).length).to eq(2)
       end
     end
+
+    context "渡された科目の質問質問が存在しないと" do
+      it "質問の取得に失敗する" do
+        subject_question1 = create(:subject_question, title: "英文法の教科書", content: "テスト本文", subject: "英文法", user_id: user.id)
+        subject_question2 = create(:subject_question, title: "英作文の教科書", content: "テスト本文", subject: "英作文", user_id: user.id)
+        subject_question3 = create(:subject_question, title: "英単語の教科書", content: "テスト本文", subject: "英単語", user_id: user.id)
+        subject_question4 = create(:subject_question, title: "英文法の教科書2", content: "テスト本文", subject: "英文法", user_id: user.id)
+
+        get questions_to_specific_subject_subject_questions_path, params: {
+          subject_question_id: -1
+        }
+        expect(response).to have_http_status(404)
+      end
+    end
+
   end
+
 
 
 
