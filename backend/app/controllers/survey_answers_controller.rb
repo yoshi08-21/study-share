@@ -9,10 +9,10 @@ class SurveyAnswersController < ApplicationController
 
     return render json: { error: "アンケートは締め切られています" }, status: 422 if is_survey_closed?(survey)
 
-    survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
-    return head :not_found unless survey_answer
-
     return render json: { error: "自分のアンケートには回答できません" }, status: 422 if current_user.id == survey.user_id
+
+    survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
+    return render json: { error: "すでに回答済みです" }, status: 422 if survey_answer
 
     survey_answer = current_user.survey_answers.build(survey_answer_params)
     if survey_answer.save
@@ -68,17 +68,6 @@ class SurveyAnswersController < ApplicationController
     def survey_answer_params
       params.require(:survey_answer).permit(:selected_option, :user_id, :survey_id)
     end
-
-    def exist_survey_answer?(current_user, survey)
-      survey_answer = SurveyAnswer.find_by(user_id: current_user.id, survey_id: survey.id)
-      #  ifの代わりに !!answerとも書ける
-      if survey_answer
-        return true
-      else
-        return false
-      end
-    end
-
 
     # アンケートが締め切られていたらtrueを返す
     def is_survey_closed?(survey)
