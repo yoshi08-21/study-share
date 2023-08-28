@@ -76,7 +76,9 @@ Rails.application.routes.draw do
       get "check_existence"
     end
   end
+
   resources :browsing_histories, only: [:index]
+
   resources :notifications, only: [:index] do
     collection do
       get "check_unread_notifications"

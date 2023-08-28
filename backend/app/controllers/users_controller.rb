@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def show_other_user
-    user = User.find_by(id: params[:id])
+    user = User.with_attached_image.find_by(id: params[:id])
     return head :not_found unless user
 
     if user.image.attached?

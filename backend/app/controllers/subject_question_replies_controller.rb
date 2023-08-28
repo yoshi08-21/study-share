@@ -152,7 +152,6 @@ class SubjectQuestionRepliesController < ApplicationController
     )
     create_notification_subject_question_reply(sample_user, current_user, current_user_question, sample_user_new_reply)
 
-    render json: sample_user_new_reply
   end
 
 

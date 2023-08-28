@@ -3,6 +3,17 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
 
   let(:user) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:book) { create(:book, user_id: user.id) }
+  let(:review) { create(:review, user_id: user.id, book_id: book.id) }
+  let(:question) { create(:question, user_id: user.id ,book_id: book.id) }
+  let(:reply) { create(:reply, user_id: user.id, question_id: question.id) }
+  let(:subject_question) { create(:subject_question, user_id: user.id) }
+  let(:subject_question_reply) { create(:subject_question_reply, user_id: user.id, subject_question_id: subject_question.id) }
+  let(:survey) { create(:survey, user_id: user.id) }
+  let(:survey_answer) { create(:survey_answer, user_id: user2.id, survey_id: survey.id) }
+
+
 
   describe "ユーザー登録" do
 
@@ -152,6 +163,149 @@ RSpec.describe "Users", type: :request do
       end
     end
 
+    context "レビューを投稿している状態でマイページにアクセスすると" do
+      it "自分が投稿したレビューを取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        review = create(:review, title: "サンプルレビュータイトル", content: "サンプルレビュー本文", rating: 5, user_id: user.id, book_id: book.id)
+        create(:favorite_review, user_id: user2.id, review_id: review.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_reviews"].length).to eq(1)
+          expect(json_response["my_reviews"][0]["title"]).to eq("サンプルレビュータイトル")
+          expect(json_response["my_reviews"][0]["content"]).to eq("サンプルレビュー本文")
+          expect(json_response["my_reviews"][0]["rating"]).to eq(5)
+          expect(json_response["my_reviews"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_reviews"][0]["book"]["name"]).to eq("サンプル参考書")
+          expect(json_response["my_reviews"][0]["favorite_reviews_count"]).to eq(1)
+          expect(json_response["my_favorite_reviews_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "質問を投稿している状態でマイページにアクセスすると" do
+      it "自分が投稿した質問を取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        question = create(:question, title: "サンプル質問タイトル", content: "サンプル質問本文", user_id: user.id, book_id: book.id)
+        create(:favorite_question, user_id: user2.id, question_id: question.id)
+        create(:reply, user_id: user2.id, question_id: question.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_questions"].length).to eq(1)
+          expect(json_response["my_questions"][0]["title"]).to eq("サンプル質問タイトル")
+          expect(json_response["my_questions"][0]["content"]).to eq("サンプル質問本文")
+          expect(json_response["my_questions"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_questions"][0]["book"]["name"]).to eq("サンプル参考書")
+          expect(json_response["my_questions"][0]["favorite_questions_count"]).to eq(1)
+          expect(json_response["my_questions"][0]["replies_count"]).to eq(1)
+          expect(json_response["my_favorite_questions_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "返信を投稿している状態でマイページにアクセスすると" do
+      it "自分が投稿した返信を取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        question = create(:question, title: "サンプル質問タイトル", content: "サンプル質問本文", user_id: user.id, book_id: book.id)
+        reply = create(:reply, content: "サンプル返信本文", user_id: user.id, question_id: question.id)
+        create(:favorite_reply, user_id: user2.id, reply_id: reply.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_replies"].length).to eq(1)
+          expect(json_response["my_replies"][0]["content"]).to eq("サンプル返信本文")
+          expect(json_response["my_replies"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_replies"][0]["question"]["title"]).to eq("サンプル質問タイトル")
+          expect(json_response["my_replies"][0]["favorite_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_replies_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "質問(科目別)を投稿している状態でマイページにアクセスすると" do
+      it "自分が投稿した質問(科目別)を取得できる" do
+        user = create(:user, name: "東京一郎")
+        subject_question = create(:subject_question, title: "サンプル科目別質問タイトル", content: "サンプル科目別質問本文", subject: "漢文", user_id: user.id)
+        create(:subject_question_reply, user_id: user2.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question, user_id: user2.id, subject_question_id: subject_question.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_subject_questions"].length).to eq(1)
+          expect(json_response["my_subject_questions"][0]["title"]).to eq("サンプル科目別質問タイトル")
+          expect(json_response["my_subject_questions"][0]["content"]).to eq("サンプル科目別質問本文")
+          expect(json_response["my_subject_questions"][0]["subject"]).to eq("漢文")
+          expect(json_response["my_subject_questions"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_subject_questions"][0]["favorite_subject_questions_count"]).to eq(1)
+          expect(json_response["my_subject_questions"][0]["subject_question_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_subject_questions_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "返信(科目別)を投稿している状態でマイページにアクセスすると" do
+      it "自分が投稿した返信(科目別)を取得できる" do
+        user = create(:user, name: "東京一郎")
+        subject_question = create(:subject_question, title: "サンプル科目別質問タイトル", content: "サンプル科目別質問本文", subject: "漢文", user_id: user.id)
+        subject_question_reply = create(:subject_question_reply, content: "サンプル科目別質問返信本文", user_id: user.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question_reply, user_id: user2.id, subject_question_reply_id: subject_question_reply.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_subject_question_replies"].length).to eq(1)
+          expect(json_response["my_subject_question_replies"][0]["content"]).to eq("サンプル科目別質問返信本文")
+          expect(json_response["my_subject_question_replies"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_subject_question_replies"][0]["subject_question"]["title"]).to eq("サンプル科目別質問タイトル")
+          expect(json_response["my_subject_question_replies"][0]["favorite_subject_question_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_subject_question_replies_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "アンケートを作成している状態でマイページにアクセスすると" do
+      it "自分が作成したアンケートを取得できる" do
+        user = create(:user, name: "東京一郎")
+        survey = create(:survey, title: "サンプルアンケートタイトル", content: "サンプルアンケート本文", genre: "国語", status: false, user_id: user.id)
+        create(:survey_answer, user_id: user2.id, survey_id: survey.id)
+        create(:favorite_survey, user_id: user2.id, survey_id: survey.id)
+
+        get user_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_surveys"].length).to eq(1)
+          expect(json_response["my_surveys"][0]["title"]).to eq("サンプルアンケートタイトル")
+          expect(json_response["my_surveys"][0]["content"]).to eq("サンプルアンケート本文")
+          expect(json_response["my_surveys"][0]["genre"]).to eq("国語")
+          expect(json_response["my_surveys"][0]["status"]).to eq(false)
+          expect(json_response["my_surveys"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_surveys"][0]["survey_answers_count"]).to eq(1)
+          expect(json_response["my_surveys"][0]["favorite_surveys_count"]).to eq(1)
+          expect(json_response["my_favorite_surveys_count"]).to eq(1)
+        end
+      end
+    end
+
     context "ログインしていない状態でマイページにアクセスすると" do
       it "情報の取得に失敗する" do
         get user_path(-1)
@@ -159,12 +313,6 @@ RSpec.describe "Users", type: :request do
       end
     end
 
-    # context "投稿をしている状態でマイページにアクセスすると" do
-    #   it "自分の投稿を取得できる" do
-
-    #   end
-
-    # end
   end
 
   describe "他ユーザーの詳細ページ" do
@@ -183,6 +331,149 @@ RSpec.describe "Users", type: :request do
       it "エラーになる" do
         get show_other_user_users_path(-1)
         expect(response).to have_http_status(404)
+      end
+    end
+
+    context "レビューを投稿している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが投稿したレビューを取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        review = create(:review, title: "サンプルレビュータイトル", content: "サンプルレビュー本文", rating: 5, user_id: user.id, book_id: book.id)
+        create(:favorite_review, user_id: user2.id, review_id: review.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_reviews"].length).to eq(1)
+          expect(json_response["my_reviews"][0]["title"]).to eq("サンプルレビュータイトル")
+          expect(json_response["my_reviews"][0]["content"]).to eq("サンプルレビュー本文")
+          expect(json_response["my_reviews"][0]["rating"]).to eq(5)
+          expect(json_response["my_reviews"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_reviews"][0]["book"]["name"]).to eq("サンプル参考書")
+          expect(json_response["my_reviews"][0]["favorite_reviews_count"]).to eq(1)
+          expect(json_response["my_favorite_reviews_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "質問を投稿している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが投稿した質問を取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        question = create(:question, title: "サンプル質問タイトル", content: "サンプル質問本文", user_id: user.id, book_id: book.id)
+        create(:favorite_question, user_id: user2.id, question_id: question.id)
+        create(:reply, user_id: user2.id, question_id: question.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_questions"].length).to eq(1)
+          expect(json_response["my_questions"][0]["title"]).to eq("サンプル質問タイトル")
+          expect(json_response["my_questions"][0]["content"]).to eq("サンプル質問本文")
+          expect(json_response["my_questions"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_questions"][0]["book"]["name"]).to eq("サンプル参考書")
+          expect(json_response["my_questions"][0]["favorite_questions_count"]).to eq(1)
+          expect(json_response["my_questions"][0]["replies_count"]).to eq(1)
+          expect(json_response["my_favorite_questions_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "返信を投稿している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが投稿した返信を取得できる" do
+        user = create(:user, name: "東京一郎")
+        book = create(:book, name: "サンプル参考書", user_id: user.id)
+        question = create(:question, title: "サンプル質問タイトル", content: "サンプル質問本文", user_id: user.id, book_id: book.id)
+        reply = create(:reply, content: "サンプル返信本文", user_id: user.id, question_id: question.id)
+        create(:favorite_reply, user_id: user2.id, reply_id: reply.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_replies"].length).to eq(1)
+          expect(json_response["my_replies"][0]["content"]).to eq("サンプル返信本文")
+          expect(json_response["my_replies"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_replies"][0]["question"]["title"]).to eq("サンプル質問タイトル")
+          expect(json_response["my_replies"][0]["favorite_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_replies_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "質問(科目別)を投稿している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが投稿した質問(科目別)を取得できる" do
+        user = create(:user, name: "東京一郎")
+        subject_question = create(:subject_question, title: "サンプル科目別質問タイトル", content: "サンプル科目別質問本文", subject: "漢文", user_id: user.id)
+        create(:subject_question_reply, user_id: user2.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question, user_id: user2.id, subject_question_id: subject_question.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_subject_questions"].length).to eq(1)
+          expect(json_response["my_subject_questions"][0]["title"]).to eq("サンプル科目別質問タイトル")
+          expect(json_response["my_subject_questions"][0]["content"]).to eq("サンプル科目別質問本文")
+          expect(json_response["my_subject_questions"][0]["subject"]).to eq("漢文")
+          expect(json_response["my_subject_questions"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_subject_questions"][0]["favorite_subject_questions_count"]).to eq(1)
+          expect(json_response["my_subject_questions"][0]["subject_question_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_subject_questions_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "返信(科目別)を投稿している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが投稿した返信(科目別)を取得できる" do
+        user = create(:user, name: "東京一郎")
+        subject_question = create(:subject_question, title: "サンプル科目別質問タイトル", content: "サンプル科目別質問本文", subject: "漢文", user_id: user.id)
+        subject_question_reply = create(:subject_question_reply, content: "サンプル科目別質問返信本文", user_id: user.id, subject_question_id: subject_question.id)
+        create(:favorite_subject_question_reply, user_id: user2.id, subject_question_reply_id: subject_question_reply.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_subject_question_replies"].length).to eq(1)
+          expect(json_response["my_subject_question_replies"][0]["content"]).to eq("サンプル科目別質問返信本文")
+          expect(json_response["my_subject_question_replies"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_subject_question_replies"][0]["subject_question"]["title"]).to eq("サンプル科目別質問タイトル")
+          expect(json_response["my_subject_question_replies"][0]["favorite_subject_question_replies_count"]).to eq(1)
+          expect(json_response["my_favorite_subject_question_replies_count"]).to eq(1)
+        end
+      end
+    end
+
+    context "アンケートを作成している状態で他ユーザーのページにアクセスすると" do
+      it "他ユーザーが作成したアンケートを取得できる" do
+        user = create(:user, name: "東京一郎")
+        survey = create(:survey, title: "サンプルアンケートタイトル", content: "サンプルアンケート本文", genre: "国語", status: false, user_id: user.id)
+        create(:survey_answer, user_id: user2.id, survey_id: survey.id)
+        create(:favorite_survey, user_id: user2.id, survey_id: survey.id)
+
+        get show_other_user_users_path(user)
+        expect(response).to have_http_status(200)
+
+        json_response = JSON.parse(response.body)
+        aggregate_failures do
+          expect(json_response["my_surveys"].length).to eq(1)
+          expect(json_response["my_surveys"][0]["title"]).to eq("サンプルアンケートタイトル")
+          expect(json_response["my_surveys"][0]["content"]).to eq("サンプルアンケート本文")
+          expect(json_response["my_surveys"][0]["genre"]).to eq("国語")
+          expect(json_response["my_surveys"][0]["status"]).to eq(false)
+          expect(json_response["my_surveys"][0]["user"]["name"]).to eq("東京一郎")
+          expect(json_response["my_surveys"][0]["survey_answers_count"]).to eq(1)
+          expect(json_response["my_surveys"][0]["favorite_surveys_count"]).to eq(1)
+          expect(json_response["my_favorite_surveys_count"]).to eq(1)
+        end
       end
     end
 

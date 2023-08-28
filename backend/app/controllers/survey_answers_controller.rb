@@ -28,6 +28,7 @@ class SurveyAnswersController < ApplicationController
     selected_survey_answer = SurveyAnswer.find_by(user_id: survey_answer[:user_id], survey_id: survey_answer[:survey_id], selected_option: survey_answer[:selected_option])
     if selected_survey_answer
       selected_survey_answer.destroy
+      delete_notification_survey_answer(survey_answer[:user_id], survey_answer[:survey_id])
       head :no_content
     else
       exist_survey_answer = SurveyAnswer.find_by(user_id: survey_answer[:user_id], survey_id: survey_answer[:survey_id])
@@ -92,6 +93,14 @@ class SurveyAnswersController < ApplicationController
         action_to: "SurveyAnswer"
       )
       survey_answer_notification.save if survey_answer_notification.valid?
+    end
+
+    def delete_notification_survey_answer(action_user_id, survey_id)
+      survey_answer_notification = Notification.find_by(action_user_id: action_user_id, survey_id: survey_id, action_type: "SurveyAnswer")
+      if survey_answer_notification
+        survey_answer_notification.destroy
+      end
+
     end
 
 end
