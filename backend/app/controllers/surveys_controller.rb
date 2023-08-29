@@ -15,7 +15,7 @@ class SurveysController < ApplicationController
   end
 
   def show
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
 
     survey = Survey.with_attached_image
                     .includes( user: { image_attachment: :blob })
@@ -38,7 +38,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:survey][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = current_user.surveys.build(survey_params)
@@ -50,7 +50,7 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:id])
@@ -67,7 +67,7 @@ class SurveysController < ApplicationController
   end
 
   def close_survey
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:id])
@@ -87,7 +87,7 @@ class SurveysController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:id])

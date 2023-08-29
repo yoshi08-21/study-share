@@ -35,7 +35,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:book][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = current_user.books.build(book_params)
@@ -58,7 +58,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:book][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:id])
@@ -93,7 +93,7 @@ class BooksController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:book_id])
@@ -155,7 +155,7 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:name, :author, :publisher, :subject, :image, :user_id, :description)
+      params.require(:book).permit(:name, :author, :publisher, :subject, :image, :description)
     end
 
     def exist_book_browsing_history?(current_user, book)

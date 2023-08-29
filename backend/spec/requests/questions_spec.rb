@@ -241,9 +241,9 @@ RSpec.describe "Questions", type: :request do
               content: "テスト質問本文",
               subject: book.subject,
               image: image,
-              user_id: user.id,
               book_id: book.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Question, :count).by(1)
         expect(response).to have_http_status(200)
@@ -269,9 +269,9 @@ RSpec.describe "Questions", type: :request do
               title: "",
               content: "",
               subject: "",
-              user_id: user.id,
               book_id: book.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Question, :count).by(0)
         expect(response).to have_http_status(422)
@@ -286,9 +286,9 @@ RSpec.describe "Questions", type: :request do
               title: "テスト質問タイトル",
               content: "テスト質問本文",
               subject: book.subject,
-              user_id: -1,
               book_id: book.id
-            }
+            },
+            current_user_id: -1,
           }
         }.to change(Question, :count).by(0)
         expect(response).to have_http_status(404)
@@ -303,8 +303,8 @@ RSpec.describe "Questions", type: :request do
               title: "テスト質問タイトル",
               content: "テスト質問本文",
               subject: book.subject,
-              user_id: user.id,
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Question, :count).by(0)
         expect(response).to have_http_status(404)
@@ -334,9 +334,9 @@ RSpec.describe "Questions", type: :request do
             content: "変更後本文",
             subject: "世界史",
             image: image,
-            user_id: user.id,
             book_id: book.id
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(200)
 
@@ -359,9 +359,9 @@ RSpec.describe "Questions", type: :request do
             title: "",
             content: "",
             subject: "",
-            user_id: user.id,
             book_id: book.id
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(422)
       end
@@ -377,9 +377,9 @@ RSpec.describe "Questions", type: :request do
             title: "変更後タイトル",
             content: "変更後本文",
             subject: "世界史",
-            user_id: user2.id,
             book_id: book.id
-          }
+          },
+          current_user_id: user2.id,
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
@@ -393,9 +393,9 @@ RSpec.describe "Questions", type: :request do
             title: "テスト質問タイトル",
             content: "テスト質問本文",
             subject: book.subject,
-            user_id: -1,
             book_id: book.id
-          }
+          },
+          current_user_id: -1,
         }
         expect(response).to have_http_status(404)
       end
@@ -408,8 +408,8 @@ RSpec.describe "Questions", type: :request do
             title: "テスト質問タイトル",
             content: "テスト質問本文",
             subject: book.subject,
-            user_id: user.id,
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(404)
       end

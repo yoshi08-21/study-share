@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:review][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:book_id])
@@ -97,7 +97,7 @@ class ReviewsController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     review = Review.find_by(id: params[:review_id])

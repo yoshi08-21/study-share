@@ -420,7 +420,7 @@ export default {
       const [surveyResponse, surveyAnswersResponse, surveysResponse] = await Promise.all([
         axios.get(`/surveys/${params.id}`, {
           params: {
-            user_id: currentUserId
+            current_user_id: currentUserId
           }
         }),
         axios.get(`/surveys/${params.id}/survey_answers/get_survey_answers`),
@@ -518,13 +518,13 @@ export default {
       const [currentUserAnswerResponse, isFavoriteResponse] = await Promise.all([
         axios.get(`/surveys/${this.$route.params.id}/survey_answers/check_current_user_answer`, {
           params: {
-            user_id: currentUserId,
+            current_user_id: currentUserId,
             survey_id: this.$route.params.id
           }
         }),
         axios.get(`/surveys/${this.$route.params.id}/is_favorite`, {
           params: {
-            user_id: currentUserId,
+            current_user_id: currentUserId,
           }
         })
       ])
@@ -557,7 +557,7 @@ export default {
       try {
         const response = await axios.delete(`surveys/${this.survey.id}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)
@@ -573,7 +573,7 @@ export default {
     async closeSurvey() {
       try {
         const response = await axios.patch(`/surveys/${this.survey.id}/close_survey`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response.data)
         this.snackbarColor = "primary"
@@ -590,9 +590,9 @@ export default {
         const response = await axios.post(`/surveys/${this.survey.id}/survey_answers`, {
           survey_answer: {
             selected_option: selectedOption,
-            user_id: this.currentUser.id,
             survey_id: this.survey.id
-          }
+          },
+          current_user_id: this.currentUser.id,
         })
         console.log(response.data)
         this.surveyAnswers.push(response.data)
@@ -612,9 +612,9 @@ export default {
         const response = await axios.patch(`/surveys/${this.survey.id}/survey_answers/change_survey_answer`, {
           survey_answer: {
             selected_option: selectedOption,
-            user_id: this.currentUser.id,
-            survey_id: this.survey.id
-          }
+            survey_id: this.survey.id,
+          },
+          current_user_id: this.currentUser.id,
         })
         console.log(response.data)
         // レスポンスで処理を切り替える
@@ -658,7 +658,7 @@ export default {
     async addToFavorite() {
       try {
         const response = await axios.post(`/surveys/${this.survey.id}/favorite_surveys`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response)
         this.snackbarColor = "primary"
@@ -678,7 +678,7 @@ export default {
       try {
         const response = await axios.delete(`/surveys/${this.survey.id}/favorite_surveys/${this.favoriteSurveyId}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)

@@ -48,7 +48,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:question][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:question][:book_id])
@@ -64,7 +64,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:question][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     question = Question.find_by(id: params[:id])
@@ -99,7 +99,7 @@ class QuestionsController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     question = Question.find_by(id: params[:question_id])

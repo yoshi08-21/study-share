@@ -16,9 +16,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(SurveyAnswer, :count).by(1)
         expect(response).to have_http_status(200)
@@ -33,9 +33,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(422)
@@ -50,9 +50,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(422)
@@ -68,9 +68,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(422)
@@ -85,9 +85,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: -1,
               survey_id: survey.id
-            }
+            },
+            current_user_id: -1
           }
         }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(404)
@@ -101,9 +101,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           post survey_survey_answers_path(-1), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user.id,
               survey_id: -1
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(404)
@@ -125,9 +125,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           patch change_survey_answer_survey_survey_answers_path(survey, survey_answer), params: {
               survey_answer: {
                 selected_option: 2,
-                user_id: user.id,
                 survey_id: survey.id
-              }
+              },
+              current_user_id: user.id
             }
           }.to change(SurveyAnswer, :count).by(0)
         expect(response).to have_http_status(200)
@@ -144,9 +144,9 @@ RSpec.describe "SurveyAnswers", type: :request do
           patch change_survey_answer_survey_survey_answers_path(survey, survey_answer), params: {
               survey_answer: {
                 selected_option: 1,
-                user_id: user.id,
                 survey_id: survey.id
-              }
+              },
+              current_user_id: user.id
             }
           }.to change(SurveyAnswer, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -163,7 +163,7 @@ RSpec.describe "SurveyAnswers", type: :request do
         survey_answer = create(:survey_answer, user_id: user.id, survey_id: survey.id)
 
         get check_current_user_answer_survey_survey_answers_path(survey), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(200)
         expect(JSON.parse(response.body)["user_id"]).to eq(user.id)
@@ -175,7 +175,7 @@ RSpec.describe "SurveyAnswers", type: :request do
         survey = create(:survey, status: false , user_id: user2.id)
 
         get check_current_user_answer_survey_survey_answers_path(survey), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(204)
       end
@@ -187,7 +187,7 @@ RSpec.describe "SurveyAnswers", type: :request do
         survey_answer = create(:survey_answer, user_id: user.id, survey_id: survey.id)
 
         get check_current_user_answer_survey_survey_answers_path(survey), params: {
-          user_id: -1
+          current_user_id: -1
         }
         expect(response).to have_http_status(404)
       end
@@ -199,7 +199,7 @@ RSpec.describe "SurveyAnswers", type: :request do
         survey_answer = create(:survey_answer, user_id: user.id, survey_id: survey.id)
 
         get check_current_user_answer_survey_survey_answers_path(-1), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(404)
       end

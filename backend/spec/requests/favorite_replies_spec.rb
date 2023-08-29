@@ -16,7 +16,7 @@ RSpec.describe "FavoriteReplies", type: :request do
 
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(1)
         expect(response).to have_http_status(200)
@@ -26,7 +26,7 @@ RSpec.describe "FavoriteReplies", type: :request do
       it "いいねに失敗する" do
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -36,7 +36,7 @@ RSpec.describe "FavoriteReplies", type: :request do
       it "いいねに失敗する" do
         expect {
           post reply_favorite_replies_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -48,7 +48,7 @@ RSpec.describe "FavoriteReplies", type: :request do
 
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(422)
@@ -63,7 +63,7 @@ RSpec.describe "FavoriteReplies", type: :request do
 
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(422)
@@ -77,7 +77,7 @@ RSpec.describe "FavoriteReplies", type: :request do
 
         expect {
           delete reply_favorite_reply_path(reply, favorite_reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -88,7 +88,7 @@ RSpec.describe "FavoriteReplies", type: :request do
         favorite_reply = create(:favorite_reply, user_id: user.id, reply_id: reply.id)
         expect {
           delete reply_favorite_reply_path(reply, favorite_reply), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -99,7 +99,7 @@ RSpec.describe "FavoriteReplies", type: :request do
         favorite_reply = create(:favorite_reply, user_id: user.id, reply_id: reply.id)
         expect {
           delete reply_favorite_reply_path(-1, favorite_reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -111,7 +111,7 @@ RSpec.describe "FavoriteReplies", type: :request do
         favorite_reply = create(:favorite_reply, user_id: user2.id, reply_id: reply.id)
         expect {
           delete reply_favorite_reply_path(reply, favorite_reply), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReply, :count).by(0)
         expect(response).to have_http_status(404)

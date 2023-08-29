@@ -329,7 +329,7 @@ export default {
 
       const response = await axios.get("subject_questions/is_favorite", {
         params: {
-          user_id: currentUserId,
+          current_user_id: currentUserId,
           subject_question_id: this.$route.params.id
         }
       })
@@ -363,7 +363,7 @@ export default {
     async editSubjectQuestion(data) {
       const formData = new FormData()
 
-      formData.append("subject_question[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("subject_question[title]", data.title);
       formData.append("subject_question[content]", data.content);
       formData.append("subject_question[subject]", data.subject);
@@ -409,7 +409,7 @@ export default {
     async addToFavorite() {
       try {
         const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/favorite_subject_questions`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response)
         this.snackbarColor = "primary"
@@ -429,7 +429,7 @@ export default {
       try {
         const response = await axios.delete(`/subject_questions/${this.subjectQuestion.id}/favorite_subject_questions/${this.favoriteSubjectQuestionId}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)
@@ -456,7 +456,7 @@ export default {
     async submitSubjectQuestionReply(data) {
       const formData = new FormData()
 
-      formData.append("subject_question_reply[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("subject_question_reply[content]", data.content);
       if (data.image) {
           formData.append("subject_question_reply[image]", data.image);

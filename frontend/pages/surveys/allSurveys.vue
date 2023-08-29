@@ -180,7 +180,7 @@ export default {
     async submitSurvey(data) {
       const formData = new FormData()
 
-      formData.append("survey[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("survey[genre]", data.genre);
       formData.append("survey[title]", data.title);
       formData.append("survey[content]", data.content);

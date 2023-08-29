@@ -20,7 +20,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -49,7 +49,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -62,7 +62,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete review_favorite_review_path(review, favorite_review), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -77,7 +77,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post question_favorite_questions_path(question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -106,7 +106,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post question_favorite_questions_path(question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -119,7 +119,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete question_favorite_question_path(question, favorite_question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -133,7 +133,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -162,7 +162,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post reply_favorite_replies_path(reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -175,7 +175,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete reply_favorite_reply_path(reply, favorite_reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -189,7 +189,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -218,7 +218,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -231,7 +231,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete subject_question_favorite_subject_question_path(subject_question, favorite_subject_question), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -245,7 +245,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post subject_question_reply_favorite_subject_question_replies_path(subject_question_reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -274,7 +274,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post subject_question_reply_favorite_subject_question_replies_path(subject_question_reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -287,7 +287,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete subject_question_reply_favorite_subject_question_reply_path(subject_question_reply, favorite_subject_question_reply), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -301,7 +301,7 @@ RSpec.describe "Notifications", type: :request do
       it "通知が作成される" do
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -330,7 +330,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(0)
       end
@@ -343,7 +343,7 @@ RSpec.describe "Notifications", type: :request do
 
         expect {
           delete survey_favorite_survey_path(survey, favorite_survey), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Notification, :count).by(-1)
       end
@@ -361,9 +361,9 @@ RSpec.describe "Notifications", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "テスト返信本文",
-              user_id: user2.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -398,9 +398,9 @@ RSpec.describe "Notifications", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "テスト返信本文",
-              user_id: user3.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user3.id,
           }
         }.to change(Notification, :count).by(2)
         expect(response).to have_http_status(200)
@@ -434,9 +434,9 @@ RSpec.describe "Notifications", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "テスト返信本文",
-              user_id: user2.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -451,9 +451,9 @@ RSpec.describe "Notifications", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "テスト返信本文",
-              user_id: user.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Notification, :count).by(0)
         expect(response).to have_http_status(200)
@@ -472,9 +472,9 @@ RSpec.describe "Notifications", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: user2.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -509,9 +509,9 @@ RSpec.describe "Notifications", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: user3.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user3.id,
           }
         }.to change(Notification, :count).by(2)
         expect(response).to have_http_status(200)
@@ -545,9 +545,9 @@ RSpec.describe "Notifications", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: user2.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -562,9 +562,9 @@ RSpec.describe "Notifications", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: user.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Notification, :count).by(0)
         expect(response).to have_http_status(200)
@@ -583,9 +583,9 @@ RSpec.describe "Notifications", type: :request do
           post survey_survey_answers_path(survey), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user2.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(1)
         expect(response).to have_http_status(200)
@@ -618,9 +618,9 @@ RSpec.describe "Notifications", type: :request do
           patch change_survey_answer_survey_survey_answers_path(survey, survey_answer), params: {
             survey_answer: {
               selected_option: 1,
-              user_id: user2.id,
               survey_id: survey.id
-            }
+            },
+            current_user_id: user2.id,
           }
         }.to change(Notification, :count).by(-1)
         expect(response).to have_http_status(204)

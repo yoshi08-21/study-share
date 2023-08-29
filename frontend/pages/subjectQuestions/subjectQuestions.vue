@@ -186,7 +186,7 @@ export default {
     async submitSubjectQuestion(data) {
       const formData = new FormData()
 
-      formData.append("subject_question[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("subject_question[title]", data.title);
       formData.append("subject_question[content]", data.content);
       formData.append("subject_question[subject]", data.subject);

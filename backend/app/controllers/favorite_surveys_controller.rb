@@ -1,7 +1,7 @@
 class FavoriteSurveysController < ApplicationController
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:survey_id])
@@ -19,7 +19,7 @@ class FavoriteSurveysController < ApplicationController
   end
 
   def destroy
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:survey_id])

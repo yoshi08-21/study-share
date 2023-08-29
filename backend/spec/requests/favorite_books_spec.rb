@@ -11,7 +11,7 @@ RSpec.describe "FavoriteBooks", type: :request do
       it "参考書がお気に入りに登録される" do
         expect {
           post book_favorite_books_path(book), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(1)
         expect(response).to have_http_status(200)
@@ -22,7 +22,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           post book_favorite_books_path(book), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(0)
         puts response.body
@@ -33,7 +33,7 @@ RSpec.describe "FavoriteBooks", type: :request do
       it "お気に入り登録に失敗する" do
         expect {
           post book_favorite_books_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(0)
         expect(response).to have_http_status(404)
@@ -43,7 +43,7 @@ RSpec.describe "FavoriteBooks", type: :request do
       it "お気に入り登録に失敗する" do
         expect {
           post book_favorite_books_path(book), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteBook, :count).by(0)
         expect(response).to have_http_status(404)
@@ -56,7 +56,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete book_favorite_book_path(book, favorite_book), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -67,7 +67,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete book_favorite_book_path(-1, favorite_book), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(0)
         expect(response).to have_http_status(404)
@@ -78,7 +78,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete book_favorite_book_path(book, favorite_book), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteBook, :count).by(0)
         expect(response).to have_http_status(404)
@@ -90,7 +90,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user2.id, book_id: book.id)
         expect {
           delete book_favorite_book_path(book, favorite_book), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteBook, :count).by(0)
         expect(response).to have_http_status(404)
@@ -104,7 +104,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete favorite_books_destroy_from_item_list_path, params: {
-            user_id: user.id,
+            current_user_id: user.id,
             book_id: book.id
           }
         }.to change(FavoriteBook, :count).by(-1)
@@ -116,7 +116,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete favorite_books_destroy_from_item_list_path, params: {
-            user_id: user.id,
+            current_user_id: user.id,
             book_id: -1
           }
         }.to change(FavoriteBook, :count).by(0)
@@ -128,7 +128,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user.id, book_id: book.id)
         expect {
           delete favorite_books_destroy_from_item_list_path, params: {
-            user_id: -1,
+            current_user_id: -1,
             book_id: book.id
           }
         }.to change(FavoriteBook, :count).by(0)
@@ -141,7 +141,7 @@ RSpec.describe "FavoriteBooks", type: :request do
         favorite_book = create(:favorite_book, user_id: user2.id, book_id: book.id)
         expect {
           delete favorite_books_destroy_from_item_list_path, params: {
-            user_id: user.id,
+            current_user_id: user.id,
             book_id: book.id
           }
         }.to change(FavoriteBook, :count).by(0)

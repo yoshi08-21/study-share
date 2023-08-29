@@ -132,7 +132,6 @@
         <v-card-title style="justify-content: center;">
           <h2>参考書を編集する</h2>
         </v-card-title>
-        </v-card-title>
         <v-card-text>
           <edit-book
             :name="book.name"
@@ -335,7 +334,7 @@ export default {
 
       const response = await axios.get("books/is_favorite", {
         params: {
-          user_id: currentUserId,
+          current_user_id: currentUserId,
           book_id: this.$route.params.id
         }
       })
@@ -360,7 +359,7 @@ export default {
       if (this.currentUser) {
         try {
           const response = await axios.post(`/books/${this.params.id}/favorite_books`, {
-            user_id: this.currentUser.id,
+            current_user_id: this.currentUser.id,
             book_id: this.params.id
           })
           console.log(response.data)
@@ -382,7 +381,7 @@ export default {
       try {
         const response = await axios.delete(`/books/${this.params.id}/favorite_books/${this.favoriteBookId}`, {
           params: {
-            user_id: this.currentUser.id,
+            current_user_id: this.currentUser.id,
             book_id: this.params.id
           }
         })
@@ -402,11 +401,11 @@ export default {
       try {
         const response = await axios.post(`/books/${this.params.id}/reviews`, {
           review: {
-            user_id: this.currentUser.id,
             title: data.title,
             content: data.content,
             rating: data.rating
-            }
+          },
+          current_user_id: this.currentUser.id,
           }
         )
         console.log(response)
@@ -423,7 +422,7 @@ export default {
 
       const formData = new FormData()
 
-      formData.append("question[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("question[book_id]", this.params.id);
       formData.append("question[title]", data.title);
       formData.append("question[content]", data.content);
@@ -464,7 +463,7 @@ export default {
     async editBook(data) {
       const formData = new FormData()
 
-      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("book[name]", data.name);
       formData.append("book[author]", data.author);
       formData.append("book[publisher]", data.publisher);

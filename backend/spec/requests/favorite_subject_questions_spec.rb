@@ -14,7 +14,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
 
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(1)
         expect(response).to have_http_status(200)
@@ -24,7 +24,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
       it "いいねに失敗する" do
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(404)
@@ -34,7 +34,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
       it "いいねに失敗する" do
         expect {
           post subject_question_favorite_subject_questions_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(404)
@@ -46,7 +46,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
 
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(422)
@@ -61,7 +61,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
 
         expect {
           post subject_question_favorite_subject_questions_path(subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(422)
@@ -75,7 +75,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
 
         expect {
           delete subject_question_favorite_subject_question_path(subject_question, favorite_subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -86,7 +86,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
         favorite_subject_question = create(:favorite_subject_question, user_id: user.id, subject_question_id: subject_question.id)
         expect {
           delete subject_question_favorite_subject_question_path(subject_question, favorite_subject_question), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(404)
@@ -97,7 +97,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
         favorite_subject_question = create(:favorite_subject_question, user_id: user.id, subject_question_id: subject_question.id)
         expect {
           delete subject_question_favorite_subject_question_path(-1 ,favorite_subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(404)
@@ -109,7 +109,7 @@ RSpec.describe "FavoriteSubjectQuestions", type: :request do
         favorite_subject_question = create(:favorite_subject_question, user_id: user2.id, subject_question_id: subject_question.id)
         expect {
           delete subject_question_favorite_subject_question_path(subject_question, favorite_subject_question), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSubjectQuestion, :count).by(0)
         expect(response).to have_http_status(404)

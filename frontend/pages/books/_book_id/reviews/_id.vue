@@ -227,7 +227,7 @@ export default {
 
       const response = await axios.get("reviews/is_favorite", {
         params: {
-          user_id: currentUserId,
+          current_user_id: currentUserId,
           review_id: this.$route.params.id
         }
       })
@@ -251,9 +251,11 @@ export default {
     async editReview(data) {
       try {
         const response = await axios.patch(`/books/${this.params.book_id}/reviews/${this.params.id}`, {
-          title: data.title,
-          content: data.content,
-          rating: data.rating,
+          review: {
+            title: data.title,
+            content: data.content,
+            rating: data.rating,
+          },
           current_user_id: this.currentUser.id
         })
         console.log(response.data)
@@ -301,7 +303,7 @@ export default {
     async addToFavorite() {
       try {
         const response = await axios.post(`/reviews/${this.review.id}/favorite_reviews`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response)
         this.snackbarColor = "primary"
@@ -321,7 +323,7 @@ export default {
       try {
         const response = await axios.delete(`/reviews/${this.review.id}/favorite_reviews/${this.favoriteReviewId}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)

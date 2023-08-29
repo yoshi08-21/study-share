@@ -143,9 +143,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
             subject_question_reply: {
               content: "テスト返信本文",
               image: image,
-              user_id: user.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(SubjectQuestionReply, :count).by(1)
         expect(response).to have_http_status(200)
@@ -165,9 +165,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "",
-              user_id: user.id,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(SubjectQuestionReply, :count).by(0)
         expect(response).to have_http_status(422)
@@ -180,9 +180,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
           post subject_question_subject_question_replies_path(subject_question), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: -1,
               subject_question_id: subject_question.id
-            }
+            },
+            current_user_id: -1,
           }
         }.to change(SubjectQuestionReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -195,9 +195,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
           post subject_question_subject_question_replies_path(-1), params: {
             subject_question_reply: {
               content: "テスト返信本文",
-              user_id: user.id,
               subject_question_id: -1
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(SubjectQuestionReply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -221,8 +221,8 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
           subject_question_reply: {
             content: "変更後テスト返信本文",
             image: image,
-            user_id: user.id,
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(200)
 
@@ -242,8 +242,8 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
         patch subject_question_subject_question_reply_path(subject_question, subject_question_reply), params: {
           subject_question_reply: {
             content: "",
-            user_id: user.id,
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(422)
       end
@@ -258,8 +258,8 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
         patch subject_question_subject_question_reply_path(subject_question, subject_question_reply), params: {
           subject_question_reply: {
             content: "変更後テスト返信本文",
-            user_id: user2.id,
-          }
+          },
+          current_user_id: user2.id,
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
@@ -271,9 +271,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
         patch subject_question_subject_question_reply_path(subject_question, subject_question_reply), params: {
           subject_question_reply: {
             content: "テスト返信本文",
-            user_id: -1,
             subject_question_id: subject_question.id
-          }
+          },
+          current_user_id: -1,
         }
         expect(response).to have_http_status(404)
       end
@@ -284,9 +284,9 @@ RSpec.describe "SubjectQuestionReplies", type: :request do
         patch subject_question_subject_question_reply_path(subject_question, -1), params: {
           subject_question_reply: {
             content: "テスト返信本文",
-            user_id: user.id,
             subject_question_id: subject_question.id
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(404)
       end
