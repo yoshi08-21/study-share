@@ -47,8 +47,8 @@
 
                 <v-card-text>
                 <h3 style="margin-bottom: 5px;">科目: {{ book.subject }}</h3>
-                <h4>出版社: {{ book.publisher }}</h4>
                 <h4>著者: {{ book.author }}</h4>
+                <h4>出版社: {{ book.publisher }}</h4>
               </v-card-text>
 
               <v-card-actions>
