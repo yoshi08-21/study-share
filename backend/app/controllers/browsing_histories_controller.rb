@@ -4,6 +4,8 @@ class BrowsingHistoriesController < ApplicationController
 
   def index
     current_user = User.find_by(id: params[:current_user_id])
+    return head :not_found unless current_user
+
     book_browsing_histories = current_user.watched_books.with_attached_image.select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user.id}) AS check_favorite")
     book_browsing_histories_with_images = attach_image_to_books(book_browsing_histories)
 
@@ -25,19 +27,15 @@ class BrowsingHistoriesController < ApplicationController
     survey_browsing_histories = current_user.watched_surveys.with_attached_image.includes(user: { image_attachment: :blob }).select("surveys.*, (SELECT COUNT(*) FROM survey_answers WHERE survey_answers.survey_id = surveys.id) AS survey_answers_count, (SELECT COUNT(*) FROM favorite_surveys WHERE favorite_surveys.survey_id = surveys.id) AS favorite_surveys_count")
     survey_browsing_histories_with_images = attach_image_to_surveys(survey_browsing_histories)
 
-    if current_user
-      render json: {
-        book_browsing_histories: book_browsing_histories_with_images,
-        review_browsing_histories: review_browsing_histories_with_images,
-        question_browsing_histories: question_browsing_histories_with_images,
-        reply_browsing_histories: reply_browsing_hitories_with_images,
-        subject_question_browsing_histories: subject_question_browsing_histories_with_images,
-        subject_question_reply_browsing_histories: subject_question_reply_browsing_histories_with_images,
-        survey_browsing_histories: survey_browsing_histories_with_images
-      }
-    else
-      render json: { error: "エラーが発生しました" }
-    end
+    render json: {
+      book_browsing_histories: book_browsing_histories_with_images,
+      review_browsing_histories: review_browsing_histories_with_images,
+      question_browsing_histories: question_browsing_histories_with_images,
+      reply_browsing_histories: reply_browsing_hitories_with_images,
+      subject_question_browsing_histories: subject_question_browsing_histories_with_images,
+      subject_question_reply_browsing_histories: subject_question_reply_browsing_histories_with_images,
+      survey_browsing_histories: survey_browsing_histories_with_images
+    }
   end
 
 end
