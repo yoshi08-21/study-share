@@ -699,7 +699,7 @@ RSpec.describe "BrowsingHistories", type: :request do
 
         expect {
           get survey_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(BrowsingHistory, :count).by(1)
         expect(response).to have_http_status(200)
@@ -752,7 +752,7 @@ RSpec.describe "BrowsingHistories", type: :request do
 
         # 閲覧履歴の作成
         get survey_path(survey11), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(200)
 
@@ -779,7 +779,7 @@ RSpec.describe "BrowsingHistories", type: :request do
 
         expect {
           get survey_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(BrowsingHistory, :count).by(0)
         expect(response).to have_http_status(200)
@@ -793,7 +793,7 @@ RSpec.describe "BrowsingHistories", type: :request do
 
         expect {
           get survey_path(survey), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(BrowsingHistory, :count).by(0)
         expect(response).to have_http_status(200)

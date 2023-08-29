@@ -14,7 +14,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
 
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(1)
         expect(response).to have_http_status(200)
@@ -24,7 +24,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
       it "いいねに失敗する" do
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -34,7 +34,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
       it "いいねに失敗する" do
         expect {
           post survey_favorite_surveys_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -46,7 +46,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
 
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(422)
@@ -61,7 +61,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
 
         expect {
           post survey_favorite_surveys_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(422)
@@ -75,7 +75,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
 
         expect {
           delete survey_favorite_survey_path(survey, favorite_survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -86,7 +86,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
         favorite_survey = create(:favorite_survey, user_id: user.id, survey_id: survey.id)
         expect {
           delete survey_favorite_survey_path(survey, favorite_survey), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -97,7 +97,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
         favorite_survey = create(:favorite_survey, user_id: user.id, survey_id: survey.id)
         expect {
           delete survey_favorite_survey_path(-1, favorite_survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -109,7 +109,7 @@ RSpec.describe "FavoriteSurveys", type: :request do
         favorite_survey = create(:favorite_survey, user_id: user2.id, survey_id: survey.id)
         expect {
           delete survey_favorite_survey_path(survey, favorite_survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteSurvey, :count).by(0)
         expect(response).to have_http_status(404)

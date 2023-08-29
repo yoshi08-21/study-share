@@ -59,7 +59,7 @@ class RepliesController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:reply][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     question = Question.includes(:user).find_by(id: params[:question_id])
@@ -76,7 +76,7 @@ class RepliesController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:reply][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     reply = Reply.find_by(id: params[:id])
@@ -110,7 +110,7 @@ class RepliesController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     reply = Reply.find_by(id: params[:reply_id])
@@ -142,7 +142,7 @@ class RepliesController < ApplicationController
   private
 
     def reply_params
-      params.require(:reply).permit(:content, :user_id, :question_id, :image)
+      params.require(:reply).permit(:content, :question_id, :image)
     end
 
     def exist_reply_browsing_history?(current_user, reply)

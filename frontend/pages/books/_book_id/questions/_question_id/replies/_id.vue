@@ -320,7 +320,7 @@ export default {
 
       const response = await axios.get("replies/is_favorite", {
         params: {
-          user_id: currentUserId,
+          current_user_id: currentUserId,
           reply_id: this.$route.params.id
         }
       })
@@ -357,7 +357,7 @@ export default {
     async editReply(data) {
       const formData = new FormData()
 
-      formData.append("reply[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("reply[content]", data.content);
       if (data.image) {
           formData.append("reply[image]", data.image);
@@ -399,7 +399,7 @@ export default {
     async addToFavorite() {
       try {
         const response = await axios.post(`/replies/${this.reply.id}/favorite_replies`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response)
         this.snackbarColor = "primary"
@@ -419,7 +419,7 @@ export default {
       try {
         const response = await axios.delete(`/replies/${this.reply.id}/favorite_replies/${this.favoriteReplyId}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)

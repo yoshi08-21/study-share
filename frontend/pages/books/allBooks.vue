@@ -199,7 +199,7 @@ export default {
     async submitBook(data) {
       const formData = new FormData()
 
-      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("book[name]", data.name);
       formData.append("book[author]", data.author);
       formData.append("book[publisher]", data.publisher);

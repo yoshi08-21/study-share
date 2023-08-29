@@ -153,8 +153,8 @@ RSpec.describe "Reviews", type: :request do
               rating: 5,
               title: "テストタイトル",
               content: "テスト本文",
-              user_id: user.id,
             },
+            current_user_id: user.id
           }
         }.to change(Review, :count).by(1)
         expect(response).to have_http_status(200)
@@ -176,8 +176,8 @@ RSpec.describe "Reviews", type: :request do
               rating: "",
               title: "",
               content: "",
-              user_id: user.id,
             },
+            current_user_id: user.id
           }
         }.to change(Review, :count).by(0)
         expect(response).to have_http_status(422)
@@ -192,8 +192,8 @@ RSpec.describe "Reviews", type: :request do
               rating: 5,
               title: "テストタイトル",
               content: "テスト本文",
-              user_id: -1,
             },
+            current_user_id: -1
           }
         }.to change(Review, :count).by(0)
         expect(response).to have_http_status(404)
@@ -208,8 +208,8 @@ RSpec.describe "Reviews", type: :request do
               rating: 5,
               title: "テストタイトル",
               content: "テスト本文",
-              user_id: user.id,
             },
+            current_user_id: user.id
           }
         }.to change(Review, :count).by(0)
         expect(response).to have_http_status(404)

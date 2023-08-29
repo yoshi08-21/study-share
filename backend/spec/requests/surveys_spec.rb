@@ -149,8 +149,8 @@ RSpec.describe "Surveys", type: :request do
               status: 0,
               genre: "数学",
               image: image,
-              user_id: user.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(Survey, :count).by(1)
         expect(response).to have_http_status(200)
@@ -184,8 +184,8 @@ RSpec.describe "Surveys", type: :request do
               option2: "",
               status: 0,
               genre: "",
-              user_id: user.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(Survey, :count).by(0)
         expect(response).to have_http_status(422)
@@ -205,8 +205,8 @@ RSpec.describe "Surveys", type: :request do
               option4: "選択肢4",
               status: 0,
               genre: "数学",
-              user_id: -1
-            }
+            },
+            current_user_id: -1
           }
         }.to change(Survey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -224,7 +224,7 @@ RSpec.describe "Surveys", type: :request do
 
         expect {
           delete survey_path(survey), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(Survey, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -239,7 +239,7 @@ RSpec.describe "Surveys", type: :request do
 
         expect {
           delete survey_path(survey), params: {
-            user_id: user2.id
+            current_user_id: user2.id
           }
         }.to change(Survey, :count).by(0)
         expect(response).to have_http_status(422)
@@ -252,7 +252,7 @@ RSpec.describe "Surveys", type: :request do
       survey = create(:survey, user_id: user.id)
         expect {
           delete survey_path(survey), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(Survey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -263,7 +263,7 @@ RSpec.describe "Surveys", type: :request do
       it "アンケートの作成に失敗する" do
         expect {
           delete survey_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(Survey, :count).by(0)
         expect(response).to have_http_status(404)
@@ -280,7 +280,7 @@ RSpec.describe "Surveys", type: :request do
         survey = create(:survey, title: "テストタイトル", content: "テスト本文", option1: "選択肢1", option2: "選択肢2", status: 0, genre: "英語", user_id: user.id)
 
         patch close_survey_survey_path(survey), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(200)
 
@@ -298,7 +298,7 @@ RSpec.describe "Surveys", type: :request do
         survey = create(:survey, title: "テストタイトル", content: "テスト本文", option1: "選択肢1", option2: "選択肢2", status: 0, genre: "英語", user_id: user.id)
 
         patch close_survey_survey_path(survey), params: {
-          user_id: user2.id
+          current_user_id: user2.id
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
@@ -311,7 +311,7 @@ RSpec.describe "Surveys", type: :request do
         survey = create(:survey, title: "テストタイトル", content: "テスト本文", option1: "選択肢1", option2: "選択肢2", status: 0, genre: "英語", user_id: user.id)
 
         patch close_survey_survey_path(survey), params: {
-          user_id: -1
+          current_user_id: -1
         }
         expect(response).to have_http_status(404)
       end
@@ -323,7 +323,7 @@ RSpec.describe "Surveys", type: :request do
         survey = create(:survey, title: "テストタイトル", content: "テスト本文", option1: "選択肢1", option2: "選択肢2", status: 0, genre: "英語", user_id: user.id)
 
         patch close_survey_survey_path(-1), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(404)
       end
@@ -335,7 +335,7 @@ RSpec.describe "Surveys", type: :request do
         survey = create(:survey, title: "テストタイトル", content: "テスト本文", option1: "選択肢1", option2: "選択肢2", status: true, genre: "英語", user_id: user.id)
 
         patch close_survey_survey_path(survey), params: {
-          user_id: user.id
+          current_user_id: user.id
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("アンケートはすでに締め切られています")

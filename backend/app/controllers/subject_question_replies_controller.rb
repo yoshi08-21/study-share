@@ -52,7 +52,7 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def create
-    current_user = User.find_by(id: params[:subject_question_reply][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     subject_question = SubjectQuestion.includes(:user).find_by(id: params[:subject_question_id])
@@ -69,7 +69,7 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def update
-    current_user = User.find_by(id: params[:subject_question_reply][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:id])
@@ -104,7 +104,7 @@ class SubjectQuestionRepliesController < ApplicationController
   end
 
   def is_favorite
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     subject_question_reply = SubjectQuestionReply.find_by(id: params[:subject_question_reply_id])

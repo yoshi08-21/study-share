@@ -178,8 +178,8 @@ RSpec.describe "Books", type: :request do
               subject: "国語",
               description: "国語の参考書",
               image: image,
-              user_id: user.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(Book, :count).by(1)
         expect(response).to have_http_status(200)
@@ -209,8 +209,8 @@ RSpec.describe "Books", type: :request do
               publisher: "東京出版",
               subject: "国語",
               description: "国語の参考書",
-              user_id: user.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(Book, :count).by(1)
 
@@ -232,8 +232,8 @@ RSpec.describe "Books", type: :request do
               name: "",
               author: "",
               subject: "",
-              user_id: user.id
-            }
+            },
+            current_user_id: user.id
           }
         }.to change(Book, :count).by(0)
         expect(response).to have_http_status(422)
@@ -250,8 +250,8 @@ RSpec.describe "Books", type: :request do
               publisher: "東京出版",
               subject: "国語",
               description: "国語の参考書",
-              user_id: -1
-            }
+            },
+            current_user_id: -1
           }
         }.to change(Book, :count).by(0)
         expect(response).to have_http_status(404)
@@ -283,8 +283,8 @@ RSpec.describe "Books", type: :request do
             subject: "英語",
             description: "英語の参考書",
             image: image,
-            user_id: user.id
-          }
+          },
+          current_user_id: user.id
         }
         expect(response).to have_http_status(200)
 
@@ -309,8 +309,8 @@ RSpec.describe "Books", type: :request do
             name: "",
             author: "",
             subject: "",
-            user_id: user.id
-          }
+          },
+          current_user_id: user.id
         }
         expect(response).to have_http_status(422)
       end
@@ -326,8 +326,8 @@ RSpec.describe "Books", type: :request do
             publisher: "神奈川書房",
             subject: "英語",
             description: "英語の参考書",
-            user_id: -1
-          }
+          },
+          current_user_id: -1
         }
         expect(response).to have_http_status(404)
       end
@@ -342,8 +342,8 @@ RSpec.describe "Books", type: :request do
             publisher: "神奈川書房",
             subject: "英語",
             description: "英語の参考書",
-            user_id: user.id
-          }
+          },
+          current_user_id: user.id
         }
         expect(response).to have_http_status(404)
       end
@@ -360,8 +360,8 @@ RSpec.describe "Books", type: :request do
             author: "神奈川一郎",
             publisher: "神奈川書房",
             subject: "英語",
-            user_id: user2.id
-          }
+          },
+          current_user_id: user2.id
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")

@@ -108,7 +108,7 @@ export default {
       if (this.currentUser) {
         try {
           const response = await axios.post(`/books/${book.id}/favorite_books`, {
-            user_id: this.currentUser.id,
+            current_user_id: this.currentUser.id,
           })
           console.log(response.data)
           book.check_favorite = 1

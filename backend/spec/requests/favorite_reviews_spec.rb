@@ -15,7 +15,7 @@ RSpec.describe "FavoriteReviews", type: :request do
 
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(1)
         expect(response).to have_http_status(200)
@@ -25,7 +25,7 @@ RSpec.describe "FavoriteReviews", type: :request do
       it "いいねに失敗する" do
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(404)
@@ -35,7 +35,7 @@ RSpec.describe "FavoriteReviews", type: :request do
       it "いいねに失敗する" do
         expect {
           post review_favorite_reviews_path(-1), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(404)
@@ -47,7 +47,7 @@ RSpec.describe "FavoriteReviews", type: :request do
 
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(422)
@@ -62,7 +62,7 @@ RSpec.describe "FavoriteReviews", type: :request do
 
         expect {
           post review_favorite_reviews_path(review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(422)
@@ -76,7 +76,7 @@ RSpec.describe "FavoriteReviews", type: :request do
 
         expect {
           delete review_favorite_review_path(review, favorite_review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(-1)
         expect(response).to have_http_status(204)
@@ -87,7 +87,7 @@ RSpec.describe "FavoriteReviews", type: :request do
         favorite_review = create(:favorite_review, user_id: user.id, review_id: review.id)
         expect {
           delete review_favorite_review_path(review, favorite_review), params: {
-            user_id: -1
+            current_user_id: -1
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(404)
@@ -98,7 +98,7 @@ RSpec.describe "FavoriteReviews", type: :request do
         favorite_review = create(:favorite_review, user_id: user.id, review_id: review.id)
         expect {
           delete review_favorite_review_path(-1, favorite_review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(404)
@@ -110,7 +110,7 @@ RSpec.describe "FavoriteReviews", type: :request do
         favorite_review = create(:favorite_review, user_id: user2.id, review_id: review.id)
         expect {
           delete review_favorite_review_path(review, favorite_review), params: {
-            user_id: user.id
+            current_user_id: user.id
           }
         }.to change(FavoriteReview, :count).by(0)
         expect(response).to have_http_status(404)

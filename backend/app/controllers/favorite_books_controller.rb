@@ -1,7 +1,7 @@
 class FavoriteBooksController < ApplicationController
 
   def create
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:book_id])
@@ -16,7 +16,7 @@ class FavoriteBooksController < ApplicationController
   end
 
   def destroy
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:book_id])
@@ -34,7 +34,7 @@ class FavoriteBooksController < ApplicationController
 
   # favorite_book_idを持っていない一覧表示から呼び出すためのアクション
   def destroy_from_item_list
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     book = Book.find_by(id: params[:book_id])

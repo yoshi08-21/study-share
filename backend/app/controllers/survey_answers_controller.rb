@@ -1,7 +1,7 @@
 class SurveyAnswersController < ApplicationController
 
   def create
-    current_user = User.find_by(id: params[:survey_answer][:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.includes(:user).find_by(id: params[:survey_answer][:survey_id])
@@ -24,14 +24,15 @@ class SurveyAnswersController < ApplicationController
   end
 
   def change_survey_answer
+    current_user_id = params[:current_user_id]
     survey_answer = survey_answer_params
-    selected_survey_answer = SurveyAnswer.find_by(user_id: survey_answer[:user_id], survey_id: survey_answer[:survey_id], selected_option: survey_answer[:selected_option])
+    selected_survey_answer = SurveyAnswer.find_by(user_id: current_user_id, survey_id: survey_answer[:survey_id], selected_option: survey_answer[:selected_option])
     if selected_survey_answer
       selected_survey_answer.destroy
-      delete_notification_survey_answer(survey_answer[:user_id], survey_answer[:survey_id])
+      delete_notification_survey_answer(current_user_id, survey_answer[:survey_id])
       head :no_content
     else
-      exist_survey_answer = SurveyAnswer.find_by(user_id: survey_answer[:user_id], survey_id: survey_answer[:survey_id])
+      exist_survey_answer = SurveyAnswer.find_by(user_id: current_user_id , survey_id: survey_answer[:survey_id])
       exist_survey_answer.selected_option = survey_answer[:selected_option]
       exist_survey_answer.save
       render json: exist_survey_answer
@@ -39,7 +40,7 @@ class SurveyAnswersController < ApplicationController
   end
 
   def check_current_user_answer
-    current_user = User.find_by(id: params[:user_id])
+    current_user = User.find_by(id: params[:current_user_id])
     return head :not_found unless current_user
 
     survey = Survey.find_by(id: params[:survey_id])
@@ -67,7 +68,7 @@ class SurveyAnswersController < ApplicationController
   private
 
     def survey_answer_params
-      params.require(:survey_answer).permit(:selected_option, :user_id, :survey_id)
+      params.require(:survey_answer).permit(:selected_option, :survey_id)
     end
 
     # アンケートが締め切られていたらtrueを返す

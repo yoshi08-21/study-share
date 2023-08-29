@@ -299,7 +299,7 @@ export default {
 
         const response = await axios.get("subject_question_replies/is_favorite", {
         params: {
-          user_id: currentUserId,
+          current_user_id: currentUserId,
           subject_question_reply_id: this.$route.params.id
         }
       })
@@ -335,7 +335,7 @@ export default {
     async editSubjectQuestionReply(data) {
       const formData = new FormData()
 
-      formData.append("subject_question_reply[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("subject_question_reply[content]", data.content);
       if (data.image) {
           formData.append("subject_question_reply[image]", data.image);
@@ -347,7 +347,7 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の編集が完了しました"
-        this.subjectQuestionReply.content = response.data.content
+        this.subjectQuestionReply.content = response.data.subject_question_reply.content
         if (response.data.image_url) {
           this.subjectQuestionReply.image = response.data.image_url
         }
@@ -377,7 +377,7 @@ export default {
     async addToFavorite() {
       try {
         const response = await axios.post(`/subject_question_replies/${this.subjectQuestionReply.id}/favorite_subject_question_replies`, {
-          user_id: this.currentUser.id
+          current_user_id: this.currentUser.id
         })
         console.log(response)
         this.snackbarColor = "primary"
@@ -397,7 +397,7 @@ export default {
       try {
         const response = await axios.delete(`/subject_question_replies/${this.subjectQuestionReply.id}/favorite_subject_question_replies/${this.favoriteSubjectQuestionReplyId}`, {
           params: {
-            user_id: this.currentUser.id
+            current_user_id: this.currentUser.id
           }
         })
         console.log(response.data)

@@ -154,9 +154,9 @@ RSpec.describe "Replies", type: :request do
             reply: {
               content: "テスト返信本文",
               image: image,
-              user_id: user.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Reply, :count).by(1)
         expect(response).to have_http_status(200)
@@ -176,9 +176,9 @@ RSpec.describe "Replies", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "",
-              user_id: user.id,
               question_id: question.id
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Reply, :count).by(0)
         expect(response).to have_http_status(422)
@@ -191,9 +191,9 @@ RSpec.describe "Replies", type: :request do
           post book_question_replies_path(book, question), params: {
             reply: {
               content: "テスト",
-              user_id: -1,
               question_id: question.id
-            }
+            },
+            current_user_id: -1,
           }
         }.to change(Reply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -206,9 +206,9 @@ RSpec.describe "Replies", type: :request do
           post book_question_replies_path(book, -1), params: {
             reply: {
               content: "",
-              user_id: user.id,
               question_id: -1
-            }
+            },
+            current_user_id: user.id,
           }
         }.to change(Reply, :count).by(0)
         expect(response).to have_http_status(404)
@@ -233,8 +233,8 @@ RSpec.describe "Replies", type: :request do
           reply: {
             content: "変更後テスト返信本文",
             image: image,
-            user_id: user.id,
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(200)
 
@@ -255,8 +255,8 @@ RSpec.describe "Replies", type: :request do
         patch book_question_reply_path(book, question, reply), params: {
           reply: {
             content: "",
-            user_id: user.id,
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(422)
       end
@@ -272,8 +272,8 @@ RSpec.describe "Replies", type: :request do
         patch book_question_reply_path(book, question, reply), params: {
           reply: {
             content: "変更後テスト返信本文",
-            user_id: user2.id,
-          }
+          },
+          current_user_id: user2.id,
         }
         expect(response).to have_http_status(422)
         expect(JSON.parse(response.body)["error"]).to eq("権限がありません")
@@ -285,9 +285,9 @@ RSpec.describe "Replies", type: :request do
         patch book_question_reply_path(book, question, reply), params: {
           reply: {
             content: "テスト",
-            user_id: -1,
             question_id: question.id
-          }
+          },
+          current_user_id: -1,
         }
         expect(response).to have_http_status(404)
       end
@@ -298,9 +298,9 @@ RSpec.describe "Replies", type: :request do
         patch book_question_reply_path(book, question, -1), params: {
           reply: {
             content: "",
-            user_id: user.id,
             question_id: question.id
-          }
+          },
+          current_user_id: user.id,
         }
         expect(response).to have_http_status(404)
       end
