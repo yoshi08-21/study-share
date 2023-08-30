@@ -52,5 +52,6 @@ tmp/cache/bootsnap/load-path-cache
 frontend/.eslintcache
 
 backend/log/test.log
+backend/config/master.key
 
 /coverage/
