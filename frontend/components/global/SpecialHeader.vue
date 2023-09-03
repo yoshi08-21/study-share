@@ -17,7 +17,7 @@
 
     <v-row class="d-flex align-center justify-center" style="flex-shrink: 1;">
       <v-col cols="1">
-        <v-app-bar-nav-icon @click.stop="toggleDrawer">
+        <v-app-bar-nav-icon @click.stop="toggleDrawer" data-cy="menu-button">
           <v-icon>mdi-menu-open</v-icon>
         </v-app-bar-nav-icon>
       </v-col>
@@ -106,7 +106,7 @@
               transition="slide-y-transition"
             >
               <template v-slot:activator="{ on }">
-                <v-btn icon x-large v-on="on">
+                <v-btn icon x-large v-on="on" data-cy="header-user-menu">
                   <v-avatar size="55">
                     <v-img :src="currentUser.image"></v-img>
                   </v-avatar>
@@ -131,7 +131,7 @@
                       閲覧履歴
                     </v-btn>
                     <v-divider class="my-3"></v-divider>
-                    <v-btn rounded text style="color: red;" @click="logout">
+                    <v-btn rounded text style="color: red;" @click="logout" data-cy="header-logout-button">
                       ログアウト
                     </v-btn>
                   </div>

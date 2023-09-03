@@ -7,9 +7,9 @@
         cols="12"
         sm="6"
       >
-        <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
+        <v-btn @click="selectSubjectDialog = true">科目を選択する(必須)</v-btn>
       </v-col>
-      <h3 v-if="editedSubject">選択された科目：{{ editedSubject }}</h3>
+      <h3 v-if="editedSubject">選択された科目:{{ editedSubject }}</h3>
       <br><br>
       <v-file-input
         v-model="selectedFile"
@@ -27,10 +27,10 @@
       *登録できる画像のファイルサイズは3MBまでです
 
       <br><br>
-      <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedName"></v-text-field>
-      <v-text-field counter label="著者" :rules="authorRules" v-model="editedAuthor"></v-text-field>
-      <v-text-field counter label="出版社" :rules="publisherRules" v-model="editedPublisher"></v-text-field>
-      <v-textarea counter outlined label="参考書の説明" :rules="descriptionRules" v-model="editedDescription"></v-textarea>
+      <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedName" data-cy="edit-name-field"></v-text-field>
+      <v-text-field counter label="著者" :rules="authorRules" v-model="editedAuthor" data-cy="edit-author-field"></v-text-field>
+      <v-text-field counter label="出版社" :rules="publisherRules" v-model="editedPublisher" data-cy="edit-publisher-field"></v-text-field>
+      <v-textarea counter outlined label="参考書の説明" :rules="descriptionRules" v-model="editedDescription" data-cy="edit-description-field"></v-textarea>
       <template v-if="errorMessage">
         <v-alert type="error" dense text border="left">
           {{ errorMessage }}
@@ -53,7 +53,7 @@
       <v-card>
         <v-card-title class="headline">科目選択</v-card-title>
         <v-card-text>
-          <v-radio-group v-model="editedSubject">
+          <v-radio-group v-model="editedSubject" data-cy="select-subject-group">
             <template v-for="category in categories">
               <p :key="category.name">{{ category.name }}</p>
               <v-radio v-for="subcategory in category.subcategories" :key="subcategory" :label="subcategory" :value="subcategory"></v-radio>
@@ -63,7 +63,7 @@
         <h3>選択された科目:{{ editededitedSubject }}</h3>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="selectSubjectDialog = false" color="primary" block>閉じる</v-btn>
+          <v-btn @click="selectSubjectDialog = false" color="primary" block data-cy="close-select-subject-dialog">閉じる</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -99,7 +99,7 @@ export default {
         value => (value || '').length <= 50 || "最大入力文字数は50文字です",
       ],
       authorRules: [
-        value => !!value || "タイトルを入力してください",
+        value => !!value || "著者を入力してください",
         value => (value || '').length <= 25 || "最大入力文字数は25文字です",
       ],
       publisherRules: [

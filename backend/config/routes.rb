@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get "find_user_by_uid/:uid", to: "users#find_user_by_uid", as: "find_user_by_uid"
       patch "save_user_memo"
       get "check_existence"
+      get "return_cypress_user"
     end
   end
   resources :books, only: [:index, :show, :create, :update, :destroy] do

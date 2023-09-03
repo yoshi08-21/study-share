@@ -67,15 +67,15 @@
           <br><br>
           <v-card-actions>
             <v-row class="d-flex align-center">
-              <v-col cols="3">
+              <v-col cols="3" data-cy="book-review-section">
                 <v-icon>mdi-comment-text-outline</v-icon>
                 レビュー: {{ book.reviews_count }}件
               </v-col>
-              <v-col cols="3">
+              <v-col cols="3" data-cy="book-question-section">
                 <v-icon>mdi-comment-question-outline</v-icon>
-                質問: {{ book.reviews_count }}件
+                質問: {{ book.questions_count }}件
               </v-col>
-              <v-col cols="3">
+              <v-col cols="3" data-cy="book-favorite-section">
                 <v-icon>mdi-heart-multiple</v-icon>
                 お気に入り ({{ book.favorite_books_count }})
               </v-col>
@@ -92,8 +92,8 @@
         </v-col>
         <v-col cols="2" class="d-flex flex-column" style="padding: 20px;">
           <template v-if="currentUser && book.user_id == currentUser.id">
-            <v-btn @click="editBookDialog=true" style="margin-bottom: 10px;">編集する</v-btn>
-            <v-btn @click="showDeleteConfirmation=true">削除する</v-btn>
+            <v-btn @click="editBookDialog=true" style="margin-bottom: 10px;" data-cy="edit-book-button">編集する</v-btn>
+            <v-btn @click="showDeleteConfirmation=true" data-cy="delete-book-button">削除する</v-btn>
           </template>
         </v-col>
       </v-row>
@@ -108,6 +108,7 @@
             x-large
             color="success"
             width="400"
+            data-cy="review-dialog-button"
           >
           新規レビューを投稿する
         </v-btn>
@@ -491,7 +492,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "質問を編集できませんでした"
+        this.flashMessage = "参考書を編集できませんでした"
       }
       this.editBookDialog = false
     },

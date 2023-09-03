@@ -3,7 +3,7 @@
     <h2 style="text-align: center;">ログイン</h2>
     <v-col>
       <v-form>
-        <v-text-field v-model="email" :rules="emailRules" label="メールアドレス"></v-text-field>
+        <v-text-field v-model="email" :rules="emailRules" label="メールアドレス" data-cy="email-field"></v-text-field>
         <v-text-field
         v-model="password"
         :rules="passwordRules"
@@ -11,8 +11,9 @@
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPassword ? 'text' : 'password'"
         @click:append="showPassword = !showPassword"
+        data-cy="password-field"
         ></v-text-field>
-        <v-btn @click="login">ログイン</v-btn>
+        <v-btn @click="login" data-cy="login-button">ログイン</v-btn>
       </v-form>
       <v-spacer :style="{ height: '20px' }"></v-spacer>
       <v-btn @click="loginAsUser1">ゲストユーザーでログイン</v-btn>
@@ -54,11 +55,12 @@ export default {
       flashMessage: "テストメッセージ",
       emailRules: [
         value => !!value || "メールアドレスを入力してください",
-        value => (value || '').length <= 60 || "最大入力文字数は250文字です",
+        value => (value || '').length <= 250 || "最大入力文字数は250文字です",
         value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "正しい形式のメールアドレスを入力してください"
       ],
       passwordRules: [
         value => !!value || "パスワードを入力してください",
+        value => (value || '').length <= 30 || "最大入力文字数は30文字です",
       ],
       showPassword: false,
 

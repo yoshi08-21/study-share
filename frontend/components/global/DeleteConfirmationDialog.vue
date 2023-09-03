@@ -25,6 +25,7 @@
                 width="300"
                 color="error"
                 dark
+                data-cy="delete-confirm-button"
                 >
                   削除する
                 </v-btn>

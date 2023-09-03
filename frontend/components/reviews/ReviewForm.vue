@@ -9,8 +9,8 @@
         large
       >
       </v-rating>
-      <v-text-field counter label="タイトル" :rules="titleRules" v-model="title"></v-text-field>
-      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
+      <v-text-field counter label="タイトル" :rules="titleRules" v-model="title" data-cy="review-title-form"></v-text-field>
+      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content" data-cy="review-content-form"></v-textarea>
       <submit-button
         :buttonTitle="'投稿する'"
         @submitForm="submitForm"

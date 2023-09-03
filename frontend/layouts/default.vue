@@ -64,6 +64,7 @@
             large
             color="cyan"
             class="fab-button"
+            data-cy="user-memo-button"
           >
             <v-icon dark>
               mdi-book-edit
@@ -74,16 +75,16 @@
             <v-bottom-sheet v-model="sheet">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                v-bind="attrs"
-                v-on="on"
-                fab
-                fixed
-                dark
-                large
-                color="teal"
-                style="position: fixed; right: 20px; bottom: 20px;"
+                  v-bind="attrs"
+                  v-on="on"
+                  fab
+                  fixed
+                  dark
+                  large
+                  color="teal"
+                  style="position: fixed; right: 20px; bottom: 20px;"
                 >
-                <v-icon dark>
+                  <v-icon dark>
                     mdi-format-list-bulleted-square
                   </v-icon>
                 </v-btn>
@@ -152,6 +153,7 @@
               rows="10"
               label="ユーザーメモ"
               counter
+              data-cy="user-memo-field"
               ></v-textarea>
               <p>＊メモの内容を残したい場合は必ず「保存する」を押してください</p>
             <submit-button
