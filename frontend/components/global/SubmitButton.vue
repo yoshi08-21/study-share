@@ -18,6 +18,7 @@
           color="primary"
           width="400"
           large
+          data-cy="submit-button"
         >
         {{ buttonTitle }}
       </v-btn>

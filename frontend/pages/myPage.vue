@@ -154,37 +154,39 @@
       </v-tab>
     </v-tabs>
 
-    <template v-if="tab === 0">
-      <br><br><br>
-      <each-reviews :reviews="myReviews"></each-reviews>
-    </template>
+    <div data-cy="tab-content">
 
-    <template v-else-if="tab === 1">
-      <br><br><br>
-      <each-questions :questions="myQuestions"></each-questions>
-    </template>
+      <template v-if="tab === 0">
+        <br><br><br>
+        <each-reviews :reviews="myReviews"></each-reviews>
+      </template>
 
-    <template v-else-if="tab === 2">
-      <br><br><br>
-      <each-subject-questions :subjectQuestions="mySubjectQuestions"></each-subject-questions>
-    </template>
+      <template v-else-if="tab === 1">
+        <br><br><br>
+        <each-questions :questions="myQuestions"></each-questions>
+      </template>
 
-    <template v-else-if="tab === 3">
-      <br><br><br>
-      <each-replies :replies="myReplies"></each-replies>
-    </template>
+      <template v-else-if="tab === 2">
+        <br><br><br>
+        <each-subject-questions :subjectQuestions="mySubjectQuestions"></each-subject-questions>
+      </template>
 
-    <template v-else-if="tab === 4">
-      <br><br><br>
-      <each-subject-question-replies :subjectQuestionReplies="mySubjectQuestionReplies"></each-subject-question-replies>
-    </template>
+      <template v-else-if="tab === 3">
+        <br><br><br>
+        <each-replies :replies="myReplies"></each-replies>
+      </template>
 
-    <template v-else-if="tab === 5">
-      <br><br><br>
-      <each-surveys :surveys="mySurveys"></each-surveys>
+      <template v-else-if="tab === 4">
+        <br><br><br>
+        <each-subject-question-replies :subjectQuestionReplies="mySubjectQuestionReplies"></each-subject-question-replies>
+      </template>
 
-    </template>
+      <template v-else-if="tab === 5">
+        <br><br><br>
+        <each-surveys :surveys="mySurveys"></each-surveys>
+      </template>
 
+    </div>
 
 
 

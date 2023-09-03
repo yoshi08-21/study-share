@@ -48,15 +48,15 @@
         <br><br>
         <v-card-actions>
           <v-row class="d-flex align-center">
-            <v-col cols="3">
+            <v-col cols="3" data-cy="book-review-section">
               <v-icon>mdi-comment-text-outline</v-icon>
               レビュー: {{ book.reviews_count }}件
             </v-col>
-            <v-col cols="3">
+            <v-col cols="3" data-cy="book-question-section">
               <v-icon>mdi-comment-question-outline</v-icon>
-              質問: {{ book.reviews_count }}件
+              質問: {{ book.questions_count }}件
             </v-col>
-            <v-col cols="3">
+            <v-col cols="3" data-cy="book-favorite-section">
               <v-icon>mdi-heart-multiple</v-icon>
               お気に入り ({{ book.favorite_books_count }})
             </v-col>

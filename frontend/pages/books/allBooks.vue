@@ -212,8 +212,6 @@ export default {
       try {
         const response = await axios.post("/books", formData)
         console.log(response)
-        this.snackbarColor = "primary"
-        this.snackbar = true
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
         console.log(error)

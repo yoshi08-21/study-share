@@ -54,4 +54,8 @@ frontend/.eslintcache
 backend/log/test.log
 backend/config/master.key
 
+frontend/coverage
+
+
 /coverage/
+coverage/

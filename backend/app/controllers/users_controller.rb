@@ -180,6 +180,13 @@ class UsersController < ApplicationController
     render json: user_json
   end
 
+  def return_cypress_user
+    user = User.find_by(name: "cypress-sample")
+    return head :not_found unless user
+
+    render json: user
+  end
+
 
 
   private

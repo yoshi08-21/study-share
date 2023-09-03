@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-cy="favorite-section">
     <template v-if="currentUser && user.id !== currentUser.id">
       <template v-if="!isFavorite">
         <v-btn

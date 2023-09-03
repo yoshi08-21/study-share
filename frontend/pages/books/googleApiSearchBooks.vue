@@ -14,11 +14,12 @@
                   outlined
                   dense
                   label="参考書を検索"
+                  data-cy="google-books-api-search-books"
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="1">
-                <v-btn @click="searchBooks(keyword)">検索</v-btn>
+                <v-btn @click="searchBooks(keyword)" data-cy="google-books-api-search-button">検索</v-btn>
               </v-col>
             </v-row>
           </v-card-title>
@@ -32,7 +33,7 @@
     <template v-if="searchResults.length !== 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
       <br>
-      <v-row mb-5 v-for="(book, index) in booksChunk" :key="index" class="justify-center">
+      <v-row mb-5 v-for="(book, index) in booksChunk" :key="index" class="justify-center" data-cy="searched-books">
         <v-col cols="10">
           <v-card
             elevation="2"
@@ -71,7 +72,7 @@
                 <v-card-actions>
                   <v-row class="d-flex align-center justify-center">
                     <v-col cols="4">
-                      <v-btn @click="openBookDialog(book)" large>参考書を登録する</v-btn>
+                      <v-btn @click="openBookDialog(book)" large data-cy="add-book">参考書を登録する</v-btn>
                     </v-col>
                   </v-row>
                 </v-card-actions>
@@ -137,7 +138,7 @@
                     >
                     <v-row>
                       <v-col class="d-flex justify-center">
-                        <v-btn @click="selectSubjectDialog = true" block>科目を選択する</v-btn>
+                        <v-btn @click="selectSubjectDialog = true" block>科目を選択する(必須)</v-btn>
                       </v-col>
                     </v-row>
                     <v-row>
@@ -169,6 +170,7 @@
                       color="primary"
                       width="400"
                       large
+                      data-cy="submit-book"
                     >
                       登録する
                     </v-btn>
@@ -195,7 +197,7 @@
       <v-card>
         <v-card-title class="headline">科目選択</v-card-title>
         <v-card-text>
-          <v-radio-group v-model="subject">
+          <v-radio-group v-model="subject" data-cy="select-subject-group">
             <template v-for="category in categories">
               <p :key="category.name">{{ category.name }}</p>
               <v-radio v-for="subcategory in category.subcategories" :key="subcategory" :label="subcategory" :value="subcategory"></v-radio>
@@ -205,7 +207,7 @@
         <h3>選択された科目:{{ subject }}</h3>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="selectSubjectDialog = false" color="primary" block>閉じる</v-btn>
+          <v-btn @click="selectSubjectDialog = false" color="primary" block data-cy="close-select-subject-dialog">閉じる</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -325,7 +327,7 @@ export default {
     async submitBook(book) {
       const formData = new FormData()
 
-      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("book[name]", book.name);
       formData.append("book[author]", book.author);
       formData.append("book[publisher]", book.publisher);

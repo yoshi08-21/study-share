@@ -216,7 +216,8 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       length: 3,
-      window: 0
+      window: 0,
+      cypressUser: {},
     }
   },
   computed: {
@@ -252,7 +253,6 @@ export default {
         this.$router.push({ path: "/mypage" })
       }
     },
-
   },
 
 

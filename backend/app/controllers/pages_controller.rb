@@ -41,7 +41,7 @@ class PagesController < ApplicationController
       if book.image.attached?
         image_url = rails_blob_url(book.image)
       end
-      book.as_json.merge(image: image_url)
+      book.as_json.merge(image: image_url, average_rating: book.average_rating.to_f)
     end
     if books_with_images
       render json: books_with_images, include: "reviews"
