@@ -1,15 +1,39 @@
 <template>
   <div>
-    <h2>「{{ this.searchQuestionsKeyword }}」の検索結果{{ this.totalCount }}件 </h2>
 
-    <v-card>
-      <v-card-title>
-        質問を再検索する
-      </v-card-title>
-      <v-card-title>
-        <v-text-field v-model="newKeyword"></v-text-field><v-btn @click="updateQueryParams(newKeyword)">検索</v-btn>
-      </v-card-title>
-    </v-card>
+    <br><br>
+    <v-row>
+      <v-col cols="12" class="d-flex justify-center">
+        <v-card height="130px" width="85%">
+          <v-card-title style="height: 100%; align-items: center;">
+            <v-row>
+              <v-col cols="11">
+                <v-text-field
+                  v-model="newKeyword"
+                  filled
+                  outlined
+                  dense
+                  label="参考書を再検索"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="1">
+                <v-btn @click="updateQueryParams(newKeyword)">検索</v-btn>
+              </v-col>
+            </v-row>
+          </v-card-title>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <br>
+    <v-row>
+      <v-col class="d-flex justify-center">
+        <h2>「{{ this.searchQuestionsKeyword }}」の検索結果{{ this.totalCount }}件 </h2>
+      </v-col>
+    </v-row>
+    <br><br>
+
 
     <div v-if="searchQuestionsResult && searchQuestionsResult.length > 0">
       <v-pagination v-model="page" :length="totalPages"></v-pagination>

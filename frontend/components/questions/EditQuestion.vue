@@ -2,8 +2,8 @@
   <div>
     <br>
     <v-form>
-      <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedTitle"></v-text-field>
-      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent"></v-textarea>
+      <v-text-field counter label="タイトル" :rules="titleRules" v-model="editedTitle" data-cy="edit-title-field"></v-text-field>
+      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent" data-cy="edit-content-field"></v-textarea>
       <br>
       *添付できる画像のファイルサイズは3MBまでです
       <br><br>

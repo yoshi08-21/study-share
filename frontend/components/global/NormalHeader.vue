@@ -29,10 +29,11 @@
               dense
               outlined
               style="margin-top: 25px;"
+              data-cy="header-search-books-field"
             ></v-text-field>
           </v-col>
           <v-col cols="2">
-            <v-btn @click="searchBooks">検索</v-btn>
+            <v-btn @click="searchBooks" data-cy="header-search-books-button">検索</v-btn>
           </v-col>
         </v-row>
       </v-col>

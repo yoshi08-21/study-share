@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row mb-5 v-for="(book, index) in books" :key="index" class="justify-center">
+    <v-row mb-5 v-for="(book, index) in books" :key="index" class="justify-center" data-cy="each-books">
       <v-col cols="10">
         <v-card
           elevation="8"

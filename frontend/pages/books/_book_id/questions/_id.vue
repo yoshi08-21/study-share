@@ -84,7 +84,7 @@
                   @removeFromFavorite="removeFromFavorite"
                 ></favorite-button>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="4" data-cy="reply-section">
                 <v-icon>mdi-comment-text-outline</v-icon>
                 返信: {{ question.replies_count }}件
               </v-col>
