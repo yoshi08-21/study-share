@@ -5,6 +5,7 @@
     </div>
     <v-card
       elevation="8"
+      data-cy="question-information"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
@@ -45,11 +46,11 @@
 
           <v-card-actions>
             <v-row class="d-flex align-center justify-center">
-              <v-col cols="4">
+              <v-col cols="4" data-cy="question-reply-section">
                 <v-icon>mdi-comment-text-outline</v-icon>
                 返信: {{ question.replies_count }}件
               </v-col>
-              <v-col cols="4">
+              <v-col cols="4" data-cy="question-favorite-section">
                 <v-icon>mdi-heart-multiple</v-icon>
                 いいね! ({{ question.favorite_questions_count }})
               </v-col>
@@ -92,6 +93,7 @@
     <v-card
       elevation="8"
       style="padding-bottom: 1px;"
+      data-cy="reply-detail"
     >
       <v-row>
         <v-col cols="2" class="mt-8">

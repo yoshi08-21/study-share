@@ -2,7 +2,7 @@
   <div>
     <br>
     <v-form>
-      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
+      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content" data-cy="create-content-field"></v-textarea>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       <br>
       *添付できる画像のファイルサイズは3MBまでです

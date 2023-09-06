@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index">
+    <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index" data-cy="each-question-replies">
       <v-col>
         <template v-if="reply.user_id !== reply.question.user_id">
           <!-- 質問の投稿者以外の返信 -->

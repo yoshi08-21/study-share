@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index" class="justify-center">
+    <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index" class="justify-center" data-cy="each-replies">
       <v-col cols="10">
         <v-card
           :to="`/books/${reply.question.book_id}/questions/${reply.question_id}/replies/${reply.id}`"
