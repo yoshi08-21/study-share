@@ -14,11 +14,12 @@
                   outlined
                   dense
                   label="参考書を検索"
+                  data-cy="search-books-field"
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="1">
-                <v-btn @click="searchBooks">検索</v-btn>
+                <v-btn @click="searchBooks" data-cy="search-books-button">検索</v-btn>
               </v-col>
             </v-row>
             <v-btn
@@ -56,6 +57,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="sort-books-select"
               ></v-select>
               </v-col>
               <v-col cols="6">
@@ -66,6 +68,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="filter-books-select"
               ></v-select>
               </v-col>
             </v-row>

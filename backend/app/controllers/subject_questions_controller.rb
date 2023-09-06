@@ -110,7 +110,7 @@ class SubjectQuestionsController < ApplicationController
     subject_questions_with_images = attach_image_to_subject_questions(subject_questions)
 
     render json: {
-      subject_questions: subject_questions.as_json(include: :user),
+      subject_questions: subject_questions_with_images,
       subject_questions_count: subject_questions_count
     }
   end

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row mb-5 v-for="(question, index) in questions" :key="'question_' + index" class="justify-center">
+    <v-row mb-5 v-for="(question, index) in questions" :key="'question_' + index" class="justify-center" data-cy="each-questions">
       <v-col cols="10">
         <v-card
           elevation="8"

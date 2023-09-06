@@ -51,6 +51,7 @@ book2 = Book.create!(name: "サンプル参考書2",
                     description: "サンプル参考書2の説明文",
                     user_id: user.id
                   )
+
 book3 = Book.create!(name: "サンプル参考書3",
                     author: "サンプル著者3",
                     publisher: "サンプル出版社3",
@@ -58,6 +59,55 @@ book3 = Book.create!(name: "サンプル参考書3",
                     description: "サンプル参考書3の説明文",
                     user_id: user.id
                   )
+
+book4 = Book.create!(name: "サンプル参考書4",
+                    author: "サンプル著者4",
+                    publisher: "サンプル出版社4",
+                    subject: "英作文",
+                    description: "サンプル参考書4の説明文",
+                    user_id: user2.id
+                  )
+
+book5 = Book.create!(name: "日本の歴史1",
+                    author: "日本史一郎",
+                    publisher: "日本出版",
+                    subject: "日本史",
+                    description: "説明文",
+                    user_id: user.id
+                  )
+
+book6 = Book.create!(name: "日本の歴史2",
+                    author: "日本史二郎",
+                    publisher: "日本出版",
+                    subject: "日本史",
+                    description: "説明文",
+                    user_id: user.id
+                  )
+
+book7 = Book.create!(name: "日本の歴史3",
+                    author: "日本史三郎",
+                    publisher: "日本出版",
+                    subject: "日本史",
+                    description: "説明文",
+                    user_id: user.id
+                  )
+
+book8 = Book.create!(name: "日本の歴史4",
+                    author: "日本史四郎",
+                    publisher: "日本出版",
+                    subject: "日本史",
+                    description: "説明文",
+                    user_id: user.id
+                  )
+
+book9 = Book.create!(name: "英文法の教科書",
+                    author: "英文法極め太郎",
+                    publisher: "個人出版",
+                    subject: "英文法",
+                    description: "説明文",
+                    user_id: user.id
+                  )
+
 
 
 review = Review.create!(rating: 5,
@@ -88,6 +138,41 @@ review4 = Review.create!(rating: 4,
                         book_id: book.id
                       )
 
+review5 = Review.create!(rating: 5,
+                        title: "サンプルレビュータイトル5",
+                        content: "サンプルレビュー本文5",
+                        user_id: user.id,
+                        book_id: book5.id
+                      )
+
+review6 = Review.create!(rating: 2,
+                        title: "サンプルレビュータイトル6",
+                        content: "サンプルレビュー本文6",
+                        user_id: user.id,
+                        book_id: book6.id
+                      )
+
+review7 = Review.create!(rating: 2,
+                        title: "サンプルレビュータイトル7",
+                        content: "サンプルレビュー本文7",
+                        user_id: user.id,
+                        book_id: book6.id
+                      )
+
+review8 = Review.create!(rating: 2,
+                        title: "サンプルレビュータイトル8",
+                        content: "サンプルレビュー本文8",
+                        user_id: user.id,
+                        book_id: book6.id
+                      )
+
+review9 = Review.create!(rating: 2,
+                        title: "サンプルレビュータイトル9",
+                        content: "サンプルレビュー本文9",
+                        user_id: user.id,
+                        book_id: book6.id
+                      )
+
 question = Question.create!(title: "サンプル質問タイトル1",
                             content: "サンプル質問本文1",
                             subject: "英文法",
@@ -101,6 +186,47 @@ question2 = Question.create!(title: "サンプル質問タイトル2",
                             user_id: user2.id,
                             book_id: book.id
                           )
+question3 = Question.create!(title: "サンプル質問タイトル3",
+                            content: "サンプル質問本文3",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book.id
+                          )
+
+question4 = Question.create!(title: "サンプル質問タイトル4",
+                            content: "サンプル質問本文4",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book3.id
+                          )
+
+question5 = Question.create!(title: "英語の質問1",
+                            content: "to不定詞の使い方を教えてください",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book9.id
+                          )
+
+question6 = Question.create!(title: "英語の質問2",
+                            content: "動名詞の使い方を教えてください",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book9.id
+                          )
+
+question7 = Question.create!(title: "英語の質問3",
+                            content: "分詞構文の使い方を教えてください",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book9.id
+                          )
+
+question8 = Question.create!(title: "英語の質問4",
+                            content: "受動態の使い方を教えてください",
+                            subject: "英文法",
+                            user_id: user.id,
+                            book_id: book9.id
+                          )
 
 reply = Reply.create!(content: "サンプル返信本文1",
                       user_id: user.id,
@@ -111,6 +237,22 @@ reply2 = Reply.create!(content: "サンプル返信本文2",
                         user_id: user2.id,
                         question_id: question.id
                       )
+
+reply1 = Reply.create!(content: "英語の返信1",
+                      user_id: user.id,
+                      question_id: question5.id
+                    )
+
+reply2 = Reply.create!(content: "英語の返信2",
+                      user_id: user.id,
+                      question_id: question5.id
+                    )
+
+reply3 = Reply.create!(content: "英語の返信3",
+                      user_id: user.id,
+                      question_id: question5.id
+                    )
+
 
 subject_question = SubjectQuestion.create!(title: "サンプル科目別質問タイトル1",
                                             content: "サンプル科目別質問本文1",
@@ -170,12 +312,32 @@ favorite_book = FavoriteBook.create!(user_id: user.id,
                                       book_id: book.id
                                     )
 
+favorite_book2 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book7.id
+                                    )
+
+favorite_book3 = FavoriteBook.create!(user_id: user2.id,
+                                      book_id: book7.id
+                                    )
+
+favorite_book4 = FavoriteBook.create!(user_id: user3.id,
+                                      book_id: book7.id
+                                    )
+
 favorite_review = FavoriteReview.create!(user_id: user2.id,
                                           review_id: review.id
                                         )
 
 favorite_question = FavoriteQuestion.create!(user_id: user2.id,
                                               question_id: question.id
+                                            )
+
+favorite_question2 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question6.id
+                                            )
+
+favorite_question3 = FavoriteQuestion.create!(user_id: user2.id,
+                                              question_id: question6.id
                                             )
 
 favorite_reply = FavoriteReply.create!(user_id: user2.id,

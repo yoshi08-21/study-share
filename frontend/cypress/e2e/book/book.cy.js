@@ -46,6 +46,621 @@ describe("参考書一覧", () => {
 
 })
 
+describe("参考書の検索機能", () => {
+
+  context("参考書名で検索", () => {
+
+    it("参考書一覧ページで参考書を参考書名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("日本の歴史1")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("参考書一覧ページで参考書を参考書名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("日本の歴史")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を参考書名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("日本の歴史1")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を参考書名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("日本の歴史")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を参考書名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("日本の歴史1")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を参考書名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("日本の歴史")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+  })
+
+  context("参考書の著者名で検索", () => {
+
+    it("参考書一覧ページで参考書を著者名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("日本史一郎")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("参考書一覧ページで参考書を著者名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("郎")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を著者名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("日本史一郎")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を著者名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("郎")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を著者名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("日本史一郎")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果1件")
+
+      cy.contains("日本の歴史1")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を著者名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("郎")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+
+  })
+
+  context("参考書の出版社名で検索", () => {
+
+    it("参考書一覧ページで参考書を出版社名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("日本出版")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("参考書一覧ページで参考書を出版社名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("本出版")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を出版社名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("日本出版")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を出版社名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("本出版")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を出版社名で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("日本出版")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("通常ヘッダーの検索バーで参考書を出版社名で検索すると、キーワードが部分一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("本出版")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+
+  })
+
+  context("参考書の科目で検索", () => {
+
+    it("参考書一覧ページで参考書を科目で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=search-books-field]").type("日本史")
+
+      cy.get("[data-cy=search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+    it("特別ヘッダーの検索バーで参考書を科目で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=header-search-books-field]").type("日本史")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+
+    it("通常ヘッダーの検索バーで参考書を科目で検索すると、キーワードが完全一致する参考書が表示される", () => {
+      cy.visit("/")
+
+      cy.get("[data-cy=menu-button]").click()
+
+      cy.contains("参考書一覧").click()
+
+      cy.get("[data-cy=header-search-books-field]").type("日本史")
+
+      cy.get("[data-cy=header-search-books-button]").click()
+
+      cy.contains("検索結果")
+
+      cy.contains("日本の歴史1")
+
+      cy.contains("日本の歴史2")
+
+      cy.contains("日本の歴史3")
+
+      cy.contains("日本の歴史4")
+    })
+
+
+  })
+
+
+
+})
+
+describe("参考書の並べ替え機能", () => {
+
+  it("参考書を「新着順」で並び替えると、新着順に参考書が表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=sort-books-select]").click()
+
+    cy.contains("新着順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史4")
+  })
+
+  it("参考書を「投稿順」で並び替えると、投稿順に参考書が表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=sort-books-select]").click()
+
+    cy.contains("投稿順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("サンプル参考書1")
+  })
+
+  it("参考書を「評価が高い順」で並び替えると、評価が高い順に参考書が表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=sort-books-select]").click()
+
+    cy.contains("評価が高い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史1")
+  })
+
+  it("参考書を「レビューが多い順」で並び替えると、レビューが多い順に参考書が表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=sort-books-select]").click()
+
+    cy.contains("レビューが多い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史2")
+
+  })
+
+  it("参考書を「お気に入り登録数が多い順」で並び替えると、お気に入り登録数が多い順に参考書が表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=sort-books-select]").click()
+
+    cy.contains("お気に入り登録数が多い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史3")
+  })
+
+})
+
+describe("参考書の絞り込み機能", () => {
+
+  it("参考書を「日本史」の科目で絞り込むと、科目が日本史の参考書のみが表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.contains("日本の歴史1")
+
+    cy.contains("日本の歴史2")
+
+    cy.contains("日本の歴史3")
+
+    cy.contains("日本の歴史4")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+})
+
+describe("参考書の絞り込み=>並び替え機能", () => {
+
+  it("参考書を「日本史」の科目で絞り込み、「新着順」で並び替えると、科目が日本史の参考書のみが新着順で表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.get("[data-cy=sort-books-select]").scrollIntoView().click()
+
+    cy.contains("新着順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史4")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+  it("参考書を「日本史」の科目で絞り込み、「投稿順」で並び替えると、科目が日本史の参考書のみが投稿順で表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.get("[data-cy=sort-books-select]").scrollIntoView().click()
+
+    cy.contains("投稿順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史1")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+  it("参考書を「日本史」の科目で絞り込み、「評価が高い順」で並び替えると、科目が日本史の参考書のみが評価が高い順で表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.get("[data-cy=sort-books-select]").scrollIntoView().click()
+
+    cy.contains("評価が高い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史1")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+  it("参考書を「日本史」の科目で絞り込み、「レビューが多い順」で並び替えると、科目が日本史の参考書のみがレビューが多い順で表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.get("[data-cy=sort-books-select]").scrollIntoView().click()
+
+    cy.contains("レビューが多い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史2")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+  it("参考書を「日本史」の科目で絞り込み、「お気に入り登録数が多い順」で並び替えると、科目が日本史の参考書のみがお気に入り登録数が多い順で表示される", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click()
+
+    cy.get(".v-menu__content").contains("日本史").click()
+
+    cy.get("[data-cy=sort-books-select]").scrollIntoView().click()
+
+    cy.contains("お気に入り登録数が多い順").click()
+
+    cy.get("[data-cy=each-books]").first().contains("日本の歴史3")
+
+    cy.contains("サンプル参考書").should("not.exist")
+  })
+
+})
+
+
+
 describe("参考書詳細", () => {
 
   it("参考書詳細ページにアクセスすると、参考書の詳細情報が表示される", () => {
@@ -110,8 +725,6 @@ describe("参考書登録", () => {
 
     cy.contains("選択された科目:現代文")
 
-    cy.fixture("no_image.png", { encoding: null }).as("image")
-
     cy.get("[data-cy=create-name-field]").type("新規サンプル参考書")
 
     cy.get("[data-cy=create-author-field]").type("新規サンプル著者")
@@ -129,6 +742,8 @@ describe("参考書登録", () => {
     cy.contains("新規サンプル著者")
 
     cy.contains("新規サンプル出版社")
+
+    cy.contains("現代文")
 
     cy.get("textarea").should("have.value", "新規サンプル説明文")
   })
@@ -274,6 +889,26 @@ describe("参考書編集", () => {
     cy.get("textarea").should("have.value", "編集後サンプル説明文")
   })
 
+  it("ログイン状態で他人が投稿した参考書詳細ページにアクセスすると、参考書編集ボタンが表示されない", () => {
+    cy.login("cypress@cypress.com", "cypress")
+
+    cy.contains("プロフィール")
+
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.contains("サンプル参考書4").scrollIntoView()
+
+    cy.contains("サンプル参考書4").click()
+
+    cy.contains("サンプル参考書4")
+
+    cy.contains("編集する").should("not.exist")
+  })
+
   it("ログイン状態で不正なパラメーターで参考書を編集すると、参考書の編集に失敗する", () => {
     cy.login("cypress@cypress.com", "cypress")
 
@@ -289,7 +924,7 @@ describe("参考書編集", () => {
 
     cy.contains("サンプル参考書2").click()
 
-    cy.get("[data-cy=edit-book-button]").click()
+    cy.get("[data-cy=edit-book-button]").click({force: true})
 
     cy.get("[data-cy=edit-name-field]").clear()
 
@@ -308,7 +943,7 @@ describe("参考書編集", () => {
     cy.contains("参考書を編集できませんでした")
   })
 
-  it("未ログイン状態だと、参考書の編集ボタンが表示されない", () => {
+  it("未ログイン状態だと、参考書編集ボタンが表示されない", () => {
     cy.visit("/")
 
     cy.get("[data-cy=menu-button]").click()
@@ -341,7 +976,7 @@ describe("参考書削除", () => {
 
     cy.contains("サンプル参考書2").click()
 
-    cy.get("[data-cy=delete-book-button]").click()
+    cy.get("[data-cy=delete-book-button]").click({force: true})
 
     cy.contains("参考書を削除しますか？")
 
@@ -352,8 +987,27 @@ describe("参考書削除", () => {
     cy.contains("参考書を削除しました")
   })
 
+  it("ログイン状態で他人が投稿した参考書詳細ページにアクセスすると、参考書削除ボタンが表示されない", () => {
+    cy.login("cypress@cypress.com", "cypress")
 
-  it("未ログイン状態だと、参考書の削除ボタンが表示されない", () => {
+    cy.contains("プロフィール")
+
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.contains("サンプル参考書4").scrollIntoView()
+
+    cy.contains("サンプル参考書4").click()
+
+    cy.contains("サンプル参考書4")
+
+    cy.contains("削除する").should("not.exist")
+  })
+
+  it("未ログイン状態だと、参考書削除ボタンが表示されない", () => {
     cy.visit("/")
 
     cy.get("[data-cy=menu-button]").click()

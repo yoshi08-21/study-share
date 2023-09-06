@@ -119,6 +119,7 @@
             x-large
             color="success"
             width="400"
+            data-cy="question-dialog-button"
           >
             新規質問を投稿する
           </v-btn>
