@@ -238,17 +238,17 @@ reply2 = Reply.create!(content: "サンプル返信本文2",
                         question_id: question.id
                       )
 
-reply1 = Reply.create!(content: "英語の返信1",
+reply3 = Reply.create!(content: "英語の返信1",
                       user_id: user.id,
                       question_id: question5.id
                     )
 
-reply2 = Reply.create!(content: "英語の返信2",
+reply4 = Reply.create!(content: "英語の返信2",
                       user_id: user.id,
                       question_id: question5.id
                     )
 
-reply3 = Reply.create!(content: "英語の返信3",
+reply5 = Reply.create!(content: "英語の返信3",
                       user_id: user.id,
                       question_id: question5.id
                     )
@@ -340,10 +340,17 @@ favorite_question3 = FavoriteQuestion.create!(user_id: user2.id,
                                               question_id: question6.id
                                             )
 
+favorite_question4 = FavoriteQuestion.create!(user_id: user3.id,
+                                              question_id: question5.id
+                                            )
+
 favorite_reply = FavoriteReply.create!(user_id: user2.id,
                                         reply_id: reply.id
                                       )
 
+favorite_reply2 = FavoriteReply.create!(user_id: user2.id,
+                                        reply_id: reply3.id
+                                      )
 
 favorite_subject_question = FavoriteSubjectQuestion.create!(user_id: user2.id,
                                                             subject_question_id: subject_question.id
