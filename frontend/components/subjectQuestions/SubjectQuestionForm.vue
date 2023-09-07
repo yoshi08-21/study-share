@@ -7,12 +7,12 @@
       cols="12"
       sm="6"
       >
-      <v-btn @click="selectSubjectDialog = true">科目を選択する</v-btn>
+      <v-btn @click="selectSubjectDialog = true">科目を選択する(必須)</v-btn>
       </v-col>
       <h3 v-if="subject">選択された科目：{{ subject }}</h3>
       <br>
-      <v-text-field counter label="タイトル" :rules="titleRules" v-model="title"></v-text-field>
-      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"></v-textarea>
+      <v-text-field counter label="タイトル" :rules="titleRules" v-model="title" data-cy="create-title-field"></v-text-field>
+      <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content" data-cy="create-content-field"></v-textarea>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       <br>
       *添付できる画像のファイルサイズは3MBまでです
@@ -48,7 +48,7 @@
       <v-card>
         <v-card-title class="headline">科目選択</v-card-title>
         <v-card-text>
-          <v-radio-group v-model="subject">
+          <v-radio-group v-model="subject" data-cy="select-subject-group">
             <template v-for="category in categories">
               <p :key="category.name">{{ category.name }}</p>
               <v-radio v-for="subcategory in category.subcategories" :key="subcategory" :label="subcategory" :value="subcategory"></v-radio>
@@ -58,7 +58,7 @@
         <h3>選択された科目:{{ subject }}</h3>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="selectSubjectDialog = false" color="primary" block>閉じる</v-btn>
+          <v-btn @click="selectSubjectDialog = false" color="primary" block data-cy="close-select-subject-dialog">閉じる</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
-      <h2>質問詳細 (科目別)</h2>
+      <h2>質問詳細(科目別)</h2>
       <nuxt-link :to="`/subjectQuestions/subjectQuestions`">質問一覧に戻る</nuxt-link>
     </div>
     <v-card
       elevation="8"
       style="padding-bottom: 1px;"
+      data-cy="subject-question-detail"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
@@ -81,7 +82,7 @@
                   @removeFromFavorite="removeFromFavorite"
                 ></favorite-button>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="4" data-cy="subject-question-reply-section">
                 <v-icon>mdi-comment-text-outline</v-icon>
                   返信: {{ subjectQuestion.subject_question_replies_count }}
               </v-col>

@@ -266,6 +266,68 @@ subject_question2 = SubjectQuestion.create!(title: "サンプル科目別質問�
                                             user_id: user2.id
                                           )
 
+subject_question3 = SubjectQuestion.create!(title: "サンプル科目別質問タイトル3",
+                                            content: "サンプル科目別質問本文3",
+                                            subject: "リスニング",
+                                            user_id: user2.id
+                                          )
+
+subject_question4 = SubjectQuestion.create!(title: "英語の科目別質問1",
+                                      content: "to不定詞の使い方を教えてください",
+                                      subject: "英文法",
+                                      user_id: user.id,
+                                    )
+
+subject_question5 = SubjectQuestion.create!(title: "英語の科目別質問2",
+                                            content: "動名詞の使い方を教えてください",
+                                            subject: "英文法",
+                                            user_id: user.id,
+                                          )
+
+subject_question6 = SubjectQuestion.create!(title: "英語の科目別質問3",
+                                            content: "分詞構文の使い方を教えてください",
+                                            subject: "英文法",
+                                            user_id: user.id,
+                                          )
+
+subject_question7 = SubjectQuestion.create!(title: "英語の科目別質問4",
+                                            content: "受動態の使い方を教えてください",
+                                            subject: "英文法",
+                                            user_id: user.id,
+                                            created_at: Time.now + 10.minute
+                                          )
+
+subject_question8 = SubjectQuestion.create!(title: "編集用科目別質問",
+                                            content: "編集前科目別質問本文",
+                                            subject: "その他科目",
+                                            user_id: user.id,
+                                          )
+
+subject_question9 = SubjectQuestion.create!(title: "編集失敗用科目別質問",
+                                            content: "編集失敗用科目別質問本文",
+                                            subject: "その他科目",
+                                            user_id: user.id,
+                                          )
+
+subject_question10 = SubjectQuestion.create!(title: "削除用科目別質問",
+                                            content: "削除用科目別質問本文",
+                                            subject: "その他科目",
+                                            user_id: user.id,
+                                          )
+
+subject_question11 = SubjectQuestion.create!(title: "削除失敗用科目別質問",
+                                            content: "削除失敗用科目別質問本文",
+                                            subject: "その他科目",
+                                            user_id: user.id,
+                                          )
+
+subject_question12 = SubjectQuestion.create!(title: "他ユーザー投稿科目別質問タイトル",
+                                            content: "他ユーザー投稿科目別質問本文",
+                                            subject: "その他科目",
+                                            user_id: user2.id,
+                                          )
+
+
 subject_question_reply = SubjectQuestionReply.create!(content: "サンプル科目別返信本文1",
                                                       user_id: user.id,
                                                       subject_question_id: subject_question.id
@@ -274,6 +336,21 @@ subject_question_reply = SubjectQuestionReply.create!(content: "サンプル科�
 subject_question_reply2 = SubjectQuestionReply.create!(content: "サンプル科目別返信本文2",
                                                       user_id: user2.id,
                                                       subject_question_id: subject_question.id
+                                                    )
+
+subject_question_reply3 = SubjectQuestionReply.create!(content: "サンプル科目別返信本文3",
+                                                      user_id: user2.id,
+                                                      subject_question_id: subject_question6.id
+                                                    )
+
+subject_question_reply4 = SubjectQuestionReply.create!(content: "サンプル科目別返信本文4",
+                                                      user_id: user2.id,
+                                                      subject_question_id: subject_question6.id
+                                                    )
+
+subject_question_reply5 = SubjectQuestionReply.create!(content: "サンプル科目別返信本文5",
+                                                      user_id: user2.id,
+                                                      subject_question_id: subject_question6.id
                                                     )
 
 survey = Survey.create!(title: "テストアンケートタイトル1",
@@ -354,6 +431,14 @@ favorite_reply2 = FavoriteReply.create!(user_id: user2.id,
 
 favorite_subject_question = FavoriteSubjectQuestion.create!(user_id: user2.id,
                                                             subject_question_id: subject_question.id
+                                                            )
+
+favorite_subject_question2 = FavoriteSubjectQuestion.create!(user_id: user2.id,
+                                                            subject_question_id: subject_question5.id
+                                                            )
+
+favorite_subject_question3 = FavoriteSubjectQuestion.create!(user_id: user3.id,
+                                                            subject_question_id: subject_question5.id
                                                             )
 
 

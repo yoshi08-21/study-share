@@ -14,6 +14,7 @@
     <v-card
       elevation="8"
       style="padding-bottom: 1px;"
+      data-cy="question-detail"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
