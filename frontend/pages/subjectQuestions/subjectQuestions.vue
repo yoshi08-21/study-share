@@ -25,11 +25,12 @@
                   outlined
                   dense
                   label="質問を検索"
+                  data-cy="search-subject-questions-field"
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="1">
-                <v-btn @click="searchSubjectQuestions">検索</v-btn>
+                <v-btn @click="searchSubjectQuestions" data-cy="search-subject-questions-button">検索</v-btn>
               </v-col>
             </v-row>
             <v-btn
@@ -67,6 +68,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="sort-subject-questions-select"
               ></v-select>
               </v-col>
               <v-col cols="6">
@@ -77,6 +79,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="filter-subject-questions-select"
               ></v-select>
               </v-col>
             </v-row>

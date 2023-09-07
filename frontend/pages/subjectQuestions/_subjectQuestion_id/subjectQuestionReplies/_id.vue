@@ -67,12 +67,13 @@
 
     <br><br><br>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
-      <h2>返信詳細</h2>
+      <h2>返信詳細(科目別)</h2>
       <nuxt-link :to="`/subjectQuestions/${subjectQuestion.id}`">質問詳細に戻る</nuxt-link>
     </div>
     <v-card
       elevation="8"
       style="padding-bottom: 1px;"
+      data-cy="subject-question-reply-detail"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
