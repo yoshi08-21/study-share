@@ -7,6 +7,7 @@
     <v-col cols="12">
       <v-card
         elevation="2"
+        data-cy="survey-detail"
       >
         <v-row>
           <v-col cols="12" class="mt-n2">
@@ -81,7 +82,7 @@
                   <span style="text-decoration: underline;">{{ $truncate(surveyUser.name, 9) }}</span>
                 </div>
                 </v-col>
-                <v-col cols="3">
+                <v-col cols="3" data-cy="survey-answer-section">
                   <v-icon>mdi-comment-text-multiple</v-icon>
                   回答数:  {{ survey.survey_answers_count }}件
                 </v-col>
@@ -166,7 +167,7 @@
         <template v-if="currentUser && survey.status === true">
           <!-- current_userがいる ＆ アンケートが締め切られている -->
           <v-alert type="error" dense text prominent border="left">
-            アンケートは締め切られています。
+            アンケートは締め切られています
           </v-alert>
           <v-row>
             <v-col class="d-flex justify-center">
@@ -281,12 +282,16 @@
 
         <template v-else-if="!currentUser">
           <!-- current_userがいない(未ログイン状態) -->
-          <v-btn-toggle style="flex-direction: column;">
-            <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-            <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-            <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-            <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
-          </v-btn-toggle>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-btn-toggle style="flex-direction: column;">
+                <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+              </v-btn-toggle>
+            </v-col>
+          </v-row>
         </template>
     </v-card>
 
@@ -327,6 +332,7 @@
                 width="300"
                 color="error"
                 dark
+                data-cy="close-survey-confirmation-button"
                 >
                   アンケートを締め切る
                 </v-btn>

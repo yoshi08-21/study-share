@@ -12,14 +12,15 @@
         v-model="selectedGenre"
         label="ジャンル(必須)"
         outlined
+        data-cy="select-genre-button"
       ></v-select>
     </v-col>
-      <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title"></v-text-field>
-      <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content"></v-textarea>
-      <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1"></v-text-field>
-      <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2"></v-text-field>
-      <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3"></v-text-field>
-      <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4"></v-text-field>
+      <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" data-cy="create-title-field"></v-text-field>
+      <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" data-cy="create-content-field"></v-textarea>
+      <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" data-cy="create-option1-field"></v-text-field>
+      <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" data-cy="create-option2-field"></v-text-field>
+      <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" data-cy="create-option3-field"></v-text-field>
+      <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" data-cy="create-option4-field"></v-text-field>
       <br>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       <br>
@@ -53,19 +54,19 @@
 
     <!-- アンケート内容確認ダイアログ -->
     <v-dialog v-model="confirmationDialog">
-      <v-card>
+      <v-card data-cy="survey-confirmation-dialog">
         <v-card-title style="justify-content: center;">
           <h2>内容確認</h2>
         </v-card-title>
         <br>
         <v-card-text>
           <br><h3>選択されたジャンル: {{ selectedGenre }}</h3><br>
-          <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo></v-text-field>
-          <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo></v-textarea>
-          <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo></v-text-field>
-          <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo></v-text-field>
-          <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo></v-text-field>
-          <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo></v-text-field>
+          <v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo data-cy="confirmation-title-field"></v-text-field>
+          <v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo data-cy="confirmation-content-field"></v-textarea>
+          <v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo data-cy="confirmation-option1-field"></v-text-field>
+          <v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo data-cy="confirmation-option2-field"></v-text-field>
+          <v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo data-cy="confirmation-option3-field"></v-text-field>
+          <v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo data-cy="confirmation-option4-field"></v-text-field>
           <br>
           <v-file-input
             v-model="selectedFile"

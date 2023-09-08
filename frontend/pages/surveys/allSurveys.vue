@@ -22,6 +22,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="sort-surveys-select"
               ></v-select>
               </v-col>
               <v-col cols="6">
@@ -32,6 +33,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="filter-surveys-select"
               ></v-select>
               </v-col>
             </v-row>
@@ -70,6 +72,7 @@
             v-model="hideClosedSurvey"
             label="回答受付中のアンケートのみ表示"
             color="indigo"
+            data-cy="hide-closed-surveys-switch"
           ></v-switch>
         </v-card>
       </v-col>

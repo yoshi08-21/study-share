@@ -286,7 +286,7 @@ describe("科目別質問の絞り込み=>並び替え機能", () => {
 
     cy.get("[data-cy=each-subject-questions]").first().contains("英語の科目別質問4")
 
-    cy.contains("サンプル参考書").should("not.exist")
+    cy.contains("サンプル科目別質問").should("not.exist")
   })
 
   it("科目別質問を「英文法」の科目で絞り込み、「投稿順」で並び替えると、科目が英文法の科目別質問のみが投稿順で表示される", () => {
@@ -306,7 +306,7 @@ describe("科目別質問の絞り込み=>並び替え機能", () => {
 
     cy.get("[data-cy=each-subject-questions]").first().contains("英語の科目別質問1")
 
-    cy.contains("サンプル参考書").should("not.exist")
+    cy.contains("サンプル科目別質問").should("not.exist")
   })
 
   it("科目別質問を「英文法」の科目で絞り込み、「いいね!が多い順」で並び替えると、科目が英文法の科目別質問のみがいいねが多い順で表示される", () => {
@@ -326,7 +326,7 @@ describe("科目別質問の絞り込み=>並び替え機能", () => {
 
     cy.get("[data-cy=each-subject-questions]").first().contains("英語の科目別質問2")
 
-    cy.contains("サンプル参考書").should("not.exist")
+    cy.contains("サンプル科目別質問").should("not.exist")
   })
 
   it("科目別質問を「英文法」の科目で絞り込み、「返信が多い順」で並び替えると、科目が英文法の科目別質問のみが返信が多い順で表示される", () => {
@@ -346,7 +346,7 @@ describe("科目別質問の絞り込み=>並び替え機能", () => {
 
     cy.get("[data-cy=each-subject-questions]").first().contains("英語の科目別質問3")
 
-    cy.contains("サンプル参考書").should("not.exist")
+    cy.contains("サンプル科目別質問").should("not.exist")
   })
 
 })
