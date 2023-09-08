@@ -353,6 +353,32 @@ subject_question_reply5 = SubjectQuestionReply.create!(content: "サンプル科
                                                       subject_question_id: subject_question6.id
                                                     )
 
+subject_question_reply6 = SubjectQuestionReply.create!(content: "編集用科目別返信",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question8.id
+                                                    )
+
+subject_question_reply7 = SubjectQuestionReply.create!(content: "編集失敗用科目別返信",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question9.id
+                                                    )
+
+subject_question_reply8 = SubjectQuestionReply.create!(content: "削除用科目別返信",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question10.id
+                                                    )
+
+subject_question_reply9 = SubjectQuestionReply.create!(content: "削除失敗用科目別返信",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question11.id
+                                                    )
+
+subject_question_reply40 = SubjectQuestionReply.create!(content: "他ユーザー投稿科目別返信",
+                                                      user_id: user2.id,
+                                                      subject_question_id: subject_question12.id
+                                                    )
+
+
 survey = Survey.create!(title: "テストアンケートタイトル1",
                         content: "テストアンケート本文1",
                         option1: "選択肢1",

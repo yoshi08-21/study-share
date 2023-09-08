@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <v-row mb-5 v-for="(subjectQuestionReply, index) in subjectQuestionReplies" :key="'subjectQuestionReply_' + index" class="justify-center">
+    <v-row mb-5 v-for="(subjectQuestionReply, index) in subjectQuestionReplies" :key="'subjectQuestionReply_' + index" class="justify-center" data-cy="each-subject-question-replies">
       <v-col cols="10">
         <v-card
           :to="`/subjectQuestions/${subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${subjectQuestionReply.id}`"
