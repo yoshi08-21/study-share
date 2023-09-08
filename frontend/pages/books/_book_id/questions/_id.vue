@@ -75,6 +75,10 @@
           <br>
           <v-card-actions>
             <v-row class="d-flex align-center justify-center">
+              <v-col cols="4" data-cy="reply-section">
+                <v-icon>mdi-comment-text-outline</v-icon>
+                返信: {{ question.replies_count }}件
+              </v-col>
               <v-col cols="4">
                 <favorite-button
                   :currentUser="currentUser"
@@ -84,10 +88,6 @@
                   @addToFavorite="addToFavorite"
                   @removeFromFavorite="removeFromFavorite"
                 ></favorite-button>
-              </v-col>
-              <v-col cols="4" data-cy="reply-section">
-                <v-icon>mdi-comment-text-outline</v-icon>
-                返信: {{ question.replies_count }}件
               </v-col>
               <v-col cols="4">
                 <v-icon>mdi-calendar-clock</v-icon>
