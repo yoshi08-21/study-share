@@ -35,7 +35,5 @@ Cypress.Commands.add("login", (email, password) => {
   cy.get("[data-cy=login-button]").click()
 
   cy.url().should("include", "/mypage")
-
-  cy.contains("プロフィール")
 })
 

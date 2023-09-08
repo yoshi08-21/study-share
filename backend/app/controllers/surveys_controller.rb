@@ -23,6 +23,7 @@ class SurveysController < ApplicationController
                     .find_by(id: params[:id])
     return head :not_found unless survey
     survey_json = attach_image_to_survey(survey)
+    survey_json["created_at"] = format_japanese_time(survey.created_at)
 
     survey_user = survey.user
     survey_user_json = attach_image_to_user(survey_user)

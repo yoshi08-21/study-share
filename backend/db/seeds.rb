@@ -379,8 +379,8 @@ subject_question_reply40 = SubjectQuestionReply.create!(content: "他ユーザ�
                                                     )
 
 
-survey = Survey.create!(title: "テストアンケートタイトル1",
-                        content: "テストアンケート本文1",
+survey = Survey.create!(title: "サンプルアンケートタイトル1",
+                        content: "サンプルアンケート本文1",
                         option1: "選択肢1",
                         option2: "選択肢2",
                         option3: "選択肢3",
@@ -390,8 +390,8 @@ survey = Survey.create!(title: "テストアンケートタイトル1",
                         user_id: user.id
                       )
 
-survey2 = Survey.create!(title: "テストアンケートタイトル2",
-                        content: "テストアンケート本文2",
+survey2 = Survey.create!(title: "サンプルアンケートタイトル2",
+                        content: "サンプルアンケート本文2",
                         option1: "選択肢1",
                         option2: "選択肢2",
                         option3: "選択肢3",
@@ -401,6 +401,141 @@ survey2 = Survey.create!(title: "テストアンケートタイトル2",
                         user_id: user2.id
                       )
 
+survey3 = Survey.create!(title: "サンプルアンケートタイトル3",
+                        content: "サンプルアンケート本文3",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "数学",
+                        status: false,
+                        user_id: user3.id,
+                        created_at: Time.now + 10.minute
+                      )
+
+survey4 = Survey.create!(title: "サンプルアンケートタイトル4",
+                        content: "サンプルアンケート本文4",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "数学",
+                        status: false,
+                        user_id: user3.id,
+                      )
+
+survey5 = Survey.create!(title: "締め切り済みアンケート",
+                        content: "締め切り済みアンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "数学",
+                        status: true,
+                        user_id: user3.id,
+                      )
+
+survey6 = Survey.create!(title: "進路のアンケート1",
+                        content: "進路のアンケート本文1",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "進路・大学",
+                        status: false,
+                        user_id: user3.id,
+                      )
+
+survey7 = Survey.create!(title: "進路のアンケート2",
+                        content: "進路のアンケート本文2",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "進路・大学",
+                        status: false,
+                        user_id: user3.id,
+                        created_at: Time.now + 5.minute
+                      )
+
+survey8 = Survey.create!(title: "進路のアンケート3",
+                        content: "進路のアンケート本文3",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "進路・大学",
+                        status: false,
+                        user_id: user3.id,
+                      )
+
+survey9 = Survey.create!(title: "進路のアンケート4",
+                        content: "進路のアンケート本文4",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "進路・大学",
+                        status: false,
+                        user_id: user3.id,
+                      )
+
+survey10 = Survey.create!(title: "締め切り機能用アンケート",
+                        content: "締め切り機能用アンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "その他",
+                        status: false,
+                        user_id: user.id,
+                      )
+
+survey11 = Survey.create!(title: "締め切り機能失敗用アンケート",
+                        content: "締め切り機能失敗用アンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "その他",
+                        status: false,
+                        user_id: user.id,
+                      )
+
+survey12 = Survey.create!(title: "他ユーザー作成アンケート",
+                        content: "他ユーザー作成アンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "その他",
+                        status: false,
+                        user_id: user2.id,
+                      )
+
+survey13 = Survey.create!(title: "削除用アンケート",
+                        content: "削除用アンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "その他",
+                        status: false,
+                        user_id: user.id,
+                      )
+
+survey14 = Survey.create!(title: "削除失敗用アンケート",
+                        content: "削除失敗用アンケート本文",
+                        option1: "選択肢1",
+                        option2: "選択肢2",
+                        option3: "選択肢3",
+                        option4: "選択肢4",
+                        genre: "その他",
+                        status: false,
+                        user_id: user.id,
+                      )
+
+
 survey_answer = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user2.id,
                                       survey_id: survey.id
@@ -408,7 +543,17 @@ survey_answer = SurveyAnswer.create!(selected_option: 1,
 
 survey_answer2 = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user.id,
-                                      survey_id: survey2.id
+                                      survey_id: survey4.id
+                                    )
+
+survey_answer3 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user2.id,
+                                      survey_id: survey4.id
+                                    )
+
+survey_answer4 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user2.id,
+                                      survey_id: survey9.id
                                     )
 
 favorite_book = FavoriteBook.create!(user_id: user.id,
@@ -475,6 +620,18 @@ favorite_subject_question_reply = FavoriteSubjectQuestionReply.create!(user_id: 
 
 favorite_survey = FavoriteSurvey.create!(user_id: user2.id,
                                           survey_id: survey.id
+                                        )
+
+favorite_survey2 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey2.id
+                                        )
+
+favorite_survey3 = FavoriteSurvey.create!(user_id: user3.id,
+                                          survey_id: survey2.id
+                                        )
+
+favorite_survey3 = FavoriteSurvey.create!(user_id: user2.id,
+                                          survey_id: survey8.id
                                         )
 
 
