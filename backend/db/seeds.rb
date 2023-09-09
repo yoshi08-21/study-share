@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 user = User.create!(name: "cypress-sample",
                     email: "cypress@cypress.com",
                     uid: "W0kuhhA7rgRl0t4aITV4kdHB0Mq2",
@@ -35,6 +27,17 @@ user3 = User.create!(name: "delete-cypress-sample",
                     introduction: "絶対合格しましょう",
                     memo: "単語帳Cを確認"
                   )
+
+user4 = User.create!(name: "sample-user1",
+                    email: "sample@sample.com",
+                    uid: "sample",
+                    first_choice_school: "A大学",
+                    second_choice_school: "B大学",
+                    third_choice_school: "C大学",
+                    introduction: "A",
+                    memo: "A"
+                  )
+
 
 book = Book.create!(name: "サンプル参考書1",
                     author: "サンプル著者1",
@@ -481,59 +484,103 @@ survey9 = Survey.create!(title: "進路のアンケート4",
                       )
 
 survey10 = Survey.create!(title: "締め切り機能用アンケート",
-                        content: "締め切り機能用アンケート本文",
-                        option1: "選択肢1",
-                        option2: "選択肢2",
-                        option3: "選択肢3",
-                        option4: "選択肢4",
-                        genre: "その他",
-                        status: false,
-                        user_id: user.id,
-                      )
+                          content: "締め切り機能用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user.id,
+                        )
 
 survey11 = Survey.create!(title: "締め切り機能失敗用アンケート",
-                        content: "締め切り機能失敗用アンケート本文",
-                        option1: "選択肢1",
-                        option2: "選択肢2",
-                        option3: "選択肢3",
-                        option4: "選択肢4",
-                        genre: "その他",
-                        status: false,
-                        user_id: user.id,
-                      )
+                          content: "締め切り機能失敗用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user.id,
+                        )
 
 survey12 = Survey.create!(title: "他ユーザー作成アンケート",
-                        content: "他ユーザー作成アンケート本文",
-                        option1: "選択肢1",
-                        option2: "選択肢2",
-                        option3: "選択肢3",
-                        option4: "選択肢4",
-                        genre: "その他",
-                        status: false,
-                        user_id: user2.id,
-                      )
+                          content: "他ユーザー作成アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user2.id,
+                        )
 
 survey13 = Survey.create!(title: "削除用アンケート",
-                        content: "削除用アンケート本文",
-                        option1: "選択肢1",
-                        option2: "選択肢2",
-                        option3: "選択肢3",
-                        option4: "選択肢4",
-                        genre: "その他",
-                        status: false,
-                        user_id: user.id,
-                      )
+                          content: "削除用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user.id,
+                        )
 
 survey14 = Survey.create!(title: "削除失敗用アンケート",
-                        content: "削除失敗用アンケート本文",
-                        option1: "選択肢1",
-                        option2: "選択肢2",
-                        option3: "選択肢3",
-                        option4: "選択肢4",
-                        genre: "その他",
-                        status: false,
-                        user_id: user.id,
-                      )
+                          content: "削除失敗用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user.id,
+                        )
+
+survey15 = Survey.create!(title: "回答作成用アンケート",
+                          content: "回答作成用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user2.id,
+                        )
+
+survey16 = Survey.create!(title: "回答変更用アンケート",
+                          content: "回答変更用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user2.id,
+                        )
+
+survey17 = Survey.create!(title: "回答削除用アンケート",
+                          content: "回答削除用アンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user2.id,
+                        )
+
+survey18 = Survey.create!(title: "自分が作成したアンケート",
+                          content: "自分が作成したアンケート本文",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "その他",
+                          status: false,
+                          user_id: user.id,
+                        )
 
 
 survey_answer = SurveyAnswer.create!(selected_option: 1,
@@ -554,6 +601,23 @@ survey_answer3 = SurveyAnswer.create!(selected_option: 1,
 survey_answer4 = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user2.id,
                                       survey_id: survey9.id
+                                    )
+
+
+survey_answer5 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user.id,
+                                      survey_id: survey16.id
+                                    )
+
+
+survey_answer6 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user3.id,
+                                      survey_id: survey16.id
+                                    )
+
+survey_answer7 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user.id,
+                                      survey_id: survey17.id
                                     )
 
 favorite_book = FavoriteBook.create!(user_id: user.id,
@@ -630,7 +694,11 @@ favorite_survey3 = FavoriteSurvey.create!(user_id: user3.id,
                                           survey_id: survey2.id
                                         )
 
-favorite_survey3 = FavoriteSurvey.create!(user_id: user2.id,
+favorite_survey4 = FavoriteSurvey.create!(user_id: user4.id,
+                                          survey_id: survey2.id
+                                        )
+
+favorite_survey5 = FavoriteSurvey.create!(user_id: user2.id,
                                           survey_id: survey8.id
                                         )
 

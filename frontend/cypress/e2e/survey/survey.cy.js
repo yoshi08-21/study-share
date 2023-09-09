@@ -317,6 +317,29 @@ describe("アンケート詳細", () => {
 
     cy.contains("アンケート回答結果")
 
+    cy.get("[data-cy=option1-result]").contains("選択肢1")
+
+    cy.get("[data-cy=option1-result]").contains("2件")
+
+    cy.get("[data-cy=option1-result]").contains("100%")
+
+    cy.get("[data-cy=option2-result]").contains("選択肢2")
+
+    cy.get("[data-cy=option2-result]").contains("0件")
+
+    cy.get("[data-cy=option2-result]").contains("0%")
+
+    cy.get("[data-cy=option3-result]").contains("選択肢3")
+
+    cy.get("[data-cy=option3-result]").contains("0件")
+
+    cy.get("[data-cy=option3-result]").contains("0%")
+
+    cy.get("[data-cy=option4-result]").contains("選択肢4")
+
+    cy.get("[data-cy=option4-result]").contains("0件")
+
+    cy.get("[data-cy=option4-result]").contains("0%")
   })
 
   it("アンケートが締切済みの場合、メッセージとアンケートの結果が表示される", () => {
@@ -612,7 +635,7 @@ describe("アンケート締め切り", () => {
 
 })
 
-describe.only("アンケート削除", () => {
+describe("アンケート削除", () => {
 
   it("ログイン状態で自分のアンケートを削除すると、アンケートの削除に成功する", () => {
     cy.login("cypress@cypress.com", "cypress")

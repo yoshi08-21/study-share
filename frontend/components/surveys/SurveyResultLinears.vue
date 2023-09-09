@@ -4,7 +4,9 @@
       :value="option1Percentage"
       color="primary"
       height="50"
-      :rounded="true"    >
+      :rounded="true"
+      data-cy="option1-result"
+    >
       選択肢1 => {{ selectedOption1Count }}件 ({{ option1Percentage.toFixed(0) }}%)
     </v-progress-linear>
     <v-progress-linear
@@ -12,6 +14,7 @@
       color="teal"
       height="50"
       :rounded="true"
+      data-cy="option2-result"
     >
       選択肢2 => {{ selectedOption2Count }}件 ({{ option2Percentage.toFixed(0) }}%)
     </v-progress-linear>
@@ -21,6 +24,7 @@
         color="lime"
         height="50"
         :rounded="true"
+        data-cy="option3-result"
       >
         選択肢3 => {{ selectedOption3Count }}件 ({{ option3Percentage.toFixed(0) }}%)
       </v-progress-linear>
@@ -31,6 +35,7 @@
         color="blue-grey"
         height="50"
         :rounded="true"
+        data-cy="option4-result"
       >
         選択肢4 => {{ selectedOption4Count }}件 ({{ option4Percentage.toFixed(0) }}%)
       </v-progress-linear>

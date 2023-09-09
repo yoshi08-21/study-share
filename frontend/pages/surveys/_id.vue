@@ -172,10 +172,10 @@
           <v-row>
             <v-col class="d-flex justify-center">
               <v-btn-toggle style="flex-direction: column;">
-                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled data-cy="option1-button">1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled data-cy="option2-button">2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled data-cy="option3-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled data-cy="option4-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -205,10 +205,10 @@
             <v-row>
               <v-col class="d-flex justify-center">
                 <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-                  <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-                  <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-                  <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-                  <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" data-cy="option1-button">1. {{ survey.option1 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" data-cy="option2-button">2. {{ survey.option2 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" data-cy="option3-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                  <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" data-cy="option4-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
                 </v-btn-toggle>
               </v-col>
             </v-row>
@@ -217,10 +217,10 @@
             <v-row>
               <v-col class="d-flex justify-center">
                 <v-btn-toggle v-model="selectedAnswer" style="flex-direction: column;">
-                  <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-                  <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-                  <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-                  <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(1)" value="1" class="large-button" data-cy="option1-button">1. {{ survey.option1 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(2)" value="2" class="large-button" data-cy="option2-button">2. {{ survey.option2 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(3)" value="3" class="large-button" data-cy="option3-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                  <v-btn @click="changeSurveyAnswer(4)" value="4" class="large-button" data-cy="option4-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
                 </v-btn-toggle>
               </v-col>
             </v-row>
@@ -253,10 +253,10 @@
           <v-row>
             <v-col class="d-flex justify-center">
               <v-btn-toggle style="flex-direction: column;">
-                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled>1. {{ survey.option1 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled>2. {{ survey.option2 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(1)" value="1" class="large-button" disabled data-cy="option1-button">1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(2)" value="2" class="large-button" disabled data-cy="option2-button">2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(3)" value="3" class="large-button" disabled data-cy="option3-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="createSurveyAnswer(4)" value="4" class="large-button" disabled data-cy="option4-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
@@ -285,10 +285,10 @@
           <v-row>
             <v-col class="d-flex justify-center">
               <v-btn-toggle style="flex-direction: column;">
-                <v-btn @click="redirectToLogin" value="1" class="large-button">1. {{ survey.option1 }}</v-btn>
-                <v-btn @click="redirectToLogin" value="2" class="large-button">2. {{ survey.option2 }}</v-btn>
-                <v-btn @click="redirectToLogin" value="3" class="large-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
-                <v-btn @click="redirectToLogin" value="4" class="large-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="1" class="large-button" data-cy="option1-button">1. {{ survey.option1 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="2" class="large-button" data-cy="option2-button">2. {{ survey.option2 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="3" class="large-button" data-cy="option3-button" v-if="survey.option3">3. {{ survey.option3 }}</v-btn>
+                <v-btn @click="redirectToLogin" value="4" class="large-button" data-cy="option4-button" v-if="survey.option4">4. {{ survey.option4 }}</v-btn>
               </v-btn-toggle>
             </v-col>
           </v-row>
