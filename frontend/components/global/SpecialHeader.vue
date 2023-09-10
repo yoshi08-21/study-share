@@ -60,7 +60,7 @@
             <v-col cols="5">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on">
+                  <v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on" data-cy="favorites-link-button">
                     <v-icon>mdi-star</v-icon>
                   </v-btn>
                 </template>
@@ -71,7 +71,7 @@
               <template v-if="unreadNotifications">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button">
                       <v-badge overlap>
                         <v-icon>mdi-bell</v-icon>
                       </v-badge>

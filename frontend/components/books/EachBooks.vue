@@ -57,7 +57,7 @@
                     <v-icon>mdi-comment-text-outline</v-icon>
                     レビュー: {{ book.reviews_count }}件
                   </v-col>
-                  <v-col cols="4">
+                  <v-col cols="4" data-cy="each-book-favorite-section">
                     <v-icon>mdi-heart-multiple</v-icon>
                     お気に入り ({{ book.favorite_books_count }})
                   </v-col>
@@ -66,8 +66,8 @@
             </v-col>
             <v-col cols="2" class="d-flex justify-center ml-n5">
               <template v-if="currentUser">
-                <v-btn v-if="book.check_favorite == 0" @click="addToFavorites(book, $event)" class="mt-8">お気に入り</v-btn>
-                <v-btn v-else @click="removeFromFavorite(book, $event)" class="mt-8">お気に入り解除</v-btn>
+                <v-btn v-if="book.check_favorite == 0" @click="addToFavorites(book, $event)" class="mt-8">お気に入り追加</v-btn>
+                <v-btn v-else @click="removeFromFavorite(book, $event)" class="mt-8">お気に入り削除</v-btn>
               </template>
             </v-col>
           </v-row>
@@ -132,7 +132,7 @@ export default {
       try {
         const response = await axios.delete("/favorite_books/destroy_from_item_list", {
           params: {
-            user_id: this.currentUser.id,
+            current_user_id: this.currentUser.id,
             book_id: book.id
           }
         })

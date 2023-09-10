@@ -111,6 +111,104 @@ book9 = Book.create!(name: "英文法の教科書",
                     user_id: user.id
                   )
 
+book10 = Book.create!(name: "お気に入り用参考書1",
+                      author: "お気に入り著者1",
+                      publisher: "お気に入り出版1",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book11 = Book.create!(name: "お気に入り用参考書2",
+                      author: "お気に入り著者2",
+                      publisher: "お気に入り出版2",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book12 = Book.create!(name: "お気に入り用参考書3",
+                      author: "お気に入り著者3",
+                      publisher: "お気に入り出版3",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book13 = Book.create!(name: "お気に入り用参考書4",
+                      author: "お気に入り著者4",
+                      publisher: "お気に入り出版4",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book14 = Book.create!(name: "お気に入り登録用参考書1",
+                      author: "お気に入り登録著者1",
+                      publisher: "お気に入り登録出版1",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book15 = Book.create!(name: "お気に入り登録用参考書2",
+                      author: "お気に入り登録著者2",
+                      publisher: "お気に入り登録出版2",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book16 = Book.create!(name: "お気に入り登録用参考書3",
+                      author: "お気に入り登録著者3",
+                      publisher: "お気に入り登録出版3",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book17 = Book.create!(name: "お気に入り登録用参考書4",
+                      author: "お気に入り登録著者4",
+                      publisher: "お気に入り登録出版4",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book18 = Book.create!(name: "お気に入り解除用参考書1",
+                      author: "お気に入り解除著者1",
+                      publisher: "お気に入り解除出版1",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book19 = Book.create!(name: "お気に入り解除用参考書2",
+                      author: "お気に入り解除著者2",
+                      publisher: "お気に入り解除出版2",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book20 = Book.create!(name: "お気に入り解除用参考書3",
+                      author: "お気に入り解除著者3",
+                      publisher: "お気に入り解除出版3",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book21 = Book.create!(name: "お気に入り解除用参考書4",
+                      author: "お気に入り解除著者4",
+                      publisher: "お気に入り解除出版4",
+                      subject: "過去問",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+# bookを増やすとfavorite-book.cy.jsの一覧ページでのお気に入り追加のテストが壊れるので注意
+
 
 
 review = Review.create!(rating: 5,
@@ -634,6 +732,34 @@ favorite_book3 = FavoriteBook.create!(user_id: user2.id,
 
 favorite_book4 = FavoriteBook.create!(user_id: user3.id,
                                       book_id: book7.id
+                                    )
+
+favorite_book5 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book10.id
+                                    )
+
+favorite_book5 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book11.id
+                                    )
+
+favorite_book5 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book12.id
+                                    )
+
+favorite_book6 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book18.id
+                                    )
+
+favorite_book7 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book19.id
+                                    )
+
+favorite_book8 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book20.id
+                                    )
+
+favorite_book9 = FavoriteBook.create!(user_id: user.id,
+                                      book_id: book21.id
                                     )
 
 favorite_review = FavoriteReview.create!(user_id: user2.id,

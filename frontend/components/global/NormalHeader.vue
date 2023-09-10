@@ -7,7 +7,7 @@
   >
     <v-row class="d-flex align-center justify-center">
       <v-col cols="1">
-        <v-app-bar-nav-icon @click.stop="toggleDrawer">
+        <v-app-bar-nav-icon @click.stop="toggleDrawer" data-cy="menu-button">
           <v-icon>mdi-menu-open</v-icon>
         </v-app-bar-nav-icon>
       </v-col>
@@ -50,7 +50,7 @@
             <v-col cols="5">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on">
+                  <v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on" data-cy="favorites-link-button">
                     <v-icon>mdi-star</v-icon>
                   </v-btn>
                 </template>
@@ -61,7 +61,7 @@
               <template v-if="unreadNotifications">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button">
                       <v-badge overlap>
                         <v-icon>mdi-bell</v-icon>
                       </v-badge>
