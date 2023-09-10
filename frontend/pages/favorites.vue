@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2 style="text-align: center;">お気に入り一覧</h2>
+
     <br>
     <v-tabs v-model="tab">
       <v-tab v-for="(tabItem, index) in tabs" :key="index">
