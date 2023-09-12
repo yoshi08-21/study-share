@@ -418,7 +418,7 @@ export default {
         console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
-        this.flashMessage = "いいね！しました"
+        this.flashMessage = "いいね!しました"
         this.isFavorite = true
         this.favoriteQuestionId = response.data.id
         this.question.favorite_questions_count +=1
@@ -426,7 +426,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "すでにいいね！されています"
+        this.flashMessage = "すでにいいね!されています"
       }
     },
     async removeFromFavorite() {
@@ -439,7 +439,7 @@ export default {
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
-        this.flashMessage = "いいね！を削除しました"
+        this.flashMessage = "いいね!を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteQuestionId = null
         this.question.favorite_questions_count -=1
@@ -447,7 +447,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "いいね！されていません"
+        this.flashMessage = "いいね!されていません"
       }
     },
     openReplyDialog() {

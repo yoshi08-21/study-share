@@ -14,6 +14,7 @@
     <v-card
       elevation="8"
       style="padding-bottom: 1px;"
+      data-cy="review-detail"
     >
       <v-row>
         <v-col cols="2" class="mt-8">
@@ -308,7 +309,7 @@ export default {
         console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
-        this.flashMessage = "いいね！しました"
+        this.flashMessage = "いいね!しました"
         this.isFavorite = true
         this.favoriteReviewId = response.data.id
         this.review.favorite_reviews_count +=1
@@ -316,7 +317,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "すでにいいね！されています"
+        this.flashMessage = "すでにいいね!されています"
       }
     },
     async removeFromFavorite() {
@@ -329,7 +330,7 @@ export default {
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
-        this.flashMessage = "いいね！を削除しました"
+        this.flashMessage = "いいね!を削除しました"
         this.isFavorite = !this.isFavorite
         this.favoriteReviewId = null
         this.review.favorite_reviews_count -=1
@@ -337,7 +338,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "いいね！されていません"
+        this.flashMessage = "いいね!されていません"
       }
     },
     nextReview() {
