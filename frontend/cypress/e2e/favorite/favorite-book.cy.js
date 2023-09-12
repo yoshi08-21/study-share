@@ -141,7 +141,6 @@ describe("お気に入りの有無の確認", () => {
 
 describe("参考書のお気に入り登録", () => {
 
-  // お気に入り数の増加とお気に入り一覧への表示は２つのテストに分けたほうがいいそうだ・・・
   it("参考書詳細ページで参考書をお気に入りに登録すると、参考書のお気に入り数が1増加する", () => {
     cy.login("cypress@cypress.com", "cypress")
 
@@ -272,6 +271,48 @@ describe("参考書のお気に入り登録", () => {
 
     cy.contains("お気に入り登録用参考書4")
   })
+
+  it("未ログイン状態で参考書詳細ページで参考書をお気に入りに登録すると、ログインページにリダイレクトする", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
+
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+
+    cy.contains("お気に入り登録用参考書1").scrollIntoView().click()
+
+    cy.contains("参考書詳細")
+
+    cy.contains("お気に入り登録用参考書1")
+
+    cy.contains("お気に入りに追加する").scrollIntoView().click({ force: true })
+
+    cy.url().should("include", "/auth/login")
+
+    cy.contains("ログインが必要です")
+  })
+
+  it("未ログイン状態で参考書詳細一覧ページにアクセスすると、お気に入り追加ボタンが表示されない", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
+
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+
+    cy.get("[data-cy=each-books]").eq(4).contains("お気に入り登録用参考書1")
+
+    cy.get("[data-cy=each-books]").eq(4).contains("お気に入り追加").should("not.exist")
+  })
+
+
 
 })
 

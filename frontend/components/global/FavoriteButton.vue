@@ -10,6 +10,7 @@
           small
           color="pink"
           outlined
+          data-cy="add-favorite-button"
         >
           <v-icon dark>
             mdi-heart-plus-outline
@@ -25,6 +26,7 @@
           dark
           small
           color="pink"
+          data-cy="remove-favorite-button"
         >
           <v-icon dark>
             mdi-heart

@@ -274,6 +274,55 @@ review9 = Review.create!(rating: 2,
                         book_id: book6.id
                       )
 
+review10 = Review.create!(rating: 1,
+                        title: "いいね用レビュー1",
+                        content: "いいね用レビュー本文1",
+                        user_id: user4.id,
+                        book_id: book10.id
+                      )
+
+review11 = Review.create!(rating: 1,
+                        title: "いいね用レビュー2",
+                        content: "いいね用レビュー本文2",
+                        user_id: user4.id,
+                        book_id: book10.id
+                      )
+
+review12 = Review.create!(rating: 1,
+                        title: "いいね用レビュー3",
+                        content: "いいね用レビュー本文3",
+                        user_id: user4.id,
+                        book_id: book10.id
+                      )
+
+review13 = Review.create!(rating: 1,
+                        title: "いいね追加用レビュー1",
+                        content: "いいね追加用レビュー本文1",
+                        user_id: user4.id,
+                        book_id: book14.id
+                      )
+
+review14 = Review.create!(rating: 1,
+                        title: "いいね追加用レビュー2",
+                        content: "いいね追加用レビュー本文2",
+                        user_id: user4.id,
+                        book_id: book14.id
+                      )
+
+review15 = Review.create!(rating: 1,
+                        title: "いいね削除用レビュー1",
+                        content: "いいね削除用レビュー本文1",
+                        user_id: user4.id,
+                        book_id: book18.id
+                      )
+
+review16 = Review.create!(rating: 1,
+                        title: "いいね削除用レビュー2",
+                        content: "いいね削除用レビュー本文2",
+                        user_id: user4.id,
+                        book_id: book18.id
+                      )
+
 question = Question.create!(title: "サンプル質問タイトル1",
                             content: "サンプル質問本文1",
                             subject: "英文法",
@@ -329,6 +378,55 @@ question8 = Question.create!(title: "英語の質問4",
                             book_id: book9.id
                           )
 
+question9 = Question.create!(title: "いいね用質問1",
+                            content: "いいね用質問本文1",
+                            subject: "過去問",
+                            user_id: user4.id,
+                            book_id: book10.id
+                          )
+
+question10 = Question.create!(title: "いいね用質問2",
+                              content: "いいね用質問本文2",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book10.id
+                            )
+
+question11 = Question.create!(title: "いいね用質問3",
+                              content: "いいね用質問本文3",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book10.id
+                            )
+
+question12 = Question.create!(title: "いいね追加用質問1",
+                              content: "いいね追加用質問本文1",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book14.id
+                            )
+
+question13 = Question.create!(title: "いいね追加用質問2",
+                              content: "いいね追加用質問本文2",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book14.id
+                            )
+
+question14 = Question.create!(title: "いいね削除用質問1",
+                              content: "いいね削除用質問本文1",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book18.id
+                            )
+
+question15 = Question.create!(title: "いいね削除用質問2",
+                              content: "いいね削除用質問本文2",
+                              subject: "過去問",
+                              user_id: user4.id,
+                              book_id: book18.id
+                            )
+
 reply = Reply.create!(content: "サンプル返信本文1",
                       user_id: user.id,
                       question_id: question.id
@@ -354,6 +452,40 @@ reply5 = Reply.create!(content: "英語の返信3",
                       question_id: question5.id
                     )
 
+reply6 = Reply.create!(content: "いいね用返信1",
+                      user_id: user4.id,
+                      question_id: question9.id
+                    )
+
+reply7 = Reply.create!(content: "いいね用返信2",
+                      user_id: user4.id,
+                      question_id: question9.id
+                    )
+
+reply8 = Reply.create!(content: "いいね用返信3",
+                      user_id: user4.id,
+                      question_id: question9.id
+                    )
+
+reply9 = Reply.create!(content: "いいね追加用返信1",
+                      user_id: user4.id,
+                      question_id: question12.id
+                    )
+
+reply10 = Reply.create!(content: "いいね追加用返信2",
+                      user_id: user4.id,
+                      question_id: question12.id
+                    )
+
+reply11 = Reply.create!(content: "いいね削除用返信1",
+                      user_id: user4.id,
+                      question_id: question14.id
+                    )
+
+reply12 = Reply.create!(content: "いいね削除用返信2",
+                      user_id: user4.id,
+                      question_id: question14.id
+                    )
 
 subject_question = SubjectQuestion.create!(title: "サンプル科目別質問タイトル1",
                                             content: "サンプル科目別質問本文1",
@@ -428,6 +560,48 @@ subject_question12 = SubjectQuestion.create!(title: "他ユーザー投稿科目
                                             user_id: user2.id,
                                           )
 
+subject_question13 = SubjectQuestion.create!(title: "いいね用科目別質問1",
+                                            content: "いいね用科目別質問本文1",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question14 = SubjectQuestion.create!(title: "いいね用科目別質問2",
+                                            content: "いいね用科目別質問本文2",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question15 = SubjectQuestion.create!(title: "いいね用科目別質問3",
+                                            content: "いいね用科目別質問本文3",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question16 = SubjectQuestion.create!(title: "いいね追加用科目別質問1",
+                                            content: "いいね追加用科目別質問本文1",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question17 = SubjectQuestion.create!(title: "いいね追加用科目別質問2",
+                                            content: "いいね追加用科目別質問本文2",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question18 = SubjectQuestion.create!(title: "いいね削除用科目別質問1",
+                                            content: "いいね削除用科目別質問本文1",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
+subject_question19 = SubjectQuestion.create!(title: "いいね削除用科目別質問2",
+                                            content: "いいね削除用科目別質問本文2",
+                                            subject: "過去問",
+                                            user_id: user4.id,
+                                          )
+
 
 subject_question_reply = SubjectQuestionReply.create!(content: "サンプル科目別返信本文1",
                                                       user_id: user.id,
@@ -474,9 +648,49 @@ subject_question_reply9 = SubjectQuestionReply.create!(content: "削除失敗用
                                                       subject_question_id: subject_question11.id
                                                     )
 
-subject_question_reply40 = SubjectQuestionReply.create!(content: "他ユーザー投稿科目別返信",
+subject_question_reply10 = SubjectQuestionReply.create!(content: "他ユーザー投稿科目別返信",
                                                       user_id: user2.id,
                                                       subject_question_id: subject_question12.id
+                                                    )
+
+subject_question_reply11 = SubjectQuestionReply.create!(content: "いいね用科目別返信1",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question13.id
+                                                    )
+
+subject_question_reply12 = SubjectQuestionReply.create!(content: "いいね用科目別返信2",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question14.id
+                                                    )
+
+subject_question_reply13 = SubjectQuestionReply.create!(content: "いいね用科目別返信3",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question15.id
+                                                    )
+
+subject_question_reply14 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信1",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question16.id
+                                                    )
+
+subject_question_reply15 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信1",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question16.id
+                                                    )
+
+subject_question_reply16 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信2",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question16.id
+                                                    )
+
+subject_question_reply17 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信1",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question18.id
+                                                    )
+
+subject_question_reply18 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信2",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question18.id
                                                     )
 
 
@@ -766,6 +980,26 @@ favorite_review = FavoriteReview.create!(user_id: user2.id,
                                           review_id: review.id
                                         )
 
+favorite_review2 = FavoriteReview.create!(user_id: user.id,
+                                          review_id: review10.id
+                                        )
+
+favorite_review3 = FavoriteReview.create!(user_id: user.id,
+                                          review_id: review11.id
+                                        )
+
+favorite_review4 = FavoriteReview.create!(user_id: user.id,
+                                          review_id: review12.id
+                                        )
+
+favorite_review5 = FavoriteReview.create!(user_id: user.id,
+                                          review_id: review15.id
+                                        )
+
+favorite_review6 = FavoriteReview.create!(user_id: user.id,
+                                          review_id: review16.id
+                                        )
+
 favorite_question = FavoriteQuestion.create!(user_id: user2.id,
                                               question_id: question.id
                                             )
@@ -782,12 +1016,52 @@ favorite_question4 = FavoriteQuestion.create!(user_id: user3.id,
                                               question_id: question5.id
                                             )
 
+favorite_question5 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question9.id
+                                            )
+
+favorite_question6 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question10.id
+                                            )
+
+favorite_question7 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question11.id
+                                            )
+
+favorite_question8 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question14.id
+                                            )
+
+favorite_question9 = FavoriteQuestion.create!(user_id: user.id,
+                                              question_id: question15.id
+                                            )
+
 favorite_reply = FavoriteReply.create!(user_id: user2.id,
                                         reply_id: reply.id
                                       )
 
 favorite_reply2 = FavoriteReply.create!(user_id: user2.id,
                                         reply_id: reply3.id
+                                      )
+
+favorite_reply3 = FavoriteReply.create!(user_id: user.id,
+                                        reply_id: reply6.id
+                                      )
+
+favorite_reply4 = FavoriteReply.create!(user_id: user.id,
+                                        reply_id: reply7.id
+                                      )
+
+favorite_reply5 = FavoriteReply.create!(user_id: user.id,
+                                        reply_id: reply8.id
+                                      )
+
+favorite_reply6 = FavoriteReply.create!(user_id: user.id,
+                                        reply_id: reply11.id
+                                      )
+
+favorite_reply6 = FavoriteReply.create!(user_id: user.id,
+                                        reply_id: reply12.id
                                       )
 
 favorite_subject_question = FavoriteSubjectQuestion.create!(user_id: user2.id,
@@ -802,9 +1076,49 @@ favorite_subject_question3 = FavoriteSubjectQuestion.create!(user_id: user3.id,
                                                             subject_question_id: subject_question5.id
                                                             )
 
+favorite_subject_question5 = FavoriteSubjectQuestion.create!(user_id: user.id,
+                                                            subject_question_id: subject_question13.id
+                                                            )
+
+favorite_subject_question6 = FavoriteSubjectQuestion.create!(user_id: user.id,
+                                                            subject_question_id: subject_question14.id
+                                                            )
+
+favorite_subject_question4 = FavoriteSubjectQuestion.create!(user_id: user.id,
+                                                              subject_question_id: subject_question15.id
+                                                              )
+
+favorite_subject_question5 = FavoriteSubjectQuestion.create!(user_id: user.id,
+                                                              subject_question_id: subject_question18.id
+                                                              )
+
+favorite_subject_question6 = FavoriteSubjectQuestion.create!(user_id: user.id,
+                                                              subject_question_id: subject_question19.id
+                                                              )
+
 
 favorite_subject_question_reply = FavoriteSubjectQuestionReply.create!(user_id: user2.id,
                                                                         subject_question_reply_id: subject_question_reply.id
+                                                                      )
+
+favorite_subject_question_reply2 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
+                                                                        subject_question_reply_id: subject_question_reply11.id
+                                                                      )
+
+favorite_subject_question_reply3 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
+                                                                        subject_question_reply_id: subject_question_reply12.id
+                                                                      )
+
+favorite_subject_question_reply4 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
+                                                                        subject_question_reply_id: subject_question_reply13.id
+                                                                      )
+
+favorite_subject_question_reply5 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
+                                                                        subject_question_reply_id: subject_question_reply17.id
+                                                                      )
+
+favorite_subject_question_reply6 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
+                                                                        subject_question_reply_id: subject_question_reply18.id
                                                                       )
 
 
