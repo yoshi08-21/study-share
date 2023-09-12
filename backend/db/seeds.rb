@@ -207,6 +207,22 @@ book21 = Book.create!(name: "お気に入り解除用参考書4",
                       user_id: user.id
                     )
 
+book22 = Book.create!(name: "閲覧履歴作成用参考書1",
+                      author: "閲覧履歴作成用著者1",
+                      publisher: "閲覧履歴作成用出版社1",
+                      subject: "小論文",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
+book23 = Book.create!(name: "閲覧履歴作成用参考書2",
+                      author: "閲覧履歴作成用著者2",
+                      publisher: "閲覧履歴作成用出版社2",
+                      subject: "小論文",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
 # bookを増やすとfavorite-book.cy.jsの一覧ページでのお気に入り追加のテストが壊れるので注意
 
 
@@ -323,6 +339,19 @@ review16 = Review.create!(rating: 1,
                         book_id: book18.id
                       )
 
+review17 = Review.create!(rating: 1,
+                        title: "閲覧履歴作成用レビュー1",
+                        content: "閲覧履歴作成用レビュー1",
+                        user_id: user4.id,
+                        book_id: book22.id
+                      )
+review18 = Review.create!(rating: 1,
+                        title: "閲覧履歴作成用レビュー2",
+                        content: "閲覧履歴作成用レビュー2",
+                        user_id: user4.id,
+                        book_id: book22.id
+                      )
+
 question = Question.create!(title: "サンプル質問タイトル1",
                             content: "サンプル質問本文1",
                             subject: "英文法",
@@ -422,9 +451,23 @@ question14 = Question.create!(title: "いいね削除用質問1",
 
 question15 = Question.create!(title: "いいね削除用質問2",
                               content: "いいね削除用質問本文2",
-                              subject: "過去問",
+                              subject: "小論文",
                               user_id: user4.id,
-                              book_id: book18.id
+                              book_id: book22.id
+                            )
+
+question16 = Question.create!(title: "閲覧履歴作成用質問1",
+                              content: "閲覧履歴作成用質問本文1",
+                              subject: "小論文",
+                              user_id: user4.id,
+                              book_id: book22.id
+                            )
+
+question17 = Question.create!(title: "閲覧履歴作成用質問2",
+                              content: "閲覧履歴作成用質問本文2",
+                              subject: "小論文",
+                              user_id: user4.id,
+                              book_id: book22.id
                             )
 
 reply = Reply.create!(content: "サンプル返信本文1",
@@ -485,6 +528,16 @@ reply11 = Reply.create!(content: "いいね削除用返信1",
 reply12 = Reply.create!(content: "いいね削除用返信2",
                       user_id: user4.id,
                       question_id: question14.id
+                    )
+
+reply13 = Reply.create!(content: "閲覧履歴作成用返信1",
+                      user_id: user4.id,
+                      question_id: question16.id
+                    )
+
+reply14 = Reply.create!(content: "閲覧履歴作成用返信2",
+                      user_id: user4.id,
+                      question_id: question16.id
                     )
 
 subject_question = SubjectQuestion.create!(title: "サンプル科目別質問タイトル1",
@@ -602,6 +655,18 @@ subject_question19 = SubjectQuestion.create!(title: "いいね削除用科目別
                                             user_id: user4.id,
                                           )
 
+subject_question20 = SubjectQuestion.create!(title: "閲覧履歴作成用科目別質問1",
+                                            content: "閲覧履歴作成用科目別質問1",
+                                            subject: "小論文",
+                                            user_id: user4.id,
+                                          )
+
+subject_question21 = SubjectQuestion.create!(title: "閲覧履歴作成用科目別質問2",
+                                            content: "閲覧履歴作成用科目別質問2",
+                                            subject: "小論文",
+                                            user_id: user4.id,
+                                          )
+
 
 subject_question_reply = SubjectQuestionReply.create!(content: "サンプル科目別返信本文1",
                                                       user_id: user.id,
@@ -686,6 +751,16 @@ subject_question_reply16 = SubjectQuestionReply.create!(content: "いいね削�
 subject_question_reply17 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信2",
                                                       user_id: user4.id,
                                                       subject_question_id: subject_question18.id
+                                                    )
+
+subject_question_reply18 = SubjectQuestionReply.create!(content: "閲覧履歴作成用科目別返信1",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question20.id
+                                                    )
+
+subject_question_reply19 = SubjectQuestionReply.create!(content: "閲覧履歴作成用科目別返信2",
+                                                      user_id: user4.id,
+                                                      subject_question_id: subject_question20.id
                                                     )
 
 
@@ -966,6 +1041,28 @@ survey25 = Survey.create!(title: "いいね削除用アンケート2",
                           user_id: user4.id,
                         )
 
+survey26 = Survey.create!(title: "閲覧履歴作成用アンケート1",
+                          content: "閲覧履歴作成用アンケート1",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "進路・大学",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey27 = Survey.create!(title: "閲覧履歴作成用アンケート2",
+                          content: "閲覧履歴作成用アンケート2",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "進路・大学",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
 survey_answer = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user2.id,
                                       survey_id: survey.id
@@ -1233,5 +1330,31 @@ favorite_survey10 = FavoriteSurvey.create!(user_id: user.id,
                                           survey_id: survey25.id
                                         )
 
+10.times do |i|
+  BrowsingHistory.create!(book_id: i + 1, user_id: user.id)
+end
 
+10.times do |i|
+  BrowsingHistory.create!(review_id: i + 1, user_id: user.id)
+end
+
+10.times do |i|
+  BrowsingHistory.create!(question_id: i + 1, user_id: user.id)
+end
+
+10.times do |i|
+  BrowsingHistory.create!(reply_id: i + 1, user_id: user.id)
+end
+
+10.times do |i|
+  BrowsingHistory.create!(subject_question_id: i + 1, user_id: user.id)
+end
+
+10.times do |i|
+  BrowsingHistory.create!(subject_question_reply_id: i + 1, user_id: user.id)
+end
+
+10.times do |i|
+  BrowsingHistory.create!(survey_id: i + 1, user_id: user.id)
+end
 
