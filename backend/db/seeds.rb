@@ -673,22 +673,17 @@ subject_question_reply14 = SubjectQuestionReply.create!(content: "いいね追�
                                                       subject_question_id: subject_question16.id
                                                     )
 
-subject_question_reply15 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信1",
+subject_question_reply15 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信2",
                                                       user_id: user4.id,
                                                       subject_question_id: subject_question16.id
                                                     )
 
-subject_question_reply16 = SubjectQuestionReply.create!(content: "いいね追加用科目別返信2",
-                                                      user_id: user4.id,
-                                                      subject_question_id: subject_question16.id
-                                                    )
-
-subject_question_reply17 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信1",
+subject_question_reply16 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信1",
                                                       user_id: user4.id,
                                                       subject_question_id: subject_question18.id
                                                     )
 
-subject_question_reply18 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信2",
+subject_question_reply17 = SubjectQuestionReply.create!(content: "いいね削除用科目別返信2",
                                                       user_id: user4.id,
                                                       subject_question_id: subject_question18.id
                                                     )
@@ -894,6 +889,82 @@ survey18 = Survey.create!(title: "自分が作成したアンケート",
                           user_id: user.id,
                         )
 
+survey19 = Survey.create!(title: "いいね用アンケート1",
+                          content: "いいね用アンケート本文1",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey20 = Survey.create!(title: "いいね用アンケート2",
+                          content: "いいね用アンケート本文2",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey21 = Survey.create!(title: "いいね用アンケート3",
+                          content: "いいね用アンケート本文3",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey22 = Survey.create!(title: "いいね追加用アンケート1",
+                          content: "いいね追加用アンケート本文1",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey23 = Survey.create!(title: "いいね追加用アンケート2",
+                          content: "いいね追加用アンケート本文2",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey24 = Survey.create!(title: "いいね削除用アンケート1",
+                          content: "いいね削除用アンケート本文1",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
+
+survey25 = Survey.create!(title: "いいね削除用アンケート2",
+                          content: "いいね削除用アンケート本文2",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "参考書",
+                          status: false,
+                          user_id: user4.id,
+                        )
 
 survey_answer = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user2.id,
@@ -1114,11 +1185,11 @@ favorite_subject_question_reply4 = FavoriteSubjectQuestionReply.create!(user_id:
                                                                       )
 
 favorite_subject_question_reply5 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
-                                                                        subject_question_reply_id: subject_question_reply17.id
+                                                                        subject_question_reply_id: subject_question_reply16.id
                                                                       )
 
 favorite_subject_question_reply6 = FavoriteSubjectQuestionReply.create!(user_id: user.id,
-                                                                        subject_question_reply_id: subject_question_reply18.id
+                                                                        subject_question_reply_id: subject_question_reply17.id
                                                                       )
 
 
@@ -1141,5 +1212,26 @@ favorite_survey4 = FavoriteSurvey.create!(user_id: user4.id,
 favorite_survey5 = FavoriteSurvey.create!(user_id: user2.id,
                                           survey_id: survey8.id
                                         )
+
+favorite_survey6 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey19.id
+                                        )
+
+favorite_survey7 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey20.id
+                                        )
+
+favorite_survey8 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey21.id
+                                        )
+
+favorite_survey9 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey24.id
+                                        )
+
+favorite_survey10 = FavoriteSurvey.create!(user_id: user.id,
+                                          survey_id: survey25.id
+                                        )
+
 
 
