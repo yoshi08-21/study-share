@@ -113,7 +113,7 @@
                   </v-avatar>
                 </v-btn>
               </template>
-              <v-card>
+              <v-card data-cy="header-user-menu-list">
                 <v-list-item-content class="justify-center">
                   <div class="mx-auto text-center">
                     <v-avatar size="60">

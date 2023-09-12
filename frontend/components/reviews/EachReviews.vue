@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row v-for="(review, index) in reviews" :key="'review_' + index" class="justify-center">
+    <v-row v-for="(review, index) in reviews" :key="'review_' + index" class="justify-center" data-cy="each-reviews">
       <v-col cols="10">
         <v-card
           elevation="8"

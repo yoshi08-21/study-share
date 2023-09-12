@@ -1,6 +1,7 @@
 <template>
   <div>
-    <!-- 作成したコンポーネントはお気に入りと共有する -->
+    <h2 style="text-align: center;">閲覧履歴一覧</h2>
+
     <br>
     <v-tabs v-model="tab">
       <v-tab v-for="(tabItem, index) in tabs" :key="index">
@@ -94,7 +95,7 @@ export default {
         { label: "閲覧した質問" },
         { label: "閲覧した科目別質問" },
         { label: "閲覧した返信" },
-        { label: "閲覧した返信（科目別質問）" },
+        { label: "閲覧した返信(科目別質問)" },
         { label: "閲覧したアンケート" },
       ]
     }

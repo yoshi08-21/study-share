@@ -57,6 +57,10 @@
                     <v-icon>mdi-comment-text-outline</v-icon>
                     レビュー: {{ book.reviews_count }}件
                   </v-col>
+                  <v-col cols="4">
+                    <v-icon>mdi-comment-text-outline</v-icon>
+                    質問: {{ book.questions_count }}件
+                  </v-col>
                   <v-col cols="4" data-cy="each-book-favorite-section">
                     <v-icon>mdi-heart-multiple</v-icon>
                     お気に入り ({{ book.favorite_books_count }})
