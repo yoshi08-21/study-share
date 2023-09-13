@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <br><br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -106,7 +105,7 @@
           <h2>参考書を登録する</h2>
         </v-card-title>
         <div style="padding: 30px;">
-          <v-btn @click="redirectToSearchBooks" color="primary" block style="height: 50px;">登録する参考書を検索する</v-btn>
+          <v-btn @click="goToSearchBooks" color="primary" block style="height: 50px;">登録する参考書を検索する</v-btn>
         </div>
         <v-card-text>
           <book-form
@@ -119,6 +118,7 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -152,8 +152,6 @@ export default {
       snackbarColor: "primary",
       flashMessage: "テストメッセージ",
       dialog: false,
-      // 参考書登録の空データ送信用。S3の利用時には削除可
-      image: "",
       perPage: 10,
       page: 1,
       searchBooksKeyword: "",
@@ -231,7 +229,7 @@ export default {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
     },
-    redirectToSearchBooks() {
+    goToSearchBooks() {
       this.$router.push({ path: "/books/googleApiSearchBooks" })
     },
     searchBooks() {

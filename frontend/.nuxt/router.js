@@ -25,6 +25,7 @@ const _9923ee5c = () => interopDefault(import('../pages/surveys/_id.vue' /* webp
 const _3a7b0901 = () => interopDefault(import('../pages/users/_id.vue' /* webpackChunkName: "pages/users/_id" */))
 const _368e3cc2 = () => interopDefault(import('../pages/books/_book_id/questions/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_id" */))
 const _db10b3e0 = () => interopDefault(import('../pages/books/_book_id/reviews/_id.vue' /* webpackChunkName: "pages/books/_book_id/reviews/_id" */))
+const _3bcef85d = () => interopDefault(import('../pages/books/_book_id/reviews/_id.test 2.js' /* webpackChunkName: "pages/books/_book_id/reviews/_id.test 2" */))
 const _450dcc65 = () => interopDefault(import('../pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id.vue' /* webpackChunkName: "pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id" */))
 const _dbcd9bbe = () => interopDefault(import('../pages/books/_book_id/questions/_question_id/replies/_id.vue' /* webpackChunkName: "pages/books/_book_id/questions/_question_id/replies/_id" */))
 const _2a6ffc20 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -124,6 +125,10 @@ export const routerOptions = {
     path: "/books/:book_id?/reviews/:id?",
     component: _db10b3e0,
     name: "books-book_id-reviews-id"
+  }, {
+    path: "/books/:book_id?/reviews/:id.test%202?",
+    component: _3bcef85d,
+    name: "books-book_id-reviews-id.test 2"
   }, {
     path: "/subjectQuestions/:subjectQuestion_id?/subjectQuestionReplies/:id?",
     component: _450dcc65,

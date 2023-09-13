@@ -22,8 +22,8 @@
         <v-col cols="7">
           <v-card-title>
             <h3> {{ book.name }}</h3>
-
           </v-card-title>
+
           <v-card-subtitle style="margin-top: -20px;">
             <v-row class="d-flex align-center">
               <v-col cols="4">
@@ -51,7 +51,7 @@
             <h4>作者: {{ book.author }}</h4>
             <h4>出版社: {{ book.publisher }}</h4>
             <br>
-            <tamplate v-if="book.description">
+            <template v-if="book.description">
               <h4>説明</h4>
               <v-textarea
                 :value="book.description"
@@ -62,8 +62,9 @@
                 auto-grow
               >
               </v-textarea>
-            </tamplate>
+            </template>
           </v-card-text>
+
           <br><br>
           <v-card-actions>
             <v-row class="d-flex align-center">
@@ -127,7 +128,6 @@
       </v-row>
     </v-card>
 
-
     <!-- 参考書編集ダイアログ -->
     <v-dialog v-model="editBookDialog">
       <v-card>
@@ -169,8 +169,8 @@
       </v-card>
     </v-dialog>
 
-        <!-- 新規質問投稿ダイアログ -->
-        <v-dialog v-model="questionDialog">
+    <!-- 新規質問投稿ダイアログ -->
+    <v-dialog v-model="questionDialog">
       <v-card>
         <v-card-title style="justify-content: center;">
           <h2>質問を投稿する</h2>
@@ -180,10 +180,6 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-
-    <br>
-    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
-
 
     <br>
     <v-divider height="50"></v-divider>
@@ -199,24 +195,25 @@
       </v-tab>
     </v-tabs>
 
-
-    <template v-if="tab === 0">
+    <br>
+    <template v-if="tab === 0 && reviewsChunk.length > 0">
       <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
       <br><br>
       <book-reviews :reviews="reviewsChunk"></book-reviews>
+      <br>
       <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
     </template>
 
-    <template v-else-if="tab === 1">
+    <template v-else-if="tab === 1 && questionsChunk.length > 0">
       <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
       <br><br>
       <book-questions :questions="questionsChunk"></book-questions>
+      <br>
       <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
     </template>
 
     <br>
-
-
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
   </div>
 </template>
@@ -246,7 +243,6 @@ export default {
     EditBook,
     DeleteConfirmationDialog
   },
-  // asyncDataでデータをreturnする場合、そのデータは自動的にdataに変数としてマージされる
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -344,7 +340,6 @@ export default {
       this.isFavorite = response.data.is_favorite
       this.favoriteBookId = response.data.favorite_book_id
     } catch(error) {
-      console.log("エラー文です")
       console.log(error)
     }
   },
@@ -353,16 +348,14 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
     async addToFavorites() {
       if (this.currentUser) {
         try {
-          const response = await axios.post(`/books/${this.params.id}/favorite_books`, {
+          const response = await axios.post(`/books/${this.book.id}/favorite_books`, {
             current_user_id: this.currentUser.id,
-            book_id: this.params.id
           })
           console.log(response.data)
           this.isFavorite = !this.isFavorite
@@ -372,19 +365,19 @@ export default {
           this.book.favorite_books_count += 1
         } catch(error) {
           console.log(error)
-          console.log("すでにお気に入りに登録されています")
+          this.snackbarColor = "red accent-2"
+          this.snackbar = true
+          this.flashMessage = "すでにお気に入りに追加されています"
         }
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
-
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/books/${this.params.id}/favorite_books/${this.favoriteBookId}`, {
+        const response = await axios.delete(`/books/${this.book.id}/favorite_books/${this.favoriteBookId}`, {
           params: {
             current_user_id: this.currentUser.id,
-            book_id: this.params.id
           }
         })
         console.log(response)
@@ -401,7 +394,7 @@ export default {
     },
     async submitReview(data) {
       try {
-        const response = await axios.post(`/books/${this.params.id}/reviews`, {
+        const response = await axios.post(`/books/${this.book.id}/reviews`, {
           review: {
             title: data.title,
             content: data.content,
@@ -421,11 +414,10 @@ export default {
       this.dialog = false
     },
     async submitQuestion(data) {
-
       const formData = new FormData()
 
       formData.append("current_user_id", this.currentUser.id);
-      formData.append("question[book_id]", this.params.id);
+      formData.append("question[book_id]", this.book.id);
       formData.append("question[title]", data.title);
       formData.append("question[content]", data.content);
       formData.append("question[subject]", this.book.subject);
@@ -434,11 +426,8 @@ export default {
       }
 
       try {
-        const response = await axios.post(`/books/${this.params.id}/questions`, formData)
+        const response = await axios.post(`/books/${this.book.id}/questions`, formData)
         console.log(response)
-        this.snackbarColor = "primary"
-        this.snackbar = true
-        this.flashMessage = "質問の投稿が完了しました"
         this.$router.push({ path: `/books/${this.book.id}/questions/${response.data.id}`, query: { message: '質問の投稿が完了しました' } })
       } catch(error) {
         console.log(error)
@@ -520,6 +509,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
