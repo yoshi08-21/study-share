@@ -296,7 +296,7 @@ describe("科目別返信編集", () => {
 
 })
 
-describe.only("科目別返信削除", () => {
+describe("科目別返信削除", () => {
 
   it("ログイン状態で自分の科目別返信を削除すると、科目別返信の削除に成功する", () => {
     cy.login("cypress@cypress.com", "cypress")
@@ -330,7 +330,7 @@ describe.only("科目別返信削除", () => {
     cy.get("[data-cy=each-subject-question-subject-question-replies]").should("not.exist")
   })
 
-  it.only("ログイン状態で他人の科目別返信詳細ページにアクセスすると,科目別返信削除ボタンが表示されない", () => {
+  it("ログイン状態で他人の科目別返信詳細ページにアクセスすると,科目別返信削除ボタンが表示されない", () => {
     cy.login("cypress@cypress.com", "cypress")
 
     cy.visit("/")
@@ -378,4 +378,42 @@ describe.only("科目別返信削除", () => {
   })
 
 })
+
+describe("コンテンツナビゲーター", () => {
+
+  it.only("科目別返信詳細ページで「次の返信」「前の返信」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("科目別質問一覧").click()
+
+    cy.contains("サンプル科目別質問タイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細(科目別)")
+
+    cy.get("[data-cy=each-subject-question-subject-question-replies]").first().click()
+
+    cy.contains("返信詳細(科目別)")
+
+    cy.get("[data-cy=subject-question-reply-detail]").find("textarea").should("have.value", "サンプル科目別返信本文1")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("返信詳細(科目別)")
+
+    cy.get("[data-cy=subject-question-reply-detail]").find("textarea").should("have.value", "サンプル科目別返信本文2")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("返信詳細(科目別)")
+
+    cy.get("[data-cy=subject-question-reply-detail]").find("textarea").should("have.value", "サンプル科目別返信本文1")
+  })
+
+})
+
+
+
+
 

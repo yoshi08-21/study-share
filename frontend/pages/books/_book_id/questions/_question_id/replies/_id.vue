@@ -330,7 +330,6 @@ export default {
       this.isFavorite = response.data.is_favorite
       this.favoriteReplyId = response.data.favorite_reply_id
     } catch(error) {
-      console.log("エラー文です")
       console.log(error)
     }
   },

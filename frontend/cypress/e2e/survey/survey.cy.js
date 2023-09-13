@@ -710,3 +710,39 @@ describe("アンケート削除", () => {
 
 })
 
+describe("コンテンツナビゲーター", () => {
+
+  it.only("アンケート詳細ページで「次のアンケート」「前のアンケート」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("アンケート").click()
+
+    cy.contains("サンプルアンケートタイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル1")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル2")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル1")
+  })
+
+})
+
+
+
+
+
+
+

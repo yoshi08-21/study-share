@@ -645,3 +645,43 @@ describe("科目別質問削除", () => {
 
 })
 
+describe("コンテンツナビゲーター", () => {
+
+  it("科目別質問詳細ページで「次の{同じ科目}の質問」「前の{同じ科目}の質問」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("科目別質問一覧").click()
+
+    cy.contains("サンプル科目別質問タイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細(科目別)")
+
+    cy.contains("サンプル科目別質問タイトル1")
+
+    cy.contains("リスニング")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細(科目別)")
+
+    cy.contains("サンプル科目別質問タイトル2")
+
+    cy.contains("リスニング")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細(科目別)")
+
+    cy.contains("サンプル科目別質問タイトル1")
+
+    cy.contains("リスニング")
+  })
+
+})
+
+
+
+
+
