@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="showDeleteConfirmation"
+    v-model="localShowDeleteConfirmation"
     width="800"
   >
     <v-card height="300">
@@ -54,6 +54,11 @@ export default {
   props: {
     showDeleteConfirmation: Boolean,
     contentTitle: String,
+  },
+  data() {
+    return {
+      localShowDeleteConfirmation: this.showDeleteConfirmation
+    }
   },
   methods: {
     deleteContent() {

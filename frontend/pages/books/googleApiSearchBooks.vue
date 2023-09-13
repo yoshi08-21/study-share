@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -84,13 +83,6 @@
       <br>
     <v-pagination v-model="page" :length="totalPages"></v-pagination>
   </template>
-
-
-
-
-
-
-
 
 
     <!-- 選択した参考書の確認ダイアログ -->
@@ -212,9 +204,9 @@
       </v-card>
     </v-dialog>
 
-
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -261,7 +253,6 @@ export default {
           subcategories: ["過去問", "小論文", "その他科目"]
         },
       ],
-
 
     }
   },
