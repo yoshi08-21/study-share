@@ -375,7 +375,7 @@ describe("質問の絞り込み=>並び替え機能", () => {
 
 describe("質問詳細", () => {
 
-it.only("質問詳細ページにアクセスすると、質問の詳細情報が表示される", () => {
+it("質問詳細ページにアクセスすると、質問の詳細情報が表示される", () => {
   cy.visit("/")
 
   cy.get("[data-cy=menu-button]").click()
@@ -675,4 +675,44 @@ describe("質問削除", () => {
   })
 
 })
+
+describe("コンテンツナビゲーター", () => {
+
+  it.only("質問詳細ページで「次の質問」「前の質問」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.contains("サンプル参考書1").should("be.visible").click()
+
+    cy.contains("参考書詳細")
+
+    cy.get(".v-tabs").contains("質問").click()
+
+    cy.contains("サンプル質問タイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細")
+
+    cy.contains("サンプル質問タイトル1")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細")
+
+    cy.contains("サンプル質問タイトル2")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細")
+
+    cy.contains("サンプル質問タイトル1")
+  })
+
+})
+
+
+
+
 

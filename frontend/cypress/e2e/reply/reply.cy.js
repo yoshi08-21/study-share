@@ -267,7 +267,7 @@ describe("返信編集", () => {
 
 })
 
-describe.only("返信削除", () => {
+describe("返信削除", () => {
 
   it("ログイン状態で自分の返信を削除すると、返信の削除に成功する", () => {
     cy.login("cypress@cypress.com", "cypress")
@@ -334,3 +334,42 @@ describe.only("返信削除", () => {
 
 })
 
+describe("コンテンツナビゲーター", () => {
+
+  it.only("返信詳細ページで「次の返信」「前の返信」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click()
+
+    cy.contains("参考書一覧").click()
+
+    cy.contains("サンプル参考書1").should("be.visible").click()
+
+    cy.contains("参考書詳細")
+
+    cy.get(".v-tabs").contains("質問").click()
+
+    cy.contains("サンプル質問タイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("質問詳細")
+
+    cy.get("[data-cy=each-question-replies]").first().click()
+
+    cy.contains("返信詳細")
+
+    cy.get("[data-cy=reply-detail]").find("textarea").should("have.value", "サンプル返信本文1")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("返信詳細")
+
+    cy.get("[data-cy=reply-detail]").find("textarea").should("have.value", "サンプル返信本文2")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("返信詳細")
+
+    cy.get("[data-cy=reply-detail]").find("textarea").should("have.value", "サンプル返信本文1")
+  })
+
+})

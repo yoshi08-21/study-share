@@ -310,7 +310,6 @@ export default {
       this.favoriteSubjectQuestionReplyId = response.data.favorite_reply_id
     } catch(error) {
       console.log(error)
-      throw error
     }
   },
   mounted() {
