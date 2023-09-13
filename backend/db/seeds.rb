@@ -223,6 +223,14 @@ book23 = Book.create!(name: "閲覧履歴作成用参考書2",
                       user_id: user.id
                     )
 
+book24 = Book.create!(name: "通知作成用参考書1",
+                      author: "通知作成用著者1",
+                      publisher: "通知作成用出版社1",
+                      subject: "小論文",
+                      description: "説明文",
+                      user_id: user.id
+                    )
+
 # bookを増やすとfavorite-book.cy.jsの一覧ページでのお気に入り追加のテストが壊れるので注意
 
 
@@ -352,6 +360,13 @@ review18 = Review.create!(rating: 1,
                         book_id: book22.id
                       )
 
+review19 = Review.create!(rating: 1,
+                        title: "通知作成用レビュー1",
+                        content: "通知作成用レビュー本文1",
+                        user_id: user.id,
+                        book_id: book24.id
+                      )
+
 question = Question.create!(title: "サンプル質問タイトル1",
                             content: "サンプル質問本文1",
                             subject: "英文法",
@@ -466,8 +481,22 @@ question16 = Question.create!(title: "閲覧履歴作成用質問1",
 question17 = Question.create!(title: "閲覧履歴作成用質問2",
                               content: "閲覧履歴作成用質問本文2",
                               subject: "小論文",
-                              user_id: user4.id,
+                              user_id: user.id,
                               book_id: book22.id
+                            )
+
+question18 = Question.create!(title: "通知作成用質問1",
+                              content: "通知作成用質問本文1",
+                              subject: "小論文",
+                              user_id: user.id,
+                              book_id: book24.id
+                            )
+
+question19 = Question.create!(title: "通知作成用質問2",
+                              content: "通知作成用質問本文2",
+                              subject: "小論文",
+                              user_id: user4.id,
+                              book_id: book24.id
                             )
 
 reply = Reply.create!(content: "サンプル返信本文1",
@@ -538,6 +567,26 @@ reply13 = Reply.create!(content: "閲覧履歴作成用返信1",
 reply14 = Reply.create!(content: "閲覧履歴作成用返信2",
                       user_id: user4.id,
                       question_id: question16.id
+                    )
+
+reply15 = Reply.create!(content: "通知作成用返信1",
+                      user_id: user.id,
+                      question_id: question18.id
+                    )
+
+reply16 = Reply.create!(content: "通知作成用返信2",
+                      user_id: user4.id,
+                      question_id: question18.id
+                    )
+
+reply17 = Reply.create!(content: "通知作成用返信3",
+                      user_id: user.id,
+                      question_id: question19.id
+                    )
+
+reply18 = Reply.create!(content: "通知作成用返信4",
+                      user_id: user4.id,
+                      question_id: question19.id
                     )
 
 subject_question = SubjectQuestion.create!(title: "サンプル科目別質問タイトル1",
@@ -667,6 +716,18 @@ subject_question21 = SubjectQuestion.create!(title: "閲覧履歴作成用科目
                                             user_id: user4.id,
                                           )
 
+subject_question21 = SubjectQuestion.create!(title: "通知作成用科目別質問1",
+                                            content: "通知作成用科目別質問1",
+                                            subject: "小論文",
+                                            user_id: user.id,
+                                          )
+
+subject_question22 = SubjectQuestion.create!(title: "通知作成用科目別質問2",
+                                            content: "通知作成用科目別質問2",
+                                            subject: "小論文",
+                                            user_id: user4.id,
+                                          )
+
 
 subject_question_reply = SubjectQuestionReply.create!(content: "サンプル科目別返信本文1",
                                                       user_id: user.id,
@@ -761,6 +822,16 @@ subject_question_reply18 = SubjectQuestionReply.create!(content: "閲覧履歴�
 subject_question_reply19 = SubjectQuestionReply.create!(content: "閲覧履歴作成用科目別返信2",
                                                       user_id: user4.id,
                                                       subject_question_id: subject_question20.id
+                                                    )
+
+subject_question_reply20 = SubjectQuestionReply.create!(content: "通知作成用科目別返信1",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question21.id
+                                                    )
+
+subject_question_reply21 = SubjectQuestionReply.create!(content: "通知作成用科目別返信2",
+                                                      user_id: user.id,
+                                                      subject_question_id: subject_question22.id
                                                     )
 
 
@@ -1063,6 +1134,17 @@ survey27 = Survey.create!(title: "閲覧履歴作成用アンケート2",
                           user_id: user4.id,
                         )
 
+survey28 = Survey.create!(title: "通知作成用アンケート1",
+                          content: "通知作成用アンケート1",
+                          option1: "選択肢1",
+                          option2: "選択肢2",
+                          option3: "選択肢3",
+                          option4: "選択肢4",
+                          genre: "進路・大学",
+                          status: false,
+                          user_id: user.id,
+                        )
+
 survey_answer = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user2.id,
                                       survey_id: survey.id
@@ -1098,6 +1180,11 @@ survey_answer6 = SurveyAnswer.create!(selected_option: 1,
 survey_answer7 = SurveyAnswer.create!(selected_option: 1,
                                       user_id: user.id,
                                       survey_id: survey17.id
+                                    )
+
+survey_answer8 = SurveyAnswer.create!(selected_option: 1,
+                                      user_id: user4.id,
+                                      survey_id: survey28.id
                                     )
 
 favorite_book = FavoriteBook.create!(user_id: user.id,
@@ -1357,4 +1444,80 @@ end
 10.times do |i|
   BrowsingHistory.create!(survey_id: i + 1, user_id: user.id)
 end
+
+notification = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    review_id: review19.id,
+                                    action_type: "Favorite",
+                                    action_to: "Review",
+                                    is_checked: false
+                                  )
+
+notification2 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    question_id: question18.id,
+                                    action_type: "Favorite",
+                                    action_to: "Question",
+                                    is_checked: false
+                                  )
+
+notification3 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    reply_id: reply15.id,
+                                    action_type: "Favorite",
+                                    action_to: "Reply",
+                                    is_checked: false
+                                  )
+
+notification4 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    subject_question_id: subject_question21.id,
+                                    action_type: "Favorite",
+                                    action_to: "SubjectQuestion",
+                                    is_checked: false
+                                  )
+
+notification5 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    subject_question_reply_id: subject_question_reply20.id,
+                                    action_type: "Favorite",
+                                    action_to: "SubjectQuestionReply",
+                                    is_checked: false
+                                  )
+
+notification6 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    survey_id: survey28.id,
+                                    action_type: "Favorite",
+                                    action_to: "Survey",
+                                    is_checked: false
+                                  )
+
+notification7 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    question_id: question18.id,
+                                    reply_id: reply16.id,
+                                    action_type: "Reply",
+                                    action_to: "Reply",
+                                    is_checked: false
+                                  )
+
+notification8 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    question_id: question19.id,
+                                    reply_id: reply18.id,
+                                    action_type: "Reply",
+                                    action_to: "Reply",
+                                    is_checked: false
+                                  )
+
+notification9 = Notification.create!(action_user_id: user4.id,
+                                    target_user_id: user.id,
+                                    survey_id: survey28.id,
+                                    action_type: "SurveyAnswer",
+                                    action_to: "SurveyAnswer",
+                                    is_checked: false
+                                  )
+
+
 

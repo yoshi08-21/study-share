@@ -4,6 +4,7 @@
     fix
     app
     scroll-target="#scrolling-techniques-3"
+    data-cy="header"
   >
     <v-row class="d-flex align-center justify-center">
       <v-col cols="1">
@@ -73,7 +74,7 @@
               <template v-else>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button">
                       <v-icon>mdi-bell</v-icon>
                     </v-btn>
                   </template>

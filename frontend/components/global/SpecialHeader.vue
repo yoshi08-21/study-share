@@ -8,6 +8,7 @@
     scroll-target="#scrolling-techniques-3"
     class="my-app-bar"
     height="400"
+    data-cy="header"
   >
     <template v-slot:img="{ props }">
       <v-img
@@ -83,7 +84,7 @@
               <template v-else>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on">
+                    <v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button">
                       <v-icon>mdi-bell</v-icon>
                     </v-btn>
                   </template>

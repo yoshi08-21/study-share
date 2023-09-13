@@ -33,7 +33,7 @@
                   <v-icon>mdi-comment-account-outline</v-icon>
                     <nuxt-link :to="`/users/${notification.action_user.id}`" class="link-text">{{ notification.action_user.name }}</nuxt-link>さんが
                     <nuxt-link :to="questionUrl">あなたが返信した質問</nuxt-link>に
-                    <nuxt-link :to="replyUrl">返信</nuxt-link>しました
+                    <nuxt-link :to="replyUrl" data-cy="notification-reply-link">返信</nuxt-link>しました
                 </v-card-subtitle>
                 <v-card-text>
                   {{ $truncate(replyInNotification.content, 100) }}
