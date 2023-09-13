@@ -30,7 +30,7 @@
     <p style="text-align: center;">
       *通知が100件を超えると古い通知から削除されます
     </p>
-    <v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index">
+    <v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index" data-cy="each-notifications">
 
       <!-- 「お気に入り」・「いいね」がされたときの通知 -->
       <div v-if="notification.action_type == 'Favorite'">
@@ -66,7 +66,7 @@
           <favorite-notification
             :notification="notification"
             :contentUrl="`/subjectQuestions/${notification.subject_question.id}`"
-            :contentTitle="'質問'"
+            :contentTitle="'質問(科目別)'"
           >
           </favorite-notification>
         </div>
@@ -75,7 +75,7 @@
           <favorite-notification
             :notification="notification"
             :contentUrl="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`"
-            :contentTitle="'返信'"
+            :contentTitle="'返信(科目別)'"
           >
           </favorite-notification>
         </div>
