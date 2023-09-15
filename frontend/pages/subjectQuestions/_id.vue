@@ -205,38 +205,12 @@
 
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
-    <v-dialog v-model="showFullImage">
-      <v-card
-        max-height="800px"
-        style="padding: 10px;"
-      >
-        <v-row>
-          <v-col cols="6" class="d-flex justify-start">
-            <v-card-title>拡大画像</v-card-title>
-          </v-col>
-          <v-col cols="6" class="d-flex justify-end align-center">
-            <v-btn @click="showFullImage = false">閉じる</v-btn>
-          </v-col>
-        </v-row>
-        <hr>
-        <v-row style="margin-top: 10px; margin-bottom: 5px;">
-          <v-col class="d-flex justify-center">
-            <v-img
-              :src="subjectQuestion.image"
-              max-height="500"
-              max-width="500"
-              contain
-            ></v-img>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="d-flex justify-center">
-            <v-btn @click="showFullImage = false">閉じる</v-btn>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-dialog>
-
+    <show-full-image-dialog
+      :showFullImage="showFullImage"
+      :image="subjectQuestion.image"
+      @closeShowFullImage="showFullImage = false"
+    >
+    </show-full-image-dialog>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -251,10 +225,11 @@ import FavoriteButton from '../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import SubjectQuestionSubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionSubjectQuestionReplies.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
+import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog },
+  components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog, ShowFullImageDialog },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null

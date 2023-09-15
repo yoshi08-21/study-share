@@ -60,6 +60,12 @@ export default {
       localShowDeleteConfirmation: this.showDeleteConfirmation
     }
   },
+  // propsで渡されるshowDeleteConfirmationの変更を検知して、コンポーネント内のdataの値を変更する
+  watch: {
+    showDeleteConfirmation(newVal) {
+      this.localShowDeleteConfirmation = newVal;
+    },
+  },
   methods: {
     deleteContent() {
       this.$emit("deleteContent")
