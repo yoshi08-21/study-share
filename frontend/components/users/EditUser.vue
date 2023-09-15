@@ -62,8 +62,8 @@
 </template>
 
 <script>
-import { VTextField, VTextarea} from 'vuetify/lib'
-import DeleteConfirmationDialog from '../global/DeleteConfirmationDialog.vue'
+import { VTextField, VTextarea} from "vuetify/lib"
+import DeleteConfirmationDialog from "../global/DeleteConfirmationDialog.vue"
 
 export default {
   props: {
@@ -87,14 +87,14 @@ export default {
       editedThirdChoiceSchool: this.third_choice_school,
       nameRules: [
         value => !!value || "名前を入力してください",
-        value => (value || '').length <= 30 || "最大入力文字数は30文字です",
+        value => (value || "").length <= 30 || "最大入力文字数は30文字です",
       ],
       contentRules: [
         value => !!value || "本文を入力してください",
-        value => (value || '').length <= 200 || "最大入力文字数は200文字です",
+        value => (value || "").length <= 200 || "最大入力文字数は200文字です",
       ],
       schoolNameRules: [
-      value => (value || '').length <= 30 || "最大入力文字数は30文字です",
+      value => (value || "").length <= 30 || "最大入力文字数は30文字です",
       ],
       showDeleteConfirmation: false,
       selectedFile: null,

@@ -77,15 +77,13 @@ export default {
   },
   methods: {
     async signUp() {
-      // 登録後はトップページに遷移
       try {
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
         console.log(response)
-        // response.user.uid
         console.log(response.user.uid)
         this.userSetup(response.user.uid)
-        this.$router.push({ path: "/", query: { message: "会員登録が完了しました。ログインしてください。" } })
+        this.$router.push({ path: "/", query: { message: "会員登録が完了しました。" } })
       } catch(error) {
         console.log(error)
         this.snackbar = true

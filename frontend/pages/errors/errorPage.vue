@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div style="text-align: center;">
     <h2>エラーページ</h2>
     <p>存在しないページです</p>
-    <v-btn  @click="redirectToTopPage">トップページに戻る</v-btn>
+    <br>
+    <v-btn  @click="redirectToTopPage" block height="50">トップページに戻る</v-btn>
   </div>
 </template>
 

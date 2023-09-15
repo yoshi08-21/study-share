@@ -97,8 +97,8 @@
 </template>
 
 <script>
-import { VTextField } from 'vuetify/lib'
-import SubmitButton from '../global/SubmitButton.vue'
+import { VTextField } from "vuetify/lib"
+import SubmitButton from "../global/SubmitButton.vue"
 
 export default {
   components: {
@@ -109,18 +109,18 @@ export default {
     return {
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 50 || "最大入力文字数は50文字です",
+        value => (value || "").length <= 50 || "最大入力文字数は50文字です",
       ],
       contentRules: [
         value => !!value || "本文を入力してください",
-        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
+        value => (value || "").length <= 1000 || "最大入力文字数は1000文字です",
       ],
       requiredOptionRules: [
         value => !!value || "選択肢を入力してください",
-        value => (value || '').length <= 50 || "最大入力文字数は50文字です",
+        value => (value || "").length <= 50 || "最大入力文字数は50文字です",
       ],
       optionRules: [
-        value => (value || '').length <= 50 || "最大入力文字数は50文字です",
+        value => (value || "").length <= 50 || "最大入力文字数は50文字です",
       ],
       genres: ["国語", "社会", "数学", "英語", "理科", "参考書", "進路・大学", "その他"],
       selectedGenre: "",
@@ -154,7 +154,7 @@ export default {
       if(this.option4 !== "") {
         survey.option4 = this.option4
       }
-      this.$emit('submitSurvey', survey)
+      this.$emit("submitSurvey", survey)
     },
     checkFileSize(file) {
       console.log(file)

@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { VTextField, VTextarea } from 'vuetify/lib'
-import SubmitButton from '../global/SubmitButton.vue'
+import { VTextField, VTextarea } from "vuetify/lib"
+import SubmitButton from "../global/SubmitButton.vue"
 
 export default {
   props: {
@@ -54,11 +54,11 @@ export default {
       editedContent: this.content,
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 60 || "最大入力文字数は60文字です",
+        value => (value || "").length <= 60 || "最大入力文字数は60文字です",
       ],
       contentRules: [
         value => !!value || "本文を入力してください",
-        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
+        value => (value || "").length <= 1000 || "最大入力文字数は1000文字です",
       ],
       selectedFile: null,
       errorMessage: "",
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitQuestion', { title: this.editedTitle, content: this.editedContent, image: this.selectedFile })
+      this.$emit("submitQuestion", { title: this.editedTitle, content: this.editedContent, image: this.selectedFile })
     },
     checkFileSize(file) {
       console.log(file)

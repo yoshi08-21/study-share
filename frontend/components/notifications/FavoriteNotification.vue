@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   props: {
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     formattedTime(datetime) {
-      return moment(datetime).format('YYYY/MM/DD HH:mm');
+      return moment(datetime).format("YYYY/MM/DD HH:mm");
     }
   }
 }

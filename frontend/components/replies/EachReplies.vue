@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-row mb-5 v-for="(reply, index) in replies" :key="'reply_' + index" class="justify-center" data-cy="each-replies">
       <v-col cols="10">
         <v-card
@@ -64,11 +63,6 @@
         </v-card>
       </v-col>
     </v-row>
-
-
-
-
-
 
   </div>
 </template>
