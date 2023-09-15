@@ -11,67 +11,163 @@
 
     <template v-if="tab === 0">
       <br><br><br>
-      <v-pagination v-model="page" :length="booksTotalPages"></v-pagination>
-      <br>
-      <each-books :books="booksChunk"></each-books>
-      <br>
-      <v-pagination v-model="page" :length="booksTotalPages"></v-pagination>
+      <template v-if="booksChunk.length > 0">
+        <v-pagination v-model="page" :length="booksTotalPages"></v-pagination>
+        <br>
+        <each-books :books="booksChunk"></each-books>
+        <br>
+        <v-pagination v-model="page" :length="booksTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+                >
+                お気に入りの参考書はありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 1">
       <br><br><br>
-      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
-      <br>
-      <each-reviews :reviews="reviewsChunk"></each-reviews>
-      <br>
-      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+      <template v-if="reviewsChunk.length > 0">
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+        <br>
+        <each-reviews :reviews="reviewsChunk"></each-reviews>
+        <br>
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねしたレビューはありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 2">
       <br><br><br>
-      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
-      <br>
-      <each-questions :questions="questionsChunk"></each-questions>
-      <br>
-      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+      <template v-if="questionsChunk.length > 0">
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+        <br>
+        <each-questions :questions="questionsChunk"></each-questions>
+        <br>
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねした質問はありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 3">
       <br><br><br>
-      <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
-      <br>
-      <each-subject-questions :subjectQuestions="subjectQuestionsChunk"></each-subject-questions>
-      <br>
-      <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
+      <template v-if="subjectQuestionsChunk.length > 0">
+        <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
+        <br>
+        <each-subject-questions :subjectQuestions="subjectQuestionsChunk"></each-subject-questions>
+        <br>
+        <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねした科目別質問はありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 4">
       <br><br><br>
-      <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
-      <br>
-      <each-replies :replies="repliesChunk"></each-replies>
-      <br>
-      <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
-
+      <template v-if="repliesChunk.length > 0">
+        <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
+        <br>
+        <each-replies :replies="repliesChunk"></each-replies>
+        <br>
+        <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねした返信はありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 5">
       <br><br><br>
-      <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
-      <br>
-      <each-subject-question-replies :subjectQuestionReplies="subjectQuestionRepliesChunk"></each-subject-question-replies>
-      <br>
-      <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
-
+      <template v-if="subjectQuestionRepliesChunk.length > 0">
+        <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
+        <br>
+        <each-subject-question-replies :subjectQuestionReplies="subjectQuestionRepliesChunk"></each-subject-question-replies>
+        <br>
+        <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねした返信(科目別質問)はありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
     <template v-else-if="tab === 6">
       <br><br><br>
-      <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
-      <br>
-      <each-surveys :surveys="surveysChunk"></each-surveys>
-      <br>
-      <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
+      <template v-if="surveysChunk.length > 0">
+        <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
+        <br>
+        <each-surveys :surveys="surveysChunk"></each-surveys>
+        <br>
+        <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+          <v-row>
+            <v-col class="d-flex justify-center">
+              <v-alert
+                type="info"
+              >
+              いいねしたアンケートはありません
+              </v-alert>
+            </v-col>
+          </v-row>
+      </template>
     </template>
 
 
