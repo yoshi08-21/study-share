@@ -10,6 +10,7 @@ You can directly use them in pages and other components without the need to impo
 - `<DeleteConfirmationDialog>` | `<delete-confirmation-dialog>` (components/global/DeleteConfirmationDialog.vue)
 - `<FavoriteButton>` | `<favorite-button>` (components/global/FavoriteButton.vue)
 - `<NormalHeader>` | `<normal-header>` (components/global/NormalHeader.vue)
+- `<ShowFullImageDialog>` | `<show-full-image-dialog>` (components/global/ShowFullImageDialog.vue)
 - `<ShowSnackbar>` | `<show-snackbar>` (components/global/ShowSnackbar.vue)
 - `<SpecialHeader>` | `<special-header>` (components/global/SpecialHeader.vue)
 - `<SubmitButton>` | `<submit-button>` (components/global/SubmitButton.vue)

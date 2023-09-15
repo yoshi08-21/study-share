@@ -5,7 +5,6 @@
     </div>
     <book-information :book="book"></book-information>
 
-
     <br><br><br>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>質問詳細</h2>
@@ -166,7 +165,6 @@
     </template>
 
 
-
     <!-- 新規返信投稿ダイアログ -->
     <v-dialog v-model="replyDialog">
       <v-card>
@@ -208,38 +206,12 @@
 
 
     <!-- 大きいサイズの画像表示用のダイアログ -->
-    <v-dialog v-model="showFullImage">
-      <v-card
-        max-height="800px"
-        style="padding: 10px;"
-      >
-        <v-row>
-          <v-col cols="6" class="d-flex justify-start">
-            <v-card-title>拡大画像</v-card-title>
-          </v-col>
-          <v-col cols="6" class="d-flex justify-end align-center">
-            <v-btn @click="showFullImage = false">閉じる</v-btn>
-          </v-col>
-        </v-row>
-        <hr>
-        <v-row style="margin-top: 10px; margin-bottom: 5px;">
-          <v-col class="d-flex justify-center">
-            <v-img
-              :src="question.image"
-              max-height="500"
-              max-width="500"
-              contain
-            ></v-img>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="d-flex justify-center">
-            <v-btn @click="showFullImage = false">閉じる</v-btn>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-dialog>
-
+    <show-full-image-dialog
+      :showFullImage="showFullImage"
+      :image="question.image"
+      @closeShowFullImage="showFullImage = false"
+    >
+    </show-full-image-dialog>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -255,10 +227,11 @@ import BookInformation from '../../../../components/books/BookInformation.vue'
 import favoriteButton from '../../../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
 import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
+import ShowFullImageDialog from '../../../../components/global/ShowFullImageDialog.vue'
 import axios from "@/plugins/axios"
 
 export default {
-  components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation, favoriteButton, ContentNavigator, DeleteConfirmationDialog },
+  components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation, favoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -377,7 +350,7 @@ export default {
       }
 
       try {
-        const response = await axios.patch(`/books/${this.params.book_id}/questions/${this.question.id}`, formData)
+        const response = await axios.patch(`/books/${this.question.book_id}/questions/${this.question.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true

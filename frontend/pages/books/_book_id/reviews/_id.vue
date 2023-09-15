@@ -5,7 +5,6 @@
     </div>
     <book-information :book="book"></book-information>
 
-
     <br><br><br>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>レビュー詳細</h2>
@@ -143,6 +142,7 @@
 
 
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -185,7 +185,6 @@ export default {
         const reviews = reviewsResponse.data
         console.log(reviewResponse.data)
         console.log(reviewsResponse.data)
-      // console.log(responce.data.review.user)
       return {
         book,
         review,
@@ -193,8 +192,6 @@ export default {
         reviews,
         params
       }
-
-
     } catch(error) {
       console.log(error)
       throw error
@@ -245,13 +242,12 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
     async editReview(data) {
       try {
-        const response = await axios.patch(`/books/${this.params.book_id}/reviews/${this.params.id}`, {
+        const response = await axios.patch(`/books/${this.review.book_id}/reviews/${this.review.id}`, {
           review: {
             title: data.title,
             content: data.content,
@@ -263,8 +259,6 @@ export default {
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "レビューの編集が完了しました"
-        // this.$snackbar.showSnackbar("Hello, Snackbar!", "success");
-        // this.$refs.snackbar.showSnackbar('This is a message', 'success')
         this.review.title = response.data.title
         this.review.content = response.data.content
         this.review.rating = response.data.rating
@@ -278,8 +272,10 @@ export default {
     },
     async deleteReview() {
       try {
-        const response = await axios.delete(`/books/${this.params.book_id}/reviews/${this.params.id}`, {
-          params: { current_user_id: this.currentUser.id }
+        const response = await axios.delete(`/books/${this.review.book_id}/reviews/${this.review.id}`, {
+          params: {
+            current_user_id: this.currentUser.id
+          }
         })
         console.log(response)
         this.$router.push({ path: `/books/${this.book.id}`, query: { message: 'レビューを削除しました' } })
@@ -290,9 +286,6 @@ export default {
         this.flashMessage = "レビューを削除できませんでした"
         this.dialog = false
       }
-    },
-    redirectToBook() {
-      this.$router.push({ path: `/books/${this.book.id}` })
     },
     goToUser() {
       if( !this.currentUser || this.currentUser.id !== this.user.id ) {
@@ -370,8 +363,4 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
 
