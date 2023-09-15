@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -120,7 +119,6 @@ export default {
         return response.data
       } catch(error) {
         console.log(error)
-        throw error
       }
     },
   }

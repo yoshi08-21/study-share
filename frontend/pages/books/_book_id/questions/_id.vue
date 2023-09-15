@@ -316,7 +316,6 @@ export default {
       this.isFavorite = response.data.is_favorite
       this.favoriteQuestionId = response.data.favorite_question_id
     } catch(error) {
-      console.log("エラー文です")
       console.log(error)
     }
   },
@@ -325,13 +324,9 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
-    redirectToBook() {
-      this.$router.push({ path: `/books/${this.book.id}` })
-    },
     goToUser() {
       if(this.currentUser.id !== this.user.id ) {
         this.$router.push({ path: `/users/${this.user.id}` })
@@ -350,7 +345,7 @@ export default {
       }
 
       try {
-        const response = await axios.patch(`/books/${this.question.book_id}/questions/${this.question.id}`, formData)
+        const response = await axios.patch(`/books/${this.book.id}/questions/${this.question.id}`, formData)
         console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
@@ -370,8 +365,10 @@ export default {
     },
     async deleteQuestion() {
       try {
-        const response = await axios.delete(`/books/${this.params.book_id}/questions/${this.question.id}`, {
-          params: { current_user_id: this.currentUser.id }
+        const response = await axios.delete(`/books/${this.book.id}/questions/${this.question.id}`, {
+          params: {
+            current_user_id: this.currentUser.id
+          }
         })
         console.log(response)
         this.$router.push({ path: `/books/${this.book.id}`, query: { message: '質問を削除しました' } })
@@ -481,6 +478,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

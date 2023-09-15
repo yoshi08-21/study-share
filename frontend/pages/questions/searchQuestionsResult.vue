@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -13,7 +12,7 @@
                   filled
                   outlined
                   dense
-                  label="参考書を再検索"
+                  label="質問を再検索"
                 >
                 </v-text-field>
               </v-col>
@@ -29,7 +28,7 @@
     <br>
     <v-row>
       <v-col class="d-flex justify-center">
-        <h2>「{{ this.searchQuestionsKeyword }}」の検索結果{{ this.totalCount }}件 </h2>
+        <h2>「{{ searchQuestionsKeyword }}」の検索結果{{ totalCount }}件 </h2>
       </v-col>
     </v-row>
     <br><br>
@@ -121,7 +120,6 @@ export default {
         return response.data
       } catch(error) {
         console.log(error)
-        throw error
       }
     },
   }

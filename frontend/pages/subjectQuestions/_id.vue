@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-space-between" style="margin-top: 50px; margin-bottom: 10px;">
       <h2>質問詳細(科目別)</h2>
-      <nuxt-link :to="`/subjectQuestions/subjectQuestions`">質問一覧に戻る</nuxt-link>
+      <nuxt-link :to="`/subjectQuestions/allSubjectQuestions`">質問一覧に戻る</nuxt-link>
     </div>
     <v-card
       elevation="8"
@@ -202,8 +202,6 @@
     >
     </delete-confirmation-dialog>
 
-
-
     <!-- 大きいサイズの画像表示用のダイアログ -->
     <show-full-image-dialog
       :showFullImage="showFullImage"
@@ -322,13 +320,9 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
-    redirectToSubjectQuestions() {
-      this.$router.push({ path: "/subjectQuestions/subjectQuestions" })
-    },
     goToUser() {
       if(this.currentUser.id !== this.user.id ) {
         this.$router.push({ path: `/users/${this.user.id}` })
@@ -370,10 +364,12 @@ export default {
     async deleteSubjectQuestion() {
       try {
         const response = await axios.delete(`/subject_questions/${this.subjectQuestion.id}`, {
-          params: { current_user_id: this.currentUser.id }
+          params: {
+            current_user_id: this.currentUser.id
+          }
         })
         console.log(response)
-        this.$router.push({ path: `/subjectQuestions/subjectQuestions`, query: { message: '質問を削除しました' } })
+        this.$router.push({ path: `/subjectQuestions/allSubjectQuestions`, query: { message: '質問を削除しました' } })
       } catch(error) {
         console.log(error)
         this.snackbarColor = "red accent-2"
@@ -479,7 +475,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>

@@ -247,7 +247,7 @@ export default {
   methods: {
     async editReview(data) {
       try {
-        const response = await axios.patch(`/books/${this.review.book_id}/reviews/${this.review.id}`, {
+        const response = await axios.patch(`/books/${this.book.id}/reviews/${this.review.id}`, {
           review: {
             title: data.title,
             content: data.content,
@@ -272,7 +272,7 @@ export default {
     },
     async deleteReview() {
       try {
-        const response = await axios.delete(`/books/${this.review.book_id}/reviews/${this.review.id}`, {
+        const response = await axios.delete(`/books/${this.book.id}/reviews/${this.review.id}`, {
           params: {
             current_user_id: this.currentUser.id
           }

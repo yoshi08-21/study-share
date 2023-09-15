@@ -227,12 +227,12 @@ export default {
         {
           icon: "mdi-comment-question",
           title: '質問一覧',
-          to: '/questions/questions'
+          to: '/questions/allQuestions'
         },
         {
           icon: "mdi-comment-question-outline",
           title: '科目別質問一覧',
-          to: '/subjectQuestions/subjectQuestions'
+          to: '/subjectQuestions/allSubjectQuestions'
         },
         {
           icon: "mdi-account-search",
@@ -258,8 +258,8 @@ export default {
         { icon: "mdi-home", title: "トップページ", to: "/" },
         { icon: "mdi-account", title: "マイページ", to: "/mypage" },
         { icon: "mdi-bookshelf", title: "参考書一覧", to: "/books/allBooks" },
-        { icon: "mdi-comment-question", title: "質問一覧", to: "/questions/questions" },
-        { icon: "mdi-comment-question-outline", title: "科目別質問一覧", to: "/subjectQuestions/subjectQuestions" },
+        { icon: "mdi-comment-question", title: "質問一覧", to: "/questions/allQuestions" },
+        { icon: "mdi-comment-question-outline", title: "科目別質問一覧", to: "/subjectQuestions/allSubjectQuestions" },
         { icon: "mdi-account-search", title: "アンケート", to: "/surveys/allSurveys" },
       ],
 
