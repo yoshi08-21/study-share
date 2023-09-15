@@ -196,20 +196,48 @@
     </v-tabs>
 
     <br>
-    <template v-if="tab === 0 && reviewsChunk.length > 0">
-      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
-      <br><br>
-      <book-reviews :reviews="reviewsChunk"></book-reviews>
-      <br>
-      <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+    <template v-if="tab === 0">
+      <template v-if="reviewsChunk.length > 0">
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+        <br><br>
+        <book-reviews :reviews="reviewsChunk"></book-reviews>
+        <br>
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-alert
+              type="info"
+            >
+            レビューは投稿されていません
+            </v-alert>
+          </v-col>
+        </v-row>
+      </template>
     </template>
 
-    <template v-else-if="tab === 1 && questionsChunk.length > 0">
-      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
-      <br><br>
-      <book-questions :questions="questionsChunk"></book-questions>
-      <br>
-      <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+    <template v-else-if="tab === 1">
+      <template v-if="questionsChunk.length > 0">
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+        <br><br>
+        <book-questions :questions="questionsChunk"></book-questions>
+        <br>
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+      </template>
+      <template v-else>
+        <br>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-alert
+              type="info"
+            >
+            質問は投稿されていません
+            </v-alert>
+          </v-col>
+        </v-row>
+      </template>
     </template>
 
     <br>
