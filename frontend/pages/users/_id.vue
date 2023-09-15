@@ -125,7 +125,7 @@
 
     <br><br><br>
     <v-tabs v-model="tab" centered>
-      <v-tab v-for="(tabItem, index) in tabs" :key="index">
+      <v-tab v-for="(tabItem, index) in tabs" :key="index" @click="page = 1">
         {{ tabItem.label }}
       </v-tab>
     </v-tabs>
@@ -134,33 +134,58 @@
 
       <template v-if="tab === 0">
         <br><br><br>
-        <each-reviews :reviews="myReviews"></each-reviews>
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
+        <br>
+        <each-reviews :reviews="reviewsChunk"></each-reviews>
+        <br>
+        <v-pagination v-model="page" :length="reviewsTotalPages"></v-pagination>
       </template>
-
 
       <template v-else-if="tab === 1">
         <br><br><br>
-        <each-questions :questions="myQuestions"></each-questions>
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
+        <br>
+        <each-questions :questions="questionsChunk"></each-questions>
+        <br>
+        <v-pagination v-model="page" :length="questionsTotalPages"></v-pagination>
       </template>
 
       <template v-else-if="tab === 2">
         <br><br><br>
-        <each-subject-questions :subjectQuestions="mySubjectQuestions"></each-subject-questions>
+        <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
+        <br>
+        <each-subject-questions :subjectQuestions="subjectQuestionsChunk"></each-subject-questions>
+        <br>
+        <v-pagination v-model="page" :length="subjectQuestionsTotalPages"></v-pagination>
       </template>
 
       <template v-else-if="tab === 3">
         <br><br><br>
-        <each-replies :replies="myReplies"></each-replies>
+        <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
+        <br>
+        <each-replies :replies="repliesChunk"></each-replies>
+        <br>
+        <v-pagination v-model="page" :length="repliesTotalPages"></v-pagination>
+
       </template>
 
       <template v-else-if="tab === 4">
         <br><br><br>
-        <each-subject-question-replies :subjectQuestionReplies="mySubjectQuestionReplies"></each-subject-question-replies>
+        <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
+        <br>
+        <each-subject-question-replies :subjectQuestionReplies="subjectQuestionRepliesChunk"></each-subject-question-replies>
+        <br>
+        <v-pagination v-model="page" :length="subjectQuestionRepliesTotalPages"></v-pagination>
+
       </template>
 
       <template v-else-if="tab === 5">
         <br><br><br>
-        <each-surveys :surveys="mySurveys"></each-surveys>
+        <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
+        <br>
+        <each-surveys :surveys="surveysChunk"></each-surveys>
+        <br>
+        <v-pagination v-model="page" :length="surveysTotalPages"></v-pagination>
       </template>
 
     </div>
@@ -214,9 +239,60 @@ export default {
         { label: "投稿した返信（科目別質問）" },
         { label: "作成したアンケート" },
       ],
-
+      perPage: 10,
+      page: 1,
     }
-  }
+  },
+  computed: {
+    reviewsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.myReviews.slice(start, end)
+    },
+    questionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.myQuestions.slice(start, end)
+    },
+    repliesChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.myReplies.slice(start, end)
+    },
+    subjectQuestionsChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.mySubjectQuestions.slice(start, end)
+    },
+    subjectQuestionRepliesChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.mySubjectQuestionReplies.slice(start, end)
+    },
+    surveysChunk() {
+      const start = (this.page - 1) * this.perPage
+      const end = start + this.perPage
+      return this.mySurveys.slice(start, end)
+    },
+    reviewsTotalPages() {
+      return Math.ceil(this.myReviews.length / this.perPage);
+    },
+    questionsTotalPages() {
+      return Math.ceil(this.myQuestions.length / this.perPage);
+    },
+    repliesTotalPages() {
+      return Math.ceil(this.myReplies.length / this.perPage);
+    },
+    subjectQuestionsTotalPages() {
+      return Math.ceil(this.mySubjectQuestions.length / this.perPage);
+    },
+    subjectQuestionRepliesTotalPages() {
+      return Math.ceil(this.mySubjectQuestionReplies.length / this.perPage);
+    },
+    surveysTotalPages() {
+      return Math.ceil(this.mySurveys.length / this.perPage);
+    },
+  },
 }
 </script>
 
