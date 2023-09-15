@@ -71,8 +71,8 @@
 </template>
 
 <script>
-import { VTextField } from 'vuetify/lib'
-import SubmitButton from '../global/SubmitButton.vue'
+import { VTextField } from "vuetify/lib"
+import SubmitButton from "../global/SubmitButton.vue"
 
 export default {
   components: {
@@ -89,17 +89,17 @@ export default {
       keepedSubject: "",
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 50 || "最大入力文字数は50文字です",
+        value => (value || "").length <= 50 || "最大入力文字数は50文字です",
       ],
       authorRules: [
         value => !!value || "著者を入力してください",
-        value => (value || '').length <= 25 || "最大入力文字数は25文字です",
+        value => (value || "").length <= 25 || "最大入力文字数は25文字です",
       ],
       publisherRules: [
-        value => (value || '').length <= 25 || "最大入力文字数は25文字です",
+        value => (value || "").length <= 25 || "最大入力文字数は25文字です",
       ],
       descriptionRules: [
-        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
+        value => (value || "").length <= 1000 || "最大入力文字数は1000文字です",
       ],
       selectSubjectDialog: false,
       categories: [
@@ -135,7 +135,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitBook', { name: this.name, author: this.author, publisher: this.publisher, subject: this.subject, image: this.selectedFile, description: this.description })
+      this.$emit("submitBook", { name: this.name, author: this.author, publisher: this.publisher, subject: this.subject, image: this.selectedFile, description: this.description })
     },
     checkFileSize(file) {
       console.log(file)

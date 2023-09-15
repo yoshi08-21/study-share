@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <br><br>
     <v-row>
       <v-col cols="12" class="d-flex justify-center">
@@ -88,9 +87,6 @@
       <v-pagination v-model="page" :length="totalPages"></v-pagination>
     </template>
 
-
-    <!-- アンケートはダイアログで作成する -->
-    <!-- 選択肢はボタンを押すと追加できるようにしたい -->
 
     <!-- アンケート新規登録ダイアログ -->
     <v-dialog v-model="dialog">

@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { VTextField, VTextarea, VRating } from 'vuetify/lib'
-import SubmitButton from '../global/SubmitButton.vue'
+import { VTextField, VTextarea, VRating } from "vuetify/lib"
+import SubmitButton from "../global/SubmitButton.vue"
 
 export default {
   components: {
@@ -39,17 +39,17 @@ export default {
       content: "",
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 60 || "最大入力文字数は60文字です",
+        value => (value || "").length <= 60 || "最大入力文字数は60文字です",
       ],
       contentRules: [
         value => !!value || "本文を入力してください",
-        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
+        value => (value || "").length <= 1000 || "最大入力文字数は1000文字です",
       ],
     }
   },
   methods: {
     submitForm() {
-      this.$emit('submitReview', { title: this.title, content: this.content, rating: this.rating })
+      this.$emit("submitReview", { title: this.title, content: this.content, rating: this.rating })
     },
   }
 }

@@ -1,7 +1,5 @@
 <template>
   <div>
-
-    <!-- <template v-if="hideClosedSurvey === true && "></template> -->
     <v-row mb-5 v-for="(survey, index) in surveys" :key="'survey_' + index" class="justify-center" data-cy="each-surveys">
       <template v-if="hideClosedSurvey === false || (hideClosedSurvey === true && survey.status === false)">
         <v-col cols="10">
@@ -69,7 +67,6 @@
         </v-col>
       </template>
     </v-row>
-
   </div>
 </template>
 

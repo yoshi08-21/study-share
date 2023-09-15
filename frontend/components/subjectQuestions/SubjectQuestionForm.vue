@@ -67,8 +67,8 @@
 </template>
 
 <script>
-import { VTextField, VTextarea } from 'vuetify/lib'
-import SubmitButton from '../global/SubmitButton.vue'
+import { VTextField, VTextarea } from "vuetify/lib"
+import SubmitButton from "../global/SubmitButton.vue"
 
 export default {
   components: {
@@ -83,11 +83,11 @@ export default {
       subject: "",
       titleRules: [
         value => !!value || "タイトルを入力してください",
-        value => (value || '').length <= 60 || "最大入力文字数は60文字です",
+        value => (value || "").length <= 60 || "最大入力文字数は60文字です",
       ],
       contentRules: [
         value => !!value || "本文を入力してください",
-        value => (value || '').length <= 1000 || "最大入力文字数は1000文字です",
+        value => (value || "").length <= 1000 || "最大入力文字数は1000文字です",
       ],
       selectSubjectDialog: false,
       categories: [
@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitSubjectQuestion', { title: this.title, content: this.content, subject: this.subject, image: this.selectedFile })
+      this.$emit("submitSubjectQuestion", { title: this.title, content: this.content, subject: this.subject, image: this.selectedFile })
     },
     checkFileSize(file) {
       console.log(file)
