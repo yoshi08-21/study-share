@@ -4,10 +4,10 @@
     <v-tabs
       grow
     >
-    <v-tab to="/questions/questions">
+    <v-tab to="/questions/allQuestions">
         参考書別質問
       </v-tab>
-      <v-tab to="/subjectQuestions/subjectQuestions">
+      <v-tab to="/subjectQuestions/allSubjectQuestions">
         科目別質問
       </v-tab>
     </v-tabs>
@@ -113,6 +113,7 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -182,7 +183,6 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {

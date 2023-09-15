@@ -203,7 +203,6 @@
     </v-dialog>
 
     <!-- 質問削除の確認ダイアログ -->
-
     <delete-confirmation-dialog
       :showDeleteConfirmation="showDeleteConfirmation"
       :contentTitle="'返信'"
@@ -222,6 +221,7 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -323,12 +323,6 @@ export default {
         this.$router.push({ path: "/mypage" })
       }
     },
-    redirectToQuestion() {
-      this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}` })
-    },
-    redirectToBook() {
-      this.$router.push({ path: `/books/${this.book.id}` })
-    },
     async editReply(data) {
       const formData = new FormData()
 
@@ -417,7 +411,7 @@ export default {
       const nextReply = this.replies[nextIndex]
       const lastItem = this.replies[this.replies.length - 1]
       if(this.reply.id !== lastItem.id) {
-        this.$router.push({ path: `/books/${this.question.book_id}/questions/${this.reply.question_id}/replies/${nextReply.id}` })
+        this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${nextReply.id}` })
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"
@@ -430,7 +424,7 @@ export default {
       const previousReply = this.replies[previousIndex]
       const firstItem = this.replies[0]
       if(this.reply.id !== firstItem.id) {
-        this.$router.push({ path: `/books/${this.question.book_id}/questions/${this.reply.question_id}/replies/${previousReply.id}` })
+        this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${previousReply.id}` })
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"

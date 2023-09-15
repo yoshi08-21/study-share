@@ -202,6 +202,7 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
+
   </div>
 </template>
 
@@ -290,7 +291,6 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
@@ -394,7 +394,7 @@ export default {
       const nextSubjectQuestionReply = this.subjectQuestionReplies[nextIndex]
       const lastItem = this.subjectQuestionReplies[this.subjectQuestionReplies.length - 1]
       if(this.subjectQuestionReply.id !== lastItem.id) {
-        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${nextSubjectQuestionReply.id}` })
+        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${nextSubjectQuestionReply.id}` })
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"
@@ -407,7 +407,7 @@ export default {
       const previousSubjectQuestionReply = this.subjectQuestionReplies[previousIndex]
       const firstItem = this.subjectQuestionReplies[0]
       if(this.subjectQuestionReply.id !== firstItem.id) {
-        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestionReply.subject_question_id}/subjectQuestionReplies/${previousSubjectQuestionReply.id}` })
+        this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${previousSubjectQuestionReply.id}` })
       } else {
         this.snackbar = true
         this.snackbarColor = "blue-grey"

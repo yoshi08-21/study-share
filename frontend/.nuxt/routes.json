@@ -70,11 +70,11 @@
     "_name": "_2a742db0"
   },
   {
-    "name": "questions-questions",
-    "path": "/questions/questions",
-    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/questions.vue",
-    "chunkName": "pages/questions/questions",
-    "_name": "_f110b94e"
+    "name": "questions-allQuestions",
+    "path": "/questions/allQuestions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/questions/allQuestions.vue",
+    "chunkName": "pages/questions/allQuestions",
+    "_name": "_09ed56d0"
   },
   {
     "name": "questions-searchQuestionsResult",
@@ -84,18 +84,18 @@
     "_name": "_76a4868e"
   },
   {
+    "name": "subjectQuestions-allSubjectQuestions",
+    "path": "/subjectQuestions/allSubjectQuestions",
+    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/allSubjectQuestions.vue",
+    "chunkName": "pages/subjectQuestions/allSubjectQuestions",
+    "_name": "_bf856054"
+  },
+  {
     "name": "subjectQuestions-searchSubjectQuestionsResult",
     "path": "/subjectQuestions/searchSubjectQuestionsResult",
     "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/searchSubjectQuestionsResult.vue",
     "chunkName": "pages/subjectQuestions/searchSubjectQuestionsResult",
     "_name": "_1b90f6e2"
-  },
-  {
-    "name": "subjectQuestions-subjectQuestions",
-    "path": "/subjectQuestions/subjectQuestions",
-    "component": "/Users/yoshito-t/Desktop/spa-portfolio-app/frontend/pages/subjectQuestions/subjectQuestions.vue",
-    "chunkName": "pages/subjectQuestions/subjectQuestions",
-    "_name": "_0216141d"
   },
   {
     "name": "surveys-allSurveys",
