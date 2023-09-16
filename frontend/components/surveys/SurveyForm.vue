@@ -99,12 +99,14 @@
 <script>
 import { VTextField } from "vuetify/lib"
 import SubmitButton from "../global/SubmitButton.vue"
+import sharedMethods from "../../mixins/sharedMethods"
 
 export default {
   components: {
     VTextField,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       titleRules: [
@@ -156,17 +158,6 @@ export default {
       }
       this.$emit("submitSurvey", survey)
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file && file.size > maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    }
   }
 }
 </script>

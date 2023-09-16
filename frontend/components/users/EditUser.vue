@@ -68,6 +68,7 @@
 <script>
 import { VTextField, VTextarea} from "vuetify/lib"
 import DeleteConfirmationDialog from "../global/DeleteConfirmationDialog.vue"
+import sharedMethods from "../../mixins/sharedMethods"
 
 export default {
   props: {
@@ -82,6 +83,7 @@ export default {
     VTextarea,
     DeleteConfirmationDialog,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       editedName: this.name,
@@ -121,17 +123,6 @@ export default {
     },
     deleteLocalUser() {
       this.$emit("deleteUser")
-    },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file && file.size > maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
     },
   }
 }

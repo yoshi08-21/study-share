@@ -13,11 +13,14 @@
                   outlined
                   dense
                   label="参考書を再検索"
+                  @keydown.enter="updateQueryParams"
+                  @compositionstart="isInputBeingConverted = true"
+                  @compositionend="isInputBeingConverted = false"
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="1">
-                <v-btn @click="updateQueryParams(newKeyword)">検索</v-btn>
+                <v-btn @click="updateQueryParams">検索</v-btn>
               </v-col>
             </v-row>
           </v-card-title>
@@ -92,6 +95,7 @@ export default {
       newKeyword: "",
       perPage: 10,
       page: 1,
+      isInputBeingConverted: false,
     }
   },
   computed: {
@@ -122,9 +126,11 @@ export default {
         throw error
       }
     },
-    updateQueryParams(newValue) {
-      this.$router.push({ query: { searchBooksKeyword: newValue } })
-      this.newKeyword = ""
+    updateQueryParams() {
+      if(this.isInputBeingConverted === false) {
+        this.$router.push({ query: { searchBooksKeyword: this.newKeyword } })
+        this.newKeyword = ""
+      }
     },
   }
 }

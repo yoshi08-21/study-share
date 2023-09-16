@@ -31,6 +31,9 @@
               outlined
               style="margin-top: 25px;"
               data-cy="header-search-books-field"
+              @keydown.enter="searchBooks"
+              @compositionstart="isInputBeingConverted = true"
+              @compositionend="isInputBeingConverted = false"
             ></v-text-field>
           </v-col>
           <v-col cols="2">
@@ -154,7 +157,7 @@ export default {
         to: "/"
       },
       searchBooksKeyword: "",
-
+      isInputBeingConverted: false,
     }
   },
   computed: {
@@ -167,7 +170,9 @@ export default {
   },
   methods: {
     searchBooks() {
-      this.$emit("searchBooks", { searchBooksKeyword: this.searchBooksKeyword })
+      if(this.isInputBeingConverted === false) {
+        this.$emit("searchBooks", { searchBooksKeyword: this.searchBooksKeyword })
+      }
     },
     goToMypage() {
       this.$emit("goToMypage")

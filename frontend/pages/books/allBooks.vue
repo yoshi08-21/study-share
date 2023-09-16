@@ -14,6 +14,9 @@
                   dense
                   label="参考書を検索"
                   data-cy="search-books-field"
+                  @keydown.enter="searchBooks"
+                  @compositionstart="isInputBeingConverted = true"
+                  @compositionend="isInputBeingConverted = false"
                 >
                 </v-text-field>
               </v-col>
@@ -165,7 +168,8 @@ export default {
       {text:"その他", disabled: true},"過去問", "小論文", "その他科目",
       ],
       selectedSortOption: "",
-      selectedBooksSubject: ""
+      selectedBooksSubject: "",
+      isInputBeingConverted: false,
     }
   },
   computed: {
@@ -193,7 +197,6 @@ export default {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
   },
   methods: {
@@ -233,9 +236,12 @@ export default {
       this.$router.push({ path: "/books/googleApiSearchBooks" })
     },
     searchBooks() {
-      this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
-      this.searchBooksKeyword = ""
+      if(this.isInputBeingConverted === false) {
+        this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+        this.searchBooksKeyword = ""
+      }
     },
+
     // selectedBookSubjectに応じてbooksの絞り込みを行う。subjectが空の場合は元の配列をそのまま返す
     filterBooks() {
       if(this.selectedBooksSubject) {
