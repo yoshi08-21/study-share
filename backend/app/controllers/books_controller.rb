@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     current_user_id = params[:current_user_id]
     books = Book.includes(:reviews)
                   .with_attached_image
-                  .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite,  (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
+                  .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
     return render json: [] if books.blank?
 
     books_with_images = attach_image_to_books(books)
@@ -113,7 +113,7 @@ class BooksController < ApplicationController
     search_books_keyword = params[:searchBooksKeyword]
     books = Book.includes(:reviews, :favorite_books)
                 .with_attached_image
-                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite")
+                .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = #{current_user_id}) AS check_favorite, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count")
                 .where("name LIKE ?", "%#{search_books_keyword}%")
                 .or(Book.where("author LIKE ?", "%#{search_books_keyword}%"))
                 .or(Book.where("publisher LIKE ?", "%#{search_books_keyword}%"))
