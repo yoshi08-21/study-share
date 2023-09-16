@@ -20,6 +20,9 @@
       <br><br>
       <v-text-field counter label="名前" :rules="nameRules" v-model="editedName" data-cy="edit-name-field"></v-text-field>
       <v-textarea outlined counter label="自己紹介" :rules="contentRules" v-model="editedIntroduction" data-cy="edit-introduction-field"></v-textarea>
+
+      <br>
+      *大学名は国立・私立などを除いた正式名称で入力してください  例） ◯東京大学 | ☓東大 ☓国立東京大学
       <v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool" data-cy="edit-first-choice-school-field"></v-text-field>
       <v-text-field counter label="第二志望" :rules="schoolNameRules" v-model="editedSecondChoiceSchool" data-cy="edit-second-choice-school-field"></v-text-field>
       <v-text-field counter label="第三志望" :rules="schoolNameRules" v-model="editedThirdChoiceSchool" data-cy="edit-third-choice-school-field"></v-text-field>
@@ -29,6 +32,7 @@
           {{ errorMessage }}
         </v-alert>
       </template>
+      <br>
       <v-row>
         <v-col cols="3" class="align-start custom-button-margin">
           <template v-if="error === true">

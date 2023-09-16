@@ -55,7 +55,9 @@
     <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" style="height: 100vh;">
       <v-main>
         <v-container>
+
           <Nuxt />
+
           <v-btn
             v-if="currentUser"
             @click="showUserMemo = true"
@@ -373,6 +375,16 @@ export default {
 
 body .v-toolbar--prominent .v-toolbar__content {
     align-items: center;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
 }
 
 
