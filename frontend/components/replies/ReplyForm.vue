@@ -39,12 +39,14 @@
 <script>
 import { VTextarea } from "vuetify/lib"
 import SubmitButton from "../global/SubmitButton.vue"
+import sharedMethods from "../../mixins/sharedMethods"
 
 export default {
   components: {
     VTextarea,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       content: "",
@@ -61,18 +63,6 @@ export default {
     submitForm() {
       this.$emit("submitReply", { content: this.content, image: this.selectedFile })
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file && file.size > maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    }
-
   }
 }
 </script>

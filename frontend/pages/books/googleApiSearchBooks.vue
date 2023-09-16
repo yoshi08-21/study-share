@@ -14,11 +14,14 @@
                   dense
                   label="参考書を検索"
                   data-cy="google-books-api-search-books"
+                  @keydown.enter="searchBooks"
+                  @compositionstart="isInputBeingConverted = true"
+                  @compositionend="isInputBeingConverted = false"
                 >
                 </v-text-field>
               </v-col>
               <v-col cols="1">
-                <v-btn @click="searchBooks(keyword)" data-cy="google-books-api-search-button">検索</v-btn>
+                <v-btn @click="searchBooks" data-cy="google-books-api-search-button">検索</v-btn>
               </v-col>
             </v-row>
           </v-card-title>
@@ -253,7 +256,7 @@ export default {
           subcategories: ["過去問", "小論文", "その他科目"]
         },
       ],
-
+      isInputBeingConverted: false,
     }
   },
   computed: {
@@ -270,36 +273,38 @@ export default {
     },
   },
   methods: {
-    async searchBooks(keyword) {
+    async searchBooks() {
       try {
-        this.searchResults = []
-        const baseUrl = "https://www.googleapis.com/books/v1/volumes?"
-        const params = {
-          q: `intitle:${keyword}`,
-          maxResults: 40
-        }
-        const queryParams = new URLSearchParams(params)
-        const response = await fetch(baseUrl + queryParams)
-        const data = await response.json()
+        if(this.isInputBeingConverted === false) {
+          this.searchResults = []
+          const baseUrl = "https://www.googleapis.com/books/v1/volumes?"
+          const params = {
+            q: `intitle:${this.keyword}`,
+            maxResults: 40
+          }
+          const queryParams = new URLSearchParams(params)
+          const response = await fetch(baseUrl + queryParams)
+          const data = await response.json()
 
-        console.log(data)
-        console.log(response)
-        for (const book of data.items) {
-          const name = book.volumeInfo.title
-          const author = book.volumeInfo.author
-          const publisher = book.volumeInfo.publisher
-          const imageUrl = book.volumeInfo.imageLinks
-          const description = book.volumeInfo.description
-          this.searchResults.push({
-            name: name || "不明",
-            author: author || "不明",
-            publisher: publisher || "不明",
-            imageUrl : imageUrl ? imageUrl.thumbnail : "",
-            description: description ? description.slice(0, 40) : "",
-            fullDescription: description ? description.slice(0, 1000) : ""
-          })
+          console.log(data)
+          console.log(response)
+          for (const book of data.items) {
+            const name = book.volumeInfo.title
+            const author = book.volumeInfo.author
+            const publisher = book.volumeInfo.publisher
+            const imageUrl = book.volumeInfo.imageLinks
+            const description = book.volumeInfo.description
+            this.searchResults.push({
+              name: name || "不明",
+              author: author || "不明",
+              publisher: publisher || "不明",
+              imageUrl : imageUrl ? imageUrl.thumbnail : "",
+              description: description ? description.slice(0, 40) : "",
+              fullDescription: description ? description.slice(0, 1000) : ""
+            })
+          }
+          this.page = 1
         }
-        this.page = 1
       } catch(error) {
         console.log(error)
         throw error

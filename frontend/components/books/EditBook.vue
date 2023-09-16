@@ -74,6 +74,7 @@
 <script>
 import { VTextField } from "vuetify/lib"
 import SubmitButton from "../global/SubmitButton.vue"
+import sharedMethods from "../../mixins/sharedMethods"
 
 export default {
   props: {
@@ -87,6 +88,7 @@ export default {
     VTextField,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       editedName: this.name,
@@ -144,17 +146,6 @@ export default {
   methods: {
     submitForm() {
       this.$emit("submitBook", { name: this.editedName, author: this.editedAuthor, publisher: this.editedPublisher, subject: this.editedSubject, image: this.selectedFile, description: this.editedDescription })
-    },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file && file.size > maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
     },
   }
 }
