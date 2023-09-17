@@ -270,9 +270,6 @@ export default {
     }
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters["auth/getLoggedIn"]
-    },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications
     },
