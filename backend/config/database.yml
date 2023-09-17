@@ -2,21 +2,22 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: "6seogFFOEKgi%%hu245134KGlad"
-  host: localhost
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+
 
 development:
   <<: *default
-  database: spa_portfolio_development
+  database: <%= ENV["DEV_DATABASE_NAME"] %>
 
 test:
   <<: *default
-  database: spa_portfolio_test
+  database: <%= ENV["TEST_DATABASE_NAME"] %>
 
 production:
   <<: *default
-  database: spa_portfolio_production
-  username: backend
-  password: <%= ENV['BACKEND_DATABASE_PASSWORD'] %>
+  database: <%= ENV["PROD_DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
 
