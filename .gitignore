@@ -53,6 +53,7 @@ frontend/.eslintcache
 
 backend/log/test.log
 backend/config/master.key
+backend/.env
 
 frontend/coverage
 
