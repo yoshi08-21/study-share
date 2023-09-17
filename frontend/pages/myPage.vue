@@ -336,6 +336,7 @@ import EachSubjectQuestions from '../components/subjectQuestions/EachSubjectQues
 import EachSubjectQuestionReplies from '../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import EachSurveys from '../components/surveys/EachSurveys.vue'
 import userComputed from "../mixins/userComputed"
+import flashMessage from "../mixins/flashMessage"
 
 import axios from "@/plugins/axios"
 
@@ -344,7 +345,7 @@ import axios from "@/plugins/axios"
 export default {
   components: { EditUser, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   middleware: authCheck,
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData({ store }) {
     try {
       let currentUserId = null
@@ -377,9 +378,6 @@ export default {
   },
   data() {
     return {
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       dialog: false,
       updatedUser: {},
       tab: 0,
@@ -444,14 +442,6 @@ export default {
     surveysTotalPages() {
       return Math.ceil(this.mySurveys.length / this.perPage);
     },
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
-    }
   },
   methods: {
     async editUser(data) {

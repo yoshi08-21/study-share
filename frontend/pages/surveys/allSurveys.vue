@@ -114,11 +114,13 @@
 import SurveyForm from '../../components/surveys/SurveyForm.vue'
 import EachSurveys from '../../components/surveys/EachSurveys.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyForm, EachSurveys },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData() {
     const response = await axios.get("/surveys")
     console.log(response.data)
@@ -129,9 +131,6 @@ export default {
   data() {
     return {
       dialog: false,
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       sortsurveysOptions: ["新着順", "投稿順", "回答が多い順", "いいね!が多い順"],
       surveyGenreOptions: ["国語", "社会", "数学", "英語", "理科", "参考書", "進路・大学", "その他"],
       selectedSortOption: "",
@@ -165,14 +164,6 @@ export default {
       return Math.ceil(this.activeSurveysBasedOnHideClosed.length / this.perPage);
     },
 
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
-    }
   },
   methods: {
     async submitSurvey(data) {

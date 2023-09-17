@@ -32,11 +32,14 @@
 <script>
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
-import axios from "../../plugins/axios";
 import isLoggedIn from "../../middleware/isLoggedIn"
+import flashMessage from "../../mixins/flashMessage";
+
+import axios from "../../plugins/axios";
 
 export default {
   middleware: isLoggedIn,
+  mixins: [flashMessage],
   watch: {
     "$route.query.message"(newValue, oldValue) {
       if(newValue !== oldValue) {
@@ -51,9 +54,6 @@ export default {
       email: "",
       password: "",
       user: {},
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       emailRules: [
         value => !!value || "メールアドレスを入力してください",
         value => (value || '').length <= 250 || "最大入力文字数は250文字です",
@@ -120,14 +120,6 @@ export default {
 
 
   },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-    }
-  },
-
 }
 </script>
 

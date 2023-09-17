@@ -387,12 +387,13 @@ import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyResultLinears, FavoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData({ params, store }) {
     try {
 
@@ -430,9 +431,6 @@ export default {
   },
   data() {
     return {
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       showDeleteConfirmation: false,
       closeSurveyConfimation: false,
       existAnswer: false,
@@ -524,13 +522,6 @@ export default {
       this.favoriteSurveyId = isFavoriteResponse.data.favorite_survey_id
     } catch (error) {
       console.log(error)
-    }
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
     }
   },
   methods: {

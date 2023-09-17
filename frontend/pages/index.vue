@@ -157,12 +157,14 @@
 <script>
 import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
 import userComputed from '../mixins/userComputed'
+import flashMessage from '../mixins/flashMessage'
+
 import axios from "../plugins/axios"
 
 
 export default {
   components: { TopPageEachBooks },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   name: 'IndexPage',
   async asyncData({ store }) {
     try {
@@ -213,22 +215,13 @@ export default {
       user: "",
       error: "",
       newReviews: [],
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       length: 3,
       window: 0,
       cypressUser: {},
     }
   },
   mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-    }
     this.$parent.showSpecialHeader = true
-
   },
   created() {
     this.$store.commit("header/setShowSpecialHeader", true)

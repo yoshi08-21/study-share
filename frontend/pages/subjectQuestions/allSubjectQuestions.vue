@@ -122,12 +122,13 @@
 import SubjectQuestionForm from '../../components/subjectQuestions/SubjectQuestionForm.vue'
 import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQuestions.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { SubjectQuestionForm, EachSubjectQuestions },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData() {
     try {
       const responce = await axios.get("/subject_questions")
@@ -143,9 +144,6 @@ export default {
   data() {
     return {
       dialog: false,
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       perPage: 10,
       page: 1,
       searchSubjectQuestionsKeyword: "",
@@ -177,13 +175,6 @@ export default {
     totalPages() {
       return Math.ceil(this.sortedQuestions.length / this.perPage);
     },
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-    }
   },
   methods: {
     async submitSubjectQuestion(data) {
