@@ -143,11 +143,13 @@
 </template>
 
 <script>
+import userComputed from '../../mixins/userComputed'
+
 export default {
   props: {
     currentUser: Object,
-
   },
+  mixins: [userComputed],
   data() {
     return {
       drawer: false,
@@ -161,9 +163,6 @@ export default {
     }
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters["auth/getLoggedIn"]
-    },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications
     },

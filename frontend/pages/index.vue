@@ -221,18 +221,11 @@ export default {
       cypressUser: {},
     }
   },
-  computed: {
-    // ...mapGetters(["auth/getLoggedIn"]),
-    isLoggedIn() {
-      return this.$store.getters["auth/getLoggedIn"]
-    },
-  },
   mounted() {
     if (this.$route.query.message) {
       this.snackbarColor = "primary"
       this.snackbar = true
       this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
     }
     this.$parent.showSpecialHeader = true
 
@@ -252,8 +245,6 @@ export default {
       }
     },
   },
-
-
 }
 
 </script>
