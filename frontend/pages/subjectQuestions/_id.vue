@@ -226,12 +226,13 @@ import DeleteConfirmationDialog from '../../components/global/DeleteConfirmation
 import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
 import userComputed from '../../mixins/userComputed'
 import flashMessage from '../../mixins/flashMessage'
+import navigationMethods from '../../mixins/navigationMethods'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog, ShowFullImageDialog },
-  mixins: [userComputed, flashMessage],
+  mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -314,13 +315,6 @@ export default {
     }
   },
   methods: {
-    goToUser() {
-      if(this.currentUser.id !== this.user.id ) {
-        this.$router.push({ path: `/users/${this.user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
     async editSubjectQuestion(data) {
       const formData = new FormData()
 

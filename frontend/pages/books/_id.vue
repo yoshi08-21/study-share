@@ -105,7 +105,7 @@
       <v-row style="height: 100%;">
         <v-col cols="6" class="d-flex justify-center align-center">
           <v-btn
-            @click="openDialog"
+            @click="openReviewDialog"
             x-large
             color="success"
             width="400"
@@ -158,7 +158,7 @@
     </delete-confirmation-dialog>
 
     <!-- 新規レビュー投稿ダイアログ -->
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="reviewDialog">
       <v-card>
         <v-card-title style="justify-content: center;">
           <h2>レビューを投稿する</h2>
@@ -314,7 +314,7 @@ export default {
       book: null,
       isFavorite: false,
       favoriteBookId: "",
-      dialog: false,
+      reviewDialog: false,
       reviews: [],
       perPage: 10,
       page: 1,
@@ -455,9 +455,9 @@ export default {
       }
       this.questionDialog = false
     },
-    openDialog() {
+    openReviewDialog() {
       if(this.currentUser) {
-        this.dialog = true
+        this.reviewDialog = true
       } else {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
@@ -519,10 +519,6 @@ export default {
         this.showDeleteConfirmation = false
       }
     },
-    redirectToBooks() {
-      this.$router.push({ path: `/books/allBooks` })
-    },
-
   }
 }
 </script>

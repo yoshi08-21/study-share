@@ -155,6 +155,7 @@ import ContentNavigator from '../../../../components/global/ContentNavigator.vue
 import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
 import userComputed from '../../../../mixins/userComputed'
 import flashMessage from '../../../../mixins/flashMessage'
+import navigationMethods from '../../../../mixins/navigationMethods'
 
 import axios from "@/plugins/axios"
 
@@ -166,7 +167,7 @@ export default {
     ContentNavigator,
     DeleteConfirmationDialog,
   },
-  mixins: [userComputed, flashMessage],
+  mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -273,13 +274,6 @@ export default {
         this.snackbar = true
         this.flashMessage = "レビューを削除できませんでした"
         this.dialog = false
-      }
-    },
-    goToUser() {
-      if( !this.currentUser || this.currentUser.id !== this.user.id ) {
-        this.$router.push({ path: `/users/${this.user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
       }
     },
     async addToFavorite() {
