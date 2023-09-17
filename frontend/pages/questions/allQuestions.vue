@@ -105,10 +105,13 @@
 <script>
 
 import EachQuestions from '../../components/questions/EachQuestions.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { EachQuestions },
+  mixins: [userComputed],
   async asyncData() {
     try {
       const responce = await axios.get("/questions/all_questions")
@@ -141,9 +144,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     subjectFilteredQuestions() {
       return this.filterQuestions()
     },

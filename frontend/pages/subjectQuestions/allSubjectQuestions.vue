@@ -121,10 +121,13 @@
 
 import SubjectQuestionForm from '../../components/subjectQuestions/SubjectQuestionForm.vue'
 import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQuestions.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { SubjectQuestionForm, EachSubjectQuestions },
+  mixins: [userComputed],
   async asyncData() {
     try {
       const responce = await axios.get("/subject_questions")
@@ -160,9 +163,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     subjectFilteredQuestions() {
       return this.filterQuestions()
     },

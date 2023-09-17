@@ -335,6 +335,8 @@ import EachReplies from '../components/replies/EachReplies.vue'
 import EachSubjectQuestions from '../components/subjectQuestions/EachSubjectQuestions.vue'
 import EachSubjectQuestionReplies from '../components/subjectQuestionReplies/EachSubjectQuestionReplies.vue'
 import EachSurveys from '../components/surveys/EachSurveys.vue'
+import userComputed from "../mixins/userComputed"
+
 import axios from "@/plugins/axios"
 
 
@@ -342,6 +344,7 @@ import axios from "@/plugins/axios"
 export default {
   components: { EditUser, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   middleware: authCheck,
+  mixins: [userComputed],
   async asyncData({ store }) {
     try {
       let currentUserId = null
@@ -393,9 +396,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     reviewsChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage

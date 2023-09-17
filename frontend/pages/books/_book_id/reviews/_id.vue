@@ -153,6 +153,8 @@ import BookInformation from '../../../../components/books/BookInformation.vue'
 import FavoriteButton from '../../../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
 import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
+import userComputed from '../../../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
@@ -163,6 +165,7 @@ export default {
     ContentNavigator,
     DeleteConfirmationDialog,
   },
+  mixins: [userComputed],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -209,11 +212,6 @@ export default {
       favoriteReviewId: "",
 
     }
-  },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
   },
   async created() {
     try {

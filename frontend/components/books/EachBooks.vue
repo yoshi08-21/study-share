@@ -87,12 +87,14 @@
 
 <script>
 
+import userComputed from "../../mixins/userComputed"
 import axios from "@/plugins/axios"
 
 export default {
   props: {
     books: [],
   },
+  mixins: [userComputed],
   data() {
     return {
       snackbar: false,
@@ -100,11 +102,6 @@ export default {
       flashMessage: "テストメッセージ",
 
     }
-  },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
   },
   methods: {
     async addToFavorites(book, event) {

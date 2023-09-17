@@ -386,10 +386,13 @@ import FavoriteButton from '../../components/global/FavoriteButton.vue'
 import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyResultLinears, FavoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
+  mixins: [userComputed],
   async asyncData({ params, store }) {
     try {
 
@@ -440,9 +443,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     totalAnswersCount() {
       return this.surveyAnswers.length
     },

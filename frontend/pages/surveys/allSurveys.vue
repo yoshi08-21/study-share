@@ -113,10 +113,12 @@
 <script>
 import SurveyForm from '../../components/surveys/SurveyForm.vue'
 import EachSurveys from '../../components/surveys/EachSurveys.vue'
+import userComputed from '../../mixins/userComputed'
 import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyForm, EachSurveys },
+  mixins: [userComputed],
   async asyncData() {
     const response = await axios.get("/surveys")
     console.log(response.data)
@@ -140,9 +142,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     genreFilteredSurveys() {
       return this.filterSurveys()
     },

@@ -129,10 +129,13 @@
 
 import EachBooks from '../../components/books/EachBooks.vue'
 import BookForm from '../../components/books/BookForm.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { EachBooks, BookForm },
+  mixins: [userComputed],
   async asyncData({ store }) {
     try {
       const response = await axios.get("/books", {
@@ -173,9 +176,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     subjectFilteredBooks() {
       return this.filterBooks()
     },

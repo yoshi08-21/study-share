@@ -215,9 +215,11 @@
 
 <script>
 
+import userComputed from "../../mixins/userComputed"
 import axios from "@/plugins/axios"
 
 export default {
+  mixins: [userComputed],
   data() {
     return {
       keyword: "",
@@ -260,9 +262,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     booksChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
