@@ -256,6 +256,7 @@ import BookQuestions from '../../components/questions/BookQuestions.vue'
 import EditBook from '../../components/books/EditBook.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
@@ -272,7 +273,7 @@ export default {
     EditBook,
     DeleteConfirmationDialog
   },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -313,9 +314,6 @@ export default {
       book: null,
       isFavorite: false,
       favoriteBookId: "",
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       dialog: false,
       reviews: [],
       perPage: 10,
@@ -368,13 +366,6 @@ export default {
       this.favoriteBookId = response.data.favorite_book_id
     } catch(error) {
       console.log(error)
-    }
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
     }
   },
   methods: {

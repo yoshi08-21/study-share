@@ -2,7 +2,7 @@ export default {
   data() {
     return {
       snackbar: false,
-      snackbarColor: "",
+      snackbarColor: "primary",
       flashMessage: ""
     };
   },

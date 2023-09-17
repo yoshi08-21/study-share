@@ -229,12 +229,13 @@ import ContentNavigator from '../../../../components/global/ContentNavigator.vue
 import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
 import ShowFullImageDialog from '../../../../components/global/ShowFullImageDialog.vue'
 import userComputed from '../../../../mixins/userComputed'
+import flashMessage from '../../../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { EditQuestion, QuestionReplies, ReplyForm, BookInformation, favoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -276,9 +277,6 @@ export default {
     return {
       dialog: false,
       showDeleteConfirmation: false,
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       isFavorite: false,
       favoriteQuestionId: "",
       replyDialog: false,
@@ -317,13 +315,6 @@ export default {
       this.favoriteQuestionId = response.data.favorite_question_id
     } catch(error) {
       console.log(error)
-    }
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
     }
   },
   methods: {

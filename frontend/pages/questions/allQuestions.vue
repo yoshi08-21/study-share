@@ -106,12 +106,13 @@
 
 import EachQuestions from '../../components/questions/EachQuestions.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { EachQuestions },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData() {
     try {
       const responce = await axios.get("/questions/all_questions")
@@ -140,7 +141,6 @@ export default {
       ],
       selectedSortOption: "",
       selectedQuestionsSubject: ""
-
     }
   },
   computed: {
@@ -159,13 +159,6 @@ export default {
     totalPages() {
       return Math.ceil(this.sortedQuestions.length / this.perPage);
     },
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-    }
   },
   methods:{
     searchQuestions() {

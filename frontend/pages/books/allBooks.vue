@@ -130,12 +130,13 @@
 import EachBooks from '../../components/books/EachBooks.vue'
 import BookForm from '../../components/books/BookForm.vue'
 import userComputed from '../../mixins/userComputed'
+import flashMessage from '../../mixins/flashMessage'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { EachBooks, BookForm },
-  mixins: [userComputed],
+  mixins: [userComputed, flashMessage],
   async asyncData({ store }) {
     try {
       const response = await axios.get("/books", {
@@ -154,9 +155,6 @@ export default {
   },
   data() {
     return {
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       dialog: false,
       perPage: 10,
       page: 1,
@@ -191,13 +189,6 @@ export default {
     totalPages() {
       return Math.ceil(this.sortedBooks.length / this.perPage);
     },
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-    }
   },
   methods: {
     async submitBook(data) {
