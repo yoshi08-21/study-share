@@ -186,6 +186,7 @@ import checkResourceExistence from "../middleware/checkResourceExistence"
 import NormalHeader from '../components/global/NormalHeader.vue'
 import SpecialHeader from '../components/global/SpecialHeader.vue'
 import SubmitButton from '../components//global/SubmitButton.vue'
+import userComputed from '../mixins/userComputed'
 import axios from "@/plugins/axios"
 
 
@@ -193,6 +194,7 @@ export default {
   components: { NormalHeader, SpecialHeader, SubmitButton },
   name: 'DefaultLayout',
   middleware: [checkNotifications, redirectNotFound, checkResourceExistence],
+  mixins: [userComputed],
   // ログアウト→ログイン時にユーザーメモが更新されるようにする
   watch: {
     "currentUser"(newValue, oldValue) {
@@ -270,9 +272,6 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters["auth/getLoggedIn"]
-    },
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
     },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications

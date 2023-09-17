@@ -71,16 +71,14 @@
 </template>
 
 <script>
+import userComputed from '../../mixins/userComputed'
+
 export default {
   props: {
     surveys: [],
     hideClosedSurvey: Boolean,
   },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
-  },
+  mixins: [userComputed],
   methods: {
     goToUser(user) {
       if( !this.currentUser || this.currentUser.id !== user.id ) {

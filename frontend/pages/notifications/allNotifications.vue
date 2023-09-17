@@ -133,10 +133,13 @@ import authCheck from '../../middleware/authCheck'
 import AnswerToSurveyNotification from '../../components/notifications/AnswerToSurveyNotification.vue'
 import FavoriteNotification from '../../components/notifications/FavoriteNotification.vue'
 import ReplyNotification from '../../components/notifications/ReplyNotification.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   middleware: authCheck,
+  mixins: [userComputed],
   components: {
     AnswerToSurveyNotification,
     FavoriteNotification,
@@ -175,9 +178,6 @@ export default {
     },
     totalPages() {
       return Math.ceil(this.notifications.length / this.perPage);
-    },
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
     },
   },
   methods: {

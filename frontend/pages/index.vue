@@ -156,11 +156,13 @@
 
 <script>
 import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
+import userComputed from '../mixins/userComputed'
 import axios from "../plugins/axios"
 
 
 export default {
   components: { TopPageEachBooks },
+  mixins: [userComputed],
   name: 'IndexPage',
   async asyncData({ store }) {
     try {
@@ -223,9 +225,6 @@ export default {
     // ...mapGetters(["auth/getLoggedIn"]),
     isLoggedIn() {
       return this.$store.getters["auth/getLoggedIn"]
-    },
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
     },
   },
   mounted() {

@@ -224,10 +224,13 @@ import ContentNavigator from '../../components/global/ContentNavigator.vue'
 import SubjectQuestionSubjectQuestionReplies from '../../components/subjectQuestionReplies/SubjectQuestionSubjectQuestionReplies.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
 import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
+import userComputed from '../../mixins/userComputed'
+
 import axios from "@/plugins/axios"
 
 export default {
   components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog, ShowFullImageDialog },
+  mixins: [userComputed],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -281,9 +284,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     subjectQuestionReplyChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage

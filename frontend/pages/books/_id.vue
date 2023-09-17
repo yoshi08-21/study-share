@@ -255,6 +255,7 @@ import BookReviews from '../../components/reviews/BookReviews.vue'
 import BookQuestions from '../../components/questions/BookQuestions.vue'
 import EditBook from '../../components/books/EditBook.vue'
 import DeleteConfirmationDialog from '../../components/global/DeleteConfirmationDialog.vue'
+import userComputed from '../../mixins/userComputed'
 
 import axios from "@/plugins/axios"
 
@@ -271,6 +272,7 @@ export default {
     EditBook,
     DeleteConfirmationDialog
   },
+  mixins: [userComputed],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -330,9 +332,6 @@ export default {
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     reviewsChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage

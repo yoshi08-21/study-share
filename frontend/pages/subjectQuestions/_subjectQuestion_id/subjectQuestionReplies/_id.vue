@@ -211,11 +211,13 @@
 import EditReply from '../../../../components/replies/EditReply.vue'
 import ContentNavigator from '../../../../components/global/ContentNavigator.vue'
 import DeleteConfirmationDialog from '../../../../components/global/DeleteConfirmationDialog.vue'
+import userComputed from '../../../../mixins/userComputed'
 import axios from "@/plugins/axios"
 
 
 export default {
   components: { EditReply, ContentNavigator, DeleteConfirmationDialog },
+  mixins: [userComputed],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -259,11 +261,6 @@ export default {
       favoriteSubjectQuestionReplyId: "",
       showFullImage: false,
     }
-  },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
   },
   async created() {
     try {
