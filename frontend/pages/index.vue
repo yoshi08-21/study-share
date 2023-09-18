@@ -158,13 +158,14 @@
 import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
 import userComputed from '../mixins/userComputed'
 import flashMessage from '../mixins/flashMessage'
+import navigationMethods from '../mixins/navigationMethods'
 
 import axios from "../plugins/axios"
 
 
 export default {
   components: { TopPageEachBooks },
-  mixins: [userComputed, flashMessage],
+  mixins: [userComputed, flashMessage, navigationMethods],
   name: 'IndexPage',
   async asyncData({ store }) {
     try {
@@ -228,15 +229,6 @@ export default {
   },
   beforeDestroy() {
     this.$store.commit("header/setShowSpecialHeader", false)
-  },
-  methods: {
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
   },
 }
 

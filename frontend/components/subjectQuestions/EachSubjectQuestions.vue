@@ -79,24 +79,17 @@
 
 <script>
 import userComputed from '../../mixins/userComputed'
+import navigationMethods from '../../mixins/navigationMethods'
 
 export default {
   props: {
     subjectQuestions: [],
   },
-  mixins: [userComputed],
+  mixins: [userComputed, navigationMethods],
   methods: {
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
     selectSubject(subject) {
       this.$emit("selectSubject", subject)
     }
-
   }
 
 }

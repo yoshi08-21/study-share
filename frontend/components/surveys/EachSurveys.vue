@@ -38,7 +38,7 @@
                 <v-card-actions style="margin-top: -10px;">
                   <v-row class="d-flex align-center justify-center">
                     <v-col cols="3">
-                      <div @click="goToUser(survey.user)" style="padding: 10px;">
+                      <div @click="goToUser(survey.user)" style="padding: 10px; cursor: pointer;">
                       <v-avatar>
                         <v-img :src="survey.user.image"></v-img>
                       </v-avatar>
@@ -72,24 +72,14 @@
 
 <script>
 import userComputed from '../../mixins/userComputed'
+import navigationMethods from '../../mixins/navigationMethods'
 
 export default {
   props: {
     surveys: [],
     hideClosedSurvey: Boolean,
   },
-  mixins: [userComputed],
-  methods: {
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
-
-  }
-
+  mixins: [userComputed, navigationMethods],
 }
 </script>
 
