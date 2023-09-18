@@ -388,12 +388,13 @@ import DeleteConfirmationDialog from '../../components/global/DeleteConfirmation
 import ShowFullImageDialog from '../../components/global/ShowFullImageDialog.vue'
 import userComputed from '../../mixins/userComputed'
 import flashMessage from '../../mixins/flashMessage'
+import navigationMethods from '../../mixins/navigationMethods'
 
 import axios from "@/plugins/axios"
 
 export default {
   components: { SurveyResultLinears, FavoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
-  mixins: [userComputed, flashMessage],
+  mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {
     try {
 
@@ -692,14 +693,6 @@ export default {
         this.flashMessage = "最初のアンケートです"
       }
     },
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
-
   }
 
 }

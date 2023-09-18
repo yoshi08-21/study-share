@@ -164,7 +164,7 @@
           <h2>レビューを投稿する</h2>
         </v-card-title>
         <v-card-text>
-          <review-form @submitReview="submitReview" @closeDialog="dialog = false"></review-form>
+          <review-form @submitReview="submitReview" @closeDialog="reviewDialog = false"></review-form>
         </v-card-text>
       </v-card>
     </v-dialog>

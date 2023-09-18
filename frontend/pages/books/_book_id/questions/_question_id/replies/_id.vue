@@ -232,13 +232,14 @@ import ContentNavigator from '../../../../../../components/global/ContentNavigat
 import DeleteConfirmationDialog from '../../../../../../components/global/DeleteConfirmationDialog.vue'
 import userComputed from '../../../../../../mixins/userComputed'
 import flashMessage from '../../../../../../mixins/flashMessage'
+import navigationMethods from '../../../../../../mixins/navigationMethods'
 
 import axios from "@/plugins/axios"
 
 
 export default {
   components: { EditReply, ContentNavigator, DeleteConfirmationDialog },
-  mixins: [userComputed, flashMessage],
+  mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {
     try {
       let currentUserId = null
@@ -303,13 +304,6 @@ export default {
     }
   },
   methods: {
-    goToUser(user) {
-      if(this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
     async editReply(data) {
       const formData = new FormData()
 
