@@ -5,7 +5,7 @@ app_path = File.expand_path('../../', __FILE__)
 worker_processes 1
 
 #アプリケーションの設置されているディレクトリを指定
-working_directory "/Users/yoshito-t/Desktop/spa-portfolio-app/backend"
+working_directory "/var/www/spa-portfolio/backend"
 
 #Unicornの起動に必要なファイルの設置場所を指定
 pid "/Users/yoshito-t/Desktop/spa-portfolio-app/backend/tmp/pids/unicorn.pid"
