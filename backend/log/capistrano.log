@@ -1,0 +1,163 @@
+# Logfile created on 2023-09-20 07:19:17 +0900 by logger.rb/v1.4.3
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-20 07:19:17 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [aeb1beab] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [aeb1beab] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [aeb1beab] Finished in 1.402 seconds with exit status 0 (successful).
+  INFO [aa1d1055] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [aa1d1055] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [aa1d1055] Finished in 0.610 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-154ce2b757642a58bc33.sh 0.0%
+  INFO Uploading /tmp/git-ssh-154ce2b757642a58bc33.sh 100.0%
+  INFO [41084439] Running /usr/bin/env chmod 700 /tmp/git-ssh-154ce2b757642a58bc33.sh as ec2-user@3.115.171.176
+ DEBUG [41084439] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-154ce2b757642a58bc33.sh )
+  INFO [41084439] Finished in 0.776 seconds with exit status 0 (successful).
+  INFO [59274537] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [59274537] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-154ce2b757642a58bc33.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [59274537] 	ec77374b156534f5ab2c2944392d441c830ce3e5	HEAD
+  INFO [59274537] Finished in 2.878 seconds with exit status 0 (successful).
+  INFO [59e0ba63] Running /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases as ec2-user@3.115.171.176
+ DEBUG [59e0ba63] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases )
+  INFO [59e0ba63] Finished in 0.661 seconds with exit status 0 (successful).
+  INFO [42418857] Running /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [42418857] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets )
+  INFO [42418857] Finished in 0.745 seconds with exit status 0 (successful).
+  INFO [0a100305] Running /usr/bin/env mkdir -p /var/www/study_share/shared/config as ec2-user@3.115.171.176
+ DEBUG [0a100305] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/config )
+  INFO [0a100305] Finished in 0.717 seconds with exit status 0 (successful).
+ DEBUG [54715d15] Running [ -f /var/www/study_share/shared/config/master.key ] as ec2-user@3.115.171.176
+ DEBUG [54715d15] Command: [ -f /var/www/study_share/shared/config/master.key ]
+ DEBUG [54715d15] Finished in 0.662 seconds with exit status 1 (failed).
+ ERROR linked file /var/www/study_share/shared/config/master.key does not exist on 3.115.171.176
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-20 07:47:18 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [b3e7cf82] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [b3e7cf82] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [b3e7cf82] Finished in 1.030 seconds with exit status 0 (successful).
+  INFO [060c3883] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [060c3883] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [060c3883] Finished in 0.713 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-7f768a103de2ba3f90cf.sh 0.0%
+  INFO Uploading /tmp/git-ssh-7f768a103de2ba3f90cf.sh 100.0%
+  INFO [a0a67269] Running /usr/bin/env chmod 700 /tmp/git-ssh-7f768a103de2ba3f90cf.sh as ec2-user@3.115.171.176
+ DEBUG [a0a67269] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-7f768a103de2ba3f90cf.sh )
+  INFO [a0a67269] Finished in 0.689 seconds with exit status 0 (successful).
+  INFO [faf154ff] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [faf154ff] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-7f768a103de2ba3f90cf.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [faf154ff] 	ec77374b156534f5ab2c2944392d441c830ce3e5	HEAD
+  INFO [faf154ff] Finished in 2.750 seconds with exit status 0 (successful).
+  INFO [f4464264] Running /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases as ec2-user@3.115.171.176
+ DEBUG [f4464264] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases )
+  INFO [f4464264] Finished in 0.703 seconds with exit status 0 (successful).
+  INFO [18bb8d29] Running /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [18bb8d29] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets )
+  INFO [18bb8d29] Finished in 0.712 seconds with exit status 0 (successful).
+  INFO [743c204c] Running /usr/bin/env mkdir -p /var/www/study_share/shared/config as ec2-user@3.115.171.176
+ DEBUG [743c204c] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/config )
+  INFO [743c204c] Finished in 0.713 seconds with exit status 0 (successful).
+ DEBUG [affd970d] Running [ -f /var/www/study_share/shared/config/master.key ] as ec2-user@3.115.171.176
+ DEBUG [affd970d] Command: [ -f /var/www/study_share/shared/config/master.key ]
+ DEBUG [affd970d] Finished in 0.715 seconds with exit status 1 (failed).
+ ERROR linked file /var/www/study_share/shared/config/master.key does not exist on 3.115.171.176
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-20 08:00:45 +0900 cap production puma:config
+  INFO ---------------------------------------------------------------------------
+ DEBUG [eaa781cd] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [eaa781cd] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [eaa781cd] Finished in 1.079 seconds with exit status 0 (successful).
+ DEBUG Uploading /var/www/study_share/shared/puma.rb 0.0%
+  INFO Uploading /var/www/study_share/shared/puma.rb 100.0%
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-20 08:00:55 +0900 cap production puma:systemd:config puma:systemd:enable
+  INFO ---------------------------------------------------------------------------
+ DEBUG [380d6202] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [380d6202] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [380d6202] Finished in 1.047 seconds with exit status 0 (successful).
+ DEBUG [9ae79761] Running /usr/bin/env echo $HOME/.rbenv/bin/rbenv exec bundle as ec2-user@3.115.171.176
+ DEBUG [9ae79761] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env echo $HOME/.rbenv/bin/rbenv exec bundle )
+ DEBUG [9ae79761] 	/home/ec2-user/.rbenv/bin/rbenv exec bundle
+ DEBUG [9ae79761] Finished in 0.713 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/puma_study_share_production.service 0.0%
+  INFO Uploading /tmp/puma_study_share_production.service 100.0%
+  INFO [7cb8a67c] Running /usr/bin/env sudo mv /tmp/puma_study_share_production.service /etc/systemd/system/ as ec2-user@3.115.171.176
+ DEBUG [7cb8a67c] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env sudo mv /tmp/puma_study_share_production.service /etc/systemd/system/ )
+  INFO [7cb8a67c] Finished in 0.741 seconds with exit status 0 (successful).
+  INFO [84f093fa] Running /usr/bin/env sudo /bin/systemctl daemon-reload as ec2-user@3.115.171.176
+ DEBUG [84f093fa] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env sudo /bin/systemctl daemon-reload )
+  INFO [84f093fa] Finished in 0.920 seconds with exit status 0 (successful).
+  INFO [0e659834] Running /usr/bin/env sudo /bin/systemctl enable puma_study_share_production as ec2-user@3.115.171.176
+ DEBUG [0e659834] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env sudo /bin/systemctl enable puma_study_share_production )
+ DEBUG [0e659834] 	Created symlink from /etc/systemd/system/multi-user.target.wants/puma_study_share_production.service to /etc/systemd/system/puma_study_share_production.service.
+  INFO [0e659834] Finished in 0.773 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-20 08:03:34 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [a0387f8a] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [a0387f8a] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [a0387f8a] Finished in 1.095 seconds with exit status 0 (successful).
+  INFO [01dad395] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [01dad395] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [01dad395] Finished in 0.686 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-e12bb2d32e394e45ac55.sh 0.0%
+  INFO Uploading /tmp/git-ssh-e12bb2d32e394e45ac55.sh 100.0%
+  INFO [92fe3040] Running /usr/bin/env chmod 700 /tmp/git-ssh-e12bb2d32e394e45ac55.sh as ec2-user@3.115.171.176
+ DEBUG [92fe3040] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-e12bb2d32e394e45ac55.sh )
+  INFO [92fe3040] Finished in 0.689 seconds with exit status 0 (successful).
+  INFO [69045ef7] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [69045ef7] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [69045ef7] 	ec77374b156534f5ab2c2944392d441c830ce3e5	HEAD
+  INFO [69045ef7] Finished in 2.853 seconds with exit status 0 (successful).
+  INFO [a420af79] Running /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases as ec2-user@3.115.171.176
+ DEBUG [a420af79] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared /var/www/study_share/releases )
+  INFO [a420af79] Finished in 0.666 seconds with exit status 0 (successful).
+  INFO [fafa1cf2] Running /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [fafa1cf2] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/log /var/www/study_share/shared/tmp/pids /var/www/study_share/shared/tmp/cache /var/www/study_share/shared/tmp/sockets /var/www/study_share/shared/node_modules /var/www/study_share/shared/public/assets )
+  INFO [fafa1cf2] Finished in 0.648 seconds with exit status 0 (successful).
+  INFO [d41237b6] Running /usr/bin/env mkdir -p /var/www/study_share/shared/config as ec2-user@3.115.171.176
+ DEBUG [d41237b6] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/study_share/shared/config )
+  INFO [d41237b6] Finished in 0.718 seconds with exit status 0 (successful).
+ DEBUG [1461a450] Running [ -f /var/www/study_share/shared/config/master.key ] as ec2-user@3.115.171.176
+ DEBUG [1461a450] Command: [ -f /var/www/study_share/shared/config/master.key ]
+ DEBUG [1461a450] Finished in 0.714 seconds with exit status 0 (successful).
+ DEBUG [8b92c236] Running [ -f /var/www/study_share/shared/puma.rb ] as ec2-user@3.115.171.176
+ DEBUG [8b92c236] Command: [ -f /var/www/study_share/shared/puma.rb ]
+ DEBUG [8b92c236] Finished in 0.590 seconds with exit status 0 (successful).
+ DEBUG [0c74a805] Running [ -f /var/www/study_share/current/REVISION ] as ec2-user@3.115.171.176
+ DEBUG [0c74a805] Command: [ -f /var/www/study_share/current/REVISION ]
+ DEBUG [0c74a805] Finished in 0.739 seconds with exit status 1 (failed).
+ DEBUG [7670bf54] Running [ -f /var/www/study_share/repo/HEAD ] as ec2-user@3.115.171.176
+ DEBUG [7670bf54] Command: [ -f /var/www/study_share/repo/HEAD ]
+ DEBUG [7670bf54] Finished in 0.708 seconds with exit status 1 (failed).
+ DEBUG [566da0d5] Running if test ! -d /var/www/study_share; then echo "Directory does not exist '/var/www/study_share'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [566da0d5] Command: if test ! -d /var/www/study_share; then echo "Directory does not exist '/var/www/study_share'" 1>&2; false; fi
+ DEBUG [566da0d5] Finished in 0.719 seconds with exit status 0 (successful).
+  INFO [6ca6e1ea] Running /usr/bin/env git clone --mirror git@github.com:yoshi08-21/spa-portfolio-app.git /var/www/study_share/repo as ec2-user@3.115.171.176
+ DEBUG [6ca6e1ea] Command: cd /var/www/study_share && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env git clone --mirror git@github.com:yoshi08-21/spa-portfolio-app.git /var/www/study_share/repo )
+ DEBUG [6ca6e1ea] 	Cloning into bare repository '/var/www/study_share/repo'...
+  INFO [6ca6e1ea] Finished in 31.333 seconds with exit status 0 (successful).
+ DEBUG [5d40f306] Running if test ! -d /var/www/study_share/repo; then echo "Directory does not exist '/var/www/study_share/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [5d40f306] Command: if test ! -d /var/www/study_share/repo; then echo "Directory does not exist '/var/www/study_share/repo'" 1>&2; false; fi
+ DEBUG [5d40f306] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO [aecdfe3f] Running /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git as ec2-user@3.115.171.176
+ DEBUG [aecdfe3f] Command: cd /var/www/study_share/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git )
+  INFO [aecdfe3f] Finished in 0.718 seconds with exit status 0 (successful).
+  INFO [a6ae3a05] Running /usr/bin/env git remote update --prune as ec2-user@3.115.171.176
+ DEBUG [a6ae3a05] Command: cd /var/www/study_share/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env git remote update --prune )
+  INFO [a6ae3a05] Finished in 2.699 seconds with exit status 0 (successful).
+ DEBUG [e8de11ae] Running if test ! -d /var/www/study_share/repo; then echo "Directory does not exist '/var/www/study_share/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [e8de11ae] Command: if test ! -d /var/www/study_share/repo; then echo "Directory does not exist '/var/www/study_share/repo'" 1>&2; false; fi
+ DEBUG [e8de11ae] Finished in 0.877 seconds with exit status 0 (successful).
+  INFO [ef91777a] Running /usr/bin/env mkdir -p /var/www/study_share/releases/20230919230344 as ec2-user@3.115.171.176
+ DEBUG [ef91777a] Command: cd /var/www/study_share/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env mkdir -p /var/www/study_share/releases/20230919230344 )
+  INFO [ef91777a] Finished in 0.795 seconds with exit status 0 (successful).
+  INFO [11b6f435] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/study_share/releases/20230919230344 as ec2-user@3.115.171.176
+ DEBUG [11b6f435] Command: cd /var/www/study_share/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e12bb2d32e394e45ac55.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/study_share/releases/20230919230344 )
+ DEBUG [11b6f435] 	fatal: not a valid object name: master
+ DEBUG [11b6f435] 	tar: 
+ DEBUG [11b6f435] 	これは tar アーカイブではないようです
+ DEBUG [11b6f435] 	
+ DEBUG [11b6f435] 	tar: 
+ DEBUG [11b6f435] 	前のエラーにより失敗ステータスで終了します
+ DEBUG [11b6f435] 	
