@@ -8,7 +8,7 @@ worker_processes 1
 working_directory "/var/www/spa-portfolio-app/backend"
 
 #Unicornの起動に必要なファイルの設置場所を指定
-pid "/Users/yoshito-t/Desktop/spa-portfolio-app/backend/tmp/pids/unicorn.pid"
+pid "/var/www/spa-portfolio-app/backend/tmp/pids/unicorn.pid"
 
 #ポート番号を指定
 listen 3000
