@@ -1,10 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - frontend',
     title: 'frontend',
@@ -20,17 +18,17 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/global.scss'
   ],
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "@/plugins/authenticated.js",
     "@/plugins/truncate.js",
-    // "@/plugins/firebase.js",
   ],
 
+  env: {
+    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000',
+  },
 
   router: {
     scrollBehavior(to, from, savedPosition) {
@@ -40,10 +38,8 @@ export default {
 
   debug: true,
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Global Components
   components: [
     { path: '~/components/global/ShowSnackbar.vue', global: true }
   ],
@@ -73,11 +69,10 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.API_BASE_URL || 'http://localhost:3000',
   },
   proxy: {
-    '/api/': { target: 'http://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/api/': { target: process.env.API_BASE_URL || 'http://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
