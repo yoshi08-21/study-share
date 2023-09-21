@@ -20,6 +20,6 @@ production:
   database: <%= ENV["PROD_DATABASE_NAME"] %>
   username: <%= ENV["DATABASE_USERNAME"] %>
   password: <%= ENV["PROD_DATABASE_PASSWORD"] %>
-  host: <%= ENV["PROD_DATABASE_HOST"] %>
+  host: stydy-share-db.ckjl3g6muqqb.ap-northeast-1.rds.amazonaws.com
 
 
