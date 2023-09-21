@@ -11,13 +11,13 @@ working_directory "/var/www/spa-portfolio-app/backend"
 pid "/var/www/spa-portfolio-app/backend/tmp/pids/unicorn.pid"
 
 #ポート番号を指定
-listen 3000
+listen "/var/www/spa-portfolio-app/backend/tmp/sockets/unicorn.sock"
 
 #エラーのログを記録するファイルを指定
-stderr_path "/var/www/spa-portfolio-app/backend/log/unicorn.stderr.log"
+# stderr_path "/var/www/spa-portfolio-app/backend/log/unicorn.stderr.log"
 
 #通常のログを記録するファイルを指定
-stdout_path "/var/www/spa-portfolio-app/backend/log/unicorn.stdout.log"
+# stdout_path "/var/www/spa-portfolio-app/backend/log/unicorn.stdout.log"
 
 #Railsアプリケーションの応答を待つ上限時間を設定
 timeout 60
