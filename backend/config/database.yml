@@ -17,8 +17,8 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV["PROD_DATABASE_NAME"] || Aws::SSM::Client.new.get_parameter(name: 'database_name', with_decryption: true).parameter.value %>
-  username: <%= ENV["DATABASE_USERNAME"] || Aws::SSM::Client.new.get_parameter(name: 'database_username', with_decryption: true).parameter.value %>
-  password: <%= ENV["PROD_DATABASE_PASSWORD"] || Aws::SSM::Client.new.get_parameter(name: 'database_password', with_decryption: true).parameter.value %>
-  host: <%= ENV["PROD_DATABASE_HOST"] || Aws::SSM::Client.new.get_parameter(name: 'database_host', with_decryption: true).parameter.value %>
+  database: <%= Aws::SSM::Client.new.get_parameter(name: 'database_name', with_decryption: true).parameter.value %>
+  username: <%= Aws::SSM::Client.new.get_parameter(name: 'database_username', with_decryption: true).parameter.value %>
+  password: <%= Aws::SSM::Client.new.get_parameter(name: 'database_password', with_decryption: true).parameter.value %>
+  host: <%= Aws::SSM::Client.new.get_parameter(name: 'database_host', with_decryption: true).parameter.value %>
 
