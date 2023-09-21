@@ -6,5 +6,3 @@ Aws.config.update({
   credentials: Aws::Credentials.new(access, secret),
 })
 
-ssm_credentials = Aws::SharedCredentials.new(profile_name: 'ssm_user')
-$ssm_client = Aws::SSM::Client.new(credentials: ssm_credentials)
