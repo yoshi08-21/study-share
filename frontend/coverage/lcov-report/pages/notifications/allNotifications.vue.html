@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -265,10 +265,7 @@
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L203'></a><a href='#L203'>203</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -405,7 +402,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -468,9 +465,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
@@ -505,7 +499,7 @@
     &lt;p style="text-align: center;"&gt;
       *通知が100件を超えると古い通知から削除されます
     &lt;/p&gt;
-    &lt;v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index"&gt;
+    &lt;v-flex mb-5 v-for="(notification, index) in notificationsChunk" :key="'notification_' + index" data-cy="each-notifications"&gt;
 &nbsp;
       &lt;!-- 「お気に入り」・「いいね」がされたときの通知 --&gt;
       &lt;div v-if="notification.action_type == 'Favorite'"&gt;
@@ -541,7 +535,7 @@
           &lt;favorite-notification
             :notification="notification"
             :contentUrl="`/subjectQuestions/${notification.subject_question.id}`"
-            :contentTitle="'質問'"
+            :contentTitle="'質問(科目別)'"
           &gt;
           &lt;/favorite-notification&gt;
         &lt;/div&gt;
@@ -550,7 +544,7 @@
           &lt;favorite-notification
             :notification="notification"
             :contentUrl="`/subjectQuestions/${notification.subject_question_reply.subject_question_id}/subjectQuestionReplies/${notification.subject_question_reply.id}`"
-            :contentTitle="'返信'"
+            :contentTitle="'返信(科目別)'"
           &gt;
           &lt;/favorite-notification&gt;
         &lt;/div&gt;
@@ -608,10 +602,13 @@
 <span class="cstat-no" title="statement not covered" >import AnswerToSurveyNotification from '../../components/notifications/AnswerToSurveyNotification.vue'</span>
 <span class="cstat-no" title="statement not covered" >import FavoriteNotification from '../../components/notifications/FavoriteNotification.vue'</span>
 <span class="cstat-no" title="statement not covered" >import ReplyNotification from '../../components/notifications/ReplyNotification.vue'</span>
+<span class="cstat-no" title="statement not covered" >import userComputed from '../../mixins/userComputed'</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import axios from "@/plugins/axios"</span></span>
 &nbsp;
 export default {
   middleware: authCheck,
+  mixins: [userComputed],
   components: {
     AnswerToSurveyNotification,
     FavoriteNotification,
@@ -651,9 +648,6 @@ export default {
     totalPages() {
       return Math.ceil(this.notifications.length / this.perPage);
     },
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
   },
   methods: {
     async createSampleNotification() {
@@ -675,9 +669,6 @@ export default {
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
 &nbsp;
-&lt;style&gt;
-&nbsp;
-&lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -685,7 +676,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

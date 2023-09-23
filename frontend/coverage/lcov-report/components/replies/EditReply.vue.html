@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -136,16 +136,7 @@
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,16 +175,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,7 +213,7 @@
   &lt;div&gt;
     &lt;br&gt;&lt;br&gt;
     &lt;v-form&gt;
-      &lt;v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent"&gt;&lt;/v-textarea&gt;
+      &lt;v-textarea outlined counter label="本文" :rules="contentRules" v-model="editedContent" data-cy="edit-content-field"&gt;&lt;/v-textarea&gt;
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       &lt;br&gt;
       *添付できる画像のファイルサイズは3MBまでです
@@ -264,8 +246,9 @@
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { VTextarea } from 'vuetify/lib'</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import SubmitButton from '../global/SubmitButton.vue'</span></span>
+<span class="cstat-no" title="statement not covered" >import { VTextarea } from "vuetify/lib"</span>
+<span class="cstat-no" title="statement not covered" >import SubmitButton from "../global/SubmitButton.vue"</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import sharedMethods from "../../mixins/sharedMethods"</span></span>
 &nbsp;
 export default {
   props: {
@@ -275,12 +258,13 @@ export default {
     VTextarea,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       editedContent: this.content,
       contentRules: [
         value =&gt; !!value || "本文を入力してください",
-        value =&gt; (value || '').length &lt;= 1000 || "最大入力文字数は1000文字です",
+        value =&gt; (value || "").length &lt;= 1000 || "最大入力文字数は1000文字です",
       ],
       selectedFile: null,
       errorMessage: "",
@@ -289,19 +273,8 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitReply', { content: this.editedContent, image: this.selectedFile })
+      this.$emit("submitReply", { content: this.editedContent, image: this.selectedFile })
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file &amp;&amp; file.size &gt; maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    }
   }
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
@@ -316,7 +289,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

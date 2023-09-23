@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -331,11 +331,13 @@
 <a name='L266'></a><a href='#L266'>266</a>
 <a name='L267'></a><a href='#L267'>267</a>
 <a name='L268'></a><a href='#L268'>268</a>
-<a name='L269'></a><a href='#L269'>269</a>
-<a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a>
-<a name='L272'></a><a href='#L272'>272</a>
-<a name='L273'></a><a href='#L273'>273</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L269'></a><a href='#L269'>269</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -461,19 +463,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -609,7 +601,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div&gt;
-&nbsp;
     &lt;br&gt;&lt;br&gt;&lt;br&gt;
     &lt;v-row&gt;
       &lt;v-col cols="12" class="d-flex justify-center"&gt;
@@ -623,11 +614,15 @@
                   outlined
                   dense
                   label="参考書を検索"
+                  data-cy="search-books-field"
+                  @keydown.enter="searchBooks"
+                  @compositionstart="isInputBeingConverted = true"
+                  @compositionend="isInputBeingConverted = false"
                 &gt;
                 &lt;/v-text-field&gt;
               &lt;/v-col&gt;
               &lt;v-col cols="1"&gt;
-                &lt;v-btn @click="searchBooks"&gt;検索&lt;/v-btn&gt;
+                &lt;v-btn @click="searchBooks" data-cy="search-books-button"&gt;検索&lt;/v-btn&gt;
               &lt;/v-col&gt;
             &lt;/v-row&gt;
             &lt;v-btn
@@ -665,6 +660,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="sort-books-select"
               &gt;&lt;/v-select&gt;
               &lt;/v-col&gt;
               &lt;v-col cols="6"&gt;
@@ -675,6 +671,7 @@
                 outlined
                 chips
                 clearable
+                data-cy="filter-books-select"
               &gt;&lt;/v-select&gt;
               &lt;/v-col&gt;
             &lt;/v-row&gt;
@@ -712,7 +709,7 @@
           &lt;h2&gt;参考書を登録する&lt;/h2&gt;
         &lt;/v-card-title&gt;
         &lt;div style="padding: 30px;"&gt;
-          &lt;v-btn @click="redirectToSearchBooks" color="primary" block style="height: 50px;"&gt;登録する参考書を検索する&lt;/v-btn&gt;
+          &lt;v-btn @click="goToSearchBooks" color="primary" block style="height: 50px;"&gt;登録する参考書を検索する&lt;/v-btn&gt;
         &lt;/div&gt;
         &lt;v-card-text&gt;
           &lt;book-form
@@ -725,6 +722,7 @@
 &nbsp;
     &lt;br&gt;
     &lt;v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor"&gt;{{ flashMessage }}&lt;/v-snackbar&gt;
+&nbsp;
   &lt;/div&gt;
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
@@ -732,10 +730,14 @@
 &nbsp;
 <span class="cstat-no" title="statement not covered" >import EachBooks from '../../components/books/EachBooks.vue'</span>
 <span class="cstat-no" title="statement not covered" >import BookForm from '../../components/books/BookForm.vue'</span>
+<span class="cstat-no" title="statement not covered" >import userComputed from '../../mixins/userComputed'</span>
+<span class="cstat-no" title="statement not covered" >import flashMessage from '../../mixins/flashMessage'</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import axios from "@/plugins/axios"</span></span>
 &nbsp;
 export default {
   components: { EachBooks, BookForm },
+  mixins: [userComputed, flashMessage],
   async asyncData({ store }) {
     try {
       const response = await axios.get("/books", {
@@ -754,12 +756,7 @@ export default {
   },
   data() {
     return {
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
       dialog: false,
-      // 参考書登録の空データ送信用。S3の利用時には削除可
-      image: "",
       perPage: 10,
       page: 1,
       searchBooksKeyword: "",
@@ -773,13 +770,11 @@ export default {
       {text:"その他", disabled: true},"過去問", "小論文", "その他科目",
       ],
       selectedSortOption: "",
-      selectedBooksSubject: ""
+      selectedBooksSubject: "",
+      isInputBeingConverted: false,
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     subjectFilteredBooks() {
       return this.filterBooks()
     },
@@ -795,14 +790,6 @@ export default {
     totalPages() {
       return Math.ceil(this.sortedBooks.length / this.perPage);
     },
-  },
-  mounted() {
-    if (this.$route.query.message) {
-      this.snackbarColor = "primary"
-      this.snackbar = true
-      this.flashMessage = this.$route.query.message
-      // this.$snackbar.show(this.$route.query.message)
-    }
   },
   methods: {
     async submitBook(data) {
@@ -821,8 +808,6 @@ export default {
       try {
         const response = await axios.post("/books", formData)
         console.log(response)
-        this.snackbarColor = "primary"
-        this.snackbar = true
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
         console.log(error)
@@ -839,13 +824,16 @@ export default {
         this.$router.push({ path: "/auth/login", query: { message: "ログインが必要です" } })
       }
     },
-    redirectToSearchBooks() {
+    goToSearchBooks() {
       this.$router.push({ path: "/books/googleApiSearchBooks" })
     },
     searchBooks() {
-      this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
-      this.searchBooksKeyword = ""
+      if(this.isInputBeingConverted === false) {
+        this.$router.push({ path: "/books/localSearchBooksResult", query: { searchBooksKeyword: this.searchBooksKeyword } })
+        this.searchBooksKeyword = ""
+      }
     },
+&nbsp;
     // selectedBookSubjectに応じてbooksの絞り込みを行う。subjectが空の場合は元の配列をそのまま返す
     filterBooks() {
       if(this.selectedBooksSubject) {
@@ -886,7 +874,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

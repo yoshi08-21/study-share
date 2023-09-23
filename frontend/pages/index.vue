@@ -142,7 +142,16 @@
     </tepmlate>
     <template v-else>
       <h2>あなたと同じ大学を志望している人が使っている参考書</h2>
-      <p>ログイン後に使用できます</p>
+      <hr><br>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <v-alert
+              type="info"
+            >
+            ログイン後に使用できます
+            </v-alert>
+          </v-col>
+        </v-row>
     </template>
 
 

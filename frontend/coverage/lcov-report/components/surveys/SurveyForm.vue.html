@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -230,15 +230,8 @@
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a>
-<a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L168'></a><a href='#L168'>168</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -338,16 +331,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -427,14 +411,15 @@
         v-model="selectedGenre"
         label="ジャンル(必須)"
         outlined
+        data-cy="select-genre-button"
       &gt;&lt;/v-select&gt;
     &lt;/v-col&gt;
-      &lt;v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title"&gt;&lt;/v-text-field&gt;
-      &lt;v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content"&gt;&lt;/v-textarea&gt;
-      &lt;v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1"&gt;&lt;/v-text-field&gt;
-      &lt;v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2"&gt;&lt;/v-text-field&gt;
-      &lt;v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3"&gt;&lt;/v-text-field&gt;
-      &lt;v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" data-cy="create-title-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" data-cy="create-content-field"&gt;&lt;/v-textarea&gt;
+      &lt;v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" data-cy="create-option1-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" data-cy="create-option2-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" data-cy="create-option3-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" data-cy="create-option4-field"&gt;&lt;/v-text-field&gt;
       &lt;br&gt;
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       &lt;br&gt;
@@ -468,19 +453,19 @@
 &nbsp;
     &lt;!-- アンケート内容確認ダイアログ --&gt;
     &lt;v-dialog v-model="confirmationDialog"&gt;
-      &lt;v-card&gt;
+      &lt;v-card data-cy="survey-confirmation-dialog"&gt;
         &lt;v-card-title style="justify-content: center;"&gt;
           &lt;h2&gt;内容確認&lt;/h2&gt;
         &lt;/v-card-title&gt;
         &lt;br&gt;
         &lt;v-card-text&gt;
           &lt;br&gt;&lt;h3&gt;選択されたジャンル: {{ selectedGenre }}&lt;/h3&gt;&lt;br&gt;
-          &lt;v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo&gt;&lt;/v-text-field&gt;
-          &lt;v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo&gt;&lt;/v-textarea&gt;
-          &lt;v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo&gt;&lt;/v-text-field&gt;
-          &lt;v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo&gt;&lt;/v-text-field&gt;
-          &lt;v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo&gt;&lt;/v-text-field&gt;
-          &lt;v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo&gt;&lt;/v-text-field&gt;
+          &lt;v-text-field counter label="タイトル（必須）" :rules="titleRules" v-model="title" readonly solo data-cy="confirmation-title-field"&gt;&lt;/v-text-field&gt;
+          &lt;v-textarea counter label="本文（必須）" :rules="contentRules" v-model="content" readonly solo data-cy="confirmation-content-field"&gt;&lt;/v-textarea&gt;
+          &lt;v-text-field counter label="選択肢1（必須）" :rules="requiredOptionRules" v-model="option1" readonly solo data-cy="confirmation-option1-field"&gt;&lt;/v-text-field&gt;
+          &lt;v-text-field counter label="選択肢2（必須）" :rules="requiredOptionRules" v-model="option2" readonly solo data-cy="confirmation-option2-field"&gt;&lt;/v-text-field&gt;
+          &lt;v-text-field counter label="選択肢3（任意）" :rules="optionRules" v-model="option3" readonly solo data-cy="confirmation-option3-field"&gt;&lt;/v-text-field&gt;
+          &lt;v-text-field counter label="選択肢4（任意）" :rules="optionRules" v-model="option4" readonly solo data-cy="confirmation-option4-field"&gt;&lt;/v-text-field&gt;
           &lt;br&gt;
           &lt;v-file-input
             v-model="selectedFile"
@@ -511,30 +496,32 @@
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { VTextField } from 'vuetify/lib'</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import SubmitButton from '../global/SubmitButton.vue'</span></span>
+<span class="cstat-no" title="statement not covered" >import { VTextField } from "vuetify/lib"</span>
+<span class="cstat-no" title="statement not covered" >import SubmitButton from "../global/SubmitButton.vue"</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import sharedMethods from "../../mixins/sharedMethods"</span></span>
 &nbsp;
 export default {
   components: {
     VTextField,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       titleRules: [
         value =&gt; !!value || "タイトルを入力してください",
-        value =&gt; (value || '').length &lt;= 50 || "最大入力文字数は50文字です",
+        value =&gt; (value || "").length &lt;= 50 || "最大入力文字数は50文字です",
       ],
       contentRules: [
         value =&gt; !!value || "本文を入力してください",
-        value =&gt; (value || '').length &lt;= 1000 || "最大入力文字数は1000文字です",
+        value =&gt; (value || "").length &lt;= 1000 || "最大入力文字数は1000文字です",
       ],
       requiredOptionRules: [
         value =&gt; !!value || "選択肢を入力してください",
-        value =&gt; (value || '').length &lt;= 50 || "最大入力文字数は50文字です",
+        value =&gt; (value || "").length &lt;= 50 || "最大入力文字数は50文字です",
       ],
       optionRules: [
-        value =&gt; (value || '').length &lt;= 50 || "最大入力文字数は50文字です",
+        value =&gt; (value || "").length &lt;= 50 || "最大入力文字数は50文字です",
       ],
       genres: ["国語", "社会", "数学", "英語", "理科", "参考書", "進路・大学", "その他"],
       selectedGenre: "",
@@ -568,19 +555,8 @@ export default {
       if(this.option4 !== "") {
         survey.option4 = this.option4
       }
-      this.$emit('submitSurvey', survey)
+      this.$emit("submitSurvey", survey)
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file &amp;&amp; file.size &gt; maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    }
   }
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
@@ -595,7 +571,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -438,13 +438,7 @@
 <a name='L373'></a><a href='#L373'>373</a>
 <a name='L374'></a><a href='#L374'>374</a>
 <a name='L375'></a><a href='#L375'>375</a>
-<a name='L376'></a><a href='#L376'>376</a>
-<a name='L377'></a><a href='#L377'>377</a>
-<a name='L378'></a><a href='#L378'>378</a>
-<a name='L379'></a><a href='#L379'>379</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L376'></a><a href='#L376'>376</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -662,7 +656,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -821,7 +815,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div&gt;
-&nbsp;
     &lt;br&gt;&lt;br&gt;
     &lt;v-row&gt;
       &lt;v-col cols="12" class="d-flex justify-center"&gt;
@@ -835,11 +828,15 @@
                   outlined
                   dense
                   label="参考書を検索"
+                  data-cy="google-books-api-search-books"
+                  @keydown.enter="searchBooks"
+                  @compositionstart="isInputBeingConverted = true"
+                  @compositionend="isInputBeingConverted = false"
                 &gt;
                 &lt;/v-text-field&gt;
               &lt;/v-col&gt;
               &lt;v-col cols="1"&gt;
-                &lt;v-btn @click="searchBooks(keyword)"&gt;検索&lt;/v-btn&gt;
+                &lt;v-btn @click="searchBooks" data-cy="google-books-api-search-button"&gt;検索&lt;/v-btn&gt;
               &lt;/v-col&gt;
             &lt;/v-row&gt;
           &lt;/v-card-title&gt;
@@ -853,7 +850,7 @@
     &lt;template v-if="searchResults.length !== 0"&gt;
       &lt;v-pagination v-model="page" :length="totalPages"&gt;&lt;/v-pagination&gt;
       &lt;br&gt;
-      &lt;v-row mb-5 v-for="(book, index) in booksChunk" :key="index" class="justify-center"&gt;
+      &lt;v-row mb-5 v-for="(book, index) in booksChunk" :key="index" class="justify-center" data-cy="searched-books"&gt;
         &lt;v-col cols="10"&gt;
           &lt;v-card
             elevation="2"
@@ -892,7 +889,7 @@
                 &lt;v-card-actions&gt;
                   &lt;v-row class="d-flex align-center justify-center"&gt;
                     &lt;v-col cols="4"&gt;
-                      &lt;v-btn @click="openBookDialog(book)" large&gt;参考書を登録する&lt;/v-btn&gt;
+                      &lt;v-btn @click="openBookDialog(book)" large data-cy="add-book"&gt;参考書を登録する&lt;/v-btn&gt;
                     &lt;/v-col&gt;
                   &lt;/v-row&gt;
                 &lt;/v-card-actions&gt;
@@ -904,13 +901,6 @@
       &lt;br&gt;
     &lt;v-pagination v-model="page" :length="totalPages"&gt;&lt;/v-pagination&gt;
   &lt;/template&gt;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
 &nbsp;
 &nbsp;
     &lt;!-- 選択した参考書の確認ダイアログ --&gt;
@@ -958,7 +948,7 @@
                     &gt;
                     &lt;v-row&gt;
                       &lt;v-col class="d-flex justify-center"&gt;
-                        &lt;v-btn @click="selectSubjectDialog = true" block&gt;科目を選択する&lt;/v-btn&gt;
+                        &lt;v-btn @click="selectSubjectDialog = true" block&gt;科目を選択する(必須)&lt;/v-btn&gt;
                       &lt;/v-col&gt;
                     &lt;/v-row&gt;
                     &lt;v-row&gt;
@@ -990,6 +980,7 @@
                       color="primary"
                       width="400"
                       large
+                      data-cy="submit-book"
                     &gt;
                       登録する
                     &lt;/v-btn&gt;
@@ -1016,7 +1007,7 @@
       &lt;v-card&gt;
         &lt;v-card-title class="headline"&gt;科目選択&lt;/v-card-title&gt;
         &lt;v-card-text&gt;
-          &lt;v-radio-group v-model="subject"&gt;
+          &lt;v-radio-group v-model="subject" data-cy="select-subject-group"&gt;
             &lt;template v-for="category in categories"&gt;
               &lt;p :key="category.name"&gt;{{ category.name }}&lt;/p&gt;
               &lt;v-radio v-for="subcategory in category.subcategories" :key="subcategory" :label="subcategory" :value="subcategory"&gt;&lt;/v-radio&gt;
@@ -1026,22 +1017,24 @@
         &lt;h3&gt;選択された科目:{{ subject }}&lt;/h3&gt;
         &lt;v-card-actions&gt;
           &lt;v-spacer&gt;&lt;/v-spacer&gt;
-          &lt;v-btn @click="selectSubjectDialog = false" color="primary" block&gt;閉じる&lt;/v-btn&gt;
+          &lt;v-btn @click="selectSubjectDialog = false" color="primary" block data-cy="close-select-subject-dialog"&gt;閉じる&lt;/v-btn&gt;
         &lt;/v-card-actions&gt;
       &lt;/v-card&gt;
     &lt;/v-dialog&gt;
 &nbsp;
-&nbsp;
     &lt;br&gt;
     &lt;v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor"&gt;{{ flashMessage }}&lt;/v-snackbar&gt;
+&nbsp;
   &lt;/div&gt;
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
 &nbsp;
+<span class="cstat-no" title="statement not covered" >import userComputed from "../../mixins/userComputed"</span>
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import axios from "@/plugins/axios"</span></span>
 &nbsp;
 export default {
+  mixins: [userComputed],
   data() {
     return {
       keyword: "",
@@ -1080,14 +1073,10 @@ export default {
           subcategories: ["過去問", "小論文", "その他科目"]
         },
       ],
-&nbsp;
-&nbsp;
+      isInputBeingConverted: false,
     }
   },
   computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
     booksChunk() {
       const start = (this.page - 1) * this.perPage
       const end = start + this.perPage
@@ -1098,36 +1087,38 @@ export default {
     },
   },
   methods: {
-    async searchBooks(keyword) {
+    async searchBooks() {
       try {
-        this.searchResults = []
-        const baseUrl = "https://www.googleapis.com/books/v1/volumes?"
-        const params = {
-          q: `intitle:${keyword}`,
-          maxResults: 40
-        }
-        const queryParams = new URLSearchParams(params)
-        const response = await fetch(baseUrl + queryParams)
-        const data = await response.json()
+        if(this.isInputBeingConverted === false) {
+          this.searchResults = []
+          const baseUrl = "https://www.googleapis.com/books/v1/volumes?"
+          const params = {
+            q: `intitle:${this.keyword}`,
+            maxResults: 40
+          }
+          const queryParams = new URLSearchParams(params)
+          const response = await fetch(baseUrl + queryParams)
+          const data = await response.json()
 &nbsp;
-        console.log(data)
-        console.log(response)
-        for (const book of data.items) {
-          const name = book.volumeInfo.title
-          const author = book.volumeInfo.author
-          const publisher = book.volumeInfo.publisher
-          const imageUrl = book.volumeInfo.imageLinks
-          const description = book.volumeInfo.description
-          this.searchResults.push({
-            name: name || "不明",
-            author: author || "不明",
-            publisher: publisher || "不明",
-            imageUrl : imageUrl ? imageUrl.thumbnail : "",
-            description: description ? description.slice(0, 40) : "",
-            fullDescription: description ? description.slice(0, 1000) : ""
-          })
+          console.log(data)
+          console.log(response)
+          for (const book of data.items) {
+            const name = book.volumeInfo.title
+            const author = book.volumeInfo.author
+            const publisher = book.volumeInfo.publisher
+            const imageUrl = book.volumeInfo.imageLinks
+            const description = book.volumeInfo.description
+            this.searchResults.push({
+              name: name || "不明",
+              author: author || "不明",
+              publisher: publisher || "不明",
+              imageUrl : imageUrl ? imageUrl.thumbnail : "",
+              description: description ? description.slice(0, 40) : "",
+              fullDescription: description ? description.slice(0, 1000) : ""
+            })
+          }
+          this.page = 1
         }
-        this.page = 1
       } catch(error) {
         console.log(error)
         throw error
@@ -1146,7 +1137,7 @@ export default {
     async submitBook(book) {
       const formData = new FormData()
 &nbsp;
-      formData.append("book[user_id]", this.currentUser.id);
+      formData.append("current_user_id", this.currentUser.id);
       formData.append("book[name]", book.name);
       formData.append("book[author]", book.author);
       formData.append("book[publisher]", book.publisher);
@@ -1204,7 +1195,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
