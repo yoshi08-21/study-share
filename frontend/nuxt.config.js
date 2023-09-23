@@ -26,10 +26,6 @@ export default {
     "@/plugins/truncate.js",
   ],
 
-  env: {
-    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000',
-  },
-
   router: {
     scrollBehavior(to, from, savedPosition) {
       return { x: 0, y: 0 }
@@ -67,12 +63,12 @@ export default {
     '@nuxtjs/proxy',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: process.env.API_BASE_URL || 'http://localhost:3000',
+  env: {
+    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000',
   },
+
   proxy: {
-    '/api/': { target: process.env.API_BASE_URL || 'http://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/api/': { target: 'http://3.115.171.176', pathRewrite: { '^/api/': '' }, changeOrigin: true }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

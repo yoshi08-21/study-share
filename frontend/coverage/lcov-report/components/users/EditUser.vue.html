@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -200,12 +200,11 @@
 <a name='L135'></a><a href='#L135'>135</a>
 <a name='L136'></a><a href='#L136'>136</a>
 <a name='L137'></a><a href='#L137'>137</a>
-<a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a>
-<a name='L141'></a><a href='#L141'>141</a>
-<a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L138'></a><a href='#L138'>138</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,16 +270,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -367,24 +357,28 @@
       *登録できる画像のファイルサイズは3MBまでです
 &nbsp;
       &lt;br&gt;&lt;br&gt;
-      &lt;v-text-field counter label="名前" :rules="nameRules" v-model="editedName"&gt;&lt;/v-text-field&gt;
-      &lt;v-textarea outlined counter label="自己紹介" :rules="contentRules" v-model="editedIntroduction"&gt;&lt;/v-textarea&gt;
-      &lt;v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool"&gt;&lt;/v-text-field&gt;
-      &lt;v-text-field counter label="第二志望" :rules="schoolNameRules" v-model="editedSecondChoiceSchool"&gt;&lt;/v-text-field&gt;
-      &lt;v-text-field counter label="第三志望" :rules="schoolNameRules" v-model="editedThirdChoiceSchool"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="名前" :rules="nameRules" v-model="editedName" data-cy="edit-name-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-textarea outlined counter label="自己紹介" :rules="contentRules" v-model="editedIntroduction" data-cy="edit-introduction-field"&gt;&lt;/v-textarea&gt;
+&nbsp;
+      &lt;br&gt;
+      *大学名は国立・私立などを除いた正式名称で入力してください  例） ◯東京大学 | ☓東大 ☓国立東京大学
+      &lt;v-text-field counter label="第一志望" :rules="schoolNameRules" v-model="editedFirstChoiceSchool" data-cy="edit-first-choice-school-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="第二志望" :rules="schoolNameRules" v-model="editedSecondChoiceSchool" data-cy="edit-second-choice-school-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-text-field counter label="第三志望" :rules="schoolNameRules" v-model="editedThirdChoiceSchool" data-cy="edit-third-choice-school-field"&gt;&lt;/v-text-field&gt;
 &nbsp;
       &lt;template v-if="errorMessage"&gt;
         &lt;v-alert type="error" dense text border="left"&gt;
           {{ errorMessage }}
         &lt;/v-alert&gt;
       &lt;/template&gt;
+      &lt;br&gt;
       &lt;v-row&gt;
         &lt;v-col cols="3" class="align-start custom-button-margin"&gt;
           &lt;template v-if="error === true"&gt;
-            &lt;v-btn color="primary" disabled @click="submitForm" width="250"&gt;編集する&lt;/v-btn&gt;
+            &lt;v-btn color="primary" disabled @click="submitForm" width="250" data-cy="submit-button"&gt;編集する&lt;/v-btn&gt;
           &lt;/template&gt;
           &lt;template v-else&gt;
-            &lt;v-btn color="primary" @click="submitForm" width="250"&gt;編集する&lt;/v-btn&gt;
+            &lt;v-btn color="primary" @click="submitForm" width="250" data-cy="submit-button"&gt;編集する&lt;/v-btn&gt;
           &lt;/template&gt;
         &lt;/v-col&gt;
         &lt;v-col cols="3" class="align-start"&gt;
@@ -392,7 +386,7 @@
         &lt;/v-col&gt;
         &lt;v-col cols="6" class="text-right"&gt;
           &lt;!-- ダイアログの表示を挟む --&gt;
-          &lt;v-btn color="error" class="justify-end" @click="showDeleteConfirmation=true"&gt;ユーザーを削除する&lt;/v-btn&gt;
+          &lt;v-btn color="error" class="justify-end" @click="showDeleteConfirmation=true" data-cy="delete-button"&gt;ユーザーを削除する&lt;/v-btn&gt;
         &lt;/v-col&gt;
       &lt;/v-row&gt;
 &nbsp;
@@ -411,8 +405,9 @@
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { VTextField, VTextarea} from 'vuetify/lib'</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import DeleteConfirmationDialog from '../global/DeleteConfirmationDialog.vue'</span></span>
+<span class="cstat-no" title="statement not covered" >import { VTextField, VTextarea} from "vuetify/lib"</span>
+<span class="cstat-no" title="statement not covered" >import DeleteConfirmationDialog from "../global/DeleteConfirmationDialog.vue"</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import sharedMethods from "../../mixins/sharedMethods"</span></span>
 &nbsp;
 export default {
   props: {
@@ -427,6 +422,7 @@ export default {
     VTextarea,
     DeleteConfirmationDialog,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       editedName: this.name,
@@ -436,14 +432,14 @@ export default {
       editedThirdChoiceSchool: this.third_choice_school,
       nameRules: [
         value =&gt; !!value || "名前を入力してください",
-        value =&gt; (value || '').length &lt;= 30 || "最大入力文字数は30文字です",
+        value =&gt; (value || "").length &lt;= 30 || "最大入力文字数は30文字です",
       ],
       contentRules: [
         value =&gt; !!value || "本文を入力してください",
-        value =&gt; (value || '').length &lt;= 200 || "最大入力文字数は200文字です",
+        value =&gt; (value || "").length &lt;= 200 || "最大入力文字数は200文字です",
       ],
       schoolNameRules: [
-      value =&gt; (value || '').length &lt;= 30 || "最大入力文字数は30文字です",
+      value =&gt; (value || "").length &lt;= 30 || "最大入力文字数は30文字です",
       ],
       showDeleteConfirmation: false,
       selectedFile: null,
@@ -467,17 +463,6 @@ export default {
     deleteLocalUser() {
       this.$emit("deleteUser")
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file &amp;&amp; file.size &gt; maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    },
   }
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
@@ -496,7 +481,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

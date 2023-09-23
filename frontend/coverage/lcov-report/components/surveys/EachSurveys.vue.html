@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
+                <span class='fraction'>0/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
                 <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -151,25 +151,7 @@
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a>
-<a name='L100'></a><a href='#L100'>100</a>
-<a name='L101'></a><a href='#L101'>101</a>
-<a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,20 +224,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,9 +241,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div&gt;
-&nbsp;
-    &lt;!-- &lt;template v-if="hideClosedSurvey === true &amp;&amp; "&gt;&lt;/template&gt; --&gt;
-    &lt;v-row mb-5 v-for="(survey, index) in surveys" :key="'survey_' + index" class="justify-center"&gt;
+    &lt;v-row mb-5 v-for="(survey, index) in surveys" :key="'survey_' + index" class="justify-center" data-cy="each-surveys"&gt;
       &lt;template v-if="hideClosedSurvey === false || (hideClosedSurvey === true &amp;&amp; survey.status === false)"&gt;
         &lt;v-col cols="10"&gt;
           &lt;v-card
@@ -311,7 +279,7 @@
                 &lt;v-card-actions style="margin-top: -10px;"&gt;
                   &lt;v-row class="d-flex align-center justify-center"&gt;
                     &lt;v-col cols="3"&gt;
-                      &lt;div @click="goToUser(survey.user)" style="padding: 10px;"&gt;
+                      &lt;div @click="goToUser(survey.user)" style="padding: 10px; cursor: pointer;"&gt;
                       &lt;v-avatar&gt;
                         &lt;v-img :src="survey.user.image"&gt;&lt;/v-img&gt;
                       &lt;/v-avatar&gt;
@@ -340,32 +308,19 @@
         &lt;/v-col&gt;
       &lt;/template&gt;
     &lt;/v-row&gt;
-&nbsp;
   &lt;/div&gt;
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import userComputed from '../../mixins/userComputed'</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import navigationMethods from '../../mixins/navigationMethods'</span></span>
+&nbsp;
 export default {
   props: {
     surveys: [],
     hideClosedSurvey: Boolean,
   },
-  computed: {
-    currentUser() {
-      return this.$store.getters["auth/getCurrentUser"]
-    },
-  },
-  methods: {
-    goToUser(user) {
-      if( !this.currentUser || this.currentUser.id !== user.id ) {
-        this.$router.push({ path: `/users/${user.id}` })
-      } else {
-        this.$router.push({ path: "/mypage" })
-      }
-    },
-&nbsp;
-  }
-&nbsp;
+  mixins: [userComputed, navigationMethods],
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
 &nbsp;
@@ -379,7 +334,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

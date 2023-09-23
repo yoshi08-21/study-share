@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
+                <span class='fraction'>0/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
                 <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -259,7 +259,18 @@
 <a name='L194'></a><a href='#L194'>194</a>
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -399,6 +410,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -461,10 +473,11 @@
     fix
     app
     scroll-target="#scrolling-techniques-3"
+    data-cy="header"
   &gt;
     &lt;v-row class="d-flex align-center justify-center"&gt;
       &lt;v-col cols="1"&gt;
-        &lt;v-app-bar-nav-icon @click.stop="toggleDrawer"&gt;
+        &lt;v-app-bar-nav-icon @click.stop="toggleDrawer" data-cy="menu-button"&gt;
           &lt;v-icon&gt;mdi-menu-open&lt;/v-icon&gt;
         &lt;/v-app-bar-nav-icon&gt;
       &lt;/v-col&gt;
@@ -486,10 +499,14 @@
               dense
               outlined
               style="margin-top: 25px;"
+              data-cy="header-search-books-field"
+              @keydown.enter="searchBooks"
+              @compositionstart="isInputBeingConverted = true"
+              @compositionend="isInputBeingConverted = false"
             &gt;&lt;/v-text-field&gt;
           &lt;/v-col&gt;
           &lt;v-col cols="2"&gt;
-            &lt;v-btn @click="searchBooks"&gt;検索&lt;/v-btn&gt;
+            &lt;v-btn @click="searchBooks" data-cy="header-search-books-button"&gt;検索&lt;/v-btn&gt;
           &lt;/v-col&gt;
         &lt;/v-row&gt;
       &lt;/v-col&gt;
@@ -506,7 +523,7 @@
             &lt;v-col cols="5"&gt;
               &lt;v-tooltip bottom&gt;
                 &lt;template v-slot:activator="{ on, attrs }"&gt;
-                  &lt;v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on"&gt;
+                  &lt;v-btn @click="goToFavorites" icon x-large v-bind="attrs" v-on="on" data-cy="favorites-link-button"&gt;
                     &lt;v-icon&gt;mdi-star&lt;/v-icon&gt;
                   &lt;/v-btn&gt;
                 &lt;/template&gt;
@@ -517,7 +534,7 @@
               &lt;template v-if="unreadNotifications"&gt;
                 &lt;v-tooltip bottom&gt;
                   &lt;template v-slot:activator="{ on, attrs }"&gt;
-                    &lt;v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on"&gt;
+                    &lt;v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button"&gt;
                       &lt;v-badge overlap&gt;
                         &lt;v-icon&gt;mdi-bell&lt;/v-icon&gt;
                       &lt;/v-badge&gt;
@@ -529,7 +546,7 @@
               &lt;template v-else&gt;
                 &lt;v-tooltip bottom&gt;
                   &lt;template v-slot:activator="{ on, attrs }"&gt;
-                    &lt;v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on"&gt;
+                    &lt;v-btn @click="goToNotifications" icon x-large v-bind="attrs" v-on="on" data-cy="notifications-link-button"&gt;
                       &lt;v-icon&gt;mdi-bell&lt;/v-icon&gt;
                     &lt;/v-btn&gt;
                   &lt;/template&gt;
@@ -553,13 +570,13 @@
               transition="slide-y-transition"
             &gt;
               &lt;template v-slot:activator="{ on }"&gt;
-                &lt;v-btn icon x-large v-on="on"&gt;
+                &lt;v-btn icon x-large v-on="on" data-cy="header-user-menu"&gt;
                   &lt;v-avatar size="55"&gt;
                     &lt;v-img :src="currentUser.image"&gt;&lt;/v-img&gt;
                   &lt;/v-avatar&gt;
                 &lt;/v-btn&gt;
               &lt;/template&gt;
-              &lt;v-card&gt;
+              &lt;v-card data-cy="header-user-menu-list"&gt;
                 &lt;v-list-item-content class="justify-center"&gt;
                   &lt;div class="mx-auto text-center"&gt;
                     &lt;v-avatar size="60"&gt;
@@ -578,7 +595,7 @@
                       閲覧履歴
                     &lt;/v-btn&gt;
                     &lt;v-divider class="my-3"&gt;&lt;/v-divider&gt;
-                    &lt;v-btn rounded text style="color: red;" @click="logout"&gt;
+                    &lt;v-btn rounded text style="color: red;" @click="logout" data-cy="header-logout-button"&gt;
                       ログアウト
                     &lt;/v-btn&gt;
                   &lt;/div&gt;
@@ -595,11 +612,13 @@
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import userComputed from '../../mixins/userComputed'</span></span>
+&nbsp;
 export default {
   props: {
     currentUser: Object,
-&nbsp;
   },
+  mixins: [userComputed],
   data() {
     return {
       drawer: false,
@@ -609,20 +628,19 @@ export default {
         to: "/"
       },
       searchBooksKeyword: "",
-&nbsp;
+      isInputBeingConverted: false,
     }
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters["auth/getLoggedIn"]
-    },
     unreadNotifications() {
       return this.$store.state.notifications.unreadNotifications
     },
   },
   methods: {
     searchBooks() {
-      this.$emit("searchBooks", { searchBooksKeyword: this.searchBooksKeyword })
+      if(this.isInputBeingConverted === false) {
+        this.$emit("searchBooks", { searchBooksKeyword: this.searchBooksKeyword })
+      }
     },
     goToMypage() {
       this.$emit("goToMypage")
@@ -658,7 +676,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

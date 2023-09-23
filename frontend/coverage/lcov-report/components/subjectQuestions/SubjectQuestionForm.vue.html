@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -199,17 +199,7 @@
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
 <a name='L136'></a><a href='#L136'>136</a>
-<a name='L137'></a><a href='#L137'>137</a>
-<a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a>
-<a name='L140'></a><a href='#L140'>140</a>
-<a name='L141'></a><a href='#L141'>141</a>
-<a name='L142'></a><a href='#L142'>142</a>
-<a name='L143'></a><a href='#L143'>143</a>
-<a name='L144'></a><a href='#L144'>144</a>
-<a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -280,17 +270,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -364,12 +344,12 @@
       cols="12"
       sm="6"
       &gt;
-      &lt;v-btn @click="selectSubjectDialog = true"&gt;科目を選択する&lt;/v-btn&gt;
+      &lt;v-btn @click="selectSubjectDialog = true"&gt;科目を選択する(必須)&lt;/v-btn&gt;
       &lt;/v-col&gt;
       &lt;h3 v-if="subject"&gt;選択された科目：{{ subject }}&lt;/h3&gt;
       &lt;br&gt;
-      &lt;v-text-field counter label="タイトル" :rules="titleRules" v-model="title"&gt;&lt;/v-text-field&gt;
-      &lt;v-textarea outlined counter label="本文" :rules="contentRules" v-model="content"&gt;&lt;/v-textarea&gt;
+      &lt;v-text-field counter label="タイトル" :rules="titleRules" v-model="title" data-cy="create-title-field"&gt;&lt;/v-text-field&gt;
+      &lt;v-textarea outlined counter label="本文" :rules="contentRules" v-model="content" data-cy="create-content-field"&gt;&lt;/v-textarea&gt;
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
       &lt;br&gt;
       *添付できる画像のファイルサイズは3MBまでです
@@ -405,7 +385,7 @@
       &lt;v-card&gt;
         &lt;v-card-title class="headline"&gt;科目選択&lt;/v-card-title&gt;
         &lt;v-card-text&gt;
-          &lt;v-radio-group v-model="subject"&gt;
+          &lt;v-radio-group v-model="subject" data-cy="select-subject-group"&gt;
             &lt;template v-for="category in categories"&gt;
               &lt;p :key="category.name"&gt;{{ category.name }}&lt;/p&gt;
               &lt;v-radio v-for="subcategory in category.subcategories" :key="subcategory" :label="subcategory" :value="subcategory"&gt;&lt;/v-radio&gt;
@@ -415,7 +395,7 @@
         &lt;h3&gt;選択された科目:{{ subject }}&lt;/h3&gt;
         &lt;v-card-actions&gt;
           &lt;v-spacer&gt;&lt;/v-spacer&gt;
-          &lt;v-btn @click="selectSubjectDialog = false" color="primary" block&gt;閉じる&lt;/v-btn&gt;
+          &lt;v-btn @click="selectSubjectDialog = false" color="primary" block data-cy="close-select-subject-dialog"&gt;閉じる&lt;/v-btn&gt;
         &lt;/v-card-actions&gt;
       &lt;/v-card&gt;
     &lt;/v-dialog&gt;
@@ -424,8 +404,9 @@
 &lt;/template&gt;
 <span class="cstat-no" title="statement not covered" ></span>
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { VTextField, VTextarea } from 'vuetify/lib'</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import SubmitButton from '../global/SubmitButton.vue'</span></span>
+<span class="cstat-no" title="statement not covered" >import { VTextField, VTextarea } from "vuetify/lib"</span>
+<span class="cstat-no" title="statement not covered" >import SubmitButton from "../global/SubmitButton.vue"</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >import sharedMethods from "../../mixins/sharedMethods"</span></span>
 &nbsp;
 export default {
   components: {
@@ -433,6 +414,7 @@ export default {
     VTextarea,
     SubmitButton,
   },
+  mixins: [sharedMethods],
   data() {
     return {
       title: "",
@@ -440,11 +422,11 @@ export default {
       subject: "",
       titleRules: [
         value =&gt; !!value || "タイトルを入力してください",
-        value =&gt; (value || '').length &lt;= 60 || "最大入力文字数は60文字です",
+        value =&gt; (value || "").length &lt;= 60 || "最大入力文字数は60文字です",
       ],
       contentRules: [
         value =&gt; !!value || "本文を入力してください",
-        value =&gt; (value || '').length &lt;= 1000 || "最大入力文字数は1000文字です",
+        value =&gt; (value || "").length &lt;= 1000 || "最大入力文字数は1000文字です",
       ],
       selectSubjectDialog: false,
       categories: [
@@ -480,20 +462,8 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$emit('submitSubjectQuestion', { title: this.title, content: this.content, subject: this.subject, image: this.selectedFile })
+      this.$emit("submitSubjectQuestion", { title: this.title, content: this.content, subject: this.subject, image: this.selectedFile })
     },
-    checkFileSize(file) {
-      console.log(file)
-      const maxSize = 3145728
-      if (file &amp;&amp; file.size &gt; maxSize) {
-        this.errorMessage = "添付できるファイルは3MBまでです"
-        this.error = true
-      } else {
-        this.errorMessage = ""
-        this.error = false
-      }
-    }
-&nbsp;
   }
 <span class="cstat-no" title="statement not covered" >}</span>
 &lt;/script&gt;
@@ -508,7 +478,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-08-30T22:30:38.463Z
+                at 2023-09-23T07:01:52.799Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
