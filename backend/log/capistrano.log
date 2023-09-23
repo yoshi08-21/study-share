@@ -161,3 +161,531 @@
  DEBUG [11b6f435] 	tar: 
  DEBUG [11b6f435] 	前のエラーにより失敗ステータスで終了します
  DEBUG [11b6f435] 	
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-24 03:58:17 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [1126cfdc] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [1126cfdc] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [1126cfdc] Finished in 1.033 seconds with exit status 0 (successful).
+  INFO [f1b81bbb] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [f1b81bbb] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [f1b81bbb] Finished in 0.871 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-e911ed779d2f63d77ada.sh 0.0%
+  INFO Uploading /tmp/git-ssh-e911ed779d2f63d77ada.sh 100.0%
+  INFO [9827a133] Running /usr/bin/env chmod 700 /tmp/git-ssh-e911ed779d2f63d77ada.sh as ec2-user@3.115.171.176
+ DEBUG [9827a133] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-e911ed779d2f63d77ada.sh )
+  INFO [9827a133] Finished in 0.693 seconds with exit status 0 (successful).
+  INFO [be490d0c] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [be490d0c] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [be490d0c] 	6720da1152b0709ea8a724fd6313740c5c7f8c94	HEAD
+  INFO [be490d0c] Finished in 2.695 seconds with exit status 0 (successful).
+  INFO [f039e491] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases as ec2-user@3.115.171.176
+ DEBUG [f039e491] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases )
+  INFO [f039e491] Finished in 0.798 seconds with exit status 0 (successful).
+  INFO [4f29dd39] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [4f29dd39] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets )
+  INFO [4f29dd39] Finished in 0.664 seconds with exit status 0 (successful).
+ DEBUG [adfd8f70] Running [ -f /var/www/spa-portfolio-app/backend/current/REVISION ] as ec2-user@3.115.171.176
+ DEBUG [adfd8f70] Command: [ -f /var/www/spa-portfolio-app/backend/current/REVISION ]
+ DEBUG [adfd8f70] Finished in 0.723 seconds with exit status 1 (failed).
+ DEBUG [b10ea17b] Running [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ] as ec2-user@3.115.171.176
+ DEBUG [b10ea17b] Command: [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ]
+ DEBUG [b10ea17b] Finished in 0.776 seconds with exit status 1 (failed).
+ DEBUG [d664a955] Running if test ! -d /var/www/spa-portfolio-app/backend; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [d664a955] Command: if test ! -d /var/www/spa-portfolio-app/backend; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend'" 1>&2; false; fi
+ DEBUG [d664a955] Finished in 0.825 seconds with exit status 0 (successful).
+  INFO [8e0acb5b] Running /usr/bin/env git clone --mirror git@github.com:yoshi08-21/spa-portfolio-app.git /var/www/spa-portfolio-app/backend/repo as ec2-user@3.115.171.176
+ DEBUG [8e0acb5b] Command: cd /var/www/spa-portfolio-app/backend && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env git clone --mirror git@github.com:yoshi08-21/spa-portfolio-app.git /var/www/spa-portfolio-app/backend/repo )
+ DEBUG [8e0acb5b] 	Cloning into bare repository '/var/www/spa-portfolio-app/backend/repo'...
+  INFO [8e0acb5b] Finished in 35.965 seconds with exit status 0 (successful).
+ DEBUG [d9768f6f] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [d9768f6f] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [d9768f6f] Finished in 0.697 seconds with exit status 0 (successful).
+  INFO [a50dd9c2] Running /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git as ec2-user@3.115.171.176
+ DEBUG [a50dd9c2] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git )
+  INFO [a50dd9c2] Finished in 0.674 seconds with exit status 0 (successful).
+  INFO [279368a7] Running /usr/bin/env git remote update --prune as ec2-user@3.115.171.176
+ DEBUG [279368a7] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env git remote update --prune )
+  INFO [279368a7] Finished in 3.030 seconds with exit status 0 (successful).
+ DEBUG [38e26246] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [38e26246] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [38e26246] Finished in 0.685 seconds with exit status 0 (successful).
+  INFO [e229ec05] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923185825 as ec2-user@3.115.171.176
+ DEBUG [e229ec05] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923185825 )
+  INFO [e229ec05] Finished in 0.819 seconds with exit status 0 (successful).
+  INFO [33b77ea2] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923185825 as ec2-user@3.115.171.176
+ DEBUG [33b77ea2] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e911ed779d2f63d77ada.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923185825 )
+ DEBUG [33b77ea2] 	fatal: not a valid object name: master
+ DEBUG [33b77ea2] 	tar: 
+ DEBUG [33b77ea2] 	これは tar アーカイブではないようです
+ DEBUG [33b77ea2] 	
+ DEBUG [33b77ea2] 	tar: 
+ DEBUG [33b77ea2] 	前のエラーにより失敗ステータスで終了します
+ DEBUG [33b77ea2] 	
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-24 06:11:30 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [c38fd8bf] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [c38fd8bf] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [c38fd8bf] Finished in 1.090 seconds with exit status 0 (successful).
+  INFO [02558a7f] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [02558a7f] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [02558a7f] Finished in 0.820 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-526df4e9fc98350c98a5.sh 0.0%
+  INFO Uploading /tmp/git-ssh-526df4e9fc98350c98a5.sh 100.0%
+  INFO [c77820af] Running /usr/bin/env chmod 700 /tmp/git-ssh-526df4e9fc98350c98a5.sh as ec2-user@3.115.171.176
+ DEBUG [c77820af] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-526df4e9fc98350c98a5.sh )
+  INFO [c77820af] Finished in 0.786 seconds with exit status 0 (successful).
+  INFO [1fc270cd] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [1fc270cd] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [1fc270cd] 	6720da1152b0709ea8a724fd6313740c5c7f8c94	HEAD
+  INFO [1fc270cd] Finished in 2.663 seconds with exit status 0 (successful).
+  INFO [3e5709f6] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases as ec2-user@3.115.171.176
+ DEBUG [3e5709f6] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases )
+  INFO [3e5709f6] Finished in 1.022 seconds with exit status 0 (successful).
+  INFO [85ff44ea] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [85ff44ea] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets )
+  INFO [85ff44ea] Finished in 0.817 seconds with exit status 0 (successful).
+ DEBUG [1ce0bfa3] Running [ -f /var/www/spa-portfolio-app/backend/current/REVISION ] as ec2-user@3.115.171.176
+ DEBUG [1ce0bfa3] Command: [ -f /var/www/spa-portfolio-app/backend/current/REVISION ]
+ DEBUG [1ce0bfa3] Finished in 0.727 seconds with exit status 1 (failed).
+ DEBUG [d58beeb9] Running [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ] as ec2-user@3.115.171.176
+ DEBUG [d58beeb9] Command: [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ]
+ DEBUG [d58beeb9] Finished in 0.762 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/spa-portfolio-app/backend/repo
+ DEBUG [28c0bd20] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [28c0bd20] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [28c0bd20] Finished in 0.962 seconds with exit status 0 (successful).
+  INFO [a6e0c3f8] Running /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git as ec2-user@3.115.171.176
+ DEBUG [a6e0c3f8] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git )
+  INFO [a6e0c3f8] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO [5a960715] Running /usr/bin/env git remote update --prune as ec2-user@3.115.171.176
+ DEBUG [5a960715] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env git remote update --prune )
+  INFO [5a960715] Finished in 2.764 seconds with exit status 0 (successful).
+ DEBUG [f21d0c77] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [f21d0c77] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [f21d0c77] Finished in 0.689 seconds with exit status 0 (successful).
+  INFO [6748af0f] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923211139 as ec2-user@3.115.171.176
+ DEBUG [6748af0f] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923211139 )
+  INFO [6748af0f] Finished in 0.766 seconds with exit status 0 (successful).
+  INFO [8a9ff43e] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923211139 as ec2-user@3.115.171.176
+ DEBUG [8a9ff43e] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923211139 )
+  INFO [8a9ff43e] Finished in 1.308 seconds with exit status 0 (successful).
+ DEBUG [e8cd69f1] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [e8cd69f1] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [e8cd69f1] Finished in 0.819 seconds with exit status 0 (successful).
+ DEBUG [4a446a57] Running /usr/bin/env git rev-list --max-count=1 main as ec2-user@3.115.171.176
+ DEBUG [4a446a57] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-526df4e9fc98350c98a5.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [4a446a57] 	6720da1152b0709ea8a724fd6313740c5c7f8c94
+ DEBUG [4a446a57] Finished in 0.743 seconds with exit status 0 (successful).
+ DEBUG [dc92147e] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [dc92147e] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi
+ DEBUG [dc92147e] Finished in 0.790 seconds with exit status 0 (successful).
+  INFO [fc45a5ad] Running /usr/bin/env echo "6720da1152b0709ea8a724fd6313740c5c7f8c94" > REVISION as ec2-user@3.115.171.176
+ DEBUG [fc45a5ad] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env echo "6720da1152b0709ea8a724fd6313740c5c7f8c94" > REVISION )
+  INFO [fc45a5ad] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO [de41ad70] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923211139 /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor /var/www/spa-portfolio-app/backend/releases/20230923211139/public as ec2-user@3.115.171.176
+ DEBUG [de41ad70] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923211139 /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor /var/www/spa-portfolio-app/backend/releases/20230923211139/public )
+  INFO [de41ad70] Finished in 0.818 seconds with exit status 0 (successful).
+ DEBUG [98a69bd5] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/log ] as ec2-user@3.115.171.176
+ DEBUG [98a69bd5] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/log ]
+ DEBUG [98a69bd5] Finished in 0.723 seconds with exit status 1 (failed).
+ DEBUG [8d9b209b] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/log ] as ec2-user@3.115.171.176
+ DEBUG [8d9b209b] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/log ]
+ DEBUG [8d9b209b] Finished in 0.813 seconds with exit status 1 (failed).
+  INFO [1b8edea1] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/releases/20230923211139/log as ec2-user@3.115.171.176
+ DEBUG [1b8edea1] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/releases/20230923211139/log )
+  INFO [1b8edea1] Finished in 0.699 seconds with exit status 0 (successful).
+ DEBUG [3563e4e9] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids ] as ec2-user@3.115.171.176
+ DEBUG [3563e4e9] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids ]
+ DEBUG [3563e4e9] Finished in 0.691 seconds with exit status 1 (failed).
+ DEBUG [4dbaebe0] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids ] as ec2-user@3.115.171.176
+ DEBUG [4dbaebe0] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids ]
+ DEBUG [4dbaebe0] Finished in 0.859 seconds with exit status 1 (failed).
+  INFO [b1aa3789] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids as ec2-user@3.115.171.176
+ DEBUG [b1aa3789] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/pids )
+  INFO [b1aa3789] Finished in 0.717 seconds with exit status 0 (successful).
+ DEBUG [ed200dd5] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache ] as ec2-user@3.115.171.176
+ DEBUG [ed200dd5] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache ]
+ DEBUG [ed200dd5] Finished in 0.714 seconds with exit status 1 (failed).
+ DEBUG [ce452252] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache ] as ec2-user@3.115.171.176
+ DEBUG [ce452252] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache ]
+ DEBUG [ce452252] Finished in 0.716 seconds with exit status 1 (failed).
+  INFO [4938b661] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache as ec2-user@3.115.171.176
+ DEBUG [4938b661] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/cache )
+  INFO [4938b661] Finished in 0.722 seconds with exit status 0 (successful).
+ DEBUG [cf086d61] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets ] as ec2-user@3.115.171.176
+ DEBUG [cf086d61] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets ]
+ DEBUG [cf086d61] Finished in 0.711 seconds with exit status 1 (failed).
+ DEBUG [83bb3dca] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets ] as ec2-user@3.115.171.176
+ DEBUG [83bb3dca] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets ]
+ DEBUG [83bb3dca] Finished in 0.715 seconds with exit status 1 (failed).
+  INFO [34711444] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets as ec2-user@3.115.171.176
+ DEBUG [34711444] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/releases/20230923211139/tmp/sockets )
+  INFO [34711444] Finished in 0.735 seconds with exit status 0 (successful).
+ DEBUG [2f36f0d3] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle ] as ec2-user@3.115.171.176
+ DEBUG [2f36f0d3] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle ]
+ DEBUG [2f36f0d3] Finished in 0.801 seconds with exit status 1 (failed).
+ DEBUG [7dce85a8] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle ] as ec2-user@3.115.171.176
+ DEBUG [7dce85a8] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle ]
+ DEBUG [7dce85a8] Finished in 0.716 seconds with exit status 1 (failed).
+  INFO [e06fb3f0] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle as ec2-user@3.115.171.176
+ DEBUG [e06fb3f0] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/releases/20230923211139/vendor/bundle )
+  INFO [e06fb3f0] Finished in 0.717 seconds with exit status 0 (successful).
+ DEBUG [f2c2faab] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system ] as ec2-user@3.115.171.176
+ DEBUG [f2c2faab] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system ]
+ DEBUG [f2c2faab] Finished in 0.717 seconds with exit status 1 (failed).
+ DEBUG [8d17b8f2] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system ] as ec2-user@3.115.171.176
+ DEBUG [8d17b8f2] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system ]
+ DEBUG [8d17b8f2] Finished in 0.719 seconds with exit status 1 (failed).
+  INFO [a5a667f8] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system as ec2-user@3.115.171.176
+ DEBUG [a5a667f8] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/releases/20230923211139/public/system )
+  INFO [a5a667f8] Finished in 0.813 seconds with exit status 0 (successful).
+ DEBUG [237f528a] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads ] as ec2-user@3.115.171.176
+ DEBUG [237f528a] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads ]
+ DEBUG [237f528a] Finished in 0.680 seconds with exit status 1 (failed).
+ DEBUG [ce022730] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads ] as ec2-user@3.115.171.176
+ DEBUG [ce022730] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads ]
+ DEBUG [ce022730] Finished in 0.755 seconds with exit status 1 (failed).
+  INFO [f0beee3f] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads as ec2-user@3.115.171.176
+ DEBUG [f0beee3f] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/releases/20230923211139/public/uploads )
+  INFO [f0beee3f] Finished in 0.716 seconds with exit status 0 (successful).
+ DEBUG [a81444b8] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets ] as ec2-user@3.115.171.176
+ DEBUG [a81444b8] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets ]
+ DEBUG [a81444b8] Finished in 0.715 seconds with exit status 1 (failed).
+ DEBUG [d3a9bdf2] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets ] as ec2-user@3.115.171.176
+ DEBUG [d3a9bdf2] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets ]
+ DEBUG [d3a9bdf2] Finished in 0.690 seconds with exit status 1 (failed).
+  INFO [967ddc57] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/assets /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets as ec2-user@3.115.171.176
+ DEBUG [967ddc57] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/assets /var/www/spa-portfolio-app/backend/releases/20230923211139/public/assets )
+  INFO [967ddc57] Finished in 0.742 seconds with exit status 0 (successful).
+ DEBUG [4f10d44d] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [4f10d44d] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi
+ DEBUG [4f10d44d] Finished in 1.022 seconds with exit status 0 (successful).
+  INFO [881cdb87] Running $HOME/.rbenv/bin/rbenv exec bundle config --local deployment true as ec2-user@3.115.171.176
+ DEBUG [881cdb87] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local deployment true )
+  INFO [881cdb87] Finished in 1.228 seconds with exit status 0 (successful).
+  INFO [c935012b] Running $HOME/.rbenv/bin/rbenv exec bundle config --local path /var/www/spa-portfolio-app/backend/shared/bundle as ec2-user@3.115.171.176
+ DEBUG [c935012b] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local path /var/www/spa-portfolio-app/backend/shared/bundle )
+  INFO [c935012b] Finished in 0.918 seconds with exit status 0 (successful).
+  INFO [49b0bf1c] Running $HOME/.rbenv/bin/rbenv exec bundle config --local without development:test as ec2-user@3.115.171.176
+ DEBUG [49b0bf1c] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local without development:test )
+  INFO [49b0bf1c] Finished in 1.025 seconds with exit status 0 (successful).
+ DEBUG [6c334789] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [6c334789] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923211139; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923211139'" 1>&2; false; fi
+ DEBUG [6c334789] Finished in 0.920 seconds with exit status 0 (successful).
+ DEBUG [8c39b366] Running $HOME/.rbenv/bin/rbenv exec bundle check as ec2-user@3.115.171.176
+ DEBUG [8c39b366] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle check )
+ DEBUG [8c39b366] 	The following gems are missing
+ DEBUG [8c39b366] 	 * rails (6.1.7)
+ DEBUG [8c39b366] 	 * mysql2 (0.5.4)
+ DEBUG [8c39b366] 	 * puma (5.6.5)
+ DEBUG [8c39b366] 	 * bootsnap (1.15.0)
+ DEBUG [8c39b366] 	 * rack-cors (1.1.1)
+ DEBUG [8c39b366] 	 * bullet (7.0.7)
+ DEBUG [8c39b366] 	 * aws-sdk-s3 (1.132.0)
+ DEBUG [8c39b366] 	 * image_processing (1.12.2)
+ DEBUG [8c39b366] 	 * mini_magick (4.12.0)
+ DEBUG [8c39b366] 	 * httparty (0.21.0)
+ DEBUG [8c39b366] 	 * rspec-rails (6.0.3)
+ DEBUG [8c39b366] 	 * factory_bot_rails (6.2.0)
+ DEBUG [8c39b366] 	 * rails-i18n (6.0.0)
+ DEBUG [8c39b366] 	 * aws-sdk-ssm (1.156.0)
+ DEBUG [8c39b366] 	 * unicorn (6.1.0)
+ DEBUG [8c39b366] 	 * capistrano (3.17.3)
+ DEBUG [8c39b366] 	 * capistrano-rails (1.6.3)
+ DEBUG [8c39b366] 	 * capistrano-rbenv (2.2.0)
+ DEBUG [8c39b366] 	 * capistrano-rbenv-vars (0.1.0)
+ DEBUG [8c39b366] 	 * capistrano3-puma (5.2.0)
+ DEBUG [8c39b366] 	 * actioncable (6.1.7)
+ DEBUG [8c39b366] 	 * actionmailbox (6.1.7)
+ DEBUG [8c39b366] 	 * actionmailer (6.1.7)
+ DEBUG [8c39b366] 	 * actionpack (6.1.7)
+ DEBUG [8c39b366] 	 * actiontext (6.1.7)
+ DEBUG [8c39b366] 	 * actionview (6.1.7)
+ DEBUG [8c39b366] 	 * activejob (6.1.7)
+ DEBUG [8c39b366] 	 * activemodel (6.1.7)
+ DEBUG [8c39b366] 	 * activerecord (6.1.7)
+ DEBUG [8c39b366] 	 * activestorage (6.1.7)
+ DEBUG [8c39b366] 	 * activesupport (6.1.7)
+ DEBUG [8c39b366] 	 * railties (6.1.7)
+ DEBUG [8c39b366] 	 * sprockets-rails (3.4.2)
+ DEBUG [8c39b366] 	 * nio4r (2.5.8)
+ DEBUG [8c39b366] 	 * msgpack (1.6.0)
+ DEBUG [8c39b366] 	 * rack (2.2.5)
+ DEBUG [8c39b366] 	 * uniform_notifier (1.16.0)
+ DEBUG [8c39b366] 	 * aws-sdk-core (3.180.1)
+ DEBUG [8c39b366] 	 * aws-sdk-kms (1.71.0)
+ DEBUG [8c39b366] 	 * aws-sigv4 (1.6.0)
+ DEBUG [8c39b366] 	 * ruby-vips (2.1.4)
+ DEBUG [8c39b366] 	 * mini_mime (1.1.2)
+ DEBUG [8c39b366] 	 * multi_xml (0.6.0)
+ DEBUG [8c39b366] 	 * rspec-core (3.12.2)
+ DEBUG [8c39b366] 	 * rspec-expectations (3.12.3)
+ DEBUG [8c39b366] 	 * rspec-mocks (3.12.6)
+ DEBUG [8c39b366] 	 * rspec-support (3.12.1)
+ DEBUG [8c39b366] 	 * factory_bot (6.2.1)
+ DEBUG [8c39b366] 	 * i18n (1.12.0)
+ DEBUG [8c39b366] 	 * kgio (2.11.4)
+ DEBUG [8c39b366] 	 * raindrops (0.20.1)
+ DEBUG [8c39b366] 	 * airbrussh (1.4.2)
+ DEBUG [8c39b366] 	 * rake (13.0.6)
+ DEBUG [8c39b366] 	 * sshkit (1.21.5)
+ DEBUG [8c39b366] 	 * capistrano-bundler (2.1.0)
+ DEBUG [8c39b366] 	 * websocket-driver (0.7.5)
+ DEBUG [8c39b366] 	 * mail (2.8.0)
+ DEBUG [8c39b366] 	 * rails-dom-testing (2.0.3)
+ DEBUG [8c39b366] 	 * rack-test (2.0.2)
+ DEBUG [8c39b366] 	 * rails-html-sanitizer (1.4.4)
+ DEBUG [8c39b366] 	 * nokogiri (1.13.10)
+ DEBUG [8c39b366] 	 * builder (3.2.4)
+ DEBUG [8c39b366] 	 * erubi (1.12.0)
+ DEBUG [8c39b366] 	 * globalid (1.0.0)
+ DEBUG [8c39b366] 	 * marcel (1.0.2)
+ DEBUG [8c39b366] 	 * concurrent-ruby (1.1.10)
+ DEBUG [8c39b366] 	 * minitest (5.17.0)
+ DEBUG [8c39b366] 	 * tzinfo (2.0.5)
+ DEBUG [8c39b366] 	 * zeitwerk (2.6.6)
+ DEBUG [8c39b366] 	 * method_source (1.0.0)
+ DEBUG [8c39b366] 	 * thor (1.2.1)
+ DEBUG [8c39b366] 	 * sprockets (4.2.0)
+ DEBUG [8c39b366] 	 * aws-eventstream (1.2.0)
+ DEBUG [8c39b366] 	 * aws-partitions (1.798.0)
+ DEBUG [8c39b366] 	 * jmespath (1.6.2)
+ DEBUG [8c39b366] 	 * ffi (1.15.5)
+ DEBUG [8c39b366] 	 * diff-lcs (1.5.0)
+ DEBUG [8c39b366] 	 * net-scp (4.0.0)
+ DEBUG [8c39b366] 	 * net-ssh (7.2.0)
+ DEBUG [8c39b366] 	 * websocket-extensions (0.1.5)
+ DEBUG [8c39b366] 	 * net-imap (0.3.4)
+ DEBUG [8c39b366] 	 * net-pop (0.1.2)
+ DEBUG [8c39b366] 	 * net-smtp (0.3.3)
+ DEBUG [8c39b366] 	 * loofah (2.19.1)
+ DEBUG [8c39b366] 	 * racc (1.6.2)
+ DEBUG [8c39b366] 	 * date (3.3.3)
+ DEBUG [8c39b366] 	 * net-protocol (0.2.1)
+ DEBUG [8c39b366] 	 * crass (1.0.6)
+ DEBUG [8c39b366] 	 * timeout (0.3.1)
+ DEBUG [8c39b366] 	Install missing gems with `bundle install`
+ DEBUG [8c39b366] Finished in 1.161 seconds with exit status 1 (failed).
+  INFO [f0b3cbbc] Running $HOME/.rbenv/bin/rbenv exec bundle install --jobs 4 --quiet as ec2-user@3.115.171.176
+ DEBUG [f0b3cbbc] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923211139 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle install --jobs 4 --quiet )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-24 06:19:57 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [6d0778ec] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [6d0778ec] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [6d0778ec] Finished in 163.154 seconds with exit status 0 (successful).
+  INFO [091f09d5] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [091f09d5] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-09-24 06:47:21 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [40ef90e9] Running [ -d $HOME/.rbenv/versions/3.0.3 ] as ec2-user@3.115.171.176
+ DEBUG [40ef90e9] Command: [ -d $HOME/.rbenv/versions/3.0.3 ]
+ DEBUG [40ef90e9] Finished in 1.068 seconds with exit status 0 (successful).
+  INFO [c6b5baaa] Running /usr/bin/env mkdir -p /tmp as ec2-user@3.115.171.176
+ DEBUG [c6b5baaa] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /tmp )
+  INFO [c6b5baaa] Finished in 0.715 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-db6d1ea4480f329108eb.sh 0.0%
+  INFO Uploading /tmp/git-ssh-db6d1ea4480f329108eb.sh 100.0%
+  INFO [6260ec8f] Running /usr/bin/env chmod 700 /tmp/git-ssh-db6d1ea4480f329108eb.sh as ec2-user@3.115.171.176
+ DEBUG [6260ec8f] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env chmod 700 /tmp/git-ssh-db6d1ea4480f329108eb.sh )
+  INFO [6260ec8f] Finished in 0.791 seconds with exit status 0 (successful).
+  INFO [435dde9f] Running /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD as ec2-user@3.115.171.176
+ DEBUG [435dde9f] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env git ls-remote git@github.com:yoshi08-21/spa-portfolio-app.git HEAD )
+ DEBUG [435dde9f] 	6720da1152b0709ea8a724fd6313740c5c7f8c94	HEAD
+  INFO [435dde9f] Finished in 2.657 seconds with exit status 0 (successful).
+  INFO [78151634] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases as ec2-user@3.115.171.176
+ DEBUG [78151634] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared /var/www/spa-portfolio-app/backend/releases )
+  INFO [78151634] Finished in 0.714 seconds with exit status 0 (successful).
+  INFO [f5288131] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets as ec2-user@3.115.171.176
+ DEBUG [f5288131] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/shared/public/assets )
+  INFO [f5288131] Finished in 0.668 seconds with exit status 0 (successful).
+ DEBUG [5f3f1c96] Running [ -f /var/www/spa-portfolio-app/backend/current/REVISION ] as ec2-user@3.115.171.176
+ DEBUG [5f3f1c96] Command: [ -f /var/www/spa-portfolio-app/backend/current/REVISION ]
+ DEBUG [5f3f1c96] Finished in 0.757 seconds with exit status 1 (failed).
+ DEBUG [c78557a6] Running [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ] as ec2-user@3.115.171.176
+ DEBUG [c78557a6] Command: [ -f /var/www/spa-portfolio-app/backend/repo/HEAD ]
+ DEBUG [c78557a6] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/spa-portfolio-app/backend/repo
+ DEBUG [c3e907cb] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [c3e907cb] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [c3e907cb] Finished in 0.719 seconds with exit status 0 (successful).
+  INFO [e2d12e7e] Running /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git as ec2-user@3.115.171.176
+ DEBUG [e2d12e7e] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env git remote set-url origin git@github.com:yoshi08-21/spa-portfolio-app.git )
+  INFO [e2d12e7e] Finished in 0.714 seconds with exit status 0 (successful).
+  INFO [1fffe922] Running /usr/bin/env git remote update --prune as ec2-user@3.115.171.176
+ DEBUG [1fffe922] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env git remote update --prune )
+  INFO [1fffe922] Finished in 2.764 seconds with exit status 0 (successful).
+ DEBUG [d8c6de32] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [d8c6de32] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [d8c6de32] Finished in 0.819 seconds with exit status 0 (successful).
+  INFO [066ed53d] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923214729 as ec2-user@3.115.171.176
+ DEBUG [066ed53d] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923214729 )
+  INFO [066ed53d] Finished in 0.715 seconds with exit status 0 (successful).
+  INFO [b91fc3f7] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923214729 as ec2-user@3.115.171.176
+ DEBUG [b91fc3f7] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/spa-portfolio-app/backend/releases/20230923214729 )
+  INFO [b91fc3f7] Finished in 1.331 seconds with exit status 0 (successful).
+ DEBUG [14113e7d] Running if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [14113e7d] Command: if test ! -d /var/www/spa-portfolio-app/backend/repo; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/repo'" 1>&2; false; fi
+ DEBUG [14113e7d] Finished in 0.715 seconds with exit status 0 (successful).
+ DEBUG [9b65e99d] Running /usr/bin/env git rev-list --max-count=1 main as ec2-user@3.115.171.176
+ DEBUG [9b65e99d] Command: cd /var/www/spa-portfolio-app/backend/repo && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-db6d1ea4480f329108eb.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [9b65e99d] 	6720da1152b0709ea8a724fd6313740c5c7f8c94
+ DEBUG [9b65e99d] Finished in 0.719 seconds with exit status 0 (successful).
+ DEBUG [d9122f69] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [d9122f69] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi
+ DEBUG [d9122f69] Finished in 0.714 seconds with exit status 0 (successful).
+  INFO [26345227] Running /usr/bin/env echo "6720da1152b0709ea8a724fd6313740c5c7f8c94" > REVISION as ec2-user@3.115.171.176
+ DEBUG [26345227] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env echo "6720da1152b0709ea8a724fd6313740c5c7f8c94" > REVISION )
+  INFO [26345227] Finished in 0.716 seconds with exit status 0 (successful).
+  INFO [41286412] Running /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923214729 /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor /var/www/spa-portfolio-app/backend/releases/20230923214729/public as ec2-user@3.115.171.176
+ DEBUG [41286412] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env mkdir -p /var/www/spa-portfolio-app/backend/releases/20230923214729 /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor /var/www/spa-portfolio-app/backend/releases/20230923214729/public )
+  INFO [41286412] Finished in 0.713 seconds with exit status 0 (successful).
+ DEBUG [feeaad3e] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/log ] as ec2-user@3.115.171.176
+ DEBUG [feeaad3e] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/log ]
+ DEBUG [feeaad3e] Finished in 0.715 seconds with exit status 1 (failed).
+ DEBUG [8de895de] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/log ] as ec2-user@3.115.171.176
+ DEBUG [8de895de] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/log ]
+ DEBUG [8de895de] Finished in 0.717 seconds with exit status 1 (failed).
+  INFO [7ff87850] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/releases/20230923214729/log as ec2-user@3.115.171.176
+ DEBUG [7ff87850] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/log /var/www/spa-portfolio-app/backend/releases/20230923214729/log )
+  INFO [7ff87850] Finished in 0.716 seconds with exit status 0 (successful).
+ DEBUG [8459ffb9] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids ] as ec2-user@3.115.171.176
+ DEBUG [8459ffb9] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids ]
+ DEBUG [8459ffb9] Finished in 0.696 seconds with exit status 1 (failed).
+ DEBUG [98e29fe8] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids ] as ec2-user@3.115.171.176
+ DEBUG [98e29fe8] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids ]
+ DEBUG [98e29fe8] Finished in 0.677 seconds with exit status 1 (failed).
+  INFO [ffbf9787] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids as ec2-user@3.115.171.176
+ DEBUG [ffbf9787] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/pids /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/pids )
+  INFO [ffbf9787] Finished in 0.691 seconds with exit status 0 (successful).
+ DEBUG [e728864b] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache ] as ec2-user@3.115.171.176
+ DEBUG [e728864b] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache ]
+ DEBUG [e728864b] Finished in 0.699 seconds with exit status 1 (failed).
+ DEBUG [6489bc14] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache ] as ec2-user@3.115.171.176
+ DEBUG [6489bc14] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache ]
+ DEBUG [6489bc14] Finished in 0.716 seconds with exit status 1 (failed).
+  INFO [91baf95e] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache as ec2-user@3.115.171.176
+ DEBUG [91baf95e] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/cache /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/cache )
+  INFO [91baf95e] Finished in 0.676 seconds with exit status 0 (successful).
+ DEBUG [095b5c79] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets ] as ec2-user@3.115.171.176
+ DEBUG [095b5c79] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets ]
+ DEBUG [095b5c79] Finished in 0.756 seconds with exit status 1 (failed).
+ DEBUG [614deb2a] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets ] as ec2-user@3.115.171.176
+ DEBUG [614deb2a] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets ]
+ DEBUG [614deb2a] Finished in 0.717 seconds with exit status 1 (failed).
+  INFO [a968ce3d] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets as ec2-user@3.115.171.176
+ DEBUG [a968ce3d] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/tmp/sockets /var/www/spa-portfolio-app/backend/releases/20230923214729/tmp/sockets )
+  INFO [a968ce3d] Finished in 0.715 seconds with exit status 0 (successful).
+ DEBUG [23c54d4e] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle ] as ec2-user@3.115.171.176
+ DEBUG [23c54d4e] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle ]
+ DEBUG [23c54d4e] Finished in 0.722 seconds with exit status 1 (failed).
+ DEBUG [802cbd9c] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle ] as ec2-user@3.115.171.176
+ DEBUG [802cbd9c] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle ]
+ DEBUG [802cbd9c] Finished in 0.678 seconds with exit status 1 (failed).
+  INFO [3165caf8] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle as ec2-user@3.115.171.176
+ DEBUG [3165caf8] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/vendor/bundle /var/www/spa-portfolio-app/backend/releases/20230923214729/vendor/bundle )
+  INFO [3165caf8] Finished in 0.749 seconds with exit status 0 (successful).
+ DEBUG [c78f1eff] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system ] as ec2-user@3.115.171.176
+ DEBUG [c78f1eff] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system ]
+ DEBUG [c78f1eff] Finished in 0.716 seconds with exit status 1 (failed).
+ DEBUG [cf419bed] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system ] as ec2-user@3.115.171.176
+ DEBUG [cf419bed] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system ]
+ DEBUG [cf419bed] Finished in 0.716 seconds with exit status 1 (failed).
+  INFO [6cfcf55b] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system as ec2-user@3.115.171.176
+ DEBUG [6cfcf55b] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/system /var/www/spa-portfolio-app/backend/releases/20230923214729/public/system )
+  INFO [6cfcf55b] Finished in 0.739 seconds with exit status 0 (successful).
+ DEBUG [bc596b5f] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads ] as ec2-user@3.115.171.176
+ DEBUG [bc596b5f] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads ]
+ DEBUG [bc596b5f] Finished in 0.797 seconds with exit status 1 (failed).
+ DEBUG [090a16d1] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads ] as ec2-user@3.115.171.176
+ DEBUG [090a16d1] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads ]
+ DEBUG [090a16d1] Finished in 0.717 seconds with exit status 1 (failed).
+  INFO [a40511fd] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads as ec2-user@3.115.171.176
+ DEBUG [a40511fd] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/uploads /var/www/spa-portfolio-app/backend/releases/20230923214729/public/uploads )
+  INFO [a40511fd] Finished in 0.715 seconds with exit status 0 (successful).
+ DEBUG [ef2d8156] Running [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets ] as ec2-user@3.115.171.176
+ DEBUG [ef2d8156] Command: [ -L /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets ]
+ DEBUG [ef2d8156] Finished in 0.716 seconds with exit status 1 (failed).
+ DEBUG [8fc1941a] Running [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets ] as ec2-user@3.115.171.176
+ DEBUG [8fc1941a] Command: [ -d /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets ]
+ DEBUG [8fc1941a] Finished in 0.717 seconds with exit status 1 (failed).
+  INFO [64e52116] Running /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/assets /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets as ec2-user@3.115.171.176
+ DEBUG [64e52116] Command: ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; /usr/bin/env ln -s /var/www/spa-portfolio-app/backend/shared/public/assets /var/www/spa-portfolio-app/backend/releases/20230923214729/public/assets )
+  INFO [64e52116] Finished in 0.679 seconds with exit status 0 (successful).
+ DEBUG [4f8f70fd] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [4f8f70fd] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi
+ DEBUG [4f8f70fd] Finished in 0.753 seconds with exit status 0 (successful).
+  INFO [941ee8d6] Running $HOME/.rbenv/bin/rbenv exec bundle config --local deployment true as ec2-user@3.115.171.176
+ DEBUG [941ee8d6] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local deployment true )
+  INFO [941ee8d6] Finished in 1.331 seconds with exit status 0 (successful).
+  INFO [58ffa73b] Running $HOME/.rbenv/bin/rbenv exec bundle config --local path /var/www/spa-portfolio-app/backend/shared/bundle as ec2-user@3.115.171.176
+ DEBUG [58ffa73b] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local path /var/www/spa-portfolio-app/backend/shared/bundle )
+  INFO [58ffa73b] Finished in 0.921 seconds with exit status 0 (successful).
+  INFO [4f962db1] Running $HOME/.rbenv/bin/rbenv exec bundle config --local without development:test as ec2-user@3.115.171.176
+ DEBUG [4f962db1] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle config --local without development:test )
+  INFO [4f962db1] Finished in 0.921 seconds with exit status 0 (successful).
+ DEBUG [9ef26140] Running if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi as ec2-user@3.115.171.176
+ DEBUG [9ef26140] Command: if test ! -d /var/www/spa-portfolio-app/backend/releases/20230923214729; then echo "Directory does not exist '/var/www/spa-portfolio-app/backend/releases/20230923214729'" 1>&2; false; fi
+ DEBUG [9ef26140] Finished in 0.726 seconds with exit status 0 (successful).
+ DEBUG [6141a72b] Running $HOME/.rbenv/bin/rbenv exec bundle check as ec2-user@3.115.171.176
+ DEBUG [6141a72b] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle check )
+ DEBUG [6141a72b] 	The following gems are missing
+ DEBUG [6141a72b] 	 * rails (6.1.7)
+ DEBUG [6141a72b] 	 * puma (5.6.5)
+ DEBUG [6141a72b] 	 * bootsnap (1.15.0)
+ DEBUG [6141a72b] 	 * bullet (7.0.7)
+ DEBUG [6141a72b] 	 * aws-sdk-s3 (1.132.0)
+ DEBUG [6141a72b] 	 * image_processing (1.12.2)
+ DEBUG [6141a72b] 	 * httparty (0.21.0)
+ DEBUG [6141a72b] 	 * rspec-rails (6.0.3)
+ DEBUG [6141a72b] 	 * factory_bot_rails (6.2.0)
+ DEBUG [6141a72b] 	 * rails-i18n (6.0.0)
+ DEBUG [6141a72b] 	 * aws-sdk-ssm (1.156.0)
+ DEBUG [6141a72b] 	 * unicorn (6.1.0)
+ DEBUG [6141a72b] 	 * capistrano (3.17.3)
+ DEBUG [6141a72b] 	 * capistrano-rails (1.6.3)
+ DEBUG [6141a72b] 	 * capistrano-rbenv (2.2.0)
+ DEBUG [6141a72b] 	 * capistrano-rbenv-vars (0.1.0)
+ DEBUG [6141a72b] 	 * capistrano3-puma (5.2.0)
+ DEBUG [6141a72b] 	 * actioncable (6.1.7)
+ DEBUG [6141a72b] 	 * actionmailbox (6.1.7)
+ DEBUG [6141a72b] 	 * actionmailer (6.1.7)
+ DEBUG [6141a72b] 	 * actionpack (6.1.7)
+ DEBUG [6141a72b] 	 * actiontext (6.1.7)
+ DEBUG [6141a72b] 	 * actionview (6.1.7)
+ DEBUG [6141a72b] 	 * activejob (6.1.7)
+ DEBUG [6141a72b] 	 * activemodel (6.1.7)
+ DEBUG [6141a72b] 	 * activerecord (6.1.7)
+ DEBUG [6141a72b] 	 * activestorage (6.1.7)
+ DEBUG [6141a72b] 	 * activesupport (6.1.7)
+ DEBUG [6141a72b] 	 * railties (6.1.7)
+ DEBUG [6141a72b] 	 * sprockets-rails (3.4.2)
+ DEBUG [6141a72b] 	 * nio4r (2.5.8)
+ DEBUG [6141a72b] 	 * msgpack (1.6.0)
+ DEBUG [6141a72b] 	 * aws-sdk-core (3.180.1)
+ DEBUG [6141a72b] 	 * aws-sdk-kms (1.71.0)
+ DEBUG [6141a72b] 	 * ruby-vips (2.1.4)
+ DEBUG [6141a72b] 	 * rspec-core (3.12.2)
+ DEBUG [6141a72b] 	 * rspec-expectations (3.12.3)
+ DEBUG [6141a72b] 	 * rspec-mocks (3.12.6)
+ DEBUG [6141a72b] 	 * factory_bot (6.2.1)
+ DEBUG [6141a72b] 	 * airbrussh (1.4.2)
+ DEBUG [6141a72b] 	 * sshkit (1.21.5)
+ DEBUG [6141a72b] 	 * capistrano-bundler (2.1.0)
+ DEBUG [6141a72b] 	 * mail (2.8.0)
+ DEBUG [6141a72b] 	 * rails-dom-testing (2.0.3)
+ DEBUG [6141a72b] 	 * rails-html-sanitizer (1.4.4)
+ DEBUG [6141a72b] 	 * globalid (1.0.0)
+ DEBUG [6141a72b] 	 * ffi (1.15.5)
+ DEBUG [6141a72b] 	 * net-imap (0.3.4)
+ DEBUG [6141a72b] 	 * net-pop (0.1.2)
+ DEBUG [6141a72b] 	 * net-smtp (0.3.3)
+ DEBUG [6141a72b] 	 * loofah (2.19.1)
+ DEBUG [6141a72b] 	 * date (3.3.3)
+ DEBUG [6141a72b] 	Install missing gems with `bundle install`
+ DEBUG [6141a72b] Finished in 1.144 seconds with exit status 1 (failed).
+  INFO [b81b3574] Running $HOME/.rbenv/bin/rbenv exec bundle install --jobs 4 --quiet as ec2-user@3.115.171.176
+ DEBUG [b81b3574] Command: cd /var/www/spa-portfolio-app/backend/releases/20230923214729 && ( export RBENV_ROOT="$HOME/.rbenv" RBENV_VERSION="3.0.3" ; $HOME/.rbenv/bin/rbenv exec bundle install --jobs 4 --quiet )
