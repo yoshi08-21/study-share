@@ -3,7 +3,7 @@ name: Deploy study_share
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
 
     - name: Setup SSH and deploy using Capistrano
       env:
-        DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }} # GitHub SecretsからSSHキーを取得
+        DEPLOY_SSH_KEY: ${{ 3.115.171.176 }}
       run: |
         mkdir -p ~/.ssh
         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
