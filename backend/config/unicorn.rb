@@ -1,5 +1,5 @@
 
-app_path = File.expand_path('../../', __FILE__)
+app_path = "/var/www/spa-portfolio-app/backend/"
 
 #アプリケーションサーバの性能を決定する
 worker_processes 1
