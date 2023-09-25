@@ -32,7 +32,7 @@ set :keep_releases, 5
 namespace :deploy do
   namespace :assets do
     task :precompile do
-      # 何もしない
+
     end
   end
 end
