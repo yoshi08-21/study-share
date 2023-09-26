@@ -19,6 +19,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '3.0.3'
 
 # どの公開鍵を利用してデプロイするか
+# keysの指定はGithub Actionsでの動作時のものなので、ローカルではエラーになる
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/id_rsa']
 
