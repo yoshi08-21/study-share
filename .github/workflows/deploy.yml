@@ -13,18 +13,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.3
-
-    - name: Setup SSH and deploy using Capistrano
+    - name: Setup SSH key
       env:
         DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
       run: |
         mkdir -p ~/.ssh
         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
-        bundle install
-        bundle exec cap production deploy
+
+    - name: Add SSH key to known hosts
+      run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.3
+
+    - name: Bundle install
+      run: bundle install
+
+    - name: Deploy using Capistrano
+      run: bundle exec cap production deploy
