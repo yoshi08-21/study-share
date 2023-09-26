@@ -41,7 +41,7 @@ jobs:
         ruby-version: 3.0.3
 
     - name: Bundle install in backend directory
-      run: cd backend_directory && bundle install
+      run: cd backend && bundle install
 
     - name: Public IP
       id: ip
