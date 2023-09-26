@@ -27,9 +27,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-      - name: Authorize Security Group for SSH
-      run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
-
     - name: Setup SSH key
       env:
         DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -37,6 +34,9 @@ jobs:
         mkdir -p ~/.ssh
         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+
+    - name: Authorize Security Group for SSH
+      run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
     - name: Add SSH key to known hosts
       run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
