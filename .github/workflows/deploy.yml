@@ -29,7 +29,7 @@ jobs:
 
     - name: Setup SSH key
       env:
-        DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_PEM_KEY }}
       run: |
         mkdir -p ~/.ssh
         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
@@ -39,9 +39,6 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.3
-
-    - name: Install gems
-      run: gem install ed25519 && gem install bcrypt_pbkdf
 
     - name: Bundle install in backend directory
       run: cd backend && bundle install
