@@ -35,17 +35,17 @@ jobs:
         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
-    - name: Public IP
-      id: ip
-      uses: haythem/public-ip@v1.2
-
-
+    - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.3
 
     - name: Bundle install
       run: bundle install
+
+    - name: Public IP
+      id: ip
+      uses: haythem/public-ip@v1.2
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -57,9 +57,9 @@ jobs:
     - name: Authorize Security Group for SSH
       run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
+    # Capistranoでのデプロイ時に必要
     - name: Add SSH key to known hosts
       run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
-    - name: Setup Ruby
 
     - name: Deploy using Capistrano
       run: bundle exec cap production deploy
