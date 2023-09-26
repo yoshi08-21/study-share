@@ -6,9 +6,23 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Build steps
+      run: echo "Your build steps here"
+      # npm run buildの実行やテストの実行など
+
   deploy:
     runs-on: ubuntu-latest
-
+    needs: build
+    permissions:
+      id-token: write
+      contents: read
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -22,9 +36,9 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
 
     - name: Add SSH key to known hosts
-      run: ssh-keyscan -H 3.115.171.176
-
+      run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
     - name: Setup Ruby
+
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.0.3
@@ -32,5 +46,62 @@ jobs:
     - name: Bundle install
       run: bundle install
 
+    - name: Public IP
+      id: ip
+      uses: haythem/public-ip@v1.2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: ap-northeast-1
+        role-to-assume: ${{ secrets.EC2_ROLE_ARN }}
+        role-session-name: github-actions-deploy-${{ github.event.repository.name }}-${{ github.run_number }}
+
+    - name: Authorize Security Group for SSH
+      run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
     - name: Deploy using Capistrano
       run: bundle exec cap production deploy
+
+    - name: Revoke security group
+      if: always()
+      run: aws ec2 revoke-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
+
+
+# name: Deploy study_share
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
+
+#     - name: Setup SSH key
+#       env:
+#         DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+#       run: |
+#         mkdir -p ~/.ssh
+#         echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
+#         chmod 600 ~/.ssh/id_rsa
+
+#     - name: Add SSH key to known hosts
+#       run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
+
+#     - name: Setup Ruby
+#       uses: ruby/setup-ruby@v1
+#       with:
+#         ruby-version: 3.0.3
+
+#     - name: Bundle install
+#       run: bundle install
+
+#     - name: Deploy using Capistrano
+#       run: bundle exec cap production deploy
