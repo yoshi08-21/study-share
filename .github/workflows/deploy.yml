@@ -61,8 +61,8 @@ jobs:
     - name: Add SSH key to known hosts
       run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
 
-    - name: Deploy using Capistrano
-      run: bundle exec cap production deploy
+    - name: Deploy using Capistrano in backend directory
+      run:  cd backend && bundle exec cap production deploy
 
     - name: Revoke security group
       if: always()
