@@ -48,7 +48,7 @@ jobs:
       run: cd frontend && npm run build
 
     - name: Deploy to S3
-      run: cd frontend && aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} --acl public-read
+      run: cd frontend && aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }}
 
     # EC2へのデプロイ
     - name: Public IP
