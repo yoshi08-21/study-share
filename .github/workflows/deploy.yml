@@ -41,6 +41,14 @@ jobs:
       with:
         node-version: '16.14.2'
 
+    - name: Cache Node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+        ${{ runner.os }}-node-
+
     - name: Install dependencies
       run: cd frontend && npm install
 
@@ -78,8 +86,18 @@ jobs:
       with:
         ruby-version: 3.0.3
 
+    - name: Cache Ruby gems
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
     - name: Bundle install in backend directory
-      run: cd backend && bundle install
+      run: |
+        bundle config path vendor/bundle
+        cd backend && bundle install --retry 3
 
     # Capistranoでのデプロイ時に必要
     - name: Add SSH key to known hosts
