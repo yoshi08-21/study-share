@@ -68,7 +68,7 @@ export default {
   },
 
   proxy: {
-    '/api/': { target: 'http://3.115.171.176', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/api/': { target: process.env.API_BASE_URL || 'http://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

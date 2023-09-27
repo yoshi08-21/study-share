@@ -321,3 +321,135 @@ Processing by NotificationsController#index as HTML
 Completed 200 OK in 239ms (Views: 225.2ms | ActiveRecord: 10.0ms | Allocations: 210409)
 
 
+Started GET "/users/find_user_by_uid/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-09-27 14:29:39 +0900
+Processing by UsersController#find_user_by_uid as HTML
+  Parameters: {"uid"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:172:in `find_user_by_uid'
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'User' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:175:in `find_user_by_uid'
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 43 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:176:in `find_user_by_uid'
+Completed 200 OK in 20ms (Views: 0.3ms | ActiveRecord: 3.0ms | Allocations: 4616)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=1" for ::1 at 2023-09-27 14:29:39 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:38:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 1 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:43:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 1.1ms | Allocations: 1063)
+
+
+Started GET "/notifications?current_user_id=1" for ::1 at 2023-09-27 14:29:39 +0900
+Processing by NotificationsController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:7:in `index'
+  [1m[36mNotification Load (0.9ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`target_user_id` = 1 ORDER BY `notifications`.`created_at` DESC[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (16, 7, 14, 1)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` IN (7, 6)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` IN (3, 39, 8, 7, 2, 15)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mReply Load (0.5ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` IN (55, 54, 53, 51, 50, 49, 45, 41, 40, 39, 38, 37, 36, 35)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (7, 14, 1)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` IN (15, 2, 9, 3, 39, 8)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestion Load (0.7ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` IN (1, 2, 34, 3, 11, 17)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestionReply Load (0.7ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` IN (79, 73, 72, 71, 70, 68, 39, 67, 41, 40)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 16, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestion Load (0.6ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` IN (17, 1, 2, 3, 34)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSurvey Load (0.5ms)[0m  [1m[34mSELECT `surveys`.* FROM `surveys` WHERE `surveys`.`id` IN (17, 4, 2, 22, 3, 14, 1, 15)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mNotification Load (0.6ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`target_user_id` = 1 AND `notifications`.`is_checked` = FALSE ORDER BY `notifications`.`created_at` DESC[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `index'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`target_user_id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:54:in `delete_over100_notifications'
+Completed 200 OK in 210ms (Views: 197.1ms | ActiveRecord: 8.9ms | Allocations: 204147)
+
+
+Started GET "/users/find_user_by_uid/Vrq4p702Yfgl7yQkHd4sbr2k7sC3" for ::1 at 2023-09-27 14:30:38 +0900
+Processing by UsersController#find_user_by_uid as HTML
+  Parameters: {"uid"=>"Vrq4p702Yfgl7yQkHd4sbr2k7sC3"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`uid` = 'Vrq4p702Yfgl7yQkHd4sbr2k7sC3' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:172:in `find_user_by_uid'
+  [1m[36mActiveStorage::Attachment Load (2.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'User' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:175:in `find_user_by_uid'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 43 LIMIT 1[0m
+  ↳ app/controllers/users_controller.rb:176:in `find_user_by_uid'
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 3.3ms | Allocations: 4413)
+
+
+Started GET "/notifications/check_unread_notifications?current_user_id=1" for ::1 at 2023-09-27 14:30:38 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:38:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 1 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:43:in `check_unread_notifications'
+Completed 204 No Content in 4ms (ActiveRecord: 1.3ms | Allocations: 1063)
+
+
+Started GET "/notifications?current_user_id=1" for ::1 at 2023-09-27 14:30:39 +0900
+Processing by NotificationsController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:7:in `index'
+  [1m[36mNotification Load (0.6ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`target_user_id` = 1 ORDER BY `notifications`.`created_at` DESC[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (16, 7, 14, 1)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`id` IN (7, 6)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` IN (3, 39, 8, 7, 2, 15)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mReply Load (0.6ms)[0m  [1m[34mSELECT `replies`.* FROM `replies` WHERE `replies`.`id` IN (55, 54, 53, 51, 50, 49, 45, 41, 40, 39, 38, 37, 36, 35)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (7, 14, 1)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT `questions`.* FROM `questions` WHERE `questions`.`id` IN (15, 2, 9, 3, 39, 8)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` IN (1, 2, 34, 3, 11, 17)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestionReply Load (0.6ms)[0m  [1m[34mSELECT `subject_question_replies`.* FROM `subject_question_replies` WHERE `subject_question_replies`.`id` IN (79, 73, 72, 71, 70, 68, 39, 67, 41, 40)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 14, 16, 7)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSubjectQuestion Load (0.5ms)[0m  [1m[34mSELECT `subject_questions`.* FROM `subject_questions` WHERE `subject_questions`.`id` IN (17, 1, 2, 3, 34)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mSurvey Load (0.6ms)[0m  [1m[34mSELECT `surveys`.* FROM `surveys` WHERE `surveys`.`id` IN (17, 4, 2, 22, 3, 14, 1, 15)[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:21:in `index'
+  [1m[36mNotification Load (0.6ms)[0m  [1m[34mSELECT `notifications`.* FROM `notifications` WHERE `notifications`.`target_user_id` = 1 AND `notifications`.`is_checked` = FALSE ORDER BY `notifications`.`created_at` DESC[0m
+  ↳ app/controllers/notifications_controller.rb:30:in `index'
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `notifications` WHERE `notifications`.`target_user_id` = 1[0m
+  ↳ app/controllers/notifications_controller.rb:54:in `delete_over100_notifications'
+Completed 200 OK in 227ms (Views: 213.5ms | ActiveRecord: 9.4ms | Allocations: 204152)
+
+
