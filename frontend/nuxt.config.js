@@ -1,5 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
+let apiBaseUrl = 'http://localhost:3000';
+if (process.env.NODE_ENV === 'production') {
+  apiBaseUrl = 'http://3.115.171.176';
+}
+
 export default {
   ssr: false,
 
@@ -61,14 +66,15 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/dotenv',
   ],
 
   env: {
-    API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000',
+    API_BASE_URL: apiBaseUrl,
   },
 
   proxy: {
-    '/api/': { target: process.env.API_BASE_URL || 'http://localhost:3000', pathRewrite: { '^/api/': '' }, changeOrigin: true }
+    '/api/': { target: apiBaseUrl, pathRewrite: { '^/api/': '' }, changeOrigin: true }
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
