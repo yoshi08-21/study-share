@@ -3,150 +3,175 @@
     "name": "favorites",
     "path": "/favorites",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/favorites.vue",
-    "chunkName": "pages/favorites"
+    "chunkName": "pages/favorites",
+    "_name": "_4d18237d"
   },
   {
     "name": "myPage",
     "path": "/myPage",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/myPage.vue",
-    "chunkName": "pages/myPage"
+    "chunkName": "pages/myPage",
+    "_name": "_44011c25"
   },
   {
     "name": "auth-login",
     "path": "/auth/login",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/login.vue",
-    "chunkName": "pages/auth/login"
+    "chunkName": "pages/auth/login",
+    "_name": "_e100a4e8"
   },
   {
     "name": "auth-signUp",
     "path": "/auth/signUp",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/signUp.vue",
-    "chunkName": "pages/auth/signUp"
+    "chunkName": "pages/auth/signUp",
+    "_name": "_7634dd25"
   },
   {
     "name": "books-allBooks",
     "path": "/books/allBooks",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/allBooks.vue",
-    "chunkName": "pages/books/allBooks"
+    "chunkName": "pages/books/allBooks",
+    "_name": "_9dc6c4d0"
   },
   {
     "name": "books-googleApiSearchBooks",
     "path": "/books/googleApiSearchBooks",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/googleApiSearchBooks.vue",
-    "chunkName": "pages/books/googleApiSearchBooks"
+    "chunkName": "pages/books/googleApiSearchBooks",
+    "_name": "_26eaf390"
   },
   {
     "name": "books-localSearchBooksResult",
     "path": "/books/localSearchBooksResult",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/localSearchBooksResult.vue",
-    "chunkName": "pages/books/localSearchBooksResult"
+    "chunkName": "pages/books/localSearchBooksResult",
+    "_name": "_ae970a7a"
   },
   {
     "name": "browsingHistories-allBrowsingHistories",
     "path": "/browsingHistories/allBrowsingHistories",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/browsingHistories/allBrowsingHistories.vue",
-    "chunkName": "pages/browsingHistories/allBrowsingHistories"
+    "chunkName": "pages/browsingHistories/allBrowsingHistories",
+    "_name": "_3cdae790"
   },
   {
     "name": "errors-errorPage",
     "path": "/errors/errorPage",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/errors/errorPage.vue",
-    "chunkName": "pages/errors/errorPage"
+    "chunkName": "pages/errors/errorPage",
+    "_name": "_6f9aaa5d"
   },
   {
     "name": "notifications-allNotifications",
     "path": "/notifications/allNotifications",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/notifications/allNotifications.vue",
-    "chunkName": "pages/notifications/allNotifications"
+    "chunkName": "pages/notifications/allNotifications",
+    "_name": "_4f958d50"
   },
   {
     "name": "questions-allQuestions",
     "path": "/questions/allQuestions",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/questions/allQuestions.vue",
-    "chunkName": "pages/questions/allQuestions"
+    "chunkName": "pages/questions/allQuestions",
+    "_name": "_98aeeb10"
   },
   {
     "name": "questions-searchQuestionsResult",
     "path": "/questions/searchQuestionsResult",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/questions/searchQuestionsResult.vue",
-    "chunkName": "pages/questions/searchQuestionsResult"
+    "chunkName": "pages/questions/searchQuestionsResult",
+    "_name": "_fdf62034"
   },
   {
     "name": "subjectQuestions-allSubjectQuestions",
     "path": "/subjectQuestions/allSubjectQuestions",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/subjectQuestions/allSubjectQuestions.vue",
-    "chunkName": "pages/subjectQuestions/allSubjectQuestions"
+    "chunkName": "pages/subjectQuestions/allSubjectQuestions",
+    "_name": "_563e0504"
   },
   {
     "name": "subjectQuestions-searchSubjectQuestionsResult",
     "path": "/subjectQuestions/searchSubjectQuestionsResult",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/subjectQuestions/searchSubjectQuestionsResult.vue",
-    "chunkName": "pages/subjectQuestions/searchSubjectQuestionsResult"
+    "chunkName": "pages/subjectQuestions/searchSubjectQuestionsResult",
+    "_name": "_5ff2263a"
   },
   {
     "name": "surveys-allSurveys",
     "path": "/surveys/allSurveys",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/surveys/allSurveys.vue",
-    "chunkName": "pages/surveys/allSurveys"
+    "chunkName": "pages/surveys/allSurveys",
+    "_name": "_0a420f90"
   },
   {
     "name": "books-id",
     "path": "/books/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/_id.vue",
-    "chunkName": "pages/books/_id"
+    "chunkName": "pages/books/_id",
+    "_name": "_548c520a"
   },
   {
     "name": "subjectQuestions-id",
     "path": "/subjectQuestions/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/subjectQuestions/_id.vue",
-    "chunkName": "pages/subjectQuestions/_id"
+    "chunkName": "pages/subjectQuestions/_id",
+    "_name": "_3d3ec1f6"
   },
   {
     "name": "surveys-id",
     "path": "/surveys/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/surveys/_id.vue",
-    "chunkName": "pages/surveys/_id"
+    "chunkName": "pages/surveys/_id",
+    "_name": "_dca2e3ac"
   },
   {
     "name": "users-id",
     "path": "/users/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/users/_id.vue",
-    "chunkName": "pages/users/_id"
+    "chunkName": "pages/users/_id",
+    "_name": "_f565f74e"
   },
   {
     "name": "books-book_id-questions-id",
     "path": "/books/:book_id?/questions/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/_book_id/questions/_id.vue",
-    "chunkName": "pages/books/_book_id/questions/_id"
+    "chunkName": "pages/books/_book_id/questions/_id",
+    "_name": "_0623db2c"
   },
   {
     "name": "books-book_id-reviews-id",
     "path": "/books/:book_id?/reviews/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/_book_id/reviews/_id.vue",
-    "chunkName": "pages/books/_book_id/reviews/_id"
+    "chunkName": "pages/books/_book_id/reviews/_id",
+    "_name": "_82be7490"
   },
   {
     "name": "books-book_id-reviews-id.test 2",
     "path": "/books/:book_id?/reviews/:id.test%202?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/_book_id/reviews/_id.test 2.js",
-    "chunkName": "pages/books/_book_id/reviews/_id.test 2"
+    "chunkName": "pages/books/_book_id/reviews/_id.test 2",
+    "_name": "_7d7bba05"
   },
   {
     "name": "subjectQuestions-subjectQuestion_id-subjectQuestionReplies-id",
     "path": "/subjectQuestions/:subjectQuestion_id?/subjectQuestionReplies/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id.vue",
-    "chunkName": "pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id"
+    "chunkName": "pages/subjectQuestions/_subjectQuestion_id/subjectQuestionReplies/_id",
+    "_name": "_e49a5486"
   },
   {
     "name": "books-book_id-questions-question_id-replies-id",
     "path": "/books/:book_id?/questions/:question_id?/replies/:id?",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/books/_book_id/questions/_question_id/replies/_id.vue",
-    "chunkName": "pages/books/_book_id/questions/_question_id/replies/_id"
+    "chunkName": "pages/books/_book_id/questions/_question_id/replies/_id",
+    "_name": "_5922f579"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_61153910"
   }
 ]
