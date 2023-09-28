@@ -56,6 +56,7 @@ backend/config/master.key
 backend/.env
 
 frontend/coverage
+frontend/cypress/screenshots/
 
 
 /coverage/
