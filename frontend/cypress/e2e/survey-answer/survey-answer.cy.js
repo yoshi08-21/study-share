@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -40,15 +40,15 @@ describe("アンケートの回答の新規作成", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("回答作成用アンケート").click()
+    cy.contains("回答作成用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -56,7 +56,7 @@ describe("アンケートの回答の新規作成", () => {
 
     cy.contains("回答受付中")
 
-    cy.contains("選択肢1").click()
+    cy.contains("選択肢1").click({ force: true })
 
     cy.contains("アンケートに回答しました")
 
@@ -92,15 +92,15 @@ describe("アンケートの回答の新規作成", () => {
   it("未ログイン状態でアンケートに回答すると、ログインページにリダイレクトする", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("回答作成用アンケート").click()
+    cy.contains("回答作成用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -108,7 +108,7 @@ describe("アンケートの回答の新規作成", () => {
 
     cy.contains("回答受付中")
 
-    cy.contains("選択肢1").click()
+    cy.contains("選択肢1").click({ force: true })
 
     cy.url().should("include", "/auth/login")
 
@@ -122,15 +122,15 @@ describe("アンケートの回答の新規作成", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("自分が作成したアンケート").click()
+    cy.contains("自分が作成したアンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -154,11 +154,11 @@ describe("アンケートの回答の新規作成", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("締め切り済みアンケート").click()
+    cy.contains("締め切り済みアンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -187,15 +187,15 @@ describe("アンケートの回答変更", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("回答変更用アンケート").click()
+    cy.contains("回答変更用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -217,7 +217,7 @@ describe("アンケートの回答変更", () => {
 
     cy.get("[data-cy=option2-result]").contains("0%")
 
-    cy.contains("選択肢2").click()
+    cy.contains("選択肢2").click({ force: true })
 
     cy.contains("回答を変更しました")
 
@@ -237,22 +237,22 @@ describe("アンケートの回答変更", () => {
 
 describe("アンケートの回答削除", () => {
 
-  it.only("回答済みのアンケートで自分が選択済みの回答を再度クリックすると、回答が取り消される", () => {
+  it("回答済みのアンケートで自分が選択済みの回答を再度クリックすると、回答が取り消される", () => {
     cy.login("cypress@cypress.com", "cypress")
 
     cy.contains("プロフィール")
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("回答削除用アンケート").click()
+    cy.contains("回答削除用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 

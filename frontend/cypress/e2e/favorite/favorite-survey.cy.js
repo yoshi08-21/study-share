@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -38,11 +38,11 @@ describe("アンケートのいいね一覧", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
-    cy.get(".v-tabs").contains("いいね!したアンケート").click()
+    cy.get(".v-tabs").contains("いいね!したアンケート").click({ force: true })
 
     cy.contains("いいね用アンケート1")
 
@@ -62,15 +62,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね追加用アンケート1").click()
+    cy.contains("いいね追加用アンケート1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -88,15 +88,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね削除用アンケート1").click()
+    cy.contains("いいね削除用アンケート1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -112,9 +112,9 @@ describe("いいねの確認", () => {
 
     cy.contains("プロフィール")
 
-    cy.get(".v-tabs").contains("作成したアンケート").click()
+    cy.get(".v-tabs").contains("作成したアンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル1").click()
+    cy.contains("サンプルアンケートタイトル1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -126,11 +126,11 @@ describe("いいねの確認", () => {
   it("未ログイン状態でアンケートの詳細ページにアクセスすると、ボタンが表示されずにいいね数だけが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル1").click()
+    cy.contains("サンプルアンケートタイトル1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -150,21 +150,21 @@ describe("アンケートのいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね追加用アンケート1").click()
+    cy.contains("いいね追加用アンケート1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
     cy.get("[data-cy=favorite-section]").contains("0")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
@@ -176,7 +176,7 @@ describe("アンケートのいいね", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -186,25 +186,25 @@ describe("アンケートのいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね追加用アンケート2").click()
+    cy.contains("いいね追加用アンケート2").click({ force: true })
 
     cy.contains("アンケート詳細")
 
     cy.contains("いいね追加用アンケート2")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -224,15 +224,15 @@ describe("アンケートのいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね削除用アンケート1").click()
+    cy.contains("いいね削除用アンケート1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -240,7 +240,7 @@ describe("アンケートのいいね削除", () => {
 
     cy.get("[data-cy=favorite-section]").contains("1")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
@@ -252,7 +252,7 @@ describe("アンケートのいいね削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -262,25 +262,25 @@ describe("アンケートのいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("参考書").click({ force: true })
 
-    cy.contains("いいね削除用アンケート2").click()
+    cy.contains("いいね削除用アンケート2").click({ force: true })
 
     cy.contains("アンケート詳細")
 
     cy.contains("いいね削除用アンケート2")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 

@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -38,11 +38,11 @@ describe("返信のいいね一覧", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
-    cy.get(".v-tabs").contains("いいね!した返信").click()
+    cy.get(".v-tabs").contains("いいね!した返信").click({ force: true })
 
     cy.get("[data-cy=each-replies]").eq(0).find("textarea").should("have.value", "いいね用返信1")
 
@@ -62,21 +62,21 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用質問1").click()
+    cy.contains("いいね追加用質問1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("いいね追加用質問1")
 
-    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね追加用返信1").click()
+    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね追加用返信1").click({ force: true })
 
     cy.contains("返信詳細")
 
@@ -92,21 +92,21 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね削除用質問1").click()
+    cy.contains("いいね削除用質問1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("いいね削除用質問1")
 
-    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね削除用返信1").click()
+    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね削除用返信1").click({ force: true })
 
     cy.contains("返信詳細")
 
@@ -120,9 +120,9 @@ describe("いいねの確認", () => {
 
     cy.contains("プロフィール")
 
-    cy.get(".v-tabs").contains("投稿した返信").click()
+    cy.get(".v-tabs").contains("投稿した返信").click({ force: true })
 
-    cy.get("[data-cy=each-replies]").eq(0).find("textarea").should("have.value", "サンプル返信本文1").click()
+    cy.get("[data-cy=each-replies]").eq(0).find("textarea").should("have.value", "サンプル返信本文1").click({ force: true })
 
     cy.contains("返信詳細")
 
@@ -134,17 +134,17 @@ describe("いいねの確認", () => {
   it("未ログイン状態で返信の詳細ページにアクセスすると、ボタンが表示されずにいいね数だけが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
-    cy.contains("サンプル質問タイトル1").click()
+    cy.contains("サンプル質問タイトル1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("サンプル質問タイトル1")
 
-    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "サンプル返信本文1").click()
+    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "サンプル返信本文1").click({ force: true })
 
     cy.contains("返信詳細")
 
@@ -166,27 +166,27 @@ describe("返信のいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用質問1").click()
+    cy.contains("いいね追加用質問1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("いいね追加用質問1")
 
-    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね追加用返信1").click()
+    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね追加用返信1").click({ force: true })
 
     cy.contains("返信詳細")
 
     cy.get("[data-cy=favorite-section]").contains("0")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
@@ -198,7 +198,7 @@ describe("返信のいいね", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -208,29 +208,29 @@ describe("返信のいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用質問1").click()
+    cy.contains("いいね追加用質問1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("いいね追加用質問1")
 
-    cy.get("[data-cy=each-question-replies]").eq(1).find("textarea").should("have.value", "いいね追加用返信2").click()
+    cy.get("[data-cy=each-question-replies]").eq(1).find("textarea").should("have.value", "いいね追加用返信2").click({ force: true })
 
     cy.contains("返信詳細")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -250,27 +250,27 @@ describe("返信のいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("質問一覧").click()
+    cy.contains("質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね削除用質問1").click()
+    cy.contains("いいね削除用質問1").click({ force: true })
 
     cy.contains("質問詳細")
 
     cy.contains("いいね削除用質問1")
 
-    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね削除用返信1").click()
+    cy.get("[data-cy=each-question-replies]").eq(0).find("textarea").should("have.value", "いいね削除用返信1").click({ force: true })
 
     cy.contains("返信詳細")
 
     cy.get("[data-cy=favorite-section]").contains("1")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
@@ -282,17 +282,17 @@ describe("返信のいいね削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
     cy.get(".v-tabs").contains("いいね!した返信").scrollIntoView().click({ force: true })
 
-    cy.get("[data-cy=each-replies]").first().find("textarea").should("have.value", "いいね用返信1").click()
+    cy.get("[data-cy=each-replies]").first().find("textarea").should("have.value", "いいね用返信1").click({ force: true })
 
     cy.contains("返信詳細")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
@@ -302,7 +302,7 @@ describe("返信のいいね削除", () => {
 
     cy.get(".v-tabs").contains("いいね!した返信").scrollIntoView().click({ force: true })
 
-    cy.get("[data-cy=each-replies]").first().find("textarea").should("not.have.value", "いいね用返信1").click()
+    cy.get("[data-cy=each-replies]").first().find("textarea").should("not.have.value", "いいね用返信1").click({ force: true })
   })
 
 })

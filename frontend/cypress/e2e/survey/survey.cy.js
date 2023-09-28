@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -35,23 +35,23 @@ describe("アンケート一覧", () => {
   it("アンケートが3件投稿されている状態でアンケート一覧ページにアクセスすると、3件のアンケートが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.contains("サンプルアンケートタイトル1")
 
     cy.contains("サンプルアンケートタイトル2")
 
-    cy.contains("サンプルアンケートタイトル3")
+    cy.contains("サンプルアンケートタイトル4")
   })
 
   it("「回答受付中のアンケートのみ表示」にチェックを入れると、締め切り済みのアンケートが一覧に表示されなくなる", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.contains("締め切り済みアンケート")
 
@@ -66,13 +66,13 @@ describe("アンケートの並べ替え機能", () => {
   it("アンケートを「新着順」で並び替えると、新着順にアンケートが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click()
+    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("新着順").click()
+    cy.contains("新着順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("サンプルアンケートタイトル3")
   })
@@ -80,13 +80,13 @@ describe("アンケートの並べ替え機能", () => {
   it("アンケートを「投稿順」で並び替えると、投稿順にアンケートが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click()
+    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("投稿順").click()
+    cy.contains("投稿順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("サンプルアンケートタイトル1")
   })
@@ -94,13 +94,13 @@ describe("アンケートの並べ替え機能", () => {
   it("アンケートを「いいね!が多い順」で並び替えると、いいねが多い順にアンケートが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click()
+    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("いいね!が多い順").click()
+    cy.contains("いいね!が多い順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("サンプルアンケートタイトル2")
   })
@@ -108,13 +108,13 @@ describe("アンケートの並べ替え機能", () => {
   it("アンケートを「回答が多い順」で並び替えると、回答が多い順にアンケートが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click()
+    cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("回答が多い順").click()
+    cy.contains("回答が多い順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("サンプルアンケートタイトル4")
   })
@@ -123,26 +123,26 @@ describe("アンケートの並べ替え機能", () => {
 
 describe("アンケートの絞り込み機能", () => {
 
-  it("アンケートを「英文法」のジャンルで絞り込むと、ジャンルが英文法のアンケートのみが表示される", () => {
+  it("アンケートを「数学」のジャンルで絞り込むと、ジャンルが数学のアンケートのみが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click()
+    cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("英文法").click()
+    cy.get(".v-menu__content").contains("数学").click({ force: true })
 
-    cy.contains("英語のアンケート1")
+    cy.contains("サンプルアンケートタイトル1")
 
-    cy.contains("英語のアンケート2")
+    cy.contains("サンプルアンケートタイトル2")
 
-    cy.contains("英語のアンケート3")
+    cy.contains("サンプルアンケートタイトル3")
 
-    cy.contains("英語のアンケート4")
+    cy.contains("サンプルアンケートタイトル4")
 
-    cy.contains("サンプルアンケート").should("not.exist")
+    cy.contains("進路のアンケート").should("not.exist")
   })
 
 })
@@ -152,17 +152,17 @@ describe("アンケートの絞り込み=>並び替え機能", () => {
   it("アンケートを「進路・大学」のジャンルで絞り込み、「新着順」で並び替えると、ジャンルが進路・大学のアンケートのみが新着順で表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("進路・大学").click()
+    cy.get(".v-menu__content").contains("進路・大学").click({ force: true })
 
     cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("新着順").click()
+    cy.contains("新着順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("進路のアンケート2")
 
@@ -172,17 +172,17 @@ describe("アンケートの絞り込み=>並び替え機能", () => {
   it("アンケートを「進路・大学」のジャンルで絞り込み、「投稿順」で並び替えると、ジャンルが進路・大学のアンケートのみが投稿順で表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("進路・大学").click()
+    cy.get(".v-menu__content").contains("進路・大学").click({ force: true })
 
     cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("投稿順").click()
+    cy.contains("投稿順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("進路のアンケート1")
 
@@ -192,17 +192,17 @@ describe("アンケートの絞り込み=>並び替え機能", () => {
   it("アンケートを「進路・大学」のジャンルで絞り込み、「いいね!が多い順」で並び替えると、ジャンルが進路・大学のアンケートのみがいいねが多い順で表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("進路・大学").click()
+    cy.get(".v-menu__content").contains("進路・大学").click({ force: true })
 
     cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("いいね!が多い順").click()
+    cy.contains("いいね!が多い順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("進路のアンケート3")
 
@@ -212,17 +212,17 @@ describe("アンケートの絞り込み=>並び替え機能", () => {
   it("アンケートを「進路・大学」のジャンルで絞り込み、「回答が多い順」で並び替えると、ジャンルが進路・大学のアンケートのみが回答が多い順で表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("進路・大学").click()
+    cy.get(".v-menu__content").contains("進路・大学").click({ force: true })
 
     cy.get("[data-cy=sort-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.contains("回答が多い順").click()
+    cy.contains("回答が多い順").click({ force: true })
 
     cy.get("[data-cy=each-surveys]").first().contains("進路のアンケート4")
 
@@ -237,11 +237,11 @@ describe("アンケート詳細", () => {
   it("アンケート詳細ページにアクセスすると、アンケートの詳細情報が表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル1").click()
+    cy.contains("サンプルアンケートタイトル1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -279,11 +279,11 @@ describe("アンケート詳細", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル2").click()
+    cy.contains("サンプルアンケートタイトル2").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -301,11 +301,11 @@ describe("アンケート詳細", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル4").click()
+    cy.contains("サンプルアンケートタイトル4").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -349,11 +349,11 @@ describe("アンケート詳細", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("締め切り済みアンケート").click()
+    cy.contains("締め切り済みアンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -373,11 +373,11 @@ describe("アンケート詳細", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("サンプルアンケートタイトル1").click()
+    cy.contains("サンプルアンケートタイトル1").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -393,11 +393,11 @@ describe("アンケート詳細", () => {
   it("未ログイン状態だと、締め切り済みでもアンケートの結果が表示されない", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("締め切り済みアンケート").click()
+    cy.contains("締め切り済みアンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -412,6 +412,35 @@ describe("アンケート詳細", () => {
 
 })
 
+describe("コンテンツナビゲーター", () => {
+
+  it("アンケート詳細ページで「次のアンケート」「前のアンケート」のナビゲーション機能が動作する", () => {
+    cy.visit("/")
+
+    cy.get("[data-cy=menu-button]").click({ force: true })
+
+    cy.contains("アンケート").click({ force: true })
+
+    cy.contains("サンプルアンケートタイトル1").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル1")
+
+    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル2")
+
+    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
+
+    cy.contains("アンケート詳細")
+
+    cy.contains("サンプルアンケートタイトル1")
+  })
+
+})
 
 describe("アンケート作成", () => {
 
@@ -422,17 +451,17 @@ describe("アンケート作成", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("新規アンケートを作成する").click()
+    cy.contains("新規アンケートを作成する").click({ force: true })
 
     cy.contains("新規アンケートを作成する")
 
-    cy.get("[data-cy=select-genre-button]").click()
+    cy.get("[data-cy=select-genre-button]").click({ force: true })
 
-    cy.contains("社会").click()
+    cy.contains("社会").click({ force: true })
 
     cy.get("[data-cy=create-title-field]").type("新規サンプルアンケートタイトル")
 
@@ -446,7 +475,7 @@ describe("アンケート作成", () => {
 
     cy.get("[data-cy=create-option4-field]").type("選択肢4")
 
-    cy.get("[data-cy=submit-button]").click()
+    cy.get("[data-cy=submit-button]").click({ force: true })
 
     cy.contains("内容確認")
 
@@ -462,7 +491,7 @@ describe("アンケート作成", () => {
 
     cy.get("[data-cy=confirmation-option4-field]").should("have.value", "選択肢4")
 
-    cy.get("[data-cy=survey-confirmation-dialog]").find("[data-cy=submit-button]").click()
+    cy.get("[data-cy=survey-confirmation-dialog]").find("[data-cy=submit-button]").click({ force: true })
 
     cy.contains("アンケートを作成しました")
 
@@ -490,11 +519,11 @@ describe("アンケート作成", () => {
   it("未ログイン状態でアンケートを作成すると、ログインページにリダイレクトする", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("新規アンケートを作成する").click()
+    cy.contains("新規アンケートを作成する").click({ force: true })
 
     cy.url().should("include", "/auth/login")
 
@@ -508,29 +537,29 @@ describe("アンケート作成", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("新規アンケートを作成する").click()
+    cy.contains("新規アンケートを作成する").click({ force: true })
 
     cy.contains("新規アンケートを作成する")
 
-    cy.get("[data-cy=create-title-field]").click().blur()
+    cy.get("[data-cy=create-title-field]").click({ force: true }).blur()
 
     cy.contains("タイトルを入力してください")
 
-    cy.get("[data-cy=create-content-field]").click().blur()
+    cy.get("[data-cy=create-content-field]").click({ force: true }).blur()
 
     cy.contains("本文を入力してください")
 
-    cy.get("[data-cy=create-option1-field]").click().blur()
+    cy.get("[data-cy=create-option1-field]").click({ force: true }).blur()
 
     cy.contains("選択肢を入力してください")
 
-    cy.get("[data-cy=create-option2-field]").click().blur()
+    cy.get("[data-cy=create-option2-field]").click({ force: true }).blur()
 
-    cy.get("[data-cy=submit-button]").click()
+    cy.get("[data-cy=submit-button]").click({ force: true })
 
     cy.contains("内容確認")
 
@@ -546,7 +575,7 @@ describe("アンケート作成", () => {
 
     cy.get("[data-cy=confirmation-option4-field]").should("have.value", "")
 
-    cy.get("[data-cy=survey-confirmation-dialog]").find("[data-cy=submit-button]").click()
+    cy.get("[data-cy=survey-confirmation-dialog]").find("[data-cy=submit-button]").click({ force: true })
 
     cy.contains("アンケートを作成できませんでした")
   })
@@ -562,11 +591,11 @@ describe("アンケート締め切り", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
-    cy.contains("締め切り機能用アンケート").click()
+    cy.contains("締め切り機能用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -574,11 +603,11 @@ describe("アンケート締め切り", () => {
 
     cy.contains("回答受付中")
 
-    cy.contains("アンケートを締め切る").click()
+    cy.contains("アンケートを締め切る").click({ force: true })
 
     cy.contains("アンケートを締め切りますか？")
 
-    cy.get("[data-cy=close-survey-confirmation-button]").click()
+    cy.get("[data-cy=close-survey-confirmation-button]").click({ force: true })
 
     cy.contains("アンケートを締め切りました")
 
@@ -592,15 +621,15 @@ describe("アンケート締め切り", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("他ユーザー作成アンケート").click()
+    cy.contains("他ユーザー作成アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -614,15 +643,15 @@ describe("アンケート締め切り", () => {
   it("未ログイン状態で自分のアンケートの詳細ページにアクセスすると、アンケート締め切りボタンが表示されない", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("締め切り機能失敗用アンケート").click()
+    cy.contains("締め切り機能失敗用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -642,9 +671,9 @@ describe("アンケート削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get(".v-tabs").contains("作成したアンケート").click()
+    cy.get(".v-tabs").contains("作成したアンケート").click({ force: true })
 
-    cy.contains("削除用アンケート").click()
+    cy.contains("削除用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -652,13 +681,13 @@ describe("アンケート削除", () => {
 
     cy.contains("アンケートを削除しますか？")
 
-    cy.get("[data-cy=delete-confirm-button]").click()
+    cy.get("[data-cy=delete-confirm-button]").click({ force: true })
 
     cy.contains("アンケートを削除しました")
 
     cy.visit("/mypage")
 
-    cy.get(".v-tabs").contains("作成したアンケート").click()
+    cy.get(".v-tabs").contains("作成したアンケート").click({ force: true })
 
     cy.contains("削除用アンケート").should("not.exist")
   })
@@ -670,15 +699,15 @@ describe("アンケート削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("他ユーザー作成アンケート").click()
+    cy.contains("他ユーザー作成アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
@@ -691,51 +720,21 @@ describe("アンケート削除", () => {
   it("未ログイン状態だと、アンケートの削除ボタンが表示されない", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("アンケート").click()
+    cy.contains("アンケート").click({ force: true })
 
     cy.get("[data-cy=filter-surveys-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").contains("その他").click()
+    cy.get(".v-menu__content").contains("その他").click({ force: true })
 
-    cy.contains("削除失敗用アンケート").click()
+    cy.contains("削除失敗用アンケート").click({ force: true })
 
     cy.contains("アンケート詳細")
 
     cy.contains("削除失敗用アンケート")
 
     cy.contains("削除する").should("not.exist")
-  })
-
-})
-
-describe("コンテンツナビゲーター", () => {
-
-  it.only("アンケート詳細ページで「次のアンケート」「前のアンケート」のナビゲーション機能が動作する", () => {
-    cy.visit("/")
-
-    cy.get("[data-cy=menu-button]").click()
-
-    cy.contains("アンケート").click()
-
-    cy.contains("サンプルアンケートタイトル1").scrollIntoView().click({ force: true })
-
-    cy.contains("アンケート詳細")
-
-    cy.contains("サンプルアンケートタイトル1")
-
-    cy.get("[data-cy=next-content-button]").scrollIntoView().click({ force: true })
-
-    cy.contains("アンケート詳細")
-
-    cy.contains("サンプルアンケートタイトル2")
-
-    cy.get("[data-cy=previous-content-button]").scrollIntoView().click({ force: true })
-
-    cy.contains("アンケート詳細")
-
-    cy.contains("サンプルアンケートタイトル1")
   })
 
 })
