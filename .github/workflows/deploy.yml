@@ -55,10 +55,10 @@ jobs:
     - name: Install dependencies in frontend directory
       run: cd frontend && npm install
 
-    -name: Start Rails server
+    - name: Start Rails server
       run: cd backend && rails server &
 
-    -name: Start Nuxt app
+    - name: Start Nuxt app
       run: cd frontend && npm run dev
 
     - name: Run Cypress tests
