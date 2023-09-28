@@ -17,11 +17,6 @@ jobs:
       run: echo "Your build steps here"
 
     # Railsのテスト
-    - name: Setup database
-      run: |
-        cd backend && bundle exec rake db:create
-        cd backend && bundle exec rake db:schema:load
-
     - name: Cache Ruby gems
       uses: actions/cache@v2
       with:
@@ -34,6 +29,11 @@ jobs:
       run: |
         bundle config path vendor/bundle
         cd backend && bundle install --retry 3
+
+    - name: Setup database
+      run: |
+        cd backend && bundle exec rake db:create
+        cd backend && bundle exec rake db:schema:load
 
     - name: Run tests in backend directory
       run: cd backend && bundle exec rspec
