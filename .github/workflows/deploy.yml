@@ -19,8 +19,8 @@ jobs:
     # Railsのテスト
     - name: Setup database
       run: |
-        bundle exec rake db:create
-        bundle exec rake db:schema:load
+        cd backend && bundle exec rake db:create
+        cd backend && bundle exec rake db:schema:load
 
     - name: Cache Ruby gems
       uses: actions/cache@v2
