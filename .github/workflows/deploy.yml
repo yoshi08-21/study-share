@@ -17,6 +17,12 @@ jobs:
       run: echo "Your build steps here"
 
     # Railsのテスト
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.3
+
+
     - name: Cache Ruby gems
       uses: actions/cache@v2
       with:
