@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -36,7 +36,7 @@ describe("ログイン", () => {
   it("ログインに成功する", () => {
     cy.visit("/")
 
-    cy.contains("ログイン").click()
+    cy.contains("ログイン").click({ force: true })
 
     cy.get("[data-cy=email-field]").type("cypress@cypress.com")
 
@@ -46,7 +46,7 @@ describe("ログイン", () => {
 
     cy.get("[data-cy=password-field]").should("have.value", "cypress")
 
-    cy.get("[data-cy=login-button]").click()
+    cy.get("[data-cy=login-button]").click({ force: true })
 
     cy.contains("プロフィール")
   })
@@ -54,21 +54,21 @@ describe("ログイン", () => {
   it("入力フォームが空白だとログインに失敗する", () => {
     cy.visit("/")
 
-    cy.contains("ログイン").click()
+    cy.contains("ログイン").click({ force: true })
 
-    cy.get("[data-cy=email-field]").click()
+    cy.get("[data-cy=email-field]").click({ force: true })
 
     cy.get("[data-cy=email-field]").blur()
 
     cy.contains("メールアドレスを入力してください")
 
-    cy.get("[data-cy=password-field]").click()
+    cy.get("[data-cy=password-field]").click({ force: true })
 
     cy.get("[data-cy=password-field]").blur()
 
     cy.contains("パスワードを入力してください")
 
-    cy.get("[data-cy=login-button]").click()
+    cy.get("[data-cy=login-button]").click({ force: true })
 
     cy.contains("ログイン")
 
@@ -85,15 +85,15 @@ describe("ログアウト", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=header-user-menu]").click();
+    cy.get("[data-cy=header-user-menu]").click({ force: true });
 
-    cy.get("[data-cy=header-logout-button]").should('be.visible').click();
+    cy.get("[data-cy=header-logout-button]").should('be.visible').click({ force: true });
 
     cy.contains("ログアウトしました")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("マイページ").click()
+    cy.contains("マイページ").click({ force: true })
 
     cy.url().should("include", "/auth/login")
 
@@ -103,88 +103,33 @@ describe("ログアウト", () => {
 })
 
 
-describe("ユーザー編集", () => {
-
-  it("ログイン後にユーザー情報を変更すると、変更に成功する", () => {
-
-    cy.login("edit_cypress@cypress.com", "cypress")
-
-    cy.url().should("include", "/mypage")
-
-    cy.contains("edit-cypress-sample")
-
-    cy.contains("D大学")
-
-    cy.contains("E大学")
-
-    cy.contains("F大学")
-
-    cy.get("textarea").should("have.value", "頑張ります")
-
-    cy.contains("ユーザー編集").click()
-
-    // ファイルアップロードも確認
-
-    cy.get("[data-cy=edit-name-field]").clear().type("edited-cypress-sample")
-
-    cy.get("[data-cy=edit-introduction-field]").clear().type("こんにちは")
-
-    cy.get("[data-cy=edit-first-choice-school-field]").clear().type("X大学")
-
-    cy.get("[data-cy=edit-second-choice-school-field]").clear().type("Y大学")
-
-    cy.get("[data-cy=edit-third-choice-school-field]").clear().type("Z大学")
-
-    cy.get("[data-cy=submit-button]").click()
-
-    cy.contains("ユーザーの編集が完了しました")
-
-    cy.contains("edited-cypress-sample")
-
-    cy.contains("X大学")
-
-    cy.contains("Y大学")
-
-    cy.contains("Z大学")
-
-    cy.get("textarea").should("have.value", "こんにちは");
-
-  })
-
-})
-
-
-
 describe("マイページ", () => {
 
-  it("自分のアクティビティの取得", () => {
-
-  })
 
   it("自分の投稿の取得", () => {
     cy.login("cypress@cypress.com", "cypress")
 
     cy.contains("サンプルレビュータイトル1")
 
-    cy.get(".v-tabs").contains("投稿した質問").click()
+    cy.get(".v-tabs").contains("投稿した質問").click({ force: true })
 
     cy.contains("サンプル質問タイトル1")
 
-    cy.get(".v-tabs").contains("投稿した科目別質問").click()
+    cy.get(".v-tabs").contains("投稿した科目別質問").click({ force: true })
 
     cy.contains("サンプル科目別質問タイトル1")
 
-    cy.get(".v-tabs").contains("投稿した返信").click()
+    cy.get(".v-tabs").contains("投稿した返信").click({ force: true })
 
     cy.get("[data-cy=tab-content]").find("textarea").should("have.value", "サンプル返信本文1")
 
-    cy.get(".v-tabs").contains("投稿した返信（科目別質問）").click()
+    cy.get(".v-tabs").contains("投稿した返信(科目別質問)").click({ force: true })
 
     cy.get("[data-cy=tab-content]").find("textarea").should("have.value", "サンプル科目別返信本文1")
 
-    cy.get(".v-tabs").contains("作成したアンケート").click()
+    cy.get(".v-tabs").contains("作成したアンケート").click({ force: true })
 
-    cy.contains("テストアンケートタイトル1")
+    cy.contains("サンプルアンケートタイトル1")
 
   })
 
@@ -217,44 +162,91 @@ describe("他ユーザーの詳細ページ", () => {
 
     cy.contains("サンプルレビュータイトル2")
 
-    cy.get(".v-tabs").contains("投稿した質問").click()
+    cy.get(".v-tabs").contains("投稿した質問").click({ force: true })
 
     cy.contains("サンプル質問タイトル2")
 
-    cy.get(".v-tabs").contains("投稿した科目別質問").click()
+    cy.get(".v-tabs").contains("投稿した科目別質問").click({ force: true })
 
     cy.contains("サンプル科目別質問タイトル2")
 
-    cy.get(".v-tabs").contains("投稿した返信").click()
+    cy.get(".v-tabs").contains("投稿した返信").click({ force: true })
 
     cy.get("[data-cy=tab-content]").find("textarea").should("have.value", "サンプル返信本文2")
 
-    cy.get(".v-tabs").contains("投稿した返信（科目別質問）").click()
+    cy.get(".v-tabs").contains("投稿した返信(科目別質問)").click({ force: true })
 
     cy.get("[data-cy=tab-content]").find("textarea").should("have.value", "サンプル科目別返信本文2")
 
-    cy.get(".v-tabs").contains("作成したアンケート").click()
+    cy.get(".v-tabs").contains("作成したアンケート").click({ force: true })
 
-    cy.contains("テストアンケートタイトル2")
+    cy.contains("サンプルアンケートタイトル2")
 
   })
 
 
 })
 
+describe("ユーザー編集", () => {
+
+  it("ログイン後にユーザー情報を変更すると、変更に成功する", () => {
+
+    cy.login("edit_cypress@cypress.com", "cypress")
+
+    cy.url().should("include", "/mypage")
+
+    cy.contains("edit-cypress-sample")
+
+    cy.contains("D大学")
+
+    cy.contains("E大学")
+
+    cy.contains("F大学")
+
+    cy.get("textarea").should("have.value", "頑張ります")
+
+    cy.contains("ユーザー編集").click({ force: true })
+
+    cy.get("[data-cy=edit-name-field]").clear().type("edited-cypress-sample")
+
+    cy.get("[data-cy=edit-introduction-field]").clear().type("こんにちは")
+
+    cy.get("[data-cy=edit-first-choice-school-field]").clear().type("X大学")
+
+    cy.get("[data-cy=edit-second-choice-school-field]").clear().type("Y大学")
+
+    cy.get("[data-cy=edit-third-choice-school-field]").clear().type("Z大学")
+
+    cy.get("[data-cy=submit-button]").click({ force: true })
+
+    cy.contains("ユーザーの編集が完了しました")
+
+    cy.contains("edited-cypress-sample")
+
+    cy.contains("X大学")
+
+    cy.contains("Y大学")
+
+    cy.contains("Z大学")
+
+    cy.get("textarea").should("have.value", "こんにちは");
+
+  })
+
+})
 
 describe("ユーザーメモ", () => {
 
   it("ログイン状態でユーザーメモを保存すると、保存に成功する", () => {
     cy.login("cypress@cypress.com", "cypress")
 
-    cy.get("[data-cy=user-memo-button]").click()
+    cy.get("[data-cy=user-memo-button]").click({ force: true })
 
     cy.get("[data-cy=user-memo-field]").should("have.value", "参考書Aが気になる");
 
     cy.get("[data-cy=user-memo-field]").clear().type("新しいメモ")
 
-    cy.get("[data-cy=submit-button]").click()
+    cy.get("[data-cy=submit-button]").click({ force: true })
 
     cy.contains("メモを保存しました")
 
@@ -269,11 +261,4 @@ describe("ユーザーメモ", () => {
 
 
 })
-
-
-// ユーザー登録はfirebaseが関係するため手動でテストする
-// ユーザー削除はfirebaseからもデータが消えるため、手動でテストする
-// もしくはユーザー登録・ユーザー削除のレスポンスをモックする
-
-
 

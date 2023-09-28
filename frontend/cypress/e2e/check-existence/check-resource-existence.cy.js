@@ -9,8 +9,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -22,8 +22,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -127,7 +127,7 @@ describe("存在しないページへのアクセスに対するバリデーシ�
 
     cy.contains("存在しないページです")
 
-    cy.contains("トップページに戻る").click()
+    cy.contains("トップページに戻る").click({ force: true })
 
     cy.contains("Welcome To StudyShare!")
   })

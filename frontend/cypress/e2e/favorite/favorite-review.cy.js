@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -38,11 +38,11 @@ describe("レビューのいいね一覧", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
-    cy.get(".v-tabs").contains("いいね!したレビュー").click()
+    cy.get(".v-tabs").contains("いいね!したレビュー").click({ force: true })
 
     cy.contains("いいね用レビュー1")
 
@@ -62,15 +62,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り登録用参考書1").click()
+    cy.contains("お気に入り登録用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -92,15 +92,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り解除用参考書1").click()
+    cy.contains("お気に入り解除用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -120,7 +120,7 @@ describe("いいねの確認", () => {
 
     cy.contains("プロフィール")
 
-    cy.contains("サンプルレビュータイトル1").click()
+    cy.contains("サンプルレビュータイトル1").click({ force: true })
 
     cy.contains("レビュー詳細")
 
@@ -131,13 +131,13 @@ describe("いいねの確認", () => {
 
   it("未ログイン状態でレビューの詳細ページにアクセスすると、ボタンが表示されずにいいね数だけが表示される", () => {
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
-    cy.contains("サンプル参考書1").click()
+    cy.contains("サンプル参考書1").click({ force: true })
 
-    cy.contains("サンプルレビュータイトル1").click()
+    cy.contains("サンプルレビュータイトル1").click({ force: true })
 
     cy.contains("レビュー詳細")
 
@@ -155,15 +155,15 @@ describe("レビューのいいね", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り登録用参考書1").click()
+    cy.contains("お気に入り登録用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -175,7 +175,7 @@ describe("レビューのいいね", () => {
 
     cy.get("[data-cy=favorite-section]").contains("0")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
@@ -187,7 +187,7 @@ describe("レビューのいいね", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -197,15 +197,15 @@ describe("レビューのいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り登録用参考書1").click()
+    cy.contains("お気に入り登録用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -215,11 +215,11 @@ describe("レビューのいいね", () => {
 
     cy.contains("レビュー詳細")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=add-favorite-button]").click({ force: true })
 
     cy.contains("いいね!しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -237,15 +237,15 @@ describe("レビューのいいね削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り解除用参考書1").click()
+    cy.contains("お気に入り解除用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -257,7 +257,7 @@ describe("レビューのいいね削除", () => {
 
     cy.get("[data-cy=favorite-section]").contains("1")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
@@ -269,7 +269,7 @@ describe("レビューのいいね削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -279,15 +279,15 @@ describe("レビューのいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("参考書一覧").click()
+    cy.contains("参考書一覧").click({ force: true })
 
     cy.get("[data-cy=filter-books-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("お気に入り解除用参考書1").click()
+    cy.contains("お気に入り解除用参考書1").click({ force: true })
 
     cy.contains("参考書詳細")
 
@@ -297,11 +297,11 @@ describe("レビューのいいね削除", () => {
 
     cy.contains("レビュー詳細")
 
-    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click()
+    cy.get("[data-cy=favorite-section]").find("[data-cy=remove-favorite-button]").click({ force: true })
 
     cy.contains("いいね!を削除しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 

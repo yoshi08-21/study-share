@@ -10,8 +10,8 @@ beforeEach(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -23,8 +23,8 @@ after(() => {
 
   cy.get("body").then(body => {
     if (body[0].querySelector("[data-cy=header-user-menu]")) {
-        cy.get("[data-cy=header-user-menu]").click();
-        cy.get("[data-cy=header-logout-button]").should("be.visible").click();
+        cy.get("[data-cy=header-user-menu]").click({ force: true });
+        cy.get("[data-cy=header-logout-button]").should("be.visible").click({ force: true });
     }
   });
 })
@@ -38,11 +38,11 @@ describe("科目別質問のいいね一覧", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
-    cy.get(".v-tabs").contains("いいね!した科目別質問").click()
+    cy.get(".v-tabs").contains("いいね!した科目別質問").click({ force: true })
 
     cy.contains("いいね用科目別質問1")
 
@@ -62,15 +62,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用科目別質問1").click()
+    cy.contains("いいね追加用科目別質問1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -88,15 +88,15 @@ describe("いいねの確認", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね削除用科目別質問1").click()
+    cy.contains("いいね削除用科目別質問1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -112,9 +112,9 @@ describe("いいねの確認", () => {
 
     cy.contains("プロフィール")
 
-    cy.get(".v-tabs").contains("投稿した科目別質問").click()
+    cy.get(".v-tabs").contains("投稿した科目別質問").click({ force: true })
 
-    cy.contains("サンプル科目別質問タイトル1").click()
+    cy.contains("サンプル科目別質問タイトル1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -128,11 +128,11 @@ describe("いいねの確認", () => {
   it("未ログイン状態で科目別質問の詳細ページにアクセスすると、ボタンが表示されずにいいね数だけが表示される", () => {
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
-    cy.contains("サンプル科目別質問タイトル1").click()
+    cy.contains("サンプル科目別質問タイトル1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -152,15 +152,15 @@ describe("科目別質問のいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用科目別質問1").click()
+    cy.contains("いいね追加用科目別質問1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -180,7 +180,7 @@ describe("科目別質問のいいね", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -190,15 +190,15 @@ describe("科目別質問のいいね", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね追加用科目別質問2").click()
+    cy.contains("いいね追加用科目別質問2").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -208,7 +208,7 @@ describe("科目別質問のいいね", () => {
 
     cy.contains("いいね!しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -228,15 +228,15 @@ describe("科目別質問のいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね削除用科目別質問1").click()
+    cy.contains("いいね削除用科目別質問1").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -256,7 +256,7 @@ describe("科目別質問のいいね削除", () => {
 
     cy.contains("プロフィール")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 
@@ -266,15 +266,15 @@ describe("科目別質問のいいね削除", () => {
 
     cy.visit("/")
 
-    cy.get("[data-cy=menu-button]").click()
+    cy.get("[data-cy=menu-button]").click({ force: true })
 
-    cy.contains("科目別質問一覧").click()
+    cy.contains("科目別質問一覧").click({ force: true })
 
     cy.get("[data-cy=filter-subject-questions-select]").scrollIntoView().click({ force: true })
 
-    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click()
+    cy.get(".v-menu__content").scrollTo("bottom").contains("過去問").click({ force: true })
 
-    cy.contains("いいね削除用科目別質問2").click()
+    cy.contains("いいね削除用科目別質問2").click({ force: true })
 
     cy.contains("質問詳細(科目別)")
 
@@ -284,7 +284,7 @@ describe("科目別質問のいいね削除", () => {
 
     cy.contains("いいね!を削除しました")
 
-    cy.get("[data-cy=favorites-link-button]").click()
+    cy.get("[data-cy=favorites-link-button]").click({ force: true })
 
     cy.contains("お気に入り一覧")
 

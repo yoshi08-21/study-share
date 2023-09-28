@@ -468,7 +468,7 @@ question15 = Question.create!(title: "いいね削除用質問2",
                               content: "いいね削除用質問本文2",
                               subject: "小論文",
                               user_id: user4.id,
-                              book_id: book22.id
+                              book_id: book18.id
                             )
 
 question16 = Question.create!(title: "閲覧履歴作成用質問1",

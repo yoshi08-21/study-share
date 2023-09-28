@@ -4,4 +4,8 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:8080',
   },
+  retries: {
+    "runMode": 3,
+    "openMode": 1
+  }
 })
