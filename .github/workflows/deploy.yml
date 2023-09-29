@@ -12,12 +12,11 @@ jobs:
     permissions:
       contents: read
     env:
+      RAILS_ENV: test
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: password
       DATABASE_HOST: localhost
       TEST_DATABASE_NAME: test_db
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     services:
       mysql:
         image: mysql:5.7
