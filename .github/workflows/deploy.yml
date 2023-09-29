@@ -19,6 +19,7 @@ jobs:
       TEST_DATABASE_NAME: test_db
       AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID_FOR_SSM }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_FOR_SSM }}
+      AWS_REGION: ap-northeast-1
     services:
       mysql:
         image: mysql:5.7
