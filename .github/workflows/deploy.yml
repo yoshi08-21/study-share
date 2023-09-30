@@ -23,7 +23,7 @@ jobs:
       AWS_REGION: ap-northeast-1
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0.34
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: test_db
