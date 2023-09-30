@@ -111,8 +111,4 @@ class PagesController < ApplicationController
     end
   end
 
-  def sample_action
-    sample = "sample"
-  end
-
 end
