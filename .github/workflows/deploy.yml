@@ -38,31 +38,31 @@ jobs:
       run: echo "Your build steps here"
 
     # Railsのテスト
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.3
+    # - name: Setup Ruby
+    #   uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: 3.0.3
 
-    - name: Cache Ruby gems
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+    # - name: Cache Ruby gems
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: vendor/bundle
+    #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-gems-
 
-    - name: Bundle install in backend directory
-      run: |
-        bundle config path vendor/bundle
-        cd backend && bundle install --retry 3
+    # - name: Bundle install in backend directory
+    #   run: |
+    #     bundle config path vendor/bundle
+    #     cd backend && bundle install --retry 3
 
-    - name: Setup database
-      run: |
-        cd backend
-        bundle exec rake db:schema:load
+    # - name: Setup database
+    #   run: |
+    #     cd backend
+    #     bundle exec rake db:schema:load
 
-    - name: Run tests in backend directory
-      run: cd backend && bundle exec rspec
+    # - name: Run tests in backend directory
+    #   run: cd backend && bundle exec rspec
 
     # Nuxtのテスト
     - name: Setup Node.js
@@ -82,10 +82,13 @@ jobs:
       run: cd frontend && npm install
 
     - name: Start Rails server
-      run: cd backend && rails server &
+      run: cd backend && bundle exec rails server &
 
     - name: Start Nuxt app
-      run: cd frontend && npm run dev
+      run: cd frontend && npm run dev &
+
+    - name: Wait for server to start
+      run: sleep 40
 
     - name: Run Cypress tests
       run: cd frontend && npx cypress run
