@@ -13,9 +13,10 @@ jobs:
       contents: read
     env:
       RAILS_ENV: test
+      # mySQLのセットアップでユーザー名を指定しない場合はデフォルトのrootが使用される
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: password
-      DATABASE_HOST: localhost
+      DATABASE_HOST: 127.0.0.1
       TEST_DATABASE_NAME: test_db
       AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID_FOR_SSM }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_FOR_SSM }}
