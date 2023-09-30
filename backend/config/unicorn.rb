@@ -4,7 +4,7 @@ app_path = File.expand_path('../../', __FILE__)
 #アプリケーションサーバの性能を決定する
 worker_processes 1
 
-working_directory "#{app_path}/current/backend"
+working_directory "#{app_path}"
 
 listen "#{app_path}/shared/tmp/sockets/unicorn.sock"
 
@@ -14,7 +14,6 @@ stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
 
 stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 
-puts "#{app_path}/current/backend"
 
 #Railsアプリケーションの応答を待つ上限時間を設定
 timeout 60
