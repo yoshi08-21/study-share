@@ -57,9 +57,9 @@ jobs:
         cd backend && bundle install --retry 3
 
     - name: Setup database
-      run: |
-        cd backend && bundle exec rake db:create
-        cd backend && bundle exec rake db:schema:load
+    run: |
+      cd backend
+      bundle exec rake db:schema:load
 
     - name: Run tests in backend directory
       run: cd backend && bundle exec rspec
