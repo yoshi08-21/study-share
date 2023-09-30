@@ -14,7 +14,6 @@ stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
 
 stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 
-
 #Railsアプリケーションの応答を待つ上限時間を設定
 timeout 60
 
