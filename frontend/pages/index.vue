@@ -3,7 +3,7 @@
     <br><br>
     <template v-if="!currentUser">
       <div>
-        <h1 style="text-align: center;">Welcome To StudyShare!</h1>
+        <h1 style="text-align: center;">SAMPLE=====Welcome To StudyShare!</h1>
         <br>
         <h2><v-icon color="green">mdi-information-box-outline</v-icon> StudyShareは学習に関するあらゆる情報を共有できるサイトです</h2>
         <br><br>

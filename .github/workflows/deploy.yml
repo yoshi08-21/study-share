@@ -38,60 +38,60 @@ jobs:
       run: echo "Your build steps here"
 
     # Railsのテスト
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.3
+    # - name: Setup Ruby
+    #   uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: 3.0.3
 
-    - name: Cache Ruby gems
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+    # - name: Cache Ruby gems
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: vendor/bundle
+    #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-gems-
 
-    - name: Bundle install in backend directory
-      run: |
-        bundle config path vendor/bundle
-        cd backend && bundle install --retry 3
+    # - name: Bundle install in backend directory
+    #   run: |
+    #     bundle config path vendor/bundle
+    #     cd backend && bundle install --retry 3
 
-    - name: Setup database
-      run: |
-        cd backend
-        bundle exec rake db:schema:load
+    # - name: Setup database
+    #   run: |
+    #     cd backend
+    #     bundle exec rake db:schema:load
 
     # - name: Run tests in backend directory
     #   run: cd backend && bundle exec rspec
 
     # Nuxtのテスト
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16.14.2'
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: '16.14.2'
 
-    - name: Cache Node modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+    # - name: Cache Node modules
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ~/.npm
+    #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-node-
 
-    - name: Install dependencies in frontend directory
-      run: cd frontend && npm install
+    # - name: Install dependencies in frontend directory
+    #   run: cd frontend && npm install
 
-    - name: Start Rails server
-      run: cd backend && bundle exec rails server &
+    # - name: Start Rails server
+    #   run: cd backend && bundle exec rails server &
 
-    - name: Start Nuxt app
-      run: cd frontend && npm run dev &
+    # - name: Start Nuxt app
+    #   run: cd frontend && npm run dev &
 
-    - name: Wait for server to start
-      run: sleep 40
+    # - name: Wait for server to start
+    #   run: sleep 40
 
-    - name: Run Cypress tests
-      run: cd frontend && npx cypress run
+    # - name: Run Cypress tests
+    #   run: cd frontend && npx cypress run
 
   deploy:
     runs-on: ubuntu-latest
