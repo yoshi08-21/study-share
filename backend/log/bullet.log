@@ -995,3 +995,191 @@ Call stack
   /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
   /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
 
+2023-10-01 11:07:12[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:07:12[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:08:04[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:08:05[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:08:17[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:08:17[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:08:25[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:08:25[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:08:49[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:08:49[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:09:35[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:09:36[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:12:36[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:12:36[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:13:12[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:13:12[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:13:29[WARN] user: yoshito-t
+GET /pages/new_reviews
+USE eager loading detected
+  ActiveStorage::Attachment => [:blob]
+  Add to your query: .includes([:blob])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:11:in `block in new_reviews'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:9:in `new_reviews'
+
+2023-10-01 11:13:29[WARN] user: yoshito-t
+GET /pages/popular_books
+AVOID eager loading detected
+  Book => [:reviews, :favorite_books]
+  Remove from your query: .includes([:reviews, :favorite_books])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:42:in `block in popular_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:40:in `popular_books'
+
+2023-10-01 11:13:42[WARN] user: yoshito-t
+GET /books/1/questions/2?current_user_id=35
+AVOID eager loading detected
+  Question => [:book]
+  Remove from your query: .includes([:book])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/questions_controller.rb:36:in `show'
+
