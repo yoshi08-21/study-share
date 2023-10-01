@@ -106,7 +106,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      s3_object = Aws::S3::Resource.new.bucket('study-feedback-bucket').object('default_user_image.png')
+      s3_object = Aws::S3::Resource.new.bucket('study-share-image').object('default_user_image.png')
 
       temp_file = Tempfile.new('downloaded_image', binmode: true)
       temp_file.write(s3_object.get.body.read)

@@ -11,7 +11,7 @@ Rails.application.configure do
 
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  config.active_storage.service = :amazon
+  config.active_storage.service = :amazon_production
   config.log_level = :info
 
   # Prepend all log lines with the following tags.

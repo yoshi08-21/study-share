@@ -41,7 +41,7 @@ class BooksController < ApplicationController
     book = current_user.books.build(book_params)
     if book.save
       unless book.image.attached?
-        s3_object = Aws::S3::Resource.new.bucket('study-feedback-bucket').object('no image.png')
+        s3_object = Aws::S3::Resource.new.bucket('study-share-image').object('no image.png')
 
         temp_file = Tempfile.new('downloaded_image', binmode: true)
         temp_file.write(s3_object.get.body.read)
