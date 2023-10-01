@@ -108,17 +108,27 @@ export default {
       this.$router.push({ path: "/mypage" , query: { message: "ログインしました"} })
     },
     async loginAsUser1() {
-      this.email = "sample@sample.com"
-      this.password = "123456"
-      await this.login()
+      if(process.env.NODE_ENV === "development") {
+        this.email = "sample@sample.com"
+        this.password = "123456"
+        await this.login()
+      } else if(process.env.NODE_ENV === "production") {
+        this.email = "kanagawa369@sample.com"
+        this.password = "kanakana"
+        await this.login()
+      }
     },
     async loginAsUser2() {
-      this.email = "sample2@sample.com"
-      this.password = "234567"
-      await this.login()
+      if(process.env.NODE_ENV === "development") {
+        this.email = "sample2@sample.com"
+        this.password = "234567"
+        await this.login()
+      } else if(process.env.NODE_ENV === "production") {
+        this.email = "kanagawa123@sample.com"
+        this.password = "kanakana2"
+        await this.login()
+      }
     }
-
-
   },
 }
 </script>
