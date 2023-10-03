@@ -57,6 +57,7 @@ class PagesController < ApplicationController
                                         .with_attached_image
                                         .where("users.first_choice_school = ?",current_user.first_choice_school)
                                         .group(:book_id)
+                                        .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
                                         .limit(10)
                                         .includes([:reviews])
@@ -73,6 +74,7 @@ class PagesController < ApplicationController
                                         .with_attached_image
                                         .where("users.first_choice_school = ?",current_user.second_choice_school)
                                         .group(:book_id)
+                                        .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
                                         .limit(50)
                                         .includes([:reviews])
@@ -89,6 +91,7 @@ class PagesController < ApplicationController
                                         .with_attached_image
                                         .where("users.first_choice_school = ?",current_user.third_choice_school)
                                         .group(:book_id)
+                                        .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
                                         .limit(10)
                                         .includes([:reviews])
