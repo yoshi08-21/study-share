@@ -84,8 +84,11 @@
         </v-col>
       </v-row>
       <br>
-    <v-pagination v-model="page" :length="totalPages"></v-pagination>
-  </template>
+      <v-pagination v-model="page" :length="totalPages"></v-pagination>
+    </template>
+    <template v-else-if="searchResults.length === 0 && isSearching === true">
+      <h2 style="text-align: center;">検索結果はありません</h2>
+    </template>
 
 
     <!-- 選択した参考書の確認ダイアログ -->
@@ -259,6 +262,7 @@ export default {
         },
       ],
       isInputBeingConverted: false,
+      isSearching: false
     }
   },
   computed: {
@@ -287,20 +291,25 @@ export default {
 
           console.log(data)
           console.log(response)
-          for (const book of data.items) {
-            const name = book.volumeInfo.title
-            const author = book.volumeInfo.author
-            const publisher = book.volumeInfo.publisher
-            const imageUrl = book.volumeInfo.imageLinks
-            const description = book.volumeInfo.description
-            this.searchResults.push({
-              name: name || "不明",
-              author: author || "不明",
-              publisher: publisher || "不明",
-              imageUrl : imageUrl ? imageUrl.thumbnail : "",
-              description: description ? description.slice(0, 40) : "",
-              fullDescription: description ? description.slice(0, 1000) : ""
-            })
+
+          if(data.items) {
+            for (const book of data.items) {
+              const name = book.volumeInfo.title
+              const author = book.volumeInfo.author
+              const publisher = book.volumeInfo.publisher
+              const imageUrl = book.volumeInfo.imageLinks
+              const description = book.volumeInfo.description
+              this.searchResults.push({
+                name: name || "不明",
+                author: author || "不明",
+                publisher: publisher || "不明",
+                imageUrl : imageUrl ? imageUrl.thumbnail : "",
+                description: description ? description.slice(0, 40) : "",
+                fullDescription: description ? description.slice(0, 1000) : ""
+              })
+            }
+          } else {
+            this.isSearching = true
           }
           this.page = 1
         }
