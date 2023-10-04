@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <v-form>
+    <v-form @submit.prevent>
       <v-rating
         v-model="rating"
         background-color="orange lighten-3"

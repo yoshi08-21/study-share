@@ -1,13 +1,13 @@
 <template>
   <div>
     <br>
-    <v-form>
+    <v-form @submit.prevent>
       <v-col
-      class="d-flex"
-      cols="12"
-      sm="6"
+        class="d-flex"
+        cols="12"
+        sm="6"
       >
-      <v-btn @click="selectSubjectDialog = true">科目を選択する(必須)</v-btn>
+        <v-btn @click="selectSubjectDialog = true">科目を選択する(必須)</v-btn>
       </v-col>
       <h3 v-if="subject">選択された科目：{{ subject }}</h3>
       <br>

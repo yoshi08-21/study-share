@@ -1,7 +1,7 @@
 <template>
   <div>
     <br><br>
-    <v-form>
+    <v-form @submit.prevent>
       <v-file-input
         v-model="selectedFile"
         accept="image/jpeg, image/png"
