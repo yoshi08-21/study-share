@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <v-form>
+    <v-form @submit.prevent>
       <v-text-field counter label="タイトル" :rules="titleRules" v-model="title" data-cy="question-title-form"></v-text-field>
       <v-textarea outlined counter label="本文" :rules="contentRules" v-model="content" data-cy="question-content-form"></v-textarea>
       *画像を添付できます(「.jpeg」「.jpg」「.png」のみ添付できます)
