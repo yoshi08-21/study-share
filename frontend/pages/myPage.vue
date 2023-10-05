@@ -477,7 +477,7 @@ export default {
         console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
-        this.flashMessage = "ユーザーを編集できませんでした"
+        this.flashMessage = error.response.data.error
         this.dialog = false
       }
     },
