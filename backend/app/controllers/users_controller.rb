@@ -126,6 +126,8 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     return head :not_found unless user
 
+    return render json: { error: "ゲストユーザーは編集できません" }, status: 422 if user.admin == true
+
     if user.update(user_params)
       image_url = user.image.attached? ? rails_blob_url(user.image) : nil
       render json: { user: user, image_url: image_url }, status: 200
