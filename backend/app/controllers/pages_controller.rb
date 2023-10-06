@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
 
   def new_reviews
-    reviews = Review.includes(:user, :book)
-                      .includes(user: :image_attachment)
+    reviews = Review.includes(book: [image_attachment: :blob], user: [image_attachment: :blob])
                       .order("created_at DESC")
                       .limit(10)
 

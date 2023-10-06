@@ -13,12 +13,12 @@
         @click:append="showPassword = !showPassword"
         data-cy="password-field"
         ></v-text-field>
-        <v-btn @click="login" data-cy="login-button">ログイン</v-btn>
+        <v-btn @click="login" data-cy="login-button" color="primary">ログイン</v-btn>
       </v-form>
       <v-spacer :style="{ height: '20px' }"></v-spacer>
-      <v-btn @click="loginAsUser1">ゲストユーザーでログイン</v-btn>
+      <v-btn @click="loginAsUser1" color="success">ゲストユーザー1でログイン</v-btn>
       <v-spacer :style="{ height: '20px' }"></v-spacer>
-      <v-btn @click="loginAsUser2">ゲストユーザー2でログイン</v-btn>
+      <v-btn @click="loginAsUser2" color="info">ゲストユーザー2でログイン</v-btn> ＊通知の作成など、別のユーザーが必要なときにお使いください。
       <v-spacer :style="{ height: '20px' }"></v-spacer>
       <v-btn block @click="$router.push('/auth/signup')">新規登録はこちらから</v-btn>
     </v-col>
