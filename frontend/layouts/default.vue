@@ -293,7 +293,9 @@ export default {
         this.userMemo = ""
         this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
       } catch(error) {
-        console.log(error)
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "ログアウトできませんでした"
       }
     },
     searchBooks(data) {
@@ -330,16 +332,16 @@ export default {
     },
     async saveUserMemo() {
       try {
-        const response = await axios.patch("/users/save_user_memo", {
+        await axios.patch("/users/save_user_memo", {
           current_user_id: this.currentUser.id,
           memo: this.userMemo
         })
-        console.log(response.data)
         this.snackbar = true
         this.flashMessage = "メモを保存しました"
       } catch(error) {
-        console.log(error)
-        throw error
+        this.snackbarColor = "red accent-2"
+        this.snackbar = true
+        this.flashMessage = "メモを保存できませんでした"
       }
     }
   }

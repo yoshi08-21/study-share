@@ -60,15 +60,13 @@ export default {
           searchQuestionsKeyword: route.query.searchQuestionsKeyword
         }
       })
-      console.log(response.data)
       return {
         searchQuestionsResult: response.data.questions,
         totalCount: response.data.questions_count,
         searchQuestionsKeyword: route.query.searchQuestionsKeyword,
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   watch: {
@@ -80,7 +78,7 @@ export default {
             this.totalCount = results.questions_count
           })
           .catch(error => {
-            console.log(error)
+            console.error("エラーが発生しました:", error)
           })
       }
     }
@@ -114,12 +112,11 @@ export default {
             searchQuestionsKeyword
           }
         })
-        console.log(response.data)
         this.searchQuestionsKeyword = searchQuestionsKeyword
         this.page = 1
         return response.data
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     },
   }

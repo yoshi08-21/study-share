@@ -59,15 +59,13 @@ export default {
           searchSubjectQuestionsKeyword: route.query.searchSubjectQuestionsKeyword
         }
       })
-      console.log(response.data)
       return {
         searchSubjectQuestionsResult: response.data.subject_questions,
         totalCount: response.data.subject_questions_count,
         searchSubjectQuestionsKeyword: route.query.searchSubjectQuestionsKeyword,
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   watch: {
@@ -79,7 +77,7 @@ export default {
             this.totalCount = results.subject_questions_count
           })
           .catch(error => {
-            console.log(error)
+            console.error("エラーが発生しました:", error)
           })
       }
     }
@@ -113,12 +111,11 @@ export default {
             searchSubjectQuestionsKeyword
           }
         })
-        console.log(response.data)
         this.searchSubjectQuestionsKeyword = searchSubjectQuestionsKeyword
         this.page = 1
         return response.data
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     },
   }

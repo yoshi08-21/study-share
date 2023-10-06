@@ -13,17 +13,13 @@ export default async function({ store }) {
         current_user_id: currentUserId
       }
     })
-    console.log(response)
     if(response.status === 200) {
       store.dispatch("notifications/setUnreadNotifications", true)
-      console.log("store.dispatch('setUnreadNotifications', true)")
     } else {
       store.dispatch("notifications/setUnreadNotifications", false)
-      console.log("store.dispatch('setUnreadNotifications', false)")
     }
   } catch(error) {
-    console.log(error)
-    throw error
+
   }
 }
 

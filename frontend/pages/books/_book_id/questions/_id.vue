@@ -257,9 +257,6 @@ export default {
       const questionData = questionResponse.data
       const questions = questionsResponse.data
       const replies = repliesResponse.data
-      console.log(questionData)
-      console.log(replies)
-      console.log(questions)
       return {
         book: questionData.book,
         question: questionData.question,
@@ -270,8 +267,7 @@ export default {
         params
       };
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -311,11 +307,10 @@ export default {
           question_id: this.$route.params.id
         }
       })
-      console.log(response)
       this.isFavorite = response.data.is_favorite
       this.favoriteQuestionId = response.data.favorite_question_id
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
@@ -331,7 +326,6 @@ export default {
 
       try {
         const response = await axios.patch(`/books/${this.book.id}/questions/${this.question.id}`, formData)
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "質問の編集が完了しました"
@@ -341,7 +335,7 @@ export default {
           this.question.image = response.data.image_url
         }
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を編集できませんでした"
@@ -350,15 +344,14 @@ export default {
     },
     async deleteQuestion() {
       try {
-        const response = await axios.delete(`/books/${this.book.id}/questions/${this.question.id}`, {
+        await axios.delete(`/books/${this.book.id}/questions/${this.question.id}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response)
         this.$router.push({ path: `/books/${this.book.id}`, query: { message: '質問を削除しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を削除できませんでした"
@@ -370,7 +363,6 @@ export default {
         const response = await axios.post(`/questions/${this.question.id}/favorite_questions`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!しました"
@@ -378,7 +370,7 @@ export default {
         this.favoriteQuestionId = response.data.id
         this.question.favorite_questions_count +=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでにいいね!されています"
@@ -386,12 +378,11 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/questions/${this.question.id}/favorite_questions/${this.favoriteQuestionId}`, {
+        await axios.delete(`/questions/${this.question.id}/favorite_questions/${this.favoriteQuestionId}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!を削除しました"
@@ -399,7 +390,7 @@ export default {
         this.favoriteQuestionId = null
         this.question.favorite_questions_count -=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね!されていません"
@@ -423,10 +414,9 @@ export default {
 
       try {
         const response = await axios.post(`/books/${this.book.id}/questions/${this.question.id}/replies`, formData)
-        console.log(response.data)
         this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}/replies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "返信を投稿できませんでした"

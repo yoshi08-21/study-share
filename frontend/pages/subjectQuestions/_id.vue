@@ -254,9 +254,6 @@ export default {
         }),
         axios.get(`subject_questions/${params.id}/subject_question_replies`)
       ])
-      console.log(subjectQuestionResponse.data)
-      console.log(subjectQuestionsResponse.data)
-      console.log(subjectQuestionRepliesResponse.data)
       return {
         subjectQuestion: subjectQuestionResponse.data.subject_question,
         user: subjectQuestionResponse.data.subject_question_user,
@@ -265,8 +262,7 @@ export default {
         params
       };
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -306,12 +302,10 @@ export default {
           subject_question_id: this.$route.params.id
         }
       })
-      console.log(response)
       this.isFavorite = response.data.is_favorite
       this.favoriteSubjectQuestionId = response.data.favorite_subject_question_id
     } catch(error) {
-      console.log("エラー文です")
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
@@ -328,7 +322,6 @@ export default {
 
       try {
         const response = await axios.patch(`/subject_questions/${this.subjectQuestion.id}`, formData)
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "質問の編集が完了しました"
@@ -339,7 +332,7 @@ export default {
           this.subjectQuestion.image = response.data.image_url
         }
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を編集できませんでした"
@@ -348,15 +341,14 @@ export default {
     },
     async deleteSubjectQuestion() {
       try {
-        const response = await axios.delete(`/subject_questions/${this.subjectQuestion.id}`, {
+        await axios.delete(`/subject_questions/${this.subjectQuestion.id}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response)
         this.$router.push({ path: `/subjectQuestions/allSubjectQuestions`, query: { message: '質問を削除しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を削除できませんでした"
@@ -368,7 +360,6 @@ export default {
         const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/favorite_subject_questions`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!しました"
@@ -376,7 +367,7 @@ export default {
         this.favoriteSubjectQuestionId = response.data.id
         this.subjectQuestion.favorite_subject_questions_count +=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでにいいね!されています"
@@ -384,12 +375,11 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/subject_questions/${this.subjectQuestion.id}/favorite_subject_questions/${this.favoriteSubjectQuestionId}`, {
+        await axios.delete(`/subject_questions/${this.subjectQuestion.id}/favorite_subject_questions/${this.favoriteSubjectQuestionId}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!を削除しました"
@@ -397,7 +387,7 @@ export default {
         this.favoriteSubjectQuestionId = null
         this.subjectQuestion.favorite_subject_questions_count -=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね!されていません"
@@ -421,10 +411,9 @@ export default {
 
       try {
         const response = await axios.post(`/subject_questions/${this.subjectQuestion.id}/subject_question_replies`, formData)
-        console.log(response)
         this.$router.push({ path: `/subjectQuestions/${this.subjectQuestion.id}/subjectQuestionReplies/${response.data.id}`, query: { message: '返信の投稿が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "返信を投稿できませんでした"

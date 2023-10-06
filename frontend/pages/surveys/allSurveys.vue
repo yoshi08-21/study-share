@@ -123,7 +123,6 @@ export default {
   mixins: [userComputed, flashMessage],
   async asyncData() {
     const response = await axios.get("/surveys")
-    console.log(response.data)
     return {
       surveys: response.data
     }
@@ -188,10 +187,9 @@ export default {
 
       try {
         const response = await axios.post("/surveys", formData)
-        console.log(response.data)
         this.$router.push({ path: `/surveys/${response.data.id}`, query: { message: 'アンケートを作成しました' }  })
       } catch (error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "アンケートを作成できませんでした"

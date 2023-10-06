@@ -75,9 +75,8 @@ export default {
         this.$store.dispatch("auth/setLoginState", true)
         this.$store.dispatch("auth/setUserUid", userCredential.user.uid)
         this.$store.dispatch("auth/setEmail", userCredential.user.email)
-        console.log(userCredential)
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         let message = ""
         if(error.code === "auth/invalid-email") {
           message = "正しいメールアドレスを入力してください"
@@ -100,9 +99,8 @@ export default {
         const response = await axios.get(`/users/find_user_by_uid/${uid}`)
         this.user = response.data
         this.$store.dispatch("auth/setCurrentUser", this.user)
-        console.log(response)
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
 
       this.$router.push({ path: "/mypage" , query: { message: "ログインしました"} })

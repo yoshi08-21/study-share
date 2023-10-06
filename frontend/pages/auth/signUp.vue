@@ -80,12 +80,10 @@ export default {
       try {
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
-        console.log(response)
-        console.log(response.user.uid)
         this.userSetup(response.user.uid)
         this.$router.push({ path: "/", query: { message: "会員登録が完了しました。" } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbar = true
         this.snackbarColor = "red accent-2"
         this.flashMessage = "入力フォームを確認してください"
@@ -100,9 +98,8 @@ export default {
         })
         this.$store.dispatch("auth/setCurrentUser", response.data)
         this.$store.dispatch("auth/setLoginState", true)
-        console.log(response.data)
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     }
 

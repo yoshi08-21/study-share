@@ -71,7 +71,6 @@ export default {
           current_user_id: store.getters["auth/getCurrentUser"].id
         }
       })
-      console.log(response.data)
       return {
         watchedBooks: response.data.book_browsing_histories,
         watchedReviews: response.data.review_browsing_histories,
@@ -82,8 +81,7 @@ export default {
         watchedSurveys: response.data.survey_browsing_histories,
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {

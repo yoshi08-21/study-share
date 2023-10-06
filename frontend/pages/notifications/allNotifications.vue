@@ -152,14 +152,11 @@ export default {
           current_user_id: store.getters["auth/getCurrentUser"].id
         }
       })
-      console.log(response)
-      console.log(response.data)
       return {
         notifications: response.data
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -183,16 +180,14 @@ export default {
   methods: {
     async createSampleNotification() {
       try {
-        const response = await axios.post("subject_question_replies/create_sample_notification", {
+        await axios.post("subject_question_replies/create_sample_notification", {
           current_user_id: this.currentUser.id,
           sample_user_id: 16,
           content: "通知確認用サンプルメッセージ"
         })
-        console.log(response.data)
         this.$router.push({ path: "/", query: { message: "通知が作成されました" } })
       } catch(error) {
-        console.log(error)
-        throw error
+        console.error("エラーが発生しました:", error)
       }
     }
 
