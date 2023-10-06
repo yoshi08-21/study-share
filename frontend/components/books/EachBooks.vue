@@ -88,21 +88,14 @@
 <script>
 
 import userComputed from "../../mixins/userComputed"
+import flashMessage from '../../mixins/flashMessage'
 import axios from "@/plugins/axios"
 
 export default {
   props: {
     books: [],
   },
-  mixins: [userComputed],
-  data() {
-    return {
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
-
-    }
-  },
+  mixins: [userComputed, flashMessage],
   methods: {
     async addToFavorites(book, event) {
       event.preventDefault();

@@ -3751,3 +3751,14 @@ Call stack
   /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:65:in `map'
   /Users/yoshito-t/Desktop/study-share/backend/app/controllers/pages_controller.rb:65:in `get_same_university_books'
 
+2023-10-06 10:25:04[WARN] user: yoshito-t
+GET /books?current_user_id=1
+AVOID eager loading detected
+  Book => [:reviews]
+  Remove from your query: .includes([:reviews])
+Call stack
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/concerns/shared_actions/attach_image.rb:12:in `block in attach_image_to_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/concerns/shared_actions/attach_image.rb:10:in `map'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/concerns/shared_actions/attach_image.rb:10:in `attach_image_to_books'
+  /Users/yoshito-t/Desktop/study-share/backend/app/controllers/books_controller.rb:13:in `index'
+

@@ -26,19 +26,21 @@
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
-
   </div>
 </template>
 
 <script>
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import axios from "../../plugins/axios";
 import isLoggedIn from "../../middleware/isLoggedIn"
+import flashMessage from '../../mixins/flashMessage'
+import axios from "../../plugins/axios";
+
 
 
 export default {
   middleware: isLoggedIn,
+  mixins: [flashMessage],
   data() {
     return {
       name: "",
@@ -68,11 +70,6 @@ export default {
       ],
       showPassword: false,
       showPasswordConfirmation: false,
-      snackbar: false,
-      snackbarColor: "primary",
-      flashMessage: "テストメッセージ",
-
-
     }
   },
   methods: {
