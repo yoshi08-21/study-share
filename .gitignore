@@ -51,6 +51,7 @@ tmp/cache/bootsnap/
 tmp/cache/bootsnap/load-path-cache
 frontend/.eslintcache
 
+backend/log/
 backend/log/test.log
 backend/config/master.key
 backend/.env
