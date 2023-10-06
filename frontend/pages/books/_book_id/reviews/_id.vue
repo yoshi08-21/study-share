@@ -188,8 +188,6 @@ export default {
         const review = reviewResponse.data.review
         const user = reviewResponse.data.review_user
         const reviews = reviewsResponse.data
-        console.log(reviewResponse.data)
-        console.log(reviewsResponse.data)
       return {
         book,
         review,
@@ -198,8 +196,7 @@ export default {
         params
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -225,12 +222,10 @@ export default {
           review_id: this.$route.params.id
         }
       })
-      console.log(response)
       this.isFavorite = response.data.is_favorite
       this.favoriteReviewId = response.data.favorite_review_id
     } catch(error) {
-      console.log("エラー文です")
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
@@ -244,7 +239,6 @@ export default {
           },
           current_user_id: this.currentUser.id
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "レビューの編集が完了しました"
@@ -252,7 +246,7 @@ export default {
         this.review.content = response.data.content
         this.review.rating = response.data.rating
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "レビューを編集できませんでした"
@@ -261,15 +255,14 @@ export default {
     },
     async deleteReview() {
       try {
-        const response = await axios.delete(`/books/${this.book.id}/reviews/${this.review.id}`, {
+        await axios.delete(`/books/${this.book.id}/reviews/${this.review.id}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response)
         this.$router.push({ path: `/books/${this.book.id}`, query: { message: 'レビューを削除しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "レビューを削除できませんでした"
@@ -281,7 +274,6 @@ export default {
         const response = await axios.post(`/reviews/${this.review.id}/favorite_reviews`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!しました"
@@ -289,7 +281,7 @@ export default {
         this.favoriteReviewId = response.data.id
         this.review.favorite_reviews_count +=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでにいいね!されています"
@@ -297,12 +289,11 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/reviews/${this.review.id}/favorite_reviews/${this.favoriteReviewId}`, {
+        await axios.delete(`/reviews/${this.review.id}/favorite_reviews/${this.favoriteReviewId}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!を削除しました"
@@ -310,7 +301,7 @@ export default {
         this.favoriteReviewId = null
         this.review.favorite_reviews_count -=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね!されていません"

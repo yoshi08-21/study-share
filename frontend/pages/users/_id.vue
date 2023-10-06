@@ -290,7 +290,6 @@ export default {
   async asyncData({ params }) {
     try {
       const response = await axios.get(`/users/show_other_user/${params.id}`)
-      console.log(response.data)
       return {
         user: response.data.user,
         myQuestions: response.data.my_questions,
@@ -307,7 +306,7 @@ export default {
         myFavoriteSurveysCount: response.data.my_favorite_surveys_count,
       }
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {

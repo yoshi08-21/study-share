@@ -132,13 +132,11 @@ export default {
   async asyncData() {
     try {
       const responce = await axios.get("/subject_questions")
-      console.log(responce.data)
       return {
         subjectQuestions: responce.data
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -190,10 +188,9 @@ export default {
 
       try {
         const response = await axios.post("/subject_questions", formData)
-        console.log(response)
         this.$router.push({ path: `/subjectQuestions/${response.data.id}`, query: { message: '質問の投稿が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を投稿できませんでした"

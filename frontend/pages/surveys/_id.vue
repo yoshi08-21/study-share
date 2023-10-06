@@ -416,9 +416,6 @@ export default {
       const survey = surveyResponse.data
       const surveyAnswers = surveyAnswersResponse.data
       const surveys = surveysResponse.data
-      console.log(survey)
-      console.log(surveyAnswers)
-      console.log(surveys)
       return {
         survey: survey.survey,
         surveyUser: survey.survey_user,
@@ -426,8 +423,7 @@ export default {
         surveys
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {
@@ -509,10 +505,6 @@ export default {
           }
         })
       ])
-
-      console.log(currentUserAnswerResponse.status)
-      console.log(currentUserAnswerResponse.data)
-      console.log(isFavoriteResponse.data)
       if(currentUserAnswerResponse.status === 200) {
         this.existAnswer = true
         this.selectedAnswer = currentUserAnswerResponse.data.selected_option.toString()
@@ -522,21 +514,20 @@ export default {
       this.isFavorite = isFavoriteResponse.data
       this.favoriteSurveyId = isFavoriteResponse.data.favorite_survey_id
     } catch (error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
     async deleteSurvey() {
       try {
-        const response = await axios.delete(`surveys/${this.survey.id}`, {
+        await axios.delete(`surveys/${this.survey.id}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.$router.push({ path: "/surveys/allSurveys", query: { message: "アンケートを削除しました" } })
       } catch (error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "アンケートを削除できませんでした"
@@ -545,17 +536,16 @@ export default {
     },
     async closeSurvey() {
       try {
-        const response = await axios.patch(`/surveys/${this.survey.id}/close_survey`, {
+        await axios.patch(`/surveys/${this.survey.id}/close_survey`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "アンケートを締め切りました"
         this.closeSurveyConfimation = false
         this.survey.status = true
       } catch (error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     },
     async createSurveyAnswer(selectedOption) {
@@ -567,14 +557,12 @@ export default {
           },
           current_user_id: this.currentUser.id,
         })
-        console.log(response.data)
         this.surveyAnswers.push(response.data)
-        console.log(this.surveyAnswers)
         this.existAnswer = true
         this.snackbar = true
         this.flashMessage = "アンケートに回答しました"
       } catch (error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでに回答済みです"
@@ -589,7 +577,6 @@ export default {
           },
           current_user_id: this.currentUser.id,
         })
-        console.log(response.data)
         // レスポンスで処理を切り替える
         if(response.status === 204) {
           this.existAnswer = false
@@ -597,17 +584,15 @@ export default {
           this.snackbar = true
           this.flashMessage = "回答を取り消しました"
           this.removeSurveyAnswersReponse(this.currentUser.id)
-          console.log(this.surveyAnswers)
         } else if(response.status === 200) {
           this.existAnswer = true
           this.snackbarColor = "primary"
           this.snackbar = true
           this.flashMessage = "回答を変更しました"
           this.changeSurveyAnswersResponse(this.currentUser.id, selectedOption)
-          console.log(this.surveyAnswers)
         }
       } catch (error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     },
     // 回答が取り消された場合に、surveyAnswersの配列から該当の回答を削除する
@@ -632,7 +617,6 @@ export default {
         const response = await axios.post(`/surveys/${this.survey.id}/favorite_surveys`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!しました"
@@ -640,7 +624,7 @@ export default {
         this.favoriteSurveyId = response.data.id
         this.survey.favorite_surveys_count += 1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでにいいね!されています"
@@ -648,12 +632,11 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/surveys/${this.survey.id}/favorite_surveys/${this.favoriteSurveyId}`, {
+        await axios.delete(`/surveys/${this.survey.id}/favorite_surveys/${this.favoriteSurveyId}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!を削除しました"
@@ -661,7 +644,7 @@ export default {
         this.favoriteQuestionId = null
         this.survey.favorite_surveys_count -= 1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね!されていません"

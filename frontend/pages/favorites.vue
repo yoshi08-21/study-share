@@ -170,6 +170,8 @@
       </template>
     </template>
 
+    <br>
+    <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 
   </div>
 </template>
@@ -196,7 +198,6 @@ export default {
           user_id: store.getters["auth/getCurrentUser"].id
         }
       })
-      console.log(response.data)
       return {
         favoriteBooks: response.data.favorite_books,
         favoriteReviews: response.data.favorite_reviews,
@@ -208,7 +209,7 @@ export default {
 
       }
     } catch(error) {
-      console.log(error)
+
     }
   },
   data() {

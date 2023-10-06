@@ -108,17 +108,15 @@ export default {
       event.preventDefault();
       if (this.currentUser) {
         try {
-          const response = await axios.post(`/books/${book.id}/favorite_books`, {
+          await axios.post(`/books/${book.id}/favorite_books`, {
             current_user_id: this.currentUser.id,
           })
-          console.log(response.data)
           book.check_favorite = 1
           book.favorite_books_count += 1
           this.snackbarColor = "primary"
           this.snackbar = true
           this.flashMessage = "お気に入りに追加しました"
         } catch(error) {
-          console.log(error)
           this.snackbarColor = "red accent-2"
           this.snackbar = true
           this.flashMessage = "すでにお気に入りに登録されています"
@@ -131,20 +129,18 @@ export default {
     async removeFromFavorite(book, event) {
       event.preventDefault();
       try {
-        const response = await axios.delete("/favorite_books/destroy_from_item_list", {
+        await axios.delete("/favorite_books/destroy_from_item_list", {
           params: {
             current_user_id: this.currentUser.id,
             book_id: book.id
           }
         })
-        console.log(response)
         book.favorite_books_count -= 1
         book.check_favorite = 0
         this.snackbar = true
         this.snackbarColor = "primary"
         this.flashMessage = "お気に入りから削除しました"
       } catch(error) {
-        console.log(error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "お気に入りに登録されていません"

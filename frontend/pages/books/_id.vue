@@ -294,9 +294,6 @@ export default {
       const book = bookResponse.data
       const reviews = reviewsResponse.data
       const questions = questionsResponse.data
-      console.log(book)
-      console.log(reviews)
-      console.log(questions)
       return {
         book,
         reviews,
@@ -304,7 +301,7 @@ export default {
         params
       };
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
       throw error
     }
 
@@ -361,11 +358,10 @@ export default {
           book_id: this.$route.params.id
         }
       })
-      console.log(response)
       this.isFavorite = response.data.is_favorite
       this.favoriteBookId = response.data.favorite_book_id
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
@@ -375,14 +371,13 @@ export default {
           const response = await axios.post(`/books/${this.book.id}/favorite_books`, {
             current_user_id: this.currentUser.id,
           })
-          console.log(response.data)
           this.isFavorite = !this.isFavorite
           this.favoriteBookId = response.data.favorite_book_id
           this.snackbar = true
           this.flashMessage = "お気に入りに追加しました"
           this.book.favorite_books_count += 1
         } catch(error) {
-          console.log(error)
+          console.error("エラーが発生しました:", error)
           this.snackbarColor = "red accent-2"
           this.snackbar = true
           this.flashMessage = "すでにお気に入りに追加されています"
@@ -393,18 +388,17 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/books/${this.book.id}/favorite_books/${this.favoriteBookId}`, {
+        await axios.delete(`/books/${this.book.id}/favorite_books/${this.favoriteBookId}`, {
           params: {
             current_user_id: this.currentUser.id,
           }
         })
-        console.log(response)
         this.isFavorite = !this.isFavorite
         this.snackbar = true
         this.flashMessage = "お気に入りから削除しました"
         this.book.favorite_books_count -= 1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "お気に入りに登録されていません"
@@ -421,10 +415,9 @@ export default {
           current_user_id: this.currentUser.id,
           }
         )
-        console.log(response)
         this.$router.push({ path: `/books/${this.book.id}/reviews/${response.data.id}`, query: { message: 'レビューの投稿が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "レビューを投稿できませんでした"
@@ -445,10 +438,9 @@ export default {
 
       try {
         const response = await axios.post(`/books/${this.book.id}/questions`, formData)
-        console.log(response)
         this.$router.push({ path: `/books/${this.book.id}/questions/${response.data.id}`, query: { message: '質問の投稿が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "質問を投稿できませんでした"
@@ -484,7 +476,6 @@ export default {
 
       try {
         const response = await axios.patch(`/books/${this.book.id}`, formData)
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "参考書の編集が完了しました"
@@ -497,7 +488,7 @@ export default {
           this.book.image = response.data.image_url
         }
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "参考書を編集できませんでした"
@@ -506,13 +497,12 @@ export default {
     },
     async deleteBook() {
       try {
-        const response = await axios.delete(`/books/${this.book.id}`, {
+        await axios.delete(`/books/${this.book.id}`, {
           params: { current_user_id: this.currentUser.id }
         })
-        console.log(response)
         this.$router.push({ path: `/books/allBooks`, query: { message: '参考書を削除しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "参考書を削除できませんでした"

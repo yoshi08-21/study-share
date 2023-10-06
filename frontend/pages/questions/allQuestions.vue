@@ -116,13 +116,11 @@ export default {
   async asyncData() {
     try {
       const responce = await axios.get("/questions/all_questions")
-      console.log(responce.data)
       return {
         questions: responce.data
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   data() {

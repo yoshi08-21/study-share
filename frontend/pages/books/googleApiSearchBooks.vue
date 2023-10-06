@@ -288,10 +288,6 @@ export default {
           const queryParams = new URLSearchParams(params)
           const response = await fetch(baseUrl + queryParams)
           const data = await response.json()
-
-          console.log(data)
-          console.log(response)
-
           if(data.items) {
             for (const book of data.items) {
               const name = book.volumeInfo.title
@@ -314,8 +310,7 @@ export default {
           this.page = 1
         }
       } catch(error) {
-        console.log(error)
-        throw error
+        console.error("エラーが発生しました:", error)
       }
     },
     openBookDialog(book) {
@@ -342,31 +337,26 @@ export default {
         const response = await axios.get(`/books/download_book_image?image_url=${encodedUrl}`, {
           responseType: 'blob'
         });
-        console.log(response)
         const imageBlob = new Blob([response.data], { type: response.headers['content-type'] });
         formData.append("book[image]", imageBlob, "downloaded-image.jpg");
       }
       try {
         const response = await axios.post("/books", formData)
-        console.log(response)
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
         if (error.response && error.response.data) {
-          console.log(error)
-          console.log(error.response)
-          console.log(error.response.data)
           const errors = error.response.data.errors
           for (const error of errors) {
             if (error.includes("Name")) {
               this.cleanedErrorMessage = error.replace("Name ", "")
             }
           }
-          console.log(this.cleanedErrorMessage); // エラーメッセージを表示
+          console.error(this.cleanedErrorMessage); // エラーメッセージを表示
           this.snackbarColor = "red accent-2"
           this.snackbar = true
           this.flashMessage = this.cleanedErrorMessage
         } else {
-          console.log('リクエストエラー:', error);
+          console.error('リクエストエラー:', error);
         }
       }
       this.bookDialog = false

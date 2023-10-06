@@ -65,15 +65,13 @@ export default {
           current_user_id: store.getters["auth/getCurrentUserId"]
         }
       })
-      console.log(response.data)
       return {
         searchBooksResult: response.data.books,
         totalCount: response.data.books_count,
         searchBooksKeyword: route.query.searchBooksKeyword
       }
     } catch(error) {
-      console.log(error)
-      throw error
+      console.error("エラーが発生しました:", error)
     }
   },
   watch: {
@@ -85,7 +83,7 @@ export default {
             this.totalCount = results.books_count
           })
           .catch(error => {
-            console.log(error)
+            console.error("エラーが発生しました:", error)
           })
       }
     }
@@ -117,13 +115,11 @@ export default {
             current_user_id: this.$store.getters["auth/getCurrentUserId"]
           }
         })
-        console.log(response.data)
         this.searchBooksKeyword = searchBooksKeyword
         this.page = 1
         return response.data
       } catch(error) {
-        console.log(error)
-        throw error
+        console.error("エラーが発生しました:", error)
       }
     },
     updateQueryParams() {

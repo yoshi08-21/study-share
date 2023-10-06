@@ -205,9 +205,6 @@ export default {
       const newReviews = newReviewsResponse.data
       const popularBooks = popularBooksResponse.data
       const sameUniversityBooks = sameUniversityBooksResponse.data
-      console.log(newReviews)
-      console.log(popularBooks)
-      console.log(sameUniversityBooks)
       return{
         newReviews,
         popularBooks,
@@ -216,7 +213,7 @@ export default {
         thirdChoiceSchoolBooks: sameUniversityBooks.third_choice_school_books
       }
     } catch(error) {
-      console.log(error)
+      console.log("エラーが発生しました")
       throw error
     }
   },

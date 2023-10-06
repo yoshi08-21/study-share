@@ -144,12 +144,11 @@ export default {
           current_user_id: store.getters["auth/getCurrentUserId"]
         }
       })
-      console.log(response.data)
       return {
         books: response.data
       }
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
       throw error
     }
   },
@@ -206,10 +205,9 @@ export default {
 
       try {
         const response = await axios.post("/books", formData)
-        console.log(response)
         this.$router.push({ path: `/books/${response.data.id}`, query: { message: '参考書の登録が完了しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "参考書を登録できませんでした"

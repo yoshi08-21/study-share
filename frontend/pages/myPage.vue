@@ -355,7 +355,6 @@ export default {
       }
 
       const response = await axios.get(`/users/${currentUserId}`)
-      console.log(response.data)
       return {
         user: response.data.user,
         myQuestions: response.data.my_questions,
@@ -372,7 +371,7 @@ export default {
         myFavoriteSurveysCount: response.data.my_favorite_surveys_count,
       }
     } catch (error) {
-      console.log(error)
+      console.log("エラーが発生しました")
       throw error
     }
   },
@@ -458,7 +457,6 @@ export default {
 
       try {
         const response = await axios.patch(`/users/${this.currentUser.id}`, formData)
-        console.log(response.data)
         // もう一度getリクエストを送って、storeのcurrentUserにセットし直す
         this.updateUser()
         this.snackbarColor = "primary"
@@ -474,7 +472,7 @@ export default {
         }
         this.dialog = false
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = error.response.data.error
@@ -486,9 +484,8 @@ export default {
         const response = await axios.get(`/users/${this.user.id}`)
         this.updatedUser = response.data.user
         this.$store.dispatch("auth/setCurrentUser", this.updatedUser)
-        console.log(response)
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "ユーザーを編集できませんでした"
@@ -496,8 +493,7 @@ export default {
     },
     async deleteLocalUser() {
       try {
-        const response = await axios.delete(`/users/${this.currentUser.id}`)
-        console.log(response.data)
+        await axios.delete(`/users/${this.currentUser.id}`)
         this.$store.dispatch("auth/setCurrentUser", null)
         this.$store.dispatch("auth/setLoginState", false)
         const auth = getAuth(this.$firebase)
@@ -505,11 +501,11 @@ export default {
         deleteUser(user).then(() => {
           console.log("ユーザーを削除しました")
         }).catch((error) => {
-          console.log(error)
+          console.error("エラーが発生しました:", error)
         });
         this.$router.push({ path: "/", query: { message: "ユーザーを削除しました。またのご利用をお待ちしています。" } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました")
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = error.response.data.error
@@ -540,7 +536,7 @@ export default {
         this.userMemo = ""
         this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
       }
     },
 

@@ -256,9 +256,6 @@ export default {
         }),
         axios.get(`/books/${params.book_id}/questions/${params.question_id}/replies`)
       ])
-
-      console.log(replyResponse.data)
-      console.log(repliesResponse.data)
       return {
         book: replyResponse.data.book,
         question: replyResponse.data.question,
@@ -269,7 +266,7 @@ export default {
         params
       };
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
       throw error
     }
   },
@@ -296,11 +293,10 @@ export default {
           reply_id: this.$route.params.id
         }
       })
-      console.log(response)
       this.isFavorite = response.data.is_favorite
       this.favoriteReplyId = response.data.favorite_reply_id
     } catch(error) {
-      console.log(error)
+      console.error("エラーが発生しました:", error)
     }
   },
   methods: {
@@ -315,7 +311,6 @@ export default {
 
       try {
         const response = await axios.patch(`/books/${this.book.id}/questions/${this.question.id}/replies/${this.reply.id}`, formData)
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "返信の編集が完了しました"
@@ -324,7 +319,7 @@ export default {
           this.reply.image = response.data.image_url
         }
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "返信を編集できませんでした"
@@ -333,13 +328,12 @@ export default {
     },
     async deleteReply() {
       try {
-        const response = await axios.delete(`/books/${this.book.id}/questions/${this.question.id}/replies/${this.reply.id}`, {
+        await axios.delete(`/books/${this.book.id}/questions/${this.question.id}/replies/${this.reply.id}`, {
           params: { current_user_id: this.currentUser.id }
         })
-        console.log(response)
         this.$router.push({ path: `/books/${this.book.id}/questions/${this.question.id}`, query: { message: '返信を削除しました' } })
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "返信を削除できませんでした"
@@ -351,7 +345,6 @@ export default {
         const response = await axios.post(`/replies/${this.reply.id}/favorite_replies`, {
           current_user_id: this.currentUser.id
         })
-        console.log(response)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!しました"
@@ -359,7 +352,7 @@ export default {
         this.favoriteReplyId = response.data.id
         this.reply.favorite_replies_count +=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "すでにいいね!されています"
@@ -367,12 +360,11 @@ export default {
     },
     async removeFromFavorite() {
       try {
-        const response = await axios.delete(`/replies/${this.reply.id}/favorite_replies/${this.favoriteReplyId}`, {
+        await axios.delete(`/replies/${this.reply.id}/favorite_replies/${this.favoriteReplyId}`, {
           params: {
             current_user_id: this.currentUser.id
           }
         })
-        console.log(response.data)
         this.snackbarColor = "primary"
         this.snackbar = true
         this.flashMessage = "いいね!を削除しました"
@@ -380,7 +372,7 @@ export default {
         this.favoriteReplyId = null
         this.reply.favorite_replies_count -=1
       } catch(error) {
-        console.log(error)
+        console.error("エラーが発生しました:", error)
         this.snackbarColor = "red accent-2"
         this.snackbar = true
         this.flashMessage = "いいね!されていません"
