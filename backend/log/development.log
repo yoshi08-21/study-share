@@ -41914,3 +41914,381 @@ puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
 puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
 puma (5.6.7) lib/puma/server.rb:443:in `process_client'
 puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--724e252d1815a32a7ce48a592ad0babaa9c57615/KhxHPHLP_400x400.png" for ::1 at 2023-10-06 10:24:23 +0900
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--724e252d1815a32a7ce48a592ad0babaa9c57615", "filename"=>"KhxHPHLP_400x400"}
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 43 LIMIT 1[0m
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.4ms | Allocations: 1118)
+
+
+  
+KeyError (Missing configuration for the amazon Active Storage service. Configurations available for the test、local、amazon_development、amazon_production services.):
+  
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:18:in `block in fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:309:in `service'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:199:in `url'
+activestorage (6.1.7.6) app/controllers/active_storage/blobs/redirect_controller.rb:12:in `show'
+actionpack (6.1.7.6) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7.6) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7.6) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7.6) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:842:in `call'
+bullet (7.0.7) lib/bullet/rack.rb:17:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (6.1.7.6) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (6.1.7.6) lib/rails/engine.rb:539:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/notifications/check_unread_notifications?current_user_id=1" for ::1 at 2023-10-06 10:25:04 +0900
+Processing by NotificationsController#check_unread_notifications as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:38:in `check_unread_notifications'
+  [1m[36mNotification Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `notifications` WHERE `notifications`.`target_user_id` = 1 AND `notifications`.`is_checked` = FALSE LIMIT 1[0m
+  ↳ app/controllers/notifications_controller.rb:43:in `check_unread_notifications'
+Completed 204 No Content in 5ms (ActiveRecord: 1.2ms | Allocations: 1063)
+
+
+Started GET "/books?current_user_id=1" for ::1 at 2023-10-06 10:25:04 +0900
+Processing by BooksController#index as HTML
+  Parameters: {"current_user_id"=>"1"}
+  [1m[36mBook Load (6.2ms)[0m  [1m[34mSELECT books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id and favorite_books.user_id = 1) AS check_favorite, (SELECT COUNT(*) FROM questions WHERE questions.book_id = books.id) AS questions_count FROM `books`[0m
+  ↳ app/controllers/books_controller.rb:11:in `index'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`book_id` IN (1, 3, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 54, 57, 59, 60)[0m
+  ↳ app/controllers/books_controller.rb:11:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_type` = 'Book' AND `active_storage_attachments`.`name` = 'image' AND `active_storage_attachments`.`record_id` IN (1, 3, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 54, 57, 59, 60)[0m
+  ↳ app/controllers/books_controller.rb:11:in `index'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` IN (26, 27, 30, 32, 33, 34, 35, 36, 37, 38, 45, 46, 47, 48, 49, 50, 51, 54, 55, 64, 66, 73, 79, 81, 82)[0m
+  ↳ app/controllers/books_controller.rb:11:in `index'
+Completed 200 OK in 154ms (Views: 5.6ms | ActiveRecord: 8.2ms | Allocations: 122167)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--724e252d1815a32a7ce48a592ad0babaa9c57615/KhxHPHLP_400x400.png" for ::1 at 2023-10-06 10:25:04 +0900
+Processing by ActiveStorage::Blobs::RedirectController#show as PNG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBNQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--724e252d1815a32a7ce48a592ad0babaa9c57615", "filename"=>"KhxHPHLP_400x400"}
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 43 LIMIT 1[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.6ms | Allocations: 1118)
+
+
+  
+KeyError (Missing configuration for the amazon Active Storage service. Configurations available for the test、local、amazon_development、amazon_production services.):
+  
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:18:in `block in fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:309:in `service'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:199:in `url'
+activestorage (6.1.7.6) app/controllers/active_storage/blobs/redirect_controller.rb:12:in `show'
+actionpack (6.1.7.6) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7.6) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7.6) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7.6) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:842:in `call'
+bullet (7.0.7) lib/bullet/rack.rb:17:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (6.1.7.6) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (6.1.7.6) lib/rails/engine.rb:539:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBOdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2de26a3a3340893144bbdf6ab9750af64a4511b5/Harry%20Potter7.jpg" for ::1 at 2023-10-06 10:25:05 +0900
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--102bbe88e75d7a3426fae7396148e1725ffac9ec/%E5%B9%BB%E6%83%B3%E7%9A%84%EF%BC%91jpg.jpeg" for ::1 at 2023-10-06 10:25:05 +0900
+Processing by ActiveStorage::Blobs::RedirectController#show as JPEG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBOdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2de26a3a3340893144bbdf6ab9750af64a4511b5", "filename"=>"Harry Potter7"}
+Processing by ActiveStorage::Blobs::RedirectController#show as JPEG
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--102bbe88e75d7a3426fae7396148e1725ffac9ec", "filename"=>"幻想的１jpg"}
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 50 LIMIT 1[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.8ms | Allocations: 1367)
+
+
+  
+KeyError (Missing configuration for the amazon Active Storage service. Configurations available for the test、local、amazon_development、amazon_production services.):
+  
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:18:in `block in fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:309:in `service'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:199:in `url'
+activestorage (6.1.7.6) app/controllers/active_storage/blobs/redirect_controller.rb:12:in `show'
+actionpack (6.1.7.6) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7.6) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7.6) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7.6) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:842:in `call'
+bullet (7.0.7) lib/bullet/rack.rb:17:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (6.1.7.6) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (6.1.7.6) lib/rails/engine.rb:539:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 32 LIMIT 1[0m
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 2.1ms | Allocations: 21631)
+
+
+  
+KeyError (Missing configuration for the amazon Active Storage service. Configurations available for the test、local、amazon_development、amazon_production services.):
+  
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:18:in `block in fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) lib/active_storage/service/registry.rb:11:in `fetch'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:309:in `service'
+activestorage (6.1.7.6) app/models/active_storage/blob.rb:199:in `url'
+activestorage (6.1.7.6) app/controllers/active_storage/blobs/redirect_controller.rb:12:in `show'
+actionpack (6.1.7.6) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:228:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:117:in `block in run_callbacks'
+actiontext (6.1.7.6) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (6.1.7.6) lib/action_text/engine.rb:59:in `block (4 levels) in <class:Engine>'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `instance_exec'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:126:in `block in run_callbacks'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:137:in `run_callbacks'
+actionpack (6.1.7.6) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `block in instrument'
+activesupport (6.1.7.6) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.1.7.6) lib/active_support/notifications.rb:203:in `instrument'
+actionpack (6.1.7.6) lib/action_controller/metal/instrumentation.rb:33:in `process_action'
+actionpack (6.1.7.6) lib/action_controller/metal/params_wrapper.rb:249:in `process_action'
+activerecord (6.1.7.6) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.1.7.6) lib/abstract_controller/base.rb:165:in `process'
+actionview (6.1.7.6) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (6.1.7.6) lib/action_controller/metal.rb:254:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.7.6) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.7.6) lib/action_dispatch/routing/route_set.rb:842:in `call'
+bullet (7.0.7) lib/bullet/rack.rb:17:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (6.1.7.6) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.7.6) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.7.6) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.7.6) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.7.6) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.7.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.7.6) lib/action_dispatch/middleware/host_authorization.rb:148:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (6.1.7.6) lib/rails/engine.rb:539:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started DELETE "/favorite_books/destroy_from_item_list?current_user_id=1&book_id=1" for ::1 at 2023-10-06 10:25:06 +0900
+Processing by FavoriteBooksController#destroy_from_item_list as HTML
+  Parameters: {"current_user_id"=>"1", "book_id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:37:in `destroy_from_item_list'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:40:in `destroy_from_item_list'
+  [1m[36mFavoriteBook Load (0.7ms)[0m  [1m[34mSELECT `favorite_books`.* FROM `favorite_books` WHERE `favorite_books`.`user_id` = 1 AND `favorite_books`.`book_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:43:in `destroy_from_item_list'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_books_controller.rb:46:in `destroy_from_item_list'
+  [1m[36mFavoriteBook Destroy (3.4ms)[0m  [1m[31mDELETE FROM `favorite_books` WHERE `favorite_books`.`id` = 213[0m
+  ↳ app/controllers/favorite_books_controller.rb:46:in `destroy_from_item_list'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_books_controller.rb:46:in `destroy_from_item_list'
+Completed 204 No Content in 19ms (ActiveRecord: 7.6ms | Allocations: 3606)
+
+
+Started POST "/books/1/favorite_books" for ::1 at 2023-10-06 10:25:06 +0900
+Processing by FavoriteBooksController#create as HTML
+  Parameters: {"current_user_id"=>1, "book_id"=>"1", "favorite_book"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:4:in `create'
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:7:in `create'
+  [1m[36mCACHE Book Load (0.0ms)[0m  [1m[34mSELECT `books`.* FROM `books` WHERE `books`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/favorite_books_controller.rb:11:in `create'
+  [1m[36mFavoriteBook Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `favorite_books` WHERE `favorite_books`.`book_id` = 1 AND `favorite_books`.`user_id` = 1 LIMIT 1[0m
+  ↳ app/controllers/favorite_books_controller.rb:11:in `create'
+  [1m[36mFavoriteBook Create (0.6ms)[0m  [1m[32mINSERT INTO `favorite_books` (`user_id`, `book_id`, `created_at`, `updated_at`) VALUES (1, 1, '2023-10-06 01:25:06.988447', '2023-10-06 01:25:06.988447')[0m
+  ↳ app/controllers/favorite_books_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/favorite_books_controller.rb:11:in `create'
+Completed 200 OK in 20ms (Views: 0.5ms | ActiveRecord: 3.8ms | Allocations: 5389)
+
+
