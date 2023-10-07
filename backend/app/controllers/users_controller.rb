@@ -103,6 +103,16 @@ class UsersController < ApplicationController
     }
   end
 
+  def user_email_confirmation
+    user = User.new(user_params)
+    email_verification_number = rand(10**7...10**8)
+    user.email_verification_number = email_verification_number
+
+    if user.save
+      UserMailer.registration_email(user, email_verification_number).deliver_now
+    end
+  end
+
   def create
     user = User.new(user_params)
     if user.save

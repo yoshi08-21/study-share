@@ -14,6 +14,13 @@
     "_name": "_44011c25"
   },
   {
+    "name": "auth-inputUserInformation",
+    "path": "/auth/inputUserInformation",
+    "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/inputUserInformation.vue",
+    "chunkName": "pages/auth/inputUserInformation",
+    "_name": "_d4063238"
+  },
+  {
     "name": "auth-login",
     "path": "/auth/login",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/login.vue",

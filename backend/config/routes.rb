@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       patch "save_user_memo"
       get "check_existence"
       get "return_cypress_user"
+      post "user_email_confirmation"
     end
   end
   resources :books, only: [:index, :show, :create, :update, :destroy] do
