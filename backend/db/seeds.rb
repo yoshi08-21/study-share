@@ -5,7 +5,8 @@ user = User.create!(name: "cypress-sample",
                     second_choice_school: "B大学",
                     third_choice_school: "C大学",
                     introduction: "よろしくお願いします",
-                    memo: "参考書Aが気になる"
+                    memo: "参考書Aが気になる",
+                    activated: true,
                   )
 
 user2 = User.create!(name: "edit-cypress-sample",
@@ -15,7 +16,8 @@ user2 = User.create!(name: "edit-cypress-sample",
                     second_choice_school: "E大学",
                     third_choice_school: "F大学",
                     introduction: "頑張ります",
-                    memo: "問題集Bを買う"
+                    memo: "問題集Bを買う",
+                    activated: true,
                   )
 
 user3 = User.create!(name: "delete-cypress-sample",
@@ -25,7 +27,8 @@ user3 = User.create!(name: "delete-cypress-sample",
                     second_choice_school: "B大学",
                     third_choice_school: "C大学",
                     introduction: "絶対合格しましょう",
-                    memo: "単語帳Cを確認"
+                    memo: "単語帳Cを確認",
+                    activated: true,
                   )
 
 user4 = User.create!(name: "sample-user1",
@@ -35,7 +38,8 @@ user4 = User.create!(name: "sample-user1",
                     second_choice_school: "B大学",
                     third_choice_school: "C大学",
                     introduction: "A",
-                    memo: "A"
+                    memo: "A",
+                    activated: true,
                   )
 
 
@@ -44,7 +48,7 @@ book = Book.create!(name: "サンプル参考書1",
                     publisher: "サンプル出版社1",
                     subject: "現代文",
                     description: "サンプル参考書1の説明文",
-                    user_id: user.id
+                    user_id: user.id,
                   )
 
 book2 = Book.create!(name: "サンプル参考書2",
