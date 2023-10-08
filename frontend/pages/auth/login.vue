@@ -69,8 +69,24 @@ export default {
   },
   methods: {
     async login() {
-      // activatedを確認
       try {
+        const isActivated = await axios.get("/users/check_is_activated", {
+          params: {
+            email: this.email
+          }
+        })
+        if(isActivated.data.status === "unactivated") {
+          await axios.get("/users/check_email_existence", {
+            params: {
+              email: this.email
+            }
+          })
+          this.flashMessage = "このアカウントは有効化されていません。メールアドレス確認用のメールを再送信しましたので、メールに記載されているリンクをクリックしてユーザー登録を完了させてください。"
+          this.snackbarColor = "info"
+          this.snackbar = true
+          return
+        }
+
         const auth = getAuth(this.$firebase)
         const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password)
         this.$store.dispatch("auth/setLoginState", true)

@@ -120,18 +120,16 @@ class UsersController < ApplicationController
 
   def check_email_existence
     user = User.find_by(email: params[:email])
-    if user
-      status = user.activated ? "activated" : "unactivated"
-      if status == "activated"
-        render json: { existence: true , status: status }
-      else
-        # アカウントの有効化が完了してない場合は、再度メールを送信する
-        email_verification_number = user.email_verification_number
-        UserMailer.registration_email(user, email_verification_number).deliver_now
-        render json: { existence: true , status: status }
-      end
+    return head :ok unless user
+
+    status = user.activated ? "activated" : "unactivated"
+    if status == "activated"
+      render json: { existence: true , status: status }
     else
-      head :ok
+      # アカウントの有効化が完了してない場合は、再度メールを送信する
+      email_verification_number = user.email_verification_number
+      UserMailer.registration_email(user, email_verification_number).deliver_now
+      render json: { existence: true , status: status }
     end
   end
 
@@ -229,6 +227,14 @@ class UsersController < ApplicationController
     user_json = user.as_json.merge(image: image_url)
 
     render json: user_json
+  end
+
+  def check_is_activated
+    user = User.find_by(email: params[:email])
+    return head :not_found unless user
+
+    status = user.activated ? "activated" : "unactivated"
+    render json: { status: status }
   end
 
   def return_cypress_user
