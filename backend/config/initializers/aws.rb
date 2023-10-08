@@ -6,4 +6,10 @@ unless Rails.env.test?
     region: 'ap-northeast-1',
     credentials: Aws::Credentials.new(access, secret),
   })
+
+  Aws::Rails.add_action_mailer_delivery_method(
+    :ses,
+    credentials: Aws::Credentials.new(access, secret),
+    region: 'ap-northeast-1'
+  )
 end

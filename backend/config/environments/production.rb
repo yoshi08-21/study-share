@@ -44,4 +44,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.action_mailer.delivery_method = :aws_sdk
+  # この host は、メール内のリンク用です。独自ドメインがなければ、アプリケーションがアクセス可能なURLにしてください。
+  config.action_mailer.default_url_options = { host: "http://www.study-share.com.s3-website-ap-northeast-1.amazonaws.com" }
+
+
 end

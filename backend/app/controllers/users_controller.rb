@@ -103,9 +103,44 @@ class UsersController < ApplicationController
     }
   end
 
+  def check_email_verification_number
+    user = User.find_by(email: params[:email])
+    user_email_verification_number = params[:email_verification_number]
+    user_email_verification_number = user.email_verification_number
+    if email_verification_number = user_email_verification_number
+      user.activated = true
+      user.save
+      if Rails.env.development?
+        redirect_to "http://localhost:8080/auth/succeededSignUp?email=#{user.email}"
+      elsif Rails.env.production?
+        redirect_to "http://www.study-share.com.s3-website-ap-northeast-1.amazonaws.com?email=#{user.email}"
+      end
+    end
+  end
+
+  def check_email_existence
+    user = User.find_by(email: params[:email])
+    return head :ok unless user
+
+    status = user.activated ? "activated" : "unactivated"
+    if status == "activated"
+      render json: { existence: true , status: status }
+    else
+      # アカウントの有効化が完了してない場合は、再度メールを送信する
+      email_verification_number = user.email_verification_number
+      UserMailer.registration_email(user, email_verification_number).deliver_now
+      render json: { existence: true , status: status }
+    end
+  end
+
   def create
     user = User.new(user_params)
+    email_verification_number = rand(10**7...10**8)
+    user.email_verification_number = email_verification_number
+
     if user.save
+      UserMailer.registration_email(user, email_verification_number).deliver_now
+
       s3_object = Aws::S3::Resource.new.bucket('study-share-image').object('default_user_image.png')
 
       temp_file = Tempfile.new('downloaded_image', binmode: true)
@@ -180,6 +215,26 @@ class UsersController < ApplicationController
     user_json = user.as_json.merge(image: image_url)
 
     render json: user_json
+  end
+
+  def find_user_by_email
+    user = User.find_by(email: params[:email])
+    return head :not_found unless user
+
+    if user.image.attached?
+      image_url = rails_blob_url(user.image)
+    end
+    user_json = user.as_json.merge(image: image_url)
+
+    render json: user_json
+  end
+
+  def check_is_activated
+    user = User.find_by(email: params[:email])
+    return head :not_found unless user
+
+    status = user.activated ? "activated" : "unactivated"
+    render json: { status: status }
   end
 
   def return_cypress_user
