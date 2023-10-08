@@ -16,10 +16,12 @@ Rails.application.routes.draw do
     collection do
       get "show_other_user/:id", to: "users#show_other_user", as: "show_other_user"
       get "find_user_by_uid/:uid", to: "users#find_user_by_uid", as: "find_user_by_uid"
+      get "find_user_by_email"
       patch "save_user_memo"
       get "check_existence"
       get "return_cypress_user"
-      post "user_email_confirmation"
+      get "check_email_verification_number"
+      get "check_email_existence"
     end
   end
   resources :books, only: [:index, :show, :create, :update, :destroy] do

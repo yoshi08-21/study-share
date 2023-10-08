@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     async login() {
+      // activatedを確認
       try {
         const auth = getAuth(this.$firebase)
         const userCredential = await signInWithEmailAndPassword(auth, this.email, this.password)

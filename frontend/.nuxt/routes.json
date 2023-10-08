@@ -14,6 +14,13 @@
     "_name": "_44011c25"
   },
   {
+    "name": "auth-checkVerificationNumber",
+    "path": "/auth/checkVerificationNumber",
+    "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/checkVerificationNumber.vue",
+    "chunkName": "pages/auth/checkVerificationNumber",
+    "_name": "_44f4844f"
+  },
+  {
     "name": "auth-inputUserInformation",
     "path": "/auth/inputUserInformation",
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/inputUserInformation.vue",
@@ -33,6 +40,13 @@
     "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/signUp.vue",
     "chunkName": "pages/auth/signUp",
     "_name": "_7634dd25"
+  },
+  {
+    "name": "auth-succeededSignUp",
+    "path": "/auth/succeededSignUp",
+    "component": "/Users/yoshito-t/Desktop/study-share/frontend/pages/auth/succeededSignUp.vue",
+    "chunkName": "pages/auth/succeededSignUp",
+    "_name": "_5fe59948"
   },
   {
     "name": "books-allBooks",
