@@ -34,8 +34,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Build steps
-      run: echo "Your build steps here"
 
     # Railsのテスト
     # - name: Setup Ruby
@@ -172,8 +170,6 @@ jobs:
     - name: Bundle install in backend directory
       run: |
         bundle config path vendor/bundle
-        cd backend
-        cd current
         cd backend && bundle install --retry 3
 
     # Capistranoでのデプロイ時に必要
@@ -181,7 +177,7 @@ jobs:
       run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
 
     - name: Deploy using Capistrano in backend directory
-      run:  cd backend/current/backend && bundle exec cap production deploy
+      run:  cd backend && bundle exec cap production deploy
 
     - name: Revoke security group
       if: always()
