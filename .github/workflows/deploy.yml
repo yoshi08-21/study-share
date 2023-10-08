@@ -172,7 +172,7 @@ jobs:
     - name: Bundle install in backend directory
       run: |
         bundle config path vendor/bundle
-        cd backend && bundle install --retry 3
+        cd backend/current/backend && bundle install --retry 3
 
     # Capistranoでのデプロイ時に必要
     - name: Add SSH key to known hosts
