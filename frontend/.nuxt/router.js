@@ -6,8 +6,11 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _4d18237d = () => interopDefault(import('../pages/favorites.vue' /* webpackChunkName: "pages/favorites" */))
 const _44011c25 = () => interopDefault(import('../pages/myPage.vue' /* webpackChunkName: "pages/myPage" */))
+const _44f4844f = () => interopDefault(import('../pages/auth/checkVerificationNumber.vue' /* webpackChunkName: "pages/auth/checkVerificationNumber" */))
+const _d4063238 = () => interopDefault(import('../pages/auth/inputUserInformation.vue' /* webpackChunkName: "pages/auth/inputUserInformation" */))
 const _e100a4e8 = () => interopDefault(import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _7634dd25 = () => interopDefault(import('../pages/auth/signUp.vue' /* webpackChunkName: "pages/auth/signUp" */))
+const _5fe59948 = () => interopDefault(import('../pages/auth/succeededSignUp.vue' /* webpackChunkName: "pages/auth/succeededSignUp" */))
 const _9dc6c4d0 = () => interopDefault(import('../pages/books/allBooks.vue' /* webpackChunkName: "pages/books/allBooks" */))
 const _26eaf390 = () => interopDefault(import('../pages/books/googleApiSearchBooks.vue' /* webpackChunkName: "pages/books/googleApiSearchBooks" */))
 const _ae970a7a = () => interopDefault(import('../pages/books/localSearchBooksResult.vue' /* webpackChunkName: "pages/books/localSearchBooksResult" */))
@@ -50,6 +53,14 @@ export const routerOptions = {
     component: _44011c25,
     name: "myPage"
   }, {
+    path: "/auth/checkVerificationNumber",
+    component: _44f4844f,
+    name: "auth-checkVerificationNumber"
+  }, {
+    path: "/auth/inputUserInformation",
+    component: _d4063238,
+    name: "auth-inputUserInformation"
+  }, {
     path: "/auth/login",
     component: _e100a4e8,
     name: "auth-login"
@@ -57,6 +68,10 @@ export const routerOptions = {
     path: "/auth/signUp",
     component: _7634dd25,
     name: "auth-signUp"
+  }, {
+    path: "/auth/succeededSignUp",
+    component: _5fe59948,
+    name: "auth-succeededSignUp"
   }, {
     path: "/books/allBooks",
     component: _9dc6c4d0,

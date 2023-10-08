@@ -1,0 +1,7 @@
+<h3>メールアドレスの確認</h3>
+
+<p>ご登録ありがとうございます。</p>
+
+<p>下記のリンクをクリックして、ユーザー登録を完了してください。</p>
+
+<%=  check_email_verification_number_users_url(email: @user.email, email_verification_number: @email_verification_number) %>

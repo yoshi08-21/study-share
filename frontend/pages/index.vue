@@ -155,6 +155,7 @@
     </template>
 
 
+    <v-btn @click="logout">ログアウト</v-btn>
 
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
@@ -164,6 +165,8 @@
 </template>
 
 <script>
+import { getAuth, signOut } from "firebase/auth"
+
 import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
 import userComputed from '../mixins/userComputed'
 import flashMessage from '../mixins/flashMessage'
@@ -236,6 +239,20 @@ export default {
   beforeDestroy() {
     this.$store.commit("header/setShowSpecialHeader", false)
   },
+  async logout() {
+      try {
+        const auth = getAuth(this.$firebase)
+        await signOut(auth)
+        this.$store.dispatch("auth/setLoginState", false)
+        this.$store.dispatch("auth/setUserUid", "")
+        this.$store.dispatch("auth/setEmail", "")
+        this.userMemo = ""
+        this.$router.push({ path: "/", query: { message: "ログアウトしました" } })
+      } catch(error) {
+        console.error("エラーが発生しました:", error)
+      }
+    },
+
 }
 
 </script>

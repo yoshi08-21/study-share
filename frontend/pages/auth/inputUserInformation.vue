@@ -75,44 +75,26 @@ export default {
   methods: {
     async signUp() {
       try {
-        const emailExistence = await axios.get("/users/check_email_existence", {
-          params: {
-            email: this.email
-          }
-        })
-        // メールアドレスが登録されていて、アカウントの有効化が行われている場合
-        if(emailExistence.data.existence === true && emailExistence.data.status === "activated") {
-          this.flashMessage = "このメールアドレスはすでに登録されています。パスワードをお忘れの場合はパスワードの再設定を行ってください"
-          this.snackbarColor = "info"
-          this.snackbar = true
-          return
-        }
-        // メールアドレスが登録されていて、アカウントの有効化が行われていない場合
-        else if(emailExistence.data.existence === true && emailExistence.data.status === "unactivated") {
-          this.flashMessage = "このメールアドレスはすでに登録されています。メールアドレス確認用のメールを再送信しましたので、メールに記載されているリンクをクリックしてユーザー登録を完了させてください。"
-          this.snackbarColor = "info"
-          this.snackbar = true
-          return
-        }
-
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
         this.userSetup(response.user.uid)
-        this.$router.push({ path: "/", query: { message: "メールアドレス確認のためのメールを送信しました。メールに記載されているリンクをクリックしてユーザー登録を完了させてください。" } })
+        this.$router.push({ path: "/", query: { message: "会員登録が完了しました。" } })
       } catch(error) {
         console.error("エラーが発生しました:", error)
         this.snackbar = true
         this.snackbarColor = "red accent-2"
-        this.flashMessage = "エラーが発生しました。入力フォームを確認してください"
+        this.flashMessage = "入力フォームを確認してください"
       }
     },
     async userSetup(userUid) {
       try {
-        await axios.post("/users", {
+        const response = await axios.post("/users", {
           name: this.name,
           email: this.email,
           uid: userUid
         })
+        this.$store.dispatch("auth/setCurrentUser", response.data)
+        this.$store.dispatch("auth/setLoginState", true)
       } catch(error) {
         console.error("エラーが発生しました:", error)
       }
