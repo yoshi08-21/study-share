@@ -113,7 +113,7 @@ class UsersController < ApplicationController
       if Rails.env.development?
         redirect_to "http://localhost:8080/auth/succeededSignUp?email=#{user.email}"
       elsif Rails.env.production?
-        redirect_to "http://localhost:8080?email=#{user.email}"
+        redirect_to "http://www.study-share.com.s3-website-ap-northeast-1.amazonaws.com?email=#{user.email}"
       end
     end
   end
