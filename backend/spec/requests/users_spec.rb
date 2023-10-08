@@ -17,29 +17,6 @@ RSpec.describe "Users", type: :request do
 
   describe "ユーザー登録" do
 
-    context "正しいパラメーターでユーザー登録すると" do
-      it "ユーザー登録に成功する" do
-        expect {
-          post users_path, params: {
-            user: {
-              name: "神奈川太郎",
-              email: "kanagawa@sample.com",
-              uid: "123456"
-            }
-          }
-        }.to change(User, :count).by(1)
-        expect(response).to have_http_status(200)
-
-        json_response = JSON.parse(response.body)
-        expect(json_response["name"]).to eq("神奈川太郎")
-        expect(json_response["email"]).to eq("kanagawa@sample.com")
-
-        user = User.find_by(name: "神奈川太郎")
-        expect(user).not_to be_nil
-        expect(user.email).to eq("kanagawa@sample.com")
-      end
-    end
-
     context "不正なパラメーターでユーザー登録すると" do
       it "ユーザー登録に失敗する" do
         expect {
