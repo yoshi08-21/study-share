@@ -161,18 +161,18 @@ jobs:
       with:
         ruby-version: 3.0.3
 
-    # - name: Cache Ruby gems
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: vendor/bundle
-    #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-gems-
+    - name: Cache Ruby gems
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
 
     - name: Bundle install in backend directory
       run: |
         bundle config path vendor/bundle
-        cd backend/current/backend && bundle install --retry 3
+        cd backend && bundle install --retry 3
 
     # Capistranoでのデプロイ時に必要
     - name: Add SSH key to known hosts
