@@ -216,7 +216,7 @@ export default {
         thirdChoiceSchoolBooks: sameUniversityBooks.third_choice_school_books
       }
     } catch(error) {
-      console.log("エラーが発生しました")
+      console.error("エラーが発生しました", error)
       throw error
     }
   },
