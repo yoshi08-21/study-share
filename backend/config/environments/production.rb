@@ -46,7 +46,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :ses
 
-  config.action_mailer.default_url_options = { host: "https://api.study-share.com" }
+  config.action_mailer.default_url_options = { host: "http://api.study-share.com" }
 
 
 end
