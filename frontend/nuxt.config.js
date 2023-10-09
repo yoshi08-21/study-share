@@ -2,7 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 let apiBaseUrl = 'http://localhost:3000';
 if (process.env.NODE_ENV === 'production') {
-  apiBaseUrl = 'http://api.study-share.com';
+  apiBaseUrl = 'https://api.study-share.com';
 }
 
 export default {
