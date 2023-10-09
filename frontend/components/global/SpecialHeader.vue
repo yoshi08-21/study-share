@@ -3,6 +3,7 @@
     fix
     app
     shrink-on-scroll
+    src="https://study-share-image.s3.ap-northeast-1.amazonaws.com/Study Share3.png"
     fade-img-on-scroll
     scroll-target="#scrolling-techniques-3"
     class="my-app-bar"

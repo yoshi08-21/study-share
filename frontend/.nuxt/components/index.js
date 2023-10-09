@@ -1,11 +1,11 @@
-export const ContentNavigator = () => import('../../components/global/ContentNavigator.vue' /* webpackChunkName: "components/content-navigator" */).then(c => wrapFunctional(c.default || c))
-export const DeleteConfirmationDialog = () => import('../../components/global/DeleteConfirmationDialog.vue' /* webpackChunkName: "components/delete-confirmation-dialog" */).then(c => wrapFunctional(c.default || c))
-export const FavoriteButton = () => import('../../components/global/FavoriteButton.vue' /* webpackChunkName: "components/favorite-button" */).then(c => wrapFunctional(c.default || c))
-export const NormalHeader = () => import('../../components/global/NormalHeader.vue' /* webpackChunkName: "components/normal-header" */).then(c => wrapFunctional(c.default || c))
-export const ShowFullImageDialog = () => import('../../components/global/ShowFullImageDialog.vue' /* webpackChunkName: "components/show-full-image-dialog" */).then(c => wrapFunctional(c.default || c))
-export const ShowSnackbar = () => import('../../components/global/ShowSnackbar.vue' /* webpackChunkName: "components/show-snackbar" */).then(c => wrapFunctional(c.default || c))
-export const SpecialHeader = () => import('../../components/global/SpecialHeader.vue' /* webpackChunkName: "components/special-header" */).then(c => wrapFunctional(c.default || c))
-export const SubmitButton = () => import('../../components/global/SubmitButton.vue' /* webpackChunkName: "components/submit-button" */).then(c => wrapFunctional(c.default || c))
+export { default as ContentNavigator } from '../../components/global/ContentNavigator.vue'
+export { default as DeleteConfirmationDialog } from '../../components/global/DeleteConfirmationDialog.vue'
+export { default as FavoriteButton } from '../../components/global/FavoriteButton.vue'
+export { default as NormalHeader } from '../../components/global/NormalHeader.vue'
+export { default as ShowFullImageDialog } from '../../components/global/ShowFullImageDialog.vue'
+export { default as ShowSnackbar } from '../../components/global/ShowSnackbar.vue'
+export { default as SpecialHeader } from '../../components/global/SpecialHeader.vue'
+export { default as SubmitButton } from '../../components/global/SubmitButton.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
