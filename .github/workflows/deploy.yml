@@ -174,7 +174,7 @@ jobs:
 
     # # Capistranoでのデプロイ時に必要
     - name: Add SSH key to known hosts
-      run: ssh-keyscan -H https://api.study-share.com >> ~/.ssh/known_hosts
+      run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
 
     - name: Deploy using Capistrano in backend directory
       run:  cd backend && bundle exec cap production deploy
