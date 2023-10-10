@@ -13,8 +13,6 @@ Rails.application.configure do
 
   config.active_storage.service = :amazon_production
 
-  config.active_storage.service_url_host = 'https://api.study-share.com'
-
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
