@@ -63,7 +63,6 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/dotenv',
@@ -73,9 +72,9 @@ export default {
     API_BASE_URL: apiBaseUrl,
   },
 
-  proxy: {
-    '/api/': { target: apiBaseUrl, pathRewrite: { '^/api/': '' }, changeOrigin: true }
-  },
+  // proxy: {
+  //   '/api/': { target: apiBaseUrl, pathRewrite: { '^/api/': '' }, changeOrigin: true }
+  // },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
