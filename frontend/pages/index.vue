@@ -162,14 +162,14 @@
 </template>
 
 <script>
-import { getAuth, signOut } from "firebase/auth"
 
+import { getAuth, signOut } from "firebase/auth"
 import TopPageEachBooks from '../components/books/TopPageEachBooks.vue'
 import userComputed from '../mixins/userComputed'
 import flashMessage from '../mixins/flashMessage'
 import navigationMethods from '../mixins/navigationMethods'
 
-import axios from "../plugins/axios"
+import axios from "@/plugins/axios"
 
 
 export default {
