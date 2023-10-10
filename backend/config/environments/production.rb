@@ -15,8 +15,6 @@ Rails.application.configure do
 
   config.active_storage.service_url_host = 'https://api.study-share.com'
 
-  config.force_ssl = true
-
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
