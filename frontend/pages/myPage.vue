@@ -371,8 +371,7 @@ export default {
         myFavoriteSurveysCount: response.data.my_favorite_surveys_count,
       }
     } catch (error) {
-      console.log("エラーが発生しました")
-      throw error
+      console.error("エラーが発生しました", error)
     }
   },
   data() {

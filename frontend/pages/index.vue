@@ -214,7 +214,6 @@ export default {
       }
     } catch(error) {
       console.error("エラーが発生しました", error)
-      console.log(t.t0)
     }
   },
   data() {
@@ -227,15 +226,15 @@ export default {
       cypressUser: {},
     }
   },
-  mounted() {
-    this.$parent.showSpecialHeader = true
-  },
-  created() {
-    this.$store.commit("header/setShowSpecialHeader", true)
-  },
-  beforeDestroy() {
-    this.$store.commit("header/setShowSpecialHeader", false)
-  },
+  // mounted() {
+  //   this.$parent.showSpecialHeader = true
+  // },
+  // created() {
+  //   this.$store.commit("header/setShowSpecialHeader", true)
+  // },
+  // beforeDestroy() {
+  //   this.$store.commit("header/setShowSpecialHeader", false)
+  // },
   async logout() {
       try {
         const auth = getAuth(this.$firebase)
