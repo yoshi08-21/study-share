@@ -302,7 +302,6 @@ export default {
       };
     } catch(error) {
       console.error("エラーが発生しました:", error)
-      throw error
     }
 
   },
