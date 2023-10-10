@@ -154,9 +154,6 @@
         </v-row>
     </template>
 
-
-    <v-btn @click="logout">ログアウト</v-btn>
-
     <br>
     <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ flashMessage }}</v-snackbar>
 

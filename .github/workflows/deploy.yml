@@ -132,55 +132,55 @@ jobs:
       run: cd frontend && aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }}
 
     # EC2へのデプロイ
-    - name: Public IP
-      id: ip
-      uses: haythem/public-ip@v1.2
+    # - name: Public IP
+    #   id: ip
+    #   uses: haythem/public-ip@v1.2
 
-    - name: Configure AWS Credentials for EC2
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-region: ap-northeast-1
-        role-to-assume: ${{ secrets.EC2_ROLE_ARN }}
-        role-session-name: github-actions-deploy-${{ github.event.repository.name }}-${{ github.run_number }}
+    # - name: Configure AWS Credentials for EC2
+    #   uses: aws-actions/configure-aws-credentials@v1
+    #   with:
+    #     aws-region: ap-northeast-1
+    #     role-to-assume: ${{ secrets.EC2_ROLE_ARN }}
+    #     role-session-name: github-actions-deploy-${{ github.event.repository.name }}-${{ github.run_number }}
 
-    - name: Setup SSH key
-      env:
-        DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_PEM_KEY }}
-      run: |
-        mkdir -p ~/.ssh
-        echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+    # - name: Setup SSH key
+    #   env:
+    #     DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_PEM_KEY }}
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "$DEPLOY_SSH_KEY" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
 
-    - name: Authorize Security Group for SSH
-      run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+    # - name: Authorize Security Group for SSH
+    #   run: aws ec2 authorize-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.3
+    # - name: Setup Ruby
+    #   uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: 3.0.3
 
-    - name: Cache Ruby gems
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+    # - name: Cache Ruby gems
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: vendor/bundle
+    #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-gems-
 
-    - name: Bundle install in backend directory
-      run: |
-        bundle config path vendor/bundle
-        cd backend && bundle install --retry 3
+    # - name: Bundle install in backend directory
+    #   run: |
+    #     bundle config path vendor/bundle
+    #     cd backend && bundle install --retry 3
 
-    # Capistranoでのデプロイ時に必要
-    - name: Add SSH key to known hosts
-      run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
+    # # Capistranoでのデプロイ時に必要
+    # - name: Add SSH key to known hosts
+    #   run: ssh-keyscan -H 3.115.171.176 >> ~/.ssh/known_hosts
 
-    - name: Deploy using Capistrano in backend directory
-      run:  cd backend && bundle exec cap production deploy
+    # - name: Deploy using Capistrano in backend directory
+    #   run:  cd backend && bundle exec cap production deploy
 
-    - name: Revoke security group
-      if: always()
-      run: aws ec2 revoke-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+    # - name: Revoke security group
+    #   if: always()
+    #   run: aws ec2 revoke-security-group-ingress --group-id ${{ secrets.EC2_SECURITY_GROUP_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
 
