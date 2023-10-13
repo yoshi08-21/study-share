@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'yoshito-t0821@keio.jp'
+  default from: 'mail.study-share.com'
   layout 'mailer'
 end
