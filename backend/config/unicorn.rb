@@ -25,6 +25,10 @@ check_client_connection false
 run_once = true
 
 before_fork do |server, worker|
+  stdout_logger = Logger.new("#{app_path}/shared/log/unicorn.stdout.log")
+  stderr_logger = Logger.new("#{app_path}/shared/log/unicorn.stderr.log")
+
+
   defined?(ActiveRecord::Base) &&
     ActiveRecord::Base.connection.disconnect!
 
@@ -38,7 +42,7 @@ before_fork do |server, worker|
       sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
       Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH => e
-      logger.error e
+      stderr_logger.error e
     end
   end
 end
