@@ -103,6 +103,8 @@ export default {
           message = "パスワードを入力してください"
         } else if(error.code === "auth/wrong-password") {
           message = "パスワードが間違っています"
+        } else if(error.status === 404) {
+          message = "ユーザーが存在しません"
         } else {
           message = "ログインエラーが発生しました"
         }
