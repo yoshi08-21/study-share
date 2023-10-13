@@ -31,7 +31,7 @@
 
 <script>
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth"
 import isLoggedIn from "../../middleware/isLoggedIn"
 import flashMessage from '../../mixins/flashMessage'
 import axios from "../../plugins/axios";
@@ -98,6 +98,7 @@ export default {
         const auth = getAuth(this.$firebase);
         const response = await createUserWithEmailAndPassword(auth, this.email, this.password)
         this.userSetup(response.user.uid)
+        await signOut(auth)
         this.$router.push({ path: "/", query: { message: "メールアドレス確認のためのメールを送信しました。メールに記載されているリンクをクリックしてユーザー登録を完了させてください。" } })
       } catch(error) {
         console.error("エラーが発生しました:", error)
