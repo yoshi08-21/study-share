@@ -54,7 +54,7 @@ class PagesController < ApplicationController
     if current_user && current_user.first_choice_school
       first_choice_school_books = Book.joins(favorite_books: :user)
                                         .with_attached_image
-                                        .where("users.first_choice_school = ?",current_user.first_choice_school)
+                                        .where("users.first_choice_school = ?", current_user.first_choice_school)
                                         .group(:book_id)
                                         .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
@@ -71,11 +71,11 @@ class PagesController < ApplicationController
     if current_user && current_user.second_choice_school
       second_choice_school_books = Book.joins(favorite_books: :user)
                                         .with_attached_image
-                                        .where("users.first_choice_school = ?",current_user.second_choice_school)
+                                        .where("users.first_choice_school = ?", current_user.second_choice_school)
                                         .group(:book_id)
                                         .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
-                                        .limit(50)
+                                        .limit(10)
                                         .includes([:reviews])
 
       second_choice_school_books_with_images = second_choice_school_books.map do |book|
@@ -88,7 +88,7 @@ class PagesController < ApplicationController
     if current_user && current_user.third_choice_school
       third_choice_school_books = Book.joins(favorite_books: :user)
                                         .with_attached_image
-                                        .where("users.first_choice_school = ?",current_user.third_choice_school)
+                                        .where("users.first_choice_school = ?", current_user.third_choice_school)
                                         .group(:book_id)
                                         .select("books.*, (SELECT COUNT(*) FROM reviews WHERE reviews.book_id = books.id) AS reviews_count, (SELECT ROUND(AVG(reviews.rating), 1) FROM reviews where reviews.book_id = books.id) AS average_rating, (SELECT COUNT(*) FROM favorite_books WHERE favorite_books.book_id = books.id) AS favorite_books_count")
                                         .order("count(favorite_books.id) DESC")
