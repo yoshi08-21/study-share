@@ -55,6 +55,7 @@ backend/log/
 backend/log/test.log
 backend/config/master.key
 backend/.env
+backend/config/local_env.yml
 
 frontend/coverage
 frontend/cypress/screenshots/
