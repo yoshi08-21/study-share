@@ -160,6 +160,9 @@ import navigationMethods from '../../../../mixins/navigationMethods'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "レビュー詳細",
+  },
   components: {
     EditReview,
     BookInformation,

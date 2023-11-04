@@ -9,6 +9,9 @@
 
 <script>
 export default {
+  head: {
+    title: "エラーが発生しました",
+  },
   methods: {
     redirectToTopPage() {
       this.$router.push({ path: "/" })

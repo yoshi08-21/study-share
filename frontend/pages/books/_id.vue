@@ -263,6 +263,11 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head() {
+    return {
+      title: `${this.book.name}`,
+    }
+  },
   components: {
     ReviewForm,
     QuestionForm,

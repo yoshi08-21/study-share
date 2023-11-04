@@ -55,6 +55,11 @@ import EachBooks from '../../components/books/EachBooks.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  head() {
+    return {
+      title: `「${this.searchBooksKeyword}」の検索結果(参考書)`,
+    }
+  },
   components: { EachBooks },
   async asyncData({ route, store }) {
     try {

@@ -62,6 +62,9 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head: {
+    title: "閲覧履歴",
+  },
   middleware: authCheck,
   components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys },
   async asyncData({ store }) {

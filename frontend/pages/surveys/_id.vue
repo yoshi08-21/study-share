@@ -393,6 +393,9 @@ import navigationMethods from '../../mixins/navigationMethods'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "アンケート詳細",
+  },
   components: { SurveyResultLinears, FavoriteButton, ContentNavigator, DeleteConfirmationDialog, ShowFullImageDialog },
   mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {

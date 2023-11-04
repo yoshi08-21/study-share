@@ -135,6 +135,9 @@ import flashMessage from '../../mixins/flashMessage'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "参考書一覧",
+  },
   components: { EachBooks, BookForm },
   mixins: [userComputed, flashMessage],
   async asyncData({ store }) {
