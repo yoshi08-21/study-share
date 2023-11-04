@@ -205,7 +205,7 @@ export default {
           this.userMemo = ""
         }
       }
-    }
+    },
   },
   data() {
     return {

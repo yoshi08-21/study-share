@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@nuxtjs/proxy": "^2.1.0",
-    "moment": "^2.29.4"
-  },
-  "devDependencies": {
-    "jest": "^29.6.4"
-  }
-}
