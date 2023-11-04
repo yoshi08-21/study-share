@@ -119,6 +119,9 @@ import flashMessage from '../../mixins/flashMessage'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "アンケート一覧",
+  },
   components: { SurveyForm, EachSurveys },
   mixins: [userComputed, flashMessage],
   async asyncData() {

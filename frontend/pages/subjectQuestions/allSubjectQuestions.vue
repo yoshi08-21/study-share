@@ -127,6 +127,9 @@ import flashMessage from '../../mixins/flashMessage'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "質問一覧(科目別質問)",
+  },
   components: { SubjectQuestionForm, EachSubjectQuestions },
   mixins: [userComputed, flashMessage],
   async asyncData() {

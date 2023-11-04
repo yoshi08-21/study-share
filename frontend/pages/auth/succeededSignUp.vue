@@ -17,6 +17,9 @@ import flashMessage from '../../mixins/flashMessage'
 
 
 export default {
+  head: {
+    title: "ユーザー登録完了",
+  },
   mixins: [flashMessage],
 }
 </script>

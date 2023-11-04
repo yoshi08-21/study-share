@@ -12,7 +12,7 @@
                   filled
                   outlined
                   dense
-                  label="参考書を検索"
+                  label="Googleで参考書を検索"
                   data-cy="google-books-api-search-books"
                   @keydown.enter="searchBooks"
                   @compositionstart="isInputBeingConverted = true"
@@ -222,6 +222,9 @@ import userComputed from "../../mixins/userComputed"
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "登録する参考書を検索",
+  },
   mixins: [userComputed],
   data() {
     return {

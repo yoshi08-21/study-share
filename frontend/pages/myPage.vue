@@ -343,6 +343,9 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head: {
+    title: "マイページ",
+  },
   components: { EditUser, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   middleware: authCheck,
   mixins: [userComputed, flashMessage],

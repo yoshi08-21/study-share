@@ -51,6 +51,11 @@ import EachSubjectQuestions from '../../components/subjectQuestions/EachSubjectQ
 import axios from "@/plugins/axios"
 
 export default {
+  head() {
+    return {
+      title: `「${this.searchSubjectQuestionsKeyword}」の検索結果(科目別質問)`,
+    }
+  },
   components: { EachSubjectQuestions },
   async asyncData({ route }) {
     try {

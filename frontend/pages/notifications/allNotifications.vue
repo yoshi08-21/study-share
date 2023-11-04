@@ -138,6 +138,9 @@ import userComputed from '../../mixins/userComputed'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "通知",
+  },
   middleware: authCheck,
   mixins: [userComputed],
   components: {

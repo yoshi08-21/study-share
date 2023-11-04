@@ -238,6 +238,9 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head: {
+    title: "返信詳細",
+  },
   components: { EditReply, ContentNavigator, DeleteConfirmationDialog },
   mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {
