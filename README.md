@@ -4,7 +4,7 @@
 
 レビュー・質問・アンケートなど、**疑問の解消**や**参考書選びの助け**となる情報を得ることができる機能を実装しています。
 
-![study-share.com](https://github.com/yoshi08-21/study-share/assets/88389469/3fa356be-f6d1-4d2e-ba65-a84cb56e6f92)
+![study-share.com](https://github.com/yoshi08-21/study-share/assets/88389469/0cf5ceff-ee98-49d9-855e-1f0374b3bc3a)
 
 
 ## URL
@@ -193,11 +193,12 @@ SPAの開発において、状態管理で苦労することがありました�
 
 ## インフラ構成図
 
-![インフラ構成図３ drawio](https://github.com/yoshi08-21/study-share/assets/88389469/17d2a80f-5d49-46d7-90e7-9148cf6a2f86)
+![インフラ構成図３ drawio](https://github.com/yoshi08-21/study-share/assets/88389469/ff826275-a0da-49b5-b7fc-68ce26f0919b)
 
 ## ER図
 
-![ER図](https://github.com/yoshi08-21/study-share/assets/88389469/a6d51d09-c1ab-490d-8a96-f51e56809716)
+![ER図](https://github.com/yoshi08-21/study-share/assets/88389469/c4ded377-73f4-479e-aaf8-bd0478116bec)
+
 
 ## 改善点
 - レスポンシブデザインに対応させる
