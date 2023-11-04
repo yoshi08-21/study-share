@@ -21,15 +21,15 @@ jobs:
       AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID_FOR_SSM }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_FOR_SSM }}
       AWS_REGION: ap-northeast-1
-    # services:
-    #   mysql:
-    #     image: mysql:8.0.34
-    #     env:
-    #       MYSQL_ROOT_PASSWORD: password
-    #       MYSQL_DATABASE: test_db
-    #     ports:
-    #       - 3306:3306
-    #     options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    services:
+      mysql:
+        image: mysql:8.0.34
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test_db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - name: Checkout code
