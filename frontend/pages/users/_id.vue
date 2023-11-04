@@ -286,6 +286,11 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head() {
+    return {
+      title: `${this.user.name}さんのマイページ`,
+    }
+  },
   components: { EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   async asyncData({ params }) {
     try {

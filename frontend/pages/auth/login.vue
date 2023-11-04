@@ -38,6 +38,9 @@ import flashMessage from "../../mixins/flashMessage";
 import axios from "../../plugins/axios";
 
 export default {
+  head: {
+    title: "ログイン",
+  },
   middleware: isLoggedIn,
   mixins: [flashMessage],
   watch: {

@@ -172,9 +172,12 @@ import axios from "@/plugins/axios"
 
 
 export default {
+  head: {
+    title: "トップページ",
+  },
   components: { TopPageEachBooks },
   mixins: [userComputed, flashMessage, navigationMethods],
-  name: 'IndexPage',
+  name: "IndexPage",
   async asyncData({ store }) {
     try {
 

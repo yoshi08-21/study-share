@@ -189,6 +189,9 @@ import authCheck from '../middleware/authCheck'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "お気に入り",
+  },
   middleware: authCheck,
   components: { EachBooks, EachReviews, EachQuestions, EachReplies, EachSubjectQuestions, EachSubjectQuestionReplies, EachSurveys, },
   async asyncData({ store }) {

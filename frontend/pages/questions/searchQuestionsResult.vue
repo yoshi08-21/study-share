@@ -52,6 +52,11 @@ import EachQuestions from '../../components/questions/EachQuestions.vue'
 import axios from "@/plugins/axios"
 
 export default {
+  head() {
+    return {
+      title: `「${this.searchQuestionsKeyword}」の検索結果（質問）`,
+    }
+  },
   components: { EachQuestions },
   async asyncData({ route }) {
     try {

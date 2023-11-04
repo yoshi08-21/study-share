@@ -231,6 +231,9 @@ import navigationMethods from '../../mixins/navigationMethods'
 import axios from "@/plugins/axios"
 
 export default {
+  head: {
+    title: "質問詳細(科目別質問)",
+  },
   components: { EditSubjectQuestion, ReplyForm, FavoriteButton, ContentNavigator, SubjectQuestionSubjectQuestionReplies, DeleteConfirmationDialog, ShowFullImageDialog },
   mixins: [userComputed, flashMessage, navigationMethods],
   async asyncData({ params, store }) {

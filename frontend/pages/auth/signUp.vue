@@ -39,6 +39,9 @@ import axios from "../../plugins/axios";
 
 
 export default {
+  head: {
+    title: "新規登録",
+  },
   middleware: isLoggedIn,
   mixins: [flashMessage],
   data() {
