@@ -188,6 +188,8 @@ jobs:
 
     - name: Deploy using Capistrano in backend directory
       run:  cd backend && bundle exec cap production deploy
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     - name: Revoke security group
       if: always()
