@@ -1,7 +1,6 @@
 
 app_path = "/var/www/study-share/backend"
 
-#アプリケーションサーバの性能を決定する
 worker_processes 1
 
 working_directory "#{app_path}/current/backend"
@@ -14,7 +13,6 @@ stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
 
 stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 
-#Railsアプリケーションの応答を待つ上限時間を設定
 timeout 60
 
 preload_app true
